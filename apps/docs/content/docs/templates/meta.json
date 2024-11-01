@@ -1,5 +1,5 @@
 {
 	"title": "Templates",
 	"root": true,
-	"pages": ["---Templates---", "mail-server/index"]
+	"pages": ["---Templates---", "mail-server/index", "erpnext/index"]
 }
