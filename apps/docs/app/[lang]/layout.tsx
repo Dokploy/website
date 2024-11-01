@@ -49,6 +49,13 @@ const modes: Mode[] = [
 		description: "API Documentation",
 		icon: PlugZapIcon,
 	},
+	{
+		param: "templates",
+		name: "Templates",
+		package: "fumadocs-mdx",
+		description: "Templates Documentation",
+		icon: PlugZapIcon,
+	},
 ];
 
 export default function Layout({
