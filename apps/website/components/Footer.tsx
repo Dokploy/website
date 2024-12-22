@@ -108,6 +108,7 @@ export function Footer() {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectItem value="en">{t("navigation.i18nEn")}</SelectItem>
+								<SelectItem value="fr">{t("navigation.i18nFr")}</SelectItem>
 								<SelectItem value="zh-Hans">
 									{t("navigation.i18nZh-Hans")}
 								</SelectItem>
