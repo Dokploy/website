@@ -1,8 +1,8 @@
 #!/bin/bash
 
 install_dokploy() {
-    DOKPLOY_HTTP_PORT=${DOKPLOY_HTTP_PORT:-80}
-    DOKPLOY_HTTPS_PORT=${DOKPLOY_HTTPS_PORT:-443}
+    TRAEFIK_PORT=${TRAEFIK_PORT:-80}
+    TRAEFIK_SSL_PORT=${TRAEFIK_SSL_PORT:-443}
     DOKPLOY_APP_PORT=${DOKPLOY_APP_PORT:-3000}
 
     if [ "$(id -u)" != "0" ]; then
@@ -22,15 +22,15 @@ install_dokploy() {
         exit 1
     fi
 
-    # check if something is running on DOKPLOY_HTTP_PORT (default 80)
-    if ss -tulnp | grep ":$DOKPLOY_HTTP_PORT " >/dev/null; then
-        echo "Error: something is already running on port $DOKPLOY_HTTP_PORT" >&2
+    # check if something is running on TRAEFIK_PORT (default 80)
+    if ss -tulnp | grep ":$TRAEFIK_PORT " >/dev/null; then
+        echo "Error: something is already running on port $TRAEFIK_PORT" >&2
         exit 1
     fi
 
-    # check if something is running on DOKPLOY_HTTPS_PORT (default 443)
-    if ss -tulnp | grep ":$DOKPLOY_HTTPS_PORT " >/dev/null; then
-        echo "Error: something is already running on port $DOKPLOY_HTTPS_PORT" >&2
+    # check if something is running on TRAEFIK_SSL_PORT (default 443)
+    if ss -tulnp | grep ":$TRAEFIK_SSL_PORT " >/dev/null; then
+        echo "Error: something is already running on port $TRAEFIK_SSL_PORT" >&2
         exit 1
     fi
 
@@ -101,8 +101,8 @@ install_dokploy() {
       --update-order stop-first \
       --constraint 'node.role == manager' \
       -e ADVERTISE_ADDR=$advertise_addr \
-      -e TRAEFIK_SSL_PORT=$DOKPLOY_HTTPS_PORT \
-      -e TRAEFIK_PORT=$DOKPLOY_HTTP_PORT \
+      -e TRAEFIK_PORT=$TRAEFIK_PORT \
+      -e TRAEFIK_SSL_PORT=$TRAEFIK_SSL_PORT \
       dokploy/dokploy:latest
 
     GREEN="\033[0;32m"

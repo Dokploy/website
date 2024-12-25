@@ -19,8 +19,8 @@ Here is a Bash script for installing Dokploy on a Linux server. Make sure you ru
 #!/bin/bash
 
 # Port Variables
-DOKPLOY_HTTP_PORT=${DOKPLOY_HTTP_PORT:-80}
-DOKPLOY_HTTPS_PORT=${DOKPLOY_HTTPS_PORT:-443}
+TRAEFIK_PORT=${TRAEFIK_PORT:-80}
+TRAEFIK_SSL_PORT=${TRAEFIK_SSL_PORT:-443}
 DOKPLOY_APP_PORT=${DOKPLOY_APP_PORT:-3000}
 
 # Ensure the script is run as root
@@ -41,13 +41,13 @@ if [ -f /.dockerenv ]; then
 fi
 
 # Check for occupied ports
-if ss -tulnp | grep ":$DOKPLOY_HTTP_PORT " >/dev/null; then
-    echo "Error: Port $DOKPLOY_HTTP_PORT is already in use" >&2
+if ss -tulnp | grep ":$TRAEFIK_PORT " >/dev/null; then
+    echo "Error: Port $TRAEFIK_PORT is already in use" >&2
     exit 1
 fi
 
-if ss -tulnp | grep ":$DOKPLOY_HTTPS_PORT " >/dev/null; then
-    echo "Error: Port $DOKPLOY_HTTPS_PORT is already in use" >&2
+if ss -tulnp | grep ":$TRAEFIK_SSL_PORT " >/dev/null; then
+    echo "Error: Port $TRAEFIK_SSL_PORT is already in use" >&2
     exit 1
 fi
 
@@ -116,8 +116,8 @@ docker service create \
     --update-parallelism 1 \
     --update-order stop-first \
     -e PORT=$DOKPLOY_APP_PORT \
-    -e TRAEFIK_SSL_PORT=$DOKPLOY_HTTPS_PORT \
-    -e TRAEFIK_PORT=$DOKPLOY_HTTP_PORT \
+    -e TRAEFIK_PORT=$TRAEFIK_PORT \
+    -e TRAEFIK_SSL_PORT=$TRAEFIK_SSL_PORT \
     -e ADVERTISE_ADDR=$advertise_addr \
     dokploy/dokploy:latest
 
