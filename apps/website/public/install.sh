@@ -1,9 +1,9 @@
 #!/bin/bash
 
 install_dokploy() {
-    HTTP_PORT=${HTTP_PORT:-80}
-    HTTPS_PORT=${HTTPS_PORT:-443}
-    APP_PORT=${APP_PORT:-3000}
+    DOKPLOY_HTTP_PORT=${DOKPLOY_HTTP_PORT:-80}
+    DOKPLOY_HTTPS_PORT=${DOKPLOY_HTTPS_PORT:-443}
+    DOKPLOY_APP_PORT=${DOKPLOY_APP_PORT:-3000}
 
     if [ "$(id -u)" != "0" ]; then
         echo "This script must be run as root" >&2
@@ -22,20 +22,20 @@ install_dokploy() {
         exit 1
     fi
 
-    # check if something is running on HTTP_PORT (default 80)
-    if ss -tulnp | grep ":$HTTP_PORT " >/dev/null; then
-        echo "Error: something is already running on port $HTTP_PORT" >&2
+    # check if something is running on DOKPLOY_HTTP_PORT (default 80)
+    if ss -tulnp | grep ":$DOKPLOY_HTTP_PORT " >/dev/null; then
+        echo "Error: something is already running on port $DOKPLOY_HTTP_PORT" >&2
         exit 1
     fi
 
-    # check if something is running on HTTPS_PORT (default 443)
-    if ss -tulnp | grep ":$HTTPS_PORT " >/dev/null; then
-        echo "Error: something is already running on port $HTTPS_PORT" >&2
+    # check if something is running on DOKPLOY_HTTPS_PORT (default 443)
+    if ss -tulnp | grep ":$DOKPLOY_HTTPS_PORT " >/dev/null; then
+        echo "Error: something is already running on port $DOKPLOY_HTTPS_PORT" >&2
         exit 1
     fi
 
-    if ss -tulnp | grep ":$APP_PORT " >/dev/null; then
-        echo "Error: something is already running on port $APP_PORT" >&2
+    if ss -tulnp | grep ":$DOKPLOY_APP_PORT " >/dev/null; then
+        echo "Error: something is already running on port $DOKPLOY_APP_PORT" >&2
         exit 1
     fi
 
@@ -96,15 +96,15 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
-      --publish published=$HTTP_PORT,target=80,mode=host \
-      --publish published=$HTTPS_PORT,target=443,mode=host \
-      --publish published=$APP_PORT,target=3000,mode=host \
+      --publish published=$DOKPLOY_HTTP_PORT,target=80,mode=host \
+      --publish published=$DOKPLOY_HTTPS_PORT,target=443,mode=host \
+      --publish published=$DOKPLOY_APP_PORT,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
       --constraint 'node.role == manager' \
       -e ADVERTISE_ADDR=$advertise_addr \
-      -e TRAEFIK_SSL_PORT=$HTTPS_PORT \
-      -e TRAEFIK_PORT=$HTTP_PORT \
+      -e TRAEFIK_SSL_PORT=$DOKPLOY_HTTPS_PORT \
+      -e TRAEFIK_PORT=$DOKPLOY_HTTP_PORT \
       dokploy/dokploy:latest
 
     GREEN="\033[0;32m"
@@ -127,7 +127,7 @@ install_dokploy() {
     echo ""
     printf "${GREEN}Congratulations, Dokploy is installed!${NC}\n"
     printf "${BLUE}Wait 15 seconds for the server to start${NC}\n"
-    printf "${YELLOW}Please go to http://${formatted_addr}:${APP_PORT}${NC}\n\n"
+    printf "${YELLOW}Please go to http://${formatted_addr}:${DOKPLOY_APP_PORT}${NC}\n\n"
 }
 
 update_dokploy() {

@@ -19,9 +19,9 @@ Here is a Bash script for installing Dokploy on a Linux server. Make sure you ru
 #!/bin/bash
 
 # Port Variables
-HTTP_PORT=${HTTP_PORT:-80}
-HTTPS_PORT=${HTTPS_PORT:-443}
-APP_PORT=${APP_PORT:-3000}
+DOKPLOY_HTTP_PORT=${DOKPLOY_HTTP_PORT:-80}
+DOKPLOY_HTTPS_PORT=${DOKPLOY_HTTPS_PORT:-443}
+DOKPLOY_APP_PORT=${DOKPLOY_APP_PORT:-3000}
 
 # Ensure the script is run as root
 if [ "$(id -u)" != "0" ]; then
@@ -41,18 +41,18 @@ if [ -f /.dockerenv ]; then
 fi
 
 # Check for occupied ports
-if ss -tulnp | grep ":$HTTP_PORT " >/dev/null; then
-    echo "Error: Port $HTTP_PORT is already in use" >&2
+if ss -tulnp | grep ":$DOKPLOY_HTTP_PORT " >/dev/null; then
+    echo "Error: Port $DOKPLOY_HTTP_PORT is already in use" >&2
     exit 1
 fi
 
-if ss -tulnp | grep ":$HTTPS_PORT " >/dev/null; then
-    echo "Error: Port $HTTPS_PORT is already in use" >&2
+if ss -tulnp | grep ":$DOKPLOY_HTTPS_PORT " >/dev/null; then
+    echo "Error: Port $DOKPLOY_HTTPS_PORT is already in use" >&2
     exit 1
 fi
 
-if ss -tulnp | grep ":$APP_PORT " >/dev/null; then
-    echo "Error: Port $APP_PORT is already in use" >&2
+if ss -tulnp | grep ":$DOKPLOY_APP_PORT " >/dev/null; then
+    echo "Error: Port $DOKPLOY_APP_PORT is already in use" >&2
     exit 1
 fi
 
@@ -112,14 +112,14 @@ docker service create \
     --network dokploy-network \
     --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
     --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
-    --publish published=$HTTP_PORT,target=80,mode=host \
-    --publish published=$HTTPS_PORT,target=443,mode=host \
-    --publish published=$APP_PORT,target=3000,mode=host \
+    --publish published=$DOKPLOY_HTTP_PORT,target=80,mode=host \
+    --publish published=$DOKPLOY_HTTPS_PORT,target=443,mode=host \
+    --publish published=$DOKPLOY_APP_PORT,target=3000,mode=host \
     --update-parallelism 1 \
     --update-order stop-first \
-    -e PORT=$APP_PORT \
-    -e TRAEFIK_SSL_PORT=$HTTPS_PORT \
-    -e TRAEFIK_PORT=$HTTP_PORT \
+    -e PORT=$DOKPLOY_APP_PORT \
+    -e TRAEFIK_SSL_PORT=$DOKPLOY_HTTPS_PORT \
+    -e TRAEFIK_PORT=$DOKPLOY_HTTP_PORT \
     -e ADVERTISE_ADDR=$advertise_addr \
     dokploy/dokploy:latest
 
@@ -130,7 +130,7 @@ BLUE="\033[0;34m"
 NC="\033[0m" # No Color
 printf "${GREEN}Congratulations, Dokploy is installed!${NC}\n"
 printf "${BLUE}Wait 15 seconds for the server to start${NC}\n"
-printf "${YELLOW}Please go to http://${advertise_addr}:${APP_PORT}${NC}\n\n"
+printf "${YELLOW}Please go to http://${advertise_addr}:${DOKPLOY_APP_PORT}${NC}\n\n"
 
 ```
 
