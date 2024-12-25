@@ -17,6 +17,12 @@ Here is a Bash script for installing Dokploy on a Linux server. Make sure you ru
 
 ```bash
 #!/bin/bash
+
+# Port Variables
+HTTP_PORT=${HTTP_PORT:-80}
+HTTPS_PORT=${HTTPS_PORT:-443}
+APP_PORT=${APP_PORT:-3000}
+
 # Ensure the script is run as root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" >&2
@@ -35,80 +41,87 @@ if [ -f /.dockerenv ]; then
 fi
 
 # Check for occupied ports
-if ss -tulnp | grep ':80 ' >/dev/null; then
-    echo "Error: Port 80 is already in use" >&2
+if ss -tulnp | grep ":$HTTP_PORT " >/dev/null; then
+    echo "Error: Port $HTTP_PORT is already in use" >&2
     exit 1
 fi
 
-if ss -tulnp | grep ':443 ' >/dev/null; then
-    echo "Error: Port 443 is already in use" >&2
+if ss -tulnp | grep ":$HTTPS_PORT " >/dev/null; then
+    echo "Error: Port $HTTPS_PORT is already in use" >&2
+    exit 1
+fi
+
+if ss -tulnp | grep ":$APP_PORT " >/dev/null; then
+    echo "Error: Port $APP_PORT is already in use" >&2
     exit 1
 fi
 
 # Function to check if a command exists
 command_exists() {
-  command -v "$@" > /dev/null 2>&1
+    command -v "$@" > /dev/null 2>&1
 }
 
 # Install Docker if it is not installed
 if command_exists docker; then
-  echo "Docker already installed"
+    echo "Docker already installed"
 else
-  curl -sSL https://get.docker.com | sh
+    curl -sSL https://get.docker.com | sh
 fi
 
 # Initialize Docker Swarm
 docker swarm leave --force 2>/dev/null
 
-    get_ip() {
-        # Try to get IPv4
-        local ipv4=$(curl -4s https://ifconfig.io 2>/dev/null)
+get_ip() {
+    # Try to get IPv4
+    local ipv4=$(curl -4s https://ifconfig.io 2>/dev/null)
 
-        if [ -n "$ipv4" ]; then
-            echo "$ipv4"
-        else
-            # Try to get IPv6
-            local ipv6=$(curl -6s https://ifconfig.io 2>/dev/null)
-            if [ -n "$ipv6" ]; then
-                echo "$ipv6"
-            fi
+    if [ -n "$ipv4" ]; then
+        echo "$ipv4"
+    else
+        # Try to get IPv6
+        local ipv6=$(curl -6s https://ifconfig.io 2>/dev/null)
+        if [ -n "$ipv6" ]; then
+            echo "$ipv6"
         fi
-    }
+    fi
+}
 
- advertise_addr="${ADVERTISE_ADDR:-$(get_ip)}"
+advertise_addr="${ADVERTISE_ADDR:-$(get_ip)}"
 
-  docker swarm init --advertise-addr $advertise_addr
+docker swarm init --advertise-addr $advertise_addr
 
-  if [ $? -ne 0 ]; then
-      echo "Error: Failed to initialize Docker Swarm" >&2
-      exit 1
-  fi
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to initialize Docker Swarm" >&2
+    exit 1
+fi
 
-  docker network rm -f dokploy-network 2>/dev/null
-  docker network create --driver overlay --attachable dokploy-network
+docker network rm -f dokploy-network 2>/dev/null
+docker network create --driver overlay --attachable dokploy-network
 
-  echo "Network created"
+echo "Network created"
 
-  mkdir -p /etc/dokploy
+mkdir -p /etc/dokploy
 
-  chmod 777 /etc/dokploy
+chmod 777 /etc/dokploy
 
 # Pull and deploy Dokploy
 docker pull dokploy/dokploy:latest
 docker service create \
-  --name dokploy \
-  --replicas 1 \
-  --network dokploy-network \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
-  --publish published=3000,target=3000,mode=host \
-  --update-parallelism 1 \
-  --update-order stop-first \
-  -e PORT=<Value For PORT eg(3000)> \
-  -e TRAEFIK_SSL_PORT=<Value For SSL PORT eg(444)> \
-  -e TRAEFIK_PORT=<VALUE FOR TRAEFIK HTTP PORT eg(81)> \
-  -e ADVERTISE_ADDR=$advertise_addr \
-  dokploy/dokploy:latest
+    --name dokploy \
+    --replicas 1 \
+    --network dokploy-network \
+    --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+    --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
+    --publish published=$HTTP_PORT,target=80,mode=host \
+    --publish published=$HTTPS_PORT,target=443,mode=host \
+    --publish published=$APP_PORT,target=3000,mode=host \
+    --update-parallelism 1 \
+    --update-order stop-first \
+    -e PORT=$APP_PORT \
+    -e TRAEFIK_SSL_PORT=$HTTPS_PORT \
+    -e TRAEFIK_PORT=$HTTP_PORT \
+    -e ADVERTISE_ADDR=$advertise_addr \
+    dokploy/dokploy:latest
 
 # Output success message
 GREEN="\033[0;32m"
@@ -117,7 +130,7 @@ BLUE="\033[0;34m"
 NC="\033[0m" # No Color
 printf "${GREEN}Congratulations, Dokploy is installed!${NC}\n"
 printf "${BLUE}Wait 15 seconds for the server to start${NC}\n"
-printf "${YELLOW}Please go to http://${advertise_addr}:3000${NC}\n\n"
+printf "${YELLOW}Please go to http://${advertise_addr}:${APP_PORT}${NC}\n\n"
 
 ```
 
