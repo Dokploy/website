@@ -96,8 +96,6 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
-      --publish published=$DOKPLOY_HTTP_PORT,target=80,mode=host \
-      --publish published=$DOKPLOY_HTTPS_PORT,target=443,mode=host \
       --publish published=$DOKPLOY_APP_PORT,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
