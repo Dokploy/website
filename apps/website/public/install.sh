@@ -1,5 +1,10 @@
 #!/bin/bash
+
 install_dokploy() {
+    TRAEFIK_PORT=${TRAEFIK_PORT:-80}
+    TRAEFIK_SSL_PORT=${TRAEFIK_SSL_PORT:-443}
+    DOKPLOY_APP_PORT=${DOKPLOY_APP_PORT:-3000}
+
     if [ "$(id -u)" != "0" ]; then
         echo "This script must be run as root" >&2
         exit 1
@@ -17,15 +22,20 @@ install_dokploy() {
         exit 1
     fi
 
-    # check if something is running on port 80
-    if ss -tulnp | grep ':80 ' >/dev/null; then
-        echo "Error: something is already running on port 80" >&2
+    # check if something is running on TRAEFIK_PORT (default 80)
+    if ss -tulnp | grep ":$TRAEFIK_PORT " >/dev/null; then
+        echo "Error: something is already running on port $TRAEFIK_PORT" >&2
         exit 1
     fi
 
-    # check if something is running on port 443
-    if ss -tulnp | grep ':443 ' >/dev/null; then
-        echo "Error: something is already running on port 443" >&2
+    # check if something is running on TRAEFIK_SSL_PORT (default 443)
+    if ss -tulnp | grep ":$TRAEFIK_SSL_PORT " >/dev/null; then
+        echo "Error: something is already running on port $TRAEFIK_SSL_PORT" >&2
+        exit 1
+    fi
+
+    if ss -tulnp | grep ":$DOKPLOY_APP_PORT " >/dev/null; then
+        echo "Error: something is already running on port $DOKPLOY_APP_PORT" >&2
         exit 1
     fi
 
@@ -115,11 +125,13 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
-      --publish published=3000,target=3000,mode=host \
+      --publish published=$DOKPLOY_APP_PORT,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
       --constraint 'node.role == manager' \
       -e ADVERTISE_ADDR=$advertise_addr \
+      -e TRAEFIK_PORT=$TRAEFIK_PORT \
+      -e TRAEFIK_SSL_PORT=$TRAEFIK_SSL_PORT \
       dokploy/dokploy:latest
 
     GREEN="\033[0;32m"
@@ -142,7 +154,7 @@ install_dokploy() {
     echo ""
     printf "${GREEN}Congratulations, Dokploy is installed!${NC}\n"
     printf "${BLUE}Wait 15 seconds for the server to start${NC}\n"
-    printf "${YELLOW}Please go to http://${formatted_addr}:3000${NC}\n\n"
+    printf "${YELLOW}Please go to http://${formatted_addr}:${DOKPLOY_APP_PORT}${NC}\n\n"
 }
 
 update_dokploy() {
