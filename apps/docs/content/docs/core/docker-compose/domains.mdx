@@ -162,7 +162,7 @@ Understanding Traefik Labels
 
 ## Important Considerations
 
-1. **Port Exposure**: Use `expose` instead of `ports` to expose ports to the host machine. This ensures that the ports are not exposed to the host machine.
+1. **Port Exposure**: Use `expose` instead of `ports` to limit port access to the container network, avoiding exposure to the host machine.
 2. **DNS Configuration**: Ensure you create `A` records pointing to your domain in your DNS Provider Settings.
 3. **HTTPS**: For HTTPS, you can use Let's Encrypt or other SSL/TLS certificates.
 
