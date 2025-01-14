@@ -205,20 +205,6 @@ export function Hero() {
 					)}
 				/>
 			</div>
-			<a
-				href="https://www.producthunt.com/posts/dokploy-cloud?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-dokploy&#0045;cloud"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<img
-					className="absolute bottom-6 right-8 h-[54px] w-[250px]"
-					src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=596245&theme=dark"
-					alt="Dokploy&#0032;Cloud - The&#0032;open&#0032;source&#0032;alternative&#0032;to&#0032;Vercel&#0044;&#0032;Heroku&#0032;and&#0032;Netlify | Product Hunt"
-					// style="width: 250px; height: 54px;"
-					width="250"
-					height="54"
-				/>
-			</a>
 		</div>
 	);
 }

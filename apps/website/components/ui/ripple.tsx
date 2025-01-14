@@ -52,6 +52,12 @@ const Ripple = React.memo(function Ripple({
 			link: "https://mandarin3d.com/?ref=dokploy",
 			type: "hero",
 		},
+		{
+			name: "LightNode",
+			image: "lightnode-logo.png",
+			link: "https://www.lightnode.com/?ref=dokploy",
+			type: "hero",
+		},
 	];
 	const premiumSponsors = [
 		{
@@ -82,6 +88,13 @@ const Ripple = React.memo(function Ripple({
 			image:
 				"https://raw.githubusercontent.com/Dokploy/dokploy/refs/heads/canary/.github/sponsors/startupfame.png",
 			link: "https://startupfa.me/?ref=dokploy",
+			type: "supporting",
+		},
+		{
+			name: "Itsdb",
+			image:
+				"https://raw.githubusercontent.com/Dokploy/dokploy/refs/heads/canary/.github/sponsors/its.png",
+			link: "https://itsdb-center.com/?ref=dokploy",
 			type: "supporting",
 		},
 	];

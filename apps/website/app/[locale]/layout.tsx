@@ -9,9 +9,14 @@ import { Header } from "@/components/Header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://dokploy.com"),
 	title: {
 		default: "Dokploy - Effortless Deployment Solutions",
 		template: "%s | Simplify Your DevOps",
+	},
+	icons: {
+		icon: "icon.svg",
+		apple: "apple-touch-icon.png",
 	},
 	alternates: {
 		canonical: "https://dokploy.com",
@@ -45,7 +50,13 @@ export const metadata: Metadata = {
 		siteName: "Dokploy",
 		images: [
 			{
-				url: "http://dokploy.com/og.png",
+				url: "https://dokploy.com/og.png",
+			},
+			{
+				url: "https://dokploy.com/icon.svg",
+				width: 24,
+				height: 24,
+				alt: "Dokploy Logo",
 			},
 		],
 	},
