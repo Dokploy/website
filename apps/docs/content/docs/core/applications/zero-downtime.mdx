@@ -22,7 +22,7 @@ To enable zero-downtime,
       "Test": [
         "CMD",
         "curl",
-        "-f",
+        "--fail",
         "http://127.0.0.1:3000/api/health"
       ],
       "Interval": 30000000000,
@@ -76,7 +76,7 @@ To configure health checks for zero downtime.
   "Test": [
     "CMD",
     "curl",
-    "-f",
+    "--fail",
     "http://localhost:3000/health"
   ],
   "Interval": 30000000000,
