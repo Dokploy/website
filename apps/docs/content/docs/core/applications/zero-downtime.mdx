@@ -32,8 +32,8 @@ To enable zero-downtime,
     Note:
     1. Ensure the API Route exists in your application
     2. For Dockerfile deployments, ensure that
-        - your host is configured to listen to 127.0.0.1 (or 0.0.0.0)
-        - your docker image has `curl` installed - this is not available by default on alpine. Alternatively, you can use wget:
+        - your host is configured to listen to 127.0.0.1 (or 0.0.0.0). For example, for NextJS Dockerfile, ensure `ENV HOSTNAME=0.0.0.0` is set.
+        - your docker image has `curl` installed - this is not available by default on alpine-based images. Alternatively, you can use wget:
             ```json
             "Test": [
               "CMD",

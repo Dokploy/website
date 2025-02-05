@@ -13,40 +13,49 @@ Rollbacks are a powerful feature that allows you to easily revert changes to you
 ## Steps to Rollback
 
 
-Let's suppose we have a NodeJS application that has a health check route `/api/health` that returns a 200 status code and running in the port 3000.
+Suppose we have a NodeJS application running on port 3000 with a health check route `/api/health` that returns a 200 status code.
 
 1. In your application is necessary to have a `Path` or `Health Route` to be able to achieve zero downtime deployments eg. in the case of a NodeJS app you can have a route `/api/health` that returns a 200 status code.
 2. Go to `Advanced` Tab and go to Cluster Settings and enter to `Swarm Settings`
 3. There are a couple options that you can use, in this case we will focus on `Health Check` and `Update Config`.
-4. Paste this code in the health check field:
-Make sure the API Route exists in your application
+4. Paste the code below in the `Health Check` field:
+    ```json
+    {
+      "Test": [
+        "CMD",
+        "curl",
+        "-f",
+        "http://127.0.0.1:3000/api/health"
+      ],
+      "Interval": 30000000000,
+      "Timeout": 10000000000,
+      "StartPeriod": 30000000000,
+      "Retries": 3
+    }
+    ```
+    Note:
+    1. Ensure the API Route exists in your application
+    2. For Dockerfile deployments, ensure that
+        - your host is configured to listen to 127.0.0.1 (or 0.0.0.0). For example, for NextJS Dockerfile, ensure `ENV HOSTNAME=0.0.0.0` is set.
+        - your docker image has `curl` installed (this is not available by default on alpine-based images). Alternatively, you can use wget:
+            ```json
+            "Test": [
+              "CMD",
+              "wget",
+              "--spider",
+              "-q",
+              "http://127.0.0.1:3000/api/health"
+            ],
+            ```
 
-```json
-{
-  "Test": [
-    "CMD",
-    "curl",
-    "-f",
-    "http://127.0.0.1:3000/api/health"
-  ],
-  "Interval": 30000000000,
-  "Timeout": 10000000000,
-  "StartPeriod": 30000000000,
-  "Retries": 3
-}
-```
-5. Now in the `Update Config`
+5. Next, in the `Update Config` field, copy and paste this code block:
+    ```json
+    {
+      "Parallelism": 1,
+      "Delay": 10000000000,
+      "FailureAction": "rollback",
+      "Order": "start-first"
+    }
+    ```
 
 Now when the application is getting unhealthy response from the health check, the container will rollback to the previous version.
-
-Paste the following code:
-```json
-{
-  "Parallelism": 1,
-  "Delay": 10000000000,
-  "FailureAction": "rollback",
-  "Order": "start-first"
-}
-```
-
-
