@@ -26,7 +26,7 @@ Make sure the API Route exists in your application
     "CMD",
     "curl",
     "-f",
-    "http://localhost:3000/api/health"
+    "http://127.0.0.1:3000/api/health"
   ],
   "Interval": 30000000000,
   "Timeout": 10000000000,
@@ -70,7 +70,6 @@ We will use this configuration specifically, paste and save it
 
 This configuration basically tells to Docker to do:
 
-Make a request inside the container to http://localhost:3000/health and then we are also saying to make in interval of 30000000000 nanosec, and also makes 3 retries before switching to the new container
+Make a request inside the container to http://127.0.0.1:3000/health and then we are also saying to make in interval of 30000000000 nanosec, and also makes 3 retries before switching to the new container
 
 that would be all, Now you have Zero Downtime Deployments 🎊.
-
