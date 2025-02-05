@@ -17,7 +17,7 @@
 			"deploy": "Deploy",
 			"anywhere": "Anywhere",
 			"with": "with Total Freedom and Ease.",
-			"des": "Streamline your operations with our all-in-one platform—perfect for managing projects, data, and system health with simplicity and efficiency.",
+			"des": "Streamline your operations with our all-in-one platform — perfect for managing projects, data, and system health with simplicity and efficiency.",
 			"featuredIn": "Featured in",
 			"sponsors": {
 				"title": "Sponsors",
@@ -74,7 +74,7 @@
 		"faq": {
 			"title": "Frequently asked questions",
 			"des": "If you can't find what you're looking for, please submit an issue through our GitHub repository or ask questions on our Discord.",
-			"q1": "What is dokploy?",
+			"q1": "What is Dokploy?",
 			"a1": "Dokploy is a stable, easy-to-use deployment solution designed to simplify the application management process. Think of Dokploy as a free alternative self-hostable solution to platforms like Heroku, Vercel, and Netlify.",
 			"q2": "Why Choose Dokploy?",
 			"a2": "Dokploy offers simplicity, flexibility, and speed in application deployment and management.",
@@ -95,7 +95,7 @@
 			"q11": "How does Dokploy's Open Source plan work?",
 			"a11": "You can host Dokploy UI on your own infrastructure and you will be responsible for the maintenance and updates.",
 			"q12": "Do I need to provide my own server for the managed plan?",
-			"a12": "Yes, in the managed plan, you provide your own server eg(Hetzner, Hostinger, AWS, ETC.) VPS, and we manage the Dokploy UI infrastructure for you.",
+			"a12": "Yes, in the managed plan, you provide your own server e.g. (Hetzner, Hostinger, AWS, ETC.) VPS, and we manage the Dokploy UI infrastructure for you.",
 			"q13": "What happens if I need more than one server?",
 			"a13": "The first server costs $4.50/month, if you buy more than one it will be $3.50/month per server.",
 			"q14": "Is there a limit on the number of deployments?",
@@ -138,7 +138,7 @@
 				"subTitle": "Open Source",
 				"section": {
 					"title": "Dokploy Open Source",
-					"description": "Manager your own infrastructure installing dokploy ui in your own server."
+					"description": "Manage your own infrastructure, installing Dokploy UI on your own server."
 				},
 				"features": {
 					"f1": "Complete Flexibility: Install Dokploy UI on your own infrastructure",
