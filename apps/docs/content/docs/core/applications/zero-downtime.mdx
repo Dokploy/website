@@ -3,6 +3,8 @@ title: Zero Downtime
 description: Learn how to configure zero downtime deployments in Dokploy.
 ---
 
+import Link from 'next/link';
+
 By default, when you create a new deployment, it will stop the latest running container and start the new one. This is the default behavior of Docker Swarm and this leads to Bad Gateway since
 the containers are initialized at the same time.
 
@@ -43,6 +45,8 @@ To enable zero-downtime,
               "http://127.0.0.1:3000/api/health"
             ],
             ```
+
+Additionally, you are recommended to also configure <Link href="./zero-downtime">rollbacks</Link> for your application in production.
 
 ## Example
 
@@ -91,4 +95,3 @@ This configuration instructs Docker to:
 5. Retry the health check 3 times before considering the container unhealthy.
 
 With this setup, new deployments will only replace old containers after the new instance passes health checks, preventing downtime 🎊.
-
