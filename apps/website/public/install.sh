@@ -101,9 +101,9 @@ install_dokploy() {
 
     echo "Network created"
 
-    mkdir -p /etc/dokploy
+    mkdir -p $WORKDIR/etc/dokploy
 
-    chmod 777 /etc/dokploy
+    chmod 777 $WORKDIR/etc/dokploy
 
     docker pull postgres:16
     docker pull redis:7
@@ -116,7 +116,7 @@ install_dokploy() {
       --replicas 1 \
       --network dokploy-network \
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-      --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
+      --mount type=bind,source=$WORKDIR/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
@@ -150,7 +150,7 @@ install_dokploy() {
 
 update_dokploy() {
     echo "Updating Dokploy..."
-    
+
     # Pull the latest image
     docker pull dokploy/dokploy:latest
 
@@ -160,9 +160,25 @@ update_dokploy() {
     echo "Dokploy has been updated to the latest version."
 }
 
+uninstall_dokploy() {
+    echo "Uninstalling Dokploy..."
+    docker swarm leave --force
+    if [ $? -eq 0 ]; then
+        echo "Successfully uninstalled dokploy (docker swarm stopped)"
+    else
+        echo "No active dokploy docker swarm found or operation failed"
+    fi
+}
+
 # Main script execution
 if [ "$1" = "update" ]; then
     update_dokploy
+elif [ "$1" = "uninstall" ]; then
+    uninstall_dokploy
 else
+    if [ "$1" = "local" ]; then
+        ADVERTISE_ADDR="127.0.0.1"
+        WORKDIR="$(pwd)/dokploy"
+    fi
     install_dokploy
 fi
