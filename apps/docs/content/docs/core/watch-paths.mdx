@@ -1,34 +1,3 @@
----
-title: Watch Paths
-description: Learn how to use watch paths in your application or docker compose.
----
-
-Watch paths are a feature that allows you to monitor specific directories or files for changes and automatically trigger actions when modifications occur.
-
-## Overview
-
-Watch paths functionality is available for both standalone applications and Docker Compose configurations. This feature helps automate deployments based on file changes in your repository.
-
-## Supported Source Providers
-
-The following source control providers are supported:
-
-- GitHub
-- GitLab
-- Bitbucket
-- Git (works with Bitbucket, Github, and GitLab repositories)
-
-## Basic Usage
-
-Let's say you have a project with the following directory structure:
-
-```
-my-app/
-├── src/
-│   ├── index.js
-├── public/
-```
-
 By default, dokploy accepts an array of paths, allowing you to monitor multiple locations. For example:
 
 - To trigger deployments when any file in the `src/` directory changes, use the pattern: `src/*`
@@ -42,8 +11,9 @@ Watch Paths works out of the box with zero configuration when using GitHub as yo
 - [Bitbucket Integration](/docs/core/bitbucket)
 - [GitLab Integration](/docs/core/gitlab)
 - [GitHub Integration](/docs/core/github)
+- [Gitea Integration](/docs/core/gitea)
 
-Note: When using the Git provider, the functionality will only work with GitHub, GitLab, or Bitbucket repositories.
+Note: When using the Git provider, the functionality will only work with GitHub, GitLab, Bitbucket, or Gitea repositories.
 
 ## Pattern Matching Features
 
@@ -69,3 +39,4 @@ We support a wide range of pattern matching features:
 - Regex logical "or":
   - `foo/(abc|xyz).js` (matches foo/abc.js or foo/xyz.js)
 
+<userStyle>Normal</userStyle>
