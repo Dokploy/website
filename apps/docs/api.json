@@ -11887,6 +11887,305 @@
 				}
 			}
 		},
+		"/gitea.create": {
+			"post": {
+				"operationId": "gitea-create",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object", 
+								"properties": {
+									"gitProviderId": {
+										"type": "string"
+									},
+									"authId": {
+										"type": "string",
+										"minLength": 1
+									},
+									"name": {
+										"type": "string",
+										"minLength": 1
+									},
+									"token": {
+										"type": "string",
+										"nullable": true
+									},
+									"baseUrl": {
+										"type": "string",
+										"nullable": true
+									}
+								},
+								"required": ["authId", "name"],
+								"additionalProperties": false
+							}
+						}
+					}
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},
+		"/gitea.one": {
+			"get": {
+				"operationId": "gitea-one",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "giteaId",
+						"in": "query", 
+						"required": true,
+						"schema": {
+							"type": "string",
+							"minLength": 1
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},
+		"/gitea.giteaProviders": {
+			"get": {
+				"operationId": "gitea-giteaProviders",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},
+		"/gitea.getGiteaRepositories": {
+			"get": {
+				"operationId": "gitea-getGiteaRepositories",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "giteaId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"minLength": 1
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},
+		"/gitea.getGiteaBranches": {
+			"get": {
+				"operationId": "gitea-getGiteaBranches",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "giteaId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					{
+						"name": "owner",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "repo",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "query", 
+						"required": false,
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},
+		"/gitea.testConnection": {
+			"post": {
+				"operationId": "gitea-testConnection",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"giteaId": {
+										"type": "string",
+										"minLength": 1
+									}
+								},
+								"required": ["giteaId"],
+								"additionalProperties": false
+							}
+						}
+					}
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},
+		"/gitea.update": {
+			"post": {
+				"operationId": "gitea-update",
+				"tags": ["gitea"],
+				"security": [
+					{
+						"Authorization": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"giteaId": {
+										"type": "string",
+										"minLength": 1
+									},
+									"name": {
+										"type": "string",
+										"minLength": 1
+									},
+									"token": {
+										"type": "string",
+										"nullable": true
+									},
+									"baseUrl": {
+										"type": "string",
+										"nullable": true
+									},
+									"gitProviderId": {
+										"type": "string"
+									}
+								},
+								"required": ["giteaId", "gitProviderId"],
+								"additionalProperties": false
+							}
+						}
+					}
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					},
+					"default": {
+						"$ref": "#/components/responses/error"
+					}
+				}
+			}
+		},		
 		"/github.one": {
 			"get": {
 				"operationId": "github-one",
@@ -12682,6 +12981,9 @@
 		},
 		{
 			"name": "gitlab"
+		},
+		{
+			"name": "gitea"
 		}
 	],
 	"externalDocs": {

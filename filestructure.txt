@@ -101,6 +101,7 @@
                         |-- reference-gitProvider.mdx
                         |-- reference-github.mdx
                         |-- reference-gitlab.mdx
+                        |-- reference-gitea.mdx
                         |-- reference-mariadb.mdx
                         |-- reference-mongo.mdx
                         |-- reference-mounts.mdx
@@ -135,6 +136,7 @@
                     |-- reference-gitProvider.mdx
                     |-- reference-github.mdx
                     |-- reference-gitlab.mdx
+                    |-- reference-gitea.mdx
                     |-- reference-mariadb.mdx
                     |-- reference-mongo.mdx
                     |-- reference-mounts.mdx
@@ -165,6 +167,7 @@
                         |-- bitbucket.mdx
                         |-- github.mdx
                         |-- gitlab.mdx
+                        |-- gitea.mdx
                     |-- (Notifications)
                         |-- discord.mdx
                         |-- email.mdx
