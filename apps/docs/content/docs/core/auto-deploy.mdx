@@ -89,7 +89,7 @@ Steps:
 curl -X 'GET' \
   'https://your-domain/api/project.all' \
   -H 'accept: application/json'
-  -H 'x-api-token: <token>'
+  -H 'x-api-key: <token>'
 ```
 
 This command lists all projects and services. Identify the applicationId for the application you wish to deploy.
@@ -101,7 +101,7 @@ curl -X 'POST' \
   'https://your-domain/api/application.deploy' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'x-api-token: <token>' \
+  -H 'x-api-key: <token>' \
   -d '{
   "applicationId": "string"
 }'
