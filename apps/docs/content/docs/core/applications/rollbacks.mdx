@@ -3,50 +3,31 @@ title: Rollbacks
 description: Learn how to rollback your application in Dokploy.
 ---
 
-Rollbacks are a powerful feature that allows you to easily revert changes to your application. This is particularly useful when you encounter issues or want to revert to a previous version of your application.
+import Link from 'next/link';
 
+Rollbacks are a powerful feature that allows you to easily revert changes to your application. This is particularly useful when you encounter issues or want to revert to a previous version of your application.
 
 ## Requirements
 
 1. Have a `/health` endpoint in your application.
+2. Configured `Health Check` by following the instructions in the <Link href="./zero-downtime">Zero Downtime Instructions</Link>
 
 ## Steps to Rollback
 
+Suppose we have a NodeJS application running on port 3000 with a health check route `/api/health` that returns a 200 status code.
 
-Let's suppose we have a NodeJS application that has a health check route `/api/health` that returns a 200 status code and running in the port 3000.
+Assuming you have already set up <Link href="./zero-downtime">healthchecks for your application</Link>, you can additionally configure rollback using the steps below:
 
-1. In your application is necessary to have a `Path` or `Health Route` to be able to achieve zero downtime deployments eg. in the case of a NodeJS app you can have a route `/api/health` that returns a 200 status code.
-2. Go to `Advanced` Tab and go to Cluster Settings and enter to `Swarm Settings`
-3. There are a couple options that you can use, in this case we will focus on `Health Check` and `Update Config`.
-4. Paste this code in the health check field:
-Make sure the API Route exists in your application
+1. Go to `Advanced` Tab and go to Cluster Settings and enter to `Swarm Settings`
+2. Locate the `Update Config` section.
+3. Paste the code block below:
+    ```json
+    {
+      "Parallelism": 1,
+      "Delay": 10000000000,
+      "FailureAction": "rollback",
+      "Order": "start-first"
+    }
+    ```
 
-```json
-{
-  "Test": [
-    "CMD",
-    "curl",
-    "-f",
-    "http://localhost:3000/api/health"
-  ],
-  "Interval": 30000000000,
-  "Timeout": 10000000000,
-  "StartPeriod": 30000000000,
-  "Retries": 3
-}
-```
-5. Now in the `Update Config`
-
-Now when the application is getting unhealthy response from the health check, the container will rollback to the previous version.
-
-Paste the following code:
-```json
-{
-  "Parallelism": 1,
-  "Delay": 10000000000,
-  "FailureAction": "rollback",
-  "Order": "start-first"
-}
-```
-
-
+Now, when the application is unhealthy from the health checks, the container will automatically roll back to a previous available version.

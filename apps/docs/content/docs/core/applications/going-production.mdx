@@ -3,6 +3,7 @@ title: Going Production
 description: Learn how to deploy your application in production in Dokploy.
 ---
 
+import Link from 'next/link';
 import { Callout } from 'fumadocs-ui/components/callout';
 
 By default, dokploy offer multiple [Builds Types](/docs/core/applications/build-type) to deploy your application, the most common is `nixpacks` and `heroku buildpacks`
@@ -166,48 +167,10 @@ jobs:
 
 You can also use this Github Action [Action](https://github.com/marketplace/actions/dokploy-deployment) to automate the deployment.
 
-## Healthcheck & Rollbacks
+## Zero-downtime (healthcheck)
 
-When using Dokploy you can also configure healthchecks and rollbacks, this will allow you to configure your application to be able to recover from failures.
- 
-In the repo we are using from the `Step 1.` we have a healthcheck endpoint `/health` that returns a 200 status code and running in the port 3000.
+Please refer to the <Link href="./zero-downtime">zero documentation</Link>.
 
-Go to `Advanced` Tab and go to Cluster Settings and enter to `Swarm Settings`
+## Rollbacks
 
-There are a couple options that you can use, in this case we will focus on `Health Check` and `Update Config`.
-
-Make sure the API Route exists in your application
-
-```json
-{
-  "Test": [
-    "CMD",
-    "curl",
-    "-f",
-    "http://localhost:3000/health"
-  ],
-  "Interval": 30000000000,
-  "Timeout": 10000000000,
-  "StartPeriod": 30000000000,
-  "Retries": 3
-}
-```
-
-Now in the `Update Config`
-
-Now when the application is getting unhealthy response from the health check, the container will rollback to the previous version.
-
-Paste the following code:
-```json
-{
-  "Parallelism": 1,
-  "Delay": 10000000000,
-  "FailureAction": "rollback",
-  "Order": "start-first"
-}
-```
-
-
-Now you everything a production ready application with automated deployments, zero downtime, rollbacks and healthchecks.
-
-We recommend strongly to use this approach in production since this will make your server never build the application, will only in charge of the deployment keeping your server without any downtime.
+Please refer to the <Link href="./rollbacks">rollbacks documentation</Link>.
