@@ -1,0 +1,73 @@
+version: '3.9'
+
+networks:
+  dokploy-network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  dokploy-postgres-database:
+  redis-data-volume:
+  dokploy-docker-config:
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: dokploy
+      POSTGRES_DB: dokploy
+      POSTGRES_PASSWORD: amukds4wi9001583845717ad2
+    networks:
+      - dokploy-network
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    volumes:
+      - dokploy-postgres-database:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    networks:
+      - dokploy-network
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    volumes:
+      - redis-data-volume:/data
+
+  interface:
+    image: dokploy/dokploy:latest
+    environment:
+      ADVERTISE_ADDR: ${ADVERTISE_ADDR}
+    networks:
+      - dokploy-network
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        order: stop-first
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/dokploy:/etc/dokploy
+      - dokploy-docker-config:/root/.docker
+
+  traefik:
+    image: traefik:v3.1.2
+    networks:
+      - dokploy-network
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443/tcp"
+      - "443:443/udp"
+    volumes:
+      - /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic
+      - /var/run/docker.sock:/var/run/docker.sock

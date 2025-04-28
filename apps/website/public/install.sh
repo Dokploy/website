@@ -100,7 +100,7 @@ install_dokploy() {
 
     docker swarm init --advertise-addr $advertise_addr
     
-     if [ $? -ne 0 ]; then
+    if [ $? -ne 0 ]; then
         echo "Error: Failed to initialize Docker Swarm" >&2
         exit 1
     fi
@@ -116,65 +116,11 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
-    docker service create \
-    --name dokploy-postgres \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --env POSTGRES_USER=dokploy \
-    --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
-    --mount type=volume,source=dokploy-postgres-database,target=/var/lib/postgresql/data \
-    postgres:16
+    curl -sSL https://dokploy.com/install-compose.yml -o /etc/dokploy/docker-compose.yml
 
-    docker service create \
-    --name dokploy-redis \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --mount type=volume,source=redis-data-volume,target=/data \
-    redis:7
+    echo "Docker Compose file downloaded"
 
-    # Installation
-    docker service create \
-      --name dokploy \
-      --replicas 1 \
-      --network dokploy-network \
-      --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-      --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
-      --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
-      --publish published=3000,target=3000,mode=host \
-      --update-parallelism 1 \
-      --update-order stop-first \
-      --constraint 'node.role == manager' \
-      -e ADVERTISE_ADDR=$advertise_addr \
-      dokploy/dokploy:latest
-
-    sleep 4
-
-    docker run -d \
-        --name dokploy-traefik \
-        --network dokploy-network \
-        --restart always \
-        -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
-        -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        -p 80:80/tcp \
-        -p 443:443/tcp \
-        -p 443:443/udp \
-        traefik:v3.1.2
-
-
-    # Optional: Use docker service create instead of docker run
-    #   docker service create \
-    #     --name dokploy-traefik \
-    #     --constraint 'node.role==manager' \
-    #     --network dokploy-network \
-    #     --mount type=bind,source=/etc/dokploy/traefik/traefik.yml,target=/etc/traefik/traefik.yml \
-    #     --mount type=bind,source=/etc/dokploy/traefik/dynamic,target=/etc/dokploy/traefik/dynamic \
-    #     --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-    #     --publish mode=host,published=443,target=443 \
-    #     --publish mode=host,published=80,target=80 \
-    #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.1.2
+    docker compose up -d --remove-orphans -p dokploy -f /etc/dokploy/docker-compose.yml
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
@@ -206,8 +152,11 @@ update_dokploy() {
     # Pull the latest image
     docker pull dokploy/dokploy:latest
 
-    # Update the service
-    docker service update --image dokploy/dokploy:latest dokploy
+    # Pull new docker-compose file and restart the service
+    curl -sSL https://dokploy.com/install-compose.yml -o /etc/dokploy/docker-compose.yml
+
+    docker compose down -p dokploy -f /etc/dokploy/docker-compose.yml
+    docker compose up -d --remove-orphans -p dokploy -f /etc/dokploy/docker-compose.yml
 
     echo "Dokploy has been updated to the latest version."
 }
