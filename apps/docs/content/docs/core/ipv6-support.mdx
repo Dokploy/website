@@ -68,32 +68,36 @@ curl -sSL https://get.docker.com | sh
       `fd00:100::/64` is a private unique-local block — safe for internal use.
     </Callout>
 
-5. Discover a routed /64 and derive a /56 pool for overlay networks. Copy the output from this command and save it for the next step:
+5. Generate a unique ULA /64 + /48 for overlay networks. Copy the output from this command and save it for the next step:
 
     ```bash
-    cidr=$(ip -6 r | awk '/proto kernel/{print $1;exit}'); IFS=':/' read -ra f <<< "$cidr"; printf 'CIDR: %s\nPool: %s:%s:%x::/56\n' "$cidr" "${f[0]}" "${f[1]}" $((0x${f[2]}+1))
+    i=$(ls /sys/class/net|grep -m1 -v lo);m=$(sed s/://g /sys/class/net/$i/address);echo CIDR: fd${m:0:2}:${m:2:4}:${m:6:4}::/64;echo Pool: fd${m:0:2}:${m:2:4}:${m:6:4}::/48
     ```
 
     Example output:
 
     ```text
-    CIDR: 2001:db8:123:1234::/64
-    Pool: 2001:db8:124::/56
+    CIDR: fd52:ab7e:4c01::/64
+    Pool: fd52:ab7e:4c01::/48
     ```
+
+    <Callout>
+      Avoid reusing a static ULA such as `fd00:dead:beef::/64` on multiple servers. Docker bridges will share one L2 segment, and overlay or VPN traffic can mis-route. The one-liner above derives a unique prefix from the host’s MAC, so every machine gets its own private /64 and /48 automatically.
+    </Callout>
 
 6. Edit `/etc/docker/daemon.json` and add the following entries:
 
     ```jsonc
     {
       "ipv6": true,
-      "fixed-cidr-v6": "2001:db8:123:1234::/64", // <— Replace with the CIDR value from the previous step
+      "fixed-cidr-v6": "fd52:ab7e:4c01::/64", // <— Replace with the CIDR value from the previous step
       "default-address-pools": [
         {
           "base": "172.16.0.0/12",
           "size": 24
         },
         {
-          "base": "2001:db8:124::/56", // <— Replace with the Pool value from the previous step
+          "base": "fd52:ab7e:4c01::/48", // <— Replace with the Pool value from the previous step
           "size": 64
         }
       ]
