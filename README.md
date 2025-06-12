@@ -2,7 +2,7 @@
 
 Hey, thanks for your interest in contributing to Dokploy! We appreciate your help and taking your time to contribute.
 
-Before you start, please first discuss the feature/bug you want to add with the owners and comunity via github issues.
+Before you start, please first discuss the feature/bug you want to add with the owners and community via github issues.
 
 We have a few guidelines to follow when contributing to this project:
 
