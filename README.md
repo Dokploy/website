@@ -6,12 +6,6 @@ Before you start, please first discuss the feature/bug you want to add with the 
 
 We have a few guidelines to follow when contributing to this project:
 
-- [Commit Convention](#commit-convention)
-- [Setup](#setup)
-- [Development](#development)
-- [Build](#build)
-- [Pull Request](#pull-request)
-
 ## Commit Convention
 
 Before you create a Pull Request, please make sure your commit message follows the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
