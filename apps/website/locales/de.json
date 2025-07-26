@@ -1,0 +1,233 @@
+{
+	"HomePage": {
+		"navigation": {
+			"features": "Funktionen",
+			"faqs": "FAQs",
+			"docs": "Dokumentation",
+			"pricing": "Preise",
+			"support": "Support",
+			"dashboard": "Anmelden",
+			"discord": "Discord",
+			"i18nButtonPlaceholder": "Sprache",
+			"i18nFr": "Français",
+      "i18nDe": "Deutsch",
+			"i18nEn": "English",
+			"i18nEs": "Español",
+			"i18nZh-Hans": "简体中文",
+			"i18nJa": "日本語",
+			"blog": "Blog",
+			"home": "Startseite",
+			"login": "Anmelden",
+			"register": "Registrieren"
+		},
+		"hero": {
+			"cloud": "Willkommen bei Dokploy Cloud",
+			"deploy": "Bereitstellen",
+			"anywhere": "Überall",
+			"with": "mit absoluter Freiheit und Leichtigkeit.",
+			"des": "Optimieren Sie Ihre Abläufe mit unserer All-in-One-Plattform – perfekt für das einfache und effiziente Verwalten von Projekten, Daten und Systemgesundheit.",
+			"featuredIn": "Bekannt aus",
+			"sponsors": {
+				"title": "Sponsoren",
+				"description": "Dokploy ist ein Open-Source-Projekt, das von einer Community von Freiwilligen gepflegt wird. Wir möchten uns bei unseren Sponsoren für ihre Unterstützung und Beiträge zum Projekt bedanken, die es uns ermöglichen, Dokploy weiterzuentwickeln und zu verbessern.",
+				"level": {
+					"hero": "Hero-Sponsoren",
+					"premium": "Premium-Unterstützer",
+					"supporting": "Fördermitglieder",
+					"community": "Community-Unterstützer",
+					"organizations": "Organisationen",
+					"individuals": "Einzelpersonen"
+				}
+			}
+		},
+		"primaryFeatures": {
+			"title": "Umfassende Kontrolle für Ihr digitales Ökosystem",
+			"des": "Vereinfachen Sie Ihr Projekt- und Datenmanagement, sorgen Sie für zuverlässiges Monitoring und sichern Sie Ihre Backups – ganz ohne Aufwand für Kleinigkeiten.",
+			"projects": "Projekte",
+			"templates": "Vorlagen",
+			"templatesDes": "Mit nur einem Klick Open-Source-Vorlagen bereitstellen.",
+			"logs": "Protokolle",
+			"logsDes": "Überwachen und verwalten Sie die Protokolle Ihrer Anwendungen mühelos, um eine effiziente Fehlerbehebung und optimale Leistung zu gewährleisten.",
+			"projectsDes": "Verwalten und organisieren Sie all Ihre Projekte an einem Ort und behalten Sie den Überblick über Fortschritt und Ressourcenzuteilung.",
+			"applications": "Anwendungen & Datenbanken",
+			"applicationsDes": "Zentralisieren Sie die Kontrolle über Ihre Anwendungen und Datenbanken für mehr Sicherheit und Effizienz und vereinfachen Sie den Zugriff und die Verwaltung Ihrer Infrastruktur.",
+			"compose": "Docker Compose",
+			"composeDes": "Native Docker Compose-Unterstützung, um komplexe Anwendungen und Dienste einfach zu verwalten.",
+			"multiserver": "Multiserver",
+			"multiserverDes": "Stellen Sie Anwendungen mühelos auf mehreren Servern bereit.",
+			"monitoring": "Überwachung",
+			"monitoringDes": "Überwachen Sie die Leistung und Gesundheit Ihrer Systeme in Echtzeit und sorgen Sie für einen kontinuierlichen und unterbrechungsfreien Betrieb.",
+			"backups": "Backups",
+			"backupsDes": "Implementieren Sie automatische und sichere Backup-Lösungen, um Ihre wichtigen Daten zu schützen und sie bei Bedarf schnell wiederherzustellen.",
+			"traefik": "Traefik",
+			"traefikDes": "Verwalten Sie Traefik über den Dateieditor, um eigene Domains, Zertifikate und mehr zu konfigurieren."
+		},
+		"secondaryFeatures": {
+			"title": "Erweiterte Verwaltungstools",
+			"des": "Verbessern Sie Ihre Infrastruktur mit Tools, die präzise Kontrolle, detailliertes Monitoring und erhöhte Sicherheit bieten – für eine nahtlose Verwaltung und starke Performance.",
+			"templates": "Open-Source-Vorlagen",
+			"templatesSummary": "Mit nur einem Klick Open-Source-Vorlagen bereitstellen.",
+			"templatesDes": "Stellen Sie Open-Source-Vorlagen mit nur einem Klick bereit, unterstützt durch Docker Compose (z.B. Plausible, Calcom, Pocketbase usw.).",
+			"traefik": "Echtzeit-Traefik-Konfiguration",
+			"traefikSummary": "Passen Sie Traefik-Einstellungen direkt über eine grafische Oberfläche oder API an.",
+			"traefikDes": "Nutzer können die Traefik-Konfiguration, einschließlich Middleware, Weiterleitungsregeln und SSL-Zertifikate, über eine intuitive Oberfläche oder API anpassen. Diese Funktion ermöglicht nahtloses Routing und Sicherheitsanpassungen ohne Neustart der Dienste.",
+			"users": "Benutzerberechtigungsverwaltung",
+			"usersSummary": "Detaillierte Kontrolle über Benutzerrechte für den Zugriff und die Verwaltung von Projekten und Diensten.",
+			"usersDes": "Administratoren können für jeden Benutzer spezifische Rollen und Berechtigungen festlegen, einschließlich der Möglichkeit, Anwendungen und Datenbanken zu erstellen, zu ändern oder zu löschen. Diese Funktion gewährleistet eine sichere und effiziente Verwaltung großer und vielfältiger Teams.",
+			"terminal": "Terminalzugriff",
+			"terminalSummary": "Direkter Zugriff auf das Terminal jedes Containers und Servers für fortgeschrittene Verwaltung.",
+			"terminalDes": "Bietet eine Oberfläche, um auf die Kommandozeile jedes aktiven Containers zuzugreifen, sodass Entwickler Befehle ausführen, Dienste verwalten und direkt vom Dashboard aus Fehler beheben können."
+		},
+		"callToAction": {
+			"title": "Entfesseln Sie Ihr Deployment-Potenzial mit Dokploy Cloud",
+			"des": "Verabschieden Sie sich von Infrastrukturproblemen – Dokploy Cloud übernimmt alles. Stellen Sie mühelos bereit, verwalten Sie Docker-Container und sichern Sie Ihren Datenverkehr mit Traefik. Konzentrieren Sie sich aufs Bauen, wir kümmern uns um den Rest.",
+			"button": "Jetzt starten"
+		},
+		"stats": {
+			"title": "Statistiken, nach denen Sie nicht gefragt haben (aber heimlich lieben)",
+			"description": "Nur ein paar Zahlen, um zu zeigen, dass wir uns das nicht *ganz* ausgedacht haben. Tatsächlich hat Dokploy schon einigen geholfen – wer hätte das gedacht?",
+			"githubCardTitle": "GitHub-Sterne",
+			"githubCardDescription": "Mit über {githubCardValue}k Sternen auf GitHub wird Dokploy weltweit von Entwicklern geschätzt. Entdecken Sie unsere Repositories und werden Sie Teil unserer Community!",
+			"dockerhubCardTitle": "DockerHub-Downloads",
+			"dockerhubCardDescription": "Über {dockerhubCardValue}M Mal heruntergeladen – Dokploy ist zur bevorzugten Lösung für nahtlose Deployments geworden. Entdecken Sie uns auf DockerHub.",
+			"communityCardTitle": "Community-Beitragende",
+			"communityCardDescription": "Dank einer wachsenden Basis von über {communityCardValue} Mitwirkenden gedeiht Dokploy weiterhin durch wertvolle Beiträge von Entwicklern aus aller Welt.",
+			"sponsorsCardTitle": "Sponsoren",
+			"sponsorsCardDescription": "Mehr als {sponsorsCardValue} Unternehmen/Einzelpersonen haben Dokploy unterstützt und sorgen für einen stetigen Fluss an Unterstützung und Ressourcen. Werden Sie Teil unserer Community!"
+		},
+		"faq": {
+			"title": "Häufig gestellte Fragen",
+			"des": "Falls Sie nicht finden, wonach Sie suchen, erstellen Sie bitte ein Issue in unserem GitHub-Repository oder stellen Sie Ihre Fragen auf unserem Discord.",
+			"q1": "Was ist Dokploy?",
+			"a1": "Dokploy ist eine stabile, benutzerfreundliche Deployment-Lösung, die den Prozess der Anwendungsverwaltung vereinfacht. Betrachten Sie Dokploy als kostenlose, selbst gehostete Alternative zu Plattformen wie Heroku, Vercel und Netlify.",
+			"q2": "Warum Dokploy wählen?",
+			"a2": "Dokploy bietet Einfachheit, Flexibilität und Geschwindigkeit bei der Bereitstellung und Verwaltung von Anwendungen.",
+			"q4": "Ist es Open Source?",
+			"a4": "Ja, Dokploy ist Open Source und kostenlos nutzbar.",
+			"q5": "Welche Programmiersprachen kann ich mit Dokploy bereitstellen?",
+			"a5": "Dokploy schränkt Programmiersprachen nicht ein. Sie können Ihre bevorzugte Sprache und Ihr bevorzugtes Framework frei wählen.",
+			"q6": "Wie kann ich ein Feature anfragen oder einen Fehler melden?",
+			"a6": "Um ein Feature anzufragen oder einen Fehler zu melden, erstellen Sie bitte ein Issue in unserem GitHub-Repository oder fragen Sie in unserem Discord-Kanal.",
+			"q7": "Verfolgen Sie die Nutzung von Dokploy?",
+			"a7": "Nein, wir erfassen keinerlei Nutzungsdaten.",
+			"q8": "Gibt es Foren oder Communities, in denen ich mich mit anderen Nutzern austauschen kann?",
+			"a8": "Ja, wir haben aktive GitHub-Diskussionen und einen Discord, wo Sie Ideen teilen, um Hilfe bitten und sich mit anderen Nutzern vernetzen können.",
+			"q9": "Welche Arten von Anwendungen kann ich mit Dokploy bereitstellen?",
+			"a9": "Sie können jede Anwendung bereitstellen, die dockerisiert werden kann – ohne Einschränkungen. Dokploy unterstützt Builds aus Git-Repositories, Dockerfiles, Nixpacks und Buildpacks wie Heroku und Paketo.",
+			"q10": "Wie verwaltet Dokploy Datenbanken?",
+			"a10": "Dokploy unterstützt mehrere Datenbanksysteme, darunter Postgres, MySQL, MariaDB, MongoDB und Redis, und bietet Tools für einfache Bereitstellung, Verwaltung und Backups direkt über das Dashboard.",
+			"q11": "Wie funktioniert der Open-Source-Plan von Dokploy?",
+			"a11": "Sie können das Dokploy-UI auf Ihrer eigenen Infrastruktur hosten und sind für Wartung und Updates selbst verantwortlich.",
+			"q12": "Muss ich für den Managed-Plan meinen eigenen Server bereitstellen?",
+			"a12": "Ja, beim Managed-Plan stellen Sie Ihren eigenen Server (z.B. Hetzner, Hostinger, AWS, etc.) als VPS bereit und wir verwalten die Dokploy-UI-Infrastruktur für Sie.",
+			"q13": "Was passiert, wenn ich mehr als einen Server benötige?",
+			"a13": "Der erste Server kostet 4,50 $/Monat, ab dem zweiten kostet jeder weitere 3,50 $/Monat.",
+			"q14": "Gibt es eine Begrenzung für die Anzahl der Deployments?",
+			"a14": "Nein, es gibt keine Begrenzung für die Anzahl der Deployments in einem der Pläne.",
+			"q15": "Was passiert, wenn ich mein gekauftes Serverlimit überschreite?",
+			"a15": "Die zuletzt hinzugefügten Server werden deaktiviert. Sie können auf inaktive Server keine Dienste erstellen, bis sie wieder aktiviert werden.",
+			"q16": "Bieten Sie Rückerstattungen an?",
+			"a16": "Wir bieten keine Rückerstattungen an. Sie können Ihr Abonnement jedoch jederzeit kündigen. Testen Sie gerne unsere Open-Source-Version kostenlos, bevor Sie einen Kauf tätigen.",
+			"q17": "Welche Art von Support bieten Sie an?",
+			"a17": "Wir bieten Community-Support für die Open-Source-Version und Prioritäts-Support für kostenpflichtige Pläne (über Discord oder per E-Mail an support@dokploy.com).",
+			"q18": "Gibt es einen Haken beim kostenpflichtigen Plan?",
+			"a18": "Nein, Sie verbinden Ihren Server (VPS) mit Ihrem Konto und können unbegrenzt Anwendungen, Datenbanken und Nutzer bereitstellen sowie unbegrenzt Updates, Deployments, Backups und mehr erhalten."
+		},
+		"footer": {
+			"copyright": "Copyright © {year} Dokploy. Alle Rechte vorbehalten."
+		}
+	},
+	"404": {
+		"title": "Hoppla! Sieht so aus, als hätten Sie sich verlaufen.",
+		"des": "Lassen Sie uns Sie zurückbringen",
+		"action": "Startseite"
+	},
+	"Link": {
+		"docs": {
+			"intro": "https://docs.dokploy.com/docs/core",
+			"install": "https://docs.dokploy.com/docs/core/installation"
+		}
+	},
+	"Pricing": {
+		"swirlyDoodleTitle": "Einfach & Erschwinglich,",
+		"restTitle": "Preise.",
+		"description": "Clever bereitstellen, schneller skalieren – ohne das Budget zu sprengen",
+		"billingCycle": {
+			"monthly": "Monatlich",
+			"annual": "Jährlich"
+		},
+		"plan": {
+			"free": {
+				"title": "Kostenlos",
+				"subTitle": "Open Source",
+				"section": {
+					"title": "Dokploy Open Source",
+					"description": "Verwalten Sie Ihre eigene Infrastruktur, indem Sie das Dokploy-UI auf Ihrem eigenen Server installieren."
+				},
+				"features": {
+					"f1": "Volle Flexibilität: Installieren Sie das Dokploy-UI auf Ihrer eigenen Infrastruktur",
+					"f2": "Selbstgehostete Infrastruktur",
+					"f3": "Community-Support",
+					"f4": "Zugang zu Kernfunktionen",
+					"f5": "Zugang zu allen Updates",
+					"f9": "Unbegrenzte Server"
+				},
+				"go": "Installation"
+			},
+			"cloud": {
+				"title": "Empfohlen",
+				"section": {
+					"title": "Dokploy-Plan",
+					"description": " um die Dokploy-UI-Infrastruktur zu verwalten – wir übernehmen das für Sie."
+				},
+				"servers": "{serverQuantity} Server (Sie bringen die Server mit)",
+				"features": {
+					"f1": "Managed Hosting: Kein eigener Serverbetrieb notwendig",
+					"f2": "Unbegrenzte Deployments",
+					"f3": "Unbegrenzte Datenbanken",
+					"f4": "Unbegrenzte Anwendungen",
+					"f5": "Unbegrenzte Nutzer",
+					"f6": "Remote-Server-Überwachung",
+					"f7": "Prioritäts-Support",
+					"f8": "Neue Updates"
+				},
+				"go": "Abonnieren"
+			}
+		},
+		"faq": {
+			"title": "Häufig gestellte Fragen",
+			"description": "Falls Sie nicht finden, wonach Sie suchen, senden Sie uns bitte eine E-Mail an",
+			"q1": "Wie funktioniert der Open-Source-Plan von Dokploy?",
+			"a1": "Sie können das Dokploy-UI auf Ihrer eigenen Infrastruktur hosten und sind für Wartung und Updates selbst verantwortlich.",
+			"q2": "Muss ich für den Managed-Plan meinen eigenen Server bereitstellen?",
+			"a2": "Ja, beim Managed-Plan stellen Sie Ihren eigenen Server (z.B. Hetzner, Hostinger, AWS, etc.) als VPS bereit und wir verwalten die Dokploy-UI-Infrastruktur für Sie.",
+			"q3": "Was passiert, wenn ich mehr als einen Server benötige?",
+			"a3": "Der erste Server kostet 4,50 $/Monat, ab dem zweiten kostet jeder weitere 3,50 $/Monat.",
+			"q4": "Gibt es eine Begrenzung für die Anzahl der Deployments?",
+			"a4": "Nein, es gibt keine Begrenzung für die Anzahl der Deployments in einem der Pläne.",
+			"q5": "Was passiert, wenn ich mein gekauftes Serverlimit überschreite?",
+			"a5": "Die zuletzt hinzugefügten Server werden deaktiviert. Sie können auf inaktive Server keine Dienste erstellen, bis sie wieder aktiviert werden.",
+			"q6": "Bieten Sie Rückerstattungen an?",
+			"a6": "Wir bieten keine Rückerstattungen an. Sie können Ihr Abonnement jedoch jederzeit kündigen. Testen Sie gerne unsere Open-Source-Version kostenlos, bevor Sie einen Kauf tätigen.",
+			"q7": "Welche Art von Support bieten Sie an?",
+			"a7": "Wir bieten Community-Support für die Open-Source-Version und Prioritäts-Support für kostenpflichtige Pläne.",
+			"q8": "Ist Dokploy Open Source?",
+			"a8": "Ja, Dokploy ist vollständig Open Source. Sie können beitragen oder es nach Bedarf für Ihre Projekte anpassen."
+		}
+	},
+	"blog": {
+		"title": "Blog",
+		"description": "Neueste Nachrichten, Updates und Artikel von Dokploy",
+		"noPosts": "Keine Beiträge verfügbar",
+		"noResults": "Keine Beiträge gefunden, die Ihren Kriterien entsprechen",
+		"searchPlaceholder": "Beiträge durchsuchen...",
+		"allTags": "Alle Tags",
+		"relatedPosts": "Verwandte Beiträge",
+		"tagDescription": "Beiträge mit dem Tag",
+		"foundPosts": "{count, plural, =0 {Keine Beiträge gefunden} one {# Beitrag gefunden} other {# Beiträge gefunden}}",
+		"tagTitle": "Beiträge mit dem Tag {tag}",
+		"backToBlog": "Zurück zum Blog",
+		"tags": "Tags",
+		"postsTaggedWith": "Beiträge mit dem Tag"
+	}
+}
