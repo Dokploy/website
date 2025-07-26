@@ -81,6 +81,18 @@
 			"des": "借助我们的 PaaS 软件来简化部署流程，使用 Traefik 轻松管理 Docker 容器和流量，立即提高基础设施的效率和安全性。",
 			"button": "现在就部署"
 		},
+		"stats": {
+			"title": "你没要求的数据（但你其实很爱看）",
+			"description": "这里有一些数字，证明我们不是*完全*瞎编的。事实证明，Dokploy 真的帮到了一些人——谁能想到呢？",
+			"githubCardTitle": "GitHub 星标",
+			"githubCardDescription": "在 GitHub 上拥有超过 {githubCardValue}k 星标，Dokploy 获得了全球开发者的信任。欢迎浏览我们的仓库并加入我们的社区！",
+			"dockerhubCardTitle": "DockerHub 下载量",
+			"dockerhubCardDescription": "Dokploy 在 DockerHub 上已被下载超过 {dockerhubCardValue}M 次，成为无缝部署的首选方案。欢迎前往 DockerHub 了解我们。",
+			"communityCardTitle": "社区贡献者",
+			"communityCardDescription": "多亏了超过 {communityCardValue} 名贡献者的不断壮大，Dokploy 得以持续发展，全球开发者都在为其贡献力量。",
+			"sponsorsCardTitle": "赞助者",
+			"sponsorsCardDescription": "已有超过 {sponsorsCardValue} 家企业/个人赞助了 Dokploy，确保了持续的支持和资源。欢迎加入我们的社区！"
+		},
 		"faq": {
 			"title": "常问问题",
 			"des": "如果您要寻找的问题不在下方，请通过我们的 GitHub 仓库提交 issue 或在我们的 Discord 提出问题。",

@@ -81,6 +81,18 @@
 			"des": "Say goodbye to infrastructure hassles—Dokploy Cloud handles it all. Effortlessly deploy, manage Docker containers, and secure your traffic with Traefik. Focus on building, we'll handle the rest.",
 			"button": "Get Started Now"
 		},
+		"stats": {
+			"title": "Stats You Didn’t Ask For (But Secretly Love to See)",
+			"description": "Just a few numbers to show we’re not *completely* making this up. Turns out, Dokploy has actually helped a few people—who knew?",
+			"githubCardTitle": "GitHub Stars",
+			"githubCardDescription": "With over {githubCardValue}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!",
+			"dockerhubCardTitle": "DockerHub Downloads",
+			"dockerhubCardDescription": "Downloaded over {dockerhubCardValue}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.",
+			"communityCardTitle": "Community Contributors",
+			"communityCardDescription": "Thanks to a growing base of over {communityCardValue} contributors, Dokploy continues to thrive with valuable contributions from developers around the world.",
+			"sponsorsCardTitle": "Sponsors",
+			"sponsorsCardDescription": "More than {sponsorsCardValue} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!"
+		},
 		"faq": {
 			"title": "Frequently asked questions",
 			"des": "If you can't find what you're looking for, please submit an issue through our GitHub repository or ask questions on our Discord.",

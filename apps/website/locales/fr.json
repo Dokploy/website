@@ -20,7 +20,7 @@
 		},
 		"hero": {
 			"cloud": "Présentation de Dokploy Cloud",
-			"deploy": "Deployer",
+			"deploy": "Déployer",
 			"anywhere": "N'importe où",
 			"with": "en toute liberté et facilement.",
 			"des": "Optimisez vos opérations grâce à notre plateforme tout-en-un : idéale pour gérer vos projets, données et l'état de vos systèmes avec simplicité et efficacité.",
@@ -80,6 +80,18 @@
 			"title": "Libérez le potentiel de vos déploiements avec Dokploy Cloud",
 			"des": "Dites adieu aux tracas d'infrastructure — Dokploy Cloud s'occupe de tout. Déployez et gérez facilement vos conteneurs Docker et sécurisez votre trafic avec Traefik. Concentrez-vous sur la création, nous nous chargeons du reste.",
 			"button": "Commencer maintenant"
+		},
+		"stats": {
+			"title": "Des stats que vous n'avez pas demandées (mais que vous adorez secrètement voir)",
+			"description": "Juste quelques chiffres pour prouver que nous n'inventons pas tout. Il s'avère que Dokploy a réellement aidé quelques personnes — qui l'aurait cru ?",
+			"githubCardTitle": "Étoiles GitHub",
+			"githubCardDescription": "Avec plus de {githubCardValue}k étoiles sur GitHub, Dokploy est approuvé par des développeurs du monde entier. Explorez nos dépôts et rejoignez notre communauté !",
+			"dockerhubCardTitle": "Téléchargements DockerHub",
+			"dockerhubCardDescription": "Téléchargé plus de {dockerhubCardValue}M de fois, Dokploy est devenu une solution incontournable pour des déploiements sans accroc. Découvrez-nous sur DockerHub.",
+			"communityCardTitle": "Contributeurs de la communauté",
+			"communityCardDescription": "Grâce à une base croissante de plus de {communityCardValue} contributeurs, Dokploy continue de prospérer grâce aux précieuses contributions de développeurs du monde entier.",
+			"sponsorsCardTitle": "Sponsors",
+			"sponsorsCardDescription": "Plus de {sponsorsCardValue} entreprises/individus ont sponsorisé Dokploy, assurant un flux constant de soutien et de ressources. Rejoignez notre communauté !"
 		},
 		"faq": {
 			"title": "Questions fréquemment posées",
