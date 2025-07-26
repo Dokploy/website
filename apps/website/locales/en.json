@@ -95,6 +95,10 @@
 			"sponsorsCardTitle": "Sponsors",
 			"sponsorsCardDescription": "More than {sponsorsCardValue} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!"
 		},
+		"testimonials": {
+			"title": "Why Developers Love Dokploy",
+			"description": "Think we’re bragging? Hear from the devs who once doubted too—until Dokploy made their lives (and deployments) surprisingly easier."
+		},
 		"faq": {
 			"title": "Frequently asked questions",
 			"des": "If you can't find what you're looking for, please submit an issue through our GitHub repository or ask questions on our Discord.",

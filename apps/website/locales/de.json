@@ -79,7 +79,7 @@
 			"terminalDes": "Bietet eine Oberfläche, um auf die Kommandozeile jedes aktiven Containers zuzugreifen, sodass Entwickler Befehle ausführen, Dienste verwalten und direkt vom Dashboard aus Fehler beheben können."
 		},
 		"callToAction": {
-			"title": "Entfesseln Sie Ihr Deployment-Potenzial mit Dokploy Cloud",
+			"title": "Entfesseln Sie Ihr Bereitstellungspotenzial mit Dokploy Cloud",
 			"des": "Verabschieden Sie sich von Infrastrukturproblemen – Dokploy Cloud übernimmt alles. Stellen Sie mühelos bereit, verwalten Sie Docker-Container und sichern Sie Ihren Datenverkehr mit Traefik. Konzentrieren Sie sich aufs Bauen, wir kümmern uns um den Rest.",
 			"button": "Jetzt starten"
 		},
@@ -89,17 +89,21 @@
 			"githubCardTitle": "GitHub-Sterne",
 			"githubCardDescription": "Mit über {githubCardValue}k Sternen auf GitHub wird Dokploy weltweit von Entwicklern geschätzt. Entdecken Sie unsere Repositories und werden Sie Teil unserer Community!",
 			"dockerhubCardTitle": "DockerHub-Downloads",
-			"dockerhubCardDescription": "Über {dockerhubCardValue}M Mal heruntergeladen – Dokploy ist zur bevorzugten Lösung für nahtlose Deployments geworden. Entdecken Sie uns auf DockerHub.",
+			"dockerhubCardDescription": "Über {dockerhubCardValue}M Mal heruntergeladen – Dokploy ist zur bevorzugten Lösung für nahtlose Bereitstellungen geworden. Entdecken Sie uns auf DockerHub.",
 			"communityCardTitle": "Community-Beitragende",
 			"communityCardDescription": "Dank einer wachsenden Basis von über {communityCardValue} Mitwirkenden gedeiht Dokploy weiterhin durch wertvolle Beiträge von Entwicklern aus aller Welt.",
 			"sponsorsCardTitle": "Sponsoren",
 			"sponsorsCardDescription": "Mehr als {sponsorsCardValue} Unternehmen/Einzelpersonen haben Dokploy unterstützt und sorgen für einen stetigen Fluss an Unterstützung und Ressourcen. Werden Sie Teil unserer Community!"
 		},
+		"testimonials": {
+			"title": "Warum Entwickler Dokploy lieben",
+			"description": "Sie denken, wir prahlen? Hören Sie von den Entwicklern, die einst auch gezweifelt haben – bis Dokploy ihr Leben (und ihre Bereitstellungen) überraschend einfacher gemacht hat."
+		},
 		"faq": {
 			"title": "Häufig gestellte Fragen",
 			"des": "Falls Sie nicht finden, wonach Sie suchen, erstellen Sie bitte ein Issue in unserem GitHub-Repository oder stellen Sie Ihre Fragen auf unserem Discord.",
 			"q1": "Was ist Dokploy?",
-			"a1": "Dokploy ist eine stabile, benutzerfreundliche Deployment-Lösung, die den Prozess der Anwendungsverwaltung vereinfacht. Betrachten Sie Dokploy als kostenlose, selbst gehostete Alternative zu Plattformen wie Heroku, Vercel und Netlify.",
+			"a1": "Dokploy ist eine stabile, benutzerfreundliche Bereitstellungslösung, die den Prozess der Anwendungsverwaltung vereinfacht. Betrachten Sie Dokploy als kostenlose, selbst gehostete Alternative zu Plattformen wie Heroku, Vercel und Netlify.",
 			"q2": "Warum Dokploy wählen?",
 			"a2": "Dokploy bietet Einfachheit, Flexibilität und Geschwindigkeit bei der Bereitstellung und Verwaltung von Anwendungen.",
 			"q4": "Ist es Open Source?",
@@ -122,8 +126,8 @@
 			"a12": "Ja, beim Managed-Plan stellen Sie Ihren eigenen Server (z.B. Hetzner, Hostinger, AWS, etc.) als VPS bereit und wir verwalten die Dokploy-UI-Infrastruktur für Sie.",
 			"q13": "Was passiert, wenn ich mehr als einen Server benötige?",
 			"a13": "Der erste Server kostet 4,50 $/Monat, ab dem zweiten kostet jeder weitere 3,50 $/Monat.",
-			"q14": "Gibt es eine Begrenzung für die Anzahl der Deployments?",
-			"a14": "Nein, es gibt keine Begrenzung für die Anzahl der Deployments in einem der Pläne.",
+			"q14": "Gibt es eine Begrenzung für die Anzahl der Bereitstellungen?",
+			"a14": "Nein, es gibt keine Begrenzung für die Anzahl der Bereitstellungen in einem der Pläne.",
 			"q15": "Was passiert, wenn ich mein gekauftes Serverlimit überschreite?",
 			"a15": "Die zuletzt hinzugefügten Server werden deaktiviert. Sie können auf inaktive Server keine Dienste erstellen, bis sie wieder aktiviert werden.",
 			"q16": "Bieten Sie Rückerstattungen an?",
@@ -131,7 +135,7 @@
 			"q17": "Welche Art von Support bieten Sie an?",
 			"a17": "Wir bieten Community-Support für die Open-Source-Version und Prioritäts-Support für kostenpflichtige Pläne (über Discord oder per E-Mail an support@dokploy.com).",
 			"q18": "Gibt es einen Haken beim kostenpflichtigen Plan?",
-			"a18": "Nein, Sie verbinden Ihren Server (VPS) mit Ihrem Konto und können unbegrenzt Anwendungen, Datenbanken und Nutzer bereitstellen sowie unbegrenzt Updates, Deployments, Backups und mehr erhalten."
+			"a18": "Nein, Sie verbinden Ihren Server (VPS) mit Ihrem Konto und können unbegrenzt Anwendungen, Datenbanken und Nutzer bereitstellen sowie unbegrenzt Updates, Bereitstellungen, Backups und mehr erhalten."
 		},
 		"footer": {
 			"copyright": "Copyright © {year} Dokploy. Alle Rechte vorbehalten."
@@ -183,7 +187,7 @@
 				"servers": "{serverQuantity} Server (Sie bringen die Server mit)",
 				"features": {
 					"f1": "Managed Hosting: Kein eigener Serverbetrieb notwendig",
-					"f2": "Unbegrenzte Deployments",
+					"f2": "Unbegrenzte Bereitstellungen",
 					"f3": "Unbegrenzte Datenbanken",
 					"f4": "Unbegrenzte Anwendungen",
 					"f5": "Unbegrenzte Nutzer",
@@ -203,8 +207,8 @@
 			"a2": "Ja, beim Managed-Plan stellen Sie Ihren eigenen Server (z.B. Hetzner, Hostinger, AWS, etc.) als VPS bereit und wir verwalten die Dokploy-UI-Infrastruktur für Sie.",
 			"q3": "Was passiert, wenn ich mehr als einen Server benötige?",
 			"a3": "Der erste Server kostet 4,50 $/Monat, ab dem zweiten kostet jeder weitere 3,50 $/Monat.",
-			"q4": "Gibt es eine Begrenzung für die Anzahl der Deployments?",
-			"a4": "Nein, es gibt keine Begrenzung für die Anzahl der Deployments in einem der Pläne.",
+			"q4": "Gibt es eine Begrenzung für die Anzahl der Bereitstellungen?",
+			"a4": "Nein, es gibt keine Begrenzung für die Anzahl der Bereitstellungen in einem der Pläne.",
 			"q5": "Was passiert, wenn ich mein gekauftes Serverlimit überschreite?",
 			"a5": "Die zuletzt hinzugefügten Server werden deaktiviert. Sie können auf inaktive Server keine Dienste erstellen, bis sie wieder aktiviert werden.",
 			"q6": "Bieten Sie Rückerstattungen an?",

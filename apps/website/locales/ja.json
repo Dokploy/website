@@ -95,6 +95,10 @@
 			"sponsorsCardTitle": "スポンサー",
 			"sponsorsCardDescription": "{sponsorsCardValue} 社・個人以上が Dokploy を支援し、安定したサポートとリソースを提供しています。ぜひコミュニティにご参加ください！"
 		},
+		"testimonials": {
+			"title": "なぜ開発者はDokployを愛用するのか",
+			"description": "自慢に聞こえますか？かつて疑っていた開発者たちの声をお聞きください——Dokployが彼らの生活（そしてデプロイ）を驚くほど簡単にしたのです。"
+		},
 		"faq": {
 			"title": "よくある質問",
 			"des": "お探しの情報が見つからない場合は、GitHub リポジトリで issue を提出するか、Discord でご質問ください。",
