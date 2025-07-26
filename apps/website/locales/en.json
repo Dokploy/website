@@ -40,6 +40,60 @@
 				}
 			}
 		},
+		"firstFeatures": {
+			"title": "Powerful Deployment, Tailored for You",
+			"description": "Unlock seamless multi-server deployments, advanced user control, and flexible database management—all with Dokploy’s developer-focused features.",
+			"features": {
+				"f1": {
+					"title": "Flexible Application Deployment",
+					"description": "Deploy any application using Nixpacks, Heroku Buildpacks, or your custom Dockerfile, tailored to your stack."
+				},
+				"f2": {
+					"title": "Native Docker Compose Support",
+					"description": "Deploy complex applications natively with full Docker Compose integration for seamless orchestration."
+				},
+				"f3": {
+					"title": "Multi-server Support",
+					"description": "Effortlessly deploy your applications on remote servers, with zero configuration hassle."
+				},
+				"f4": {
+					"title": "Advanced User Management",
+					"description": "Control user access with detailed roles and permissions, keeping your deployments secure and organized."
+				},
+				"f5": {
+					"title": "Database Management with Backups",
+					"description": "Manage and back up MySQL, PostgreSQL, MongoDB, MariaDB, Redis directly from Dokploy."
+				},
+				"f6": {
+					"title": "API & CLI Access",
+					"description": "Need custom functionality? Dokploy offers complete API and CLI access to fit your needs."
+				},
+				"f7": {
+					"title": "Docker Swarm Clusters",
+					"description": "Scale your deployments seamlessly with built-in Docker Swarm support for robust, multi-node applications."
+				},
+				"f8": {
+					"title": "Open Source Templates",
+					"description": "Get started quickly with pre-configured templates for popular tools like Supabase, Cal.com, and Pocketbase."
+				},
+				"f9": {
+					"title": "No Vendor Lock-In",
+					"description": "Experience complete freedom to modify, scale, and customize Dokploy to suit your specific needs."
+				},
+				"f10": {
+					"title": "Real-time Monitoring & Alerts",
+					"description": "Monitor CPU, memory, and network usage in real-time across your deployments for full visibility."
+				},
+				"f11": {
+					"title": "Built for developers",
+					"description": "Designed specifically for engineers and developers seeking control and flexibility."
+				},
+				"f12": {
+					"title": "Self-hosted & Open Source",
+					"description": "Dokploy provides complete control with self-hosting capabilities and open-source transparency."
+				}
+			}
+		},
 		"primaryFeatures": {
 			"title": "Comprehensive Control for Your Digital Ecosystem",
 			"des": "Simplify your project and data management, ensure robust monitoring, and secure your backups—all without the fuss over minute details.",

@@ -40,6 +40,60 @@
 				}
 			}
 		},
+		"firstFeatures": {
+			"title": "强大部署，量身定制",
+			"description": "通过 Dokploy 面向开发者的特性，轻松实现多服务器无缝部署、高级用户控制和灵活的数据库管理。",
+			"features": {
+				"f1": {
+					"title": "灵活的应用部署",
+					"description": "支持使用 Nixpacks、Heroku Buildpacks 或自定义 Dockerfile 部署任何应用，适配您的技术栈。"
+				},
+				"f2": {
+					"title": "原生 Docker Compose 支持",
+					"description": "原生集成 Docker Compose，轻松编排和部署复杂应用。"
+				},
+				"f3": {
+					"title": "多服务器支持",
+					"description": "无需繁琐配置，轻松将应用部署到远程服务器。"
+				},
+				"f4": {
+					"title": "高级用户管理",
+					"description": "通过细致的角色与权限控制用户访问，保障部署安全有序。"
+				},
+				"f5": {
+					"title": "数据库管理与备份",
+					"description": "直接在 Dokploy 内管理并备份 MySQL、PostgreSQL、MongoDB、MariaDB、Redis。"
+				},
+				"f6": {
+					"title": "API 与 CLI 访问",
+					"description": "需要自定义功能？Dokploy 提供完整的 API 和 CLI 访问，满足您的各种需求。"
+				},
+				"f7": {
+					"title": "Docker Swarm 集群",
+					"description": "内置 Docker Swarm 支持，助力多节点应用无缝扩展部署。"
+				},
+				"f8": {
+					"title": "开源模板",
+					"description": "内置 Supabase、Cal.com、Pocketbase 等热门工具的预设模板，快速上手。"
+				},
+				"f9": {
+					"title": "无厂商锁定",
+					"description": "完全自由地修改、扩展和定制 Dokploy，满足您的专属需求。"
+				},
+				"f10": {
+					"title": "实时监控与告警",
+					"description": "实时监控所有部署的 CPU、内存和网络使用情况，全面掌控运行状态。"
+				},
+				"f11": {
+					"title": "为开发者而生",
+					"description": "专为追求控制力与灵活性的工程师和开发者设计。"
+				},
+				"f12": {
+					"title": "自托管与开源",
+					"description": "Dokploy 支持自托管，开源透明，赋予您完全的掌控权。"
+				}
+			}
+		},
 		"primaryFeatures": {
 			"title": "全面掌控您的基础设施",
 			"des": "Dokploy 不仅简化您的项目部署和数据管理流程，同时还提供完备的数据备份，一切只在弹指间。",

@@ -40,6 +40,60 @@
 				}
 			}
 		},
+		"firstFeatures": {
+			"title": "Déploiement puissant, adapté pour vous",
+			"description": "Débloquez des déploiements multi-serveurs sans effort, un contrôle utilisateur avancé et une gestion flexible des bases de données — le tout grâce aux fonctionnalités pensées pour les développeurs de Dokploy.",
+			"features": {
+				"f1": {
+					"title": "Déploiement d'applications flexible",
+					"description": "Déployez n'importe quelle application avec Nixpacks, Heroku Buildpacks ou votre propre Dockerfile, selon votre stack."
+				},
+				"f2": {
+					"title": "Support natif de Docker Compose",
+					"description": "Déployez des applications complexes nativement grâce à l'intégration complète de Docker Compose pour une orchestration fluide."
+				},
+				"f3": {
+					"title": "Support multi-serveur",
+					"description": "Déployez vos applications sur des serveurs distants sans aucune complexité de configuration."
+				},
+				"f4": {
+					"title": "Gestion avancée des utilisateurs",
+					"description": "Contrôlez l'accès des utilisateurs avec des rôles et permissions détaillés, pour des déploiements sécurisés et organisés."
+				},
+				"f5": {
+					"title": "Gestion des bases de données avec sauvegardes",
+					"description": "Gérez et sauvegardez MySQL, PostgreSQL, MongoDB, MariaDB, Redis directement depuis Dokploy."
+				},
+				"f6": {
+					"title": "Accès API & CLI",
+					"description": "Besoin de fonctionnalités sur mesure ? Dokploy offre un accès complet à l'API et à la CLI pour répondre à vos besoins."
+				},
+				"f7": {
+					"title": "Clusters Docker Swarm",
+					"description": "Faites évoluer vos déploiements sans effort grâce au support intégré de Docker Swarm pour des applications robustes et multi-nœuds."
+				},
+				"f8": {
+					"title": "Templates open source",
+					"description": "Démarrez rapidement avec des templates préconfigurés pour des outils populaires comme Supabase, Cal.com et Pocketbase."
+				},
+				"f9": {
+					"title": "Aucune dépendance fournisseur",
+					"description": "Profitez d'une liberté totale pour modifier, faire évoluer et personnaliser Dokploy selon vos besoins spécifiques."
+				},
+				"f10": {
+					"title": "Surveillance & alertes en temps réel",
+					"description": "Surveillez l'utilisation du CPU, de la mémoire et du réseau en temps réel sur tous vos déploiements pour une visibilité totale."
+				},
+				"f11": {
+					"title": "Conçu pour les développeurs",
+					"description": "Pensé spécialement pour les ingénieurs et développeurs recherchant contrôle et flexibilité."
+				},
+				"f12": {
+					"title": "Auto-hébergé & open source",
+					"description": "Dokploy vous offre un contrôle total grâce à l'auto-hébergement et à la transparence de l'open source."
+				}
+			}
+		},
 		"primaryFeatures": {
 			"title": "Contrôle complet de votre écosystème numérique",
 			"des": "Simplifiez la gestion de vos projets et données, assurez une surveillance robuste et sécurisez vos sauvegardes — tout cela sans vous soucier des détails minutieux.",
