@@ -177,7 +177,7 @@
 			"cloud": {
 				"title": "Recommandé",
 				"section": {
-					"title": "Offre Dokploy&",
+					"title": "Offre Dokploy",
 					"description": " pour gérer l'infrastructure de Dokploy UI, nous nous en occupons pour vous."
 				},
 				"servers": "{serverQuantity} Serveurs (Vous fournissez les serveurs)",
