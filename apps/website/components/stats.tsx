@@ -16,9 +16,9 @@ export function StatsSection() {
 
 	const grid = [
 		{
-			title: t("stats.githubCardTitle"),
-			description: t("stats.githubCardDescription", {
-				githubCardValue: (statsValues.githubStars / 1000).toFixed(1)
+			title: t("stats.features.f1.title"),
+			description: t("stats.features.f1.description", {
+				githubStarsValue: (statsValues.githubStars / 1000).toFixed(1)
 			}),
 			icon: (
 				<svg aria-hidden="true" className="h-6 w-6 fill-white">
@@ -28,9 +28,9 @@ export function StatsSection() {
 			value: statsValues.githubStars
 		},
 		{
-			title: t("stats.dockerhubCardTitle"),
-			description: t("stats.dockerhubCardDescription", {
-				dockerhubCardValue: (statsValues.dockerDownloads / 1000000).toFixed(2).split(".")[0]
+			title: t("stats.features.f2.title"),
+			description: t("stats.features.f2.description", {
+				dockerhubDownloadsValue: (statsValues.dockerDownloads / 1000000).toFixed(2).split(".")[0]
 			}),
 			icon: (
 				<svg
@@ -47,17 +47,17 @@ export function StatsSection() {
 			value: statsValues.dockerDownloads
 		},
 		{
-			title: t("stats.communityCardTitle"),
-			description: t("stats.communityCardDescription", {
-				communityCardValue: statsValues.contributors
+			title: t("stats.features.f3.title"),
+			description: t("stats.features.f3.description", {
+				contributorsValue: statsValues.contributors
 			}),
 			icon: <Users className="h-6 w-6 stroke-white" />,
 			value: statsValues.contributors
 		},
 		{
-			title: t("stats.sponsorsCardTitle"),
-			description: t("stats.sponsorsCardDescription", {
-				sponsorsCardValue: statsValues.sponsors
+			title: t("stats.features.f4.title"),
+			description: t("stats.features.f4.description", {
+				sponsorsValue: statsValues.sponsors
 			}),
 			icon: <HandCoins className="h-6 w-6 stroke-white" />,
 			value: statsValues.sponsors,

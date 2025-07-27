@@ -140,14 +140,24 @@
 		"stats": {
 			"title": "Stats You Didn’t Ask For (But Secretly Love to See)",
 			"description": "Just a few numbers to show we’re not *completely* making this up. Turns out, Dokploy has actually helped a few people—who knew?",
-			"githubCardTitle": "GitHub Stars",
-			"githubCardDescription": "With over {githubCardValue}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!",
-			"dockerhubCardTitle": "DockerHub Downloads",
-			"dockerhubCardDescription": "Downloaded over {dockerhubCardValue}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.",
-			"communityCardTitle": "Community Contributors",
-			"communityCardDescription": "Thanks to a growing base of over {communityCardValue} contributors, Dokploy continues to thrive with valuable contributions from developers around the world.",
-			"sponsorsCardTitle": "Sponsors",
-			"sponsorsCardDescription": "More than {sponsorsCardValue} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!"
+			"features": {
+				"f1": {
+					"title": "GitHub Stars",
+					"description": "With over {githubStarsValue}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!"
+				},
+				"f2": {
+					"title": "DockerHub Downloads",
+					"description": "Downloaded over {dockerhubDownloadsValue}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub."
+				},
+				"f3": {
+					"title": "Community Contributors",
+					"description": "Thanks to a growing base of over {contributorsValue} contributors, Dokploy continues to thrive with valuable contributions from developers around the world."
+				},
+				"f4": {
+					"title": "Sponsors",
+					"description": "More than {sponsorsValue} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!"
+				}
+			}
 		},
 		"testimonials": {
 			"title": "Why Developers Love Dokploy",

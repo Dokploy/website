@@ -138,16 +138,26 @@
 			"button": "今すぐ始める"
 		},
 		"stats": {
-			"title": "誰も聞いてないけど、ちょっと見てほしい統計",
-			"description": "これは全部作り話じゃないことを示すための数字です。実は Dokploy は多くの人に役立っています—ご存知でしたか？",
-			"githubCardTitle": "GitHub スター数",
-			"githubCardDescription": "GitHub で {githubCardValue}k 以上のスターを獲得し、世界中の開発者に信頼されています。リポジトリをチェックしてコミュニティに参加しましょう！",
-			"dockerhubCardTitle": "DockerHub ダウンロード数",
-			"dockerhubCardDescription": "DockerHub で {dockerhubCardValue}M 回以上ダウンロードされ、シームレスなデプロイの定番ソリューションとなっています。ぜひご覧ください。",
-			"communityCardTitle": "コミュニティ貢献者",
-			"communityCardDescription": "{communityCardValue} 人以上の貢献者のおかげで、Dokploy は世界中の開発者からの貴重な貢献により成長し続けています。",
-			"sponsorsCardTitle": "スポンサー",
-			"sponsorsCardDescription": "{sponsorsCardValue} 社・個人以上が Dokploy を支援し、安定したサポートとリソースを提供しています。ぜひコミュニティにご参加ください！"
+			"title": "誰も頼んでいないけど、ちょっと気になる統計",
+			"description": "これは全部作り話じゃないことを示す、ちょっとした数字です。実はDokployはすでに多くの人々の役に立っています——誰が想像したでしょう？",
+			"features": {
+				"f1": {
+					"title": "GitHubスター数",
+					"description": "GitHubで{githubStarsValue}k以上のスターを獲得し、Dokployは世界中の開発者から信頼されています。リポジトリをチェックして、コミュニティに参加しましょう！"
+				},
+				"f2": {
+					"title": "DockerHubダウンロード数",
+					"description": "DockerHubで{dockerhubDownloadsValue}M回以上ダウンロードされ、Dokployはシームレスなデプロイの定番ソリューションとなっています。ぜひDockerHubでご確認ください。"
+				},
+				"f3": {
+					"title": "コミュニティ貢献者数",
+					"description": "{contributorsValue}人を超える貢献者の増加により、Dokployは世界中の開発者からの価値ある貢献で成長し続けています。"
+				},
+				"f4": {
+					"title": "スポンサー数",
+					"description": "{sponsorsValue}社/名以上の企業・個人がDokployを支援し、安定したサポートとリソースを提供しています。ぜひコミュニティにご参加ください！"
+				}
+			}
 		},
 		"testimonials": {
 			"title": "なぜ開発者はDokployを愛用するのか",

@@ -138,16 +138,26 @@
 			"button": "现在就部署"
 		},
 		"stats": {
-			"title": "你没要求的数据（但你其实很爱看）",
-			"description": "这里有一些数字，证明我们不是*完全*瞎编的。事实证明，Dokploy 真的帮到了一些人——谁能想到呢？",
-			"githubCardTitle": "GitHub 星标",
-			"githubCardDescription": "在 GitHub 上拥有超过 {githubCardValue}k 星标，Dokploy 获得了全球开发者的信任。欢迎浏览我们的仓库并加入我们的社区！",
-			"dockerhubCardTitle": "DockerHub 下载量",
-			"dockerhubCardDescription": "Dokploy 在 DockerHub 上已被下载超过 {dockerhubCardValue}M 次，成为无缝部署的首选方案。欢迎前往 DockerHub 了解我们。",
-			"communityCardTitle": "社区贡献者",
-			"communityCardDescription": "多亏了超过 {communityCardValue} 名贡献者的不断壮大，Dokploy 得以持续发展，全球开发者都在为其贡献力量。",
-			"sponsorsCardTitle": "赞助者",
-			"sponsorsCardDescription": "已有超过 {sponsorsCardValue} 家企业/个人赞助了 Dokploy，确保了持续的支持和资源。欢迎加入我们的社区！"
+			"title": "你没问但其实很想看的数据",
+			"description": "这里有一些数字，证明我们并不是在胡编乱造。事实证明，Dokploy 已经帮助了不少人——谁能想到呢？",
+			"features": {
+				"f1": {
+					"title": "GitHub 星标数",
+					"description": "在 GitHub 上已获得超过 {githubStarsValue}k 颗星，Dokploy 得到了全球开发者的信任。欢迎查看我们的仓库并加入社区！"
+				},
+				"f2": {
+					"title": "DockerHub 下载量",
+					"description": "Dokploy 在 DockerHub 上的下载量已超过 {dockerhubDownloadsValue}M 次，成为无缝部署的首选方案。欢迎前往 DockerHub 了解更多。"
+				},
+				"f3": {
+					"title": "社区贡献者",
+					"description": "得益于超过 {contributorsValue} 位贡献者的不断加入，Dokploy 持续成长，汇聚了全球开发者的宝贵贡献。"
+				},
+				"f4": {
+					"title": "赞助者",
+					"description": "已有超过 {sponsorsValue} 家企业/个人赞助了 Dokploy，确保了持续的支持与资源。欢迎加入我们的社区！"
+				}
+			}
 		},
 		"testimonials": {
 			"title": "为什么开发者喜欢 Dokploy",

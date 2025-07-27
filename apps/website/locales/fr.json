@@ -138,16 +138,26 @@
 			"button": "Commencer maintenant"
 		},
 		"stats": {
-			"title": "Des stats que vous n'avez pas demandées (mais que vous adorez secrètement voir)",
-			"description": "Juste quelques chiffres pour prouver que nous n'inventons pas tout. Il s'avère que Dokploy a réellement aidé quelques personnes — qui l'aurait cru ?",
-			"githubCardTitle": "Étoiles GitHub",
-			"githubCardDescription": "Avec plus de {githubCardValue}k étoiles sur GitHub, Dokploy est approuvé par des développeurs du monde entier. Explorez nos dépôts et rejoignez notre communauté !",
-			"dockerhubCardTitle": "Téléchargements DockerHub",
-			"dockerhubCardDescription": "Téléchargé plus de {dockerhubCardValue}M de fois, Dokploy est devenu une solution incontournable pour des déploiements sans accroc. Découvrez-nous sur DockerHub.",
-			"communityCardTitle": "Contributeurs de la communauté",
-			"communityCardDescription": "Grâce à une base croissante de plus de {communityCardValue} contributeurs, Dokploy continue de prospérer grâce aux précieuses contributions de développeurs du monde entier.",
-			"sponsorsCardTitle": "Sponsors",
-			"sponsorsCardDescription": "Plus de {sponsorsCardValue} entreprises/individus ont sponsorisé Dokploy, assurant un flux constant de soutien et de ressources. Rejoignez notre communauté !"
+			"title": "Des statistiques que vous n’avez pas demandées (mais que vous adorez secrètement voir)",
+			"description": "Quelques chiffres pour prouver que nous n’inventons pas tout. Il s’avère que Dokploy a réellement aidé quelques personnes — qui l’aurait cru ?",
+			"features": {
+				"f1": {
+					"title": "Étoiles GitHub",
+					"description": "Avec plus de {githubStarsValue}k étoiles sur GitHub, Dokploy est plébiscité par les développeurs du monde entier. Découvrez nos dépôts et rejoignez notre communauté !"
+				},
+				"f2": {
+					"title": "Téléchargements DockerHub",
+					"description": "Téléchargé plus de {dockerhubDownloadsValue}M de fois, Dokploy est devenu une solution incontournable pour des déploiements sans accroc. Découvrez-nous sur DockerHub."
+				},
+				"f3": {
+					"title": "Contributeurs de la communauté",
+					"description": "Grâce à une base croissante de plus de {contributorsValue} contributeurs, Dokploy continue de prospérer grâce aux précieuses contributions de développeurs du monde entier."
+				},
+				"f4": {
+					"title": "Sponsors",
+					"description": "Plus de {sponsorsValue} entreprises/individus ont sponsorisé Dokploy, assurant un soutien et des ressources constants. Rejoignez notre communauté !"
+				}
+			}
 		},
 		"testimonials": {
 			"title": "Pourquoi les développeurs adorent Dokploy",
