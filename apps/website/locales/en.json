@@ -10,9 +10,11 @@
 			"discord": "Discord",
 			"i18nButtonPlaceholder": "Language",
 			"i18nFr": "Français",
+			"i18nDe": "Deutsch",
 			"i18nEn": "English",
 			"i18nEs": "Español",
 			"i18nZh-Hans": "简体中文",
+			"i18nJa": "日本語",
 			"blog": "Blog",
 			"home": "Home",
 			"login": "Login",
@@ -35,6 +37,60 @@
 					"community": "Community Backers",
 					"organizations": "Organizations",
 					"individuals": "Individuals"
+				}
+			}
+		},
+		"firstFeatures": {
+			"title": "Powerful Deployment, Tailored for You",
+			"description": "Unlock seamless multi-server deployments, advanced user control, and flexible database management—all with Dokploy’s developer-focused features.",
+			"features": {
+				"f1": {
+					"title": "Flexible Application Deployment",
+					"description": "Deploy any application using Nixpacks, Heroku Buildpacks, or your custom Dockerfile, tailored to your stack."
+				},
+				"f2": {
+					"title": "Native Docker Compose Support",
+					"description": "Deploy complex applications natively with full Docker Compose integration for seamless orchestration."
+				},
+				"f3": {
+					"title": "Multi-server Support",
+					"description": "Effortlessly deploy your applications on remote servers, with zero configuration hassle."
+				},
+				"f4": {
+					"title": "Advanced User Management",
+					"description": "Control user access with detailed roles and permissions, keeping your deployments secure and organized."
+				},
+				"f5": {
+					"title": "Database Management with Backups",
+					"description": "Manage and back up MySQL, PostgreSQL, MongoDB, MariaDB, Redis directly from Dokploy."
+				},
+				"f6": {
+					"title": "API & CLI Access",
+					"description": "Need custom functionality? Dokploy offers complete API and CLI access to fit your needs."
+				},
+				"f7": {
+					"title": "Docker Swarm Clusters",
+					"description": "Scale your deployments seamlessly with built-in Docker Swarm support for robust, multi-node applications."
+				},
+				"f8": {
+					"title": "Open Source Templates",
+					"description": "Get started quickly with pre-configured templates for popular tools like Supabase, Cal.com, and Pocketbase."
+				},
+				"f9": {
+					"title": "No Vendor Lock-In",
+					"description": "Experience complete freedom to modify, scale, and customize Dokploy to suit your specific needs."
+				},
+				"f10": {
+					"title": "Real-time Monitoring & Alerts",
+					"description": "Monitor CPU, memory, and network usage in real-time across your deployments for full visibility."
+				},
+				"f11": {
+					"title": "Built for developers",
+					"description": "Designed specifically for engineers and developers seeking control and flexibility."
+				},
+				"f12": {
+					"title": "Self-hosted & Open Source",
+					"description": "Dokploy provides complete control with self-hosting capabilities and open-source transparency."
 				}
 			}
 		},
@@ -80,6 +136,32 @@
 			"title": "Unlock Your Deployment Potential with Dokploy Cloud",
 			"des": "Say goodbye to infrastructure hassles—Dokploy Cloud handles it all. Effortlessly deploy, manage Docker containers, and secure your traffic with Traefik. Focus on building, we'll handle the rest.",
 			"button": "Get Started Now"
+		},
+		"stats": {
+			"title": "Stats You Didn’t Ask For (But Secretly Love to See)",
+			"description": "Just a few numbers to show we’re not *completely* making this up. Turns out, Dokploy has actually helped a few people—who knew?",
+			"features": {
+				"f1": {
+					"title": "GitHub Stars",
+					"description": "With over {githubStarsValue}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!"
+				},
+				"f2": {
+					"title": "DockerHub Downloads",
+					"description": "Downloaded over {dockerhubDownloadsValue}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub."
+				},
+				"f3": {
+					"title": "Community Contributors",
+					"description": "Thanks to a growing base of over {contributorsValue} contributors, Dokploy continues to thrive with valuable contributions from developers around the world."
+				},
+				"f4": {
+					"title": "Sponsors",
+					"description": "More than {sponsorsValue} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!"
+				}
+			}
+		},
+		"testimonials": {
+			"title": "Why Developers Love Dokploy",
+			"description": "Think we’re bragging? Hear from the devs who once doubted too—until Dokploy made their lives (and deployments) surprisingly easier."
 		},
 		"faq": {
 			"title": "Frequently asked questions",

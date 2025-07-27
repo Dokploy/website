@@ -10,8 +10,10 @@
 			"discord": "Discord",
 			"i18nButtonPlaceholder": "Langue",
 			"i18nFr": "Français",
+			"i18nDe": "Deutsch",
 			"i18nEn": "English",
 			"i18nEs": "Español",
+			"i18nJa": "日本語",
 			"i18nZh-Hans": "简体中文",
 			"blog": "Blog",
 			"home": "Accueil",
@@ -20,7 +22,7 @@
 		},
 		"hero": {
 			"cloud": "Présentation de Dokploy Cloud",
-			"deploy": "Deployer",
+			"deploy": "Déployer",
 			"anywhere": "N'importe où",
 			"with": "en toute liberté et facilement.",
 			"des": "Optimisez vos opérations grâce à notre plateforme tout-en-un : idéale pour gérer vos projets, données et l'état de vos systèmes avec simplicité et efficacité.",
@@ -35,6 +37,60 @@
 					"community": "Soutiens de la communauté",
 					"organizations": "Organisations",
 					"individuals": "Particuliers"
+				}
+			}
+		},
+		"firstFeatures": {
+			"title": "Déploiement puissant, adapté pour vous",
+			"description": "Débloquez des déploiements multi-serveurs sans effort, un contrôle utilisateur avancé et une gestion flexible des bases de données — le tout grâce aux fonctionnalités pensées pour les développeurs de Dokploy.",
+			"features": {
+				"f1": {
+					"title": "Déploiement d'applications flexible",
+					"description": "Déployez n'importe quelle application avec Nixpacks, Heroku Buildpacks ou votre propre Dockerfile, selon votre stack."
+				},
+				"f2": {
+					"title": "Support natif de Docker Compose",
+					"description": "Déployez des applications complexes nativement grâce à l'intégration complète de Docker Compose pour une orchestration fluide."
+				},
+				"f3": {
+					"title": "Support multi-serveur",
+					"description": "Déployez vos applications sur des serveurs distants sans aucune complexité de configuration."
+				},
+				"f4": {
+					"title": "Gestion avancée des utilisateurs",
+					"description": "Contrôlez l'accès des utilisateurs avec des rôles et permissions détaillés, pour des déploiements sécurisés et organisés."
+				},
+				"f5": {
+					"title": "Gestion des bases de données avec sauvegardes",
+					"description": "Gérez et sauvegardez MySQL, PostgreSQL, MongoDB, MariaDB, Redis directement depuis Dokploy."
+				},
+				"f6": {
+					"title": "Accès API & CLI",
+					"description": "Besoin de fonctionnalités sur mesure ? Dokploy offre un accès complet à l'API et à la CLI pour répondre à vos besoins."
+				},
+				"f7": {
+					"title": "Clusters Docker Swarm",
+					"description": "Faites évoluer vos déploiements sans effort grâce au support intégré de Docker Swarm pour des applications robustes et multi-nœuds."
+				},
+				"f8": {
+					"title": "Templates open source",
+					"description": "Démarrez rapidement avec des templates préconfigurés pour des outils populaires comme Supabase, Cal.com et Pocketbase."
+				},
+				"f9": {
+					"title": "Aucune dépendance fournisseur",
+					"description": "Profitez d'une liberté totale pour modifier, faire évoluer et personnaliser Dokploy selon vos besoins spécifiques."
+				},
+				"f10": {
+					"title": "Surveillance & alertes en temps réel",
+					"description": "Surveillez l'utilisation du CPU, de la mémoire et du réseau en temps réel sur tous vos déploiements pour une visibilité totale."
+				},
+				"f11": {
+					"title": "Conçu pour les développeurs",
+					"description": "Pensé spécialement pour les ingénieurs et développeurs recherchant contrôle et flexibilité."
+				},
+				"f12": {
+					"title": "Auto-hébergé & open source",
+					"description": "Dokploy vous offre un contrôle total grâce à l'auto-hébergement et à la transparence de l'open source."
 				}
 			}
 		},
@@ -80,6 +136,32 @@
 			"title": "Libérez le potentiel de vos déploiements avec Dokploy Cloud",
 			"des": "Dites adieu aux tracas d'infrastructure — Dokploy Cloud s'occupe de tout. Déployez et gérez facilement vos conteneurs Docker et sécurisez votre trafic avec Traefik. Concentrez-vous sur la création, nous nous chargeons du reste.",
 			"button": "Commencer maintenant"
+		},
+		"stats": {
+			"title": "Des statistiques que vous n’avez pas demandées (mais que vous adorez secrètement voir)",
+			"description": "Quelques chiffres pour prouver que nous n’inventons pas tout. Il s’avère que Dokploy a réellement aidé quelques personnes — qui l’aurait cru ?",
+			"features": {
+				"f1": {
+					"title": "Étoiles GitHub",
+					"description": "Avec plus de {githubStarsValue}k étoiles sur GitHub, Dokploy est plébiscité par les développeurs du monde entier. Découvrez nos dépôts et rejoignez notre communauté !"
+				},
+				"f2": {
+					"title": "Téléchargements DockerHub",
+					"description": "Téléchargé plus de {dockerhubDownloadsValue}M de fois, Dokploy est devenu une solution incontournable pour des déploiements sans accroc. Découvrez-nous sur DockerHub."
+				},
+				"f3": {
+					"title": "Contributeurs de la communauté",
+					"description": "Grâce à une base croissante de plus de {contributorsValue} contributeurs, Dokploy continue de prospérer grâce aux précieuses contributions de développeurs du monde entier."
+				},
+				"f4": {
+					"title": "Sponsors",
+					"description": "Plus de {sponsorsValue} entreprises/individus ont sponsorisé Dokploy, assurant un soutien et des ressources constants. Rejoignez notre communauté !"
+				}
+			}
+		},
+		"testimonials": {
+			"title": "Pourquoi les développeurs adorent Dokploy",
+			"description": "Vous pensez qu’on exagère ? Écoutez les développeurs qui doutaient eux aussi — jusqu’à ce que Dokploy leur simplifie vraiment la vie (et les déploiements)."
 		},
 		"faq": {
 			"title": "Questions fréquemment posées",
@@ -163,7 +245,7 @@
 			"cloud": {
 				"title": "Recommandé",
 				"section": {
-					"title": "Offre Dokploy&",
+					"title": "Offre Dokploy",
 					"description": " pour gérer l'infrastructure de Dokploy UI, nous nous en occupons pour vous."
 				},
 				"servers": "{serverQuantity} Serveurs (Vous fournissez les serveurs)",

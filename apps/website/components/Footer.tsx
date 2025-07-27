@@ -92,7 +92,7 @@ export function Footer() {
 						<Select
 							onValueChange={(locale) => {
 								router.replace("/", {
-									locale: locale as "en" | "zh-Hans" | "fr" | "es",
+									locale: locale as "en" | "zh-Hans" | "fr" | "de" | "es" | "ja",
 								});
 							}}
 							value={locale}
@@ -109,10 +109,12 @@ export function Footer() {
 							<SelectContent>
 								<SelectItem value="en">{t("navigation.i18nEn")}</SelectItem>
 								<SelectItem value="fr">{t("navigation.i18nFr")}</SelectItem>
+								<SelectItem value="de">{t("navigation.i18nDe")}</SelectItem>
 								<SelectItem value="es">{t("navigation.i18nEs")}</SelectItem>
 								<SelectItem value="zh-Hans">
 									{t("navigation.i18nZh-Hans")}
 								</SelectItem>
+								<SelectItem value="ja">{t("navigation.i18nJa")}</SelectItem>
 							</SelectContent>
 						</Select>
 					</div>

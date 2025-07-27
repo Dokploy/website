@@ -10,9 +10,11 @@
 			"discord": "Discord",
 			"i18nButtonPlaceholder": "语言",
 			"i18nFr": "Français",
+			"i18nDe": "Deutsch",
 			"i18nEn": "English",
 			"i18nEs": "Español",
 			"i18nZh-Hans": "简体中文",
+			"i18nJa": "日本語",
 			"blog": "博客",
 			"home": "首页",
 			"login": "登录",
@@ -35,6 +37,60 @@
 					"community": "铜牌赞助",
 					"organizations": "组织赞助",
 					"individuals": "个人赞助"
+				}
+			}
+		},
+		"firstFeatures": {
+			"title": "强大部署，量身定制",
+			"description": "通过 Dokploy 面向开发者的特性，轻松实现多服务器无缝部署、高级用户控制和灵活的数据库管理。",
+			"features": {
+				"f1": {
+					"title": "灵活的应用部署",
+					"description": "支持使用 Nixpacks、Heroku Buildpacks 或自定义 Dockerfile 部署任何应用，适配您的技术栈。"
+				},
+				"f2": {
+					"title": "原生 Docker Compose 支持",
+					"description": "原生集成 Docker Compose，轻松编排和部署复杂应用。"
+				},
+				"f3": {
+					"title": "多服务器支持",
+					"description": "无需繁琐配置，轻松将应用部署到远程服务器。"
+				},
+				"f4": {
+					"title": "高级用户管理",
+					"description": "通过细致的角色与权限控制用户访问，保障部署安全有序。"
+				},
+				"f5": {
+					"title": "数据库管理与备份",
+					"description": "直接在 Dokploy 内管理并备份 MySQL、PostgreSQL、MongoDB、MariaDB、Redis。"
+				},
+				"f6": {
+					"title": "API 与 CLI 访问",
+					"description": "需要自定义功能？Dokploy 提供完整的 API 和 CLI 访问，满足您的各种需求。"
+				},
+				"f7": {
+					"title": "Docker Swarm 集群",
+					"description": "内置 Docker Swarm 支持，助力多节点应用无缝扩展部署。"
+				},
+				"f8": {
+					"title": "开源模板",
+					"description": "内置 Supabase、Cal.com、Pocketbase 等热门工具的预设模板，快速上手。"
+				},
+				"f9": {
+					"title": "无厂商锁定",
+					"description": "完全自由地修改、扩展和定制 Dokploy，满足您的专属需求。"
+				},
+				"f10": {
+					"title": "实时监控与告警",
+					"description": "实时监控所有部署的 CPU、内存和网络使用情况，全面掌控运行状态。"
+				},
+				"f11": {
+					"title": "为开发者而生",
+					"description": "专为追求控制力与灵活性的工程师和开发者设计。"
+				},
+				"f12": {
+					"title": "自托管与开源",
+					"description": "Dokploy 支持自托管，开源透明，赋予您完全的掌控权。"
 				}
 			}
 		},
@@ -80,6 +136,32 @@
 			"title": "释放自主部署的全部潜力",
 			"des": "借助我们的 PaaS 软件来简化部署流程，使用 Traefik 轻松管理 Docker 容器和流量，立即提高基础设施的效率和安全性。",
 			"button": "现在就部署"
+		},
+		"stats": {
+			"title": "你没问但其实很想看的数据",
+			"description": "这里有一些数字，证明我们并不是在胡编乱造。事实证明，Dokploy 已经帮助了不少人——谁能想到呢？",
+			"features": {
+				"f1": {
+					"title": "GitHub 星标数",
+					"description": "在 GitHub 上已获得超过 {githubStarsValue}k 颗星，Dokploy 得到了全球开发者的信任。欢迎查看我们的仓库并加入社区！"
+				},
+				"f2": {
+					"title": "DockerHub 下载量",
+					"description": "Dokploy 在 DockerHub 上的下载量已超过 {dockerhubDownloadsValue}M 次，成为无缝部署的首选方案。欢迎前往 DockerHub 了解更多。"
+				},
+				"f3": {
+					"title": "社区贡献者",
+					"description": "得益于超过 {contributorsValue} 位贡献者的不断加入，Dokploy 持续成长，汇聚了全球开发者的宝贵贡献。"
+				},
+				"f4": {
+					"title": "赞助者",
+					"description": "已有超过 {sponsorsValue} 家企业/个人赞助了 Dokploy，确保了持续的支持与资源。欢迎加入我们的社区！"
+				}
+			}
+		},
+		"testimonials": {
+			"title": "为什么开发者喜欢 Dokploy",
+			"description": "觉得我们在自夸？来听听那些曾经也怀疑过的开发者怎么说——直到 Dokploy 让他们的工作（和部署）变得出乎意料的轻松。"
 		},
 		"faq": {
 			"title": "常问问题",

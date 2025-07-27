@@ -11,92 +11,81 @@ import {
 	IconTerminal2,
 	IconUsers,
 } from "@tabler/icons-react";
-import { Layers, Lock, UnlockIcon } from "lucide-react";
+import { Layers, UnlockIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function FirstFeaturesSection() {
+	const t = useTranslations("HomePage");
+
 	const features = [
 		{
-			title: "Flexible Application Deployment",
-			description:
-				"Deploy any application using Nixpacks, Heroku Buildpacks, or your custom Dockerfile, tailored to your stack.",
+			title: t("firstFeatures.features.f1.title"),
+			description: t("firstFeatures.features.f1.description"),
 			icon: <IconRocket />,
 		},
 		{
-			title: "Native Docker Compose Support",
-			description:
-				"Deploy complex applications natively with full Docker Compose integration for seamless orchestration.",
+			title: t("firstFeatures.features.f2.title"),
+			description: t("firstFeatures.features.f2.description"),
 			icon: <Layers />,
 		},
 		{
-			title: "Multi-server Support",
-			description:
-				"Effortlessly deploy your applications on remote servers, with zero configuration hassle.",
+			title: t("firstFeatures.features.f3.title"),
+			description: t("firstFeatures.features.f3.description"),
 			icon: <IconCloud />,
 		},
 		{
-			title: "Advanced User Management",
-			description:
-				"Control user access with detailed roles and permissions, keeping your deployments secure and organized.",
+			title: t("firstFeatures.features.f4.title"),
+			description: t("firstFeatures.features.f4.description"),
 			icon: <IconUsers />,
 		},
 		{
-			title: "Database Management with Backups",
-			description:
-				"Manage and back up MySQL, PostgreSQL, MongoDB, MariaDB, Redis directly from Dokploy.",
+			title: t("firstFeatures.features.f5.title"),
+			description: t("firstFeatures.features.f5.description"),
 			icon: <IconDatabase />,
 		},
 		{
-			title: "API & CLI Access",
-			description:
-				"Need custom functionality? Dokploy offers complete API and CLI access to fit your needs.",
+			title: t("firstFeatures.features.f6.title"),
+			description: t("firstFeatures.features.f6.title"),
 			icon: <IconTerminal />,
 		},
 		{
-			title: "Docker Swarm Clusters",
-			description:
-				"Scale your deployments seamlessly with built-in Docker Swarm support for robust, multi-node applications.",
+			title: t("firstFeatures.features.f7.title"),
+			description: t("firstFeatures.features.f7.description"),
 			icon: <IconUsers />,
 		},
 		{
-			title: "Open Source Templates",
-			description:
-				"Get started quickly with pre-configured templates for popular tools like Supabase, Cal.com, and Pocketbase.",
+			title: t("firstFeatures.features.f8.title"),
+			description: t("firstFeatures.features.f8.description"),
 			icon: <IconTemplate />,
 		},
 		{
-			title: "No Vendor Lock-In",
-			description:
-				"Experience complete freedom to modify, scale, and customize Dokploy to suit your specific needs.",
+			title: t("firstFeatures.features.f9.title"),
+			description: t("firstFeatures.features.f9.description"),
 			icon: <UnlockIcon />,
 		},
 		{
-			title: "Real-time Monitoring & Alerts",
-			description:
-				"Monitor CPU, memory, and network usage in real-time across your deployments for full visibility.",
+			title: t("firstFeatures.features.f10.title"),
+			description: t("firstFeatures.features.f10.description"),
 			icon: <IconActivity />,
 		},
 		{
-			title: "Built for developers",
-			description:
-				"Designed specifically for engineers and developers seeking control and flexibility.",
+			title: t("firstFeatures.features.f11.title"),
+			description: t("firstFeatures.features.f11.description"),
 			icon: <IconTerminal2 />,
 		},
 		{
-			title: "Self-hosted & Open Source",
-			description:
-				"Dokploy provides complete control with self-hosting capabilities and open-source transparency.",
+			title: t("firstFeatures.features.f12.title"),
+			description: t("firstFeatures.features.f12.description"),
 			icon: <IconEaseInOut />,
 		},
 	];
 	return (
 		<div className="flex flex-col justify-center items-center  mt-20 px-4">
 			<h2 className="font-display text-3xl tracking-tight text-primary sm:text-4xl text-center">
-				Powerful Deployment, Tailored for You
+				{t("firstFeatures.title")}
 			</h2>
 			<p className="mt-4 text-lg tracking-tight  text-muted-foreground text-center">
-				Unlock seamless multi-server deployments, advanced user control, and
-				flexible database management—all with Dokploy’s developer-focused
-				features.
+				{t("firstFeatures.description")}
 			</p>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto mt-10 max-sm:p-0 max-sm:mx-0 max-sm:w-full">
 				{features.map((feature, index) => (
