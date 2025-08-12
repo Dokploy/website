@@ -98,6 +98,8 @@ install_dokploy() {
     fi
     echo "Using advertise address: $advertise_addr"
 
+    docker network rm -f docker_gwbridge 2>/dev/null
+    docker network create docker_gwbridge --ipv4 --ipv6 --driver bridge
     docker swarm init --advertise-addr $advertise_addr
     
      if [ $? -ne 0 ]; then
@@ -108,9 +110,12 @@ install_dokploy() {
     echo "Swarm initialized"
 
     docker network rm -f dokploy-network 2>/dev/null
-    docker network create --driver overlay --attachable dokploy-network
+    docker network create --driver overlay --attachable --ipv4 --ipv6 dokploy-network
+    yes | docker network rm -f ingress 2>/dev/null
+    sleep 1 # race condition after the delete
+    docker network create --ipv4 --ipv6 --driver overlay --ingress ingress
 
-    echo "Network created"
+    echo "Networks created"
 
     mkdir -p /etc/dokploy
 
@@ -152,6 +157,7 @@ install_dokploy() {
 
     docker run -d \
         --name dokploy-traefik \
+	--network dokploy-network \
         --restart always \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
