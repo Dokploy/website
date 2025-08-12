@@ -157,7 +157,7 @@ install_dokploy() {
 
     docker run -d \
         --name dokploy-traefik \
-	--network dokploy-network \
+        --network dokploy-network \
         --restart always \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
