@@ -39,8 +39,41 @@ To switch between modes, follow these steps:
 Follow the steps in the same order to prevent any issues.
 </Callout>
 
-We assume that you have enabled the `Full (Strict)` mode in the previous step, is super important to follow the steps in the same order to prevent any issues.
+You can create a certificate for your origin server using two methods:
+- Using Cloudflare's Origin CA to generate a certificate for your origin server.
+- Using Let's Encrypt to generate a certificate for your origin server.
 
+We assume that you have enabled the `Full (Strict)` mode in the previous step, is super important to follow the steps in the same order to prevent any issues.
+### Using Cloudflare's Origin CA
+1. Go to cloudflare dashboard and then click on `Account Home` -> Select the Domain.
+2. On the left side, click `SSL/TLS`.
+3. Click on `Origin Server`.
+4. Click on `Create Certificate`.
+5. Select `Generate private key and CSR with Cloudflare`.
+6. Choose the list of hostnames you want the certificate to cover eg. `api.dokploy.com`.
+7. Choose the validity period eg. `15 years`.
+8. Click `Create`.
+9. Using the PEM format, copy the `Origin Certificate` and `Private Key` in the respective fields in the dokploy new certificate panel (Certificates > Add Certificate).
+10. Go to `Domains` section in your application.
+11. Click `Create Domain`.
+12. In the `Host` field, enter the domain name eg. `api.dokploy.com`. (Make sure that the domain is already pointing to your server IP in Cloudflare DNS settings and the **hostname matches the one in the certificate**).
+13. In the `Path` field, enter the path eg. `/`.
+14. In the `Container Port` field, enter the port where your application is running eg. `3000`.
+15. In the `HTTPS` field enable `ON`.
+16. In the `Certificate` field select `None`.
+17. Click `Create`.
+
+Using Cloudflare's Origin CA, you are sure that the certificate will be valid for the next 15 years, or the duration you selected, and you don't have to worry about failed renewals.
+
+<Callout type="info">
+You can also create a certificate for wildcards domains eg. `*.dokploy.com` and use it for multiple subdomains.
+</Callout>
+
+<Callout type="warn">
+**Important**: With a free Cloudflare account, this methods work only for the main domain and subdomains, not for sub-subdomains. Eg. `api.dokploy.com` works but `staging.api.dokploy.com` does not work.
+</Callout>
+
+### Using Let's Encrypt
 1. Go to cloudflare dashboard and then click on `Account Home` -> Select the Domain.
 2. On the left side, click `DNS`.
 3. Click on `Records`.
