@@ -73,6 +73,11 @@ After running the installation script, Dokploy and its dependencies will be set 
 
 Open your web browser and navigate to `http://your-ip-from-your-vps:3000`. You will be directed to the initial setup page where you can configure the administrative account for Dokploy.
 
+<Callout type='warn'>
+    **Important:** Ensure that your server's firewall allows traffic on port
+    3000 to access the Dokploy web interface.
+</Callout>
+
 ### Initial Configuration
 
 1. **Create an Admin Account:** Fill in the necessary details to set up your administrator account. This account will be the admin account for Dokploy.
@@ -86,3 +91,21 @@ Open your web browser and navigate to `http://your-ip-from-your-vps:3000`. You w
   alt="home og image"
   className="rounded-lg"
 />
+
+### Secure Your Installation
+After setting up your admin account, it's crucial to secure your Dokploy installation.
+The first thing to do is to **enable HTTPS:**
+You need to go to **Web Server** > **Server Domain** and add your domain, then enable the **HTTPS** toggle and select the certificate provider you want to use.
+
+<Callout type='warn'>
+    If you are using Cloudflare origin certificates, once you have added the certificate, make sure to set the certificate provider to `None` in your domain settings.
+</Callout>
+
+### Disable access via ip:port (Optional but Recommended)
+To enhance security, it's advisable to restrict access to Dokploy via the server's IP address and port. This can be achieved by running this command on the server:
+
+```bash
+docker service update --publish-rm "published=3000,target=3000,mode=host" dokploy
+```
+To further secure your installation, consider reading the [Security recommendations](/docs/core/multi-server/security#security-recommendations) section.
+
