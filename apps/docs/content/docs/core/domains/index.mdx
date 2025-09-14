@@ -142,3 +142,70 @@ Create the domain in dokploy, using the host `www.example.com`
 Now in dokploy, you can go to application -> advanced -> redirects (Select the preset www to non-www) and click on save.
 
 now everytime you access `www.example.com` it will redirect to `example.com`
+
+
+---
+
+## Wildcard Domains
+description: This guide will cover how to configure wildcard domains for your applications in Dokploy.
+---
+
+Wildcard domains allow you to route multiple subdomains to the same application without creating individual domain entries for each one. This is particularly useful for:
+
+- **Dynamic staging environments**: `*-dev.dokploy.com`, `*-staging.dokploy.com`
+- **Multi-tenant applications**: `*.saas.example.com`
+- **Feature branch deployments**: `*-feature.app.com`
+- **User subdomains**: `*.users.example.com`
+
+### How Wildcard Domains Work
+
+When you enable wildcard domains in Dokploy, the system automatically converts your wildcard pattern into a Traefik-compatible regex rule:
+
+- `*-dev.dokploy.com` becomes `HostRegexp(^[^.]+-dev\.dokploy\.com$)`
+- `*.staging.example.com` becomes `HostRegexp(^[^.]+\.staging\.example\.com$)`
+- `api-*.dokploy.com` becomes `HostRegexp(^api-[^.]+\.dokploy\.com$)`
+
+<Callout type="warn">
+Wildcard domains require proper DNS configuration. You need to set up a wildcard DNS record (like `*.dokploy.com`) pointing to your server's IP address.
+</Callout>
+
+### Configure Wildcard Domain for Applications
+
+1. Configure DNS: create a wildcard DNS record pointing to your server.
+2. Create Wildcard Domain in Dokploy: enter wildcard host, set path, container port, enable wildcard toggle, configure HTTPS, and save.
+3. Verify by testing multiple subdomains.
+
+### Configure Wildcard Domain for Docker Compose
+
+Same as applications but select the target service from the Service Name dropdown.
+
+### SSL Certificates with Wildcard Domains
+
+<Callout type="warn">
+Let's Encrypt supports wildcard certificates, but they require DNS-01 challenge validation.
+</Callout>
+
+**Option 1: Individual Certificates** — automatic per-subdomain with HTTP-01 challenge.  
+**Option 2: Wildcard Certificate** — covers all subdomains, requires DNS-01 setup.
+
+### Path Prefix Support
+
+Wildcard domains work with path prefixes for advanced routing patterns.
+
+### Troubleshooting
+
+- **DNS**: verify wildcard record with `dig`.
+- **Dokploy**: confirm wildcard toggle and container port.
+- **SSL**: check Let's Encrypt issuance in Traefik logs.
+- **Routing**: ensure regex matches intended subdomains.
+
+### Security Considerations
+
+<Callout type="warn">
+Wildcard domains can potentially expose your application to unintended subdomains.
+</Callout>
+
+- Validate subdomains in application logic
+- Apply rate limiting
+- Monitor unusual subdomain traffic
+- Restrict wildcard use to controlled environments
