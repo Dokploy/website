@@ -1,6 +1,6 @@
 ---
-title: 'Manual Installation'
-description: 'Learn how to manually install Dokploy on your server.'
+title: "Manual Installation"
+description: "Learn how to manually install Dokploy on your server."
 ---
 
 If you wish to customize the Dokploy installation on your server, you can modify several enviroment variables:
@@ -15,14 +15,13 @@ If you wish to customize the Dokploy installation on your server, you can modify
 
 ## Installation Script
 
-Here is a Bash script for installing Dokploy on a Linux server. Make sure you run this as root on a Linux environment that is not a container, and ensure ports 80 and 443 are free.
-
+Here is a Bash script for installing Dokploy on a Linux server. Make sure you run this as root ( or as a user with NOPASSWD sudo access) on a Linux environment that is not a container, and ensure ports 80 and 443 are free.
 
 ```bash
 #!/bin/bash
 install_dokploy() {
-    if [ "$(id -u)" != "0" ]; then
-        echo "This script must be run as root" >&2
+    if [ "$(id -u)" != "0" ] && ! sudo -n true 2>/dev/null; then
+        echo "This script must be run as root or as a user with NOPASSWD sudo access" >&2
         exit 1
     fi
 
@@ -51,29 +50,44 @@ install_dokploy() {
     fi
 
     command_exists() {
-      command -v "$@" > /dev/null 2>&1
+        command -v "$@" > /dev/null 2>&1
     }
 
     if command_exists docker; then
-      echo "Docker already installed"
+        echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh
+        curl -sSL https://get.docker.com | sudo sh
     fi
+
+    # Add ourselves to docker group to run docker commands without sudo
+    if ! getent group docker >/dev/null; then
+        sudo groupadd docker
+    fi
+
+    if ! groups | grep -q docker; then
+        sudo usermod -aG docker "$USER"
+        newgrp docker
+    fi
+
+    # Make sure docker config directory permissions are correct
+    mkdir -p "$HOME"/.docker
+    sudo chown "$USER":"$USER" "$HOME"/.docker -R
+    sudo chmod g+rwx "$HOME"/.docker -R
 
     docker swarm leave --force 2>/dev/null
 
     get_ip() {
         local ip=""
-        
+
         # Try IPv4 first
         # First attempt: ifconfig.io
         ip=$(curl -4s --connect-timeout 5 https://ifconfig.io 2>/dev/null)
-        
+
         # Second attempt: icanhazip.com
         if [ -z "$ip" ]; then
             ip=$(curl -4s --connect-timeout 5 https://icanhazip.com 2>/dev/null)
         fi
-        
+
         # Third attempt: ipecho.net
         if [ -z "$ip" ]; then
             ip=$(curl -4s --connect-timeout 5 https://ipecho.net/plain 2>/dev/null)
@@ -83,12 +97,12 @@ install_dokploy() {
         if [ -z "$ip" ]; then
             # Try IPv6 with ifconfig.io
             ip=$(curl -6s --connect-timeout 5 https://ifconfig.io 2>/dev/null)
-            
+
             # Try IPv6 with icanhazip.com
             if [ -z "$ip" ]; then
                 ip=$(curl -6s --connect-timeout 5 https://icanhazip.com 2>/dev/null)
             fi
-            
+
             # Try IPv6 with ipecho.net
             if [ -z "$ip" ]; then
                 ip=$(curl -6s --connect-timeout 5 https://ipecho.net/plain 2>/dev/null)
@@ -109,7 +123,7 @@ install_dokploy() {
     echo "Using advertise address: $advertise_addr"
 
     docker swarm init --advertise-addr $advertise_addr
-    
+
      if [ $? -ne 0 ]; then
         echo "Error: Failed to initialize Docker Swarm" >&2
         exit 1
@@ -122,9 +136,7 @@ install_dokploy() {
 
     echo "Network created"
 
-    mkdir -p /etc/dokploy
-
-    chmod 777 /etc/dokploy
+    sudo install -d -o "$(id -u)" -g "$(id -g)" -m 775 /etc/dokploy
 
     docker service create \
     --name dokploy-postgres \
@@ -164,6 +176,7 @@ install_dokploy() {
 
     docker run -d \
         --name dokploy-traefik \
+        --user "$(id -u)":"$(id -g)" \
         --restart always \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
@@ -214,7 +227,7 @@ install_dokploy() {
 
 update_dokploy() {
     echo "Updating Dokploy..."
-    
+
     # Pull the latest image
     docker pull dokploy/dokploy:latest
 
@@ -237,7 +250,8 @@ This script includes checks for common pitfalls, installs Docker if it’s not a
 
 This structured format clearly lays out the prerequisites, steps, and post-installation information, making it user-friendly and accessible for those performing manual installations.
 
-## Customize install 
+## Customize install
+
 #### Customize swarm advertise address
 
 The --advertise-addr parameter in the docker swarm init command specifies the IP address or interface that the Docker Swarm manager node should advertise to other nodes in the Swarm. This address is used by other nodes to communicate with the manager.
@@ -249,18 +263,14 @@ To customize the --advertise-addr parameter, replace the line: `advertise_addr=$
 
 :warning: This IP address should be accessible to all nodes that will join the Swarm.
 
-
 ## Existing Docker swarm
 
 If you already have a Docker swarm running on your server and you want to use dokploy, you can use the following command to join it:
 
-
 ```bash
 docker network create --driver overlay --attachable dokploy-network
 
-mkdir -p /etc/dokploy
-
-chmod -R 777 /etc/dokploy
+sudo install -d -o "$(id -u)" -g "$(id -g)" -m 775 /etc/dokploy
 
 docker pull dokploy/dokploy:latest
 
@@ -284,4 +294,3 @@ To upgrade Dokploy manually, you can use the following command:
 ```bash
 curl -sSL https://dokploy.com/install.sh | sh -s update
 ```
-

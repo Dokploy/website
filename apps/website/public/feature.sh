@@ -1,7 +1,7 @@
 #!/bin/bash
 install_dokploy() {
-    if [ "$(id -u)" != "0" ]; then
-        echo "This script must be run as root" >&2
+    if [ "$(id -u)" != "0" ] && ! sudo -n true 2>/dev/null; then
+        echo "This script must be run as root or as a user with NOPASSWD sudo access" >&2
         exit 1
     fi
 
@@ -30,29 +30,44 @@ install_dokploy() {
     fi
 
     command_exists() {
-      command -v "$@" > /dev/null 2>&1
+        command -v "$@" > /dev/null 2>&1
     }
 
     if command_exists docker; then
-      echo "Docker already installed"
+        echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh
+        curl -sSL https://get.docker.com | sudo sh
     fi
+
+    # Add ourselves to docker group to run docker commands without sudo
+    if ! getent group docker >/dev/null; then
+        sudo groupadd docker
+    fi
+
+    if ! groups | grep -q docker; then
+        sudo usermod -aG docker "$USER"
+        newgrp docker
+    fi
+
+    # Make sure docker config directory permissions are correct
+    mkdir -p "$HOME"/.docker
+    sudo chown "$USER":"$USER" "$HOME"/.docker -R
+    sudo chmod g+rwx "$HOME"/.docker -R
 
     docker swarm leave --force 2>/dev/null
 
     get_ip() {
         local ip=""
-        
+
         # Try IPv4 first
         # First attempt: ifconfig.io
         ip=$(curl -4s --connect-timeout 5 https://ifconfig.io 2>/dev/null)
-        
+
         # Second attempt: icanhazip.com
         if [ -z "$ip" ]; then
             ip=$(curl -4s --connect-timeout 5 https://icanhazip.com 2>/dev/null)
         fi
-        
+
         # Third attempt: ipecho.net
         if [ -z "$ip" ]; then
             ip=$(curl -4s --connect-timeout 5 https://ipecho.net/plain 2>/dev/null)
@@ -62,12 +77,12 @@ install_dokploy() {
         if [ -z "$ip" ]; then
             # Try IPv6 with ifconfig.io
             ip=$(curl -6s --connect-timeout 5 https://ifconfig.io 2>/dev/null)
-            
+
             # Try IPv6 with icanhazip.com
             if [ -z "$ip" ]; then
                 ip=$(curl -6s --connect-timeout 5 https://icanhazip.com 2>/dev/null)
             fi
-            
+
             # Try IPv6 with ipecho.net
             if [ -z "$ip" ]; then
                 ip=$(curl -6s --connect-timeout 5 https://ipecho.net/plain 2>/dev/null)
@@ -112,57 +127,54 @@ install_dokploy() {
 
     echo "Network created"
 
-    mkdir -p /etc/dokploy
-
-    chmod 777 /etc/dokploy
+    sudo install -d -o "$(id -u)" -g "$(id -g)" -m 775 /etc/dokploy
 
     docker service create \
-    --name dokploy-postgres \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --env POSTGRES_USER=dokploy \
-    --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
-    --mount type=volume,source=dokploy-postgres-database,target=/var/lib/postgresql/data \
-    postgres:16
-
+        --name dokploy-postgres \
+        --constraint 'node.role==manager' \
+        --network dokploy-network \
+        --env POSTGRES_USER=dokploy \
+        --env POSTGRES_DB=dokploy \
+        --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+        --mount type=volume,source=dokploy-postgres-database,target=/var/lib/postgresql/data \
+        postgres:16
 
     docker service create \
-    --name dokploy-redis \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --mount type=volume,source=redis-data-volume,target=/data \
-    redis:7
-
+        --name dokploy-redis \
+        --constraint 'node.role==manager' \
+        --network dokploy-network \
+        --mount type=volume,source=redis-data-volume,target=/data \
+        redis:7
 
     # Installation
     docker service create \
-      --name dokploy \
-      --replicas 1 \
-      --network dokploy-network \
-      --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-      --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
-      --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
-      --publish published=3000,target=3000,mode=host \
-      --update-parallelism 1 \
-      --update-order stop-first \
-      --constraint 'node.role == manager' \
-      -e RELEASE_TAG=feature \
-      -e ADVERTISE_ADDR=$advertise_addr \
-      dokploy/dokploy:feature
+        --name dokploy \
+        --replicas 1 \
+        --network dokploy-network \
+        --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+        --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
+        --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
+        --publish published=3000,target=3000,mode=host \
+        --update-parallelism 1 \
+        --update-order stop-first \
+        --constraint 'node.role == manager' \
+        -e RELEASE_TAG=feature \
+        -e ADVERTISE_ADDR=$advertise_addr \
+        dokploy/dokploy:feature
 
     sleep 4
 
     docker run -d \
-    --name dokploy-traefik \
-    --restart always \
-    -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
-    -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -p 80:80/tcp \
-    -p 443:443/tcp \
-    -p 443:443/udp \
-    traefik:v3.5.0
+        --name dokploy-traefik \
+        --user "$(id -u)":"$(id -g)" \
+        --restart always \
+        -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
+        -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -p 80:80/tcp \
+        -p 443:443/tcp \
+        -p 443:443/udp \
+        traefik:v3.5.0
 
     docker network connect dokploy-network dokploy-traefik
 
@@ -206,7 +218,7 @@ install_dokploy() {
 
 update_dokploy() {
     echo "Updating Dokploy..."
-    
+
     # Pull the latest feature image
     docker pull dokploy/dokploy:feature
 
