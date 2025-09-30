@@ -1,6 +1,7 @@
 import { HandCoins, Users } from "lucide-react";
 import React from "react";
 import { useId } from "react";
+import { useTranslations } from "next-intl";
 import NumberTicker from "./ui/number-ticker";
 
 const statsValues = {
@@ -11,15 +12,74 @@ const statsValues = {
 };
 
 export function StatsSection() {
+	const t = useTranslations("HomePage.stats");
+	
+	const grid = [
+		{
+			title: t("githubStars.title"),
+			description: t("githubStars.description", { stars: (statsValues.githubStars / 1000).toFixed(1) }),
+			icon: (
+				<svg aria-hidden="true" className="h-6 w-6 fill-white">
+					<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+				</svg>
+			),
+			component: (
+				<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter  mt-4">
+					<NumberTicker value={statsValues.githubStars} />+
+				</p>
+			),
+		},
+		{
+			title: t("dockerDownloads.title"),
+			description: t("dockerDownloads.description", { downloads: (statsValues.dockerDownloads / 1000000).toFixed(2).split(".")[0] }),
+			icon: (
+				<svg
+					stroke="currentColor"
+					fill="currentColor"
+					strokeWidth="0"
+					viewBox="0 0 640 512"
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-6 w-6 fill-white"
+				>
+					<path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z" />
+				</svg>
+			),
+			component: (
+				<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter  mt-4">
+					<NumberTicker value={statsValues.dockerDownloads} />+
+				</p>
+			),
+		},
+		{
+			title: t("contributors.title"),
+			description: t("contributors.description", { contributors: statsValues.contributors }),
+			icon: <Users className="h-6 w-6 stroke-white" />,
+			component: (
+				<p className="whitespace-pre-wrap text-2xl !font-semibold tracking-tighter  mt-4">
+					<NumberTicker value={statsValues.contributors} />+
+				</p>
+			),
+		},
+		{
+			title: t("sponsors.title"),
+			description: t("sponsors.description", { sponsors: statsValues.sponsors }),
+			icon: <HandCoins className="h-6 w-6 stroke-white" />,
+			component: (
+				<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter mt-4">
+					<NumberTicker value={statsValues.sponsors} />+
+				</p>
+			),
+		},
+	];
+
 	return (
 		<div className="py-20 lg:py-40 flex flex-col gap-10 px-4 ">
 			<div className="mx-auto max-w-2xl md:text-center">
 				<h2 className="font-display text-3xl tracking-tight  sm:text-4xl text-center">
-					Stats You Didn’t Ask For (But Secretly Love to See)
+					{t("title")}
 				</h2>
 				<p className="mt-4 text-lg tracking-tight text-muted-foreground text-center">
-					Just a few numbers to show we’re not *completely* making this up.
-					Turns out, Dokploy has actually helped a few people—who knew?
+					{t("description")}
 				</p>
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-2 max-w-7xl mx-auto">
@@ -45,63 +105,6 @@ export function StatsSection() {
 	);
 }
 
-const grid = [
-	{
-		title: "GitHub Stars",
-		description: `With over ${(statsValues.githubStars / 1000).toFixed(1)}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!`,
-		icon: (
-			<svg aria-hidden="true" className="h-6 w-6 fill-white">
-				<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-			</svg>
-		),
-		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter  mt-4">
-				<NumberTicker value={statsValues.githubStars} />+
-			</p>
-		),
-	},
-	{
-		title: "DockerHub Downloads",
-		description: `Downloaded over ${(statsValues.dockerDownloads / 1000000).toFixed(2).split(".")[0]}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.`,
-		icon: (
-			<svg
-				stroke="currentColor"
-				fill="currentColor"
-				strokeWidth="0"
-				viewBox="0 0 640 512"
-				xmlns="http://www.w3.org/2000/svg"
-				className="h-6 w-6 fill-white"
-			>
-				<path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z" />
-			</svg>
-		),
-		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter  mt-4">
-				<NumberTicker value={statsValues.dockerDownloads} />+
-			</p>
-		),
-	},
-	{
-		title: "Community Contributors",
-		description: `Thanks to a growing base of over ${statsValues.contributors} contributors, Dokploy continues to thrive with valuable contributions from developers around the world.`,
-		icon: <Users className="h-6 w-6 stroke-white" />,
-		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold tracking-tighter  mt-4">
-				<NumberTicker value={statsValues.contributors} />+
-			</p>
-		),
-	},
-	{
-		title: "Sponsors",
-		description: `More than ${statsValues.sponsors} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!`,
-		icon: <HandCoins className="h-6 w-6 stroke-white" />,
-		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter mt-4">
-				<NumberTicker value={statsValues.sponsors} />+
-			</p>
-		),
-	},
-];
 
 export const Grid = ({
 	pattern,
@@ -158,10 +161,10 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
 			/>
 			{squares && (
 				<svg x={x} y={y} className="overflow-visible">
-					{squares.map(([x, y]: any) => (
+					{squares.map(([x, y]: any, index: number) => (
 						<rect
 							strokeWidth="0"
-							key={`${x}-${y}`}
+							key={`${x}-${y}-${index}`}
 							width={width + 1}
 							height={height + 1}
 							x={x * width}

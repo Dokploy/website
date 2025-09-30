@@ -6,7 +6,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 } from "@/components/ui/select";
-import { Link, useRouter } from "@/i18n/routing";
+import { Link, useRouter, redirect } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import type { SVGProps } from "react";
 import { Container } from "./Container";
@@ -91,9 +91,10 @@ export function Footer() {
 						</Link>
 						<Select
 							onValueChange={(locale) => {
-								router.replace("/", {
-									locale: locale as "en" | "zh-Hans" | "fr" | "es",
-								});
+								// Force a full page reload with the correct locale URL
+								// For "as-needed" prefix, English uses "/" and other locales use "/{locale}"
+								const url = locale === 'en' ? '/' : `/${locale}`;
+								window.location.href = url;
 							}}
 							value={locale}
 						>

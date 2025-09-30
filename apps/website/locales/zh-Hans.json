@@ -203,6 +203,90 @@
 			"a7": "付费计划可以得到优先的技术支持，开源版本则是由社区提供技术支持。",
 			"q8": "Dokploy 开源吗?",
 			"a8": "是的，Dokploy 完全开源，您可以参与贡献或者是 Fork 后自行修改以用于您的私人需求。"
+		},
+		"footer": {
+			"copyright": "版权所有 © {year} Dokploy。保留所有权利。"
+		},
+		"stats": {
+			"title": "您没要求但偷偷爱看的数据",
+			"description": "只是几个数字来证明我们不是*完全*在编造。事实证明，Dokploy 确实帮助了一些人——谁知道呢？",
+			"githubStars": {
+				"title": "GitHub 星标",
+				"description": "在 GitHub 上拥有超过 {stars}k 星标，Dokploy 受到全球开发者的信任。探索我们的仓库并加入我们的社区！"
+			},
+			"dockerDownloads": {
+				"title": "DockerHub 下载量",
+				"description": "下载超过 {downloads}M 次，Dokploy 已成为无缝部署的首选解决方案。在 DockerHub 上发现我们的存在。"
+			},
+			"contributors": {
+				"title": "社区贡献者",
+				"description": "感谢超过 {contributors} 名贡献者不断增长的社区，Dokploy 继续在全球开发者的宝贵贡献中蓬勃发展。"
+			},
+			"sponsors": {
+				"title": "赞助商",
+				"description": "超过 {sponsors} 家公司/个人赞助了 Dokploy，确保持续的支持和资源流。加入我们的社区！"
+			}
+		},
+		"pricing": {
+			"videoTooltip": "我们建议观看视频以了解 Dokploy Cloud 的优势"
+		},
+		"firstFeatures": {
+			"title": "强大的部署，为您量身定制",
+			"description": "解锁无缝的多服务器部署、高级用户控制和灵活的数据库管理——所有这些都通过 Dokploy 面向开发者的功能实现。",
+			"features": {
+				"flexibleDeployment": {
+					"title": "灵活的应用程序部署",
+					"description": "使用 Nixpacks、Heroku Buildpacks 或您的自定义 Dockerfile 部署任何应用程序，完全适合您的技术栈。"
+				},
+				"dockerCompose": {
+					"title": "原生 Docker Compose 支持",
+					"description": "通过完整的 Docker Compose 集成原生部署复杂应用程序，实现无缝编排。"
+				},
+				"multiServer": {
+					"title": "多服务器支持",
+					"description": "轻松在远程服务器上部署您的应用程序，零配置麻烦。"
+				},
+				"userManagement": {
+					"title": "高级用户管理",
+					"description": "通过详细的角色和权限控制用户访问，保持您的部署安全有序。"
+				},
+				"databaseManagement": {
+					"title": "数据库管理与备份",
+					"description": "直接从 Dokploy 管理和备份 MySQL、PostgreSQL、MongoDB、MariaDB、Redis。"
+				},
+				"apiCli": {
+					"title": "API 和 CLI 访问",
+					"description": "需要自定义功能？Dokploy 提供完整的 API 和 CLI 访问以满足您的需求。"
+				},
+				"dockerSwarm": {
+					"title": "Docker Swarm 集群",
+					"description": "通过内置的 Docker Swarm 支持无缝扩展您的部署，实现强大的多节点应用程序。"
+				},
+				"templates": {
+					"title": "开源模板",
+					"description": "使用 Supabase、Cal.com 和 Pocketbase 等热门工具的预配置模板快速开始。"
+				},
+				"noVendorLockIn": {
+					"title": "无供应商锁定",
+					"description": "体验完全的自由来修改、扩展和自定义 Dokploy 以满足您的特定需求。"
+				},
+				"monitoring": {
+					"title": "实时监控和警报",
+					"description": "实时监控您的部署中的 CPU、内存和网络使用情况，获得完全可见性。"
+				},
+				"builtForDevelopers": {
+					"title": "为开发者而建",
+					"description": "专为寻求控制和灵活性的工程师和开发者设计。"
+				},
+				"selfHosted": {
+					"title": "自托管和开源",
+					"description": "Dokploy 通过自托管功能和开源透明度提供完全控制。"
+				}
+			}
+		},
+		"testimonials": {
+			"title": "为什么开发者喜欢 Dokploy",
+			"description": "认为我们在吹牛？听听那些曾经也怀疑过的开发者们——直到 Dokploy 让他们的生活（和部署）变得令人惊讶地轻松。"
 		}
 	},
 	"blog": {

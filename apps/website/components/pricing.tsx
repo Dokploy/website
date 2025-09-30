@@ -308,8 +308,7 @@ export function Pricing() {
 														/>
 													</div>
 													<p className="text-primary mb-2 text-left">
-														We Recommend to watch the video to understand the
-														benefits of Dokploy Cloud
+														{t("pricing.videoTooltip")}
 													</p>
 
 													<HeroVideoDialog
