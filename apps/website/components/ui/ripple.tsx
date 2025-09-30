@@ -107,7 +107,7 @@ const Ripple = React.memo(function Ripple({
 		},
 	];
 
-	const communitySponsors = [];
+	const communitySponsors: Array<{ name: string; link: string; type: string; image?: string }> = [];
 
 	return (
 		<div
@@ -191,7 +191,7 @@ const Ripple = React.memo(function Ripple({
 															<Link href={item.link} target="_blank">
 																<Avatar className="border-2 border-red-600">
 																	<AvatarImage
-																		src={item.image}
+																		src={item.image || ""}
 																		alt={item.name}
 																	/>
 																	<AvatarFallback>{initials}</AvatarFallback>
@@ -240,7 +240,7 @@ const Ripple = React.memo(function Ripple({
 															<Link href={item.link} target="_blank">
 																<Avatar className="border-2 border-yellow-500">
 																	<AvatarImage
-																		src={item.image}
+																		src={item.image || ""}
 																		alt={item.name}
 																	/>
 																	<AvatarFallback>{initials}</AvatarFallback>
@@ -289,7 +289,7 @@ const Ripple = React.memo(function Ripple({
 															<Link href={item.link} target="_blank">
 																<Avatar className="border-2 border-yellow-900">
 																	<AvatarImage
-																		src={item.image}
+																		src={item.image || ""}
 																		alt={item.name}
 																	/>
 																	<AvatarFallback>{initials}</AvatarFallback>
@@ -337,7 +337,7 @@ const Ripple = React.memo(function Ripple({
 															<Link href={item.link} target="_blank">
 																<Avatar className="border-2 border-yellow-900">
 																	<AvatarImage
-																		src={item.image}
+																		src={item.image || ""}
 																		alt={item.name}
 																	/>
 																	<AvatarFallback>{initials}</AvatarFallback>
@@ -368,7 +368,7 @@ const Ripple = React.memo(function Ripple({
 										const y = radius * Math.sin((angle * Math.PI) / 180);
 										const initials = item.name
 											.split(" ")
-											.map((n) => n[0])
+											.map((n: string) => n[0])
 											.join("");
 										return (
 											<div
@@ -386,7 +386,7 @@ const Ripple = React.memo(function Ripple({
 															<Link href={item.link} target="_blank">
 																<Avatar className="border-2 border-yellow-500">
 																	<AvatarImage
-																		src={item.image}
+																		src={item.image || ""}
 																		alt={item.name}
 																	/>
 																	<AvatarFallback>{initials}</AvatarFallback>

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
 	const tags = await getTags();
 
-	return tags.map((tag: { slug: string }) => ({
+	return (tags as Array<{ slug: string }>).map((tag) => ({
 		tag: tag.slug,
 	}));
 }
@@ -39,7 +39,7 @@ export default async function TagPage({ params }: Props) {
 
 	// Get the tag name from the first post
 	const tagName =
-		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
+		(posts as Post[])[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
 
 	return (
 		<div className="container mx-auto px-4 py-12">
@@ -73,8 +73,8 @@ export default async function TagPage({ params }: Props) {
 			</div>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{posts.map((post: Post) => (
-					<BlogPostCard key={post.id} post={post} locale={locale} />
+				{(posts as Post[]).map((post: Post) => (
+					<BlogPostCard key={post.id} post={post} locale={params.locale} />
 				))}
 			</div>
 		</div>
