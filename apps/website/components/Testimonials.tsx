@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Marquee } from "./ui/marquee";
 import { useTranslations } from "next-intl";
+import { Marquee } from "./ui/marquee";
 
 // const testimonials = [
 // 	[
@@ -183,7 +183,7 @@ const ReviewCard = ({
 
 export function Testimonials() {
 	const t = useTranslations("HomePage.testimonials");
-	
+
 	return (
 		<section
 			id="testimonials"

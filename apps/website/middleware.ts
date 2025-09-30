@@ -6,7 +6,7 @@ export default createMiddleware({
 	// Used when no locale matches
 	defaultLocale: "en",
 	localePrefix: "as-needed",
-	
+
 	// Disable automatic locale detection to prevent browser language override
 	localeDetection: false,
 });

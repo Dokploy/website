@@ -1,10 +1,16 @@
 "use client";
 
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+} from "@/components/ui/select";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronRight, HeartIcon } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Fragment, type JSX, type SVGProps } from "react";
 import { Container } from "./Container";
 import { NavLink } from "./NavLink";
@@ -12,12 +18,6 @@ import { trackGAEvent } from "./analitycs";
 import { Logo } from "./shared/Logo";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import { Button, buttonVariants } from "./ui/button";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-} from "@/components/ui/select";
 
 function MobileNavLink({
 	href,
@@ -192,11 +192,11 @@ export function Header() {
 						</Link>
 
 						{/* Language switching icon - hidden when language is French */}
-						{locale !== 'fr' && (
+						{locale !== "fr" && (
 							<Select
 								onValueChange={(locale) => {
 									// Force a full page reload with the correct locale URL
-									const url = locale === 'en' ? '/' : `/${locale}`;
+									const url = locale === "en" ? "/" : `/${locale}`;
 									window.location.href = url;
 								}}
 								value={locale}

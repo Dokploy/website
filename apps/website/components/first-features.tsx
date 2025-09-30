@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 
 export function FirstFeaturesSection() {
 	const t = useTranslations("HomePage.firstFeatures");
-	
+
 	const features = [
 		{
 			title: t("features.flexibleDeployment.title"),
