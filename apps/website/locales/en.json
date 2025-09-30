@@ -121,6 +121,87 @@
 		},
 		"footer": {
 			"copyright": "Copyright © {year} Dokploy. All rights reserved."
+		},
+		"stats": {
+			"title": "Stats You Didn't Ask For (But Secretly Love to See)",
+			"description": "Just a few numbers to show we're not *completely* making this up. Turns out, Dokploy has actually helped a few people—who knew?",
+			"githubStars": {
+				"title": "GitHub Stars",
+				"description": "With over {stars}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!"
+			},
+			"dockerDownloads": {
+				"title": "DockerHub Downloads",
+				"description": "Downloaded over {downloads}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub."
+			},
+			"contributors": {
+				"title": "Community Contributors",
+				"description": "Thanks to a growing base of over {contributors} contributors, Dokploy continues to thrive with valuable contributions from developers around the world."
+			},
+			"sponsors": {
+				"title": "Sponsors",
+				"description": "More than {sponsors} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!"
+			}
+		},
+		"pricing": {
+			"videoTooltip": "We recommend watching the video to understand the benefits of Dokploy Cloud"
+		},
+		"firstFeatures": {
+			"title": "Powerful Deployment, Tailored for You",
+			"description": "Unlock seamless multi-server deployments, advanced user control, and flexible database management—all with Dokploy's developer-focused features.",
+			"features": {
+				"flexibleDeployment": {
+					"title": "Flexible Application Deployment",
+					"description": "Deploy any application using Nixpacks, Heroku Buildpacks, or your custom Dockerfile, tailored to your stack."
+				},
+				"dockerCompose": {
+					"title": "Native Docker Compose Support",
+					"description": "Deploy complex applications natively with full Docker Compose integration for seamless orchestration."
+				},
+				"multiServer": {
+					"title": "Multi-server Support",
+					"description": "Effortlessly deploy your applications on remote servers, with zero configuration hassle."
+				},
+				"userManagement": {
+					"title": "Advanced User Management",
+					"description": "Control user access with detailed roles and permissions, keeping your deployments secure and organized."
+				},
+				"databaseManagement": {
+					"title": "Database Management with Backups",
+					"description": "Manage and back up MySQL, PostgreSQL, MongoDB, MariaDB, Redis directly from Dokploy."
+				},
+				"apiCli": {
+					"title": "API & CLI Access",
+					"description": "Need custom functionality? Dokploy offers complete API and CLI access to fit your needs."
+				},
+				"dockerSwarm": {
+					"title": "Docker Swarm Clusters",
+					"description": "Scale your deployments seamlessly with built-in Docker Swarm support for robust, multi-node applications."
+				},
+				"templates": {
+					"title": "Open Source Templates",
+					"description": "Get started quickly with pre-configured templates for popular tools like Supabase, Cal.com, and Pocketbase."
+				},
+				"noVendorLockIn": {
+					"title": "No Vendor Lock-In",
+					"description": "Experience complete freedom to modify, scale, and customize Dokploy to suit your specific needs."
+				},
+				"monitoring": {
+					"title": "Real-time Monitoring & Alerts",
+					"description": "Monitor CPU, memory, and network usage in real-time across your deployments for full visibility."
+				},
+				"builtForDevelopers": {
+					"title": "Built for developers",
+					"description": "Designed specifically for engineers and developers seeking control and flexibility."
+				},
+				"selfHosted": {
+					"title": "Self-hosted & Open Source",
+					"description": "Dokploy provides complete control with self-hosting capabilities and open-source transparency."
+				}
+			}
+		},
+		"testimonials": {
+			"title": "Why Developers Love Dokploy",
+			"description": "Think we're bragging? Hear from the devs who once doubted too—until Dokploy made their lives (and deployments) surprisingly easier."
 		}
 	},
 	"404": {

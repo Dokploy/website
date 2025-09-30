@@ -121,6 +121,87 @@
 		},
 		"footer": {
 			"copyright": "Copyright © {year} Dokploy. Tous droits réservés."
+		},
+		"stats": {
+			"title": "Statistiques que vous n'avez pas demandées (mais que vous aimez secrètement voir)",
+			"description": "Quelques chiffres pour montrer que nous n'inventons pas *complètement* tout ça. Il s'avère que Dokploy a réellement aidé quelques personnes—qui l'aurait cru ?",
+			"githubStars": {
+				"title": "Étoiles GitHub",
+				"description": "Avec plus de {stars}k étoiles sur GitHub, Dokploy est approuvé par les développeurs du monde entier. Explorez nos dépôts et rejoignez notre communauté !"
+			},
+			"dockerDownloads": {
+				"title": "Téléchargements DockerHub",
+				"description": "Téléchargé plus de {downloads}M fois, Dokploy est devenu une solution incontournable pour les déploiements sans faille. Découvrez notre présence sur DockerHub."
+			},
+			"contributors": {
+				"title": "Contributeurs de la Communauté",
+				"description": "Grâce à une base croissante de plus de {contributors} contributeurs, Dokploy continue de prospérer avec des contributions précieuses de développeurs du monde entier."
+			},
+			"sponsors": {
+				"title": "Partenaires",
+				"description": "Plus de {sponsors} entreprises/particuliers ont parrainé Dokploy, garantissant un flux constant de soutien et de ressources. Rejoignez notre communauté !"
+			}
+		},
+		"pricing": {
+			"videoTooltip": "Nous recommandons de regarder la vidéo pour comprendre les avantages de Dokploy Cloud"
+		},
+		"firstFeatures": {
+			"title": "Déploiement puissant, adapté à vos besoins",
+			"description": "Débloquez des déploiements multi-serveurs fluides, un contrôle utilisateur avancé et une gestion de base de données flexible—le tout avec les fonctionnalités orientées développeur de Dokploy.",
+			"features": {
+				"flexibleDeployment": {
+					"title": "Déploiement d'applications flexible",
+					"description": "Déployez n'importe quelle application en utilisant Nixpacks, Heroku Buildpacks, ou votre Dockerfile personnalisé, adapté à votre stack."
+				},
+				"dockerCompose": {
+					"title": "Support natif Docker Compose",
+					"description": "Déployez des applications complexes nativement avec une intégration complète de Docker Compose pour une orchestration fluide."
+				},
+				"multiServer": {
+					"title": "Support multi-serveur",
+					"description": "Déployez facilement vos applications sur des serveurs distants, sans tracas de configuration."
+				},
+				"userManagement": {
+					"title": "Gestion avancée des utilisateurs",
+					"description": "Contrôlez l'accès des utilisateurs avec des rôles et permissions détaillés, gardant vos déploiements sécurisés et organisés."
+				},
+				"databaseManagement": {
+					"title": "Gestion de base de données avec sauvegardes",
+					"description": "Gérez et sauvegardez MySQL, PostgreSQL, MongoDB, MariaDB, Redis directement depuis Dokploy."
+				},
+				"apiCli": {
+					"title": "Accès API et CLI",
+					"description": "Besoin de fonctionnalités personnalisées ? Dokploy offre un accès complet à l'API et au CLI pour répondre à vos besoins."
+				},
+				"dockerSwarm": {
+					"title": "Clusters Docker Swarm",
+					"description": "Mettez à l'échelle vos déploiements de manière fluide avec le support intégré de Docker Swarm pour des applications robustes multi-nœuds."
+				},
+				"templates": {
+					"title": "Templates open source",
+					"description": "Commencez rapidement avec des templates pré-configurés pour des outils populaires comme Supabase, Cal.com, et Pocketbase."
+				},
+				"noVendorLockIn": {
+					"title": "Pas de verrouillage fournisseur",
+					"description": "Profitez d'une liberté complète pour modifier, mettre à l'échelle et personnaliser Dokploy selon vos besoins spécifiques."
+				},
+				"monitoring": {
+					"title": "Surveillance et alertes en temps réel",
+					"description": "Surveillez l'utilisation du CPU, de la mémoire et du réseau en temps réel sur vos déploiements pour une visibilité complète."
+				},
+				"builtForDevelopers": {
+					"title": "Conçu pour les développeurs",
+					"description": "Conçu spécifiquement pour les ingénieurs et développeurs recherchant contrôle et flexibilité."
+				},
+				"selfHosted": {
+					"title": "Auto-hébergé et open source",
+					"description": "Dokploy offre un contrôle complet avec des capacités d'auto-hébergement et une transparence open source."
+				}
+			}
+		},
+		"testimonials": {
+			"title": "Pourquoi les développeurs adorent Dokploy",
+			"description": "Vous pensez qu'on se vante ? Écoutez les développeurs qui doutaient aussi—jusqu'à ce que Dokploy rende leur vie (et leurs déploiements) étonnamment plus facile."
 		}
 	},
 	"404": {
@@ -151,30 +232,31 @@
 					"description": "Gérer sa propre infrastructure installer dokploy ui sur son propre serveur."
 				},
 				"features": {
-					"f1": "Complete Flexibility: Install Dokploy UI on your own infrastructure",
+					"f1": "Flexibilité complète : Installez l'interface utilisateur de Dokploy sur votre propre infrastructure",
 					"f2": "Infrastructure Auto-Hébergée",
 					"f3": "Support de la communauté",
 					"f4": "Accès à toutes les fonctionnalités",
 					"f5": "Accès à toutes les mises à jour",
-					"f9": "Serveurs Illimitées"
+					"f9": "Serveurs Illimités"
 				},
 				"go": "Installation"
 			},
 			"cloud": {
 				"title": "Recommandé",
 				"section": {
-					"title": "Offre Dokploy&",
-					"description": " pour gérer l'infrastructure de Dokploy UI, nous nous en occupons pour vous."
+					"title": "Plan Dokploy",
+					"description": "Nous gérons l'infrastructure de Dokploy UI, nous nous en occupons pour vous."
 				},
 				"servers": "{serverQuantity} Serveurs (Vous fournissez les serveurs)",
 				"features": {
-					"f1": "Hébergement géré: Pas besoin de gérer vos propres serveurs",
+					"f1": "Hébergement géré : Pas besoin de gérer vos propres serveurs",
 					"f2": "Déploiements Illimités",
 					"f3": "Bases de données Illimitées",
 					"f4": "Applications Illimitées",
 					"f5": "Utilisateurs Illimités",
-					"f6": "Support Prioritaire",
-					"f7": "Nouvelles mises à jour"
+					"f6": "Surveillance des Serveurs Distants",
+					"f7": "Support Prioritaire",
+					"f8": "Nouvelles mises à jour"
 				},
 				"go": "S'abonner"
 			}
@@ -208,6 +290,11 @@
 		"searchPlaceholder": "Rechercher des articles...",
 		"allTags": "Tous les tags",
 		"relatedPosts": "Articles similaires",
-		"tagDescription": "Articles tagués avec"
+		"tagDescription": "Articles tagués avec",
+		"foundPosts": "{count, plural, =0 {Aucun article trouvé} one {# article trouvé} other {# articles trouvés}}",
+		"tagTitle": "Articles tagués avec {tag}",
+		"backToBlog": "Retour au Blog",
+		"tags": "Tags",
+		"postsTaggedWith": "Articles tagués avec"
 	}
 }

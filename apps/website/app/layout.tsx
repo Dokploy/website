@@ -1,10 +1,10 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Inter, Lexend } from "next/font/google";
 import type { ReactNode } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 type Props = {
 	children: ReactNode;
