@@ -1898,9 +1898,9 @@
 				}
 			}
 		},
-		"/application.saveGitProdiver": {
+		"/application.saveGitProvider": {
 			"post": {
-				"operationId": "application-saveGitProdiver",
+				"operationId": "application-saveGitProvider",
 				"tags": ["application"],
 				"security": [
 					{
