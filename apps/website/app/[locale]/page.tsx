@@ -9,7 +9,9 @@ import { Sponsors } from "@/components/sponsors";
 import { StatsSection } from "@/components/stats";
 import { setRequestLocale } from "next-intl/server";
 
-export default async function Home({ params }: { params: { locale: string } }) {
+export default async function Home({
+	params,
+}: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
 	return (

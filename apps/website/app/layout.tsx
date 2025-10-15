@@ -1,10 +1,10 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Inter, Lexend } from "next/font/google";
 import type { ReactNode } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 type Props = {
 	children: ReactNode;
@@ -49,9 +49,9 @@ export default async function RootLayout({
 	params,
 }: {
 	children: ReactNode;
-	params: { locale: string };
+	params: Promise<{ locale: string }>;
 }) {
-	const { locale } = params;
+	const { locale } = await params;
 	const messages = await getMessages();
 	return (
 		<html

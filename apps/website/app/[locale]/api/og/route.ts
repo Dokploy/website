@@ -4,18 +4,14 @@ import type { NextRequest } from "next/server";
 
 export async function GET(
 	request: NextRequest,
-	{ params }: { params: { locale: string } },
+	{ params }: { params: Promise<{ locale: string }> },
 ) {
 	try {
 		const { searchParams } = new URL(request.url);
 		const slug = searchParams.get("slug");
+		const { locale } = await params;
 
-		console.log(
-			"Generating OG image for slug:",
-			slug,
-			"locale:",
-			params.locale,
-		);
+		console.log("Generating OG image for slug:", slug, "locale:", locale);
 
 		if (!slug) {
 			console.error("Missing slug parameter");
@@ -32,7 +28,7 @@ export async function GET(
 		console.log("Found post:", post.title);
 
 		const formattedDate = new Date(post.published_at).toLocaleDateString(
-			params.locale,
+			locale,
 			{
 				year: "numeric",
 				month: "long",
