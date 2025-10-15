@@ -217,11 +217,8 @@ export default async function BlogPostPage({ params }: Props) {
 				className="object-cover max-w-lg mx-auto rounded-lg border max-lg:w-64 border-border overflow-hidden"
 			/>
 		),
-		code: ({
-			className,
-			children,
-			inline,
-		}: { className: string; children: React.ReactNode; inline: boolean }) => {
+		code: (props: any) => {
+			const { className, children, inline } = props;
 			console.log(className, children, inline);
 			// Si es código inline (no tiene className con language-*), renderizar como span
 			if (inline || !className || !/language-(\w+)/.test(className)) {
