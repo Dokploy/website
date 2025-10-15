@@ -55,7 +55,7 @@ export function Hero() {
 	return (
 		<div className="h-[1100px] bg-black pt-20 sm:h-[1100px] lg:pt-32">
 			<div className=" bottom-0 flex w-full items-center justify-center overflow-hidden rounded-lg  bg-background md:shadow-xl">
-				<div className="relative px-4">
+				<div className="relative px-8 sm:px-8 md:px-10 lg:px-12">
 					<div className="text-center">
 						<motion.a
 							href="#pricing"
@@ -80,7 +80,7 @@ export function Hero() {
 						</motion.a>
 
 						<motion.h1
-							className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-muted-foreground sm:text-7xl"
+							className="mx-auto max-w-3xl sm:max-w-4xl font-display text-4xl font-medium tracking-tight text-muted-foreground sm:text-6xl lg:text-7xl"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3 }}
@@ -100,7 +100,7 @@ export function Hero() {
 							{t("hero.with")}
 						</motion.h1>
 						<motion.p
-							className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-muted-foreground"
+							className="mx-auto mt-6 max-w-2xl text-base sm:text-lg tracking-tight text-muted-foreground"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3, delay: 0.2 }}
