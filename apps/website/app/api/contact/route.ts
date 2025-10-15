@@ -1,7 +1,7 @@
+import { getHubSpotUTK, submitToHubSpot } from "@/lib/hubspot";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { submitToHubSpot, getHubSpotUTK } from "@/lib/hubspot";
 
 interface ContactFormData {
 	inquiryType: "support" | "sales" | "other";

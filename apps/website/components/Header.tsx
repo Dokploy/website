@@ -128,7 +128,9 @@ function MobileNavigation() {
 							{t("navigation.docs")}
 						</MobileNavLink>
 						<MobileNavLink href="/blog">{t("navigation.blog")}</MobileNavLink>
-						<MobileNavLink href="/contact">{t("navigation.contact")}</MobileNavLink>
+						<MobileNavLink href="/contact">
+							{t("navigation.contact")}
+						</MobileNavLink>
 						<MobileNavLink href={linkT("docs.intro")} target="_blank">
 							<Button className=" w-full" asChild>
 								<Link

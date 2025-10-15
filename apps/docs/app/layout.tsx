@@ -1,8 +1,8 @@
-import "./global.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { RootProvider } from "fumadocs-ui/provider";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import "./global.css";
 const inter = Inter({
 	subsets: ["latin"],
 });
