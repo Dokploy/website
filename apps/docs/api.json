@@ -2713,7 +2713,7 @@
 										"type": "string",
 										"default": "mysql:8"
 									},
-									"projectId": {
+									"environmentId": {
 										"type": "string"
 									},
 									"description": {
@@ -2742,7 +2742,7 @@
 								"required": [
 									"name",
 									"appName",
-									"projectId",
+									"environmentId",
 									"databaseName",
 									"databaseUser",
 									"databasePassword",
@@ -3282,7 +3282,7 @@
 										"type": "string",
 										"default": "postgres:15"
 									},
-									"projectId": {
+									"environmentId": {
 										"type": "string"
 									},
 									"description": {
@@ -3300,7 +3300,7 @@
 									"databaseName",
 									"databaseUser",
 									"databasePassword",
-									"projectId"
+									"environmentId"
 								],
 								"additionalProperties": false
 							}
@@ -3824,7 +3824,7 @@
 										"type": "string",
 										"default": "redis:8"
 									},
-									"projectId": {
+									"environmentId": {
 										"type": "string"
 									},
 									"description": {
@@ -3840,7 +3840,7 @@
 									"name",
 									"appName",
 									"databasePassword",
-									"projectId"
+									"environmentId"
 								],
 								"additionalProperties": false
 							}
@@ -4355,7 +4355,7 @@
 										"type": "string",
 										"default": "mongo:15"
 									},
-									"projectId": {
+									"environmentId": {
 										"type": "string"
 									},
 									"description": {
@@ -4377,7 +4377,7 @@
 								"required": [
 									"name",
 									"appName",
-									"projectId",
+									"environmentId",
 									"databaseUser",
 									"databasePassword"
 								],
@@ -4901,7 +4901,7 @@
 									"databaseRootPassword": {
 										"type": "string"
 									},
-									"projectId": {
+									"environmentId": {
 										"type": "string"
 									},
 									"description": {
@@ -4928,7 +4928,7 @@
 									"name",
 									"appName",
 									"databaseRootPassword",
-									"projectId",
+									"environmentId",
 									"databaseName",
 									"databaseUser",
 									"databasePassword"
