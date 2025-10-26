@@ -38,8 +38,7 @@ export default async function TagPage({ params }: Props) {
 	}
 
 	// Get the tag name from the first post
-	const tagName =
-		(posts[0] as any).tags?.find((t: any) => t.slug === tag)?.name || tag;
+	const tagName = posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
 
 	return (
 		<div className="container mx-auto px-4 py-12">
