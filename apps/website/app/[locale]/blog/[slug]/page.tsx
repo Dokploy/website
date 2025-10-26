@@ -105,25 +105,28 @@ export default async function BlogPostPage({ params }: Props) {
 			const scripts = doc.querySelectorAll(
 				'script[type="application/ld+json"], script',
 			);
-			scripts.forEach((script) => script.remove());
+			for (const script of scripts) {
+				script.remove();
+			}
 
 			// Remover otros elementos no deseados
 			const unwantedElements = doc.querySelectorAll("style, meta, link");
-			unwantedElements.forEach((el) => el.remove());
+			for (const el of unwantedElements) {
+				el.remove();
+			}
 
 			return doc.body.innerHTML;
-		} else {
-			// Fallback para servidor - usar regex para limpiar
-			return html
-				.replace(
-					/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
-					"",
-				)
-				.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-				.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
-				.replace(/<meta[^>]*>/gi, "")
-				.replace(/<link[^>]*>/gi, "");
 		}
+		// Fallback para servidor - usar regex para limpiar
+		return html
+			.replace(
+				/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
+				"",
+			)
+			.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+			.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+			.replace(/<meta[^>]*>/gi, "")
+			.replace(/<link[^>]*>/gi, "");
 	};
 
 	// Convertir HTML a Markdown
@@ -214,11 +217,8 @@ export default async function BlogPostPage({ params }: Props) {
 				className="object-cover max-w-lg mx-auto rounded-lg border max-lg:w-64 border-border overflow-hidden"
 			/>
 		),
-		code: ({
-			className,
-			children,
-			inline,
-		}: { className: string; children: React.ReactNode; inline: boolean }) => {
+		code: (props: any) => {
+			const { className, children, inline } = props;
 			console.log(className, children, inline);
 			// Si es código inline (no tiene className con language-*), renderizar como span
 			if (inline || !className || !/language-(\w+)/.test(className)) {

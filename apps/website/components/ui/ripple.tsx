@@ -113,7 +113,7 @@ const Ripple = React.memo(function Ripple({
 		},
 	];
 
-	const communitySponsors = [];
+	const communitySponsors: any[] = [];
 
 	return (
 		<div
@@ -178,7 +178,7 @@ const Ripple = React.memo(function Ripple({
 										const y = radius * Math.sin((angle * Math.PI) / 180);
 										const initials = item.name
 											.split(" ")
-											.map((n) => n[0])
+											.map((n: string) => n[0])
 											.join("");
 
 										return (
@@ -229,7 +229,7 @@ const Ripple = React.memo(function Ripple({
 										const y = radius * Math.sin((angle * Math.PI) / 180);
 										const initials = item.name
 											.split(" ")
-											.map((n) => n[0])
+											.map((n: string) => n[0])
 											.join("");
 										return (
 											<div
@@ -278,7 +278,7 @@ const Ripple = React.memo(function Ripple({
 										const y = radius * Math.sin((angle * Math.PI) / 180);
 										const initials = item.name
 											.split(" ")
-											.map((n) => n[0])
+											.map((n: string) => n[0])
 											.join("");
 										return (
 											<div
@@ -326,7 +326,7 @@ const Ripple = React.memo(function Ripple({
 										const y = radius * Math.sin((angle * Math.PI) / 180);
 										const initials = item.name
 											.split(" ")
-											.map((n) => n[0])
+											.map((n: string) => n[0])
 											.join("");
 										return (
 											<div
@@ -368,14 +368,14 @@ const Ripple = React.memo(function Ripple({
 
 							{i === 4 && (
 								<div className="relative w-full h-full flex justify-center items-center">
-									{communitySponsors.map((item, index) => {
+									{communitySponsors.map((item: any, index: number) => {
 										const angle = (360 / communitySponsors.length) * index;
 										const radius = mainCircleSize / 2 + 180;
 										const x = radius * Math.cos((angle * Math.PI) / 180);
 										const y = radius * Math.sin((angle * Math.PI) / 180);
 										const initials = item.name
 											.split(" ")
-											.map((n) => n[0])
+											.map((n: string) => n[0])
 											.join("");
 										return (
 											<div

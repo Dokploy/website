@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
 import { Container } from "@/components/Container";
+import { trackGAEvent } from "@/components/analitycs";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,9 +12,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { trackGAEvent } from "@/components/analitycs";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 interface ContactFormData {
 	inquiryType: "" | "support" | "sales" | "other";

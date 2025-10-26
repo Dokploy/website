@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
 	const tags = await getTags();
 
-	return tags.map((tag: { slug: string }) => ({
+	return tags.map((tag) => ({
 		tag: tag.slug,
 	}));
 }
@@ -74,7 +74,7 @@ export default async function TagPage({ params }: Props) {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{posts.map((post: Post) => (
-					<BlogPostCard key={post.id} post={post} locale={locale} />
+					<BlogPostCard key={post.id} post={post} locale={tag} />
 				))}
 			</div>
 		</div>

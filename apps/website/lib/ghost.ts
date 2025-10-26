@@ -105,23 +105,23 @@ export async function getPost(slug: string): Promise<Post | null> {
 	}
 }
 
-export async function getTags() {
+export async function getTags(): Promise<Array<{ slug: string }>> {
 	try {
 		const result = await api.tags.browse();
-		return result;
+		return result as Array<{ slug: string }>;
 	} catch (error) {
 		console.error("Error fetching tags:", error);
 		return [];
 	}
 }
 
-export async function getPostsByTag(tag: string) {
+export async function getPostsByTag(tag: string): Promise<Post[]> {
 	try {
-		const result = await api.posts.browse({
+		const result = (await api.posts.browse({
 			limit: "all",
 			filter: `tag:${tag}`,
 			include: ["tags", "authors"],
-		});
+		})) as Post[];
 		return result;
 	} catch (error) {
 		console.error(`Error fetching posts with tag ${tag}:`, error);

@@ -21,8 +21,8 @@ export default async function BlogPage({
 	params,
 	searchParams,
 }: {
-	params: { locale: string };
-	searchParams: { [key: string]: string | string[] | undefined };
+	params: Promise<{ locale: string }>;
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
 	const { locale } = await params;
 	const searchParams2 = await searchParams;
