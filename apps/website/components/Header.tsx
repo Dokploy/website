@@ -11,6 +11,7 @@ import { trackGAEvent } from "./analitycs";
 import { Logo } from "./shared/Logo";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import { Button, buttonVariants } from "./ui/button";
+import GithubStars from "./GithubStars";
 
 function MobileNavLink({
 	href,
@@ -173,6 +174,8 @@ export function Header() {
 						</div>
 					</div>
 					<div className="flex items-center gap-x-4 md:gap-x-5">
+						<GithubStars className="max-md:hidden" />
+
 						<Link href="https://x.com/getdokploy" target="_blank">
 							<svg
 								stroke="currentColor"
