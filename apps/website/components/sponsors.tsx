@@ -1,6 +1,6 @@
 "use client";
 import { PlusCircleIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/intl";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import Ripple from "./ui/ripple";

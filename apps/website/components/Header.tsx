@@ -1,10 +1,9 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronRight, HeartIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Fragment, type JSX, type SVGProps } from "react";
 import { Container } from "./Container";
 import { NavLink } from "./NavLink";
@@ -84,8 +83,6 @@ const I18nIcon = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
 );
 
 function MobileNavigation() {
-	const t = useTranslations("HomePage");
-	const linkT = useTranslations("Link");
 	return (
 		<Popover>
 			<Popover.Button
@@ -120,16 +117,20 @@ function MobileNavigation() {
 						as="div"
 						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight  text-primary shadow-xl ring-1 ring-border/5"
 					>
-						<MobileNavLink href="/#pricing">
-							{t("navigation.pricing")}
+						<MobileNavLink href="/#pricing">Pricing</MobileNavLink>
+						<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
+						<MobileNavLink
+							href="https://docs.dokploy.com/docs/core"
+							target="_blank"
+						>
+							Docs
 						</MobileNavLink>
-						<MobileNavLink href="/#faqs">{t("navigation.faqs")}</MobileNavLink>
-						<MobileNavLink href={linkT("docs.intro")} target="_blank">
-							{t("navigation.docs")}
-						</MobileNavLink>
-						<MobileNavLink href="/blog">{t("navigation.blog")}</MobileNavLink>
-						<MobileNavLink href="/contact">{t("navigation.contact")}</MobileNavLink>
-						<MobileNavLink href={linkT("docs.intro")} target="_blank">
+						<MobileNavLink href="/blog">Blog</MobileNavLink>
+						<MobileNavLink href="/contact">Contact</MobileNavLink>
+						<MobileNavLink
+							href="https://docs.dokploy.com/docs/core"
+							target="_blank"
+						>
 							<Button className=" w-full" asChild>
 								<Link
 									href="https://app.dokploy.com/register"
@@ -137,7 +138,7 @@ function MobileNavigation() {
 									target="_blank"
 								>
 									<div className="group flex-row relative mx-auto flex max-w-fit items-center justify-center rounded-2xl text-sm font-medium w-full">
-										<span>{t("navigation.dashboard")}</span>
+										<span>Sign In</span>
 										<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 									</div>
 								</Link>
@@ -151,9 +152,6 @@ function MobileNavigation() {
 }
 
 export function Header() {
-	const t = useTranslations("HomePage");
-	const linkT = useTranslations("Link");
-
 	return (
 		<header className="bg-background py-10">
 			<Container>
@@ -163,12 +161,15 @@ export function Header() {
 							<Logo className="h-10 w-auto" />
 						</Link>
 						<div className="hidden md:flex md:gap-x-6">
-							<NavLink href="/#pricing">{t("navigation.pricing")}</NavLink>
-							<NavLink href="/#faqs">{t("navigation.faqs")}</NavLink>
-							<NavLink href={linkT("docs.intro")} target="_blank">
-								{t("navigation.docs")}
+							<NavLink href="/#pricing">Pricing</NavLink>
+							<NavLink href="/#faqs">FAQ</NavLink>
+							<NavLink
+								href="https://docs.dokploy.com/docs/core"
+								target="_blank"
+							>
+								Docs
 							</NavLink>
-							<NavLink href="/blog">{t("navigation.blog")}</NavLink>
+							<NavLink href="/blog">Blog</NavLink>
 						</div>
 					</div>
 					<div className="flex items-center gap-x-4 md:gap-x-5">
@@ -200,7 +201,7 @@ export function Header() {
 									});
 								}}
 							>
-								{t("navigation.contact")}
+								Contact
 							</Link>
 						</Button>
 
@@ -225,7 +226,7 @@ export function Header() {
 								target="_blank"
 							>
 								<div className="group flex-row relative mx-auto flex max-w-fit items-center justify-center rounded-2xl text-sm font-medium w-full">
-									<span>{t("navigation.dashboard")}</span>
+									<span>Sign In</span>
 									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 								</div>
 							</Link>

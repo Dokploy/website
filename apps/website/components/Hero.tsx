@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Check, ChevronRight, Copy } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import AnimatedGradientText from "./ui/animated-gradient-text";

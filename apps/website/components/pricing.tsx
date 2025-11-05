@@ -11,7 +11,7 @@ import {
 	X,
 	XCircleIcon,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

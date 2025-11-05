@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import { Inter, Lexend } from "next/font/google";
 import type { ReactNode } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import "@/styles/tailwind.css";
+import "react-photo-view/dist/react-photo-view.css";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 type Props = {
 	children: ReactNode;
@@ -44,18 +46,10 @@ const lexend = Lexend({
 });
 // Since we have a `not-found.tsx` page on the root, a layout file
 // is required, even if it's just passing children through.
-export default async function RootLayout({
-	children,
-	params,
-}: {
-	children: ReactNode;
-	params: { locale: string };
-}) {
-	const { locale } = params;
-	const messages = await getMessages();
+export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html
-			lang={locale}
+			lang="en"
 			className={clsx(
 				"h-full scroll-smooth antialiased",
 				inter.variable,
@@ -73,9 +67,11 @@ export default async function RootLayout({
 			</head>
 			<body>
 				<GoogleAnalytics gaId="G-0RTZ5EPB26" />
-				<NextIntlClientProvider messages={messages}>
+				<div className="flex h-full flex-col">
+					<Header />
 					{children}
-				</NextIntlClientProvider>
+					<Footer />
+				</div>
 			</body>
 		</html>
 	);

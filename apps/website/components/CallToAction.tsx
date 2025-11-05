@@ -1,5 +1,5 @@
 import { Container } from "@/components/Container";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/intl";
 import Link from "next/link";
 import { Button } from "./ui/button";
 

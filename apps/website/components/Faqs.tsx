@@ -4,7 +4,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/intl";
 import { Container } from "./Container";
 
 const faqs = [

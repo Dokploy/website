@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Tab } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Layers, Terminal, Users } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/intl";
 import { Container } from "./Container";
 interface Feature {
 	name: React.ReactNode;

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +25,6 @@ interface ContactFormData {
 }
 
 export default function ContactPage() {
-	const t = useTranslations("Contact");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [formData, setFormData] = useState<ContactFormData>({
@@ -43,24 +41,24 @@ export default function ContactPage() {
 		const newErrors: Record<string, string> = {};
 
 		if (!formData.inquiryType) {
-			newErrors.inquiryType = t("errors.inquiryTypeRequired");
+			newErrors.inquiryType = "Please select what we can help you with";
 		}
 		if (!formData.firstName.trim()) {
-			newErrors.firstName = t("errors.firstNameRequired");
+			newErrors.firstName = "First name is required";
 		}
 		if (!formData.lastName.trim()) {
-			newErrors.lastName = t("errors.lastNameRequired");
+			newErrors.lastName = "Last name is required";
 		}
 		if (!formData.email.trim()) {
-			newErrors.email = t("errors.emailRequired");
+			newErrors.email = "Email is required";
 		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-			newErrors.email = t("errors.emailInvalid");
+			newErrors.email = "Please enter a valid email address";
 		}
 		if (!formData.company.trim()) {
-			newErrors.company = t("errors.companyRequired");
+			newErrors.company = "Company name is required";
 		}
 		if (!formData.message.trim()) {
-			newErrors.message = t("errors.messageRequired");
+			newErrors.message = "Message is required";
 		}
 
 		setErrors(newErrors);
@@ -86,14 +84,12 @@ export default function ContactPage() {
 			});
 
 			if (response.ok) {
-				// Track successful form submission
 				trackGAEvent({
 					action: "Contact Form Submitted",
 					category: "Contact",
 					label: formData.inquiryType,
 				});
 
-				// Reset form and show success
 				setFormData({
 					inquiryType: "",
 					firstName: "",
@@ -109,7 +105,7 @@ export default function ContactPage() {
 			}
 		} catch (error) {
 			console.error("Error submitting form:", error);
-			alert(t("errorMessage"));
+			alert("There was an error sending your message. Please try again.");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -117,7 +113,6 @@ export default function ContactPage() {
 
 	const handleInputChange = (field: keyof ContactFormData, value: any) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
-		// Clear error when user starts typing
 		if (errors[field]) {
 			setErrors((prev) => {
 				const newErrors = { ...prev };
@@ -133,14 +128,15 @@ export default function ContactPage() {
 				<Container>
 					<div className="mx-auto max-w-2xl text-center">
 						<h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-							{t("successTitle")}
+							Thank you for contacting us!
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-muted-foreground">
-							{t("successMessage")}
+							We've received your message and will get back to you as soon as
+							possible.
 						</p>
 						<div className="mt-10">
 							<Button onClick={() => setIsSubmitted(false)} variant="outline">
-								{t("buttons.sendAnother")}
+								Send Another Message
 							</Button>
 						</div>
 					</div>
@@ -167,10 +163,11 @@ export default function ContactPage() {
 				<div className="mx-auto max-w-3xl border border-border rounded-lg p-8 bg-black z-10 relative">
 					<div className="text-center">
 						<h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-							{t("title")}
+							Contact Us
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-muted-foreground">
-							{t("description")}
+							Get in touch with our team. We're here to help with any questions
+							about Dokploy.
 						</p>
 					</div>
 
@@ -180,7 +177,7 @@ export default function ContactPage() {
 								htmlFor="inquiryType"
 								className="block text-sm font-medium text-foreground"
 							>
-								{t("fields.inquiryType.label")}{" "}
+								What can we help you with today?{" "}
 								<span className="text-red-500">*</span>
 							</label>
 							<Select
@@ -193,20 +190,12 @@ export default function ContactPage() {
 								}
 							>
 								<SelectTrigger className="bg-input">
-									<SelectValue
-										placeholder={t("fields.inquiryType.placeholder")}
-									/>
+									<SelectValue placeholder="Select an option" />
 								</SelectTrigger>
 								<SelectContent>
-									<SelectItem value="support">
-										{t("fields.inquiryType.options.support")}
-									</SelectItem>
-									<SelectItem value="sales">
-										{t("fields.inquiryType.options.sales")}
-									</SelectItem>
-									<SelectItem value="other">
-										{t("fields.inquiryType.options.other")}
-									</SelectItem>
+									<SelectItem value="support">Support</SelectItem>
+									<SelectItem value="sales">Sales</SelectItem>
+									<SelectItem value="other">Other</SelectItem>
 								</SelectContent>
 							</Select>
 							{errors.inquiryType && (
@@ -220,8 +209,7 @@ export default function ContactPage() {
 									htmlFor="firstName"
 									className="block text-sm font-medium text-foreground"
 								>
-									{t("fields.firstName.label")}{" "}
-									<span className="text-red-500">*</span>
+									First Name <span className="text-red-500">*</span>
 								</label>
 								<Input
 									id="firstName"
@@ -230,7 +218,7 @@ export default function ContactPage() {
 									onChange={(e) =>
 										handleInputChange("firstName", e.target.value)
 									}
-									placeholder={t("fields.firstName.placeholder")}
+									placeholder="Your first name"
 								/>
 								{errors.firstName && (
 									<p className="text-sm text-red-600">{errors.firstName}</p>
@@ -242,8 +230,7 @@ export default function ContactPage() {
 									htmlFor="lastName"
 									className="block text-sm font-medium text-foreground"
 								>
-									{t("fields.lastName.label")}{" "}
-									<span className="text-red-500">*</span>
+									Last Name <span className="text-red-500">*</span>
 								</label>
 								<Input
 									id="lastName"
@@ -252,7 +239,7 @@ export default function ContactPage() {
 									onChange={(e) =>
 										handleInputChange("lastName", e.target.value)
 									}
-									placeholder={t("fields.lastName.placeholder")}
+									placeholder="Your last name"
 								/>
 								{errors.lastName && (
 									<p className="text-sm text-red-600">{errors.lastName}</p>
@@ -265,15 +252,14 @@ export default function ContactPage() {
 								htmlFor="email"
 								className="block text-sm font-medium text-foreground"
 							>
-								{t("fields.email.label")}{" "}
-								<span className="text-red-500">*</span>
+								Email <span className="text-red-500">*</span>
 							</label>
 							<Input
 								id="email"
 								type="email"
 								value={formData.email}
 								onChange={(e) => handleInputChange("email", e.target.value)}
-								placeholder={t("fields.email.placeholder")}
+								placeholder="your.email@company.com"
 							/>
 							{errors.email && (
 								<p className="text-sm text-red-600">{errors.email}</p>
@@ -285,15 +271,14 @@ export default function ContactPage() {
 								htmlFor="company"
 								className="block text-sm font-medium text-foreground"
 							>
-								{t("fields.company.label")}{" "}
-								<span className="text-red-500">*</span>
+								Company Name <span className="text-red-500">*</span>
 							</label>
 							<Input
 								id="company"
 								type="text"
 								value={formData.company}
 								onChange={(e) => handleInputChange("company", e.target.value)}
-								placeholder={t("fields.company.placeholder")}
+								placeholder="Your company name"
 							/>
 							{errors.company && (
 								<p className="text-sm text-red-600">{errors.company}</p>
@@ -305,14 +290,13 @@ export default function ContactPage() {
 								htmlFor="message"
 								className="block text-sm font-medium text-foreground"
 							>
-								{t("fields.message.label")}{" "}
-								<span className="text-red-500">*</span>
+								How can we help? <span className="text-red-500">*</span>
 							</label>
 							<textarea
 								id="message"
 								value={formData.message}
 								onChange={(e) => handleInputChange("message", e.target.value)}
-								placeholder={t("fields.message.placeholder")}
+								placeholder="Tell us more about your inquiry..."
 								rows={6}
 								className="flex w-full rounded-md bg-input border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
 							/>
@@ -327,7 +311,7 @@ export default function ContactPage() {
 								disabled={isSubmitting}
 								className="min-w-[120px]"
 							>
-								{isSubmitting ? t("buttons.sending") : t("buttons.send")}
+								{isSubmitting ? "Sending..." : "Send Message"}
 							</Button>
 						</div>
 					</form>
