@@ -14,7 +14,7 @@ export function GithubStars({
 	className,
 	repoUrl = "https://github.com/dokploy/dokploy",
 	label = "GitHub Stars",
-	count = "26k",
+	count = "26.4k",
 }: GithubStarsProps) {
 	return (
 		<Link
