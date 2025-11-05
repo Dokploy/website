@@ -3,14 +3,14 @@
 import type { Post } from "@/lib/ghost";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
 interface BlogPostCardProps {
 	post: Post;
-	locale: string;
 }
 
-export function BlogPostCard({ post, locale }: BlogPostCardProps) {
+export function BlogPostCard({ post }: BlogPostCardProps) {
 	const router = useRouter();
-	const formattedDate = new Date(post.published_at).toLocaleDateString(locale, {
+	const formattedDate = new Date(post.published_at).toLocaleDateString("en", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",

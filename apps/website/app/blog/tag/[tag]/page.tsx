@@ -1,18 +1,18 @@
 import { getPostsByTag, getTags } from "@/lib/ghost";
 import type { Post } from "@/lib/ghost";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { useTranslations } from "@/lib/intl";
 
 type Props = {
-	params: { locale: string; tag: string };
+	params: { tag: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { tag } = await params;
-	const t = await getTranslations("blog");
+	const t = useTranslations("blog");
 
 	return {
 		title: `${t("tagTitle", { tag })}`,
@@ -22,22 +22,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
 	const tags = await getTags();
-
-	return tags.map((tag: { slug: string }) => ({
-		tag: tag.slug,
-	}));
+	return tags.map((tag: { slug: string }) => ({ tag: tag.slug }));
 }
 
 export default async function TagPage({ params }: Props) {
 	const { tag } = await params;
-	const t = await getTranslations("blog");
+	const t = useTranslations("blog");
 	const posts = await getPostsByTag(tag);
 
 	if (!posts || posts.length === 0) {
 		notFound();
 	}
 
-	// Get the tag name from the first post
 	const tagName =
 		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
 
@@ -74,15 +70,15 @@ export default async function TagPage({ params }: Props) {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{posts.map((post: Post) => (
-					<BlogPostCard key={post.id} post={post} locale={locale} />
+					<BlogPostCard key={post.id} post={post} />
 				))}
 			</div>
 		</div>
 	);
 }
 
-function BlogPostCard({ post, locale }: { post: Post; locale: string }) {
-	const formattedDate = new Date(post.published_at).toLocaleDateString(locale, {
+function BlogPostCard({ post }: { post: Post }) {
+	const formattedDate = new Date(post.published_at).toLocaleDateString("en", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",

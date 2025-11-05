@@ -2,10 +2,11 @@ import { getPosts, getTags } from "@/lib/ghost";
 import type { Post } from "@/lib/ghost";
 import { RssIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { BlogPostCard } from "./components/BlogPostCard";
 import { SearchAndFilter } from "./components/SearchAndFilter";
+import { useTranslations } from "@/lib/intl";
+
 interface Tag {
 	id: string;
 	name: string;
@@ -18,15 +19,12 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage({
-	params,
 	searchParams,
 }: {
-	params: { locale: string };
 	searchParams: { [key: string]: string | string[] | undefined };
 }) {
-	const { locale } = await params;
 	const searchParams2 = await searchParams;
-	const t = await getTranslations("blog");
+	const t = useTranslations("blog");
 	const posts = await getPosts();
 	const tags = (await getTags()) as Tag[];
 	const search =
@@ -80,7 +78,7 @@ export default async function BlogPage({
 			) : (
 				<div className="space-y-8">
 					{filteredPosts.map((post: Post) => (
-						<BlogPostCard key={post.id} post={post} locale={locale} />
+						<BlogPostCard key={post.id} post={post} />
 					))}
 				</div>
 			)}

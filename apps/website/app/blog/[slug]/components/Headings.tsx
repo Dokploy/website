@@ -29,15 +29,10 @@ function LinkIcon() {
 
 export function H1({ children, ...props }: HeadingProps) {
 	const router = useRouter();
-	const id = slugify(children?.toString() || "", {
-		lower: true,
-		strict: true,
-	});
-
+	const id = slugify(children?.toString() || "", { lower: true, strict: true });
 	const handleClick = () => {
 		router.push(`#${id}`);
 	};
-
 	return (
 		<h1
 			id={id}
@@ -53,15 +48,10 @@ export function H1({ children, ...props }: HeadingProps) {
 
 export function H2({ children, ...props }: HeadingProps) {
 	const router = useRouter();
-	const id = slugify(children?.toString() || "", {
-		lower: true,
-		strict: true,
-	});
-
+	const id = slugify(children?.toString() || "", { lower: true, strict: true });
 	const handleClick = () => {
 		router.push(`#${id}`);
 	};
-
 	return (
 		<h2
 			id={id}
@@ -77,15 +67,10 @@ export function H2({ children, ...props }: HeadingProps) {
 
 export function H3({ children, ...props }: HeadingProps) {
 	const router = useRouter();
-	const id = slugify(children?.toString() || "", {
-		lower: true,
-		strict: true,
-	});
-
+	const id = slugify(children?.toString() || "", { lower: true, strict: true });
 	const handleClick = () => {
 		router.push(`#${id}`);
 	};
-
 	return (
 		<h3
 			id={id}

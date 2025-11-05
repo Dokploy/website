@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+
 interface ZoomableImageProps {
 	src: string;
 	alt: string;

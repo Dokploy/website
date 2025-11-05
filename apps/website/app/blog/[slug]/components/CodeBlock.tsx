@@ -18,9 +18,7 @@ interface CodeBlockProps {
 async function formatCode(code: string, lang: string) {
 	try {
 		let parser: string;
-		let plugins = [];
-
-		// Select parser and plugins based on language
+		let plugins = [] as any[];
 		switch (lang.toLowerCase()) {
 			case "yaml":
 			case "yml":
@@ -35,12 +33,8 @@ async function formatCode(code: string, lang: string) {
 				plugins = [babel, estree];
 				break;
 			default:
-				// For unsupported languages, return the original code
 				return code;
 		}
-
-		console.log(`Formatting ${lang} with parser:`, parser);
-
 		const formatted = await prettier.format(code, {
 			parser,
 			plugins,
@@ -50,12 +44,10 @@ async function formatCode(code: string, lang: string) {
 			useTabs: false,
 			printWidth: 120,
 		});
-
-		console.log("Formatted code:", formatted);
 		return formatted;
 	} catch (error) {
 		console.error("Error formatting code:", error);
-		return code; // Return original code if there's an error
+		return code;
 	}
 }
 
@@ -66,22 +58,15 @@ export function CodeBlock({ code, lang, initial }: CodeBlockProps) {
 	useLayoutEffect(() => {
 		async function formatAndHighlight() {
 			try {
-				console.log("Original code:", code);
-				console.log("Language:", lang);
 				const formatted = await formatCode(code, lang);
 				setFormattedCode(formatted);
-
-				// Then highlight the formatted code
 				const highlighted = await highlight(formatted, lang);
 				setNodes(highlighted);
 			} catch (error) {
-				console.error("Error in formatAndHighlight:", error);
-				// If formatting fails, try to highlight the original code
 				const highlighted = await highlight(code, lang);
 				setNodes(highlighted);
 			}
 		}
-
 		void formatAndHighlight();
 	}, [code, lang]);
 

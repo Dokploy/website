@@ -1,6 +1,5 @@
 import { getPost, getPosts } from "@/lib/ghost";
 import type { Metadata, ResolvingMetadata } from "next";
-import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -18,15 +17,17 @@ import { CodeBlock } from "./components/CodeBlock";
 import { H1, H2, H3 } from "./components/Headings";
 import { TableOfContents } from "./components/TableOfContents";
 import { ZoomableImage } from "./components/ZoomableImage";
+import { useTranslations } from "@/lib/intl";
+
 type Props = {
-	params: { locale: string; slug: string };
+	params: { slug: string };
 };
 
 export async function generateMetadata(
 	{ params }: Props,
 	parent: ResolvingMetadata,
 ): Promise<Metadata> {
-	const { locale, slug } = await params;
+	const { slug } = await params;
 	const post = await getPost(slug);
 
 	if (!post) {
@@ -36,7 +37,7 @@ export async function generateMetadata(
 	}
 
 	const ogUrl = new URL(
-		`/${locale}/api/og`,
+		`/api/og`,
 		process.env.NODE_ENV === "production"
 			? "https://dokploy.com"
 			: "http://localhost:3000",
@@ -69,51 +70,30 @@ export async function generateMetadata(
 	};
 }
 
-// export async function generateStaticParams() {
-// 	const posts = await getPosts();
-// 	const locales = ["en", "fr", "es", "zh-Hans"];
-
-// 	return posts.flatMap((post) =>
-// 		locales.map((locale) => ({
-// 			locale,
-// 			slug: post.slug,
-// 		})),
-// 	);
-// }
-
 export default async function BlogPostPage({ params }: Props) {
 	const { slug } = await params;
-	const t = await getTranslations("blog");
+	const t = useTranslations("blog");
 	const post = await getPost(slug);
 	const allPosts = await getPosts();
 
-	// Get related posts (excluding current post)
-	const relatedPosts = allPosts.filter((p) => p.id !== post?.id).slice(0, 3); // Show only 3 related posts
+	const relatedPosts = allPosts.filter((p) => p.id !== post?.id).slice(0, 3);
 
 	if (!post) {
 		notFound();
 	}
 
-	// Limpiar HTML antes de convertir a Markdown
 	const cleanHtml = (html: string) => {
-		// Crear un DOM temporal para limpiar el HTML
 		if (typeof window !== "undefined") {
 			const parser = new DOMParser();
 			const doc = parser.parseFromString(html, "text/html");
-
-			// Remover scripts JSON-LD y otros scripts
 			const scripts = doc.querySelectorAll(
 				'script[type="application/ld+json"], script',
 			);
 			scripts.forEach((script) => script.remove());
-
-			// Remover otros elementos no deseados
 			const unwantedElements = doc.querySelectorAll("style, meta, link");
 			unwantedElements.forEach((el) => el.remove());
-
 			return doc.body.innerHTML;
 		} else {
-			// Fallback para servidor - usar regex para limpiar
 			return html
 				.replace(
 					/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
@@ -126,7 +106,6 @@ export default async function BlogPostPage({ params }: Props) {
 		}
 	};
 
-	// Convertir HTML a Markdown
 	const turndownService = new TurndownService({
 		headingStyle: "atx",
 		codeBlockStyle: "fenced",
@@ -219,8 +198,6 @@ export default async function BlogPostPage({ params }: Props) {
 			children,
 			inline,
 		}: { className: string; children: React.ReactNode; inline: boolean }) => {
-			console.log(className, children, inline);
-			// Si es código inline (no tiene className con language-*), renderizar como span
 			if (inline || !className || !/language-(\w+)/.test(className)) {
 				return (
 					<code className="px-1.5 py-0.5 bg-muted text-sm rounded font-mono text-foreground">
@@ -228,8 +205,6 @@ export default async function BlogPostPage({ params }: Props) {
 					</code>
 				);
 			}
-
-			// Si es un bloque de código, usar CodeBlock
 			const match = /language-(\w+)/.exec(className);
 			return (
 				<CodeBlock
