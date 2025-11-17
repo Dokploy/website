@@ -11,6 +11,10 @@ Multi server allows you to deploy your apps remotely to different servers withou
 
 1. To install Dokploy UI, follow the [installation guide](en/docs/core/get-started/installation).
 
+<Callout type="warning">
+  If your remote server is configured with a different shell (other than bash), you must configure bash as the default shell, as Dokploy has been developed and tested with bash.
+</Callout>
+
 2. Create an SSH key by going to `/dashboard/settings/ssh-keys` and add a new key. Be sure to copy the public key.
 
    <ImageZoom
