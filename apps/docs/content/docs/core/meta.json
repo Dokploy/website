@@ -42,6 +42,7 @@
 		"watch-paths",
 		"---Advanced---",
 		"cluster",
-		"multi-server"
+		"multi-server",
+		"ipv6-support"
 	]
 }

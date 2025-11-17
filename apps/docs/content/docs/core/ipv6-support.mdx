@@ -1,0 +1,164 @@
+---
+title: IPv6 Support
+description: "Enable IPv6 networking for Dokploy, including Docker Swarm tweaks and NAT64 for IPv6‑only remote servers."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy runs on top of Docker Swarm, which does **not** enable IPv6 by default.
+This guide shows how to
+
+* rebuild the internal `docker_gwbridge` with IPv6,
+* tell the Docker daemon which IPv6 blocks it may allocate, and
+* add DNS64/NAT64 so IPv6‑only remote machines can still reach IPv4‑only hosts such as GitHub.
+
+## Enable IPv6 in Docker Swarm
+
+<Callout title="Back up compose files/secrets/volumes or snapshot the machine first" type="warn">
+  * This guide assumes that there's only a single routed IPv6 to the server.
+  * This procedure stops and removes every running container. Anything not stored in a named volume or external backup will be **permanently lost**.
+  * All websites and services hosted on this server will be **offline for the entire duration** of the install.
+  * The steps below are tested on Debian (Docker version 28.1.1) and will only work on Debian-based distributions (e.g., Ubuntu). Behavior on other distros or with older Docker versions may differ.
+  * Running a production website over IPv6-only is **not recommended**; many residential and corporate networks still lack IPv6 connectivity. Prefer dual-stack or an IPv4 front-end.
+</Callout>
+
+If Dokploy is not already installed, don't install it yet. Instead, install Docker with the following command and then jump straight to step 4:
+
+```bash
+curl -sSL https://get.docker.com | sh
+```
+
+1. Stop Dokploy's Traefik proxy:
+
+    ```bash
+    docker container stop dokploy-traefik
+    ```
+
+    <Callout>
+      `dokploy-traefik` binds to port 80 and will prevent the installer from recreating the swarm in step 9.
+    </Callout>
+
+2. Leave the existing swarm:
+
+    ```bash
+    docker swarm leave --force
+    ```
+
+3. Delete the default bridge:
+
+    ```bash
+    docker network rm docker_gwbridge
+    ```
+
+4. Create an IPv6-capable `docker_gwbridge`:
+
+    ```bash
+    docker network create \
+      --driver bridge \
+      --opt com.docker.network.bridge.name=docker_gwbridge \
+      --opt com.docker.network.bridge.enable_ip_forwarding=true \
+      --opt com.docker.network.bridge.enable_ip_masquerade=true \
+      --ipv6 \
+      --subnet fd00:100::/64 \
+      --gateway fd00:100::1 \
+      docker_gwbridge
+    ```
+
+    <Callout>
+      `fd00:100::/64` is a private unique-local block — safe for internal use.
+    </Callout>
+
+5. Generate a unique ULA /64 + /48 for overlay networks. Copy the output from this command and save it for the next step:
+
+    ```bash
+    i=$(ls /sys/class/net|grep -m1 -v lo);m=$(sed s/://g /sys/class/net/$i/address);echo CIDR: fd${m:0:2}:${m:2:4}:${m:6:4}::/64;echo Pool: fd${m:0:2}:${m:2:4}:${m:6:4}::/48
+    ```
+
+    Example output:
+
+    ```text
+    CIDR: fd52:ab7e:4c01::/64
+    Pool: fd52:ab7e:4c01::/48
+    ```
+
+    <Callout>
+      Avoid reusing a static ULA such as `fd00:dead:beef::/64` on multiple servers. Docker bridges will share one L2 segment, and overlay or VPN traffic can mis-route. The one-liner above derives a unique prefix from the host’s MAC, so every machine gets its own private /64 and /48 automatically.
+    </Callout>
+
+6. Edit `/etc/docker/daemon.json` and add the following entries:
+
+    ```jsonc
+    {
+      "ipv6": true,
+      "fixed-cidr-v6": "fd52:ab7e:4c01::/64", // <— Replace with the CIDR value from the previous step
+      "default-address-pools": [
+        {
+          "base": "172.16.0.0/12",
+          "size": 24
+        },
+        {
+          "base": "fd52:ab7e:4c01::/48", // <— Replace with the Pool value from the previous step
+          "size": 64
+        }
+      ]
+    }
+    ```
+
+7. Restart Docker:
+
+    ```bash
+    systemctl restart docker
+    ```
+
+8. Enable forwarding and accept router advertisements:
+
+    ```bash
+    sysctl -w net.ipv6.conf.all.forwarding=1 net.ipv6.conf.all.accept_ra=2
+    ```
+
+    <Callout>
+      To make this persistent add the keys to `/etc/sysctl.d/99-sysctl.conf`. If the host uses a static IPv6 address, `accept_ra=1` together with `accept_ra_defrtr=0` may be more appropriate.
+    </Callout>
+
+9. Reinstall Dokploy (initialises the swarm and starts Traefik again):
+
+    ```bash
+    curl -sSL https://dokploy.com/install.sh | sh
+    ```
+
+10. Verify IPv6 connectivity:
+
+    ```bash
+    docker run --network docker_gwbridge --rm busybox ping -6 -c4 google.com
+    ```
+
+    <Callout>
+      A successful test returns **0% packet loss**. if `nftables`, `ufw`, or another firewall is running, make sure the new `docker_gwbridge` subnet and UDP 4789 (VXLAN) are allowed.
+    </Callout>
+
+---
+
+## NAT64 for IPv6-only remote servers
+
+Setting up a remote server requires pulling assets from IPv4-only hosts (e.g. raw GitHub files). Add NAT64-aware nameservers so A-records synthesise as AAAA.
+
+1. Open [nat64.net](https://nat64.net/) and copy the DNS64 addresses.
+2. On the remote machine edit `/etc/systemd/resolved.conf` and add the nameservers so it looks like this:
+
+    ```ini
+    DNS=2a00:1098:2b::1 2a00:1098:2c::1 2a01:4f9:c010:3f02::1
+    ```
+
+3. Restart the resolver:
+
+    ```bash
+    systemctl restart systemd-resolved
+    ```
+
+4. Verify that NAT64 is working:
+
+    ```bash
+    curl -6 https://httpstat.us/200
+    ```
+
+    A plain `200 OK` confirms NAT64 is active.
