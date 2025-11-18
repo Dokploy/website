@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type GithubStarsProps = {
@@ -10,17 +11,73 @@ type GithubStarsProps = {
 	count?: string;
 };
 
+// Function to format star count (e.g., 26400 -> "26.4k")
+function formatStarCount(count: number): string {
+	if (count >= 1000000) {
+		return `${(count / 1000000).toFixed(1)}M`;
+	}
+	if (count >= 1000) {
+		return `${(count / 1000).toFixed(1)}k`;
+	}
+	return count.toString();
+}
+
+// Extract owner and repo from GitHub URL
+function extractRepoInfo(url: string): { owner: string; repo: string } | null {
+	try {
+		const match = url.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+		if (match) {
+			return { owner: match[1], repo: match[2].replace(/\.git$/, "") };
+		}
+	} catch (error) {
+		console.error("Error extracting repo info:", error);
+	}
+	return null;
+}
+
 export function GithubStars({
 	className,
 	repoUrl = "https://github.com/dokploy/dokploy",
 	label = "GitHub Stars",
-	count = "26.4k",
+	count: defaultCount = "26.4k",
 }: GithubStarsProps) {
+	const [starCount, setStarCount] = useState<string>(defaultCount);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchStarCount = async () => {
+			const repoInfo = extractRepoInfo(repoUrl);
+			if (!repoInfo) {
+				setIsLoading(false);
+				return;
+			}
+
+			try {
+				const response = await fetch(
+					`/api/github-stars?owner=${encodeURIComponent(repoInfo.owner)}&repo=${encodeURIComponent(repoInfo.repo)}`,
+				);
+
+				if (response.ok) {
+					const data = await response.json();
+					const formattedCount = formatStarCount(data.stargazers_count);
+					setStarCount(formattedCount);
+				}
+			} catch (error) {
+				console.error("Error fetching GitHub stars:", error);
+				// Keep default count on error
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchStarCount();
+	}, [repoUrl]);
+
 	return (
 		<Link
 			href={repoUrl}
 			target="_blank"
-			aria-label={`${label}: ${count}`}
+			aria-label={`${label}: ${starCount}`}
 			className={cn(
 				"group relative inline-flex items-center gap-2 rounded-full px-3 py-1",
 				"shadow-[0_0_0_2px_#000_inset,0_2px_8px_rgba(0,0,0,0.35)]",
@@ -109,7 +166,9 @@ export function GithubStars({
 			{/* copy */}
 			<span className="flex items-baseline gap-1 pr-0.5">
 				<span className="text-xs font-semibold">Stars</span>
-				<span className="text-sm font-extrabold tracking-tight">{count}</span>
+				<span className="text-sm font-extrabold tracking-tight">
+					{isLoading ? "..." : starCount}
+				</span>
 			</span>
 
 			{/* subtle ring on hover */}
