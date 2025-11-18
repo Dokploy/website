@@ -124,7 +124,8 @@ Configure persistent storage for your application to ensure data remains intact 
 
 **File Mount**: Specifically for single files, useful for configuration files.
 1. **Content**: The content to store in the file.
-2. **Mount Path**: Path in the container where the file is placed.
+2. **File Path**: The name of the file.
+3. **Mount Path**: Path in the container where the file is placed. **The path must also contain the filename.**
 
 File mounts are a dokploy features, this create a file in a folder called `files` inside your project, so it recreates every single time you deploy your project.
 
