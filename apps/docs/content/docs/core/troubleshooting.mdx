@@ -484,16 +484,18 @@ docker network connect dokploy-network dokploy-traefik
 docker service rm dokploy-traefik
 
 # Create a new dokploy-traefik service
-docker run -d \
-    --name dokploy-traefik \
-    --restart always \
-    -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
-    -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -p 80:80/tcp \
-    -p 443:443/tcp \
-    -p 443:443/udp \
-    traefik:v3.6.1
+docker service create \
+  --name dokploy-traefik \
+  --constraint 'node.role == manager' \
+  --replicas 1 \
+  --network dokploy-network \
+  --publish published=80,target=80,mode=host \
+  --publish published=443,target=443,mode=host \
+  --mount type=bind,source=/etc/dokploy/traefik/traefik.yml,target=/etc/traefik/traefik.yml \
+  --mount type=bind,source=/etc/dokploy/traefik/dynamic,target=/etc/dokploy/traefik/dynamic \
+  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+  --label traefik.enable=true \
+  traefik:v3.6.1
 ```
 
 Remove the dokploy service:
