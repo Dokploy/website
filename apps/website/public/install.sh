@@ -185,7 +185,7 @@ install_dokploy() {
         --restart always \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /var/run/docker.sock:/var/run/docker.sock:ro \
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
