@@ -36,7 +36,7 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh
+      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
     fi
 
     docker swarm leave --force 2>/dev/null
