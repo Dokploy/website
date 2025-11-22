@@ -52,7 +52,7 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh
+      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
     fi
 
     # Check if running in Proxmox LXC container and set endpoint mode
