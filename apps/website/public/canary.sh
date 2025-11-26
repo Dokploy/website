@@ -130,7 +130,7 @@ install_dokploy() {
     --name dokploy-redis \
     --constraint 'node.role==manager' \
     --network dokploy-network \
-    --mount type=volume,source=redis-data-volume,target=/data \
+    --mount type=volume,source=dokploy-redis,target=/data \
     redis:7
 
     # Installation
@@ -140,7 +140,7 @@ install_dokploy() {
     --network dokploy-network \
     --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
     --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
-    --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
+    --mount type=volume,source=dokploy-config,target=/root/.docker \
     --publish published=3000,target=3000,mode=host \
     --update-parallelism 1 \
     --update-order stop-first \
