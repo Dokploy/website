@@ -1,32 +1,64 @@
 ---
-title: "卸载"
+title: 卸载
 description: "了解如何在服务器上卸载 Dokploy"
 ---
 
-## 卸载步骤
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
-按照以下步骤从您的服务器中完全删除 Dokploy 及其组件。
+按照以下步骤，彻底从服务器中移除 Dokploy 及其组件。
 
-### 第 1 步： 删除 Docker Swarm 服务
+<Steps>
+<Step>
+移除 Dokploy 创建的 Docker Swarm 服务：
 
-首先，删除 Docker Swarm 中的 Dokploy 以及相关服务:
+   ```bash
+   docker service remove dokploy dokploy-traefik dokploy-postgres dokploy-redis
+   docker container remove -f dokploy-traefik
+   ```
+ 
+</Step>
+ 
+<Step>
+ 
+移除 Dokploy 创建的 Docker 卷（volumes）：
 
-```bash
-docker service rm dokploy dokploy-traefik dokploy-postgres dokploy-redis
-```
+   ```bash
+   docker volume remove -f dokploy-config dokploy-postgres dokploy-redis
+   ```
+ 
+</Step>
 
-### 第 2 步： 删除 Docker 挂载卷
+<Step>
+ 
+移除 Dokploy 创建的 Docker 网络：
 
-接下来，删除 Dokploy 创建的 Docker 卷：
+   ```bash
+   docker network remove -f dokploy-network
+   ```
+ 
+</Step>
+ 
+<Step>
 
-```bash
-docker volume rm -f dokploy-postgres-database redis-data-volume
-```
+执行 Docker 清理操作以删除残留资源：
 
-### 第 3 步： 删除 Dokploy 文件
+   ```bash
+   docker container prune --force
+   docker image prune --all --force
+   docker volume prune --all --force
+   docker builder prune --all --force
+   docker system prune --all --volumes --force
+   ```
+ 
+</Step>
+ 
+<Step>
 
-最后，从服务器上删除 Dokploy 文件和目录：
+从服务器移除 Dokploy 文件和目录：
 
-```bash
-sudo rm -rf /etc/dokploy
-```
+   ```bash
+   sudo rm -rf /etc/dokploy
+   ```
+ 
+</Step>
+</Steps>
