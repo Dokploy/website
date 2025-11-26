@@ -123,7 +123,7 @@ install_dokploy() {
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
     --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
-    --mount type=volume,source=dokploy-postgres-database,target=/var/lib/postgresql/data \
+    --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
     postgres:16
 
     docker service create \
