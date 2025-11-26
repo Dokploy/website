@@ -12,7 +12,8 @@ Follow these steps to completely remove Dokploy and its components from your ser
 Remove the docker swarm services created by Dokploy:
 
    ```bash
-   docker service rm dokploy dokploy-traefik dokploy-postgres dokploy-redis
+   docker service remove dokploy dokploy-traefik dokploy-postgres dokploy-redis
+   docker container remove -f dokploy-traefik
    ```
  
 </Step>
@@ -22,7 +23,7 @@ Remove the docker swarm services created by Dokploy:
 Remove the docker volumes created by Dokploy:
 
    ```bash
-   docker volume rm -f dokploy-postgres-database redis-data-volume
+   docker volume remove -f dokploy-config dokploy-postgres dokploy-redis
    ```
  
 </Step>
@@ -32,7 +33,21 @@ Remove the docker volumes created by Dokploy:
 Remove the docker network created by Dokploy:
 
    ```bash
-   docker network rm -f dokploy-network
+   docker network remove -f dokploy-network
+   ```
+ 
+</Step>
+ 
+<Step>
+
+Docker cleanup to remove leftovers:
+
+   ```bash
+   docker container prune --force
+   docker image prune --all --force
+   docker volume prune --all --force
+   docker builder prune --all --force
+   docker system prune --all --volumes --force
    ```
  
 </Step>
