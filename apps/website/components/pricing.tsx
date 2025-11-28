@@ -117,7 +117,7 @@ export function Pricing() {
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />
-							<span className="relative">Simple, Affordable,</span>
+							<span className="relative">Simple Affordable</span>
 						</span>{" "}
 						Pricing.
 					</h2>
