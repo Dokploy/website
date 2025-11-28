@@ -112,7 +112,7 @@ const grid = [
 	},
 	{
 		title: "Community Contributors",
-		description: `Thanks to a growing base of over ${statsValues.contributors} contributors, Dokploy continues to thrive with valuable contributions from developers around the world.`,
+		description: `Thanks to our growing base of over ${statsValues.contributors} contributors, Dokploy continues to thrive, with valuable contributions from developers around the world.`,
 		icon: <Users className="h-6 w-6 stroke-white" />,
 		component: (
 			<p className="whitespace-pre-wrap text-2xl !font-semibold tracking-tighter  mt-4">

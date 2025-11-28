@@ -36,16 +36,16 @@ export function CallToAction() {
 						Say goodbye to infrastructure hassles—Dokploy Cloud handles it all. Effortlessly deploy, manage Docker containers, and secure your traffic with Traefik. Focus on building, we'll handle the rest.
 					</p>
 
-					<Button className="mt-10 rounded-full" asChild>
-						<Link
-							href={"https://app.dokploy.com/register"}
-							aria-label="Dokploy on GitHub"
-							target="_blank"
-							className="flex flex-row items-center gap-2"
-						>
-							Get Started Now
-						</Link>
-					</Button>
+				<Button className="mt-10 rounded-full" asChild>
+					<Link
+						href={"https://app.dokploy.com/register"}
+						aria-label="Dokploy on GitHub"
+						target="_blank"
+						className="flex flex-row items-center gap-2"
+					>
+						Create an account
+					</Link>
+				</Button>
 				</div>
 			</Container>
 		</section>

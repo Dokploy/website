@@ -17,7 +17,7 @@ const faqs = [
 	},
 	{
 		question: "Do I need to provide my own server for the managed plan?",
-		answer: "Yes, in the managed plan, you provide your own server e.g. (Hetzner, Hostinger, AWS, ETC.) VPS, and we manage the Dokploy UI infrastructure for you.",
+		answer: "Yes, in the managed plan, you provide your own server (e.g., Hetzner, Hostinger, AWS, etc.) VPS, and we manage the Dokploy UI infrastructure for you.",
 	},
 	{
 		question: "What happens if I need more than one server?",
@@ -33,11 +33,11 @@ const faqs = [
 	},
 	{
 		question: "What kind of support do you offer?",
-		answer: "We offer community support for the open source version and priority support for paid plans (Via Discord or Email at support@dokploy.com).",
+		answer: "We offer community support for the open source version and priority support for paid plans (via Discord or Email at support@dokploy.com).",
 	},
 	{
 		question: "What's the catch on the Paid Plan?",
-		answer: "Nothing, you link your server(VPS) to your account and you can deploy unlimited applications, databases, and users and you get unlimited updates, deployments, backups and more.",
+		answer: "Nothing, once you link your server (VPS) to your account, you can deploy unlimited applications, databases, and users, and you get unlimited updates, deployments, backups, and more.",
 	},
 	{
 		question: "Why Choose Dokploy?",

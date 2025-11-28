@@ -117,12 +117,12 @@ export function Pricing() {
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />
-							<span className="relative">Simple & Affordable,</span>
+							<span className="relative">Simple, Affordable,</span>
 						</span>{" "}
 						Pricing.
 					</h2>
 					<p className="mt-4 text-lg text-muted-foreground">
-						Deploy Smarter, Scale Faster – Without Breaking the Bank
+						Deploy Smarter and Scale Faster, Without Breaking the Bank
 					</p>
 				</div>
 
@@ -170,7 +170,7 @@ export function Pricing() {
 									featured ? "text-white" : "text-slate-400",
 								)}
 							>
-								Manage your own infrastructure, installing Dokploy UI on your own server.
+								Install and manage Dokploy UI on your own server.
 							</p>
 
 							<ul
@@ -186,6 +186,7 @@ export function Pricing() {
 									"Community Support",
 									"Access to Core Features",
 									"Access to All Updates",
+									"Unlimited Servers",
 								].map((feature) => (
 									<li key={feature} className="flex text-muted-foreground">
 										<CheckIcon />
@@ -209,7 +210,7 @@ export function Pricing() {
 										target="_blank"
 										className="flex items-start text-sm text-primary"
 									>
-										Installation{" "}
+										Start deploying{" "}
 										<ArrowRight className="ml-2 size-4 self-center" />
 									</Link>
 								</div>
@@ -258,7 +259,7 @@ export function Pricing() {
 									featured ? "text-white" : "text-slate-400",
 								)}
 							>
-								 to manage Dokploy UI infrastructure, we take care of it for you.
+								We manage the Dokploy UI infrastructure, we take care of it for you.
 							</p>
 
 							<ul
@@ -289,7 +290,7 @@ export function Pricing() {
 							<div className="mt-4 flex flex-col gap-2">
 								<div className="flex items-center justify-center gap-2">
 									<span className="text-sm text-muted-foreground">
-										{serverQuantity} Servers (You bring the servers)
+										No. of {serverQuantity} Servers (You bring the servers)
 									</span>
 										<TooltipProvider>
 											<Tooltip open={openVideo}>
@@ -304,7 +305,7 @@ export function Pricing() {
 														/>
 													</div>
 													<p className="text-primary mb-2 text-left">
-														We Recommend to watch the video to understand the
+														We recommend you to watch the video to understand the
 														benefits of Dokploy Cloud
 													</p>
 

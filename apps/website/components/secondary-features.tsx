@@ -9,17 +9,17 @@ import { cn } from "@/lib/utils";
 const features = [
 	{
 		title: "Applications & Databases",
-		description: "Centralize control over your applications and databases for enhanced security and efficiency, simplifying access and management across your infrastructure.",
+		description: "Centralize control of your applications and databases for enhanced security and efficiency, simplifying access and management across your infrastructure.",
 		image: "/dashboard.png",
 	},
 	{
 		title: "Docker Compose",
-		description: "Native Docker Compose support for manage complex applications and services with ease.",
+		description: "Native Docker Compose support so you can manage complex applications and services with ease.",
 		image: "/compose.png",
 	},
 	{
 		title: "Multiserver",
-		description: "Deploy applications to multiple servers without effort.",
+		description: "Deploy applications to multiple servers without the extra effort.",
 		image: "/remote.png",
 	},
 	{
@@ -39,12 +39,12 @@ const features = [
 	},
 	{
 		title: "Traefik",
-		description: "Manage traefik via File Editor to configure your own domain names, certificates, and more.",
+		description: "Manage Traefik via File Editor to configure your own domain names, certificates, and more.",
 		image: "/traefik.png",
 	},
 	{
 		title: "Templates",
-		description: "One click to deploy open source templates.",
+		description: "Deploy open source templates with one click.",
 		image: "/templates.png",
 	},
 ];
@@ -85,7 +85,7 @@ export function SecondaryFeaturesSections() {
 			<div className="mx-auto max-w-7xl max-lg:px-4 relative">
 				<div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-						Comprehensive Control for Your Digital Ecosystem
+						Comprehensive Control of Your Digital Ecosystem
 					</h2>
 					<p className="mt-6 text-lg tracking-tight text-muted-foreground">
 						Simplify your project and data management, ensure robust monitoring, and secure your backups—all without the fuss over minute details.
