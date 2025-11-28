@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Privacy Policy",
+	description:
+		"Learn about how Dokploy collects, uses, and safeguards your personal information when you use our website and services.",
+};
+
 export default function Home() {
 	return (
 		<div className="flex flex-col gap-4 w-full max-w-4xl mx-auto">

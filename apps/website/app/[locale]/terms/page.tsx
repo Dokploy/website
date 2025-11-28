@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Terms and Conditions",
+	description:
+		"Read the terms and conditions for using Dokploy's website and services.",
+};
+
 export default function Home() {
 	return (
 		<div className="flex flex-col gap-4 w-full max-w-4xl mx-auto">

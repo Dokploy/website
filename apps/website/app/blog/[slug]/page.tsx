@@ -17,7 +17,6 @@ import { CodeBlock } from "./components/CodeBlock";
 import { H1, H2, H3 } from "./components/Headings";
 import { TableOfContents } from "./components/TableOfContents";
 import { ZoomableImage } from "./components/ZoomableImage";
-import { useTranslations } from "@/lib/intl";
 
 type Props = {
 	params: { slug: string };
@@ -72,7 +71,6 @@ export async function generateMetadata(
 
 export default async function BlogPostPage({ params }: Props) {
 	const { slug } = await params;
-	const t = useTranslations("blog");
 	const post = await getPost(slug);
 	const allPosts = await getPosts();
 
@@ -233,7 +231,7 @@ export default async function BlogPostPage({ params }: Props) {
 						clipRule="evenodd"
 					/>
 				</svg>
-				{t("backToBlog")}
+				Back to Blog
 			</Link>
 
 			<div className="grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-8">
@@ -313,7 +311,7 @@ export default async function BlogPostPage({ params }: Props) {
 
 					{post.tags && post.tags.length > 0 && (
 						<div className="mt-12 pt-6 border-t border-border">
-							<h2 className="text-xl font-semibold mb-4">{t("tags")}</h2>
+							<h2 className="text-xl font-semibold mb-4">Tags</h2>
 							<div className="flex flex-wrap gap-2">
 								{post.tags.map((tag) => (
 									<Link
@@ -338,7 +336,7 @@ export default async function BlogPostPage({ params }: Props) {
 
 			{relatedPosts.length > 0 && (
 				<div className="mt-12">
-					<h2 className="text-2xl font-bold mb-6">{t("relatedPosts")}</h2>
+					<h2 className="text-2xl font-bold mb-6">Related Posts</h2>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 						{relatedPosts.map((relatedPost) => {
 							const relatedPostDate = new Date(

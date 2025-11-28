@@ -11,7 +11,6 @@ import {
 	X,
 	XCircleIcon,
 } from "lucide-react";
-import { useTranslations } from "@/lib/intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -85,7 +84,6 @@ export const calculatePrice = (count: number, isAnnual = false) => {
 
 export function Pricing() {
 	const router = useRouter();
-	const t = useTranslations("Pricing");
 	const [isAnnual, setIsAnnual] = useState(false);
 	const [serverQuantity, setServerQuantity] = useState(1);
 	const featured = true;
@@ -119,12 +117,12 @@ export function Pricing() {
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />
-							<span className="relative">{t("swirlyDoodleTitle")}</span>
+							<span className="relative">Simple & Affordable,</span>
 						</span>{" "}
-						{t("restTitle")}
+						Pricing.
 					</h2>
 					<p className="mt-4 text-lg text-muted-foreground">
-						{t("description")}
+						Deploy Smarter, Scale Faster – Without Breaking the Bank
 					</p>
 				</div>
 
@@ -137,10 +135,10 @@ export function Pricing() {
 						>
 							<TabsList>
 								<TabsTrigger value="monthly">
-									{t("billingCycle.monthly")}
+									Monthly
 								</TabsTrigger>
 								<TabsTrigger value="annual">
-									{t("billingCycle.annual")}
+									Annual
 								</TabsTrigger>
 							</TabsList>
 						</Tabs>
@@ -153,69 +151,69 @@ export function Pricing() {
 										: "lg:py-8",
 								)}
 							>
-								<div className="flex flex-row items-center gap-2">
-									<p className=" text-2xl font-semibold tracking-tight text-primary ">
-										{t("plan.free.title")}
-									</p>
-									|
-									<p className=" text-base font-semibold tracking-tight text-muted-foreground">
-										{t("plan.free.subTitle")}
-									</p>
-								</div>
-
-								<h3 className="mt-5 text-lg font-medium text-white">
-									{t("plan.free.section.title")}
-								</h3>
-								<p
-									className={clsx(
-										"text-sm",
-										featured ? "text-white" : "text-slate-400",
-									)}
-								>
-									{t("plan.free.section.description")}
+							<div className="flex flex-row items-center gap-2">
+								<p className=" text-2xl font-semibold tracking-tight text-primary ">
+									Free
 								</p>
+								|
+								<p className=" text-base font-semibold tracking-tight text-muted-foreground">
+									Open Source
+								</p>
+							</div>
 
-								<ul
-									role="list"
-									className={clsx(
-										" mt-4 flex flex-col gap-y-2 text-sm",
-										featured ? "text-white" : "text-slate-200",
-									)}
-								>
-									{[
-										t("plan.free.features.f1"),
-										t("plan.free.features.f2"),
-										t("plan.free.features.f3"),
-										t("plan.free.features.f4"),
-										t("plan.free.features.f5"),
-									].map((feature) => (
-										<li key={feature} className="flex text-muted-foreground">
-											<CheckIcon />
-											<span className="ml-2">{feature}</span>
-										</li>
-									))}
-									<li className="flex text-muted-foreground">
-										<XCircleIcon className="size-5 self-center text-destructive" />
-										<span className="ml-3 text-destructive">
-											Remote Servers Monitoring
-										</span>
+							<h3 className="mt-5 text-lg font-medium text-white">
+								Dokploy Open Source
+							</h3>
+							<p
+								className={clsx(
+									"text-sm",
+									featured ? "text-white" : "text-slate-400",
+								)}
+							>
+								Manage your own infrastructure, installing Dokploy UI on your own server.
+							</p>
+
+							<ul
+								role="list"
+								className={clsx(
+									" mt-4 flex flex-col gap-y-2 text-sm",
+									featured ? "text-white" : "text-slate-200",
+								)}
+							>
+								{[
+									"Complete Flexibility: Install Dokploy UI on your own infrastructure",
+									"Self-hosted Infrastructure",
+									"Community Support",
+									"Access to Core Features",
+									"Access to All Updates",
+								].map((feature) => (
+									<li key={feature} className="flex text-muted-foreground">
+										<CheckIcon />
+										<span className="ml-2">{feature}</span>
 									</li>
-								</ul>
-								<div className="mt-4 flex flex-col gap-2">
-									<div className="flex flex-col items-center justify-center gap-2">
-										<span className="text-sm text-muted-foreground">
-											{t("plan.free.features.f9")}
-										</span>
-										<Link
-											href="https://docs.dokploy.com/docs/core/installation#docker"
-											target="_blank"
-											className="flex items-start text-sm text-primary"
-										>
-											{t("plan.free.go")}{" "}
-											<ArrowRight className="ml-2 size-4 self-center" />
-										</Link>
-									</div>
+								))}
+								<li className="flex text-muted-foreground">
+									<XCircleIcon className="size-5 self-center text-destructive" />
+									<span className="ml-3 text-destructive">
+										Remote Servers Monitoring
+									</span>
+								</li>
+							</ul>
+							<div className="mt-4 flex flex-col gap-2">
+								<div className="flex flex-col items-center justify-center gap-2">
+									<span className="text-sm text-muted-foreground">
+										Unlimited Servers
+									</span>
+									<Link
+										href="https://docs.dokploy.com/docs/core/installation#docker"
+										target="_blank"
+										className="flex items-start text-sm text-primary"
+									>
+										Installation{" "}
+										<ArrowRight className="ml-2 size-4 self-center" />
+									</Link>
 								</div>
+							</div>
 							</section>
 							<section
 								className={clsx(
@@ -224,12 +222,12 @@ export function Pricing() {
 										? "order-first border bg-black py-8 lg:order-none"
 										: "lg:py-8",
 								)}
-							>
-								{isAnnual && (
-									<div className="mb-4 flex flex-row items-center gap-2">
-										<Badge>{t("plan.cloud.title")} 🚀</Badge>
-									</div>
-								)}
+						>
+							{isAnnual && (
+								<div className="mb-4 flex flex-row items-center gap-2">
+									<Badge>Recommended 🚀</Badge>
+								</div>
+							)}
 
 								{isAnnual ? (
 									<div className="flex flex-row items-center gap-2">
@@ -251,50 +249,48 @@ export function Pricing() {
 										$ {calculatePrice(serverQuantity, isAnnual).toFixed(2)} USD
 									</p>
 								)}
-								<h3 className="mt-5 text-lg font-medium text-white">
-									{t("plan.cloud.section.title")}
-								</h3>
-								<p
-									className={clsx(
-										"text-sm",
-										featured ? "text-white" : "text-slate-400",
-									)}
-								>
-									{t("plan.cloud.section.description")}
-								</p>
+							<h3 className="mt-5 text-lg font-medium text-white">
+								Dokploy Plan
+							</h3>
+							<p
+								className={clsx(
+									"text-sm",
+									featured ? "text-white" : "text-slate-400",
+								)}
+							>
+								 to manage Dokploy UI infrastructure, we take care of it for you.
+							</p>
 
-								<ul
-									role="list"
-									className={clsx(
-										" mt-4 flex flex-col gap-y-2 text-sm",
-										featured ? "text-white" : "text-slate-200",
-									)}
-								>
-									{[
-										t("plan.cloud.features.f1"),
-										t("plan.cloud.features.f2"),
-										t("plan.cloud.features.f3"),
-										t("plan.cloud.features.f4"),
-										t("plan.cloud.features.f5"),
-										t("plan.cloud.features.f6"),
-										t("plan.cloud.features.f7"),
-									].map((feature, index) => (
-										<li
-											key={`${feature}-${index}`}
-											className="flex text-muted-foreground"
-										>
-											<CheckIcon />
-											<span className="ml-2">{feature}</span>
-										</li>
-									))}
-								</ul>
-								<div className="mt-4 flex flex-col gap-2">
-									<div className="flex items-center justify-center gap-2">
-										<span className="text-sm text-muted-foreground">
-											{t("plan.cloud.servers", {
-												serverQuantity,
-											})}
-										</span>
+							<ul
+								role="list"
+								className={clsx(
+									" mt-4 flex flex-col gap-y-2 text-sm",
+									featured ? "text-white" : "text-slate-200",
+								)}
+							>
+								{[
+									"Managed Hosting: No need to manage your own servers",
+									"Unlimited Deployments",
+									"Unlimited Databases",
+									"Unlimited Applications",
+									"Unlimited Users",
+									"Remote Servers Monitoring",
+									"Priority Support",
+								].map((feature, index) => (
+									<li
+										key={`${feature}-${index}`}
+										className="flex text-muted-foreground"
+									>
+										<CheckIcon />
+										<span className="ml-2">{feature}</span>
+									</li>
+								))}
+							</ul>
+							<div className="mt-4 flex flex-col gap-2">
+								<div className="flex items-center justify-center gap-2">
+									<span className="text-sm text-muted-foreground">
+										{serverQuantity} Servers (You bring the servers)
+									</span>
 										<TooltipProvider>
 											<Tooltip open={openVideo}>
 												<TooltipTrigger onClick={() => setOpenVideo(true)}>
@@ -366,7 +362,7 @@ export function Pricing() {
 													className: "w-full",
 												})}
 											>
-												{t("plan.cloud.go")}
+												Subscribe
 											</Link>
 										</div>
 									</div>

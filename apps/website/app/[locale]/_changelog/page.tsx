@@ -1,4 +1,10 @@
 // import { ScrollArea } from "@/components/ui/scroll-area";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Changelog",
+	description: "Stay updated with the latest changes, improvements, and features in Dokploy",
+};
 
 // Datos de ejemplo del changelog
 const changelogEntries = [
@@ -57,7 +63,7 @@ const changelogEntries = [
 	},
 ];
 
-const Comp = () => {
+export default function ChangelogPage() {
 	return (
 		<div className="border-t border-border/30 bg-black py-20 sm:py-32">
 			<div className="absolute inset-0">
@@ -115,7 +121,12 @@ const Comp = () => {
 			</div>
 		</div>
 	);
-};
+}
+
+// Unused/old version below
+// const Comp = () => {
+//   ...
+// };
 
 // export default function Changelog() {
 // 	return (

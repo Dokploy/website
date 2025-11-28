@@ -5,53 +5,51 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { useTranslations } from "@/lib/intl";
 
 const features = [
 	{
-		title: "primaryFeatures.applications",
-		description: "primaryFeatures.applicationsDes",
+		title: "Applications & Databases",
+		description: "Centralize control over your applications and databases for enhanced security and efficiency, simplifying access and management across your infrastructure.",
 		image: "/dashboard.png",
 	},
 	{
-		title: "primaryFeatures.compose",
-		description: "primaryFeatures.composeDes",
+		title: "Docker Compose",
+		description: "Native Docker Compose support for manage complex applications and services with ease.",
 		image: "/compose.png",
 	},
 	{
-		title: "primaryFeatures.multiserver",
-		description: "primaryFeatures.multiserverDes",
+		title: "Multiserver",
+		description: "Deploy applications to multiple servers without effort.",
 		image: "/remote.png",
 	},
 	{
-		title: "primaryFeatures.logs",
-		description: "primaryFeatures.logsDes",
+		title: "Logs",
+		description: "Monitor and manage your applications' logs with ease, ensuring efficient troubleshooting and optimal performance.",
 		image: "/logs.png",
 	},
 	{
-		title: "primaryFeatures.monitoring",
-		description: "primaryFeatures.monitoringDes",
+		title: "Monitoring",
+		description: "Monitor your systems' performance and health in real time, ensuring continuous and uninterrupted operation.",
 		image: "/primary/monitoring.png",
 	},
 	{
-		title: "primaryFeatures.backups",
-		description: "primaryFeatures.backupsDes",
+		title: "Backups",
+		description: "Implement automatic and secure backup solutions to protect your critical data and restore it quickly when necessary.",
 		image: "/backups.png",
 	},
 	{
-		title: "primaryFeatures.traefik",
-		description: "primaryFeatures.traefikDes",
+		title: "Traefik",
+		description: "Manage traefik via File Editor to configure your own domain names, certificates, and more.",
 		image: "/traefik.png",
 	},
 	{
-		title: "primaryFeatures.templates",
-		description: "primaryFeatures.templatesDes",
+		title: "Templates",
+		description: "One click to deploy open source templates.",
 		image: "/templates.png",
 	},
 ];
 
 export function SecondaryFeaturesSections() {
-	const t = useTranslations("HomePage");
 	const [tabOrientation, setTabOrientation] = useState<
 		"horizontal" | "vertical"
 	>("horizontal");
@@ -84,23 +82,13 @@ export function SecondaryFeaturesSections() {
 			aria-label="Features for running your books"
 			className="relative overflow-hidden bg-black pb-28 pt-20 sm:py-32"
 		>
-			{/* <div class="absolute inset-0 h-full w-full bg-background bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" /> */}
-
-			{/* <Image
-				className="absolute left-1/2 top-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-				src={backgroundImage}
-				alt=""
-				width={2245}
-				height={1636}
-				unoptimized
-			/> */}
 			<div className="mx-auto max-w-7xl max-lg:px-4 relative">
 				<div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-						{t("primaryFeatures.title")}
+						Comprehensive Control for Your Digital Ecosystem
 					</h2>
 					<p className="mt-6 text-lg tracking-tight text-muted-foreground">
-						{t("primaryFeatures.des")}
+						Simplify your project and data management, ensure robust monitoring, and secure your backups—all without the fuss over minute details.
 					</p>
 				</div>
 				<Tab.Group
@@ -148,7 +136,7 @@ export function SecondaryFeaturesSections() {
 													)}
 												>
 													<span className="absolute inset-0 rounded-full" />
-													{t(feature.title)}
+													{feature.title}
 												</Tab>
 											</h3>
 											<p
@@ -156,7 +144,7 @@ export function SecondaryFeaturesSections() {
 													"mt-2 hidden text-sm text-muted-foreground ",
 												)}
 											>
-												{t(feature.description)}
+												{feature.description}
 											</p>
 										</motion.div>
 									))}
@@ -168,7 +156,7 @@ export function SecondaryFeaturesSections() {
 										<div className="relative sm:px-6 ">
 											<div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-card/60 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
 											<p className="relative mx-auto max-w-2xl text-base text-white sm:text-center mb-10">
-												{t(feature.description)}
+												{feature.description}
 											</p>
 										</div>
 
