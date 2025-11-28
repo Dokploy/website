@@ -55,7 +55,7 @@ export function Hero() {
 			<div className=" bottom-0 flex w-full items-center justify-center overflow-hidden rounded-lg  bg-background md:shadow-xl">
 				<div className="relative px-4">
 					<div className="text-center">
-						<motion.a
+						{/* <motion.a
 							href="#pricing"
 							className="relative z-10 mb-4 inline-block"
 							initial={{ opacity: 0, y: 20 }}
@@ -75,7 +75,7 @@ export function Hero() {
 									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 								</AnimatedGradientText>
 							</div>
-						</motion.a>
+						</motion.a> */}
 
 				<motion.h1
 					className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-muted-foreground sm:text-7xl"
