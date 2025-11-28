@@ -6,9 +6,9 @@ export const metadata: Metadata = {
 		"Learn about how Dokploy collects, uses, and safeguards your personal information when you use our website and services.",
 };
 
-export default function Home() {
+export default function PrivacyPage() {
 	return (
-		<div className="flex flex-col gap-4 w-full max-w-4xl mx-auto">
+		<div className="flex flex-col gap-4 w-full max-w-4xl mx-auto py-12 px-4">
 			<h1 className="text-3xl font-bold text-center mb-6">Privacy</h1>
 
 			<section className="flex flex-col gap-2">
@@ -105,7 +105,7 @@ export default function Home() {
 					please contact us at:
 				</p>
 				<p className="mb-4">
-					Email:
+					Email:{" "}
 					<a
 						href="mailto:support@dokploy.com"
 						className="text-blue-500 hover:underline"
@@ -117,3 +117,4 @@ export default function Home() {
 		</div>
 	);
 }
+
