@@ -40,3 +40,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Generated files
+apps/docs/public/openapi.json
+apps/docs/content/docs/api/generated/
