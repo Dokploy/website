@@ -1,10 +1,9 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronRight, HeartIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Fragment, type JSX, type SVGProps } from "react";
 import { Container } from "./Container";
 import { NavLink } from "./NavLink";
@@ -12,6 +11,7 @@ import { trackGAEvent } from "./analitycs";
 import { Logo } from "./shared/Logo";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import { Button, buttonVariants } from "./ui/button";
+import GithubStars from "./GithubStars";
 
 function MobileNavLink({
 	href,
@@ -84,8 +84,6 @@ const I18nIcon = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
 );
 
 function MobileNavigation() {
-	const t = useTranslations("HomePage");
-	const linkT = useTranslations("Link");
 	return (
 		<Popover>
 			<Popover.Button
@@ -120,15 +118,20 @@ function MobileNavigation() {
 						as="div"
 						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight  text-primary shadow-xl ring-1 ring-border/5"
 					>
-						<MobileNavLink href="/#pricing">
-							{t("navigation.pricing")}
+						<MobileNavLink href="/#pricing">Pricing</MobileNavLink>
+						<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
+						<MobileNavLink
+							href="https://docs.dokploy.com/docs/core"
+							target="_blank"
+						>
+							Docs
 						</MobileNavLink>
-						<MobileNavLink href="/#faqs">{t("navigation.faqs")}</MobileNavLink>
-						<MobileNavLink href={linkT("docs.intro")} target="_blank">
-							{t("navigation.docs")}
-						</MobileNavLink>
-						<MobileNavLink href="/blog">{t("navigation.blog")}</MobileNavLink>
-						<MobileNavLink href={linkT("docs.intro")} target="_blank">
+						<MobileNavLink href="/blog">Blog</MobileNavLink>
+						<MobileNavLink href="/contact">Contact</MobileNavLink>
+						<MobileNavLink
+							href="https://docs.dokploy.com/docs/core"
+							target="_blank"
+						>
 							<Button className=" w-full" asChild>
 								<Link
 									href="https://app.dokploy.com/register"
@@ -136,7 +139,7 @@ function MobileNavigation() {
 									target="_blank"
 								>
 									<div className="group flex-row relative mx-auto flex max-w-fit items-center justify-center rounded-2xl text-sm font-medium w-full">
-										<span>{t("navigation.dashboard")}</span>
+										<span>Sign In</span>
 										<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 									</div>
 								</Link>
@@ -150,11 +153,8 @@ function MobileNavigation() {
 }
 
 export function Header() {
-	const t = useTranslations("HomePage");
-	const linkT = useTranslations("Link");
-
 	return (
-		<header className="bg-background py-10">
+		<header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40 py-5">
 			<Container>
 				<nav className="relative z-50 flex justify-between">
 					<div className="flex items-center md:gap-x-12">
@@ -162,15 +162,20 @@ export function Header() {
 							<Logo className="h-10 w-auto" />
 						</Link>
 						<div className="hidden md:flex md:gap-x-6">
-							<NavLink href="/#pricing">{t("navigation.pricing")}</NavLink>
-							<NavLink href="/#faqs">{t("navigation.faqs")}</NavLink>
-							<NavLink href={linkT("docs.intro")} target="_blank">
-								{t("navigation.docs")}
+							<NavLink href="/#pricing">Pricing</NavLink>
+							<NavLink href="/#faqs">FAQ</NavLink>
+							<NavLink
+								href="https://docs.dokploy.com/docs/core"
+								target="_blank"
+							>
+								Docs
 							</NavLink>
-							<NavLink href="/blog">{t("navigation.blog")}</NavLink>
+							<NavLink href="/blog">Blog</NavLink>
 						</div>
 					</div>
 					<div className="flex items-center gap-x-4 md:gap-x-5">
+						<GithubStars className="max-md:hidden" />
+
 						<Link href="https://x.com/getdokploy" target="_blank">
 							<svg
 								stroke="currentColor"
@@ -183,6 +188,25 @@ export function Header() {
 								<path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
 							</svg>
 						</Link>
+
+						<Button
+							variant="outline"
+							className="rounded-full max-md:hidden"
+							asChild
+						>
+							<Link
+								href="/contact"
+								onClick={() => {
+									trackGAEvent({
+										action: "Contact Button Clicked",
+										category: "Contact",
+										label: "Header",
+									});
+								}}
+							>
+								Contact
+							</Link>
+						</Button>
 
 						{/* <Link
 							className={buttonVariants({
@@ -205,7 +229,7 @@ export function Header() {
 								target="_blank"
 							>
 								<div className="group flex-row relative mx-auto flex max-w-fit items-center justify-center rounded-2xl text-sm font-medium w-full">
-									<span>{t("navigation.dashboard")}</span>
+									<span>Sign In</span>
 									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 								</div>
 							</Link>

@@ -45,6 +45,12 @@ const Ripple = React.memo(function Ripple({
 			link: "https://www.lxaer.com?ref=dokploy",
 			type: "hero",
 		},
+		{
+			name: "LambdaTest",
+			image: "https://www.lambdatest.com/blue-logo.png",
+			link: "https://www.lambdatest.com/?utm_source=dokploy&utm_medium=sponsor",
+			type: "premium",
+		},
 	];
 	const premiumSponsors = [
 		{
@@ -193,6 +199,7 @@ const Ripple = React.memo(function Ripple({
 																	<AvatarImage
 																		src={item.image}
 																		alt={item.name}
+																		className="object-contain"
 																	/>
 																	<AvatarFallback>{initials}</AvatarFallback>
 																</Avatar>

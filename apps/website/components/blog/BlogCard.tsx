@@ -4,11 +4,10 @@ import Link from "next/link";
 
 interface BlogCardProps {
 	post: Post;
-	locale: string;
 }
 
-export function BlogCard({ post, locale }: BlogCardProps) {
-	const formattedDate = new Date(post.published_at).toLocaleDateString(locale, {
+export function BlogCard({ post }: BlogCardProps) {
+	const formattedDate = new Date(post.published_at).toLocaleDateString("en", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
@@ -37,7 +36,7 @@ export function BlogCard({ post, locale }: BlogCardProps) {
 							{post.primary_tag.name}
 						</p>
 					)}
-					<Link href={`/${locale}/blog/${post.slug}`} className="mt-2 block">
+					<Link href={`/blog/${post.slug}`} className="mt-2 block">
 						<h3 className="text-xl font-semibold text-gray-900">
 							{post.title}
 						</h3>

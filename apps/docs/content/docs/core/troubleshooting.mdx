@@ -54,6 +54,46 @@ volumes:
     - "../files/my-configs:/etc/my-app/config" ✅
 ```
 
+### Using Files from Your Repository
+
+<Callout type="warning">
+  If you need to use files from your repository (e.g., configuration files, scripts, or directories), you **must** move them to Dokploy's file mounts and reference them manually using the Dokploy interface. This is because when using AutoDeploy, Dokploy performs a `git clone` operation on each deployment, which clears the repository directory. If you mount files directly from your repository using relative paths like `./` or `./docker/config/odoo.conf`, these files will be lost or empty in subsequent deployments, even though the first deployment may work correctly.
+</Callout>
+
+**Why this happens:**
+- On the first deployment, the files exist and are mounted correctly
+- On subsequent deployments, Dokploy cleans the directory and performs a fresh `git clone`
+- Docker loses the reference to the files that were in the filesystem, and the new files have a new reference
+- This causes mounted directories and files to be empty or missing inside the container
+
+**Solution:**
+1. Go to **Advanced** → **Mounts** in your Docker Compose application
+2. Create a new **File Mount** for each file or directory you need from your repository
+3. Copy the content from your repository files into the File Mount content field
+4. Specify the file path for your configuration
+5. Reference the file mount in your `docker-compose.yml` using the `../files/` path:
+
+```yaml
+volumes:
+  - "../files/my-config.json:/etc/my-app/config" ✅
+  - "../files/my-directory:/path/in/container" ✅
+```
+
+**Example:**
+Instead of mounting directly from your repository:
+```yaml
+volumes:
+  - ./:/mnt/extra-addons/va_subscription_18 ❌
+  - ./docker/config/odoo.conf:/etc/odoo/odoo.conf ❌
+```
+
+Use Dokploy's file mounts:
+```yaml
+volumes:
+  - ../files/va_subscription_18:/mnt/extra-addons/va_subscription_18 ✅
+  - ../files/odoo.conf:/etc/odoo/odoo.conf ✅
+```
+
 ## Logs Not Loading When Deploying to a Remote Server?
 
 There are a few potential reasons for this:
@@ -203,6 +243,10 @@ You can then reference this configuration file in your `docker-compose.yml`:
 volumes:
   - ../files/my-config.json:/etc/my-app/config
 ```
+
+<Callout type="info">
+  **Important for AutoDeploy users:** If you have configuration files or directories in your repository that you need to mount into your containers, you must copy their content to Dokploy's File Mounts (via Advanced → Mounts) instead of mounting them directly from the repository. This ensures the files persist across deployments, as the repository directory is cleaned and re-cloned on each AutoDeploy.
+</Callout>
 
 
 ## Failed to initialize Docker Swarm
@@ -428,11 +472,11 @@ docker run -d \
     --restart always \
     -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
     -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -p 80:80/tcp \
     -p 443:443/tcp \
     -p 443:443/udp \
-    traefik:v3.5.0
+    traefik:v3.6.1
 
 docker network connect dokploy-network dokploy-traefik
 
@@ -445,11 +489,11 @@ docker run -d \
     --restart always \
     -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
     -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -p 80:80/tcp \
     -p 443:443/tcp \
     -p 443:443/udp \
-    traefik:v3.5.0
+    traefik:v3.6.1
 ```
 
 Remove the dokploy service:

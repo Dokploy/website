@@ -36,7 +36,7 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh
+      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
     fi
 
     docker swarm leave --force 2>/dev/null
@@ -158,11 +158,11 @@ install_dokploy() {
     --restart always \
     -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
     -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -p 80:80/tcp \
     -p 443:443/tcp \
     -p 443:443/udp \
-    traefik:v3.5.0
+    traefik:v3.6.1
 
     docker network connect dokploy-network dokploy-traefik
 
@@ -177,7 +177,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.5.0
+    #     traefik:v3.6.1
 
 
     GREEN="\033[0;32m"

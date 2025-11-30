@@ -60,7 +60,7 @@ export function FirstFeaturesSection() {
 		{
 			title: "Open Source Templates",
 			description:
-				"Get started quickly with pre-configured templates for popular tools like Supabase, Cal.com, and Pocketbase.",
+				"Get started quickly with pre-configured templates for popular tools like Supabase, Cal.com, and PocketBase.",
 			icon: <IconTemplate />,
 		},
 		{
@@ -76,7 +76,7 @@ export function FirstFeaturesSection() {
 			icon: <IconActivity />,
 		},
 		{
-			title: "Built for developers",
+			title: "Built for Developers",
 			description:
 				"Designed specifically for engineers and developers seeking control and flexibility.",
 			icon: <IconTerminal2 />,
@@ -91,7 +91,7 @@ export function FirstFeaturesSection() {
 	return (
 		<div className="flex flex-col justify-center items-center  mt-20 px-4">
 			<h2 className="font-display text-3xl tracking-tight text-primary sm:text-4xl text-center">
-				Powerful Deployment, Tailored for You
+				Powerful Deployment Tailored to You
 			</h2>
 			<p className="mt-4 text-lg tracking-tight  text-muted-foreground text-center">
 				Unlock seamless multi-server deployments, advanced user control, and

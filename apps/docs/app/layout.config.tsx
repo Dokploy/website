@@ -1,5 +1,12 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { Github, GlobeIcon, HeartIcon, Rss } from "lucide-react";
+import {
+	Github,
+	GlobeIcon,
+	HeartIcon,
+	Rss,
+	LogIn,
+	UserPlus,
+} from "lucide-react";
 import Link from "next/link";
 /**
  * Shared layout configurations
@@ -45,6 +52,18 @@ export const baseOptions: BaseLayoutProps = {
 		),
 	},
 	links: [
+		{
+			text: "Login",
+			url: "https://app.dokploy.com/",
+			active: "nested-url",
+			icon: <LogIn />,
+		},
+		{
+			text: "Sign Up",
+			url: "https://app.dokploy.com/register",
+			active: "nested-url",
+			icon: <UserPlus />,
+		},
 		{
 			text: "Website",
 			url: "https://dokploy.com",
