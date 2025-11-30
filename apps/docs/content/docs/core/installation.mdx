@@ -93,19 +93,22 @@ Open your web browser and navigate to `http://your-ip-from-your-vps:3000`. You w
 />
 
 ### Secure Your Installation
-After setting up your admin account, it's crucial to secure your Dokploy installation.
-The first thing to do is to **enable HTTPS:**
-You need to go to **Web Server** > **Server Domain** and add your domain, then enable the **HTTPS** toggle and select the certificate provider you want to use.
+After setting up your admin account, it's crucial to secure your Dokploy installation by enabling HTTPS.
+
+To configure a domain with SSL/TLS certificates for your Dokploy panel, please refer to the [Domains](/docs/core/domains) section where you'll find detailed instructions for different SSL configurations including Let's Encrypt, Cloudflare, and custom certificates.
+
+### Disable access via ip:port (Optional but Recommended) 
+To enhance security, it's advisable to restrict access to Dokploy via the server's IP address and port.
 
 <Callout type='warn'>
-    If you are using Cloudflare origin certificates, once you have added the certificate, make sure to set the certificate provider to `None` in your domain settings.
+    **Important:** Before disabling IP:port access, make sure you have configured a domain with HTTPS working properly. Otherwise, you will lose access to your Dokploy installation. See the [Domains](/docs/core/domains) section to set this up first.
 </Callout>
 
-### Disable access via ip:port (Optional but Recommended)
-To enhance security, it's advisable to restrict access to Dokploy via the server's IP address and port. This can be achieved by running this command on the server:
+Once you have verified that your domain is working correctly, you can disable IP:port access by running this command on the server:
 
 ```bash
 docker service update --publish-rm "published=3000,target=3000,mode=host" dokploy
 ```
+
 To further secure your installation, consider reading the [Security recommendations](/docs/core/multi-server/security#security-recommendations) section.
 
