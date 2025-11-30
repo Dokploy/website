@@ -50,11 +50,11 @@ Railpack exposes multiple Build Variables, you can define them in the `Environme
 
 | Name                  | Description                                                                                                |
 | :-------------------- | :--------------------------------------------------------------------------------------------------------- |
-| `BUILD_CMD`           | Set the command to run for the build step. This overwrites any commands that come from providers           |
-| `START_CMD`           | Set the command to run when the container starts                                                           |
-| `PACKAGES`            | Install additional Mise packages. In the format `pkg@version`. The latest version is used if not provided. |
-| `BUILD_APT_PACKAGES`  | Install additional Apt packages during build                                                               |
-| `DEPLOY_APT_PACKAGES` | Install additional Apt packages in the final image                                                         |
+| `RAILPACK_BUILD_CMD`           | Set the command to run for the build step. This overwrites any commands that come from providers           |
+| `RAILPACK_START_CMD`           | Set the command to run when the container starts                                                           |
+| `RAILPACK_PACKAGES`            | Install additional Mise packages. In the format `pkg@version`. The latest version is used if not provided. |
+| `RAILPACK_BUILD_APT_PACKAGES`  | Install additional Apt packages during build                                                               |
+| `RAILPACK_DEPLOY_APT_PACKAGES` | Install additional Apt packages in the final image                                                         |
 
 you can read more about Railpack [here](https://railpack.com/config/environment-variables).
 
