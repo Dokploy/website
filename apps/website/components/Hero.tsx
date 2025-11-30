@@ -85,7 +85,7 @@ export function Hero() {
 							transition={{ duration: 0.3 }}
 						>
 							Simplify{' '}
-							<span className="relative whitespace-nowrap  text-primary">
+							<span className="relative whitespace-normal lg:whitespace-nowrap text-primary">
 								<svg
 									aria-hidden="true"
 									viewBox="0 0 418 42"
