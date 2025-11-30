@@ -42,5 +42,4 @@ yarn-error.log*
 *.pem
 
 # Generated files
-apps/docs/public/openapi.json
 apps/docs/content/docs/api/generated/
