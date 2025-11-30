@@ -15,7 +15,7 @@ If you wish to customize the Dokploy installation on your server, you can modify
 
 ## Installation Script
 
-Here is a Bash script for installing Dokploy on a Linux server. Make sure you run this as root on a Linux environment that is not a container, and ensure ports 80 and 443 are free.
+Here is a Bash script for installing Dokploy on a Linux server. Make sure you run this as root on a Linux environment that is not a container, and ensure ports 80, 443, and 3000 are free.
 
 
 ```bash
@@ -47,6 +47,13 @@ install_dokploy() {
     # check if something is running on port 443
     if ss -tulnp | grep ':443 ' >/dev/null; then
         echo "Error: something is already running on port 443" >&2
+        exit 1
+    fi
+
+    # check if something is running on port 3000
+    if ss -tulnp | grep ':3000 ' >/dev/null; then
+        echo "Error: something is already running on port 3000" >&2
+        echo "Dokploy requires port 3000 to be available. Please stop any service using this port." >&2
         exit 1
     fi
 

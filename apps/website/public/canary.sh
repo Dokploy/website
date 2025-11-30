@@ -29,6 +29,13 @@ install_dokploy() {
         exit 1
     fi
 
+    # check if something is running on port 3000
+    if ss -tulnp | grep ':3000 ' >/dev/null; then
+        echo "Error: something is already running on port 3000" >&2
+        echo "Dokploy requires port 3000 to be available. Please stop any service using this port." >&2
+        exit 1
+    fi
+
     command_exists() {
       command -v "$@" > /dev/null 2>&1
     }
