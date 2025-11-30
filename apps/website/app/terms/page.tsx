@@ -1,6 +1,14 @@
-export default function Home() {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Terms and Conditions",
+	description:
+		"Read the terms and conditions for using Dokploy's website and services.",
+};
+
+export default function TermsPage() {
 	return (
-		<div className="flex flex-col gap-4 w-full max-w-4xl mx-auto">
+		<div className="flex flex-col gap-4 w-full max-w-4xl mx-auto py-12 px-4">
 			<h1 className="text-3xl font-bold text-center mb-6">
 				Terms and Conditions
 			</h1>
@@ -8,7 +16,7 @@ export default function Home() {
 			<section className="flex flex-col gap-2">
 				<p>
 					Welcome to Dokploy! These Terms and Conditions outline the rules and
-					regulations for the use of Dokploy’s website and services.
+					regulations for the use of Dokploy's website and services.
 				</p>
 				<p>
 					By accessing or using our services, you agree to be bound by the
@@ -180,7 +188,7 @@ export default function Home() {
 					These Terms & Conditions are governed by applicable laws based on the
 					user's location. Any disputes arising under these terms will be
 					resolved in accordance with the legal jurisdiction relevant to the
-					user’s location, unless otherwise required by applicable law.
+					user's location, unless otherwise required by applicable law.
 				</p>
 			</section>
 
@@ -191,7 +199,7 @@ export default function Home() {
 					reach us at:
 				</p>
 				<p className="mb-4">
-					Email:
+					Email:{" "}
 					<a
 						href="mailto:support@dokploy.com"
 						className="text-blue-500 hover:underline"
@@ -203,3 +211,4 @@ export default function Home() {
 		</div>
 	);
 }
+

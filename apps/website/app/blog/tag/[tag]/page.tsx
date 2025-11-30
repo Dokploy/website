@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { useTranslations } from "@/lib/intl";
 
 type Props = {
 	params: { tag: string };
@@ -12,11 +11,21 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { tag } = await params;
-	const t = useTranslations("blog");
+	const posts = await getPostsByTag(tag);
+	
+	if (!posts || posts.length === 0) {
+		return {
+			title: "Tag Not Found",
+			description: "The requested tag could not be found",
+		};
+	}
+
+	const tagName =
+		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
 
 	return {
-		title: `${t("tagTitle", { tag })}`,
-		description: t("tagDescription", { tag }),
+		title: `${tagName} Posts`,
+		description: `Browse all posts tagged with ${tagName}`,
 	};
 }
 
@@ -27,7 +36,6 @@ export async function generateStaticParams() {
 
 export default async function TagPage({ params }: Props) {
 	const { tag } = await params;
-	const t = useTranslations("blog");
 	const posts = await getPostsByTag(tag);
 
 	if (!posts || posts.length === 0) {
@@ -55,16 +63,16 @@ export default async function TagPage({ params }: Props) {
 						clipRule="evenodd"
 					/>
 				</svg>
-				{t("backToBlog")}
+				Back to Blog
 			</Link>
 
 			<div className="mb-8">
 				<h1 className="text-3xl font-bold mb-2">
-					{t("postsTaggedWith")}{" "}
+					Posts tagged with{" "}
 					<span className="text-primary-600">"{tagName}"</span>
 				</h1>
 				<p className="text-gray-600 dark:text-gray-400">
-					{t("foundPosts", { count: posts.length })}
+					{posts.length} {posts.length === 1 ? 'post' : 'posts'} found
 				</p>
 			</div>
 
