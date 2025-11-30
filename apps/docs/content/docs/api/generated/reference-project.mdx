@@ -18,6 +18,9 @@ _openapi:
     - depth: 2
       title: Project update
       url: '#project-update'
+    - depth: 2
+      title: Project duplicate
+      url: '#project-duplicate'
   structuredData:
     headings:
       - content: Project create
@@ -30,7 +33,9 @@ _openapi:
         id: project-remove
       - content: Project update
         id: project-update
+      - content: Project duplicate
+        id: project-duplicate
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/project.create"},{"method":"get","path":"/project.one"},{"method":"get","path":"/project.all"},{"method":"post","path":"/project.remove"},{"method":"post","path":"/project.update"}]} hasHead={true} />
+<APIPage document={"../../public/openapi.json"} operations={[{"method":"post","path":"/project.create"},{"method":"get","path":"/project.one"},{"method":"get","path":"/project.all"},{"method":"post","path":"/project.remove"},{"method":"post","path":"/project.update"},{"method":"post","path":"/project.duplicate"}]} hasHead={true} />

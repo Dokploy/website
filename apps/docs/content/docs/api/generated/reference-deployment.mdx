@@ -12,6 +12,12 @@ _openapi:
     - depth: 2
       title: Deployment all By Server
       url: '#deployment-all-by-server'
+    - depth: 2
+      title: Deployment all By Type
+      url: '#deployment-all-by-type'
+    - depth: 2
+      title: Deployment kill Process
+      url: '#deployment-kill-process'
   structuredData:
     headings:
       - content: Deployment all
@@ -20,7 +26,11 @@ _openapi:
         id: deployment-all-by-compose
       - content: Deployment all By Server
         id: deployment-all-by-server
+      - content: Deployment all By Type
+        id: deployment-all-by-type
+      - content: Deployment kill Process
+        id: deployment-kill-process
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"get","path":"/deployment.all"},{"method":"get","path":"/deployment.allByCompose"},{"method":"get","path":"/deployment.allByServer"}]} hasHead={true} />
+<APIPage document={"../../public/openapi.json"} operations={[{"method":"get","path":"/deployment.all"},{"method":"get","path":"/deployment.allByCompose"},{"method":"get","path":"/deployment.allByServer"},{"method":"get","path":"/deployment.allByType"},{"method":"post","path":"/deployment.killProcess"}]} hasHead={true} />

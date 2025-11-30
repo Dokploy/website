@@ -36,6 +36,12 @@ _openapi:
     - depth: 2
       title: Mysql update
       url: '#mysql-update'
+    - depth: 2
+      title: Mysql move
+      url: '#mysql-move'
+    - depth: 2
+      title: Mysql rebuild
+      url: '#mysql-rebuild'
   structuredData:
     headings:
       - content: Mysql create
@@ -60,7 +66,11 @@ _openapi:
         id: mysql-save-environment
       - content: Mysql update
         id: mysql-update
+      - content: Mysql move
+        id: mysql-move
+      - content: Mysql rebuild
+        id: mysql-rebuild
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/mysql.create"},{"method":"get","path":"/mysql.one"},{"method":"post","path":"/mysql.start"},{"method":"post","path":"/mysql.stop"},{"method":"post","path":"/mysql.saveExternalPort"},{"method":"post","path":"/mysql.deploy"},{"method":"post","path":"/mysql.changeStatus"},{"method":"post","path":"/mysql.reload"},{"method":"post","path":"/mysql.remove"},{"method":"post","path":"/mysql.saveEnvironment"},{"method":"post","path":"/mysql.update"}]} hasHead={true} />
+<APIPage document={"../../public/openapi.json"} operations={[{"method":"post","path":"/mysql.create"},{"method":"get","path":"/mysql.one"},{"method":"post","path":"/mysql.start"},{"method":"post","path":"/mysql.stop"},{"method":"post","path":"/mysql.saveExternalPort"},{"method":"post","path":"/mysql.deploy"},{"method":"post","path":"/mysql.changeStatus"},{"method":"post","path":"/mysql.reload"},{"method":"post","path":"/mysql.remove"},{"method":"post","path":"/mysql.saveEnvironment"},{"method":"post","path":"/mysql.update"},{"method":"post","path":"/mysql.move"},{"method":"post","path":"/mysql.rebuild"}]} hasHead={true} />

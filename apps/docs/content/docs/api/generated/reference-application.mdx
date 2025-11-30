@@ -40,11 +40,17 @@ _openapi:
       title: Application save Bitbucket Provider
       url: '#application-save-bitbucket-provider'
     - depth: 2
+      title: Application save Gitea Provider
+      url: '#application-save-gitea-provider'
+    - depth: 2
       title: Application save Docker Provider
       url: '#application-save-docker-provider'
     - depth: 2
-      title: Application save Git Prodiver
-      url: '#application-save-git-prodiver'
+      title: Application save Git Provider
+      url: '#application-save-git-provider'
+    - depth: 2
+      title: Application disconnect Git Provider
+      url: '#application-disconnect-git-provider'
     - depth: 2
       title: Application mark Running
       url: '#application-mark-running'
@@ -61,6 +67,9 @@ _openapi:
       title: Application clean Queues
       url: '#application-clean-queues'
     - depth: 2
+      title: Application kill Build
+      url: '#application-kill-build'
+    - depth: 2
       title: Application read Traefik Config
       url: '#application-read-traefik-config'
     - depth: 2
@@ -69,6 +78,12 @@ _openapi:
     - depth: 2
       title: Application read App Monitoring
       url: '#application-read-app-monitoring'
+    - depth: 2
+      title: Application move
+      url: '#application-move'
+    - depth: 2
+      title: Application cancel Deployment
+      url: '#application-cancel-deployment'
   structuredData:
     headings:
       - content: Application create
@@ -95,10 +110,14 @@ _openapi:
         id: application-save-gitlab-provider
       - content: Application save Bitbucket Provider
         id: application-save-bitbucket-provider
+      - content: Application save Gitea Provider
+        id: application-save-gitea-provider
       - content: Application save Docker Provider
         id: application-save-docker-provider
-      - content: Application save Git Prodiver
-        id: application-save-git-prodiver
+      - content: Application save Git Provider
+        id: application-save-git-provider
+      - content: Application disconnect Git Provider
+        id: application-disconnect-git-provider
       - content: Application mark Running
         id: application-mark-running
       - content: Application update
@@ -109,13 +128,19 @@ _openapi:
         id: application-deploy
       - content: Application clean Queues
         id: application-clean-queues
+      - content: Application kill Build
+        id: application-kill-build
       - content: Application read Traefik Config
         id: application-read-traefik-config
       - content: Application update Traefik Config
         id: application-update-traefik-config
       - content: Application read App Monitoring
         id: application-read-app-monitoring
+      - content: Application move
+        id: application-move
+      - content: Application cancel Deployment
+        id: application-cancel-deployment
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/application.create"},{"method":"get","path":"/application.one"},{"method":"post","path":"/application.reload"},{"method":"post","path":"/application.delete"},{"method":"post","path":"/application.stop"},{"method":"post","path":"/application.start"},{"method":"post","path":"/application.redeploy"},{"method":"post","path":"/application.saveEnvironment"},{"method":"post","path":"/application.saveBuildType"},{"method":"post","path":"/application.saveGithubProvider"},{"method":"post","path":"/application.saveGitlabProvider"},{"method":"post","path":"/application.saveBitbucketProvider"},{"method":"post","path":"/application.saveDockerProvider"},{"method":"post","path":"/application.saveGitProdiver"},{"method":"post","path":"/application.markRunning"},{"method":"post","path":"/application.update"},{"method":"post","path":"/application.refreshToken"},{"method":"post","path":"/application.deploy"},{"method":"post","path":"/application.cleanQueues"},{"method":"get","path":"/application.readTraefikConfig"},{"method":"post","path":"/application.updateTraefikConfig"},{"method":"get","path":"/application.readAppMonitoring"}]} hasHead={true} />
+<APIPage document={"../../public/openapi.json"} operations={[{"method":"post","path":"/application.create"},{"method":"get","path":"/application.one"},{"method":"post","path":"/application.reload"},{"method":"post","path":"/application.delete"},{"method":"post","path":"/application.stop"},{"method":"post","path":"/application.start"},{"method":"post","path":"/application.redeploy"},{"method":"post","path":"/application.saveEnvironment"},{"method":"post","path":"/application.saveBuildType"},{"method":"post","path":"/application.saveGithubProvider"},{"method":"post","path":"/application.saveGitlabProvider"},{"method":"post","path":"/application.saveBitbucketProvider"},{"method":"post","path":"/application.saveGiteaProvider"},{"method":"post","path":"/application.saveDockerProvider"},{"method":"post","path":"/application.saveGitProvider"},{"method":"post","path":"/application.disconnectGitProvider"},{"method":"post","path":"/application.markRunning"},{"method":"post","path":"/application.update"},{"method":"post","path":"/application.refreshToken"},{"method":"post","path":"/application.deploy"},{"method":"post","path":"/application.cleanQueues"},{"method":"post","path":"/application.killBuild"},{"method":"get","path":"/application.readTraefikConfig"},{"method":"post","path":"/application.updateTraefikConfig"},{"method":"get","path":"/application.readAppMonitoring"},{"method":"post","path":"/application.move"},{"method":"post","path":"/application.cancelDeployment"}]} hasHead={true} />
