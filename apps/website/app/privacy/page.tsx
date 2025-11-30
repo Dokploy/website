@@ -1,6 +1,14 @@
-export default function Home() {
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Privacy Policy',
+	description:
+		'Learn about how Dokploy collects, uses, and safeguards your personal information when you use our website and services.',
+}
+
+export default function PrivacyPage() {
 	return (
-		<div className="mx-auto flex w-full max-w-4xl flex-col gap-4">
+		<div className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-12">
 			<h1 className="mb-6 text-center text-3xl font-bold">Privacy</h1>
 
 			<section className="flex flex-col gap-2">
@@ -110,7 +118,7 @@ export default function Home() {
 					Privacy Policy, please contact us at:
 				</p>
 				<p className="mb-4">
-					Email:
+					Email:{' '}
 					<a
 						href="mailto:support@dokploy.com"
 						className="text-blue-500 hover:underline"

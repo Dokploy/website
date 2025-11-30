@@ -1,10 +1,8 @@
 import { Container } from '@/components/Container'
-import { useTranslations } from '@/lib/intl'
 import Link from 'next/link'
 import { Button } from './ui/button'
 
 export function CallToAction() {
-	const t = useTranslations('HomePage')
 	return (
 		<section
 			id="get-started-today"
@@ -37,10 +35,13 @@ export function CallToAction() {
 			<Container className="relative z-30">
 				<div className="mx-auto max-w-lg text-center">
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
-						{t('callToAction.title')}
+						Unlock Your Deployment Potential with Dokploy Cloud
 					</h2>
 					<p className="mt-4 text-lg tracking-tight text-muted-foreground">
-						{t('callToAction.des')}
+						Say goodbye to infrastructure hassles—Dokploy Cloud
+						handles it all. Effortlessly deploy, manage Docker
+						containers, and secure your traffic with Traefik. Focus
+						on building, we'll handle the rest.
 					</p>
 
 					<Button className="mt-10 rounded-full" asChild>
@@ -50,7 +51,7 @@ export function CallToAction() {
 							target="_blank"
 							className="flex flex-row items-center gap-2"
 						>
-							{t('callToAction.button')}
+							Create an account
 						</Link>
 					</Button>
 				</div>

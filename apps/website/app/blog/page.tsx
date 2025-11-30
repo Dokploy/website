@@ -5,7 +5,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BlogPostCard } from './components/BlogPostCard'
 import { SearchAndFilter } from './components/SearchAndFilter'
-import { useTranslations } from '@/lib/intl'
 
 interface Tag {
 	id: string
@@ -14,7 +13,7 @@ interface Tag {
 }
 
 export const metadata: Metadata = {
-	title: 'Blog | Dokploy',
+	title: 'Blog',
 	description: 'Latest news, updates, and articles from Dokploy',
 }
 
@@ -24,7 +23,6 @@ export default async function BlogPage({
 	searchParams: { [key: string]: string | string[] | undefined }
 }) {
 	const searchParams2 = await searchParams
-	const t = useTranslations('blog')
 	const posts = await getPosts()
 	const tags = (await getTags()) as Tag[]
 	const search =
@@ -68,14 +66,16 @@ export default async function BlogPage({
 				tags={tags}
 				initialSearch={search}
 				initialTag={selectedTag}
-				searchPlaceholder={t('searchPlaceholder')}
-				allTagsText={t('allTags')}
+				searchPlaceholder="Search posts..."
+				allTagsText="All Tags"
 			/>
 
 			{filteredPosts.length === 0 ? (
 				<div className="flex min-h-[20vh] items-center justify-center py-12 text-center">
 					<p className="text-xl text-muted-foreground">
-						{search || selectedTag ? t('noResults') : t('noPosts')}
+						{search || selectedTag
+							? 'No posts found matching your criteria'
+							: 'No posts available'}
 					</p>
 				</div>
 			) : (

@@ -21,8 +21,6 @@ export async function GET(request: NextRequest) {
 			return new Response('Post not found', { status: 404 })
 		}
 
-		console.log('Found post:', post.title)
-
 		const formattedDate = new Date(post.published_at).toLocaleDateString(
 			'en-US',
 			{
@@ -43,8 +41,6 @@ export async function GET(request: NextRequest) {
 			date: formattedDate,
 			readingTime: post.reading_time,
 		})
-
-		console.log('Successfully generated OG image')
 
 		return new Response(ogImage, {
 			headers: {

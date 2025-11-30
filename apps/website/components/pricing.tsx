@@ -11,7 +11,6 @@ import {
 	X,
 	XCircleIcon,
 } from 'lucide-react'
-import { useTranslations } from '@/lib/intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -85,7 +84,6 @@ export const calculatePrice = (count: number, isAnnual = false) => {
 
 export function Pricing() {
 	const router = useRouter()
-	const t = useTranslations('Pricing')
 	const [isAnnual, setIsAnnual] = useState(false)
 	const [serverQuantity, setServerQuantity] = useState(1)
 	const featured = true
@@ -128,14 +126,13 @@ export function Pricing() {
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />
-							<span className="relative">
-								{t('swirlyDoodleTitle')}
-							</span>
+							<span className="relative">Simple Affordable</span>
 						</span>{' '}
-						{t('restTitle')}
+						Pricing.
 					</h2>
 					<p className="mt-4 text-lg text-muted-foreground">
-						{t('description')}
+						Deploy Smarter and Scale Faster, Without Breaking the
+						Bank
 					</p>
 				</div>
 
@@ -148,11 +145,9 @@ export function Pricing() {
 						>
 							<TabsList>
 								<TabsTrigger value="monthly">
-									{t('billingCycle.monthly')}
+									Monthly
 								</TabsTrigger>
-								<TabsTrigger value="annual">
-									{t('billingCycle.annual')}
-								</TabsTrigger>
+								<TabsTrigger value="annual">Annual</TabsTrigger>
 							</TabsList>
 						</Tabs>
 						<div className="mx-auto flex max-w-4xl gap-4 max-sm:flex-wrap-reverse max-sm:justify-center sm:flex-row-reverse">
@@ -166,16 +161,16 @@ export function Pricing() {
 							>
 								<div className="flex flex-row items-center gap-2">
 									<p className=" text-2xl font-semibold tracking-tight text-primary ">
-										{t('plan.free.title')}
+										Free
 									</p>
 									|
 									<p className=" text-base font-semibold tracking-tight text-muted-foreground">
-										{t('plan.free.subTitle')}
+										Open Source
 									</p>
 								</div>
 
 								<h3 className="mt-5 text-lg font-medium text-white">
-									{t('plan.free.section.title')}
+									Dokploy Open Source
 								</h3>
 								<p
 									className={clsx(
@@ -185,7 +180,8 @@ export function Pricing() {
 											: 'text-slate-400',
 									)}
 								>
-									{t('plan.free.section.description')}
+									Install and manage Dokploy UI on your own
+									server.
 								</p>
 
 								<ul
@@ -198,11 +194,12 @@ export function Pricing() {
 									)}
 								>
 									{[
-										t('plan.free.features.f1'),
-										t('plan.free.features.f2'),
-										t('plan.free.features.f3'),
-										t('plan.free.features.f4'),
-										t('plan.free.features.f5'),
+										'Complete Flexibility: Install Dokploy UI on your own infrastructure',
+										'Self-hosted Infrastructure',
+										'Community Support',
+										'Access to Core Features',
+										'Access to All Updates',
+										'Unlimited Servers',
 									].map((feature) => (
 										<li
 											key={feature}
@@ -224,14 +221,14 @@ export function Pricing() {
 								<div className="mt-4 flex flex-col gap-2">
 									<div className="flex flex-col items-center justify-center gap-2">
 										<span className="text-sm text-muted-foreground">
-											{t('plan.free.features.f9')}
+											Unlimited Servers
 										</span>
 										<Link
 											href="https://docs.dokploy.com/docs/core/installation#docker"
 											target="_blank"
 											className="flex items-start text-sm text-primary"
 										>
-											{t('plan.free.go')}{' '}
+											Start deploying{' '}
 											<ArrowRight className="ml-2 size-4 self-center" />
 										</Link>
 									</div>
@@ -247,9 +244,7 @@ export function Pricing() {
 							>
 								{isAnnual && (
 									<div className="mb-4 flex flex-row items-center gap-2">
-										<Badge>
-											{t('plan.cloud.title')} 🚀
-										</Badge>
+										<Badge>Recommended 🚀</Badge>
 									</div>
 								)}
 
@@ -286,7 +281,7 @@ export function Pricing() {
 									</p>
 								)}
 								<h3 className="mt-5 text-lg font-medium text-white">
-									{t('plan.cloud.section.title')}
+									Dokploy Plan
 								</h3>
 								<p
 									className={clsx(
@@ -296,7 +291,8 @@ export function Pricing() {
 											: 'text-slate-400',
 									)}
 								>
-									{t('plan.cloud.section.description')}
+									We manage the Dokploy UI infrastructure, we
+									take care of it for you.
 								</p>
 
 								<ul
@@ -309,13 +305,13 @@ export function Pricing() {
 									)}
 								>
 									{[
-										t('plan.cloud.features.f1'),
-										t('plan.cloud.features.f2'),
-										t('plan.cloud.features.f3'),
-										t('plan.cloud.features.f4'),
-										t('plan.cloud.features.f5'),
-										t('plan.cloud.features.f6'),
-										t('plan.cloud.features.f7'),
+										'Managed Hosting: No need to manage your own servers',
+										'Unlimited Deployments',
+										'Unlimited Databases',
+										'Unlimited Applications',
+										'Unlimited Users',
+										'Remote Servers Monitoring',
+										'Priority Support',
 									].map((feature, index) => (
 										<li
 											key={`${feature}-${index}`}
@@ -331,9 +327,8 @@ export function Pricing() {
 								<div className="mt-4 flex flex-col gap-2">
 									<div className="flex items-center justify-center gap-2">
 										<span className="text-sm text-muted-foreground">
-											{t('plan.cloud.servers', {
-												serverQuantity,
-											})}
+											No. of {serverQuantity} Servers (You
+											bring the servers)
 										</span>
 										<TooltipProvider>
 											<Tooltip open={openVideo}>
@@ -356,10 +351,10 @@ export function Pricing() {
 														/>
 													</div>
 													<p className="mb-2 text-left text-primary">
-														We Recommend to watch
-														the video to understand
-														the benefits of Dokploy
-														Cloud
+														We recommend you to
+														watch the video to
+														understand the benefits
+														of Dokploy Cloud
 													</p>
 
 													<HeroVideoDialog
@@ -423,7 +418,7 @@ export function Pricing() {
 													className: 'w-full',
 												})}
 											>
-												{t('plan.cloud.go')}
+												Subscribe
 											</Link>
 										</div>
 									</div>
