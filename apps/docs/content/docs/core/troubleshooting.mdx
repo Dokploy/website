@@ -163,6 +163,37 @@ port: 3000
 1. Remove the healthcheck from the service
 2. Make sure the healthcheck is working
 
+## Templates and Compose Services Returning 404
+
+If you're experiencing 404 errors when accessing services created from templates (like Docker Registry, Stalwart, Uptime Kuma, etc.) or Docker Compose services, this is usually related to how Traefik handles routing for different service types.
+
+### Understanding the Difference
+
+Dokploy uses two different methods for configuring Traefik routing:
+
+1. **Applications** (Nixpacks, Dockerfile, Buildpacks): Use the Traefik **file system** for routing configuration
+   - Domain changes are applied automatically
+   - No need to redeploy after updating domains
+   - Configuration files are created in Traefik's dynamic configuration directory
+
+2. **Templates and Compose Services**: Use Traefik **labels** for routing configuration
+   - Require redeployment after any domain changes
+   - Labels are read from Docker container metadata
+   - Learn more about Traefik labels in the [official documentation](https://doc.traefik.io/traefik/reference/routing-configuration/other-providers/docker/#configuration-examples)
+
+### Solution
+
+When working with Templates or Compose services:
+
+1. **Configure your domain** in the Domains section of your service
+2. **Redeploy the service** - This is crucial! The domain changes won't take effect until you redeploy
+3. Wait for the deployment to complete
+4. Your service should now be accessible via the configured domain
+
+<Callout type='info'>
+    **Key Tip:** Every time you add, modify, or remove a domain from a Template or Compose service, you must redeploy for the changes to take effect.
+</Callout>
+
 ## Getting "Bad Gateway Error" When Accessing Your Application Domain
 
 If you're encountering a Bad Gateway Error when accessing your application through its domain, this typically indicates one of several common configuration issues:
