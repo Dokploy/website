@@ -149,12 +149,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -188,12 +183,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -239,12 +229,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -288,12 +273,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -358,12 +338,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -419,12 +394,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -468,12 +438,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -517,12 +482,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -574,12 +534,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -614,12 +569,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -644,12 +594,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -694,12 +639,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -761,12 +701,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -853,12 +788,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -918,12 +848,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -957,12 +882,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1010,12 +930,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1059,12 +974,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1108,12 +1018,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1157,12 +1062,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1213,12 +1113,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1274,12 +1169,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1365,12 +1255,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1455,12 +1340,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1550,12 +1430,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1635,12 +1510,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1720,12 +1590,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1785,12 +1650,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1861,12 +1721,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1910,12 +1765,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -1959,12 +1809,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2117,6 +1962,13 @@
                   },
                   "command": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "nullable": true
                   },
                   "refreshToken": {
@@ -2626,12 +2478,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2675,12 +2522,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2731,12 +2573,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2780,12 +2617,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2829,12 +2661,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2868,12 +2695,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2921,12 +2743,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -2960,12 +2777,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3013,12 +2825,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3062,12 +2869,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3153,12 +2955,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3192,12 +2989,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3241,12 +3033,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3290,12 +3077,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3344,12 +3126,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3393,12 +3170,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3452,12 +3224,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3506,12 +3273,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3555,12 +3317,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3608,12 +3365,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -3678,6 +3430,13 @@
                   },
                   "command": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "nullable": true
                   },
                   "env": {
@@ -4001,12 +3760,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4054,12 +3808,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4103,12 +3852,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4188,12 +3932,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4227,12 +3966,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4276,12 +4010,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4325,12 +4054,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4379,12 +4103,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4428,12 +4147,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4487,12 +4201,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4536,12 +4245,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4589,12 +4293,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4642,12 +4341,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -4707,6 +4401,13 @@
                   },
                   "command": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "nullable": true
                   },
                   "env": {
@@ -5030,12 +4731,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5083,12 +4779,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5132,12 +4823,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5207,12 +4893,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5246,12 +4927,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5295,12 +4971,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5349,12 +5020,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5398,12 +5064,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5452,12 +5113,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5501,12 +5157,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5560,12 +5211,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5609,12 +5255,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5662,12 +5303,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -5719,6 +5355,13 @@
                   },
                   "command": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "nullable": true
                   },
                   "env": {
@@ -6042,12 +5685,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6095,12 +5733,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6144,12 +5777,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6230,12 +5858,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6269,12 +5892,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6318,12 +5936,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6367,12 +5980,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6421,12 +6029,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6470,12 +6073,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6529,12 +6127,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6583,12 +6176,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6632,12 +6220,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6685,12 +6268,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -6747,6 +6325,13 @@
                   },
                   "command": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "nullable": true
                   },
                   "env": {
@@ -7075,12 +6660,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7128,12 +6708,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7177,12 +6752,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7268,12 +6838,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7307,12 +6872,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7356,12 +6916,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7405,12 +6960,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7459,12 +7009,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7508,12 +7053,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7567,12 +7107,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7616,12 +7151,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7669,12 +7199,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7723,12 +7248,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -7793,6 +7313,13 @@
                   },
                   "command": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
                     "nullable": true
                   },
                   "env": {
@@ -8116,12 +7643,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8169,12 +7691,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8218,12 +7735,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8293,12 +7805,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8333,12 +7840,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8562,12 +8064,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8616,12 +8113,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8666,12 +8158,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8716,12 +8203,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8776,12 +8258,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8825,12 +8302,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8875,12 +8347,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8928,12 +8395,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -8981,12 +8443,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9021,12 +8478,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9077,12 +8529,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9133,12 +8580,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9183,12 +8625,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9233,12 +8670,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9273,12 +8705,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9323,12 +8750,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9382,12 +8804,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9421,12 +8838,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9460,12 +8872,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9510,12 +8917,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9563,12 +8965,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9617,12 +9014,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9671,12 +9063,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9721,12 +9108,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9751,12 +9133,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9790,12 +9167,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9820,12 +9192,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9850,12 +9217,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9880,12 +9242,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -9910,12 +9267,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10175,12 +9527,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10215,12 +9562,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10245,12 +9587,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10294,12 +9631,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10409,12 +9741,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10439,12 +9766,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10502,12 +9824,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10532,12 +9849,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10581,12 +9893,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10668,12 +9975,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10707,12 +10009,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10762,12 +10059,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10870,12 +10162,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10909,12 +10196,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -10949,12 +10231,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11001,12 +10278,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11040,12 +10312,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11140,12 +10407,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11179,12 +10441,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11228,12 +10485,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11280,12 +10532,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11358,12 +10605,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11436,12 +10678,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11475,12 +10712,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11505,12 +10737,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11554,12 +10781,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11636,12 +10858,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11756,12 +10973,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11795,12 +11007,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11889,12 +11096,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11938,12 +11140,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -11987,12 +11184,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12036,12 +11228,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12085,12 +11272,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12134,12 +11316,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12183,12 +11360,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12232,12 +11404,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12287,12 +11454,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12327,12 +11489,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12367,12 +11524,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12407,12 +11559,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12464,12 +11611,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12514,12 +11656,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12554,12 +11691,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12603,12 +11735,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12642,12 +11769,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12735,12 +11857,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12784,12 +11901,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12823,12 +11935,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12942,12 +12049,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -12982,12 +12084,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13060,12 +12157,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13100,12 +12192,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13150,12 +12237,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13180,12 +12262,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13210,12 +12287,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13240,12 +12312,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13270,12 +12337,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13316,12 +12378,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13365,12 +12422,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13411,12 +12463,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13457,12 +12504,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13503,12 +12545,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13549,12 +12586,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13595,12 +12627,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13641,12 +12668,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13671,12 +12693,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13721,12 +12738,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13787,12 +12799,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13817,12 +12824,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13869,12 +12871,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13899,12 +12896,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13949,12 +12941,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -13979,12 +12966,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14029,12 +13011,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14059,12 +13036,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14109,12 +13081,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14139,12 +13106,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14169,12 +13131,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14199,12 +13156,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14229,12 +13181,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14268,12 +13215,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14326,12 +13268,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14374,12 +13311,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14404,12 +13336,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14434,12 +13361,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14473,12 +13395,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14525,12 +13442,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14564,12 +13476,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14594,12 +13501,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14643,12 +13545,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14673,12 +13570,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14703,12 +13595,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14733,12 +13620,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14779,12 +13661,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14818,12 +13695,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14895,12 +13767,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14934,12 +13801,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -14984,12 +13846,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15014,12 +13871,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15044,12 +13896,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15103,12 +13950,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15143,12 +13985,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15193,12 +14030,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15253,12 +14085,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15316,12 +14143,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15356,12 +14178,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15406,12 +14223,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15470,12 +14282,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15544,12 +14351,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15584,12 +14386,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15634,12 +14431,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15708,12 +14500,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15787,12 +14574,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15837,12 +14619,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15922,12 +14699,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15952,12 +14724,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -15992,12 +14759,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16068,12 +14830,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16107,12 +14864,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16159,12 +14911,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16198,12 +14945,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16237,12 +14979,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16319,12 +15056,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16404,12 +15136,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16458,12 +15185,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16545,12 +15267,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16635,12 +15352,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16694,12 +15406,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16776,12 +15483,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16862,12 +15564,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -16915,12 +15612,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17021,12 +15713,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17127,12 +15814,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17205,12 +15887,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17254,12 +15931,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17293,12 +15965,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17323,12 +15990,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17404,12 +16066,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17492,12 +16149,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17583,12 +16235,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17646,12 +16293,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17735,12 +16377,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17827,12 +16464,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17892,12 +16524,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -17970,12 +16597,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18053,12 +16675,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18103,12 +16720,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18133,12 +16745,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18199,12 +16806,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18248,12 +16850,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18287,12 +16884,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18317,12 +16909,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18367,12 +16954,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18428,12 +17010,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18458,12 +17035,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18508,12 +17080,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18599,12 +17166,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18639,12 +17201,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18669,12 +17226,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18709,12 +17261,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18766,12 +17313,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18815,12 +17357,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18909,12 +17446,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -18949,12 +17481,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19026,12 +17553,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19066,12 +17588,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19096,12 +17613,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19136,12 +17648,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19191,12 +17698,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19257,12 +17759,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19335,12 +17832,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19425,12 +17917,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19465,12 +17952,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19495,12 +17977,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19535,12 +18012,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19598,12 +18070,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19647,12 +18114,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19735,12 +18197,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19775,12 +18232,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19815,12 +18267,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19872,12 +18319,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19902,12 +18344,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -19952,12 +18389,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20041,12 +18473,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20120,12 +18547,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20160,12 +18582,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20200,12 +18617,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20230,12 +18642,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20260,12 +18667,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20290,12 +18692,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20320,12 +18717,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20370,12 +18762,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20410,12 +18797,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20450,12 +18832,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20599,12 +18976,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20649,12 +19021,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20736,12 +19103,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20766,12 +19128,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20796,12 +19153,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20851,12 +19203,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20881,12 +19228,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20939,12 +19281,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20969,12 +19306,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -20999,12 +19331,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21038,12 +19365,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21085,12 +19407,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21124,12 +19441,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21163,12 +19475,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21211,12 +19518,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21279,12 +19581,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21350,12 +19647,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21380,12 +19672,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21419,12 +19706,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21468,12 +19750,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21524,12 +19801,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21647,12 +19919,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21699,12 +19966,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21729,12 +19991,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21768,12 +20025,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21824,12 +20076,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21873,12 +20120,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21903,12 +20145,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -21952,12 +20189,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22002,12 +20234,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22111,12 +20338,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22222,12 +20444,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22271,12 +20488,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22324,12 +20536,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22363,12 +20570,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22413,12 +20615,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22463,12 +20660,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22513,12 +20705,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22570,12 +20757,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22696,12 +20878,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22736,12 +20913,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22786,12 +20958,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22917,12 +21084,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -22967,12 +21129,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23025,12 +21182,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23065,12 +21217,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23104,12 +21251,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23154,12 +21296,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23221,12 +21358,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23280,12 +21412,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Successful response"
-                }
-              }
+              "application/json": {}
             }
           },
           "default": {
@@ -23302,12 +21429,6 @@
         "in": "header",
         "name": "x-api-key",
         "description": "API key authentication. Generate an API key from your Dokploy dashboard under Settings > API Keys."
-      },
-      "Authorization": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication using Authorization header"
       }
     },
     "responses": {
