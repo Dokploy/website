@@ -11,6 +11,10 @@ WORKDIR /usr/src/app
 # Install dependencies
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/docs --frozen-lockfile
 
+# Copy openapi.json to docs public folder
+RUN mkdir -p /usr/src/app/apps/docs/public && \
+    cp /usr/src/app/public/openapi.json /usr/src/app/apps/docs/public/openapi.json
+
 # Generate OpenAPI documentation
 RUN pnpm --filter=./apps/docs run build:docs
 
