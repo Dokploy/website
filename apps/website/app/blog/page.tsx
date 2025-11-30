@@ -1,55 +1,58 @@
-import { getPosts, getTags } from "@/lib/ghost";
-import type { Post } from "@/lib/ghost";
-import { RssIcon } from "lucide-react";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { BlogPostCard } from "./components/BlogPostCard";
-import { SearchAndFilter } from "./components/SearchAndFilter";
+import { getPosts, getTags } from '@/lib/ghost'
+import type { Post } from '@/lib/ghost'
+import { RssIcon } from 'lucide-react'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { BlogPostCard } from './components/BlogPostCard'
+import { SearchAndFilter } from './components/SearchAndFilter'
 
 interface Tag {
-	id: string;
-	name: string;
-	slug: string;
+	id: string
+	name: string
+	slug: string
 }
 
 export const metadata: Metadata = {
-	title: "Blog",
-	description: "Latest news, updates, and articles from Dokploy",
-};
+	title: 'Blog',
+	description: 'Latest news, updates, and articles from Dokploy',
+}
 
 export default async function BlogPage({
 	searchParams,
 }: {
-	searchParams: { [key: string]: string | string[] | undefined };
+	searchParams: { [key: string]: string | string[] | undefined }
 }) {
-	const searchParams2 = await searchParams;
-	const posts = await getPosts();
-	const tags = (await getTags()) as Tag[];
+	const searchParams2 = await searchParams
+	const posts = await getPosts()
+	const tags = (await getTags()) as Tag[]
 	const search =
-		typeof searchParams2.search === "string" ? searchParams2.search : "";
+		typeof searchParams2.search === 'string' ? searchParams2.search : ''
 	const selectedTag =
-		typeof searchParams2.tag === "string" ? searchParams2.tag : "";
+		typeof searchParams2.tag === 'string' ? searchParams2.tag : ''
 
 	const filteredPosts = posts.filter((post) => {
 		const matchesSearch =
-			search === "" ||
+			search === '' ||
 			post.title.toLowerCase().includes(search.toLowerCase()) ||
-			post.excerpt.toLowerCase().includes(search.toLowerCase());
+			post.excerpt.toLowerCase().includes(search.toLowerCase())
 
 		const matchesTag =
-			selectedTag === "" || post.tags?.some((tag) => tag.slug === selectedTag);
+			selectedTag === '' ||
+			post.tags?.some((tag) => tag.slug === selectedTag)
 
-		return matchesSearch && matchesTag;
-	});
+		return matchesSearch && matchesTag
+	})
 
 	return (
-		<div className="container mx-auto px-4 py-12 max-w-5xl">
-			<div className="flex items-center justify-between mb-8">
+		<div className="container mx-auto max-w-5xl px-4 py-12">
+			<div className="mb-8 flex items-center justify-between">
 				<div>
-					<p className="text-sm text-muted-foreground uppercase tracking-wider mb-2">
+					<p className="mb-2 text-sm uppercase tracking-wider text-muted-foreground">
 						BLOG
 					</p>
-					<h1 className="text-4xl font-bold">Dokploy Latest News & Updates</h1>
+					<h1 className="text-4xl font-bold">
+						Dokploy Latest News & Updates
+					</h1>
 				</div>
 				<Link
 					href="/rss.xml"
@@ -59,21 +62,23 @@ export default async function BlogPage({
 				</Link>
 			</div>
 
-		<SearchAndFilter
-			tags={tags}
-			initialSearch={search}
-			initialTag={selectedTag}
-			searchPlaceholder="Search posts..."
-			allTagsText="All Tags"
-		/>
+			<SearchAndFilter
+				tags={tags}
+				initialSearch={search}
+				initialTag={selectedTag}
+				searchPlaceholder="Search posts..."
+				allTagsText="All Tags"
+			/>
 
-		{filteredPosts.length === 0 ? (
-			<div className="text-center py-12 min-h-[20vh] flex items-center justify-center">
-				<p className="text-xl text-muted-foreground">
-					{search || selectedTag ? "No posts found matching your criteria" : "No posts available"}
-				</p>
-			</div>
-		) : (
+			{filteredPosts.length === 0 ? (
+				<div className="flex min-h-[20vh] items-center justify-center py-12 text-center">
+					<p className="text-xl text-muted-foreground">
+						{search || selectedTag
+							? 'No posts found matching your criteria'
+							: 'No posts available'}
+					</p>
+				</div>
+			) : (
 				<div className="space-y-8">
 					{filteredPosts.map((post: Post) => (
 						<BlogPostCard key={post.id} post={post} />
@@ -81,5 +86,5 @@ export default async function BlogPage({
 				</div>
 			)}
 		</div>
-	);
+	)
 }
