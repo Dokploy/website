@@ -1,26 +1,26 @@
-import { getPosts } from "@/lib/ghost";
-import type { MetadataRoute } from "next";
+import { getPosts } from '@/lib/ghost'
+import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const posts = await getPosts();
+	const posts = await getPosts()
 	return [
 		{
-			url: "https://dokploy.com",
+			url: 'https://dokploy.com',
 			lastModified: new Date(),
-			changeFrequency: "monthly",
+			changeFrequency: 'monthly',
 			priority: 1,
 		},
 		{
-			url: "https://dokploy.com/blog",
+			url: 'https://dokploy.com/blog',
 			lastModified: new Date(),
-			changeFrequency: "monthly",
+			changeFrequency: 'monthly',
 			priority: 0.8,
 		},
 		...posts.map((post) => ({
 			url: `https://dokploy.com/blog/${post.slug}`,
 			lastModified: new Date(post.published_at),
-			changeFrequency: "monthly" as const,
+			changeFrequency: 'monthly' as const,
 			priority: 0.8,
 		})),
-	];
+	]
 }

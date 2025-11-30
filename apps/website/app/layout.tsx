@@ -1,16 +1,16 @@
-import clsx from "clsx";
-import type { Metadata } from "next";
-import { Inter, Lexend } from "next/font/google";
-import type { ReactNode } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import "@/styles/tailwind.css";
-import "react-photo-view/dist/react-photo-view.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import clsx from 'clsx'
+import type { Metadata } from 'next'
+import { Inter, Lexend } from 'next/font/google'
+import type { ReactNode } from 'react'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import '@/styles/tailwind.css'
+import 'react-photo-view/dist/react-photo-view.css'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 
 type Props = {
-	children: ReactNode;
-};
+	children: ReactNode
+}
 
 // export const metadata: Metadata = {
 // 	metadataBase: new URL("https://dokploy.com"),
@@ -34,16 +34,16 @@ type Props = {
 // 	},
 // };
 const inter = Inter({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-inter",
-});
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-inter',
+})
 
 const lexend = Lexend({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-lexend",
-});
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-lexend',
+})
 // Since we have a `not-found.tsx` page on the root, a layout file
 // is required, even if it's just passing children through.
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<html
 			lang="en"
 			className={clsx(
-				"h-full scroll-smooth antialiased",
+				'h-full scroll-smooth antialiased',
 				inter.variable,
 				lexend.variable,
 			)}
@@ -74,5 +74,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				</div>
 			</body>
 		</html>
-	);
+	)
 }

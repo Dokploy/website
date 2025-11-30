@@ -1,77 +1,79 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { cn } from '@/lib/utils'
 
 type GithubStarsProps = {
-	className?: string;
-	repoUrl?: string;
-	label?: string;
-	count?: string;
-};
+	className?: string
+	repoUrl?: string
+	label?: string
+	count?: string
+}
 
 // Function to format star count (e.g., 26400 -> "26.4k")
 function formatStarCount(count: number): string {
 	if (count >= 1000000) {
-		return `${(count / 1000000).toFixed(1)}M`;
+		return `${(count / 1000000).toFixed(1)}M`
 	}
 	if (count >= 1000) {
-		return `${(count / 1000).toFixed(1)}k`;
+		return `${(count / 1000).toFixed(1)}k`
 	}
-	return count.toString();
+	return count.toString()
 }
 
 // Extract owner and repo from GitHub URL
 function extractRepoInfo(url: string): { owner: string; repo: string } | null {
 	try {
-		const match = url.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+		const match = url.match(/github\.com\/([^\/]+)\/([^\/]+)/)
 		if (match) {
-			return { owner: match[1], repo: match[2].replace(/\.git$/, "") };
+			return { owner: match[1], repo: match[2].replace(/\.git$/, '') }
 		}
 	} catch (error) {
-		console.error("Error extracting repo info:", error);
+		console.error('Error extracting repo info:', error)
 	}
-	return null;
+	return null
 }
 
 export function GithubStars({
 	className,
-	repoUrl = "https://github.com/dokploy/dokploy",
-	label = "GitHub Stars",
-	count: defaultCount = "26.4k",
+	repoUrl = 'https://github.com/dokploy/dokploy',
+	label = 'GitHub Stars',
+	count: defaultCount = '26.4k',
 }: GithubStarsProps) {
-	const [starCount, setStarCount] = useState<string>(defaultCount);
-	const [isLoading, setIsLoading] = useState(true);
+	const [starCount, setStarCount] = useState<string>(defaultCount)
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchStarCount = async () => {
-			const repoInfo = extractRepoInfo(repoUrl);
+			const repoInfo = extractRepoInfo(repoUrl)
 			if (!repoInfo) {
-				setIsLoading(false);
-				return;
+				setIsLoading(false)
+				return
 			}
 
 			try {
 				const response = await fetch(
 					`/api/github-stars?owner=${encodeURIComponent(repoInfo.owner)}&repo=${encodeURIComponent(repoInfo.repo)}`,
-				);
+				)
 
 				if (response.ok) {
-					const data = await response.json();
-					const formattedCount = formatStarCount(data.stargazers_count);
-					setStarCount(formattedCount);
+					const data = await response.json()
+					const formattedCount = formatStarCount(
+						data.stargazers_count,
+					)
+					setStarCount(formattedCount)
 				}
 			} catch (error) {
-				console.error("Error fetching GitHub stars:", error);
+				console.error('Error fetching GitHub stars:', error)
 				// Keep default count on error
 			} finally {
-				setIsLoading(false);
+				setIsLoading(false)
 			}
-		};
+		}
 
-		fetchStarCount();
-	}, [repoUrl]);
+		fetchStarCount()
+	}, [repoUrl])
 
 	return (
 		<Link
@@ -79,11 +81,11 @@ export function GithubStars({
 			target="_blank"
 			aria-label={`${label}: ${starCount}`}
 			className={cn(
-				"group relative inline-flex items-center gap-2 rounded-full px-3 py-1",
-				"shadow-[0_0_0_2px_#000_inset,0_2px_8px_rgba(0,0,0,0.35)]",
-				"bg-gradient-to-b from-yellow-300 via-yellow-400 to-yellow-500",
-				"text-black",
-				"transition-transform hover:scale-[1.02] active:scale-[0.99]",
+				'group relative inline-flex items-center gap-2 rounded-full px-3 py-1',
+				'shadow-[0_0_0_2px_#000_inset,0_2px_8px_rgba(0,0,0,0.35)]',
+				'bg-gradient-to-b from-yellow-300 via-yellow-400 to-yellow-500',
+				'text-black',
+				'transition-transform hover:scale-[1.02] active:scale-[0.99]',
 				className,
 			)}
 		>
@@ -96,9 +98,9 @@ export function GithubStars({
 				<svg
 					viewBox="0 0 24 24"
 					className={cn(
-						"absolute -top-1 -left-1 h-3 w-3 text-yellow-100",
-						"drop-shadow-[0_0_6px_rgba(255,255,200,0.9)]",
-						"animate-pulse [animation-duration:1.6s] [animation-delay:.2s]",
+						'absolute -left-1 -top-1 h-3 w-3 text-yellow-100',
+						'drop-shadow-[0_0_6px_rgba(255,255,200,0.9)]',
+						'animate-pulse [animation-delay:.2s] [animation-duration:1.6s]',
 					)}
 					fill="currentColor"
 				>
@@ -108,9 +110,9 @@ export function GithubStars({
 				<svg
 					viewBox="0 0 24 24"
 					className={cn(
-						"absolute -top-2 right-1 h-2.5 w-2.5 text-yellow-50",
-						"drop-shadow-[0_0_6px_rgba(255,255,220,0.95)]",
-						"animate-pulse [animation-duration:1.9s] [animation-delay:.7s]",
+						'absolute -top-2 right-1 h-2.5 w-2.5 text-yellow-50',
+						'drop-shadow-[0_0_6px_rgba(255,255,220,0.95)]',
+						'animate-pulse [animation-delay:.7s] [animation-duration:1.9s]',
 					)}
 					fill="currentColor"
 				>
@@ -120,9 +122,9 @@ export function GithubStars({
 				<svg
 					viewBox="0 0 24 24"
 					className={cn(
-						"absolute -bottom-1 -right-1 h-3.5 w-3.5 text-yellow-200",
-						"drop-shadow-[0_0_8px_rgba(255,255,180,0.85)]",
-						"animate-pulse [animation-duration:2.2s] [animation-delay:1.1s]",
+						'absolute -bottom-1 -right-1 h-3.5 w-3.5 text-yellow-200',
+						'drop-shadow-[0_0_8px_rgba(255,255,180,0.85)]',
+						'animate-pulse [animation-delay:1.1s] [animation-duration:2.2s]',
 					)}
 					fill="currentColor"
 				>
@@ -137,10 +139,10 @@ export function GithubStars({
 			>
 				<span
 					className={cn(
-						"absolute -inset-x-10 -top-6 h-10 rotate-12",
-						"bg-white/40 blur-md",
-						"opacity-0 transition-opacity duration-500",
-						"group-hover:opacity-40",
+						'absolute -inset-x-10 -top-6 h-10 rotate-12',
+						'bg-white/40 blur-md',
+						'opacity-0 transition-opacity duration-500',
+						'group-hover:opacity-40',
 					)}
 				/>
 			</span>
@@ -148,9 +150,9 @@ export function GithubStars({
 			{/* GitHub mark */}
 			<span
 				className={cn(
-					"flex h-6 w-6 items-center justify-center rounded-full",
-					"bg-black text-white",
-					"shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]",
+					'flex h-6 w-6 items-center justify-center rounded-full',
+					'bg-black text-white',
+					'shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]',
 				)}
 			>
 				<svg
@@ -167,7 +169,7 @@ export function GithubStars({
 			<span className="flex items-baseline gap-1 pr-0.5">
 				<span className="text-xs font-semibold">Stars</span>
 				<span className="text-sm font-extrabold tracking-tight">
-					{isLoading ? "..." : starCount}
+					{isLoading ? '...' : starCount}
 				</span>
 			</span>
 
@@ -175,12 +177,12 @@ export function GithubStars({
 			<span
 				aria-hidden
 				className={cn(
-					"pointer-events-none absolute inset-0 rounded-full",
-					"ring-1 ring-black/10 group-hover:ring-black/20",
+					'pointer-events-none absolute inset-0 rounded-full',
+					'ring-1 ring-black/10 group-hover:ring-black/20',
 				)}
 			/>
 		</Link>
-	);
+	)
 }
 
-export default GithubStars;
+export default GithubStars

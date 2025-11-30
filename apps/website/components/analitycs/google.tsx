@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import initializeGA from ".";
+import { useEffect } from 'react'
+import initializeGA from '.'
 
 export default function GoogleAnalytics() {
 	useEffect(() => {
 		// @ts-ignore
 		if (!window.GA_INITIALIZED) {
-			initializeGA();
+			initializeGA()
 			// @ts-ignore
-			window.GA_INITIALIZED = true;
+			window.GA_INITIALIZED = true
 		}
-	}, []);
+	}, [])
 
-	return null;
+	return null
 }

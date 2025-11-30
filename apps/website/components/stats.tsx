@@ -1,81 +1,82 @@
-"use client";
+'use client'
 
-import { HandCoins, Users } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { useId } from "react";
-import NumberTicker from "./ui/number-ticker";
+import { HandCoins, Users } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { useId } from 'react'
+import NumberTicker from './ui/number-ticker'
 
 const statsValues = {
 	githubStars: 26000,
 	dockerDownloads: 4000000,
 	contributors: 200,
 	sponsors: 50,
-};
+}
 
 export function StatsSection() {
-	const [githubStars, setGithubStars] = useState(statsValues.githubStars);
+	const [githubStars, setGithubStars] = useState(statsValues.githubStars)
 
 	useEffect(() => {
 		const fetchGitHubStars = async () => {
 			try {
 				const response = await fetch(
-					"/api/github-stars?owner=dokploy&repo=dokploy",
-				);
+					'/api/github-stars?owner=dokploy&repo=dokploy',
+				)
 
 				if (response.ok) {
-					const data = await response.json();
-					setGithubStars(data.stargazers_count);
+					const data = await response.json()
+					setGithubStars(data.stargazers_count)
 				}
 			} catch (error) {
-				console.error("Error fetching GitHub stars:", error);
+				console.error('Error fetching GitHub stars:', error)
 				// Keep default value on error
 			}
-		};
+		}
 
-		fetchGitHubStars();
-	}, []);
+		fetchGitHubStars()
+	}, [])
 
 	return (
-		<div className="py-20 lg:py-40 flex flex-col gap-10 px-4 ">
+		<div className="flex flex-col gap-10 px-4 py-20 lg:py-40 ">
 			<div className="mx-auto max-w-2xl md:text-center">
-				<h2 className="font-display text-3xl tracking-tight  sm:text-4xl text-center">
+				<h2 className="text-center font-display text-3xl  tracking-tight sm:text-4xl">
 					Stats You Didn't Ask For (But Secretly Love to See)
 				</h2>
-				<p className="mt-4 text-lg tracking-tight text-muted-foreground text-center">
-					Just a few numbers to show we're not *completely* making this up.
-					Turns out, Dokploy has actually helped a few people—who knew?
+				<p className="mt-4 text-center text-lg tracking-tight text-muted-foreground">
+					Just a few numbers to show we're not *completely* making
+					this up. Turns out, Dokploy has actually helped a few
+					people—who knew?
 				</p>
 			</div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-2 max-w-7xl mx-auto">
+			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-4">
 				{grid.map((feature, index) => (
 					<div
 						key={feature.title}
-						className="relative bg-gradient-to-b from-neutral-900 to-neutral-950  p-6 rounded-3xl overflow-hidden"
+						className="relative overflow-hidden rounded-3xl bg-gradient-to-b  from-neutral-900 to-neutral-950 p-6"
 					>
 						<Grid size={20} />
 
-						<p className="text-base font-bold text-white relative z-20 flex flex-row gap-4 items-center">
+						<p className="relative z-20 flex flex-row items-center gap-4 text-base font-bold text-white">
 							{feature.title}
 							{feature.icon}
 						</p>
-						<p className="text-neutral-400 mt-4 text-base font-normal relative z-20">
-							{typeof feature.description === "function"
+						<p className="relative z-20 mt-4 text-base font-normal text-neutral-400">
+							{typeof feature.description === 'function'
 								? feature.description(githubStars)
 								: feature.description}
 						</p>
-						{typeof feature.component === "function"
+						{typeof feature.component === 'function'
 							? feature.component(githubStars)
 							: feature.component}
 					</div>
 				))}
 			</div>
 		</div>
-	);
+	)
 }
 
 const grid = [
 	{
-		title: "GitHub Stars",
+		title: 'GitHub Stars',
 		description: (stars: number) =>
 			`With over ${(stars / 1000).toFixed(1)}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!`,
 		icon: (
@@ -84,14 +85,14 @@ const grid = [
 			</svg>
 		),
 		component: (stars: number) => (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter  mt-4">
+			<p className="mt-4 whitespace-pre-wrap text-2xl  !font-semibold  tracking-tighter">
 				<NumberTicker value={stars} />+
 			</p>
 		),
 	},
 	{
-		title: "DockerHub Downloads",
-		description: `Downloaded over ${(statsValues.dockerDownloads / 1000000).toFixed(2).split(".")[0]}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.`,
+		title: 'DockerHub Downloads',
+		description: `Downloaded over ${(statsValues.dockerDownloads / 1000000).toFixed(2).split('.')[0]}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.`,
 		icon: (
 			<svg
 				stroke="currentColor"
@@ -105,39 +106,39 @@ const grid = [
 			</svg>
 		),
 		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter  mt-4">
+			<p className="mt-4 whitespace-pre-wrap text-2xl  !font-semibold  tracking-tighter">
 				<NumberTicker value={statsValues.dockerDownloads} />+
 			</p>
 		),
 	},
 	{
-		title: "Community Contributors",
+		title: 'Community Contributors',
 		description: `Thanks to a growing base of over ${statsValues.contributors} contributors, Dokploy continues to thrive with valuable contributions from developers around the world.`,
 		icon: <Users className="h-6 w-6 stroke-white" />,
 		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold tracking-tighter  mt-4">
+			<p className="mt-4 whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter">
 				<NumberTicker value={statsValues.contributors} />+
 			</p>
 		),
 	},
 	{
-		title: "Sponsors",
+		title: 'Sponsors',
 		description: `More than ${statsValues.sponsors} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!`,
 		icon: <HandCoins className="h-6 w-6 stroke-white" />,
 		component: (
-			<p className="whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter mt-4">
+			<p className="mt-4 whitespace-pre-wrap text-2xl  !font-semibold tracking-tighter">
 				<NumberTicker value={statsValues.sponsors} />+
 			</p>
 		),
 	},
-];
+]
 
 export const Grid = ({
 	pattern,
 	size,
 }: {
-	pattern?: number[][];
-	size?: number;
+	pattern?: number[][]
+	size?: number
 }) => {
 	const p = pattern ?? [
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
@@ -145,25 +146,25 @@ export const Grid = ({
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-	];
+	]
 	return (
 		<div className="pointer-events-none absolute left-1/2 top-0  -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
-			<div className="absolute inset-0 bg-gradient-to-r  [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] from-zinc-900/30 to-zinc-900/30 opacity-100">
+			<div className="absolute inset-0 bg-gradient-to-r  from-zinc-900/30 to-zinc-900/30 opacity-100 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)]">
 				<GridPattern
 					width={size ?? 20}
 					height={size ?? 20}
 					x="-12"
 					y="4"
 					squares={p}
-					className="absolute inset-0 h-full w-full  mix-blend-overlay fill-white/10 stroke-white/10  "
+					className="absolute inset-0 h-full w-full  fill-white/10 stroke-white/10 mix-blend-overlay  "
 				/>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export function GridPattern({ width, height, x, y, squares, ...props }: any) {
-	const patternId = useId();
+	const patternId = useId()
 
 	return (
 		<svg aria-hidden="true" {...props}>
@@ -200,5 +201,5 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
 				</svg>
 			)}
 		</svg>
-	);
+	)
 }

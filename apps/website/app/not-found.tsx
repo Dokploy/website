@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import NextError from "next/error";
+import NextError from 'next/error'
 
 export default function NotFound() {
 	return (
@@ -9,5 +9,5 @@ export default function NotFound() {
 				<NextError statusCode={404} />
 			</body>
 		</html>
-	);
+	)
 }

@@ -42,7 +42,6 @@ Example:
 feat: add new feature
 ```
 
-
 ## Pull Request
 
 - The `main` branch is the source of truth and should always reflect the latest stable release.
