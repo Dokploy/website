@@ -36,6 +36,12 @@ _openapi:
     - depth: 2
       title: Mariadb update
       url: '#mariadb-update'
+    - depth: 2
+      title: Mariadb move
+      url: '#mariadb-move'
+    - depth: 2
+      title: Mariadb rebuild
+      url: '#mariadb-rebuild'
   structuredData:
     headings:
       - content: Mariadb create
@@ -60,7 +66,11 @@ _openapi:
         id: mariadb-reload
       - content: Mariadb update
         id: mariadb-update
+      - content: Mariadb move
+        id: mariadb-move
+      - content: Mariadb rebuild
+        id: mariadb-rebuild
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/mariadb.create"},{"method":"get","path":"/mariadb.one"},{"method":"post","path":"/mariadb.start"},{"method":"post","path":"/mariadb.stop"},{"method":"post","path":"/mariadb.saveExternalPort"},{"method":"post","path":"/mariadb.deploy"},{"method":"post","path":"/mariadb.changeStatus"},{"method":"post","path":"/mariadb.remove"},{"method":"post","path":"/mariadb.saveEnvironment"},{"method":"post","path":"/mariadb.reload"},{"method":"post","path":"/mariadb.update"}]} hasHead={true} />
+<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/mariadb.create"},{"method":"get","path":"/mariadb.one"},{"method":"post","path":"/mariadb.start"},{"method":"post","path":"/mariadb.stop"},{"method":"post","path":"/mariadb.saveExternalPort"},{"method":"post","path":"/mariadb.deploy"},{"method":"post","path":"/mariadb.changeStatus"},{"method":"post","path":"/mariadb.remove"},{"method":"post","path":"/mariadb.saveEnvironment"},{"method":"post","path":"/mariadb.reload"},{"method":"post","path":"/mariadb.update"},{"method":"post","path":"/mariadb.move"},{"method":"post","path":"/mariadb.rebuild"}]} hasHead={true} />

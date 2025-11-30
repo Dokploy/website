@@ -2,7 +2,7 @@ import { generateFiles } from "fumadocs-openapi";
 
 try {
 	void generateFiles({
-		input: ["./api.json"],
+		input: ["./public/openapi.json"],
 		output: "./content/docs/api/generated",
 		per: "tag",
 		name: (tag, name) => {
@@ -10,6 +10,7 @@ try {
 			return `reference-${name}`;
 		},
 	});
+	console.log("Done");
 } catch (error) {
 	console.error(error);
 }

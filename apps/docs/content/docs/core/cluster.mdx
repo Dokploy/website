@@ -38,24 +38,20 @@ If you choose the second option, we will proceed to configure the different serv
 
 To start, we need to configure a Docker registry, as when deploying an application, you need a registry to deploy and download the application image on the other servers.
 
-We offer two ways to configure a registry:
-
-1. **External Registry**: Use any registry you want.
-2. **Self-Hosted Registry**: We create and configure a self-hosted registry for you.
-
 ### External Registry
 
-You can use any registry, such as Docker Hub, DigitalOcean Spaces, ECR, or your choice. Make sure to enter the correct credentials and test the connection before adding the registry.
+You can use any external registry of your choice. Here are some popular options:
 
-### Self-Hosted Registry
+1. **Docker Hub** - Free tier available, easy to set up
+2. **GitHub Container Registry (ghcr.io)** - Free for public repositories
+3. **DigitalOcean Container Registry** - Simple setup with good integration
+4. **Amazon ECR** - AWS's managed container registry
+5. **Google Container Registry** - Google Cloud's managed registry
+6. **Azure Container Registry** - Microsoft's managed registry
 
-We will ask you for three things:
+Make sure to enter the correct credentials and test the connection before adding the registry to your cluster configuration.
 
-1. A user.
-2. A password.
-3. A domain. Ensure this domain is pointing to the dokploy VPS.
-
-Once set up, the Cluster section will be unlocked.
+Once configured, the Cluster section will be unlocked.
 
 ## Understanding Docker Swarm
 

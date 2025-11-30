@@ -1,36 +1,34 @@
-import { getPost } from "@/lib/ghost";
-import { generateOGImage } from "@/lib/og-image";
-import type { NextRequest } from "next/server";
+import { getPost } from '@/lib/ghost'
+import { generateOGImage } from '@/lib/og-image'
+import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
 	try {
-		const { searchParams } = new URL(request.url);
-		const slug = searchParams.get("slug");
+		const { searchParams } = new URL(request.url)
+		const slug = searchParams.get('slug')
 
-		console.log("Generating OG image for slug:", slug);
+		console.log('Generating OG image for slug:', slug)
 
 		if (!slug) {
-			console.error("Missing slug parameter");
-			return new Response("Missing slug parameter", { status: 400 });
+			console.error('Missing slug parameter')
+			return new Response('Missing slug parameter', { status: 400 })
 		}
 
-		const post = await getPost(slug);
+		const post = await getPost(slug)
 
 		if (!post) {
-			console.error("Post not found for slug:", slug);
-			return new Response("Post not found", { status: 404 });
+			console.error('Post not found for slug:', slug)
+			return new Response('Post not found', { status: 404 })
 		}
 
-		console.log("Found post:", post.title);
-
 		const formattedDate = new Date(post.published_at).toLocaleDateString(
-			"en-US",
+			'en-US',
 			{
-				year: "numeric",
-				month: "long",
-				day: "numeric",
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
 			},
-		);
+		)
 
 		const ogImage = await generateOGImage({
 			title: post.title,
@@ -42,18 +40,16 @@ export async function GET(request: NextRequest) {
 				: undefined,
 			date: formattedDate,
 			readingTime: post.reading_time,
-		});
-
-		console.log("Successfully generated OG image");
+		})
 
 		return new Response(ogImage, {
 			headers: {
-				"Content-Type": "image/png",
-				"Cache-Control": "public, max-age=31536000, immutable",
+				'Content-Type': 'image/png',
+				'Cache-Control': 'public, max-age=31536000, immutable',
 			},
-		});
+		})
 	} catch (error) {
-		console.error("Error generating OG image:", error);
-		return new Response(`Error generating image: ${error}`, { status: 500 });
+		console.error('Error generating OG image:', error)
+		return new Response(`Error generating image: ${error}`, { status: 500 })
 	}
 }

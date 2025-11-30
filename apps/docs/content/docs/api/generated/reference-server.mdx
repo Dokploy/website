@@ -10,37 +10,82 @@ _openapi:
       title: Server one
       url: '#server-one'
     - depth: 2
+      title: Server get Default Command
+      url: '#server-get-default-command'
+    - depth: 2
       title: Server all
       url: '#server-all'
+    - depth: 2
+      title: Server count
+      url: '#server-count'
     - depth: 2
       title: Server with S S H Key
       url: '#server-with-s-s-h-key'
     - depth: 2
+      title: Server build Servers
+      url: '#server-build-servers'
+    - depth: 2
       title: Server setup
       url: '#server-setup'
+    - depth: 2
+      title: Server validate
+      url: '#server-validate'
+    - depth: 2
+      title: Server security
+      url: '#server-security'
+    - depth: 2
+      title: Server setup Monitoring
+      url: '#server-setup-monitoring'
     - depth: 2
       title: Server remove
       url: '#server-remove'
     - depth: 2
       title: Server update
       url: '#server-update'
+    - depth: 2
+      title: Server public Ip
+      url: '#server-public-ip'
+    - depth: 2
+      title: Server get Server Time
+      url: '#server-get-server-time'
+    - depth: 2
+      title: Server get Server Metrics
+      url: '#server-get-server-metrics'
   structuredData:
     headings:
       - content: Server create
         id: server-create
       - content: Server one
         id: server-one
+      - content: Server get Default Command
+        id: server-get-default-command
       - content: Server all
         id: server-all
+      - content: Server count
+        id: server-count
       - content: Server with S S H Key
         id: server-with-s-s-h-key
+      - content: Server build Servers
+        id: server-build-servers
       - content: Server setup
         id: server-setup
+      - content: Server validate
+        id: server-validate
+      - content: Server security
+        id: server-security
+      - content: Server setup Monitoring
+        id: server-setup-monitoring
       - content: Server remove
         id: server-remove
       - content: Server update
         id: server-update
+      - content: Server public Ip
+        id: server-public-ip
+      - content: Server get Server Time
+        id: server-get-server-time
+      - content: Server get Server Metrics
+        id: server-get-server-metrics
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/server.create"},{"method":"get","path":"/server.one"},{"method":"get","path":"/server.all"},{"method":"get","path":"/server.withSSHKey"},{"method":"post","path":"/server.setup"},{"method":"post","path":"/server.remove"},{"method":"post","path":"/server.update"}]} hasHead={true} />
+<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/server.create"},{"method":"get","path":"/server.one"},{"method":"get","path":"/server.getDefaultCommand"},{"method":"get","path":"/server.all"},{"method":"get","path":"/server.count"},{"method":"get","path":"/server.withSSHKey"},{"method":"get","path":"/server.buildServers"},{"method":"post","path":"/server.setup"},{"method":"get","path":"/server.validate"},{"method":"get","path":"/server.security"},{"method":"post","path":"/server.setupMonitoring"},{"method":"post","path":"/server.remove"},{"method":"post","path":"/server.update"},{"method":"get","path":"/server.publicIp"},{"method":"get","path":"/server.getServerTime"},{"method":"get","path":"/server.getServerMetrics"}]} hasHead={true} />

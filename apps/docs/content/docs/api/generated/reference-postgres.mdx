@@ -36,6 +36,12 @@ _openapi:
     - depth: 2
       title: Postgres update
       url: '#postgres-update'
+    - depth: 2
+      title: Postgres move
+      url: '#postgres-move'
+    - depth: 2
+      title: Postgres rebuild
+      url: '#postgres-rebuild'
   structuredData:
     headings:
       - content: Postgres create
@@ -60,7 +66,11 @@ _openapi:
         id: postgres-reload
       - content: Postgres update
         id: postgres-update
+      - content: Postgres move
+        id: postgres-move
+      - content: Postgres rebuild
+        id: postgres-rebuild
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/postgres.create"},{"method":"get","path":"/postgres.one"},{"method":"post","path":"/postgres.start"},{"method":"post","path":"/postgres.stop"},{"method":"post","path":"/postgres.saveExternalPort"},{"method":"post","path":"/postgres.deploy"},{"method":"post","path":"/postgres.changeStatus"},{"method":"post","path":"/postgres.remove"},{"method":"post","path":"/postgres.saveEnvironment"},{"method":"post","path":"/postgres.reload"},{"method":"post","path":"/postgres.update"}]} hasHead={true} />
+<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/postgres.create"},{"method":"get","path":"/postgres.one"},{"method":"post","path":"/postgres.start"},{"method":"post","path":"/postgres.stop"},{"method":"post","path":"/postgres.saveExternalPort"},{"method":"post","path":"/postgres.deploy"},{"method":"post","path":"/postgres.changeStatus"},{"method":"post","path":"/postgres.remove"},{"method":"post","path":"/postgres.saveEnvironment"},{"method":"post","path":"/postgres.reload"},{"method":"post","path":"/postgres.update"},{"method":"post","path":"/postgres.move"},{"method":"post","path":"/postgres.rebuild"}]} hasHead={true} />
