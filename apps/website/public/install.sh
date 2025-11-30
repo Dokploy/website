@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Detect version from environment variable or default to latest
+# Usage: DOKPLOY_VERSION=canary bash install.sh
+# Usage: DOKPLOY_VERSION=feature bash install.sh
+# Usage: bash install.sh (defaults to latest)
+detect_version() {
+    local version="${DOKPLOY_VERSION:-latest}"
+    echo "$version"
+}
+
 # Function to detect if running in Proxmox LXC container
 is_proxmox_lxc() {
     # Check for LXC in environment
@@ -16,6 +25,11 @@ is_proxmox_lxc() {
 }
 
 install_dokploy() {
+    # Detect version tag
+    VERSION_TAG=$(detect_version)
+    DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
+    
+    echo "Installing Dokploy version: ${VERSION_TAG}"
     if [ "$(id -u)" != "0" ]; then
         echo "This script must be run as root" >&2
         exit 1
@@ -134,7 +148,17 @@ install_dokploy() {
     fi
     echo "Using advertise address: $advertise_addr"
 
-    docker swarm init --advertise-addr $advertise_addr
+    # Allow custom Docker Swarm init arguments via DOCKER_SWARM_INIT_ARGS environment variable
+    # Example: export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
+    # This is useful to avoid CIDR overlapping with cloud provider VPCs (e.g., AWS)
+    swarm_init_args="${DOCKER_SWARM_INIT_ARGS:-}"
+    
+    if [ -n "$swarm_init_args" ]; then
+        echo "Using custom swarm init arguments: $swarm_init_args"
+        docker swarm init --advertise-addr $advertise_addr $swarm_init_args
+    else
+        docker swarm init --advertise-addr $advertise_addr
+    fi
     
      if [ $? -ne 0 ]; then
         echo "Error: Failed to initialize Docker Swarm" >&2
@@ -170,6 +194,12 @@ install_dokploy() {
     redis:7
 
     # Installation
+    # Set RELEASE_TAG environment variable for canary/feature versions
+    release_tag_env=""
+    if [ "$VERSION_TAG" != "latest" ]; then
+        release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
+    fi
+    
     docker service create \
       --name dokploy \
       --replicas 1 \
@@ -182,8 +212,9 @@ install_dokploy() {
       --update-order stop-first \
       --constraint 'node.role == manager' \
       $endpoint_mode \
+      $release_tag_env \
       -e ADVERTISE_ADDR=$advertise_addr \
-      dokploy/dokploy:latest
+      $DOCKER_IMAGE
 
     sleep 4
 
@@ -239,15 +270,19 @@ install_dokploy() {
 }
 
 update_dokploy() {
-    echo "Updating Dokploy..."
+    # Detect version tag
+    VERSION_TAG=$(detect_version)
+    DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
     
-    # Pull the latest image
-    docker pull dokploy/dokploy:latest
+    echo "Updating Dokploy to version: ${VERSION_TAG}"
+    
+    # Pull the image
+    docker pull $DOCKER_IMAGE
 
     # Update the service
-    docker service update --image dokploy/dokploy:latest dokploy
+    docker service update --image $DOCKER_IMAGE dokploy
 
-    echo "Dokploy has been updated to the latest version."
+    echo "Dokploy has been updated to version: ${VERSION_TAG}"
 }
 
 # Main script execution
