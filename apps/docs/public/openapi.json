@@ -16347,8 +16347,7 @@
                     "minLength": 1
                   },
                   "accessToken": {
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "priority": {
                     "type": "number",
@@ -16431,8 +16430,7 @@
                     "minLength": 1
                   },
                   "accessToken": {
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "priority": {
                     "type": "number",
@@ -16500,8 +16498,7 @@
                     "minLength": 1
                   },
                   "accessToken": {
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "priority": {
                     "type": "number",
