@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils'
 
 interface ContactFormData {
 	inquiryType: '' | 'support' | 'sales' | 'other'
+	deploymentType: '' | 'cloud' | 'self-hosted'
 	firstName: string
 	lastName: string
 	email: string
@@ -29,6 +30,7 @@ export default function ContactPage() {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [formData, setFormData] = useState<ContactFormData>({
 		inquiryType: '',
+		deploymentType: '',
 		firstName: '',
 		lastName: '',
 		email: '',
@@ -42,6 +44,9 @@ export default function ContactPage() {
 
 		if (!formData.inquiryType) {
 			newErrors.inquiryType = 'Please select what we can help you with'
+		}
+		if (formData.inquiryType === 'support' && !formData.deploymentType) {
+			newErrors.deploymentType = 'Please select your deployment type'
 		}
 		if (!formData.firstName.trim()) {
 			newErrors.firstName = 'First name is required'
@@ -72,6 +77,11 @@ export default function ContactPage() {
 			return
 		}
 
+		// Prevent submission for self-hosted support requests
+		if (formData.inquiryType === 'support' && formData.deploymentType === 'self-hosted') {
+			return
+		}
+
 		setIsSubmitting(true)
 
 		try {
@@ -92,6 +102,7 @@ export default function ContactPage() {
 
 				setFormData({
 					inquiryType: '',
+					deploymentType: '',
 					firstName: '',
 					lastName: '',
 					email: '',
@@ -112,7 +123,14 @@ export default function ContactPage() {
 	}
 
 	const handleInputChange = (field: keyof ContactFormData, value: any) => {
-		setFormData((prev) => ({ ...prev, [field]: value }))
+		setFormData((prev) => {
+			const updated = { ...prev, [field]: value }
+			// Reset deploymentType when inquiryType changes and is not support
+			if (field === 'inquiryType' && value !== 'support') {
+				updated.deploymentType = ''
+			}
+			return updated
+		})
 		if (errors[field]) {
 			setErrors((prev) => {
 				const newErrors = { ...prev }
@@ -209,6 +227,85 @@ export default function ContactPage() {
 								</p>
 							)}
 						</div>
+
+						{formData.inquiryType === 'support' && (
+							<div className="space-y-2">
+								<label
+									htmlFor="deploymentType"
+									className="block text-sm font-medium text-foreground"
+								>
+									What version of Dokploy are you using?{' '}
+									<span className="text-red-500">*</span>
+								</label>
+								<Select
+									value={formData.deploymentType}
+									onValueChange={(value) =>
+										handleInputChange(
+											'deploymentType',
+											value as 'cloud' | 'self-hosted',
+										)
+									}
+								>
+									<SelectTrigger className="bg-input">
+										<SelectValue placeholder="Select deployment type" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="cloud">
+											Cloud Version
+										</SelectItem>
+										<SelectItem value="self-hosted">
+											Self Hosted
+										</SelectItem>
+									</SelectContent>
+								</Select>
+								{errors.deploymentType && (
+									<p className="text-sm text-red-600">
+										{errors.deploymentType}
+									</p>
+								)}
+
+								{formData.deploymentType === 'self-hosted' && (
+									<div className="mt-4 rounded-lg border border-amber-500/50 bg-amber-500/10 p-4">
+										<h3 className="mb-2 text-sm font-semibold text-amber-500">
+											Self-Hosted Support
+										</h3>
+										<p className="mb-3 text-sm text-muted-foreground">
+											We currently don't provide direct support for self-hosted deployments through this form. However, our community is here to help!
+										</p>
+										<div className="space-y-2 text-sm">
+											<p className="text-muted-foreground">
+												Please use one of these channels to get assistance:
+											</p>
+											<ul className="ml-4 list-disc space-y-1 text-muted-foreground">
+												<li>
+													Join our{' '}
+													<a
+														href="https://discord.gg/2tBnJ3jDJc"
+														target="_blank"
+														rel="noopener noreferrer"
+														className="text-primary underline hover:text-primary/80"
+													>
+														Discord community
+													</a>{' '}
+													for real-time help
+												</li>
+												<li>
+													Open a discussion on{' '}
+													<a
+														href="https://github.com/Dokploy/dokploy/discussions"
+														target="_blank"
+														rel="noopener noreferrer"
+														className="text-primary underline hover:text-primary/80"
+													>
+														GitHub Discussions
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								)}
+							</div>
+						)}
 
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
 							<div className="space-y-2">
@@ -341,7 +438,11 @@ export default function ContactPage() {
 						<div className="flex justify-end">
 							<Button
 								type="submit"
-								disabled={isSubmitting}
+								disabled={
+									isSubmitting ||
+									(formData.inquiryType === 'support' &&
+										formData.deploymentType === 'self-hosted')
+								}
 								className="min-w-[120px]"
 							>
 								{isSubmitting ? 'Sending...' : 'Send Message'}
