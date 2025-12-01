@@ -40,8 +40,9 @@
 		"volume-backups",
 		"providers",
 		"watch-paths",
-		"---Advanced---",
-		"cluster",
-		"multi-server"
+	"---Advanced---",
+	"cloudflare-tunnels",
+	"cluster",
+	"multi-server"
 	]
 }
