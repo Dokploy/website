@@ -1,5 +1,35 @@
 #!/bin/bash
+
+# Detect version from environment variable or default to latest
+# Usage: DOKPLOY_VERSION=canary bash install.sh
+# Usage: DOKPLOY_VERSION=feature bash install.sh
+# Usage: bash install.sh (defaults to latest)
+detect_version() {
+    local version="${DOKPLOY_VERSION:-latest}"
+    echo "$version"
+}
+
+# Function to detect if running in Proxmox LXC container
+is_proxmox_lxc() {
+    # Check for LXC in environment
+    if [ -n "$container" ] && [ "$container" = "lxc" ]; then
+        return 0  # LXC container
+    fi
+    
+    # Check for LXC in /proc/1/environ
+    if grep -q "container=lxc" /proc/1/environ 2>/dev/null; then
+        return 0  # LXC container
+    fi
+    
+    return 1  # Not LXC
+}
+
 install_dokploy() {
+    # Detect version tag
+    VERSION_TAG=$(detect_version)
+    DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
+    
+    echo "Installing Dokploy version: ${VERSION_TAG}"
     if [ "$(id -u)" != "0" ]; then
         echo "This script must be run as root" >&2
         exit 1
@@ -29,6 +59,13 @@ install_dokploy() {
         exit 1
     fi
 
+    # check if something is running on port 3000
+    if ss -tulnp | grep ':3000 ' >/dev/null; then
+        echo "Error: something is already running on port 3000" >&2
+        echo "Dokploy requires port 3000 to be available. Please stop any service using this port." >&2
+        exit 1
+    fi
+
     command_exists() {
       command -v "$@" > /dev/null 2>&1
     }
@@ -36,8 +73,21 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh
+      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
     fi
+
+    # Check if running in Proxmox LXC container and set endpoint mode
+    endpoint_mode=""
+    if is_proxmox_lxc; then
+        echo "⚠️ WARNING: Detected Proxmox LXC container environment!"
+        echo "Adding --endpoint-mode dnsrr to Docker service for LXC compatibility."
+        echo "This may affect service discovery but is required for LXC containers."
+        echo ""
+        endpoint_mode="--endpoint-mode dnsrr"
+        echo "Waiting for 5 seconds before continuing..."
+        sleep 5
+    fi
+
 
     docker swarm leave --force 2>/dev/null
 
@@ -98,9 +148,22 @@ install_dokploy() {
     fi
     echo "Using advertise address: $advertise_addr"
 
+
     docker network rm -f docker_gwbridge 2>/dev/null
     docker network create docker_gwbridge --ipv4 --ipv6 --driver bridge
-    docker swarm init --advertise-addr $advertise_addr
+
+    # Allow custom Docker Swarm init arguments via DOCKER_SWARM_INIT_ARGS environment variable
+    # Example: export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
+    # This is useful to avoid CIDR overlapping with cloud provider VPCs (e.g., AWS)
+    swarm_init_args="${DOCKER_SWARM_INIT_ARGS:-}"
+    
+    if [ -n "$swarm_init_args" ]; then
+        echo "Using custom swarm init arguments: $swarm_init_args"
+        docker swarm init --advertise-addr $advertise_addr $swarm_init_args
+    else
+        docker swarm init --advertise-addr $advertise_addr
+    fi
+
     
      if [ $? -ne 0 ]; then
         echo "Error: Failed to initialize Docker Swarm" >&2
@@ -128,30 +191,38 @@ install_dokploy() {
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
     --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
-    --mount type=volume,source=dokploy-postgres-database,target=/var/lib/postgresql/data \
+    --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
     postgres:16
 
     docker service create \
     --name dokploy-redis \
     --constraint 'node.role==manager' \
     --network dokploy-network \
-    --mount type=volume,source=redis-data-volume,target=/data \
+    --mount type=volume,source=dokploy-redis,target=/data \
     redis:7
 
     # Installation
+    # Set RELEASE_TAG environment variable for canary/feature versions
+    release_tag_env=""
+    if [ "$VERSION_TAG" != "latest" ]; then
+        release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
+    fi
+    
     docker service create \
       --name dokploy \
       --replicas 1 \
       --network dokploy-network \
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
-      --mount type=volume,source=dokploy-docker-config,target=/root/.docker \
+      --mount type=volume,source=dokploy,target=/root/.docker \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
       --constraint 'node.role == manager' \
+      $endpoint_mode \
+      $release_tag_env \
       -e ADVERTISE_ADDR=$advertise_addr \
-      dokploy/dokploy:latest
+      $DOCKER_IMAGE
 
     sleep 4
 
@@ -161,11 +232,11 @@ install_dokploy() {
         --restart always \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
-        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /var/run/docker.sock:/var/run/docker.sock:ro \
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
-        traefik:v3.1.2
+        traefik:v3.6.1
     
     docker network connect dokploy-network dokploy-traefik
 
@@ -181,7 +252,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.1.2
+    #     traefik:v3.6.1
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
@@ -208,15 +279,19 @@ install_dokploy() {
 }
 
 update_dokploy() {
-    echo "Updating Dokploy..."
+    # Detect version tag
+    VERSION_TAG=$(detect_version)
+    DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
     
-    # Pull the latest image
-    docker pull dokploy/dokploy:latest
+    echo "Updating Dokploy to version: ${VERSION_TAG}"
+    
+    # Pull the image
+    docker pull $DOCKER_IMAGE
 
     # Update the service
-    docker service update --image dokploy/dokploy:latest dokploy
+    docker service update --image $DOCKER_IMAGE dokploy
 
-    echo "Dokploy has been updated to the latest version."
+    echo "Dokploy has been updated to version: ${VERSION_TAG}"
 }
 
 # Main script execution

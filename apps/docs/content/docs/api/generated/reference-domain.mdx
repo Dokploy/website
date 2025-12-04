@@ -16,6 +16,9 @@ _openapi:
       title: Domain generate Domain
       url: '#domain-generate-domain'
     - depth: 2
+      title: Domain can Generate Traefik Me Domains
+      url: '#domain-can-generate-traefik-me-domains'
+    - depth: 2
       title: Domain update
       url: '#domain-update'
     - depth: 2
@@ -24,6 +27,9 @@ _openapi:
     - depth: 2
       title: Domain delete
       url: '#domain-delete'
+    - depth: 2
+      title: Domain validate Domain
+      url: '#domain-validate-domain'
   structuredData:
     headings:
       - content: Domain create
@@ -34,13 +40,17 @@ _openapi:
         id: domain-by-compose-id
       - content: Domain generate Domain
         id: domain-generate-domain
+      - content: Domain can Generate Traefik Me Domains
+        id: domain-can-generate-traefik-me-domains
       - content: Domain update
         id: domain-update
       - content: Domain one
         id: domain-one
       - content: Domain delete
         id: domain-delete
+      - content: Domain validate Domain
+        id: domain-validate-domain
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/domain.create"},{"method":"get","path":"/domain.byApplicationId"},{"method":"get","path":"/domain.byComposeId"},{"method":"post","path":"/domain.generateDomain"},{"method":"post","path":"/domain.update"},{"method":"get","path":"/domain.one"},{"method":"post","path":"/domain.delete"}]} hasHead={true} />
+<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/domain.create"},{"method":"get","path":"/domain.byApplicationId"},{"method":"get","path":"/domain.byComposeId"},{"method":"post","path":"/domain.generateDomain"},{"method":"get","path":"/domain.canGenerateTraefikMeDomains"},{"method":"post","path":"/domain.update"},{"method":"get","path":"/domain.one"},{"method":"post","path":"/domain.delete"},{"method":"post","path":"/domain.validateDomain"}]} hasHead={true} />

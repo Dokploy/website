@@ -73,4 +73,25 @@ volumes:
   - "../files/my-configs:/etc/my-app/config" ✅
 ```
 
+**Important:** If you need to use files from your repository (configuration files, scripts, etc.), you must move them to Dokploy's File Mounts (via Advanced → Mounts) instead of mounting them directly from the repository. When using AutoDeploy, Dokploy performs a `git clone` on each deployment, which clears the repository directory. Mounting files directly from your repository using relative paths (e.g., `./` or `./config/file.conf`) will cause them to be lost or empty in subsequent deployments. See the [Troubleshooting guide](/docs/core/troubleshooting#using-files-from-your-repository) for more details.
+
 </Callout>
+
+## Keyboard Shortcuts
+
+To help speed up navigating there are some built in keyboard shortcuts for
+navigating tabs on docker compose pages. Similar to GitHub these are all prefixed
+with the `g` key so to use them press `g` and then the shortcut key.
+
+| Key | Tab                 |
+| --- | ------------------- |
+| `g` | General             |
+| `e` | Environment         |
+| `u` | Domains             |
+| `d` | Deployments         |
+| `b` | Backups             |
+| `s` | Schedules           |
+| `v` | Volume Backups      |
+| `l` | Logs                |
+| `m` | Monitoring          |
+| `a` | Advanced            |

@@ -42,6 +42,12 @@ For example:
 
 Note: Pull requests to branches other than your configured target branch will not trigger preview deployments.
 
+### Filtering labels
+
+If you only want pull requests with a specific label to create preview deployments, you can specify one or multiple in the preview settings.
+Dokploy will check that at least one of the labels is present on the pull request. If you leave the settings field empty, Dokploy will create
+preview deployments for all pull requests, regardless of labels.
+
 ### Monitoring Deployments
 
 When you open a pull request, you can monitor the deployment progress in the preview deployments section:

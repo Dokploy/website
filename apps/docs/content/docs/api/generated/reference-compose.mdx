@@ -19,14 +19,23 @@ _openapi:
       title: Compose clean Queues
       url: '#compose-clean-queues'
     - depth: 2
+      title: Compose kill Build
+      url: '#compose-kill-build'
+    - depth: 2
       title: Compose load Services
       url: '#compose-load-services'
+    - depth: 2
+      title: Compose load Mounts By Service
+      url: '#compose-load-mounts-by-service'
     - depth: 2
       title: Compose fetch Source Type
       url: '#compose-fetch-source-type'
     - depth: 2
       title: Compose randomize Compose
       url: '#compose-randomize-compose'
+    - depth: 2
+      title: Compose isolated Deployment
+      url: '#compose-isolated-deployment'
     - depth: 2
       title: Compose get Converted Compose
       url: '#compose-get-converted-compose'
@@ -39,6 +48,9 @@ _openapi:
     - depth: 2
       title: Compose stop
       url: '#compose-stop'
+    - depth: 2
+      title: Compose start
+      url: '#compose-start'
     - depth: 2
       title: Compose get Default Command
       url: '#compose-get-default-command'
@@ -54,6 +66,21 @@ _openapi:
     - depth: 2
       title: Compose get Tags
       url: '#compose-get-tags'
+    - depth: 2
+      title: Compose disconnect Git Provider
+      url: '#compose-disconnect-git-provider'
+    - depth: 2
+      title: Compose move
+      url: '#compose-move'
+    - depth: 2
+      title: Compose process Template
+      url: '#compose-process-template'
+    - depth: 2
+      title: Compose import
+      url: '#compose-import'
+    - depth: 2
+      title: Compose cancel Deployment
+      url: '#compose-cancel-deployment'
   structuredData:
     headings:
       - content: Compose create
@@ -66,12 +93,18 @@ _openapi:
         id: compose-delete
       - content: Compose clean Queues
         id: compose-clean-queues
+      - content: Compose kill Build
+        id: compose-kill-build
       - content: Compose load Services
         id: compose-load-services
+      - content: Compose load Mounts By Service
+        id: compose-load-mounts-by-service
       - content: Compose fetch Source Type
         id: compose-fetch-source-type
       - content: Compose randomize Compose
         id: compose-randomize-compose
+      - content: Compose isolated Deployment
+        id: compose-isolated-deployment
       - content: Compose get Converted Compose
         id: compose-get-converted-compose
       - content: Compose deploy
@@ -80,6 +113,8 @@ _openapi:
         id: compose-redeploy
       - content: Compose stop
         id: compose-stop
+      - content: Compose start
+        id: compose-start
       - content: Compose get Default Command
         id: compose-get-default-command
       - content: Compose refresh Token
@@ -90,7 +125,17 @@ _openapi:
         id: compose-templates
       - content: Compose get Tags
         id: compose-get-tags
+      - content: Compose disconnect Git Provider
+        id: compose-disconnect-git-provider
+      - content: Compose move
+        id: compose-move
+      - content: Compose process Template
+        id: compose-process-template
+      - content: Compose import
+        id: compose-import
+      - content: Compose cancel Deployment
+        id: compose-cancel-deployment
     contents: []
 ---
 
-<APIPage document={"./api.json"} operations={[{"method":"post","path":"/compose.create"},{"method":"get","path":"/compose.one"},{"method":"post","path":"/compose.update"},{"method":"post","path":"/compose.delete"},{"method":"post","path":"/compose.cleanQueues"},{"method":"get","path":"/compose.loadServices"},{"method":"post","path":"/compose.fetchSourceType"},{"method":"post","path":"/compose.randomizeCompose"},{"method":"get","path":"/compose.getConvertedCompose"},{"method":"post","path":"/compose.deploy"},{"method":"post","path":"/compose.redeploy"},{"method":"post","path":"/compose.stop"},{"method":"get","path":"/compose.getDefaultCommand"},{"method":"post","path":"/compose.refreshToken"},{"method":"post","path":"/compose.deployTemplate"},{"method":"get","path":"/compose.templates"},{"method":"get","path":"/compose.getTags"}]} hasHead={true} />
+<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/compose.create"},{"method":"get","path":"/compose.one"},{"method":"post","path":"/compose.update"},{"method":"post","path":"/compose.delete"},{"method":"post","path":"/compose.cleanQueues"},{"method":"post","path":"/compose.killBuild"},{"method":"get","path":"/compose.loadServices"},{"method":"get","path":"/compose.loadMountsByService"},{"method":"post","path":"/compose.fetchSourceType"},{"method":"post","path":"/compose.randomizeCompose"},{"method":"post","path":"/compose.isolatedDeployment"},{"method":"get","path":"/compose.getConvertedCompose"},{"method":"post","path":"/compose.deploy"},{"method":"post","path":"/compose.redeploy"},{"method":"post","path":"/compose.stop"},{"method":"post","path":"/compose.start"},{"method":"get","path":"/compose.getDefaultCommand"},{"method":"post","path":"/compose.refreshToken"},{"method":"post","path":"/compose.deployTemplate"},{"method":"get","path":"/compose.templates"},{"method":"get","path":"/compose.getTags"},{"method":"post","path":"/compose.disconnectGitProvider"},{"method":"post","path":"/compose.move"},{"method":"post","path":"/compose.processTemplate"},{"method":"post","path":"/compose.import"},{"method":"post","path":"/compose.cancelDeployment"}]} hasHead={true} />

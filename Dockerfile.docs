@@ -11,6 +11,9 @@ WORKDIR /usr/src/app
 # Install dependencies
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/docs --frozen-lockfile
 
+# Generate OpenAPI documentation from apps/docs/public/openapi.json
+RUN pnpm --filter=./apps/docs run build:docs
+
 # Deploy only the dokploy app
 
 ENV NODE_ENV=production

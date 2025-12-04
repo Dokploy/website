@@ -1,10 +1,10 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react'
 
 export interface SafariProps extends SVGProps<SVGSVGElement> {
-	url?: string;
-	src?: string;
-	width?: number;
-	height?: number;
+	url?: string
+	src?: string
+	width?: number
+	height?: number
 }
 
 export default function Safari({
@@ -134,5 +134,5 @@ export default function Safari({
 				</clipPath>
 			</defs>
 		</svg>
-	);
+	)
 }
