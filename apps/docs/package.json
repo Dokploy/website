@@ -12,7 +12,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"next": "15.0.3",
+		"next": "16.0.7",
 		"fumadocs-ui": "14.3.1",
 		"fumadocs-core": "14.3.1",
 		"react": "^18.3.1",
@@ -21,7 +21,7 @@
 		"lucide-react": "^0.456.0",
 		"fumadocs-openapi": "5.5.9",
 		"shiki": "1.22.2",
-		"@next/third-parties": "15.4.5"
+		"@next/third-parties": "16.0.7"
 	},
 	"devDependencies": {
 		"tsx": "^4.19.2",
