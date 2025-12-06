@@ -2437,6 +2437,10 @@
                     "type": "string",
                     "nullable": true
                   },
+                  "rollbackRegistryId": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "environmentId": {
                     "type": "string"
                   },
