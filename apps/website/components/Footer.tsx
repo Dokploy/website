@@ -37,18 +37,21 @@ export function Footer() {
 						</span>
 					</div>
 
-					<nav className="mt-10 text-sm" aria-label="quick links">
-						<div className="-my-1 flex flex-wrap justify-center gap-6">
-							<NavLink href="/#features">Features</NavLink>
-							<NavLink href="/#faqs">FAQ</NavLink>
-							<NavLink
-								href="https://docs.dokploy.com/docs/core"
-								target="_blank"
-							>
-								Docs
-							</NavLink>
-						</div>
-					</nav>
+				<nav className="mt-10 text-sm" aria-label="quick links">
+					<div className="-my-1 flex flex-wrap justify-center gap-6">
+						<NavLink href="/#features">Features</NavLink>
+						<NavLink href="/pricing">Pricing</NavLink>
+						<NavLink href="/#faqs">FAQ</NavLink>
+						<NavLink
+							href="https://docs.dokploy.com/docs/core"
+							target="_blank"
+						>
+							Docs
+						</NavLink>
+						<NavLink href="/blog">Blog</NavLink>
+						<NavLink href="/changelog">Changelog</NavLink>
+					</div>
+				</nav>
 				</div>
 				<div className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
 					<div className="flex items-center gap-x-6">

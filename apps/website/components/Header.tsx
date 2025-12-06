@@ -121,16 +121,17 @@ function MobileNavigation() {
 						as="div"
 						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight  text-primary shadow-xl ring-1 ring-border/5"
 					>
-						<MobileNavLink href="/#pricing">Pricing</MobileNavLink>
-						<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
-						<MobileNavLink
-							href="https://docs.dokploy.com/docs/core"
-							target="_blank"
-						>
-							Docs
-						</MobileNavLink>
-						<MobileNavLink href="/blog">Blog</MobileNavLink>
-						<MobileNavLink href="/contact">Contact</MobileNavLink>
+					<MobileNavLink href="/#pricing">Pricing</MobileNavLink>
+					<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
+					<MobileNavLink
+						href="https://docs.dokploy.com/docs/core"
+						target="_blank"
+					>
+						Docs
+					</MobileNavLink>
+					<MobileNavLink href="/blog">Blog</MobileNavLink>
+					<MobileNavLink href="/changelog">Changelog</MobileNavLink>
+					<MobileNavLink href="/contact">Contact</MobileNavLink>
 						<MobileNavLink
 							href="https://docs.dokploy.com/docs/core"
 							target="_blank"
@@ -164,17 +165,18 @@ export function Header() {
 						<Link href="/" aria-label="Home">
 							<Logo className="h-10 w-auto" />
 						</Link>
-						<div className="hidden md:flex md:gap-x-6">
-							<NavLink href="/#pricing">Pricing</NavLink>
-							<NavLink href="/#faqs">FAQ</NavLink>
-							<NavLink
-								href="https://docs.dokploy.com/docs/core"
-								target="_blank"
-							>
-								Docs
-							</NavLink>
-							<NavLink href="/blog">Blog</NavLink>
-						</div>
+					<div className="hidden md:flex md:gap-x-6">
+						<NavLink href="/#pricing">Pricing</NavLink>
+						<NavLink href="/#faqs">FAQ</NavLink>
+						<NavLink
+							href="https://docs.dokploy.com/docs/core"
+							target="_blank"
+						>
+							Docs
+						</NavLink>
+						<NavLink href="/blog">Blog</NavLink>
+						<NavLink href="/changelog">Changelog</NavLink>
+					</div>
 					</div>
 					<div className="flex items-center gap-x-4 md:gap-x-5">
 						<GithubStars className="max-md:hidden" />

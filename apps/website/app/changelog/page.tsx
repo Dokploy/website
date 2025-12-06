@@ -1,133 +1,559 @@
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-	title: 'Changelog',
-	description:
-		'Stay updated with the latest changes, improvements, and features in Dokploy',
+import { Container } from '@/components/Container'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+	ExternalLink,
+	Sparkles,
+	Rocket,
+	Calendar,
+	GitBranch,
+} from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import type { Components } from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
+import type { BundledLanguage } from 'shiki/bundle/web'
+import { CodeBlock } from '@/app/blog/[slug]/components/CodeBlock'
+import { ZoomableImage } from '@/app/blog/[slug]/components/ZoomableImage'
+import { useSearchParams, useRouter } from 'next/navigation'
+
+interface Release {
+	version: string
+	date: string
+	title: string
+	body: string
+	url: string
 }
 
-const changelogEntries = [
-	{
-		date: '2023-11-01',
-		title: 'Versión 2.1.0',
-		changes: [
-			'Añadido soporte para modo oscuro en todas las páginas',
-			'Mejorado el rendimiento para grandes conjuntos de datos',
-			'Corregido error en el flujo de autenticación de usuarios',
-		],
-		image: 'https://g-ndmbkfuhw2w.vusercontent.net/placeholder.svg?height=200&width=400',
-	},
-	{
-		date: '2023-10-15',
-		title: 'Versión 2.0.1',
-		changes: [
-			'Corrección urgente para vulnerabilidad crítica de seguridad',
-			'Actualizadas las dependencias a las últimas versiones',
-		],
-		image: 'https://g-ndmbkfuhw2w.vusercontent.net/placeholder.svg?height=200&width=400',
-	},
-	{
-		date: '2023-10-01',
-		title: 'Versión 2.0.0',
-		changes: [
-			'Rediseño completo de la UI para mejorar la experiencia de usuario',
-			'Introducidas nuevas características en el panel de control',
-			'Añadido soporte para temas personalizados',
-			'Mejorada la accesibilidad en toda la aplicación',
-		],
-		image: 'https://g-ndmbkfuhw2w.vusercontent.net/placeholder.svg?height=200&width=400',
-	},
-	{
-		date: '2023-09-15',
-		title: 'Versión 1.9.5',
-		changes: [
-			'Optimización de rendimiento en la carga inicial',
-			'Nuevas opciones de personalización para usuarios premium',
-		],
-		image: 'https://g-ndmbkfuhw2w.vusercontent.net/placeholder.svg?height=200&width=400',
-	},
-	{
-		date: '2023-08-01',
-		title: 'Versión 1.9.0',
-		changes: [
-			'Lanzamiento de la API pública para desarrolladores',
-			'Mejoras en la sincronización de datos entre dispositivos',
-		],
-		image: 'https://g-ndmbkfuhw2w.vusercontent.net/placeholder.svg?height=200&width=400',
-	},
-]
+const RELEASES_PER_PAGE = 10
 
 export default function ChangelogPage() {
-	return (
-		<div className="border-t border-border/30 bg-black py-20 sm:py-32">
-			<div className="absolute inset-0">
-				<svg viewBox="0 0 2000 1000" xmlns="http://www.w3.org/2000/svg">
-					<mask id="b" x="0" y="0" width="2000" height="1000">
-						<path fill="url(#a)" d="M0 0h2000v1000H0z" />
-					</mask>
-					<path d="M0 0h2000v1000H0z" />
-					<g
-						stroke="#22222233"
-						strokeWidth=".4"
-						fill="none"
-						mask="url(#b)"
-					>
-						<path d="M0 0h50v50H0zM50 0h50v50H50zM100 0h50v50h-50zM150 0h50v50h-50zM200 0h50v50h-50zM250 0h50v50h-50zM300 0h50v50h-50zM350 0h50v50h-50zM400 0h50v50h-50zM450 0h50v50h-50zM500 0h50v50h-50zM550 0h50v50h-50zM600 0h50v50h-50zM650 0h50v50h-50zM700 0h50v50h-50zM750 0h50v50h-50zM800 0h50v50h-50zM850 0h50v50h-50zM900 0h50v50h-50zM950 0h50v50h-50zM1000 0h50v50h-50zM1050 0h50v50h-50zM1100 0h50v50h-50zM1150 0h50v50h-50zM1200 0h50v50h-50zM1250 0h50v50h-50zM1300 0h50v50h-50zM1350 0h50v50h-50zM1400 0h50v50h-50zM1450 0h50v50h-50zM1500 0h50v50h-50zM1550 0h50v50h-50zM1600 0h50v50h-50zM1650 0h50v50h-50zM1700 0h50v50h-50zM1750 0h50v50h-50zM1800 0h50v50h-50zM1850 0h50v50h-50zM1900 0h50v50h-50zM1950 0h50v50h-50zM0 50h50v50H0zM50 50h50v50H50zM100 50h50v50h-50zM150 50h50v50h-50zM200 50h50v50h-50zM250 50h50v50h-50zM300 50h50v50h-50zM350 50h50v50h-50zM400 50h50v50h-50zM450 50h50v50h-50zM500 50h50v50h-50zM550 50h50v50h-50zM600 50h50v50h-50zM650 50h50v50h-50zM700 50h50v50h-50zM750 50h50v50h-50zM800 50h50v50h-50zM850 50h50v50h-50zM900 50h50v50h-50zM950 50h50v50h-50zM1000 50h50v50h-50zM1050 50h50v50h-50zM1100 50h50v50h-50zM1150 50h50v50h-50zM1200 50h50v50h-50zM1250 50h50v50h-50zM1300 50h50v50h-50zM1350 50h50v50h-50zM1400 50h50v50h-50zM1450 50h50v50h-50zM1500 50h50v50h-50zM1550 50h50v50h-50zM1600 50h50v50h-50zM1650 50h50v50h-50zM1700 50h50v50h-50zM1750 50h50v50h-50zM1800 50h50v50h-50zM1850 50h50v50h-50zM1900 50h50v50h-50zM1950 50h50v50h-50zM0 100h50v50H0zM50 100h50v50H50zM100 100h50v50h-50zM150 100h50v50h-50zM200 100h50v50h-50zM250 100h50v50h-50zM300 100h50v50h-50zM350 100h50v50h-50zM400 100h50v50h-50zM450 100h50v50h-50zM500 100h50v50h-50zM550 100h50v50h-50zM600 100h50v50h-50zM650 100h50v50h-50zM700 100h50v50h-50zM750 100h50v50h-50zM800 100h50v50h-50zM850 100h50v50h-50zM900 100h50v50h-50zM950 100h50v50h-50zM1000 100h50v50h-50zM1050 100h50v50h-50zM1100 100h50v50h-50zM1150 100h50v50h-50zM1200 100h50v50h-50zM1250 100h50v50h-50zM1300 100h50v50h-50zM1350 100h50v50h-50zM1400 100h50v50h-50zM1450 100h50v50h-50zM1500 100h50v50h-50zM1550 100h50v50h-50zM1600 100h50v50h-50zM1650 100h50v50h-50zM1700 100h50v50h-50zM1750 100h50v50h-50zM1800 100h50v50h-50zM1850 100h50v50h-50zM1900 100h50v50h-50zM1950 100h50v50h-50zM0 150h50v50H0zM50 150h50v50H50zM100 150h50v50h-50zM150 150h50v50h-50zM200 150h50v50h-50zM250 150h50v50h-50zM300 150h50v50h-50zM350 150h50v50h-50zM400 150h50v50h-50zM450 150h50v50h-50zM500 150h50v50h-50zM550 150h50v50h-50zM600 150h50v50h-50zM650 150h50v50h-50zM700 150h50v50h-50zM750 150h50v50h-50zM800 150h50v50h-50zM850 150h50v50h-50zM900 150h50v50h-50zM950 150h50v50h-50zM1000 150h50v50h-50zM1050 150h50v50h-50zM1100 150h50v50h-50zM1150 150h50v50h-50zM1200 150h50v50h-50zM1250 150h50v50h-50zM1300 150h50v50h-50zM1350 150h50v50h-50zM1400 150h50v50h-50zM1450 150h50v50h-50zM1500 150h50v50h-50zM1550 150h50v50h-50zM1600 150h50v50h-50zM1650 150h50v50h-50zM1700 150h50v50h-50zM1750 150h50v50h-50zM1800 150h50v50h-50zM1850 150h50v50h-50zM1900 150h50v50h-50zM1950 150h50v50h-50zM0 200h50v50H0zM50 200h50v50H50zM100 200h50v50h-50zM150 200h50v50h-50zM200 200h50v50h-50zM250 200h50v50h-50zM300 200h50v50h-50zM350 200h50v50h-50zM400 200h50v50h-50zM450 200h50v50h-50zM500 200h50v50h-50zM550 200h50v50h-50zM600 200h50v50h-50zM650 200h50v50h-50zM700 200h50v50h-50zM750 200h50v50h-50zM800 200h50v50h-50zM850 200h50v50h-50zM900 200h50v50h-50zM950 200h50v50h-50zM1000 200h50v50h-50zM1050 200h50v50h-50zM1100 200h50v50h-50zM1150 200h50v50h-50zM1200 200h50v50h-50zM1250 200h50v50h-50zM1300 200h50v50h-50zM1350 200h50v50h-50zM1400 200h50v50h-50zM1450 200h50v50h-50zM1500 200h50v50h-50zM1550 200h50v50h-50zM1600 200h50v50h-50zM1650 200h50v50h-50zM1700 200h50v50h-50zM1750 200h50v50h-50zM1800 200h50v50h-50zM1850 200h50v50h-50zM1900 200h50v50h-50zM1950 200h50v50h-50zM0 250h50v50H0zM50 250h50v50H50zM100 250h50v50h-50zM150 250h50v50h-50zM200 250h50v50h-50zM250 250h50v50h-50zM300 250h50v50h-50zM350 250h50v50h-50zM400 250h50v50h-50zM450 250h50v50h-50zM500 250h50v50h-50zM550 250h50v50h-50zM600 250h50v50h-50zM650 250h50v50h-50zM700 250h50v50h-50zM750 250h50v50h-50zM800 250h50v50h-50zM850 250h50v50h-50zM900 250h50v50h-50zM950 250h50v50h-50zM1000 250h50v50h-50zM1050 250h50v50h-50zM1100 250h50v50h-50zM1150 250h50v50h-50zM1200 250h50v50h-50zM1250 250h50v50h-50zM1300 250h50v50h-50zM1350 250h50v50h-50zM1400 250h50v50h-50zM1450 250h50v50h-50zM1500 250h50v50h-50zM1550 250h50v50h-50zM1600 250h50v50h-50zM1650 250h50v50h-50zM1700 250h50v50h-50zM1750 250h50v50h-50zM1800 250h50v50h-50zM1850 250h50v50h-50zM1900 250h50v50h-50zM1950 250h50v50h-50zM0 300h50v50H0zM50 300h50v50H50zM100 300h50v50h-50zM150 300h50v50h-50zM200 300h50v50h-50zM250 300h50v50h-50zM300 300h50v50h-50zM350 300h50v50h-50zM400 300h50v50h-50zM450 300h50v50h-50zM500 300h50v50h-50zM550 300h50v50h-50zM600 300h50v50h-50zM650 300h50v50h-50zM700 300h50v50h-50zM750 300h50v50h-50zM800 300h50v50h-50zM850 300h50v50h-50zM900 300h50v50h-50zM950 300h50v50h-50zM1000 300h50v50h-50zM1050 300h50v50h-50zM1100 300h50v50h-50zM1150 300h50v50h-50zM1200 300h50v50h-50zM1250 300h50v50h-50zM1300 300h50v50h-50zM1350 300h50v50h-50zM1400 300h50v50h-50zM1450 300h50v50h-50zM1500 300h50v50h-50zM1550 300h50v50h-50zM1600 300h50v50h-50zM1650 300h50v50h-50zM1700 300h50v50h-50zM1750 300h50v50h-50zM1800 300h50v50h-50zM1850 300h50v50h-50zM1900 300h50v50h-50zM1950 300h50v50h-50zM0 350h50v50H0zM50 350h50v50H50zM100 350h50v50h-50zM150 350h50v50h-50zM200 350h50v50h-50zM250 350h50v50h-50zM300 350h50v50h-50zM350 350h50v50h-50zM400 350h50v50h-50zM450 350h50v50h-50zM500 350h50v50h-50zM550 350h50v50h-50zM600 350h50v50h-50zM650 350h50v50h-50zM700 350h50v50h-50zM750 350h50v50h-50zM800 350h50v50h-50zM850 350h50v50h-50zM900 350h50v50h-50zM950 350h50v50h-50zM1000 350h50v50h-50zM1050 350h50v50h-50zM1100 350h50v50h-50zM1150 350h50v50h-50zM1200 350h50v50h-50zM1250 350h50v50h-50zM1300 350h50v50h-50zM1350 350h50v50h-50zM1400 350h50v50h-50zM1450 350h50v50h-50zM1500 350h50v50h-50zM1550 350h50v50h-50zM1600 350h50v50h-50zM1650 350h50v50h-50zM1700 350h50v50h-50zM1750 350h50v50h-50zM1800 350h50v50h-50zM1850 350h50v50h-50zM1900 350h50v50h-50zM1950 350h50v50h-50zM0 400h50v50H0zM50 400h50v50H50zM100 400h50v50h-50zM150 400h50v50h-50zM200 400h50v50h-50zM250 400h50v50h-50zM300 400h50v50h-50zM350 400h50v50h-50zM400 400h50v50h-50zM450 400h50v50h-50zM500 400h50v50h-50zM550 400h50v50h-50zM600 400h50v50h-50zM650 400h50v50h-50zM700 400h50v50h-50zM750 400h50v50h-50zM800 400h50v50h-50zM850 400h50v50h-50zM900 400h50v50h-50zM950 400h50v50h-50zM1000 400h50v50h-50zM1050 400h50v50h-50zM1100 400h50v50h-50zM1150 400h50v50h-50zM1200 400h50v50h-50zM1250 400h50v50h-50zM1300 400h50v50h-50zM1350 400h50v50h-50zM1400 400h50v50h-50zM1450 400h50v50h-50zM1500 400h50v50h-50zM1550 400h50v50h-50zM1600 400h50v50h-50zM1650 400h50v50h-50zM1700 400h50v50h-50zM1750 400h50v50h-50zM1800 400h50v50h-50zM1850 400h50v50h-50zM1900 400h50v50h-50zM1950 400h50v50h-50zM0 450h50v50H0zM50 450h50v50H50zM100 450h50v50h-50zM150 450h50v50h-50zM200 450h50v50h-50zM250 450h50v50h-50zM300 450h50v50h-50zM350 450h50v50h-50zM400 450h50v50h-50zM450 450h50v50h-50zM500 450h50v50h-50zM550 450h50v50h-50zM600 450h50v50h-50zM650 450h50v50h-50zM700 450h50v50h-50zM750 450h50v50h-50zM800 450h50v50h-50zM850 450h50v50h-50zM900 450h50v50h-50zM950 450h50v50h-50zM1000 450h50v50h-50zM1050 450h50v50h-50zM1100 450h50v50h-50zM1150 450h50v50h-50zM1200 450h50v50h-50zM1250 450h50v50h-50zM1300 450h50v50h-50zM1350 450h50v50h-50zM1400 450h50v50h-50zM1450 450h50v50h-50zM1500 450h50v50h-50zM1550 450h50v50h-50zM1600 450h50v50h-50zM1650 450h50v50h-50zM1700 450h50v50h-50zM1750 450h50v50h-50zM1800 450h50v50h-50zM1850 450h50v50h-50zM1900 450h50v50h-50zM1950 450h50v50h-50zM0 500h50v50H0zM50 500h50v50H50zM100 500h50v50h-50zM150 500h50v50h-50zM200 500h50v50h-50zM250 500h50v50h-50zM300 500h50v50h-50zM350 500h50v50h-50zM400 500h50v50h-50zM450 500h50v50h-50zM500 500h50v50h-50zM550 500h50v50h-50zM600 500h50v50h-50zM650 500h50v50h-50zM700 500h50v50h-50zM750 500h50v50h-50zM800 500h50v50h-50zM850 500h50v50h-50zM900 500h50v50h-50zM950 500h50v50h-50zM1000 500h50v50h-50zM1050 500h50v50h-50zM1100 500h50v50h-50zM1150 500h50v50h-50zM1200 500h50v50h-50zM1250 500h50v50h-50zM1300 500h50v50h-50zM1350 500h50v50h-50zM1400 500h50v50h-50zM1450 500h50v50h-50zM1500 500h50v50h-50zM1550 500h50v50h-50zM1600 500h50v50h-50zM1650 500h50v50h-50zM1700 500h50v50h-50zM1750 500h50v50h-50zM1800 500h50v50h-50zM1850 500h50v50h-50zM1900 500h50v50h-50zM1950 500h50v50h-50zM0 550h50v50H0zM50 550h50v50H50zM100 550h50v50h-50zM150 550h50v50h-50zM200 550h50v50h-50zM250 550h50v50h-50zM300 550h50v50h-50zM350 550h50v50h-50zM400 550h50v50h-50zM450 550h50v50h-50zM500 550h50v50h-50zM550 550h50v50h-50zM600 550h50v50h-50zM650 550h50v50h-50zM700 550h50v50h-50zM750 550h50v50h-50zM800 550h50v50h-50zM850 550h50v50h-50zM900 550h50v50h-50zM950 550h50v50h-50zM1000 550h50v50h-50zM1050 550h50v50h-50zM1100 550h50v50h-50zM1150 550h50v50h-50zM1200 550h50v50h-50zM1250 550h50v50h-50zM1300 550h50v50h-50zM1350 550h50v50h-50zM1400 550h50v50h-50zM1450 550h50v50h-50zM1500 550h50v50h-50zM1550 550h50v50h-50zM1600 550h50v50h-50zM1650 550h50v50h-50zM1700 550h50v50h-50zM1750 550h50v50h-50zM1800 550h50v50h-50zM1850 550h50v50h-50zM1900 550h50v50h-50zM1950 550h50v50h-50zM0 600h50v50H0zM50 600h50v50H50zM100 600h50v50h-50zM150 600h50v50h-50zM200 600h50v50h-50zM250 600h50v50h-50zM300 600h50v50h-50zM350 600h50v50h-50zM400 600h50v50h-50zM450 600h50v50h-50zM500 600h50v50h-50zM550 600h50v50h-50zM600 600h50v50h-50zM650 600h50v50h-50zM700 600h50v50h-50zM750 600h50v50h-50zM800 600h50v50h-50zM850 600h50v50h-50zM900 600h50v50h-50zM950 600h50v50h-50zM1000 600h50v50h-50zM1050 600h50v50h-50zM1100 600h50v50h-50zM1150 600h50v50h-50zM1200 600h50v50h-50zM1250 600h50v50h-50zM1300 600h50v50h-50zM1350 600h50v50h-50zM1400 600h50v50h-50zM1450 600h50v50h-50zM1500 600h50v50h-50zM1550 600h50v50h-50zM1600 600h50v50h-50zM1650 600h50v50h-50zM1700 600h50v50h-50zM1750 600h50v50h-50zM1800 600h50v50h-50zM1850 600h50v50h-50zM1900 600h50v50h-50zM1950 600h50v50h-50zM0 650h50v50H0zM50 650h50v50H50zM100 650h50v50h-50zM150 650h50v50h-50zM200 650h50v50h-50zM250 650h50v50h-50zM300 650h50v50h-50zM350 650h50v50h-50zM400 650h50v50h-50zM450 650h50v50h-50zM500 650h50v50h-50zM550 650h50v50h-50zM600 650h50v50h-50zM650 650h50v50h-50zM700 650h50v50h-50zM750 650h50v50h-50zM800 650h50v50h-50zM850 650h50v50h-50zM900 650h50v50h-50zM950 650h50v50h-50zM1000 650h50v50h-50zM1050 650h50v50h-50zM1100 650h50v50h-50zM1150 650h50v50h-50zM1200 650h50v50h-50zM1250 650h50v50h-50zM1300 650h50v50h-50zM1350 650h50v50h-50zM1400 650h50v50h-50zM1450 650h50v50h-50zM1500 650h50v50h-50zM1550 650h50v50h-50zM1600 650h50v50h-50zM1650 650h50v50h-50zM1700 650h50v50h-50zM1750 650h50v50h-50zM1800 650h50v50h-50zM1850 650h50v50h-50zM1900 650h50v50h-50zM1950 650h50v50h-50zM0 700h50v50H0zM50 700h50v50H50zM100 700h50v50h-50zM150 700h50v50h-50zM200 700h50v50h-50zM250 700h50v50h-50zM300 700h50v50h-50zM350 700h50v50h-50zM400 700h50v50h-50zM450 700h50v50h-50zM500 700h50v50h-50zM550 700h50v50h-50zM600 700h50v50h-50zM650 700h50v50h-50zM700 700h50v50h-50zM750 700h50v50h-50zM800 700h50v50h-50zM850 700h50v50h-50zM900 700h50v50h-50zM950 700h50v50h-50zM1000 700h50v50h-50zM1050 700h50v50h-50zM1100 700h50v50h-50zM1150 700h50v50h-50zM1200 700h50v50h-50zM1250 700h50v50h-50zM1300 700h50v50h-50zM1350 700h50v50h-50zM1400 700h50v50h-50zM1450 700h50v50h-50zM1500 700h50v50h-50zM1550 700h50v50h-50zM1600 700h50v50h-50zM1650 700h50v50h-50zM1700 700h50v50h-50zM1750 700h50v50h-50zM1800 700h50v50h-50zM1850 700h50v50h-50zM1900 700h50v50h-50zM1950 700h50v50h-50zM0 750h50v50H0zM50 750h50v50H50zM100 750h50v50h-50zM150 750h50v50h-50zM200 750h50v50h-50zM250 750h50v50h-50zM300 750h50v50h-50zM350 750h50v50h-50zM400 750h50v50h-50zM450 750h50v50h-50zM500 750h50v50h-50zM550 750h50v50h-50zM600 750h50v50h-50zM650 750h50v50h-50zM700 750h50v50h-50zM750 750h50v50h-50zM800 750h50v50h-50zM850 750h50v50h-50zM900 750h50v50h-50zM950 750h50v50h-50zM1000 750h50v50h-50zM1050 750h50v50h-50zM1100 750h50v50h-50zM1150 750h50v50h-50zM1200 750h50v50h-50zM1250 750h50v50h-50zM1300 750h50v50h-50zM1350 750h50v50h-50zM1400 750h50v50h-50zM1450 750h50v50h-50zM1500 750h50v50h-50zM1550 750h50v50h-50zM1600 750h50v50h-50zM1650 750h50v50h-50zM1700 750h50v50h-50zM1750 750h50v50h-50zM1800 750h50v50h-50zM1850 750h50v50h-50zM1900 750h50v50h-50zM1950 750h50v50h-50zM0 800h50v50H0zM50 800h50v50H50zM100 800h50v50h-50zM150 800h50v50h-50zM200 800h50v50h-50zM250 800h50v50h-50zM300 800h50v50h-50zM350 800h50v50h-50zM400 800h50v50h-50zM450 800h50v50h-50zM500 800h50v50h-50zM550 800h50v50h-50zM600 800h50v50h-50zM650 800h50v50h-50zM700 800h50v50h-50zM750 800h50v50h-50zM800 800h50v50h-50zM850 800h50v50h-50zM900 800h50v50h-50zM950 800h50v50h-50zM1000 800h50v50h-50zM1050 800h50v50h-50zM1100 800h50v50h-50zM1150 800h50v50h-50zM1200 800h50v50h-50zM1250 800h50v50h-50zM1300 800h50v50h-50zM1350 800h50v50h-50zM1400 800h50v50h-50zM1450 800h50v50h-50zM1500 800h50v50h-50zM1550 800h50v50h-50zM1600 800h50v50h-50zM1650 800h50v50h-50zM1700 800h50v50h-50zM1750 800h50v50h-50zM1800 800h50v50h-50zM1850 800h50v50h-50zM1900 800h50v50h-50zM1950 800h50v50h-50zM0 850h50v50H0zM50 850h50v50H50zM100 850h50v50h-50zM150 850h50v50h-50zM200 850h50v50h-50zM250 850h50v50h-50zM300 850h50v50h-50zM350 850h50v50h-50zM400 850h50v50h-50zM450 850h50v50h-50zM500 850h50v50h-50zM550 850h50v50h-50zM600 850h50v50h-50zM650 850h50v50h-50zM700 850h50v50h-50zM750 850h50v50h-50zM800 850h50v50h-50zM850 850h50v50h-50zM900 850h50v50h-50zM950 850h50v50h-50zM1000 850h50v50h-50zM1050 850h50v50h-50zM1100 850h50v50h-50zM1150 850h50v50h-50zM1200 850h50v50h-50zM1250 850h50v50h-50zM1300 850h50v50h-50zM1350 850h50v50h-50zM1400 850h50v50h-50zM1450 850h50v50h-50zM1500 850h50v50h-50zM1550 850h50v50h-50zM1600 850h50v50h-50zM1650 850h50v50h-50zM1700 850h50v50h-50zM1750 850h50v50h-50zM1800 850h50v50h-50zM1850 850h50v50h-50zM1900 850h50v50h-50zM1950 850h50v50h-50zM0 900h50v50H0zM50 900h50v50H50zM100 900h50v50h-50zM150 900h50v50h-50zM200 900h50v50h-50zM250 900h50v50h-50zM300 900h50v50h-50zM350 900h50v50h-50zM400 900h50v50h-50zM450 900h50v50h-50zM500 900h50v50h-50zM550 900h50v50h-50zM600 900h50v50h-50zM650 900h50v50h-50zM700 900h50v50h-50zM750 900h50v50h-50zM800 900h50v50h-50zM850 900h50v50h-50zM900 900h50v50h-50zM950 900h50v50h-50zM1000 900h50v50h-50zM1050 900h50v50h-50zM1100 900h50v50h-50zM1150 900h50v50h-50zM1200 900h50v50h-50zM1250 900h50v50h-50zM1300 900h50v50h-50zM1350 900h50v50h-50zM1400 900h50v50h-50zM1450 900h50v50h-50zM1500 900h50v50h-50zM1550 900h50v50h-50zM1600 900h50v50h-50zM1650 900h50v50h-50zM1700 900h50v50h-50zM1750 900h50v50h-50zM1800 900h50v50h-50zM1850 900h50v50h-50zM1900 900h50v50h-50zM1950 900h50v50h-50zM0 950h50v50H0zM50 950h50v50H50zM100 950h50v50h-50zM150 950h50v50h-50zM200 950h50v50h-50zM250 950h50v50h-50zM300 950h50v50h-50zM350 950h50v50h-50zM400 950h50v50h-50zM450 950h50v50h-50zM500 950h50v50h-50zM550 950h50v50h-50zM600 950h50v50h-50zM650 950h50v50h-50zM700 950h50v50h-50zM750 950h50v50h-50zM800 950h50v50h-50zM850 950h50v50h-50zM900 950h50v50h-50zM950 950h50v50h-50zM1000 950h50v50h-50zM1050 950h50v50h-50zM1100 950h50v50h-50zM1150 950h50v50h-50zM1200 950h50v50h-50zM1250 950h50v50h-50zM1300 950h50v50h-50zM1350 950h50v50h-50zM1400 950h50v50h-50zM1450 950h50v50h-50zM1500 950h50v50h-50zM1550 950h50v50h-50zM1600 950h50v50h-50zM1650 950h50v50h-50zM1700 950h50v50h-50zM1750 950h50v50h-50zM1800 950h50v50h-50zM1850 950h50v50h-50zM1900 950h50v50h-50zM1950 950h50v50h-50z" />
-					</g>
-					<defs>
-						<radialGradient id="a">
-							<stop
-								offset="50%"
-								stopColor="#fff"
-								stopOpacity="0"
-							/>
-							<stop offset="1" stopColor="#fff" stopOpacity="1" />
-						</radialGradient>
-					</defs>
-				</svg>
+	const [releases, setReleases] = useState<Release[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState<string | null>(null)
+	const searchParams = useSearchParams()
+	const router = useRouter()
+
+	// Get current page from URL
+	const currentPage = Number(searchParams.get('page')) || 1
+
+	useEffect(() => {
+		async function fetchReleases() {
+			try {
+				const response = await fetch('/api/releases')
+				if (!response.ok) {
+					throw new Error('Failed to fetch releases')
+				}
+				const data = await response.json()
+				setReleases(data)
+			} catch (err) {
+				setError(
+					err instanceof Error ? err.message : 'An error occurred',
+				)
+			} finally {
+				setLoading(false)
+			}
+		}
+
+		fetchReleases()
+	}, [])
+
+	// Pagination logic
+	const totalPages = Math.ceil(releases.length / RELEASES_PER_PAGE)
+	
+	// Validate and clamp current page
+	const validPage = Math.max(1, Math.min(currentPage, totalPages || 1))
+	
+	const startIndex = (validPage - 1) * RELEASES_PER_PAGE
+	const endIndex = startIndex + RELEASES_PER_PAGE
+	const currentReleases = releases.slice(startIndex, endIndex)
+
+	const updatePage = (page: number) => {
+		const params = new URLSearchParams(searchParams.toString())
+		params.set('page', page.toString())
+		router.push(`/changelog?${params.toString()}`)
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}
+
+	const goToNextPage = () => {
+		if (validPage < totalPages) {
+			updatePage(validPage + 1)
+		}
+	}
+
+	const goToPreviousPage = () => {
+		if (validPage > 1) {
+			updatePage(validPage - 1)
+		}
+	}
+
+	const goToPage = (page: number) => {
+		updatePage(page)
+	}
+
+	// Markdown components with styling
+	const components: Partial<Components> = {
+		h1: ({ children, ...props }) => (
+			<h1
+				className="mb-4 mt-8 text-2xl font-bold text-white"
+				{...props}
+			>
+				{children}
+			</h1>
+		),
+		h2: ({ children, ...props }) => (
+			<h2
+				className="mb-3 mt-6 flex items-center gap-2 text-xl font-semibold text-white"
+				{...props}
+			>
+				<Sparkles className="h-5 w-5 text-primary" />
+				{children}
+			</h2>
+		),
+		h3: ({ children, ...props }) => (
+			<h3
+				className="mb-2 mt-4 text-lg font-semibold text-white/90"
+				{...props}
+			>
+				{children}
+			</h3>
+		),
+		p: ({ children, ...props }) => (
+			<p
+				className="mb-4 text-base leading-relaxed text-muted-foreground"
+				{...props}
+			>
+				{children}
+			</p>
+		),
+		a: ({ href, children, ...props }) => (
+			<a
+				href={href}
+				className="text-primary underline decoration-primary/30 hover:decoration-primary"
+				target="_blank"
+				rel="noopener noreferrer"
+				{...props}
+			>
+				{children}
+			</a>
+		),
+		ul: ({ children, ...props }) => (
+			<ul
+				className="mb-4 list-disc space-y-2 pl-6 text-muted-foreground"
+				{...props}
+			>
+				{children}
+			</ul>
+		),
+		ol: ({ children, ...props }) => (
+			<ol
+				className="mb-4 list-decimal space-y-2 pl-6 text-muted-foreground"
+				{...props}
+			>
+				{children}
+			</ol>
+		),
+		li: ({ children, ...props }) => (
+			<li
+				className="ml-2 text-sm leading-relaxed text-muted-foreground"
+				{...props}
+			>
+				{children}
+			</li>
+		),
+		blockquote: ({ children, ...props }) => (
+			<blockquote
+				className="my-4 border-l-4 border-primary/50 bg-gradient-to-r from-primary/5 to-transparent py-3 pl-4 text-muted-foreground"
+				{...props}
+			>
+				{children}
+			</blockquote>
+		),
+		code: ({ children, className, inline }: any) => {
+			if (inline || !className || !/language-(\w+)/.test(className)) {
+				return (
+					<code className="rounded bg-primary/10 px-1.5 py-0.5 font-mono text-sm text-primary ring-1 ring-primary/20">
+						{children}
+					</code>
+				)
+			}
+			const match = /language-(\w+)/.exec(className)
+			return (
+				<CodeBlock
+					lang={match ? (match[1] as BundledLanguage) : 'typescript'}
+					code={children?.toString() || ''}
+				/>
+			)
+		},
+		table: ({ children, ...props }) => (
+			<div className="my-6 w-full overflow-hidden rounded-lg border border-border/50 shadow-lg">
+				<div className="overflow-x-auto">
+					<table className="w-full border-collapse" {...props}>
+						{children}
+					</table>
+				</div>
 			</div>
-			<div className="relative mx-auto w-full max-w-5xl px-4">
-				<h1 className="mb-8 text-3xl font-bold">Changelog</h1>
-				<div className="space-y-12">
-					{changelogEntries.map((entry, index) => (
-						<div
-							key={index}
-							id={entry.date}
-							className="flex flex-col gap-6 border-t border-gray-800 pt-8 first:border-t-0 first:pt-0 md:flex-row"
-						>
-							<div className="flex flex-col items-start md:w-1/4">
-								<span className="text-lg font-semibold text-gray-400">
-									{entry.date}
-								</span>
-								<h2 className="mt-2 text-2xl font-bold">
-									{entry.title}
-								</h2>
+		),
+		thead: ({ children, ...props }) => (
+			<thead
+				className="border-b border-border bg-gradient-to-r from-primary/5 to-transparent"
+				{...props}
+			>
+				{children}
+			</thead>
+		),
+		tbody: ({ children, ...props }) => (
+			<tbody className="divide-y divide-border/50" {...props}>
+				{children}
+			</tbody>
+		),
+		tr: ({ children, ...props }) => (
+			<tr {...props}>
+				{children}
+			</tr>
+		),
+		th: ({ children, ...props }) => (
+			<th
+				className="p-4 text-left font-semibold text-white"
+				{...props}
+			>
+				{children}
+			</th>
+		),
+		td: ({ children, ...props }) => (
+			<td
+				className="p-4 text-sm text-muted-foreground"
+				{...props}
+			>
+				{children}
+			</td>
+		),
+		hr: ({ ...props }) => (
+			<div className="relative my-8" {...props}>
+				<hr className="border-border/30" />
+				<div className="absolute inset-0 flex items-center justify-center">
+					<div className="h-px w-full bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+				</div>
+			</div>
+		),
+		img: ({ src, alt }) => {
+			if (!src) return null
+			return (
+				<ZoomableImage
+					src={src}
+					alt={alt || 'Release image'}
+					className="my-4 rounded-lg border border-primary/20 shadow-lg shadow-primary/5"
+				/>
+			)
+		},
+	}
+
+	if (loading) {
+		return (
+			<div className="min-h-screen bg-black py-20">
+				<Container>
+					<div className="flex flex-col items-center justify-center gap-4">
+						<div className="animate-spin">
+							<Sparkles className="h-12 w-12 text-primary" />
+						</div>
+						<p className="text-muted-foreground">
+							Loading releases...
+						</p>
+					</div>
+				</Container>
+			</div>
+		)
+	}
+
+	if (error) {
+		return (
+			<div className="min-h-screen bg-black py-20">
+				<Container>
+					<div className="text-center">
+						<p className="text-red-500">Error: {error}</p>
+					</div>
+				</Container>
+			</div>
+		)
+	}
+
+	return (
+		<div className="relative min-h-screen overflow-hidden bg-black">
+			{/* Background Grid */}
+			<div className="absolute inset-0 opacity-20">
+				<div
+					className="absolute inset-0"
+					style={{
+						backgroundImage: `
+							linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+							linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
+						`,
+						backgroundSize: '50px 50px',
+					}}
+				/>
+			</div>
+
+			{/* Gradient Orbs */}
+			<div className="absolute inset-0 overflow-hidden pointer-events-none">
+				<div className="absolute -left-40 top-0 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+				<div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
+			</div>
+
+			{/* Content */}
+			<div className="relative">
+				<Container>
+					<div className="mx-auto max-w-4xl py-20 sm:py-32">
+						{/* Header */}
+						<div className="mb-16 text-center">
+							<div className="mb-6 inline-flex">
+								<div className="relative">
+									<div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-blue-500 opacity-20 blur-xl" />
+									<Rocket className="relative h-16 w-16 text-primary" />
+								</div>
 							</div>
-							<div className="space-y-4 md:w-3/4">
-								<div>
-									<img
-										src={entry.image}
-										alt={`Imagen para ${entry.title}`}
-										className="h-48 w-full rounded-lg object-cover"
-									/>
+							<h1 className="font-display mb-4 bg-gradient-to-r from-white to-white/60 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+								Changelogs
+							</h1>
+							<p className="text-lg text-muted-foreground">
+								All of the changes made will be available here.
+							</p>
+							<p className="mt-2 text-sm text-muted-foreground">
+								Dokploy is the most comprehensive deployment
+								platform for your applications.
+							</p>
+						</div>
+
+						{/* Releases */}
+						<div className="space-y-16">
+							{currentReleases.map((release, index) => (
+								<article
+									key={release.version}
+									id={release.version}
+									className="relative"
+								>
+									{/* Card */}
+									<div className="relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br from-background/50 to-background/30 p-8 backdrop-blur-sm">
+
+										{/* Content */}
+										<div className="relative">
+											{/* Date badge with icon */}
+											<div className="mb-6">
+												<Badge
+													variant="outline"
+													className="border-primary/30 bg-primary/5 text-primary backdrop-blur-sm"
+												>
+													<Calendar className="mr-1.5 h-3 w-3" />
+													{release.date}
+												</Badge>
+											</div>
+
+											{/* Version and link */}
+											<div className="mb-6 flex items-start justify-between gap-4">
+												<div className="flex items-center gap-3">
+													<GitBranch className="h-6 w-6 text-primary" />
+													<h2 className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
+														{release.version}
+													</h2>
+												</div>
+												<Button
+													variant="ghost"
+													size="sm"
+													asChild
+													className="shrink-0"
+												>
+													<Link
+														href={release.url}
+														target="_blank"
+														rel="noopener noreferrer"
+													>
+														View on GitHub
+														<ExternalLink className="ml-2 h-4 w-4" />
+													</Link>
+												</Button>
+											</div>
+
+											{/* Markdown content */}
+											<div className="prose prose-invert max-w-none">
+												<ReactMarkdown
+													remarkPlugins={[remarkGfm]}
+													rehypePlugins={[rehypeRaw]}
+													components={components}
+												>
+													{release.body}
+												</ReactMarkdown>
+											</div>
+										</div>
+									</div>
+
+									{/* Divider with gradient */}
+									{index < currentReleases.length - 1 && (
+										<div className="relative mt-16">
+											<div className="absolute inset-0 flex items-center">
+												<div className="w-full border-t border-gradient-to-r from-transparent via-border/30 to-transparent" />
+											</div>
+											<div className="relative flex justify-center">
+												<span className="bg-black px-4">
+													<Sparkles className="h-4 w-4 text-primary/40" />
+												</span>
+											</div>
+										</div>
+									)}
+								</article>
+							))}
+						</div>
+
+						{/* Pagination */}
+						{totalPages > 1 && (
+							<div className="mt-16 flex flex-col items-center gap-6">
+								{/* Page info */}
+								<div className="text-sm text-muted-foreground">
+									Showing{' '}
+									<span className="font-semibold text-white">
+										{startIndex + 1}-
+										{Math.min(endIndex, releases.length)}
+									</span>{' '}
+									of{' '}
+									<span className="font-semibold text-white">
+										{releases.length}
+									</span>{' '}
+									releases
 								</div>
 
-								<ul className="list-inside list-disc space-y-2">
-									{entry.changes.map(
-										(change, changeIndex) => (
-											<li
-												key={changeIndex}
-												className="text-gray-300"
-											>
-												{change}
-											</li>
-										),
-									)}
-								</ul>
+								{/* Navigation buttons */}
+								<div className="flex items-center gap-2">
+									<Button
+										variant="outline"
+										onClick={goToPreviousPage}
+										disabled={validPage === 1}
+										className="gap-2"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path d="m15 18-6-6 6-6" />
+										</svg>
+										Previous
+									</Button>
+
+									{/* Page numbers */}
+									<div className="flex items-center gap-1">
+										{Array.from({ length: totalPages }, (_, i) => i + 1)
+											.filter((page) => {
+												// Show first page, last page, current page, and 2 pages around current
+												return (
+													page === 1 ||
+													page === totalPages ||
+													Math.abs(page - validPage) <= 1
+												)
+											})
+											.map((page, idx, arr) => {
+												// Add ellipsis if there's a gap
+												const prevPage = arr[idx - 1]
+												const showEllipsis =
+													prevPage && page - prevPage > 1
+
+												return (
+													<div
+														key={page}
+														className="flex items-center gap-1"
+													>
+														{showEllipsis && (
+															<span className="px-2 text-muted-foreground">
+																...
+															</span>
+														)}
+														<Button
+															variant={
+																validPage === page
+																	? 'default'
+																	: 'outline'
+															}
+															size="sm"
+															onClick={() => goToPage(page)}
+															className={
+																validPage === page
+																	? 'bg-primary text-black hover:bg-primary/90'
+																	: ''
+															}
+														>
+															{page}
+														</Button>
+													</div>
+												)
+											})}
+									</div>
+
+									<Button
+										variant="outline"
+										onClick={goToNextPage}
+										disabled={validPage === totalPages}
+										className="gap-2"
+									>
+										Next
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path d="m9 18 6-6-6-6" />
+										</svg>
+									</Button>
+								</div>
+							</div>
+						)}
+
+						{/* Footer links */}
+						<div className="mt-16 border-t border-border/30 pt-16">
+							<div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+								<Button variant="outline" asChild>
+									<Link
+										href="https://docs.dokploy.com"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Documentation
+									</Link>
+								</Button>
+								<Button variant="outline" asChild>
+									<Link
+										href="https://github.com/Dokploy/dokploy"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										GitHub
+									</Link>
+								</Button>
+								<Button variant="outline" asChild>
+									<Link
+										href="https://discord.gg/dokploy"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Community
+									</Link>
+								</Button>
 							</div>
 						</div>
-					))}
-				</div>
+					</div>
+				</Container>
 			</div>
 		</div>
 	)

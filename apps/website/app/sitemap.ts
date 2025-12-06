@@ -16,6 +16,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			changeFrequency: 'monthly',
 			priority: 0.8,
 		},
+		{
+			url: 'https://dokploy.com/pricing',
+			lastModified: new Date(),
+			changeFrequency: 'monthly',
+			priority: 0.9,
+		},
+		{
+			url: 'https://dokploy.com/changelog',
+			lastModified: new Date(),
+			changeFrequency: 'weekly',
+			priority: 0.9,
+		},
 		...posts.map((post) => ({
 			url: `https://dokploy.com/blog/${post.slug}`,
 			lastModified: new Date(post.published_at),
