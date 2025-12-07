@@ -23,6 +23,64 @@ Domains are supported for:
 - **Applications**
 - **Docker Compose**
 
+## How Domains Are Managed
+
+Dokploy handles domains differently depending on whether you're using Applications or Docker Compose:
+
+### Applications
+
+For **Applications**, Dokploy creates a unique configuration file for each domain you create or update. These files are managed automatically and can be viewed in:
+
+- **Traefik File System**: Accessible through the Dokploy UI
+- **Advanced Settings**: Scroll to the bottom of the Advanced tab to view the Traefik configuration
+
+Each domain configuration follows this structure:
+
+```yaml
+http:
+  routers:
+    dokploy-app-name-router-1:
+      rule: Host(`your-domain.com`)
+      service: dokploy-app-name-service-1
+      middlewares:
+        - redirect-to-https
+      entryPoints:
+        - web
+    dokploy-app-name-router-websecure-1:
+      rule: Host(`your-domain.com`)
+      service: dokploy-app-name-service-1
+      middlewares: []
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+  services:
+    dokploy-app-name-service-1:
+      loadBalancer:
+        servers:
+          - url: http://dokploy-app-name:3000
+        passHostHeader: true
+```
+
+**Key Points for Applications:**
+
+- **No Redeployment Required**: Changes to domains take effect immediately without needing to redeploy your application
+- **Hot Reload**: Dokploy uses Traefik's [File Provider](https://doc.traefik.io/traefik/reference/install-configuration/providers/others/file/) which supports hot reloading, so configuration changes are applied automatically
+- **Troubleshooting**: If you make changes and your domain doesn't work, check the Traefik logs for any errors. The logs should provide helpful information about what might be wrong
+
+### Docker Compose
+
+For **Docker Compose**, domains are managed using [Traefik Docker Labels](https://doc.traefik.io/traefik/expose/docker/). This means:
+
+- **No Configuration Files**: Domains are configured directly through Docker labels in your compose file
+- **Redeployment Required**: Unlike Applications, you **must redeploy** your Docker Compose application for domain changes to take effect
+- **No Hot Reload**: Docker Compose does not support hot reloading of domain configurations, so Traefik needs to read the labels from a fresh deployment
+
+**Key Points for Docker Compose:**
+
+- Each time you modify a domain, you need to redeploy the application
+- Domain changes are applied when Traefik reads the Docker labels during deployment
+- For more details on configuring domains manually with Docker Compose, see the [Docker Compose Domains guide](/docs/core/docker-compose/domains)
 
 ## Requirements (Optional)
 
