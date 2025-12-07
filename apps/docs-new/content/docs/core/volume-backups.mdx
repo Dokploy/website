@@ -1,0 +1,142 @@
+---
+title: "Volume Backups"
+description: "Learn how to backup your volumes using Dokploy's Volume Backups feature"
+---
+
+Volume backups are essential when your service doesn't fit the traditional database backup solutions. This is common when your application uses SQLite databases or doesn't have a database at all, making Dokploy's dedicated database backup features (PostgreSQL, MySQL, MongoDB, etc.) unsuitable for your use case.
+
+Volume backups allow you to backup [Docker named volumes](https://docs.docker.com/engine/storage/volumes/) to S3 destinations, providing a comprehensive backup solution for any type of data stored in volumes.
+
+## Supported Services
+
+Volume backups are available for:
+
+1. **Applications** - Single container applications
+2. **Docker Compose** - Multi-container applications
+
+## Setting Up Volume Mounts
+
+### For Applications
+
+1. Navigate to your application
+2. Go to **Advanced** → **Mounts**
+3. Create a new mount and select **Volume Mount** option
+
+### For Docker Compose
+
+Define volumes directly in your `docker-compose.yml` file:
+
+```yaml
+services:
+  app:
+    image: dokploy/dokploy:latest
+    volumes:
+      - my-volume:/app/data
+
+volumes:
+  my-volume:
+```
+
+## Practical Example: N8N Backup
+
+Let's walk through a common scenario using N8N, which runs on SQLite and stores data in Docker volumes.
+
+### N8N Docker Compose Configuration
+
+```yaml
+version: "3.8"
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:1.83.2
+    restart: always
+    environment:
+      - N8N_HOST=${N8N_HOST}
+      - N8N_PORT=${N8N_PORT}
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://${N8N_HOST}/
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - N8N_SECURE_COOKIE=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
+```
+
+Since N8N uses SQLite (stored in the `n8n_data` volume), we can't use Dokploy's database backup features. Instead, we'll backup the entire volume.
+
+## Creating Volume Backups
+
+### Backup Configuration
+
+1. Deploy your N8N template
+2. Navigate to **Volume Backups** section
+3. Create a new volume backup with these settings:
+
+| Setting | Value | Description |
+|---------|-------|-------------|
+| **Name** | `my-n8n-backup` | Unique identifier for your backup |
+| **Schedule** | `0 0 * * *` | Daily backup at midnight (cron format) |
+| **Destination** | Your S3 destination | Must be configured in your account |
+| **Service Name** | `n8n` | Auto-complete will suggest available services |
+| **Volume Name** | `n8n_data` | Auto-filled when service is selected |
+| **Backup Prefix** | Optional | Additional prefix for backup files |
+| **Turn off Container** | Optional | See safety considerations below |
+| **Enabled** | ✓ | Enable the backup schedule |
+
+### Safety Considerations
+
+**Turn off Container during backup** option provides two approaches:
+
+- **Container OFF** (Recommended): Safer option that prevents data corruption during backup, this will stop the container during the backup, and then start it again after the backup is done.
+- **Container ON**: Faster but may cause inconsistencies if the service is actively writing to the volume
+
+<Callout type="warning">
+    When backing up with the container running, there's a risk of data corruption if the application is actively writing to the volume during backup.
+</Callout>
+
+## Restoring Volume Backups
+
+### Restore Process
+
+1. Navigate to **Volume Backups** section
+2. Select **Restore Volume** option
+3. Choose your S3 destination where the backup is stored
+4. Select the specific backup you want to restore
+5. Enter the target volume name for restoration
+
+### Volume Naming for Docker Compose
+
+For Docker Compose services, volume names follow a specific pattern:
+`{appName}_{volumeName}`
+
+**Example**: If your app name is `n8n-n8n-kqlble`, the volume name would be:
+`n8n-n8n-kqlble_n8n_data`
+
+### Important Restore Considerations
+
+<Callout type="warning">
+    **Before restoring:**
+    - Ensure the target volume doesn't already exist
+    - Stop any containers using the volume
+    - Remove the existing volume if necessary
+    
+    The restore will fail if the volume is in use or already exists.
+</Callout>
+
+### Finding the Correct Volume Name
+
+1. **Check your Docker Compose file** to understand the volume structure
+2. **Verify the app name** in Dokploy (usually under the name of your service)
+3. **Use the pattern**: `{appName}_{volumeName}` for Docker Compose services
+4. **For single applications**: Volume names are typically simpler and match your mount configuration
+
+This ensures your restored volume will be properly recognized and used by your Docker Compose services when they restart.
+
+
+
+
+
+
+

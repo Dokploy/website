@@ -1,0 +1,13 @@
+{
+	"title": "CLI",
+	"description": "CLI Documentation",
+	"icon": "Building2",
+	"root": true,
+	"pages": [
+		"---Get Started---",
+		"index",
+		"comparisons",
+		"---Commands---",
+		"..."
+	]
+}

@@ -1,0 +1,19 @@
+---
+title: GHCR
+description: 'Configure GitHub Container Registry to store your images and artifacts.'
+---
+
+To configure a GitHub Container Registry, you need to fill the form with the following details:
+
+1. Insert the Registry Name eg. `My Registry`.
+2. Insert the Username eg. `github_username`.
+3. Insert the Password, you can use your own github password or generate a token here `https://github.com/settings/tokens`
+4. Click on Generate Token (Classic).
+5. Insert the Note Description eg. `github_token`.
+6. In permissions make sure to select `write:packages`.
+7. Click on `Create`.
+8. Copy the `access token` and paste it in Dokploy Modal as a Password field.
+9. (Optional) If you pretend to use Cluster Feature, make sure to set a `Image Prefix`.
+10. Registry URL: set `ghcr.io`
+11. Click on `Test` to make sure everything is working.
+12. Click on `Create` to save the registry.

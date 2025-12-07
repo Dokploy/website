@@ -1,0 +1,22 @@
+---
+title: Digital Ocean
+description: 'Configure a Digital Ocean Container Registry to store your images and artifacts.'
+---
+
+To configure a Digital Ocean Container Registry, you need to fill the form with the following details:
+
+1. Insert the Registry Name eg. `My Registry`.
+2. Go to `https://cloud.digitalocean.com/registry/new` and click on `Create a Container Registry`.
+3. Insert a lowercase name eg. `dokploy-username`.
+4. Click on `Create Registry`.
+5. Click on `Actions` and then `Download Docker Credentials`.
+6. In Permissions select `Read` and `Write`.
+7. Open the downloaded file and copy the auth value and type as `Password` in Dokploy Modal.
+7. Go to `https://cloud.digitalocean.com/account/api/tokens` and click on `Generate New Token`.
+8. In permissions select `Registry`.
+7. Click on `Create`.
+8. Copy the `access token` and paste it in Dokploy Modal as a `Username` field.
+9. (Optional) If you pretend to use Cluster Feature, make sure to set a `Image Prefix`.
+10. Registry URL: set `registry.digitalocean.com`
+11. Click on `Test` to make sure everything is working.
+12. Click on `Create` to save the registry.

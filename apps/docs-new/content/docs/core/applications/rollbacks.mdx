@@ -1,0 +1,84 @@
+---
+title: Rollbacks
+description: Learn how to rollback your application in Dokploy.
+---
+
+Rollbacks are a powerful feature that allows you to easily revert changes to your application. This is particularly useful when you encounter issues or want to revert to a previous version of your application.
+
+
+## Requirements
+
+1. Have a `/health` endpoint in your application.
+2. Have `curl` available in your container (if you use alpine for example, it won't be installed by default).
+
+## Steps to Rollback
+
+
+Let's suppose we have a NodeJS application that has a health check route `/api/health` that returns a 200 status code and running in the port 3000.
+
+1. In your application is necessary to have a `Path` or `Health Route` to be able to achieve zero downtime deployments eg. in the case of a NodeJS app you can have a route `/api/health` that returns a 200 status code.
+2. Go to `Advanced` Tab and go to Cluster Settings and enter to `Swarm Settings`
+3. There are a couple options that you can use, in this case we will focus on `Health Check` and `Update Config`.
+4. Paste this code in the health check field:
+Make sure the API Route exists in your application
+
+```json
+{
+  "Test": [
+    "CMD",
+    "curl",
+    "-f",
+    "http://localhost:3000/api/health"
+  ],
+  "Interval": 30000000000,
+  "Timeout": 10000000000,
+  "StartPeriod": 30000000000,
+  "Retries": 3
+}
+```
+5. Now in the `Update Config`
+
+Now when the application is getting unhealthy response from the health check, the container will rollback to the previous version.
+
+Paste the following code:
+```json
+{
+  "Parallelism": 1,
+  "Delay": 10000000000,
+  "FailureAction": "rollback",
+  "Order": "start-first"
+}
+```
+
+## Rollback to a specific version
+
+The previous steps covered Docker Swarm's automatic rollback feature. Since v0.23.0, Dokploy also supports manual rollbacks to specific deployment points, giving you more control over your application versions.
+
+### Enabling Rollback Feature
+
+To start saving deployment snapshots for rollbacks:
+
+1. Navigate to your application
+2. Go to **Deployments** → **Rollback Settings**
+3. Enable the **Rollback** option
+
+### How it works
+
+- **Automatic snapshots**: Every time you deploy, Dokploy creates a rollback point associated with that deployment
+- **Manual rollback**: Click the **Rollback** button next to any deployment to revert to that specific version
+- **Automatic cleanup**: When old deployments are deleted, their associated rollback snapshots and images are also removed to save space
+
+### Performing a rollback
+
+1. Go to your application's **Deployments** section
+2. Find the deployment version you want to rollback to
+3. Click the **Rollback** button next to that deployment
+4. Confirm the rollback action
+
+<Callout type="info">
+    Having rollbacks enabled will increase storage usage, as it saves previous versions of your application. Consider your storage capacity when enabling this feature.
+</Callout>
+
+<Callout type="warning">
+    **Important**: If you manually clean Docker images using commands like `docker image prune` or `docker system prune`, the rollback snapshots may be lost. Avoid cleaning Docker images if you want to preserve your rollback history.
+</Callout>
