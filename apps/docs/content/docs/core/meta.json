@@ -42,6 +42,7 @@
 	"---Remote Servers---",
 	"remote-servers/index",
 	"remote-servers/instructions",
+	"remote-servers/build-server",
 	"remote-servers/deployments",
 	"remote-servers/security",
 	"remote-servers/validate",
