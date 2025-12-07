@@ -9,5 +9,18 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ImageZoom,
     Callout,
     ...components,
+    p: ({ children }) => (
+      <p className="text-[#3E4342] dark:text-muted-foreground">
+        {children}
+      </p>
+    ),
+    li: ({ children, id }) => (
+      <li
+        {...{ id }}
+        className="text-[#3E4342] dark:text-muted-foreground"
+      >
+        {children}
+      </li>
+    ),
   };
 }

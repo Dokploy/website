@@ -1,7 +1,7 @@
 {
 	"title": "Core",
 	"description": "The core of Dokploy",
-	"icon": "Building2",
+	"icon": "Package",
 	"root": true,
 	"pages": [
 		"---Introduction---",
@@ -38,10 +38,16 @@
 		"auto-deploy",
 		"schedule-jobs",
 		"volume-backups",
-		"providers",
-		"watch-paths",
-		"---Advanced---",
-		"cluster",
-		"multi-server"
-	]
+	"providers",
+	"watch-paths",
+	"---Remote Servers---",
+	"remote-servers/index",
+	"remote-servers/instructions",
+	"remote-servers/deployments",
+	"remote-servers/ec2-instructions",
+	"remote-servers/security",
+	"remote-servers/validate",
+	"---Advanced---",
+	"cluster"
+]
 }
