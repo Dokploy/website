@@ -292,3 +292,17 @@ To upgrade Dokploy manually, you can use the following command:
 curl -sSL https://dokploy.com/install.sh | sh -s update
 ```
 
+To use a specific version, you can use the following command:
+
+```bash
+export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
+export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
+curl -sSL https://dokploy.com/install.sh | sh (defaults to latest)
+```
+
+Alternatively, you can use `bash -s`:
+
+```bash
+DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
+DOKPLOY_VERSION=feature bash -s < <(curl -sSL https://dokploy.com/install.sh)
+```
