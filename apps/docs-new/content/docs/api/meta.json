@@ -3,5 +3,5 @@
 	"description": "API Documentation",
 	"icon": "Code",
 	"root": true,
-	"pages": ["---Get Started---", "index", "---API---", "...", "---Reference---"]
+	"pages": ["---Get Started---", "index", "---Reference---", "..."]
 }
