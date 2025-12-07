@@ -49,6 +49,7 @@
 	"remote-servers/validate",
 	"---Guides---",
 	"guides/cloudflare-tunnels",
+	"guides/tailscale",
 	"guides/ec2-instructions",
 	"---Advanced---",
 	"cluster"
