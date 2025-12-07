@@ -15,10 +15,7 @@ export const openapi = createOpenAPI({
   input: ['./public/openapi.json'],
 });
 
-export const APIPage = createAPIPage(openapi, {
-  // options
-  
-});
+export const APIPage = createAPIPage(openapi);
 
 export function getPageImage(page: InferPageType<typeof source>) {
   const segments = [...page.slugs, 'image.png'];

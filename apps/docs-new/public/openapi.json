@@ -27,7 +27,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -171,7 +171,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -210,7 +210,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -261,7 +261,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -310,7 +310,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -380,7 +380,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -441,7 +441,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -490,7 +490,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -539,7 +539,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -596,7 +596,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -636,7 +636,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -666,7 +666,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -716,7 +716,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -783,7 +783,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -875,7 +875,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -940,7 +940,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -979,7 +979,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1032,7 +1032,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1081,7 +1081,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1130,7 +1130,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1179,7 +1179,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1235,7 +1235,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1296,7 +1296,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1387,7 +1387,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1477,7 +1477,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1572,7 +1572,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1657,7 +1657,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1742,7 +1742,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1807,7 +1807,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1883,7 +1883,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1932,7 +1932,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -1981,7 +1981,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -2659,7 +2659,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -2708,7 +2708,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -2764,7 +2764,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -2813,7 +2813,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -2862,7 +2862,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -2901,7 +2901,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -2954,7 +2954,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -2993,7 +2993,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3046,7 +3046,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3095,7 +3095,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3186,7 +3186,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -3225,7 +3225,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3274,7 +3274,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3323,7 +3323,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3377,7 +3377,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3426,7 +3426,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3485,7 +3485,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3539,7 +3539,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3588,7 +3588,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -3641,7 +3641,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4041,7 +4041,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4094,7 +4094,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4143,7 +4143,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4228,7 +4228,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -4267,7 +4267,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4316,7 +4316,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4365,7 +4365,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4419,7 +4419,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4468,7 +4468,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4527,7 +4527,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4576,7 +4576,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4629,7 +4629,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -4682,7 +4682,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5077,7 +5077,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5130,7 +5130,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5179,7 +5179,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5254,7 +5254,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -5293,7 +5293,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5342,7 +5342,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5396,7 +5396,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5445,7 +5445,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5499,7 +5499,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5548,7 +5548,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5607,7 +5607,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5656,7 +5656,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -5709,7 +5709,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6096,7 +6096,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6149,7 +6149,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6198,7 +6198,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6284,7 +6284,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -6323,7 +6323,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6372,7 +6372,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6421,7 +6421,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6475,7 +6475,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6524,7 +6524,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6583,7 +6583,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6637,7 +6637,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6686,7 +6686,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -6739,7 +6739,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7136,7 +7136,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7189,7 +7189,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7238,7 +7238,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7329,7 +7329,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -7368,7 +7368,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7417,7 +7417,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7466,7 +7466,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7520,7 +7520,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7569,7 +7569,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7628,7 +7628,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7677,7 +7677,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7730,7 +7730,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -7784,7 +7784,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8184,7 +8184,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8237,7 +8237,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8286,7 +8286,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8361,7 +8361,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -8401,7 +8401,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8630,7 +8630,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8684,7 +8684,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8734,7 +8734,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8784,7 +8784,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -8844,7 +8844,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -8893,7 +8893,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8943,7 +8943,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -8996,7 +8996,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9049,7 +9049,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -9089,7 +9089,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9145,7 +9145,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9201,7 +9201,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9251,7 +9251,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9301,7 +9301,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -9341,7 +9341,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9391,7 +9391,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9450,7 +9450,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -9489,7 +9489,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -9528,7 +9528,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9578,7 +9578,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9631,7 +9631,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9685,7 +9685,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9739,7 +9739,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -9789,7 +9789,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -9819,7 +9819,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -9858,7 +9858,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -9888,7 +9888,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -9918,7 +9918,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -9948,7 +9948,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -9978,7 +9978,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10243,7 +10243,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -10283,7 +10283,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -10313,7 +10313,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10362,7 +10362,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10477,7 +10477,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -10507,7 +10507,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -10570,7 +10570,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -10600,7 +10600,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10649,7 +10649,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10736,7 +10736,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -10775,7 +10775,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10830,7 +10830,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -10938,7 +10938,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -10977,7 +10977,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -11017,7 +11017,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11069,7 +11069,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -11108,7 +11108,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11208,7 +11208,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -11247,7 +11247,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11296,7 +11296,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11348,7 +11348,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11426,7 +11426,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11504,7 +11504,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -11543,7 +11543,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -11573,7 +11573,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11622,7 +11622,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11704,7 +11704,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11824,7 +11824,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -11863,7 +11863,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -11957,7 +11957,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12006,7 +12006,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12055,7 +12055,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12104,7 +12104,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12153,7 +12153,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12202,7 +12202,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12251,7 +12251,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12300,7 +12300,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12355,7 +12355,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12395,7 +12395,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12435,7 +12435,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12475,7 +12475,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12532,7 +12532,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12582,7 +12582,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12622,7 +12622,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12671,7 +12671,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12710,7 +12710,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12803,7 +12803,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -12852,7 +12852,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -12891,7 +12891,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13010,7 +13010,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -13050,7 +13050,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13128,7 +13128,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -13168,7 +13168,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13218,7 +13218,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13248,7 +13248,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13278,7 +13278,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13308,7 +13308,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13338,7 +13338,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13384,7 +13384,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13433,7 +13433,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13479,7 +13479,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13525,7 +13525,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13571,7 +13571,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13617,7 +13617,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13663,7 +13663,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13709,7 +13709,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13739,7 +13739,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13789,7 +13789,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13855,7 +13855,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13885,7 +13885,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -13937,7 +13937,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -13967,7 +13967,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14017,7 +14017,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14047,7 +14047,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14097,7 +14097,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14127,7 +14127,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14177,7 +14177,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14207,7 +14207,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14237,7 +14237,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14267,7 +14267,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14297,7 +14297,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -14336,7 +14336,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14394,7 +14394,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -14442,7 +14442,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14472,7 +14472,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14502,7 +14502,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -14541,7 +14541,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14593,7 +14593,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -14632,7 +14632,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14662,7 +14662,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14711,7 +14711,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14741,7 +14741,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14771,7 +14771,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -14801,7 +14801,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14847,7 +14847,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -14886,7 +14886,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -14963,7 +14963,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -15002,7 +15002,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15052,7 +15052,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -15082,7 +15082,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -15112,7 +15112,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15171,7 +15171,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -15211,7 +15211,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15261,7 +15261,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15321,7 +15321,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15384,7 +15384,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -15424,7 +15424,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15474,7 +15474,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15538,7 +15538,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15612,7 +15612,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -15652,7 +15652,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15702,7 +15702,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15776,7 +15776,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15855,7 +15855,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15905,7 +15905,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -15990,7 +15990,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -16020,7 +16020,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -16060,7 +16060,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16136,7 +16136,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -16175,7 +16175,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16227,7 +16227,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -16266,7 +16266,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -16305,7 +16305,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16391,7 +16391,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16479,7 +16479,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16533,7 +16533,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16624,7 +16624,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16717,7 +16717,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16776,7 +16776,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16862,7 +16862,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -16951,7 +16951,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17004,7 +17004,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17114,7 +17114,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17223,7 +17223,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17301,7 +17301,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17350,7 +17350,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -17389,7 +17389,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -17419,7 +17419,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17500,7 +17500,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17592,7 +17592,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17686,7 +17686,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17749,7 +17749,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17841,7 +17841,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17935,7 +17935,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -17999,7 +17999,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18077,7 +18077,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18160,7 +18160,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18210,7 +18210,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -18240,7 +18240,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18306,7 +18306,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18355,7 +18355,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -18394,7 +18394,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -18424,7 +18424,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18474,7 +18474,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18535,7 +18535,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -18565,7 +18565,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18615,7 +18615,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18706,7 +18706,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -18746,7 +18746,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -18776,7 +18776,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -18816,7 +18816,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -18873,7 +18873,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -18922,7 +18922,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19016,7 +19016,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19056,7 +19056,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19133,7 +19133,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19173,7 +19173,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -19203,7 +19203,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19243,7 +19243,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19298,7 +19298,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19364,7 +19364,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19442,7 +19442,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19532,7 +19532,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19572,7 +19572,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -19602,7 +19602,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19642,7 +19642,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19705,7 +19705,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19754,7 +19754,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -19842,7 +19842,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19882,7 +19882,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19922,7 +19922,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -19979,7 +19979,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20009,7 +20009,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20059,7 +20059,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20148,7 +20148,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20227,7 +20227,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -20267,7 +20267,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -20307,7 +20307,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20337,7 +20337,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20367,7 +20367,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20397,7 +20397,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20427,7 +20427,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20477,7 +20477,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -20517,7 +20517,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -20557,7 +20557,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20706,7 +20706,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20756,7 +20756,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -20843,7 +20843,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20873,7 +20873,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20903,7 +20903,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -20958,7 +20958,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -20988,7 +20988,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21046,7 +21046,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -21076,7 +21076,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -21106,7 +21106,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21145,7 +21145,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21192,7 +21192,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21231,7 +21231,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21270,7 +21270,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21318,7 +21318,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21386,7 +21386,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21457,7 +21457,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -21487,7 +21487,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21526,7 +21526,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21575,7 +21575,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21631,7 +21631,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21754,7 +21754,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21806,7 +21806,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -21836,7 +21836,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -21875,7 +21875,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21931,7 +21931,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -21980,7 +21980,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [],
@@ -22010,7 +22010,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22059,7 +22059,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22116,7 +22116,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22166,7 +22166,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22275,7 +22275,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22386,7 +22386,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22435,7 +22435,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -22488,7 +22488,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -22527,7 +22527,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22577,7 +22577,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22627,7 +22627,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22677,7 +22677,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -22734,7 +22734,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22860,7 +22860,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -22900,7 +22900,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -22950,7 +22950,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -23081,7 +23081,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -23131,7 +23131,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -23189,7 +23189,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -23229,7 +23229,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "parameters": [
@@ -23268,7 +23268,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -23318,7 +23318,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -23385,7 +23385,7 @@
         ],
         "security": [
           {
-            "Authorization": []
+            "x-api-key": []
           }
         ],
         "requestBody": {
@@ -23445,11 +23445,11 @@
         "name": "x-api-key",
         "description": "API key authentication. Generate an API key from your Dokploy dashboard under Settings > API Keys."
       },
-      "Authorization": {
+      "x-api-key": {
         "type": "apiKey",
         "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication using Authorization header"
+        "name": "x-api-key",
+        "description": "API key authentication. Use YOUR-GENERATED-API-KEY"
       }
     },
     "responses": {
@@ -23613,6 +23613,9 @@
   "security": [
     {
       "apiKey": []
+    },
+    {
+      "x-api-key": []
     }
   ]
 }

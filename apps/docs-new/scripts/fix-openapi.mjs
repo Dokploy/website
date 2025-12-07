@@ -11,21 +11,62 @@ try {
 	let fixed = 0;
 	let securityFixed = false;
 	
-	// Fix missing Authorization security scheme
+	// Remove Authorization security scheme and add x-api-key
 	if (!openapi.components) {
 		openapi.components = {};
 	}
 	if (!openapi.components.securitySchemes) {
 		openapi.components.securitySchemes = {};
 	}
-	if (!openapi.components.securitySchemes.Authorization) {
-		openapi.components.securitySchemes.Authorization = {
+	
+	// Remove old Authorization scheme
+	if (openapi.components.securitySchemes['Authorization']) {
+		delete openapi.components.securitySchemes['Authorization'];
+		securityFixed = true;
+	}
+	
+	// Add x-api-key scheme
+	if (!openapi.components.securitySchemes['x-api-key']) {
+		openapi.components.securitySchemes['x-api-key'] = {
 			type: 'apiKey',
 			in: 'header',
-			name: 'Authorization',
-			description: 'API key authentication using Authorization header'
+			name: 'x-api-key',
+			description: 'API key authentication. Use YOUR-GENERATED-API-KEY'
 		};
 		securityFixed = true;
+	}
+	
+	// Replace global security from Authorization to x-api-key
+	if (openapi.security) {
+		openapi.security = openapi.security.filter(
+			sec => !sec['Authorization']
+		);
+	} else {
+		openapi.security = [];
+	}
+	
+	const hasApiKeySecurity = openapi.security.some(
+		sec => sec['x-api-key']
+	);
+	if (!hasApiKeySecurity) {
+		openapi.security.push({ 'x-api-key': [] });
+		securityFixed = true;
+	}
+	
+	// Replace Authorization with x-api-key in all operation security
+	for (const [path, pathItem] of Object.entries(openapi.paths || {})) {
+		for (const [method, operation] of Object.entries(pathItem)) {
+			if (operation && operation.security) {
+				// Replace Authorization with x-api-key
+				operation.security = operation.security.map(sec => {
+					if (sec['Authorization'] !== undefined) {
+						securityFixed = true;
+						return { 'x-api-key': [] };
+					}
+					return sec;
+				});
+			}
+		}
 	}
 	
 	// Fix empty response schemas
@@ -54,7 +95,7 @@ try {
 	if (fixed > 0 || securityFixed) {
 		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
 		if (fixed > 0) console.log(`✓ Fixed ${fixed} empty response schemas`);
-		if (securityFixed) console.log(`✓ Added missing Authorization security scheme`);
+		if (securityFixed) console.log("✓ Added x-api-key security scheme");
 	} else {
 		console.log('✓ No fixes needed');
 	}
