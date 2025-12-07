@@ -12,6 +12,7 @@
     "build:docs": "npm run fix-openapi && node generate-docs.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "16.0.7",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -20,7 +21,7 @@
     "fumadocs-openapi": "10.1.1",
     "fumadocs-ui": "16.2.3",
     "lucide-react": "^0.552.0",
-    "next": "16.0.1",
+    "next": "16.0.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "shiki": "3.19.0",
