@@ -23449,7 +23449,8 @@
         "type": "apiKey",
         "in": "header",
         "name": "x-api-key",
-        "description": "API key authentication. Use YOUR-GENERATED-API-KEY"
+        "description": "API key authentication. Use YOUR-GENERATED-API-KEY",
+        "x-default": "your-key"
       }
     },
     "responses": {

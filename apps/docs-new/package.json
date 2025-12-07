@@ -9,7 +9,7 @@
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
     "fix-openapi": "node scripts/fix-openapi.mjs",
-		"build:docs": "npm run fix-openapi && node generate-docs.mjs"
+    "build:docs": "npm run fix-openapi && node generate-docs.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.16",
@@ -23,7 +23,7 @@
     "next": "16.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "shiki": "1.22.2",
+    "shiki": "3.19.0",
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {

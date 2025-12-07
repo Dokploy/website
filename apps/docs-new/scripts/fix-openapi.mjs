@@ -26,15 +26,14 @@ try {
 	}
 	
 	// Add x-api-key scheme
-	if (!openapi.components.securitySchemes['x-api-key']) {
-		openapi.components.securitySchemes['x-api-key'] = {
-			type: 'apiKey',
-			in: 'header',
-			name: 'x-api-key',
-			description: 'API key authentication. Use YOUR-GENERATED-API-KEY'
-		};
-		securityFixed = true;
-	}
+	openapi.components.securitySchemes['x-api-key'] = {
+		type: 'apiKey',
+		in: 'header',
+		name: 'x-api-key',
+		description: 'API key authentication. Use YOUR-GENERATED-API-KEY',
+		'x-default': 'your-key'
+	};
+	securityFixed = true;
 	
 	// Replace global security from Authorization to x-api-key
 	if (openapi.security) {
