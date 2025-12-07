@@ -70,6 +70,18 @@ Dokploy expose 3 Fields to be configured:
 - `Docker Context Path`: This is where the Dockerfile is located, eg. If your Dockerfile is in the root of your application you can just specify the `.` (dot) character, is basically to tell docker what context will use to build your application, you can read [Dockerfile Context](https://docs.docker.com/build/concepts/context/) for more information.
 - `Docker Build Stage`: This is the build stage to use for building the application, eg. If you want to use the `builder` stage you can specify the `builder` stage, read more about build stages [here](https://docs.docker.com/build/building/multi-stage/).
 
+#### Environment Variables for Dockerfile Builds
+
+When you enable the Dockerfile build type, two additional fields become available in the **Environment** tab:
+
+- **Build Time Arguments**: Configure [build arguments (ARG)](https://docs.docker.com/build/building/variables/) that are passed to your Dockerfile during the build process. Build arguments allow you to parameterize your Dockerfile, making it more flexible and reusable. For example, you can specify versions of dependencies, feature flags, or other build-time configurations.
+
+- **Build-time Secrets**: Configure [build secrets](https://docs.docker.com/build/building/secrets/) to securely pass sensitive information (such as API tokens, passwords, or SSH keys) to your build process. Unlike build arguments, secrets are not exposed in the final image or build history, making them the recommended way to handle sensitive data during builds.
+
+<Callout type="info">
+  Build arguments and environment variables are inappropriate for passing secrets, as they persist in the final image. Always use build-time secrets for sensitive information like API tokens or passwords.
+</Callout>
+
 
 
 ### Buildpack
