@@ -99,6 +99,31 @@ Assigns metadata to containers to help identify and organize them, the configura
 Modifying Swarm Settings requires careful consideration as incorrect configurations can disrupt the entire container orchestration. Always ensure you understand the implications of the changes you are making.
 
 
+## Build Server
+
+You can configure your application to use an external build server to compile and build your application. This feature allows you to separate the build process from your deployment servers, which is particularly useful when you want to:
+
+- Use powerful build resources without paying for expensive deployment servers
+- Keep your deployment servers lightweight
+- Build once and deploy to multiple servers
+- Isolate the build process from production environments
+
+When you enable a custom build server:
+
+1. **Build Phase**: Dokploy connects to your build server via SSH, clones your repository, and builds the Docker image on the build server
+2. **Push Phase**: The built image is pushed to your configured Docker registry
+3. **Deploy Phase**: Your deployment server(s) pull the image from the registry and deploy it
+
+<Callout type="info">
+  **Important**: Build servers are currently **only available for Applications**. This feature is not supported for Docker Compose deployments.
+</Callout>
+
+<Callout type="warn">
+  **Required Configuration**: When using a build server, you must configure a Docker registry in your Dokploy settings. The built image needs to be stored in a registry that's accessible to your deployment servers. See [Docker Registry](/docs/core/registry) for configuration details.
+</Callout>
+
+**For complete setup instructions, configuration details, and best practices, please read the comprehensive [Build Server guide](/docs/core/remote-servers/build-server).**
+
 ## Resources
 
 Manage the memory and CPU resources allocated to your applications or databases. These settings help control resource consumption and ensure fair distribution across your containers.
