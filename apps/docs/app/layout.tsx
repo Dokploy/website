@@ -1,18 +1,29 @@
-import "./global.css";
-import { RootProvider } from "fumadocs-ui/provider";
-import { Inter } from "next/font/google";
-import type { ReactNode } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { RootProvider } from 'fumadocs-ui/provider/next';
+import './global.css';
+import { Inter } from 'next/font/google';
+import type { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: ['latin'],
 });
 
-export default async function Layout({
-  children,
-  ...rest
-}: {
-  children: ReactNode;
-}) {
+export const metadata: Metadata = {
+  title: {
+    default: 'Dokploy Documentation',
+    template: '%s | Dokploy',
+  },
+  description: 'Open Source Alternative to Vercel, Netlify and Heroku. Deploy your applications with ease.',
+  keywords: ['dokploy', 'deployment', 'docker', 'hosting', 'devops', 'open source'],
+  authors: [{ name: 'Dokploy Team' }],
+  openGraph: {
+    title: 'Dokploy Documentation',
+    description: 'Open Source Alternative to Vercel, Netlify and Heroku',
+    type: 'website',
+  },
+};
+
+export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">

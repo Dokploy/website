@@ -1,21 +1,10 @@
-import { baseOptions } from "@/app/layout.config";
-import { source } from "@/lib/source";
-import { baseUrl, createMetadata } from "@/utils/metadata";
-import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import type { ReactNode } from "react";
+import { source } from '@/lib/source';
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { baseOptions } from '@/lib/layout.shared';
 
-export const metadata = createMetadata({
-  title: {
-    template: "%s | Dokploy",
-    default: "Dokploy",
-  },
-  description: "The Open Source Alternative to Vercel, Heroku, and Netlify",
-  metadataBase: new URL(baseUrl),
-});
-
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: LayoutProps<'/docs'>) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions}>
+    <DocsLayout tree={source.pageTree} {...baseOptions()}>
       {children}
     </DocsLayout>
   );
