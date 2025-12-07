@@ -9302,7 +9302,10 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "name": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
                     "type": "string"
                   },
                   "isRegistered": {
@@ -9518,6 +9521,9 @@
                     "type": "string"
                   },
                   "currentPassword": {
+                    "type": "string"
+                  },
+                  "name": {
                     "type": "string"
                   }
                 },
