@@ -30,25 +30,27 @@ services:
 
 When Isolated Deployments is enabled, Dokploy will:
 
-1. Add a prefix to all your defined networks
-2. Create a network based on your service's appName and associate it with each service in your compose file
+1. Create a network based on your `appName` and associate it with each service in your compose file
+2. Add the network to every service in your compose file
 3. Connect the Traefik load balancer to this isolated network, maintaining service isolation while ensuring proper routing
 
 When using this feature, you don't need to explicitly define dokploy-network in your networks section, as isolation is handled automatically.
 
-## Randomize Compose
+<Callout type="warn">
+  **Important: Installation Type Considerations**
 
-Dokploy offers functionality to randomize various compose properties:
+  If you're using a **custom installation** that replaces the standalone Traefik container with a Docker service (see [Manual Installation](/docs/core/manual-installation)), be aware of the following risks:
 
-1. Volumes
-2. Networks
-3. Services
-4. Configs
-5. Secrets
+  1. **System Restart Issues**: If your system restarts, your services may lose their network references to Traefik. This happens because Docker Swarm changes network references after a restart, which can cause connectivity issues between your services and Traefik.
 
-You can specify a custom prefix that will be used as a suffix for each compose property.
+  2. **Manual Redeployment Required**: After a system restart, you may need to manually redeploy your Docker Compose applications to restore network connectivity, which can be tedious and time-consuming.
 
-Note: If both Isolated Deployments and Randomize Compose are enabled, the Isolated Deployments configuration takes precedence.
+  3. **Reference**: For more details about this issue, see [GitHub Issue #1004](https://github.com/Dokploy/dokploy/issues/1004).
+
+  **Recommended Approach**: If you use the **official installation** or **manual installation with the standalone Traefik container**, you won't experience these issues. Your services should start normally after a system restart without requiring manual intervention.
+</Callout>
+
+
 
 
 
