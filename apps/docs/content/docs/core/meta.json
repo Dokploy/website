@@ -43,9 +43,11 @@
 	"remote-servers/index",
 	"remote-servers/instructions",
 	"remote-servers/deployments",
-	"remote-servers/ec2-instructions",
 	"remote-servers/security",
 	"remote-servers/validate",
+	"---Guides---",
+	"guides/cloudflare-tunnels",
+	"guides/ec2-instructions",
 	"---Advanced---",
 	"cluster"
 ]
