@@ -21,6 +21,73 @@ To use this method:
 3. Click **Add Domain** and configure your domain
 4. Dokploy will automatically handle the routing configuration
 
+### How It Works
+
+At runtime, during the deployment phase, Dokploy automatically adds Traefik labels internally to your Docker Compose file. You don't need to manually add these labels - Dokploy handles this automatically based on the domains you configure in the UI.
+
+**Example:**
+
+Here's a default Docker Compose file:
+
+```yaml
+version: "3.8"
+
+services:
+  beszel:
+    image: henrygd/beszel:0.10.2
+    restart: unless-stopped
+    ports:
+      - 8090
+    volumes:
+      - beszel_data:/beszel_data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  beszel_data: {}
+```
+
+**Preview Compose Feature:**
+
+You can click the **Preview Compose** button to see the final Docker Compose file that will be executed. If you have at least one domain added, the preview will show the compose file with all the labels and network configurations automatically added.
+
+Here's what the final compose file looks like when deployed (this example uses [Isolated Deployments](/docs/core/docker-compose/utilities#isolated-deployments)):
+
+```yaml
+version: "3.8"
+
+services:
+  beszel:
+    image: henrygd/beszel:0.10.2
+    restart: unless-stopped
+    ports:
+      - 8090
+    volumes:
+      - beszel_data:/beszel_data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - a-beszel-a95pzl
+    labels:
+      - traefik.http.routers.a-beszel-a95pzl-715-web.rule=Host(`a-beszel-d073ee-31-220-108-27.traefik.me`)
+      - traefik.http.routers.a-beszel-a95pzl-715-web.entrypoints=web
+      - traefik.http.services.a-beszel-a95pzl-715-web.loadbalancer.server.port=8090
+      - traefik.http.routers.a-beszel-a95pzl-715-web.service=a-beszel-a95pzl-715-web
+      - traefik.enable=true
+
+volumes:
+  beszel_data: {}
+
+networks:
+  a-beszel-a95pzl:
+    name: a-beszel-a95pzl
+    external: true
+```
+
+**Important Notes:**
+
+- If you don't add any domains through the UI and don't use [Isolated Deployments](/docs/core/docker-compose/utilities#isolated-deployments), your application will be deployed exactly as you specified in your original Docker Compose file - no labels or network modifications will be added.
+- The Preview Compose button is useful for verifying how Dokploy will modify your compose file before deployment.
+- All label generation and network configuration is handled automatically by Dokploy based on your domain settings.
+
 For detailed instructions on using Dokploy's domain management, see the [Domains guide](/docs/core/domains).
 
 ## Method 2: Manual Configuration (Advanced)
