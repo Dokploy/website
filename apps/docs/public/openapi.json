@@ -15016,6 +15016,9 @@
                   "databaseBackup": {
                     "type": "boolean"
                   },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
                   "dokployRestart": {
                     "type": "boolean"
                   },
@@ -15042,6 +15045,7 @@
                 "required": [
                   "appBuildError",
                   "databaseBackup",
+                  "volumeBackup",
                   "dokployRestart",
                   "name",
                   "appDeploy",
@@ -15091,6 +15095,9 @@
                     "type": "boolean"
                   },
                   "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
                     "type": "boolean"
                   },
                   "dokployRestart": {
@@ -15222,6 +15229,9 @@
                   "databaseBackup": {
                     "type": "boolean"
                   },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
                   "dokployRestart": {
                     "type": "boolean"
                   },
@@ -15252,6 +15262,7 @@
                 "required": [
                   "appBuildError",
                   "databaseBackup",
+                  "volumeBackup",
                   "dokployRestart",
                   "name",
                   "appDeploy",
@@ -15302,6 +15313,9 @@
                     "type": "boolean"
                   },
                   "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
                     "type": "boolean"
                   },
                   "dokployRestart": {
@@ -15443,6 +15457,9 @@
                   "databaseBackup": {
                     "type": "boolean"
                   },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
                   "dokployRestart": {
                     "type": "boolean"
                   },
@@ -15469,6 +15486,7 @@
                 "required": [
                   "appBuildError",
                   "databaseBackup",
+                  "volumeBackup",
                   "dokployRestart",
                   "name",
                   "appDeploy",
@@ -15518,6 +15536,9 @@
                     "type": "boolean"
                   },
                   "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
                     "type": "boolean"
                   },
                   "dokployRestart": {
@@ -15649,6 +15670,9 @@
                   "databaseBackup": {
                     "type": "boolean"
                   },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
                   "dokployRestart": {
                     "type": "boolean"
                   },
@@ -15695,6 +15719,7 @@
                 "required": [
                   "appBuildError",
                   "databaseBackup",
+                  "volumeBackup",
                   "dokployRestart",
                   "name",
                   "appDeploy",
@@ -15748,6 +15773,9 @@
                     "type": "boolean"
                   },
                   "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
                     "type": "boolean"
                   },
                   "dokployRestart": {
@@ -16103,6 +16131,9 @@
                   "databaseBackup": {
                     "type": "boolean"
                   },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
                   "dokployRestart": {
                     "type": "boolean"
                   },
@@ -16134,6 +16165,7 @@
                 "required": [
                   "appBuildError",
                   "databaseBackup",
+                  "volumeBackup",
                   "dokployRestart",
                   "name",
                   "appDeploy",
@@ -16184,6 +16216,9 @@
                     "type": "boolean"
                   },
                   "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
                     "type": "boolean"
                   },
                   "dokployRestart": {
@@ -16330,6 +16365,9 @@
                   "databaseBackup": {
                     "type": "boolean"
                   },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
                   "dokployRestart": {
                     "type": "boolean"
                   },
@@ -16361,6 +16399,7 @@
                 "required": [
                   "appBuildError",
                   "databaseBackup",
+                  "volumeBackup",
                   "dokployRestart",
                   "name",
                   "appDeploy",
@@ -16411,6 +16450,9 @@
                     "type": "boolean"
                   },
                   "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
                     "type": "boolean"
                   },
                   "dokployRestart": {
