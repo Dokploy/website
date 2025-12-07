@@ -1,6 +1,6 @@
 {
 	"title": "Core",
-	"description": "The core of Dokploy",
+	"description": "Essential guides for deploying and managing applications, databases, and server configurations",
 	"icon": "Package",
 	"root": true,
 	"pages": [
