@@ -253,4 +253,106 @@ http://ubuntu-2gb-ash-4.tail1ff529.ts.net:3000
   Replace `ubuntu-2gb-ash-4.tail1ff529.ts.net` with your actual server's Full Domain from the Tailscale admin console.
 </Callout>
 
+## Securing Your Server with UFW
 
+Once Tailscale is configured, you can further enhance your server's security by using UFW (Uncomplicated Firewall) to block all public internet traffic and only allow connections through Tailscale. This prevents unauthorized access attempts and bot attacks that are common on public-facing servers.
+
+<Callout type="warn">
+  **Important**: Before proceeding, ensure you can SSH into your server using the Tailscale IP address (from Step 3.5). If you lock down SSH access and lose Tailscale connectivity, you may need console access to your server to regain access.
+</Callout>
+
+### Why Use UFW with Tailscale?
+
+Servers on the public internet are constantly scanned and attacked by bots looking for vulnerabilities. By using UFW to block all public traffic and only allowing Tailscale connections, you:
+
+- **Eliminate attack surface**: Your server becomes invisible to attackers on the public internet
+- **Prevent bot scans**: No more failed login attempts in your logs
+- **Maintain easy access**: You can still access everything through your private Tailscale network
+- **Keep services private**: Dokploy (port 3000) and Traefik (ports 80/443) are only accessible through Tailscale
+
+### Step 1: SSH Over Tailscale
+
+Before locking down public access, verify you can SSH using your Tailscale IP:
+
+1. Get your server's Tailscale IP:
+   ```bash
+   sudo tailscale ip -4
+   ```
+
+2. Exit your current SSH session and reconnect using the Tailscale IP:
+   ```bash
+   exit
+   ssh <username>@<tailscale-ip>
+   ```
+
+If you can successfully connect, you're ready to proceed.
+
+### Step 2: Enable UFW
+
+UFW comes pre-installed on Ubuntu. Enable it:
+
+```bash
+sudo ufw enable
+```
+
+### Step 3: Configure Default Rules
+
+Set UFW to deny all incoming traffic by default, but allow all outgoing traffic:
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+### Step 4: Allow Tailscale Traffic
+
+Allow all traffic on the Tailscale interface (`tailscale0`):
+
+```bash
+sudo ufw allow in on tailscale0
+```
+
+This ensures all Tailscale connections work properly, including:
+- SSH access
+- Dokploy dashboard (port 3000)
+- Traefik (ports 80/443)
+- All your applications
+
+### Step 5: Review and Remove Public Access Rules
+
+Check your current firewall rules:
+
+```bash
+sudo ufw status verbose
+```
+
+You might see rules like:
+```
+To                          Action      From
+--                         ------      ----
+Anywhere on tailscale0     ALLOW       Anywhere                  
+Anywhere (v6) on tailscale0 ALLOW       Anywhere (v6)       
+```
+
+Since we're using Tailscale for all access, your server is now configured to only accept connections through the Tailscale network. This means:
+
+- ✅ **SSH access**: Only available via Tailscale IP
+- ✅ **Dokploy dashboard**: Only accessible via Tailscale IP
+- ✅ **Traefik**: Only accessible via Tailscale IP
+- ✅ **All applications**: Only accessible via Tailscale IP
+
+<Callout type="warn">
+  **Important Note About Docker and UFW**: Docker directly manipulates `iptables`, which can bypass UFW rules. This means Docker-published ports (like Dokploy on port 3000 or Traefik on ports 80/443) might still be accessible from the public internet even with UFW configured.
+
+  **Solutions:**
+  
+  1. **Use your VPS provider's firewall** (recommended): Configure your cloud provider's firewall to block public access to ports 22, 80, 443, and 3000. This operates before Docker's iptables rules.
+  
+  2. **Use ufw-docker utility**: This tool integrates Docker with UFW properly. However, with Tailscale and subnet routing, this is usually not necessary since all access goes through Tailscale.
+  
+  3. **Bind Docker ports to localhost**: Modify Docker services to bind to `127.0.0.1` instead of `0.0.0.0`, but this may break Tailscale access unless configured carefully.
+
+  For Dokploy with Tailscale, the recommended approach is to use your VPS provider's firewall to block public access, as this provides the most reliable protection.
+</Callout>
+
+With this configuration, your server is now protected from public internet access. All services (SSH, Dokploy, Traefik, and applications) are only accessible through your private Tailscale network, ensuring they remain secure and invisible to unauthorized users.
