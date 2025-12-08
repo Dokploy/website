@@ -20628,6 +20628,10 @@
                   "enabled": {
                     "type": "boolean"
                   },
+                  "timezone": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "createdAt": {
                     "type": "string"
                   }
@@ -20732,6 +20736,10 @@
                   },
                   "enabled": {
                     "type": "boolean"
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "nullable": true
                   },
                   "createdAt": {
                     "type": "string"
