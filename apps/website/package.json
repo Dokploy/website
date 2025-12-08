@@ -31,7 +31,7 @@
 		"@types/turndown": "^5.0.5",
 		"autoprefixer": "^10.4.12",
 		"axios": "^1.8.1",
-		"resend": "6.1.2",
+		"resend": "6.5.2",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
 		"framer-motion": "^11.3.19",
