@@ -15,7 +15,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Container } from "./Container";
+import { ContactFormModal } from "./ContactFormModal";
 import { Badge } from "./ui/badge";
+import AnimatedGradientText from "./ui/animated-gradient-text";
 import { Button, buttonVariants } from "./ui/button";
 import HeroVideoDialog from "./ui/hero-video-dialog";
 import { NumberInput } from "./ui/input";
@@ -89,6 +91,7 @@ export function Pricing() {
 	const featured = true;
 
 	const [openVideo, setOpenVideo] = useState(false);
+	const [openContactModal, setOpenContactModal] = useState(false);
 	return (
 		<section
 			id="pricing"
@@ -138,15 +141,16 @@ export function Pricing() {
 								<TabsTrigger value="annual">Annual</TabsTrigger>
 							</TabsList>
 						</Tabs>
-						<div className="mx-auto flex max-w-4xl gap-4 max-sm:flex-wrap-reverse max-sm:justify-center sm:flex-row-reverse">
-							<section
-								className={clsx(
-									"flex max-w-sm flex-col  rounded-3xl border-2 border-dashed border-muted px-4",
-									featured
-										? "order-first border bg-black py-8 lg:order-none"
-										: "lg:py-8",
-								)}
-							>
+						<div className="mx-auto flex max-w-4xl flex-col gap-8">
+							<div className="flex gap-4 max-sm:flex-wrap max-sm:justify-center sm:flex-row">
+								<section
+									className={clsx(
+										"flex max-w-sm flex-col  rounded-3xl border-2 border-dashed border-muted px-4",
+										featured
+											? "order-first border bg-black py-8 lg:order-none"
+											: "lg:py-8",
+									)}
+								>
 								<div className="flex flex-row items-center gap-2">
 									<p className=" text-2xl font-semibold tracking-tight text-primary ">
 										Free
@@ -366,10 +370,61 @@ export function Pricing() {
 									</div>
 								</div>
 							</section>
+							</div>
+							<div className="flex justify-center">
+								<section
+									className={clsx(
+										"flex w-full max-w-4xl flex-col rounded-3xl border-2 border-dashed border-muted px-4 py-4",
+									)}
+								>
+									<div className="flex flex-row items-center justify-start gap-3 w-fit">
+										<p className="text-xl font-semibold tracking-tight text-primary">
+											Enterprise
+										</p>
+										<AnimatedGradientText className="text-xs">
+											Premium ✨
+										</AnimatedGradientText>
+									</div>
+
+									<h3 className="mt-3 text-base font-medium text-white">
+										Enterprise Support & Services
+									</h3>
+									<p className="text-sm text-muted-foreground">
+										Custom solutions and dedicated support for your organization.
+									</p>
+
+									<ul className="mt-3 grid grid-cols-2 gap-y-1 text-sm text-slate-200">
+										{[
+											"SLA Guarantees / Priority Support",
+											"Aditional Security & Governance",
+											"Custom Solutions",
+											"Private Labeling",
+										].map((feature) => (
+											<li key={feature} className="flex text-muted-foreground">
+												<CheckIcon />
+												<span className="ml-2">{feature}</span>
+											</li>
+										))}
+									</ul>
+									<div className="mt-4 flex flex-col gap-2">
+										<Button
+											onClick={() => setOpenContactModal(true)}
+											className="w-full"
+										>
+											Get in touch
+										</Button>
+									</div>
+								</section>
+							</div>
 						</div>
 					</div>
 				</div>
 			</Container>
+			<ContactFormModal
+				open={openContactModal}
+				onOpenChange={setOpenContactModal}
+				defaultInquiryType="sales"
+			/>
 		</section>
 	);
 }
