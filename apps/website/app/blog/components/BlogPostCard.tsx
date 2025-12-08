@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import type { Post } from '@/lib/ghost'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import type { Post } from "@/lib/ghost";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface BlogPostCardProps {
-	post: Post
+	post: Post;
 }
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
-	const router = useRouter()
-	const formattedDate = new Date(post.published_at).toLocaleDateString('en', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	})
+	const router = useRouter();
+	const formattedDate = new Date(post.published_at).toLocaleDateString("en", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
 
 	const handleTwitterClick = (e: React.MouseEvent) => {
 		if (post.primary_author?.twitter) {
-			router.push(`https://twitter.com/${post.primary_author.twitter}`)
+			router.push(`https://twitter.com/${post.primary_author.twitter}`);
 		}
-		e.preventDefault()
-		e.stopPropagation()
-	}
+		e.preventDefault();
+		e.stopPropagation();
+	};
 
 	return (
 		<Link
@@ -32,8 +32,8 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 			<article className="flex items-start items-center gap-6 max-sm:flex-col">
 				<div className="relative  mx-auto flex shrink-0 items-center justify-center">
 					<img
-						src={post.feature_image || '/og.png'}
-						alt={post.feature_image ? post.title : 'Default Image'}
+						src={post.feature_image || "/og.png"}
+						alt={post.feature_image ? post.title : "Default Image"}
 						className="mx-auto h-32 w-64 self-center rounded-lg object-cover object-center sm:h-24 sm:w-32"
 					/>
 				</div>
@@ -55,20 +55,14 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 											type="button"
 										>
 											<img
-												src={
-													post.primary_author
-														.profile_image
-												}
+												src={post.primary_author.profile_image}
 												alt={post.primary_author.name}
 												className="object-cover"
 											/>
 										</button>
 									) : (
 										<img
-											src={
-												post.primary_author
-													.profile_image
-											}
+											src={post.primary_author.profile_image}
 											alt={post.primary_author.name}
 											className="object-cover"
 										/>
@@ -81,18 +75,14 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 									onClick={handleTwitterClick}
 									type="button"
 								>
-									{post.primary_author.name ||
-										'Unknown Author'}
+									{post.primary_author.name || "Unknown Author"}
 								</button>
 							) : (
-								<span>
-									{post.primary_author?.name ||
-										'Unknown Author'}
-								</span>
+								<span>{post.primary_author?.name || "Unknown Author"}</span>
 							)}
 						</div>
 						<span className="mx-2">in</span>
-						<span>{post.primary_tag?.name || 'General'}</span>
+						<span>{post.primary_tag?.name || "General"}</span>
 						<span className="mx-2">•</span>
 						<span>{post.reading_time} min read</span>
 						<span className="mx-2">•</span>
@@ -101,5 +91,5 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 				</div>
 			</article>
 		</Link>
-	)
+	);
 }

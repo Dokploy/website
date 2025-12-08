@@ -1,52 +1,52 @@
-import clsx from 'clsx'
-import type { Metadata } from 'next'
-import { Inter, Lexend } from 'next/font/google'
-import type { ReactNode } from 'react'
-import { GoogleAnalytics } from '@next/third-parties/google'
-import '@/styles/tailwind.css'
-import 'react-photo-view/dist/react-photo-view.css'
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
+import { GoogleAnalytics } from "@next/third-parties/google";
+import clsx from "clsx";
+import type { Metadata } from "next";
+import { Inter, Lexend } from "next/font/google";
+import type { ReactNode } from "react";
+import "@/styles/tailwind.css";
+import "react-photo-view/dist/react-photo-view.css";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 
 type Props = {
-	children: ReactNode
-}
+	children: ReactNode;
+};
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://dokploy.com'),
+	metadataBase: new URL("https://dokploy.com"),
 	title: {
-		default: 'Dokploy - Deploy your applications with ease',
-		template: '%s | Dokploy',
+		default: "Dokploy - Deploy your applications with ease",
+		template: "%s | Dokploy",
 	},
-	description: 'Deploy your applications with ease using Dokploy',
+	description: "Deploy your applications with ease using Dokploy",
 	icons: {
-		icon: 'icon.svg',
-		apple: 'apple-touch-icon.png',
+		icon: "icon.svg",
+		apple: "apple-touch-icon.png",
 	},
 	openGraph: {
-		title: 'Dokploy - Deploy your applications with ease',
-		description: 'Deploy your applications with ease using Dokploy',
-		images: '/og.png',
-		type: 'website',
+		title: "Dokploy - Deploy your applications with ease",
+		description: "Deploy your applications with ease using Dokploy",
+		images: "/og.png",
+		type: "website",
 	},
 	twitter: {
-		card: 'summary_large_image',
-		title: 'Dokploy - Deploy your applications with ease',
-		description: 'Deploy your applications with ease using Dokploy',
-		images: ['/og.png'],
+		card: "summary_large_image",
+		title: "Dokploy - Deploy your applications with ease",
+		description: "Deploy your applications with ease using Dokploy",
+		images: ["/og.png"],
 	},
-}
+};
 const inter = Inter({
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-inter',
-})
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-inter",
+});
 
 const lexend = Lexend({
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-lexend',
-})
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-lexend",
+});
 // Since we have a `not-found.tsx` page on the root, a layout file
 // is required, even if it's just passing children through.
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<html
 			lang="en"
 			className={clsx(
-				'h-full scroll-smooth antialiased',
+				"h-full scroll-smooth antialiased",
 				inter.variable,
 				lexend.variable,
 			)}
@@ -77,5 +77,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				</div>
 			</body>
 		</html>
-	)
+	);
 }

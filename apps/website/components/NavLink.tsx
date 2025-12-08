@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { trackGAEvent } from './analitycs'
+import Link from "next/link";
+import { trackGAEvent } from "./analitycs";
 
 export function NavLink({
 	href,
 	children,
 	target,
 }: {
-	href: string
-	children: React.ReactNode
-	target?: string
+	href: string;
+	children: React.ReactNode;
+	target?: string;
 }) {
 	return (
 		<div>
@@ -18,8 +18,8 @@ export function NavLink({
 				href={href}
 				onClick={() =>
 					trackGAEvent({
-						action: 'Nav Link Clicked',
-						category: 'Navigation',
+						action: "Nav Link Clicked",
+						category: "Navigation",
 						label: href,
 					})
 				}
@@ -29,5 +29,5 @@ export function NavLink({
 				{children}
 			</Link>
 		</div>
-	)
+	);
 }

@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import type { DetailedHTMLProps, HTMLAttributes } from 'react'
-import slugify from 'slugify'
+import { useRouter } from "next/navigation";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
+import slugify from "slugify";
 
 type HeadingProps = DetailedHTMLProps<
 	HTMLAttributes<HTMLHeadingElement>,
 	HTMLHeadingElement
->
+>;
 
 function LinkIcon() {
 	return (
@@ -24,18 +24,18 @@ function LinkIcon() {
 				d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
 			/>
 		</svg>
-	)
+	);
 }
 
 export function H1({ children, ...props }: HeadingProps) {
-	const router = useRouter()
-	const id = slugify(children?.toString() || '', {
+	const router = useRouter();
+	const id = slugify(children?.toString() || "", {
 		lower: true,
 		strict: true,
-	})
+	});
 	const handleClick = () => {
-		router.push(`#${id}`)
-	}
+		router.push(`#${id}`);
+	};
 	return (
 		<h1
 			id={id}
@@ -46,18 +46,18 @@ export function H1({ children, ...props }: HeadingProps) {
 			{children}
 			<LinkIcon />
 		</h1>
-	)
+	);
 }
 
 export function H2({ children, ...props }: HeadingProps) {
-	const router = useRouter()
-	const id = slugify(children?.toString() || '', {
+	const router = useRouter();
+	const id = slugify(children?.toString() || "", {
 		lower: true,
 		strict: true,
-	})
+	});
 	const handleClick = () => {
-		router.push(`#${id}`)
-	}
+		router.push(`#${id}`);
+	};
 	return (
 		<h2
 			id={id}
@@ -68,18 +68,18 @@ export function H2({ children, ...props }: HeadingProps) {
 			{children}
 			<LinkIcon />
 		</h2>
-	)
+	);
 }
 
 export function H3({ children, ...props }: HeadingProps) {
-	const router = useRouter()
-	const id = slugify(children?.toString() || '', {
+	const router = useRouter();
+	const id = slugify(children?.toString() || "", {
 		lower: true,
 		strict: true,
-	})
+	});
 	const handleClick = () => {
-		router.push(`#${id}`)
-	}
+		router.push(`#${id}`);
+	};
 	return (
 		<h3
 			id={id}
@@ -90,5 +90,5 @@ export function H3({ children, ...props }: HeadingProps) {
 			{children}
 			<LinkIcon />
 		</h3>
-	)
+	);
 }

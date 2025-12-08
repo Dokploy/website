@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
-import { CheckIcon, CopyIcon } from 'lucide-react'
-import { useState } from 'react'
+import { CheckIcon, CopyIcon } from "lucide-react";
+import { useState } from "react";
 
 interface CopyButtonProps {
-	text: string
+	text: string;
 }
 
 export function CopyButton({ text }: CopyButtonProps) {
-	const [isCopied, setIsCopied] = useState(false)
+	const [isCopied, setIsCopied] = useState(false);
 
 	const copy = async () => {
-		await navigator.clipboard.writeText(text)
-		setIsCopied(true)
-		setTimeout(() => setIsCopied(false), 2000)
-	}
+		await navigator.clipboard.writeText(text);
+		setIsCopied(true);
+		setTimeout(() => setIsCopied(false), 2000);
+	};
 
 	return (
 		<button
@@ -28,5 +28,5 @@ export function CopyButton({ text }: CopyButtonProps) {
 				<CopyIcon className="h-full w-full text-gray-400" />
 			)}
 		</button>
-	)
+	);
 }

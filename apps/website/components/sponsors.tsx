@@ -1,14 +1,14 @@
-'use client'
-import { PlusCircleIcon } from 'lucide-react'
-import Link from 'next/link'
-import { buttonVariants } from './ui/button'
-import Ripple from './ui/ripple'
+"use client";
+import { PlusCircleIcon } from "lucide-react";
+import Link from "next/link";
+import { buttonVariants } from "./ui/button";
+import Ripple from "./ui/ripple";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from './ui/tooltip'
+} from "./ui/tooltip";
 
 export const Sponsors = () => {
 	return (
@@ -18,10 +18,10 @@ export const Sponsors = () => {
 					Sponsors
 				</h3>
 				<p className="mx-auto max-w-2xl text-center text-lg tracking-tight text-muted-foreground">
-					Dokploy is an open source project that is maintained by a
-					community of volunteers. We would like to thank our sponsors
-					for their support and contributions to the project, which
-					help us to continue to develop and improve Dokploy.
+					Dokploy is an open source project that is maintained by a community of
+					volunteers. We would like to thank our sponsors for their support and
+					contributions to the project, which help us to continue to develop and
+					improve Dokploy.
 				</p>
 			</div>
 			<div className="relative flex h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background md:shadow-xl">
@@ -29,13 +29,12 @@ export const Sponsors = () => {
 					<Tooltip>
 						<TooltipTrigger className="z-10 m-0 p-0">
 							<Link
-								href={'https://opencollective.com/dokploy'}
+								href={"https://opencollective.com/dokploy"}
 								target="_blank"
 								className={buttonVariants({
-									variant: 'secondary',
-									size: 'sm',
-									className:
-										'm-0 w-fit  !rounded-full bg-transparent !p-0',
+									variant: "secondary",
+									size: "sm",
+									className: "m-0 w-fit  !rounded-full bg-transparent !p-0",
 								})}
 							>
 								<PlusCircleIcon className="size-10 text-muted-foreground transition-colors hover:text-primary" />
@@ -49,5 +48,5 @@ export const Sponsors = () => {
 				<Ripple />
 			</div>
 		</div>
-	)
-}
+	);
+};

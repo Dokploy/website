@@ -1,51 +1,49 @@
-import { getPostsByTag, getTags } from '@/lib/ghost'
-import type { Post } from '@/lib/ghost'
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { getPostsByTag, getTags } from "@/lib/ghost";
+import type { Post } from "@/lib/ghost";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 type Props = {
-	params: { tag: string }
-}
+	params: { tag: string };
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { tag } = await params
-	const posts = await getPostsByTag(tag)
+	const { tag } = await params;
+	const posts = await getPostsByTag(tag);
 
 	if (!posts || posts.length === 0) {
 		return {
-			title: 'Tag Not Found',
-			description: 'The requested tag could not be found',
-		}
+			title: "Tag Not Found",
+			description: "The requested tag could not be found",
+		};
 	}
 
 	const tagName =
-		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name ||
-		tag
+		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
 
 	return {
 		title: `${tagName} Posts`,
 		description: `Browse all posts tagged with ${tagName}`,
-	}
+	};
 }
 
 export async function generateStaticParams() {
-	const tags = await getTags()
-	return tags.map((tag: { slug: string }) => ({ tag: tag.slug }))
+	const tags = await getTags();
+	return tags.map((tag: { slug: string }) => ({ tag: tag.slug }));
 }
 
 export default async function TagPage({ params }: Props) {
-	const { tag } = await params
-	const posts = await getPostsByTag(tag)
+	const { tag } = await params;
+	const posts = await getPostsByTag(tag);
 
 	if (!posts || posts.length === 0) {
-		notFound()
+		notFound();
 	}
 
 	const tagName =
-		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name ||
-		tag
+		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
 
 	return (
 		<div className="container mx-auto px-4 py-12">
@@ -70,11 +68,11 @@ export default async function TagPage({ params }: Props) {
 
 			<div className="mb-8">
 				<h1 className="mb-2 text-3xl font-bold">
-					Posts tagged with{' '}
+					Posts tagged with{" "}
 					<span className="text-primary-600">"{tagName}"</span>
 				</h1>
 				<p className="text-gray-600 dark:text-gray-400">
-					{posts.length} {posts.length === 1 ? 'post' : 'posts'} found
+					{posts.length} {posts.length === 1 ? "post" : "posts"} found
 				</p>
 			</div>
 
@@ -84,15 +82,15 @@ export default async function TagPage({ params }: Props) {
 				))}
 			</div>
 		</div>
-	)
+	);
 }
 
 function BlogPostCard({ post }: { post: Post }) {
-	const formattedDate = new Date(post.published_at).toLocaleDateString('en', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	})
+	const formattedDate = new Date(post.published_at).toLocaleDateString("en", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
 
 	return (
 		<Link href={`/blog/${post.slug}`} className="group">
@@ -130,12 +128,12 @@ function BlogPostCard({ post }: { post: Post }) {
 						)}
 						<div>
 							<p className="font-medium">
-								{post.primary_author?.name || 'Unknown Author'}
+								{post.primary_author?.name || "Unknown Author"}
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</Link>
-	)
+	);
 }
