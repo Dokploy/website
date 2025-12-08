@@ -1,47 +1,47 @@
-import { getPost, getPosts } from '@/lib/ghost'
-import type { Metadata, ResolvingMetadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import type React from 'react'
-import ReactMarkdown from 'react-markdown'
-import type { Components } from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
-import remarkGfm from 'remark-gfm'
-import remarkToc from 'remark-toc'
-import type { BundledLanguage } from 'shiki/bundle/web'
-import TurndownService from 'turndown'
+import { getPost, getPosts } from "@/lib/ghost";
+import type { Metadata, ResolvingMetadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import type React from "react";
+import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import remarkToc from "remark-toc";
+import type { BundledLanguage } from "shiki/bundle/web";
+import TurndownService from "turndown";
 // @ts-ignore
-import * as turndownPluginGfm from 'turndown-plugin-gfm'
-import { CodeBlock } from './components/CodeBlock'
-import { H1, H2, H3 } from './components/Headings'
-import { TableOfContents } from './components/TableOfContents'
-import { ZoomableImage } from './components/ZoomableImage'
+import * as turndownPluginGfm from "turndown-plugin-gfm";
+import { CodeBlock } from "./components/CodeBlock";
+import { H1, H2, H3 } from "./components/Headings";
+import { TableOfContents } from "./components/TableOfContents";
+import { ZoomableImage } from "./components/ZoomableImage";
 
 type Props = {
-	params: { slug: string }
-}
+	params: { slug: string };
+};
 
 export async function generateMetadata(
 	{ params }: Props,
 	parent: ResolvingMetadata,
 ): Promise<Metadata> {
-	const { slug } = await params
-	const post = await getPost(slug)
+	const { slug } = await params;
+	const post = await getPost(slug);
 
 	if (!post) {
 		return {
-			title: 'Post Not Found',
-		}
+			title: "Post Not Found",
+		};
 	}
 
 	const ogUrl = new URL(
-		`/api/og`,
-		process.env.NODE_ENV === 'production'
-			? 'https://dokploy.com'
-			: 'http://localhost:3000',
-	)
-	ogUrl.searchParams.set('slug', slug)
+		"/api/og",
+		process.env.NODE_ENV === "production"
+			? "https://dokploy.com"
+			: "http://localhost:3000",
+	);
+	ogUrl.searchParams.set("slug", slug);
 
 	return {
 		title: post.title,
@@ -49,7 +49,7 @@ export async function generateMetadata(
 		openGraph: {
 			title: post.title,
 			description: post.custom_excerpt || post.excerpt,
-			type: 'article',
+			type: "article",
 			url: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${post.slug}`,
 			images: [
 				{
@@ -61,66 +61,66 @@ export async function generateMetadata(
 			],
 		},
 		twitter: {
-			card: 'summary_large_image',
+			card: "summary_large_image",
 			title: post.title,
 			description: post.custom_excerpt || post.excerpt,
 			images: [ogUrl.toString()],
 		},
-	}
+	};
 }
 
 export default async function BlogPostPage({ params }: Props) {
-	const { slug } = await params
-	const post = await getPost(slug)
-	const allPosts = await getPosts()
+	const { slug } = await params;
+	const post = await getPost(slug);
+	const allPosts = await getPosts();
 
-	const relatedPosts = allPosts.filter((p) => p.id !== post?.id).slice(0, 3)
+	const relatedPosts = allPosts.filter((p) => p.id !== post?.id).slice(0, 3);
 
 	if (!post) {
-		notFound()
+		notFound();
 	}
 
 	const cleanHtml = (html: string) => {
-		if (typeof window !== 'undefined') {
-			const parser = new DOMParser()
-			const doc = parser.parseFromString(html, 'text/html')
+		if (typeof window !== "undefined") {
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(html, "text/html");
 			const scripts = doc.querySelectorAll(
 				'script[type="application/ld+json"], script',
-			)
-			scripts.forEach((script) => script.remove())
-			const unwantedElements = doc.querySelectorAll('style, meta, link')
-			unwantedElements.forEach((el) => el.remove())
-			return doc.body.innerHTML
+			);
+			scripts.forEach((script) => script.remove());
+			const unwantedElements = doc.querySelectorAll("style, meta, link");
+			unwantedElements.forEach((el) => el.remove());
+			return doc.body.innerHTML;
 		} else {
 			return html
 				.replace(
 					/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
-					'',
+					"",
 				)
-				.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-				.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-				.replace(/<meta[^>]*>/gi, '')
-				.replace(/<link[^>]*>/gi, '')
+				.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+				.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+				.replace(/<meta[^>]*>/gi, "")
+				.replace(/<link[^>]*>/gi, "");
 		}
-	}
+	};
 
 	const turndownService = new TurndownService({
-		headingStyle: 'atx',
-		codeBlockStyle: 'fenced',
-	})
-	const gfm = turndownPluginGfm.gfm
-	const tables = turndownPluginGfm.tables
-	const strikethrough = turndownPluginGfm.strikethrough
-	turndownService.use([tables, strikethrough, gfm, remarkToc])
+		headingStyle: "atx",
+		codeBlockStyle: "fenced",
+	});
+	const gfm = turndownPluginGfm.gfm;
+	const tables = turndownPluginGfm.tables;
+	const strikethrough = turndownPluginGfm.strikethrough;
+	turndownService.use([tables, strikethrough, gfm, remarkToc]);
 
-	const cleanedHtml = cleanHtml(post.html)
-	const markdown = turndownService.turndown(cleanedHtml)
+	const cleanedHtml = cleanHtml(post.html);
+	const markdown = turndownService.turndown(cleanedHtml);
 
-	const formattedDate = new Date(post.published_at).toLocaleDateString('en', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	})
+	const formattedDate = new Date(post.published_at).toLocaleDateString("en", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
 
 	const components: Partial<Components> = {
 		h1: H1,
@@ -186,8 +186,8 @@ export default async function BlogPostPage({ params }: Props) {
 		),
 		img: ({ node, src, alt }) => (
 			<ZoomableImage
-				src={src || ''}
-				alt={alt || ''}
+				src={src || ""}
+				alt={alt || ""}
 				className="mx-auto max-w-lg overflow-hidden rounded-lg border border-border object-cover max-lg:w-64"
 			/>
 		),
@@ -196,26 +196,26 @@ export default async function BlogPostPage({ params }: Props) {
 			children,
 			inline,
 		}: {
-			className: string
-			children: React.ReactNode
-			inline: boolean
+			className: string;
+			children: React.ReactNode;
+			inline: boolean;
 		}) => {
 			if (inline || !className || !/language-(\w+)/.test(className)) {
 				return (
 					<code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground">
 						{children}
 					</code>
-				)
+				);
 			}
-			const match = /language-(\w+)/.exec(className)
+			const match = /language-(\w+)/.exec(className);
 			return (
 				<CodeBlock
-					lang={match ? (match[1] as BundledLanguage) : 'ts'}
-					code={children?.toString() || ''}
+					lang={match ? (match[1] as BundledLanguage) : "ts"}
+					code={children?.toString() || ""}
 				/>
-			)
+			);
 		},
-	}
+	};
 
 	return (
 		<article className="mx-auto w-full max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
@@ -255,20 +255,14 @@ export default async function BlogPostPage({ params }: Props) {
 											className="block cursor-pointer transition-opacity hover:opacity-90"
 										>
 											<img
-												src={
-													post.primary_author
-														.profile_image
-												}
+												src={post.primary_author.profile_image}
 												alt={post.primary_author.name}
 												className="object-cover"
 											/>
 										</a>
 									) : (
 										<img
-											src={
-												post.primary_author
-													.profile_image
-											}
+											src={post.primary_author.profile_image}
 											alt={post.primary_author.name}
 											className="object-cover"
 										/>
@@ -284,17 +278,14 @@ export default async function BlogPostPage({ params }: Props) {
 											rel="noopener noreferrer"
 											className="transition-colors hover:text-primary"
 										>
-											{post.primary_author.name ||
-												'Unknown Author'}
+											{post.primary_author.name || "Unknown Author"}
 										</a>
 									) : (
-										post.primary_author?.name ||
-										'Unknown Author'
+										post.primary_author?.name || "Unknown Author"
 									)}
 								</p>
 								<p className="text-sm text-muted-foreground">
-									{formattedDate} • {post.reading_time} min
-									read
+									{formattedDate} • {post.reading_time} min read
 								</p>
 							</div>
 						</div>
@@ -354,11 +345,11 @@ export default async function BlogPostPage({ params }: Props) {
 						{relatedPosts.map((relatedPost) => {
 							const relatedPostDate = new Date(
 								relatedPost.published_at,
-							).toLocaleDateString('en', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-							})
+							).toLocaleDateString("en", {
+								year: "numeric",
+								month: "long",
+								day: "numeric",
+							});
 
 							return (
 								<Link
@@ -370,10 +361,7 @@ export default async function BlogPostPage({ params }: Props) {
 										{relatedPost.feature_image && (
 											<div className="relative  w-full">
 												<img
-													src={
-														relatedPost.feature_image ||
-														'/og.png'
-													}
+													src={relatedPost.feature_image || "/og.png"}
 													alt={relatedPost.title}
 													className="object-cover "
 												/>
@@ -384,9 +372,7 @@ export default async function BlogPostPage({ params }: Props) {
 												{relatedPost.title}
 											</h3>
 											<p className="mb-4 text-sm text-muted-foreground">
-												{relatedPostDate} •{' '}
-												{relatedPost.reading_time} min
-												read
+												{relatedPostDate} • {relatedPost.reading_time} min read
 											</p>
 											<p className="line-clamp-2 text-muted-foreground">
 												{relatedPost.excerpt}
@@ -394,11 +380,11 @@ export default async function BlogPostPage({ params }: Props) {
 										</div>
 									</div>
 								</Link>
-							)
+							);
 						})}
 					</div>
 				</div>
 			)}
 		</article>
-	)
+	);
 }

@@ -1,35 +1,35 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import { Popover, Transition } from '@headlessui/react'
-import { ChevronRight, HeartIcon } from 'lucide-react'
-import { Fragment, type JSX, type SVGProps } from 'react'
-import { Container } from './Container'
-import { NavLink } from './NavLink'
-import { trackGAEvent } from './analitycs'
-import { Logo } from './shared/Logo'
-import AnimatedGradientText from './ui/animated-gradient-text'
-import { Button, buttonVariants } from './ui/button'
-import GithubStars from './GithubStars'
+import { cn } from "@/lib/utils";
+import { Popover, Transition } from "@headlessui/react";
+import { ChevronRight, HeartIcon } from "lucide-react";
+import Link from "next/link";
+import { Fragment, type JSX, type SVGProps } from "react";
+import { Container } from "./Container";
+import GithubStars from "./GithubStars";
+import { NavLink } from "./NavLink";
+import { trackGAEvent } from "./analitycs";
+import { Logo } from "./shared/Logo";
+import AnimatedGradientText from "./ui/animated-gradient-text";
+import { Button, buttonVariants } from "./ui/button";
 
 function MobileNavLink({
 	href,
 	children,
 	target,
 }: {
-	href: string
-	children: React.ReactNode
-	target?: string
+	href: string;
+	children: React.ReactNode;
+	target?: string;
 }) {
 	return (
 		<Popover.Button
 			onClick={() => {
 				trackGAEvent({
-					action: 'Nav Link Clicked',
-					category: 'Navigation',
+					action: "Nav Link Clicked",
+					category: "Navigation",
 					label: href,
-				})
+				});
 			}}
 			as={Link}
 			href={href}
@@ -38,7 +38,7 @@ function MobileNavLink({
 		>
 			{children}
 		</Popover.Button>
-	)
+	);
 }
 
 function MobileNavIcon({ open }: { open: boolean }) {
@@ -52,20 +52,17 @@ function MobileNavIcon({ open }: { open: boolean }) {
 		>
 			<path
 				d="M0 1H14M0 7H14M0 13H14"
-				className={cn(
-					'origin-center transition',
-					open && 'scale-90 opacity-0',
-				)}
+				className={cn("origin-center transition", open && "scale-90 opacity-0")}
 			/>
 			<path
 				d="M2 2L12 12M12 2L2 12"
 				className={cn(
-					'origin-center transition',
-					!open && 'scale-90 opacity-0',
+					"origin-center transition",
+					!open && "scale-90 opacity-0",
 				)}
 			/>
 		</svg>
-	)
+	);
 }
 
 const I18nIcon = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
@@ -84,7 +81,7 @@ const I18nIcon = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
 			d="m478.33 433.6-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362 368 281.65 401.17 362zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73 39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93.92 1.19 1.83 2.35 2.74 3.51-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59 22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z"
 		/>
 	</svg>
-)
+);
 
 function MobileNavigation() {
 	return (
@@ -152,7 +149,7 @@ function MobileNavigation() {
 				</Transition.Child>
 			</Transition.Root>
 		</Popover>
-	)
+	);
 }
 
 export function Header() {
@@ -201,10 +198,10 @@ export function Header() {
 								href="/contact"
 								onClick={() => {
 									trackGAEvent({
-										action: 'Contact Button Clicked',
-										category: 'Contact',
-										label: 'Header',
-									})
+										action: "Contact Button Clicked",
+										category: "Contact",
+										label: "Header",
+									});
 								}}
 							>
 								Contact
@@ -244,5 +241,5 @@ export function Header() {
 				</nav>
 			</Container>
 		</header>
-	)
+	);
 }

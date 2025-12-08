@@ -1,0 +1,14 @@
+{
+	"title": "Notifications",
+	"pages": [
+		"overview",
+		"slack",
+		"telegram",
+		"discord",
+		"lark",
+		"email",
+		"gotify",
+		"ntfy",
+		"webhook"
+	]
+}

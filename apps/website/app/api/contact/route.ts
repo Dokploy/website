@@ -1,31 +1,31 @@
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
-import { submitToHubSpot, getHubSpotUTK } from '@/lib/hubspot'
+import { getHubSpotUTK, submitToHubSpot } from "@/lib/hubspot";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 interface ContactFormData {
-	inquiryType: 'support' | 'sales' | 'other'
-	firstName: string
-	lastName: string
-	email: string
-	company: string
-	message: string
+	inquiryType: "support" | "sales" | "other";
+	firstName: string;
+	lastName: string;
+	email: string;
+	company: string;
+	message: string;
 }
 
 export async function POST(request: NextRequest) {
 	try {
 		// Initialize Resend with API key check
-		const apiKey = process.env.RESEND_API_KEY
+		const apiKey = process.env.RESEND_API_KEY;
 		if (!apiKey) {
-			console.error('RESEND_API_KEY is not configured')
+			console.error("RESEND_API_KEY is not configured");
 			return NextResponse.json(
-				{ error: 'Email service not configured' },
+				{ error: "Email service not configured" },
 				{ status: 500 },
-			)
+			);
 		}
 
-		const resend = new Resend(apiKey)
-		const body: ContactFormData = await request.json()
+		const resend = new Resend(apiKey);
+		const body: ContactFormData = await request.json();
 
 		// Validate required fields
 		if (
@@ -37,45 +37,41 @@ export async function POST(request: NextRequest) {
 			!body.message
 		) {
 			return NextResponse.json(
-				{ error: 'All fields are required' },
+				{ error: "All fields are required" },
 				{ status: 400 },
-			)
+			);
 		}
 
 		// Validate email format
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!emailRegex.test(body.email)) {
 			return NextResponse.json(
-				{ error: 'Invalid email format' },
+				{ error: "Invalid email format" },
 				{ status: 400 },
-			)
+			);
 		}
 
 		// Submit to HubSpot if it's a sales inquiry
-		if (body.inquiryType === 'sales') {
+		if (body.inquiryType === "sales") {
 			try {
-				const hutk = getHubSpotUTK(
-					request.headers.get('cookie') || undefined,
-				)
-				const hubspotSuccess = await submitToHubSpot(body, hutk)
+				const hutk = getHubSpotUTK(request.headers.get("cookie") || undefined);
+				const hubspotSuccess = await submitToHubSpot(body, hutk);
 
 				if (hubspotSuccess) {
-					console.log(
-						'Successfully submitted sales inquiry to HubSpot',
-					)
+					console.log("Successfully submitted sales inquiry to HubSpot");
 				} else {
 					console.warn(
-						'Failed to submit sales inquiry to HubSpot, but continuing with email',
-					)
+						"Failed to submit sales inquiry to HubSpot, but continuing with email",
+					);
 				}
 			} catch (error) {
-				console.error('Error submitting to HubSpot:', error)
+				console.error("Error submitting to HubSpot:", error);
 				// Continue with email even if HubSpot fails
 			}
 		}
 
 		// Format email content
-		const emailSubject = `[${body.inquiryType.toUpperCase()}] New contact form submission from ${body.firstName} ${body.lastName}`
+		const emailSubject = `[${body.inquiryType.toUpperCase()}] New contact form submission from ${body.firstName} ${body.lastName}`;
 		const emailBody = `
 New contact form submission:
 
@@ -90,23 +86,23 @@ ${body.message}
 
 ---
 Sent from Dokploy website contact form
-		`.trim()
+		`.trim();
 
 		// Send email to Dokploy team
 		await resend.emails.send({
-			from: 'Dokploy Contact Form <noreply@emails.dokploy.com>',
+			from: "Dokploy Contact Form <noreply@emails.dokploy.com>",
 			to:
-				body.inquiryType === 'sales'
-					? ['sales@dokploy.com', 'contact@dokploy.com']
-					: ['contact@dokploy.com'],
+				body.inquiryType === "sales"
+					? ["sales@dokploy.com", "contact@dokploy.com"]
+					: ["contact@dokploy.com"],
 			subject: emailSubject,
 			text: emailBody,
 			replyTo: body.email,
-		})
+		});
 
 		// Send confirmation email to the user
 		const confirmationSubject =
-			'Thank you for contacting Dokploy - We received your message'
+			"Thank you for contacting Dokploy - We received your message";
 		const confirmationBody = `
 Hello ${body.firstName} ${body.lastName},
 
@@ -126,24 +122,24 @@ The Dokploy Team
 ---
 This is an automated confirmation email. Please do not reply to this email.
 If you need immediate assistance, contact us at contact@dokploy.com
-		`.trim()
+		`.trim();
 
 		await resend.emails.send({
-			from: 'Dokploy Team <noreply@emails.dokploy.com>',
+			from: "Dokploy Team <noreply@emails.dokploy.com>",
 			to: [body.email],
 			subject: confirmationSubject,
 			text: confirmationBody,
-		})
+		});
 
 		return NextResponse.json(
-			{ message: 'Contact form submitted successfully' },
+			{ message: "Contact form submitted successfully" },
 			{ status: 200 },
-		)
+		);
 	} catch (error) {
-		console.error('Error processing contact form:', error)
+		console.error("Error processing contact form:", error);
 		return NextResponse.json(
-			{ error: 'Internal server error' },
+			{ error: "Internal server error" },
 			{ status: 500 },
-		)
+		);
 	}
 }

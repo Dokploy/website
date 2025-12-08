@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
 	Select,
@@ -6,27 +6,27 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/components/ui/select'
-import { useDebounce } from '@/lib/hooks/use-debounce'
-import { Search } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useCallback, useTransition } from 'react'
+} from "@/components/ui/select";
+import { useDebounce } from "@/lib/hooks/use-debounce";
+import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useCallback, useTransition } from "react";
 
 interface Tag {
-	id: string
-	name: string
-	slug: string
+	id: string;
+	name: string;
+	slug: string;
 }
 
 interface SearchAndFilterProps {
-	tags: Tag[]
-	initialSearch: string
-	initialTag: string
-	searchPlaceholder: string
-	allTagsText: string
+	tags: Tag[];
+	initialSearch: string;
+	initialTag: string;
+	searchPlaceholder: string;
+	allTagsText: string;
 }
 
-const ALL_TAGS_VALUE = 'all'
+const ALL_TAGS_VALUE = "all";
 
 export function SearchAndFilter({
 	tags,
@@ -35,39 +35,39 @@ export function SearchAndFilter({
 	searchPlaceholder,
 	allTagsText,
 }: SearchAndFilterProps) {
-	const router = useRouter()
-	const [isPending, startTransition] = useTransition()
+	const router = useRouter();
+	const [isPending, startTransition] = useTransition();
 
 	const handleTagChange = (value: string) => {
-		const searchParams = new URLSearchParams(window.location.search)
+		const searchParams = new URLSearchParams(window.location.search);
 		if (value && value !== ALL_TAGS_VALUE) {
-			searchParams.set('tag', value)
+			searchParams.set("tag", value);
 		} else {
-			searchParams.delete('tag')
+			searchParams.delete("tag");
 		}
 		startTransition(() => {
-			router.push(`?${searchParams.toString()}`)
-		})
-	}
+			router.push(`?${searchParams.toString()}`);
+		});
+	};
 
 	const debouncedCallback = useDebounce((value: string) => {
-		const searchParams = new URLSearchParams(window.location.search)
+		const searchParams = new URLSearchParams(window.location.search);
 		if (value) {
-			searchParams.set('search', value)
+			searchParams.set("search", value);
 		} else {
-			searchParams.delete('search')
+			searchParams.delete("search");
 		}
 		startTransition(() => {
-			router.push(`?${searchParams.toString()}`)
-		})
-	}, 300)
+			router.push(`?${searchParams.toString()}`);
+		});
+	}, 300);
 
 	const handleSearch = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
-			debouncedCallback(e.target.value)
+			debouncedCallback(e.target.value);
 		},
 		[debouncedCallback],
-	)
+	);
 
 	return (
 		<div className="mb-8 flex flex-col gap-4 md:flex-row">
@@ -92,9 +92,7 @@ export function SearchAndFilter({
 						<SelectValue placeholder={allTagsText} />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value={ALL_TAGS_VALUE}>
-							{allTagsText}
-						</SelectItem>
+						<SelectItem value={ALL_TAGS_VALUE}>{allTagsText}</SelectItem>
 						{tags.map((tag) => (
 							<SelectItem key={tag.id} value={tag.slug}>
 								{tag.name}
@@ -104,5 +102,5 @@ export function SearchAndFilter({
 				</Select>
 			</div>
 		</div>
-	)
+	);
 }

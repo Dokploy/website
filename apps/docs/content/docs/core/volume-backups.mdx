@@ -7,6 +7,10 @@ Volume backups are essential when your service doesn't fit the traditional datab
 
 Volume backups allow you to backup [Docker named volumes](https://docs.docker.com/engine/storage/volumes/) to S3 destinations, providing a comprehensive backup solution for any type of data stored in volumes.
 
+<Callout type="info">
+**Important:** Volume Backups only work with Docker named volumes, not with bind mounts (like the `../files` folder). If you're currently using bind mounts and need backup functionality, you'll need to migrate to named volumes. See the [Docker Compose guide](/docs/core/docker-compose#volumes) for a comparison of both methods and guidance on choosing the right approach for your needs.
+</Callout>
+
 ## Supported Services
 
 Volume backups are available for:
@@ -16,6 +20,8 @@ Volume backups are available for:
 
 ## Setting Up Volume Mounts
 
+Volume Backups require Docker named volumes. If you're using bind mounts (like `../files`), you'll need to switch to named volumes to use this feature.
+
 ### For Applications
 
 1. Navigate to your application
@@ -24,7 +30,7 @@ Volume backups are available for:
 
 ### For Docker Compose
 
-Define volumes directly in your `docker-compose.yml` file:
+Define named volumes directly in your `docker-compose.yml` file. **Note:** Bind mounts (e.g., `../files/my-data:/app/data`) cannot be backed up using Volume Backups—you must use named volumes:
 
 ```yaml
 services:
@@ -36,6 +42,8 @@ services:
 volumes:
   my-volume:
 ```
+
+For more information on choosing between bind mounts and named volumes, see the [Docker Compose volumes section](/docs/core/docker-compose#volumes).
 
 ## Practical Example: N8N Backup
 

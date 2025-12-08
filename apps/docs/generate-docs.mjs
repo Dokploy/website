@@ -1,18 +1,19 @@
 import { generateFiles } from "fumadocs-openapi";
+import { createOpenAPI } from "fumadocs-openapi/server";
+
+const openapi = createOpenAPI({
+	input: ["./public/openapi.json"],
+});
 
 try {
-	void generateFiles({
-		input: ["./public/openapi.json"],
-		output: "./content/docs/api/generated",
+	await generateFiles({
+		input: openapi,
+		output: "./content/docs/api",
 		per: "tag",
-		name: (tag, name) => {
-			console.log(tag, name);
-			return `reference-${name}`;
-		},
+		includeDescription: true,
 	});
-	console.log("Done");
+	console.log("✓ Generated API documentation files");
 } catch (error) {
-	console.error(error);
+	console.error("Error generating docs:", error.message);
+	process.exit(1);
 }
-
-// united.com/customer-care

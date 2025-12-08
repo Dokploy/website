@@ -1,7 +1,7 @@
 {
 	"title": "CLI",
-	"description": "CLI Documentation",
-	"icon": "Building2",
+	"description": "Command-line interface for managing Dokploy from your terminal",
+	"icon": "SquareTerminal",
 	"root": true,
 	"pages": [
 		"---Get Started---",

@@ -1,7 +1,7 @@
 {
 	"title": "Core",
-	"description": "The core of Dokploy",
-	"icon": "Building2",
+	"description": "Essential guides for deploying and managing applications, databases, and server configurations",
+	"icon": "Package",
 	"root": true,
 	"pages": [
 		"---Introduction---",
@@ -13,7 +13,8 @@
 		"reset-password",
 		"uninstall",
 		"videos",
-		"...",
+		"goodies",
+		"troubleshooting",
 		"---Cloud---",
 		"cloud",
 		"monitoring",
@@ -40,8 +41,18 @@
 		"volume-backups",
 		"providers",
 		"watch-paths",
+		"---Remote Servers---",
+		"remote-servers/index",
+		"remote-servers/instructions",
+		"remote-servers/build-server",
+		"remote-servers/deployments",
+		"remote-servers/security",
+		"remote-servers/validate",
+		"---Guides---",
+		"guides/cloudflare-tunnels",
+		"guides/tailscale",
+		"guides/ec2-instructions",
 		"---Advanced---",
-		"cluster",
-		"multi-server"
+		"cluster"
 	]
 }

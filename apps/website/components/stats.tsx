@@ -1,39 +1,39 @@
-'use client'
+"use client";
 
-import { HandCoins, Users } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
-import { useId } from 'react'
-import NumberTicker from './ui/number-ticker'
+import { HandCoins, Users } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useId } from "react";
+import NumberTicker from "./ui/number-ticker";
 
 const statsValues = {
 	githubStars: 26000,
 	dockerDownloads: 4000000,
 	contributors: 200,
 	sponsors: 50,
-}
+};
 
 export function StatsSection() {
-	const [githubStars, setGithubStars] = useState(statsValues.githubStars)
+	const [githubStars, setGithubStars] = useState(statsValues.githubStars);
 
 	useEffect(() => {
 		const fetchGitHubStars = async () => {
 			try {
 				const response = await fetch(
-					'/api/github-stars?owner=dokploy&repo=dokploy',
-				)
+					"/api/github-stars?owner=dokploy&repo=dokploy",
+				);
 
 				if (response.ok) {
-					const data = await response.json()
-					setGithubStars(data.stargazers_count)
+					const data = await response.json();
+					setGithubStars(data.stargazers_count);
 				}
 			} catch (error) {
-				console.error('Error fetching GitHub stars:', error)
+				console.error("Error fetching GitHub stars:", error);
 				// Keep default value on error
 			}
-		}
+		};
 
-		fetchGitHubStars()
-	}, [])
+		fetchGitHubStars();
+	}, []);
 
 	return (
 		<div className="flex flex-col gap-10 px-4 py-20 lg:py-40 ">
@@ -42,9 +42,8 @@ export function StatsSection() {
 					Stats You Didn't Ask For (But Secretly Love to See)
 				</h2>
 				<p className="mt-4 text-center text-lg tracking-tight text-muted-foreground">
-					Just a few numbers to show we're not *completely* making
-					this up. Turns out, Dokploy has actually helped a few
-					people—who knew?
+					Just a few numbers to show we're not *completely* making this up.
+					Turns out, Dokploy has actually helped a few people—who knew?
 				</p>
 			</div>
 			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-4">
@@ -60,23 +59,23 @@ export function StatsSection() {
 							{feature.icon}
 						</p>
 						<p className="relative z-20 mt-4 text-base font-normal text-neutral-400">
-							{typeof feature.description === 'function'
+							{typeof feature.description === "function"
 								? feature.description(githubStars)
 								: feature.description}
 						</p>
-						{typeof feature.component === 'function'
+						{typeof feature.component === "function"
 							? feature.component(githubStars)
 							: feature.component}
 					</div>
 				))}
 			</div>
 		</div>
-	)
+	);
 }
 
 const grid = [
 	{
-		title: 'GitHub Stars',
+		title: "GitHub Stars",
 		description: (stars: number) =>
 			`With over ${(stars / 1000).toFixed(1)}k stars on GitHub, Dokploy is trusted by developers worldwide. Explore our repositories and join our community!`,
 		icon: (
@@ -91,8 +90,8 @@ const grid = [
 		),
 	},
 	{
-		title: 'DockerHub Downloads',
-		description: `Downloaded over ${(statsValues.dockerDownloads / 1000000).toFixed(2).split('.')[0]}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.`,
+		title: "DockerHub Downloads",
+		description: `Downloaded over ${(statsValues.dockerDownloads / 1000000).toFixed(2).split(".")[0]}M times, Dokploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.`,
 		icon: (
 			<svg
 				stroke="currentColor"
@@ -112,7 +111,7 @@ const grid = [
 		),
 	},
 	{
-		title: 'Community Contributors',
+		title: "Community Contributors",
 		description: `Thanks to our growing base of over ${statsValues.contributors} contributors, Dokploy continues to thrive, with valuable contributions from developers around the world.`,
 		icon: <Users className="h-6 w-6 stroke-white" />,
 		component: (
@@ -122,7 +121,7 @@ const grid = [
 		),
 	},
 	{
-		title: 'Sponsors',
+		title: "Sponsors",
 		description: `More than ${statsValues.sponsors} companies/individuals have sponsored Dokploy, ensuring a steady flow of support and resources. Join our community!`,
 		icon: <HandCoins className="h-6 w-6 stroke-white" />,
 		component: (
@@ -131,14 +130,14 @@ const grid = [
 			</p>
 		),
 	},
-]
+];
 
 export const Grid = ({
 	pattern,
 	size,
 }: {
-	pattern?: number[][]
-	size?: number
+	pattern?: number[][];
+	size?: number;
 }) => {
 	const p = pattern ?? [
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
@@ -146,7 +145,7 @@ export const Grid = ({
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
 		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-	]
+	];
 	return (
 		<div className="pointer-events-none absolute left-1/2 top-0  -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
 			<div className="absolute inset-0 bg-gradient-to-r  from-zinc-900/30 to-zinc-900/30 opacity-100 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)]">
@@ -160,11 +159,11 @@ export const Grid = ({
 				/>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 export function GridPattern({ width, height, x, y, squares, ...props }: any) {
-	const patternId = useId()
+	const patternId = useId();
 
 	return (
 		<svg aria-hidden="true" {...props}>
@@ -201,5 +200,5 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
 				</svg>
 			)}
 		</svg>
-	)
+	);
 }

@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # Detect version from environment variable or default to latest
-# Usage: DOKPLOY_VERSION=canary bash install.sh
-# Usage: DOKPLOY_VERSION=feature bash install.sh
-# Usage: bash install.sh (defaults to latest)
+# Usage with curl (export first): export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
+# Usage with curl (export first): export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
+# Usage with curl (bash -s): DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
+# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (defaults to latest)
+# Usage with bash: DOKPLOY_VERSION=canary bash install.sh
+# Usage with bash: DOKPLOY_VERSION=feature bash install.sh
+# Usage with bash: bash install.sh (defaults to latest)
 detect_version() {
     local version="${DOKPLOY_VERSION:-latest}"
     echo "$version"

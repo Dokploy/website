@@ -12,8 +12,8 @@ Dokploy supports four types of scheduled jobs:
 
 1. **Application Jobs**: Run commands inside specific application containers
 2. **Compose Jobs**: Execute commands in Docker Compose services
-3. **Server Jobs**: Run scripts on remote servers
-4. **Dokploy Server Jobs**: Execute tasks on the Dokploy server itself
+3. **Server Jobs**: Run scripts on remote servers (executed on the host)
+4. **Dokploy Server Jobs**: Execute tasks at the container level within the Dokploy container. These jobs can interact with commands inside the Dokploy container (e.g., `docker ps`, `docker image prune`), but they are not executed directly on the host system
 
 ## Container-based Jobs (Application and Compose)
 
@@ -40,7 +40,27 @@ For docker compose jobs, is required to not change the COMPOSE_PROJECT_NAME envi
 
 ## Server-based Jobs (Server and Dokploy Server)
 
-For remote servers and the Dokploy server, you can write bash scripts to perform various tasks. These scripts can use any command or tool available on the target system.
+### Server Jobs
+
+For remote servers, you can write bash scripts to perform various tasks. These scripts are executed directly on the host system and can use any command or tool available on the target server.
+
+### Dokploy Server Jobs
+
+Dokploy Server Jobs are executed at the container level within the Dokploy container. This means:
+
+- Commands run inside the Dokploy container environment
+- You can interact with Docker commands (e.g., `docker ps`, `docker image prune`, `docker system prune`)
+- Scripts have access to the Docker socket and can manage containers and images
+- Jobs do not execute directly on the host system, but within the containerized Dokploy environment
+
+**Example**: You can create a scheduled job to clean up unused Docker images:
+
+```bash
+#!/bin/bash
+docker image prune -af
+```
+
+This command will run inside the Dokploy container and can interact with Docker to clean up images.
 
 <Callout type="info">
 Make sure any required dependencies are installed on the target server before using them in your scripts.
