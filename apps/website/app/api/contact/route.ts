@@ -71,22 +71,22 @@ export async function POST(request: NextRequest) {
 			}
 		}
 
-		// Send notification to Slack (sales or support channel)
-		try {
-			const slackSuccess = await notifySlack(body);
-			if (slackSuccess) {
-				console.log(
-					`Successfully sent ${body.inquiryType} inquiry notification to Slack`,
-				);
-			} else {
-				console.warn(
-					`Failed to send ${body.inquiryType} inquiry notification to Slack, but continuing with email`,
-				);
-			}
-		} catch (error) {
-			console.error("Error sending to Slack:", error);
-			// Continue with email even if Slack fails
-		}
+		// // Send notification to Slack (sales or support channel)
+		// try {
+		// 	const slackSuccess = await notifySlack(body);
+		// 	if (slackSuccess) {
+		// 		console.log(
+		// 			`Successfully sent ${body.inquiryType} inquiry notification to Slack`,
+		// 		);
+		// 	} else {
+		// 		console.warn(
+		// 			`Failed to send ${body.inquiryType} inquiry notification to Slack, but continuing with email`,
+		// 		);
+		// 	}
+		// } catch (error) {
+		// 	console.error("Error sending to Slack:", error);
+		// 	// Continue with email even if Slack fails
+		// }
 
 		// Format email content
 		const emailSubject = `[${body.inquiryType.toUpperCase()}] New contact form submission from ${body.firstName} ${body.lastName}`;
