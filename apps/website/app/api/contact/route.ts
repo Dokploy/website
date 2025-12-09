@@ -1,4 +1,5 @@
 import { getHubSpotUTK, submitToHubSpot } from "@/lib/hubspot";
+import { notifySlack } from "@/lib/slack";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
@@ -68,6 +69,23 @@ export async function POST(request: NextRequest) {
 				console.error("Error submitting to HubSpot:", error);
 				// Continue with email even if HubSpot fails
 			}
+		}
+
+		// Send notification to Slack (sales or support channel)
+		try {
+			const slackSuccess = await notifySlack(body);
+			if (slackSuccess) {
+				console.log(
+					`Successfully sent ${body.inquiryType} inquiry notification to Slack`,
+				);
+			} else {
+				console.warn(
+					`Failed to send ${body.inquiryType} inquiry notification to Slack, but continuing with email`,
+				);
+			}
+		} catch (error) {
+			console.error("Error sending to Slack:", error);
+			// Continue with email even if Slack fails
 		}
 
 		// Format email content
