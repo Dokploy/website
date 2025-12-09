@@ -3,6 +3,8 @@ title: Cluster
 description: 'Manage server cluster settings.'
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 When you deploy applications in dokploy, all of them run on the same node. If you wish to run an application on a different server, you can use the cluster feature.
 
 The idea of using clusters is to allow each server to host a different application and, using Traefik along with the load balancer, redirect the traffic from the dokploy server to the servers you choose.
@@ -80,3 +82,7 @@ You can click the 'Add Node' button, which will display the instructions you nee
 Once you follow the instructions, the workers or managers will appear in the table.
 
 <ImageZoom src="/assets/nodes.png" width={800} height={630} className="rounded-lg"/>
+
+<Callout type="info">
+  **Storage Cleanup Note**: Dokploy does not perform automatic cleanup of storage for workers or other associated nodes that are not the Dokploy server. For automatic cleanup, you can add your node as a remote server and configure cleanups, or create a schedule that performs that cleanup. Additionally, you don't need to perform setup when you only add the node as a remote server. For more information, see the [Remote Servers documentation](/docs/core/remote-servers).
+</Callout>
