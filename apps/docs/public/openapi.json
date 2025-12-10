@@ -1154,10 +1154,14 @@
                   "buildSecrets": {
                     "type": "string",
                     "nullable": true
+                  },
+                  "createEnvFile": {
+                    "type": "boolean"
                   }
                 },
                 "required": [
-                  "applicationId"
+                  "applicationId",
+                  "createEnvFile"
                 ],
                 "additionalProperties": false
               }
@@ -2429,6 +2433,9 @@
                   "isStaticSpa": {
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "createEnvFile": {
+                    "type": "boolean"
                   },
                   "createdAt": {
                     "type": "string"
