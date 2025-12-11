@@ -153,14 +153,12 @@ jobs:
         uses: dokploy/dokploy-action@v1
         run: |
             curl -X 'POST' \
-            'https://<your-dokploy-domain>/api/trpc/application.deploy' \
+            'https://<your-dokploy-domain>/api/application.deploy' \
             -H 'accept: application/json' \
             -H 'x-api-key: YOUR-GENERATED-API-KEY' \
             -H 'Content-Type: application/json' \
             -d '{
-                "json":{
-                    "applicationId": "YOUR-APPLICATION-ID"
-                }
+                 "applicationId": "YOUR-APPLICATION-ID"
             }'
 ```
 
