@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 
 interface ContactFormData {
-	inquiryType: "" | "support" | "sales" | "other";
+	inquiryType: "" | "support" | "sales";
 	deploymentType: "" | "cloud" | "self-hosted";
 	firstName: string;
 	lastName: string;
@@ -23,7 +23,7 @@ interface ContactFormData {
 }
 
 interface ContactFormProps {
-	defaultInquiryType?: "" | "support" | "sales" | "other";
+	defaultInquiryType?: "" | "support" | "sales";
 	onSuccess?: () => void;
 	onCancel?: () => void;
 	showCancelButton?: boolean;
@@ -194,7 +194,7 @@ export function ContactForm({
 							onValueChange={(value) =>
 								handleInputChange(
 									"inquiryType",
-									value as "support" | "sales" | "other",
+									value as "support" | "sales",
 								)
 							}
 						>
@@ -204,7 +204,6 @@ export function ContactForm({
 							<SelectContent>
 								<SelectItem value="support">Support</SelectItem>
 								<SelectItem value="sales">Sales</SelectItem>
-								<SelectItem value="other">Other</SelectItem>
 							</SelectContent>
 						</Select>
 						{errors.inquiryType && (

@@ -1,5 +1,5 @@
 interface ContactFormData {
-	inquiryType: "support" | "sales" | "other";
+	inquiryType: "support" | "sales";
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -46,10 +46,6 @@ function formatContactDataForSlack(
 		case "support":
 			inquiryTypeEmoji = "🛟";
 			inquiryTypeLabel = "Support";
-			break;
-		case "other":
-			inquiryTypeEmoji = "📝";
-			inquiryTypeLabel = "Other";
 			break;
 		default:
 			inquiryTypeEmoji = "📧";

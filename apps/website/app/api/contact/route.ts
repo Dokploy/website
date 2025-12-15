@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 interface ContactFormData {
-	inquiryType: "support" | "sales" | "other";
+	inquiryType: "support" | "sales";
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -107,12 +107,14 @@ Sent from Dokploy website contact form
 		`.trim();
 
 		// Send email to Dokploy team
+		const recipients =
+			body.inquiryType === "sales"
+				? ["sales@dokploy.com", "contact@dokploy.com"]
+				: ["support@dokploy.com"];
+
 		await resend.emails.send({
 			from: "Dokploy Contact Form <noreply@emails.dokploy.com>",
-			to:
-				body.inquiryType === "sales"
-					? ["sales@dokploy.com", "contact@dokploy.com"]
-					: ["contact@dokploy.com"],
+			to: recipients,
 			subject: emailSubject,
 			text: emailBody,
 			replyTo: body.email,
