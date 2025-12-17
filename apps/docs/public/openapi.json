@@ -14856,6 +14856,51 @@
         }
       }
     },
+    "/registry.testRegistryById": {
+      "post": {
+        "operationId": "registry-testRegistryById",
+        "tags": [
+          "registry"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "registryId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "serverId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/cluster.getNodes": {
       "get": {
         "operationId": "cluster-getNodes",
