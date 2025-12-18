@@ -43,6 +43,15 @@ We provide a webhook so that you can trigger your own deployments by pushing to 
 This section provides advanced configuration options for experienced users. It includes tools for custom commands within the container and volumes.
 
 - **Command**: Dokploy has a defined command to run the Docker Compose file, ensuring complete control through the UI. However, you can append flags or options to the command.
+  
+  <Callout type="info" title="Using Private Registries with Docker Stack">
+  If you're deploying with **Docker Stack** (Docker Swarm mode) using **replicas** and a **private registry**, you need to add the `--with-registry-auth` flag to ensure that registry credentials are properly distributed to all nodes in your swarm.
+  
+  Without this flag, worker nodes may fail to pull images from private registries, resulting in authentication errors like "no such image" or "docker authentication failed".
+  
+  This flag ensures that Docker shares the registry credentials with all swarm nodes during deployment, enabling them to authenticate and pull images from your private registry (GitHub Container Registry, Docker Hub private repos, etc.).
+  </Callout>
+
 - **Volumes**: To ensure data persistence across deployments, configure storage volumes for your application.
 
 <ImageZoom
