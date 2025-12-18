@@ -221,7 +221,7 @@ export default async function BlogPostPage({ params }: Props) {
 		<article className="mx-auto w-full max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
 			<Link
 				href="/blog"
-				className="mb-8 inline-flex items-center text-primary transition-colors hover:text-primary/80"
+				className="mb-8 inline-flex items-center text-primary transition-colors hover:text-primary/80 mt-20"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
