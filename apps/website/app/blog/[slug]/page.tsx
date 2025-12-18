@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: Props) {
 	const gfm = turndownPluginGfm.gfm;
 	const tables = turndownPluginGfm.tables;
 	const strikethrough = turndownPluginGfm.strikethrough;
-	turndownService.use([tables, strikethrough, gfm, remarkToc]);
+	turndownService.use([tables, strikethrough, gfm]);
 
 	const cleanedHtml = cleanHtml(post.html);
 	const markdown = turndownService.turndown(cleanedHtml);
