@@ -84,7 +84,7 @@ install_dokploy() {
     endpoint_mode=""
     if is_proxmox_lxc; then
         echo "⚠️ WARNING: Detected Proxmox LXC container environment!"
-        echo "Adding --endpoint-mode dnsrr to Docker service for LXC compatibility."
+        echo "Adding --endpoint-mode dnsrr to Docker services for LXC compatibility."
         echo "This may affect service discovery but is required for LXC containers."
         echo ""
         endpoint_mode="--endpoint-mode dnsrr"
@@ -188,6 +188,7 @@ install_dokploy() {
     --env POSTGRES_DB=dokploy \
     --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
     --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
+    $endpoint_mode \
     postgres:16
 
     docker service create \
@@ -195,6 +196,7 @@ install_dokploy() {
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --mount type=volume,source=dokploy-redis,target=/data \
+    $endpoint_mode \
     redis:7
 
     # Installation
