@@ -9362,155 +9362,10 @@
                     "type": "string",
                     "format": "date-time"
                   },
-                  "serverIp": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "certificateType": {
-                    "type": "string",
-                    "enum": [
-                      "letsencrypt",
-                      "none",
-                      "custom"
-                    ]
-                  },
-                  "https": {
-                    "type": "boolean"
-                  },
-                  "host": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "letsEncryptEmail": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "sshPrivateKey": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "enableDockerCleanup": {
-                    "type": "boolean"
-                  },
-                  "logCleanupCron": {
-                    "type": "string",
-                    "nullable": true
-                  },
                   "enablePaidFeatures": {
                     "type": "boolean"
                   },
                   "allowImpersonation": {
-                    "type": "boolean"
-                  },
-                  "metricsConfig": {
-                    "type": "object",
-                    "properties": {
-                      "server": {
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "Dokploy",
-                              "Remote"
-                            ]
-                          },
-                          "refreshRate": {
-                            "type": "number"
-                          },
-                          "port": {
-                            "type": "number"
-                          },
-                          "token": {
-                            "type": "string"
-                          },
-                          "urlCallback": {
-                            "type": "string"
-                          },
-                          "retentionDays": {
-                            "type": "number"
-                          },
-                          "cronJob": {
-                            "type": "string"
-                          },
-                          "thresholds": {
-                            "type": "object",
-                            "properties": {
-                              "cpu": {
-                                "type": "number"
-                              },
-                              "memory": {
-                                "type": "number"
-                              }
-                            },
-                            "required": [
-                              "cpu",
-                              "memory"
-                            ],
-                            "additionalProperties": false
-                          }
-                        },
-                        "required": [
-                          "type",
-                          "refreshRate",
-                          "port",
-                          "token",
-                          "urlCallback",
-                          "retentionDays",
-                          "cronJob",
-                          "thresholds"
-                        ],
-                        "additionalProperties": false
-                      },
-                      "containers": {
-                        "type": "object",
-                        "properties": {
-                          "refreshRate": {
-                            "type": "number"
-                          },
-                          "services": {
-                            "type": "object",
-                            "properties": {
-                              "include": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              },
-                              "exclude": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            },
-                            "required": [
-                              "include",
-                              "exclude"
-                            ],
-                            "additionalProperties": false
-                          }
-                        },
-                        "required": [
-                          "refreshRate",
-                          "services"
-                        ],
-                        "additionalProperties": false
-                      }
-                    },
-                    "required": [
-                      "server",
-                      "containers"
-                    ],
-                    "additionalProperties": false
-                  },
-                  "cleanupCacheApplications": {
-                    "type": "boolean"
-                  },
-                  "cleanupCacheOnPreviews": {
-                    "type": "boolean"
-                  },
-                  "cleanupCacheOnCompose": {
                     "type": "boolean"
                   },
                   "stripeCustomerId": {
@@ -12288,6 +12143,31 @@
         }
       }
     },
+    "/settings.getWebServerSettings": {
+      "get": {
+        "operationId": "settings-getWebServerSettings",
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/settings.reloadServer": {
       "post": {
         "operationId": "settings-reloadServer",
@@ -12738,8 +12618,7 @@
                 "type": "object",
                 "properties": {
                   "sshPrivateKey": {
-                    "type": "string",
-                    "nullable": true
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -12783,8 +12662,7 @@
                 "type": "object",
                 "properties": {
                   "host": {
-                    "type": "string",
-                    "nullable": true
+                    "type": "string"
                   },
                   "certificateType": {
                     "type": "string",
@@ -12796,6 +12674,7 @@
                   },
                   "letsEncryptEmail": {
                     "type": "string",
+                    "format": "email",
                     "nullable": true
                   },
                   "https": {
@@ -13348,6 +13227,50 @@
             "Authorization": []
           }
         ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/settings.updateServerIp": {
+      "post": {
+        "operationId": "settings-updateServerIp",
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "serverIp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "serverIp"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
         "parameters": [],
         "responses": {
           "200": {
