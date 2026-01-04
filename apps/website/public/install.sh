@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Docker version to install and maintain
+DOCKER_VERSION="28.5.0"
+
 # Detect version from environment variable or default to latest
 # Usage with curl (export first): export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
 # Usage with curl (export first): export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
@@ -77,7 +80,9 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
+      curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
+      # Hold docker packages to prevent unintended upgrades
+      apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
     fi
 
     # Check if running in Proxmox LXC container and set endpoint mode
@@ -279,9 +284,31 @@ update_dokploy() {
     # Detect version tag
     VERSION_TAG=$(detect_version)
     DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
-    
+
     echo "Updating Dokploy to version: ${VERSION_TAG}"
-    
+
+    # Check Docker version and update if necessary
+    if command -v docker >/dev/null 2>&1; then
+        current_docker_version=$(docker --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+        if [ "$current_docker_version" != "$DOCKER_VERSION" ]; then
+            echo "Docker version mismatch detected. Current: $current_docker_version, Target: $DOCKER_VERSION"
+            echo "Updating Docker to version $DOCKER_VERSION..."
+
+            # Unhold packages to allow update
+            apt-mark unhold docker-ce docker-ce-cli docker-ce-rootless-extras 2>/dev/null
+
+            # Install specific Docker version
+            curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
+
+            # Hold packages again
+            apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
+
+            echo "Docker updated to version $DOCKER_VERSION"
+        else
+            echo "Docker version $current_docker_version matches target version"
+        fi
+    fi
+
     # Pull the image
     docker pull $DOCKER_IMAGE
 
