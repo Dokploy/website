@@ -19585,6 +19585,31 @@
         }
       }
     },
+    "/stripe.getInvoices": {
+      "get": {
+        "operationId": "stripe-getInvoices",
+        "tags": [
+          "stripe"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/swarm.getNodes": {
       "get": {
         "operationId": "swarm-getNodes",
