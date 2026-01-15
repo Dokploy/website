@@ -1,15 +1,34 @@
 #!/bin/bash
 
-# Detect version from environment variable or default to latest
+# Detect version from environment variable or detect latest stable from GitHub
 # Usage with curl (export first): export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
-# Usage with curl (export first): export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
+# Usage with curl (export first): export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
 # Usage with curl (bash -s): DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
-# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (defaults to latest)
+# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (detects latest stable version)
 # Usage with bash: DOKPLOY_VERSION=canary bash install.sh
-# Usage with bash: DOKPLOY_VERSION=feature bash install.sh
-# Usage with bash: bash install.sh (defaults to latest)
+# Usage with bash: DOKPLOY_VERSION=latest bash install.sh
+# Usage with bash: bash install.sh (detects latest stable version)
 detect_version() {
-    local version="${DOKPLOY_VERSION:-latest}"
+    local version="${DOKPLOY_VERSION}"
+    
+    # If no version specified, get latest stable version from GitHub releases
+    if [ -z "$version" ]; then
+        echo "Detecting latest stable version from GitHub..." >&2
+        
+        # Try to get latest release from GitHub by following redirects
+        version=$(curl -fsSL -o /dev/null -w '%{url_effective}\n' \
+            https://github.com/dokploy/dokploy/releases/latest 2>/dev/null | \
+            sed 's#.*/tag/##')
+        
+        # Fallback to latest tag if detection fails
+        if [ -z "$version" ]; then
+            echo "Warning: Could not detect latest version from GitHub, using fallback version latest" >&2
+            version="latest"
+        else
+            echo "Latest stable version detected: $version" >&2
+        fi
+    fi
+    
     echo "$version"
 }
 
