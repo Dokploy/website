@@ -76,7 +76,7 @@ POSTGRES_CONTAINER=$(docker ps --filter "name=dokploy-postgres" --format "{{.ID}
 
 if [ -n "$POSTGRES_CONTAINER" ]; then
     docker exec "$POSTGRES_CONTAINER" psql -U dokploy -d dokploy \
-        -c "ALTER USER dokploy WITH PASSWORD '${NEW_PASSWORD}';" >/dev/null 2>&1 || true
+        -c "ALTER USER dokploy WITH PASSWORD '${NEW_PASSWORD}';" 
 fi
 
 # Update Postgres service to use Docker Secret
