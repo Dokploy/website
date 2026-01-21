@@ -82,6 +82,7 @@ fi
 # Update Postgres service to use Docker Secret
 echo "🔄 Updating PostgreSQL service..."
 docker service update \
+    --env-rm POSTGRES_PASSWORD \
     --secret-add source=dokploy_postgres_password,target=/run/secrets/postgres_password \
     --env-add POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
     dokploy-postgres
