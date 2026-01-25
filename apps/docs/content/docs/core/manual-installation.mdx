@@ -134,13 +134,17 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
+    postgres_user="${POSTGRES_USER:-dokploy}"
+    postgres_db="${POSTGRES_DB:-dokploy}"
+    postgres_password="${POSTGRES_PASSWORD:-$(openssl rand --hex 32)}"
+
     docker service create \
     --name dokploy-postgres \
     --constraint 'node.role==manager' \
     --network dokploy-network \
-    --env POSTGRES_USER=dokploy \
-    --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+    --env POSTGRES_USER=${postgres_user} \
+    --env POSTGRES_DB=${postgres_db} \
+    --env POSTGRES_PASSWORD=${postgres_password} \
     --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
     postgres:16
 
@@ -159,6 +163,7 @@ install_dokploy() {
       --name dokploy \
       --replicas 1 \
       --network dokploy-network \
+      --env DATABASE_URL="postgres://${postgres_user}:${postgres_password}@dokploy-postgres:5432/${postgres_db}" \
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
