@@ -3,7 +3,7 @@ title: 'Manual Installation'
 description: 'Learn how to manually install Dokploy on your server.'
 ---
 
-If you wish to customize the Dokploy installation on your server, you can modify several enviroment variables:
+If you wish to customize the Dokploy installation on your server, you can modify several environment variables:
 
 1. **PORT** - Ideal for avoiding conflicts with other services.
 2. **TRAEFIK_SSL_PORT** - Set to another port if you want to use a different port for SSL.
@@ -134,13 +134,22 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
+    # Generate secure random password for Postgres
+    POSTGRES_PASSWORD=$(openssl rand -base64 32 | tr -d "=+/" | cut -c1-32)
+    
+    # Store password as Docker Secret (encrypted and secure)
+    echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
+    
+    echo "Generated secure database credentials (stored in Docker Secrets)"
+
     docker service create \
     --name dokploy-postgres \
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+    --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+    --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
     --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
     postgres:16
 
@@ -151,9 +160,6 @@ install_dokploy() {
     --mount type=volume,source=dokploy-redis,target=/data \
     redis:7
 
-    docker pull traefik:v3.6.1
-    docker pull dokploy/dokploy:latest
-
     # Installation
     docker service create \
       --name dokploy \
@@ -162,11 +168,13 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
+      --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
       --constraint 'node.role == manager' \
       -e ADVERTISE_ADDR=$advertise_addr \
+      -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
       dokploy/dokploy:latest
 
 
@@ -258,6 +266,23 @@ To customize the --advertise-addr parameter, replace the line: `advertise_addr=$
 :warning: This IP address should be accessible to all nodes that will join the Swarm.
 
 
+## Proxmox LXC Considerations
+
+If you're installing Dokploy in a Proxmox LXC container, the installation script automatically detects the environment and adds `--endpoint-mode dnsrr` to Docker services for compatibility. 
+
+For manual installations in LXC, add this flag to your service creation commands:
+
+```bash
+docker service create \
+  --name dokploy-postgres \
+  --endpoint-mode dnsrr \
+  # ... rest of the configuration
+```
+
+<Callout type='warn'>
+  **Note:** The `--endpoint-mode dnsrr` flag is required for Docker services to work properly in Proxmox LXC containers due to networking limitations.
+</Callout>
+
 ## Existing Docker swarm
 
 If you already have a Docker swarm running on your server and you want to use dokploy, you can use the following command to join it:
@@ -303,17 +328,47 @@ To upgrade Dokploy manually, you can use the following command:
 curl -sSL https://dokploy.com/install.sh | sh -s update
 ```
 
-To use a specific version, you can use the following command:
+### Version-Specific Installation & Updates
 
+The installation script automatically detects the latest stable version from GitHub. You can also specify a particular version:
+
+**Install/Update to Canary (Development):**
 ```bash
 export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
-export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
-curl -sSL https://dokploy.com/install.sh | sh (defaults to latest)
 ```
 
-Alternatively, you can use `bash -s`:
+**Install/Update to Latest Stable:**
+```bash
+export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
+```
+
+**Install/Update to Specific Version:**
+```bash
+export DOKPLOY_VERSION=v0.26.6 && curl -sSL https://dokploy.com/install.sh | sh
+```
+
+**Auto-detect Latest Stable (Default):**
+```bash
+curl -sSL https://dokploy.com/install.sh | sh
+```
+
+Alternatively, you can use `bash -s` for inline version specification:
 
 ```bash
 DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
-DOKPLOY_VERSION=feature bash -s < <(curl -sSL https://dokploy.com/install.sh)
+DOKPLOY_VERSION=v0.26.6 bash -s < <(curl -sSL https://dokploy.com/install.sh)
+```
+
+### Additional Environment Variables
+
+**Custom Docker Swarm Network Configuration:**
+```bash
+export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
+curl -sSL https://dokploy.com/install.sh | sh
+```
+
+**Manual Advertise Address:**
+```bash
+export ADVERTISE_ADDR=192.168.1.100
+curl -sSL https://dokploy.com/install.sh | sh
 ```

@@ -77,6 +77,64 @@ Dokploy utilizes Docker, so it is essential to have Docker installed on your ser
 curl -sSL https://dokploy.com/install.sh | sh
 ```
 
+### Advanced Installation Options
+
+The installation script automatically detects and installs the latest stable version from GitHub. However, you can customize the installation using environment variables:
+
+#### Install Specific Versions
+
+**Install Canary Version (Development):**
+```bash
+export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
+```
+
+**Install Latest Stable:**
+```bash
+export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
+```
+
+**Install Specific Version:**
+```bash
+export DOKPLOY_VERSION=v0.26.6 && curl -sSL https://dokploy.com/install.sh | sh
+```
+
+#### Custom Network Configuration
+
+If you need to customize the Docker Swarm network configuration (useful to avoid CIDR conflicts with cloud provider VPCs):
+
+```bash
+export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
+curl -sSL https://dokploy.com/install.sh | sh
+```
+
+#### Manual Advertise Address
+
+If the script cannot detect your server's IP automatically, specify it manually:
+
+```bash
+export ADVERTISE_ADDR=192.168.1.100
+curl -sSL https://dokploy.com/install.sh | sh
+```
+
+### Proxmox LXC Support
+
+<Callout type='info'>
+  The installation script automatically detects Proxmox LXC containers and applies the necessary configurations (`--endpoint-mode dnsrr`) for compatibility.
+</Callout>
+
+### Updating Dokploy
+
+To update your Dokploy installation to the latest version:
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sh -s update
+```
+
+**Update to Specific Version:**
+```bash
+export DOKPLOY_VERSION=v0.26.6 && curl -sSL https://dokploy.com/install.sh | sh -s update
+```
+
 ## Completing the Setup
 
 After running the installation script, Dokploy and its dependencies will be set up on your server. Here's how to finalize the setup and start using Dokploy:
