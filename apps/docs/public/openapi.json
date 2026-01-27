@@ -12720,8 +12720,18 @@
                     ]
                   },
                   "letsEncryptEmail": {
-                    "type": "string",
-                    "format": "email",
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          ""
+                        ]
+                      }
+                    ],
                     "nullable": true
                   },
                   "https": {
