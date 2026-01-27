@@ -9384,9 +9384,6 @@
                   },
                   "currentPassword": {
                     "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
                   }
                 },
                 "additionalProperties": false
