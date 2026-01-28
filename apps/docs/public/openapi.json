@@ -1477,6 +1477,10 @@
                     "type": "string",
                     "nullable": true
                   },
+                  "bitbucketRepositorySlug": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "bitbucketId": {
                     "type": "string",
                     "nullable": true
@@ -1500,6 +1504,7 @@
                   "bitbucketBuildPath",
                   "bitbucketOwner",
                   "bitbucketRepository",
+                  "bitbucketRepositorySlug",
                   "bitbucketId",
                   "applicationId",
                   "enableSubmodules"
@@ -2064,6 +2069,10 @@
                     "nullable": true
                   },
                   "bitbucketRepository": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "bitbucketRepositorySlug": {
                     "type": "string",
                     "nullable": true
                   },
@@ -7958,6 +7967,10 @@
                     "nullable": true
                   },
                   "bitbucketRepository": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "bitbucketRepositorySlug": {
                     "type": "string",
                     "nullable": true
                   },
