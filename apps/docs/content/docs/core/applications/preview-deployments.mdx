@@ -60,6 +60,7 @@ In this section, you can:
 - Check build and deployment logs
 - Monitor deployment updates
 - Update domain configuration
+- Manually rebuild preview deployments
 
 ### Automatic Updates
 
@@ -69,6 +70,16 @@ The preview deployment will automatically:
 - Clean up when the pull request is closed or merged
 
 This continuous preview system allows teams to review and test changes in isolation before merging to production.
+
+### Manual Rebuilds
+
+You can manually rebuild a preview deployment without downloading new code from the repository. This is useful when you need to:
+
+- Rebuild with updated environment variables or build settings
+- Retry a failed build without making code changes
+- Apply configuration changes that require a rebuild
+
+To rebuild a preview deployment, click the **Rebuild** button (hammer icon) next to the deployment and confirm the action. The rebuild will use the existing code and only re-run the build process.
 
 <Callout type="info">
   If you have security or redirects created in your application, it will inherit the same configuration for the preview deployment.
