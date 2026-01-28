@@ -17031,6 +17031,266 @@
         }
       }
     },
+    "/notification.createPushover": {
+      "post": {
+        "operationId": "notification-createPushover",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "userKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "apiToken": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "priority": {
+                    "type": "number",
+                    "minimum": -2,
+                    "maximum": 2,
+                    "default": 0
+                  },
+                  "retry": {
+                    "type": "number",
+                    "minimum": 30,
+                    "nullable": true
+                  },
+                  "expire": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 10800,
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "name",
+                  "userKey",
+                  "apiToken"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.updatePushover": {
+      "post": {
+        "operationId": "notification-updatePushover",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "notificationId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "pushoverId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  },
+                  "userKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "apiToken": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "priority": {
+                    "type": "number",
+                    "minimum": -2,
+                    "maximum": 2
+                  },
+                  "retry": {
+                    "type": "number",
+                    "minimum": 30,
+                    "nullable": true
+                  },
+                  "expire": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 10800,
+                    "nullable": true
+                  },
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "notificationId",
+                  "pushoverId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.testPushoverConnection": {
+      "post": {
+        "operationId": "notification-testPushoverConnection",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "apiToken": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "priority": {
+                    "type": "number",
+                    "minimum": -2,
+                    "maximum": 2
+                  },
+                  "retry": {
+                    "type": "number",
+                    "minimum": 30,
+                    "nullable": true
+                  },
+                  "expire": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 10800,
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "userKey",
+                  "apiToken",
+                  "priority"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/notification.getEmailProviders": {
       "get": {
         "operationId": "notification-getEmailProviders",
