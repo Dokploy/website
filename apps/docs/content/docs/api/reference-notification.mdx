@@ -79,6 +79,15 @@ _openapi:
       title: Notification test Lark Connection
       url: '#notification-test-lark-connection'
     - depth: 2
+      title: Notification create Pushover
+      url: '#notification-create-pushover'
+    - depth: 2
+      title: Notification update Pushover
+      url: '#notification-update-pushover'
+    - depth: 2
+      title: Notification test Pushover Connection
+      url: '#notification-test-pushover-connection'
+    - depth: 2
       title: Notification get Email Providers
       url: '#notification-get-email-providers'
   structuredData:
@@ -133,9 +142,15 @@ _openapi:
         id: notification-update-lark
       - content: Notification test Lark Connection
         id: notification-test-lark-connection
+      - content: Notification create Pushover
+        id: notification-create-pushover
+      - content: Notification update Pushover
+        id: notification-update-pushover
+      - content: Notification test Pushover Connection
+        id: notification-test-pushover-connection
       - content: Notification get Email Providers
         id: notification-get-email-providers
     contents: []
 ---
 
-<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/notification.createSlack"},{"method":"post","path":"/notification.updateSlack"},{"method":"post","path":"/notification.testSlackConnection"},{"method":"post","path":"/notification.createTelegram"},{"method":"post","path":"/notification.updateTelegram"},{"method":"post","path":"/notification.testTelegramConnection"},{"method":"post","path":"/notification.createDiscord"},{"method":"post","path":"/notification.updateDiscord"},{"method":"post","path":"/notification.testDiscordConnection"},{"method":"post","path":"/notification.createEmail"},{"method":"post","path":"/notification.updateEmail"},{"method":"post","path":"/notification.testEmailConnection"},{"method":"post","path":"/notification.remove"},{"method":"get","path":"/notification.one"},{"method":"get","path":"/notification.all"},{"method":"post","path":"/notification.receiveNotification"},{"method":"post","path":"/notification.createGotify"},{"method":"post","path":"/notification.updateGotify"},{"method":"post","path":"/notification.testGotifyConnection"},{"method":"post","path":"/notification.createNtfy"},{"method":"post","path":"/notification.updateNtfy"},{"method":"post","path":"/notification.testNtfyConnection"},{"method":"post","path":"/notification.createLark"},{"method":"post","path":"/notification.updateLark"},{"method":"post","path":"/notification.testLarkConnection"},{"method":"get","path":"/notification.getEmailProviders"}]} hasHead={true} />
+<APIPage document={"./public/openapi.json"} operations={[{"method":"post","path":"/notification.createSlack"},{"method":"post","path":"/notification.updateSlack"},{"method":"post","path":"/notification.testSlackConnection"},{"method":"post","path":"/notification.createTelegram"},{"method":"post","path":"/notification.updateTelegram"},{"method":"post","path":"/notification.testTelegramConnection"},{"method":"post","path":"/notification.createDiscord"},{"method":"post","path":"/notification.updateDiscord"},{"method":"post","path":"/notification.testDiscordConnection"},{"method":"post","path":"/notification.createEmail"},{"method":"post","path":"/notification.updateEmail"},{"method":"post","path":"/notification.testEmailConnection"},{"method":"post","path":"/notification.remove"},{"method":"get","path":"/notification.one"},{"method":"get","path":"/notification.all"},{"method":"post","path":"/notification.receiveNotification"},{"method":"post","path":"/notification.createGotify"},{"method":"post","path":"/notification.updateGotify"},{"method":"post","path":"/notification.testGotifyConnection"},{"method":"post","path":"/notification.createNtfy"},{"method":"post","path":"/notification.updateNtfy"},{"method":"post","path":"/notification.testNtfyConnection"},{"method":"post","path":"/notification.createLark"},{"method":"post","path":"/notification.updateLark"},{"method":"post","path":"/notification.testLarkConnection"},{"method":"post","path":"/notification.createPushover"},{"method":"post","path":"/notification.updatePushover"},{"method":"post","path":"/notification.testPushoverConnection"},{"method":"get","path":"/notification.getEmailProviders"}]} hasHead={true} />
