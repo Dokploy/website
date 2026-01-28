@@ -3911,7 +3911,7 @@
                   },
                   "dockerImage": {
                     "type": "string",
-                    "default": "postgres:15"
+                    "default": "postgres:18"
                   },
                   "environmentId": {
                     "type": "string"
@@ -4408,7 +4408,7 @@
                   },
                   "dockerImage": {
                     "type": "string",
-                    "default": "postgres:15"
+                    "default": "postgres:18"
                   },
                   "command": {
                     "type": "string",
