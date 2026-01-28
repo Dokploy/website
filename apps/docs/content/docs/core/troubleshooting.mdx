@@ -460,13 +460,18 @@ You should now be able to access the user interface.
 
 In the case you want to recreate the dokploy services, you can do the following:
 
+<Callout type='warn'>
+  **Important:** Before recreating services, make sure you have backups of your data. Recreating services will not delete your volumes, but it's always good to have backups.
+</Callout>
 
-Remove the dokploy-redis service:
+### Recreate Redis Service
+
+Remove and recreate the dokploy-redis service:
 ```bash
 docker service rm dokploy-redis
 
 # Create a new dokploy-redis service
-  docker service create \
+docker service create \
   --name dokploy-redis \
   --constraint 'node.role==manager' \
   --network dokploy-network \
@@ -479,17 +484,22 @@ Remove the dokploy-postgres service:
 ```bash
 docker service rm dokploy-postgres
 
-# Create a new dokploy-postgres service
-  docker service create \
+# Create a new dokploy-postgres service with Docker Secrets
+docker service create \
   --name dokploy-postgres \
   --constraint 'node.role==manager' \
   --network dokploy-network \
   --env POSTGRES_USER=dokploy \
   --env POSTGRES_DB=dokploy \
-  --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+  --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
   --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
   postgres:16
 ```
+
+<Callout type='info'>
+  **Note:** Using Docker Secrets is the recommended approach for managing sensitive data like passwords. The secret is encrypted and only available to services that have been granted access to it.
+</Callout>
 
 
 Remove the dokploy-traefik service:
@@ -507,7 +517,7 @@ docker run -d \
     -p 80:80/tcp \
     -p 443:443/tcp \
     -p 443:443/udp \
-    traefik:v3.6.1
+    traefik:v3.6.7
 
 docker network connect dokploy-network dokploy-traefik
 
@@ -525,24 +535,27 @@ docker service create \
   --publish mode=host,published=443,target=443 \
   --publish mode=host,published=80,target=80 \
   --publish mode=host,published=443,target=443,protocol=udp \
-  traefik:v3.6.1
+  traefik:v3.6.7
 ```
 
-Remove the dokploy service:
+### Recreate Dokploy Service
+
+First, get the private IP of your server for the ADVERTISE_ADDR:
+
+```bash
+# Get the private IP of your server
+ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
+```
+
+Copy the IP address from the output and use it in the command below.
+
+Remove and recreate the dokploy service:
 
 ```bash
 docker service rm dokploy
 
-# Create a new dokploy service
-
-# We need the advertise address to be set which is the Private IP of your server, you can get it by running the following command:
-
-# Run this command to get the private IP of your server:
-
-# Copy this value and paste in the ADVERTISE_ADDR variable:
-ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
-
 # Create the dokploy service
+# Replace <YOUR_PRIVATE_IP> with the IP you got from the command above
 docker service create \
   --name dokploy \
   --replicas 1 \
@@ -550,11 +563,34 @@ docker service create \
   --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
   --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
   --mount type=volume,source=dokploy,target=/root/.docker \
+  --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
   --publish published=3000,target=3000,mode=host \
   --update-parallelism 1 \
   --update-order stop-first \
   --constraint 'node.role == manager' \
-  -e ADVERTISE_ADDR="Eg: 192.168.1.100" \
+  -e ADVERTISE_ADDR=<YOUR_PRIVATE_IP> \
+  -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+  dokploy/dokploy:latest
+```
+
+**For Proxmox LXC environments**, add the `--endpoint-mode dnsrr` flag to all services:
+
+```bash
+docker service create \
+  --name dokploy \
+  --replicas 1 \
+  --network dokploy-network \
+  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+  --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
+  --mount type=volume,source=dokploy,target=/root/.docker \
+  --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --publish published=3000,target=3000,mode=host \
+  --update-parallelism 1 \
+  --update-order stop-first \
+  --constraint 'node.role == manager' \
+  --endpoint-mode dnsrr \
+  -e ADVERTISE_ADDR=<YOUR_PRIVATE_IP> \
+  -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
   dokploy/dokploy:latest
 ```
 

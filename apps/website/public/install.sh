@@ -47,6 +47,37 @@ is_proxmox_lxc() {
     return 1  # Not LXC
 }
 
+generate_random_password() {
+    # Generate a secure random password using multiple methods with fallbacks
+    local password=""
+    
+    # Try using openssl (most reliable, available on most systems)
+    if command -v openssl >/dev/null 2>&1; then
+        password=$(openssl rand -base64 32 | tr -d "=+/" | cut -c1-32)
+    # Fallback to /dev/urandom with tr (most Linux systems)
+    elif [ -r /dev/urandom ]; then
+        password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32)
+    # Last resort fallback using date and simple hashing
+    else
+        if command -v sha256sum >/dev/null 2>&1; then
+            password=$(date +%s%N | sha256sum | base64 | head -c 32)
+        elif command -v shasum >/dev/null 2>&1; then
+            password=$(date +%s%N | shasum -a 256 | base64 | head -c 32)
+        else
+            # Very basic fallback - combines multiple sources of entropy
+            password=$(echo "$(date +%s%N)-$(hostname)-$$-$RANDOM" | base64 | tr -d "=+/" | head -c 32)
+        fi
+    fi
+    
+    # Ensure we got a password of correct length
+    if [ -z "$password" ] || [ ${#password} -lt 20 ]; then
+        echo "Error: Failed to generate random password" >&2
+        exit 1
+    fi
+    
+    echo "$password"
+}
+
 install_dokploy() {
     # Detect version tag
     VERSION_TAG=$(detect_version)
@@ -199,13 +230,22 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
+    # Generate secure random password for Postgres
+    POSTGRES_PASSWORD=$(generate_random_password)
+    
+    # Store password as Docker Secret (encrypted and secure)
+    echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
+    
+    echo "Generated secure database credentials (stored in Docker Secrets)"
+
     docker service create \
     --name dokploy-postgres \
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+    --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+    --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
     --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
     $endpoint_mode \
     postgres:16
@@ -232,6 +272,7 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
+      --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
@@ -239,6 +280,7 @@ install_dokploy() {
       $endpoint_mode \
       $release_tag_env \
       -e ADVERTISE_ADDR=$advertise_addr \
+      -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
       $DOCKER_IMAGE
 
     sleep 4
@@ -252,7 +294,7 @@ install_dokploy() {
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
-        traefik:v3.6.1
+        traefik:v3.6.7
     
     docker network connect dokploy-network dokploy-traefik
 
@@ -268,7 +310,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.6.1
+    #     traefik:v3.6.7
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
