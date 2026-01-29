@@ -35,7 +35,6 @@
 		"applications",
 		"docker-compose",
 		"databases",
-		"templates",
 		"(examples)",
 		"auto-deploy",
 		"schedule-jobs",

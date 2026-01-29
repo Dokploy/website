@@ -9,7 +9,8 @@
 		"types:check": "fumadocs-mdx && tsc --noEmit",
 		"postinstall": "fumadocs-mdx",
 		"fix-openapi": "node scripts/fix-openapi.mjs",
-		"build:docs": "npm run fix-openapi && node generate-docs.mjs"
+		"generate-templates": "node scripts/generate-templates.mjs",
+		"build:docs": "npm run fix-openapi && npm run generate-templates && node generate-docs.mjs"
 	},
 	"dependencies": {
 		"@next/third-parties": "16.0.7",
