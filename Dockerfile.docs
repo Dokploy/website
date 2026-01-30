@@ -14,6 +14,8 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/d
 # Generate OpenAPI documentation from apps/docs/public/openapi.json
 RUN pnpm --filter=./apps/docs run build:docs
 
+# Generate templates
+RUN pnpm --filter=./apps/docs run generate-templates
 # Deploy only the dokploy app
 
 ENV NODE_ENV=production
