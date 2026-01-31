@@ -1,0 +1,44 @@
+---
+title: Auth0
+description: Configure SSO with Auth0
+---
+
+
+## 1. Create an application in Auth0
+
+1. Log in to the [Auth0 Dashboard](https://manage.auth0.com/).
+2. Go to **Applications** → **Applications** → **Create Application**.
+3. Choose **Regular Web Application** and create it.
+4. Note your **Domain**, **Client ID**, and **Client Secret**.
+
+## 2. Configure Dokploy
+
+1. In Dokploy, go to **Settings** (or **Organization** / **Security** in Enterprise).
+2. Enable **SSO** and choose **OpenID Connect**.
+3. Enter:
+   - **Provider**: myorg-name-auth0 (Unique)
+   - **Issuer URL**: `https://YOUR_AUTH0_DOMAIN/` (Make sure add the trailing slash)
+   - **Domain**: `your-domain.com` (Your domain)
+   - **Client ID**: from Auth0 application
+   - **Client Secret**: from Auth0 application
+   - **Scopes**: openid email profile
+4. Save.
+
+## 3. Configure Auth0
+
+1. In your application, go to **Settings**.
+2. Set **Allowed Callback URLs** to your Dokploy URL, for example:
+   - `https://your-dokploy-domain.com/api/auth/callback/myorg-name-auth0`
+3. Set **Allowed Logout URLs** to:
+   - `https://your-dokploy-domain.com`
+4. Set **Allowed Origins** to:
+   - `https://your-dokploy-domain.com`
+5. Save changes.
+
+## Troubleshooting
+
+- **Redirect URI mismatch** — Ensure the callback URL in Dokploy matches exactly what is configured in Auth0 (including protocol and path).
+- **Invalid client** — Double-check Client ID and Client Secret, and that the application is a web application.
+- **Scopes** — Ensure Auth0 is configured to return `openid` and, if required, `email` and `profile`.
+
+For help with your setup, [contact us](https://dokploy.com/contact).

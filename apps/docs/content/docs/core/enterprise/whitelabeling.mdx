@@ -1,0 +1,37 @@
+---
+title: Whitelabeling
+description: Rebrand Dokploy with your logo, colors, and domain
+---
+
+
+## What you can customize
+
+- **Logo** — Header and login logo.
+- **Favicon** — Browser tab icon.
+- **Colors** — Primary color and accent (e.g. buttons, links).
+- **Custom domain** — Serve the app from your own domain (e.g. `deploy.yourcompany.com`).
+
+## Configuration
+
+Whitelabel settings are managed in the Enterprise admin area (or via environment variables, depending on your deployment).
+
+1. Go to **Settings** → **Whitelabel** (or equivalent in your Enterprise setup).
+2. Upload your **logo** (recommended: SVG or PNG, transparent background).
+3. Upload your **favicon** (e.g. ICO or PNG).
+4. Set **primary color** and **accent color** (hex codes).
+5. If using a custom domain, configure your reverse proxy (e.g. Traefik, Nginx) and DNS to point to your Dokploy instance, and set the **base URL** in Dokploy to match.
+
+## Custom domain
+
+1. Create a CNAME (or A) record pointing your domain to the server or load balancer where Dokploy runs.
+2. Configure TLS (e.g. Let's Encrypt) on your reverse proxy for that hostname.
+3. In Dokploy, set the **Application URL** (or equivalent) to `https://your-domain.com`.
+4. Restart or reload Dokploy so it uses the new base URL for redirects and links.
+
+## Best practices
+
+- Use high-resolution logos (e.g. 2x) for sharp display on retina screens.
+- Keep primary and accent colors accessible (sufficient contrast for text and buttons).
+- Test login and main flows after changing logo and colors to ensure nothing is broken or hard to read.
+
+For help enabling or configuring whitelabeling, [contact us](https://dokploy.com/contact).
