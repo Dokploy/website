@@ -1,0 +1,45 @@
+---
+title: Okta
+description: Configure SSO with Okta
+---
+
+
+## 1. Create an application in Okta
+
+1. Log in to the [Okta Admin Console](https://login.okta.com/) (or your Okta domain).
+2. Go to **Applications** → **Applications** → **Create App Integration**.
+3. Choose **OIDC - OpenID Connect** and **Web Application**, then create it.
+4. Note your **Client ID** and **Client Secret** (under **General** or **Client credentials**).
+5. Note your Okta **domain** (e.g. `https://your-domain.okta.com`) and, if using a custom authorization server, its **issuer** (e.g. `https://your-domain.okta.com/oauth2/default`) or go to **Security** → **API** → **Authorization Servers** and note the **Issuer** (e.g. `https://your-domain.okta.com`).
+
+## 2. Configure Dokploy
+
+1. In Dokploy, go to **Settings** (or **Organization** / **Security** in Enterprise).
+2. Enable **SSO** and choose **OpenID Connect**.
+3. Enter:
+   - **Provider**: myorg-name-okta (unique name for this provider)
+   - **Issuer URL**: your Okta issuer URL (e.g. `https://your-domain.okta.com` )
+   - **Domain**: `your-domain.com` (your Dokploy domain)
+   - **Client ID**: from the Okta application
+   - **Client Secret**: from the Okta application
+   - **Scopes**: openid email profile
+4. Save.
+
+## 3. Configure Okta
+
+1. In your Okta application, go to **General** (or **Sign-in** / **Assignments** as needed).
+2. Set **Sign-in redirect URIs** to your Dokploy callback URL, for example:
+   - `https://your-dokploy-domain.com/api/auth/callback/myorg-name-okta`
+3. Set **Sign-out redirect URIs** (optional) to:
+   - `https://your-dokploy-domain.com`
+4. Under **Trusted Origins**, add your Dokploy URL as an origin (e.g. `https://your-dokploy-domain.com`) if required for CORS.
+5. Save.
+
+## Troubleshooting
+
+- **Redirect URI mismatch** — Ensure the callback URL in Dokploy matches exactly what is configured in Okta (including protocol and path). Use the same **Provider** value in the path (e.g. `.../api/auth/callback/myorg-name-okta`).
+- **Invalid client** — Double-check Client ID and Client Secret, and that the application is a Web Application with the correct grant types (e.g. Authorization Code).
+- **Issuer URL** — Use the full issuer URL for your authorization server (e.g. `https://your-domain.okta.com`).
+- **Scopes** — Ensure the Okta authorization server is configured to allow `openid`, and if needed `email` and `profile`.
+
+For help with your setup, [contact us](https://dokploy.com/contact).
