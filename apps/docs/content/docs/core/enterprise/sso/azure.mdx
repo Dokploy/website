@@ -1,0 +1,46 @@
+---
+title: Azure AD (Microsoft Entra ID)
+description: Configure SSO with Azure AD / Microsoft Entra ID
+---
+
+
+## 1. Register an application in Azure
+
+1. Log in to the [Azure Portal](https://portal.azure.com/).
+2. Go to **Microsoft Entra ID** (or **Azure Active Directory**) → **App registrations** → **New registration**.
+3. Enter a **Name** (e.g. Dokploy), choose supported account types, and set **Redirect URI** to **Web** with a placeholder for now (e.g. `https://your-dokploy-domain.com/api/auth/callback/myorg-name-azure`).
+4. Register and note the **Application (client) ID** and **Directory (tenant) ID**.
+5. Go to **Certificates & secrets** → **New client secret**, create a secret and note its **Value** (you won’t see it again).
+6. The **Issuer URL** for OpenID Connect is: `https://login.microsoftonline.com/{tenant-id}/v2.0` (replace `{tenant-id}` with your Directory (tenant) ID). Some setups expect a trailing slash.
+
+## 2. Configure Dokploy
+
+1. In Dokploy, go to **Settings** (or **Organization** / **Security** in Enterprise).
+2. Enable **SSO** and choose **OpenID Connect**.
+3. Enter:
+   - **Provider**: myorg-name-azure (unique name for this provider)
+   - **Issuer URL**: `https://login.microsoftonline.com/YOUR_TENANT_ID/v2.0` (use your Directory (tenant) ID; add a trailing slash if required for discovery)
+   - **Domain**: `your-domain.com`
+   - **Client ID**: the Application (client) ID from Azure
+   - **Client Secret**: the client secret value from Certificates & secrets
+   - **Scopes**: openid email profile
+4. Save.
+
+## 3. Configure Azure
+
+1. In your app registration, go to **Authentication**.
+2. Under **Web** → **Redirect URIs**, add:
+   - `https://your-dokploy-domain.com/api/auth/callback/myorg-name-azure`
+3. Under **Front-channel logout URL** (optional), you can set:
+   - `https://your-dokploy-domain.com`
+4. Go to **Token Configuration** and add optional claim, select **email**, **preferred_username** and **upn** from the list of claims.
+5. Save.
+
+## Troubleshooting
+
+- **Redirect URI mismatch** — Ensure the callback URL in Dokploy matches exactly what is configured in Azure (including protocol and path). Use the same **Provider** value in the path (e.g. `.../api/auth/callback/myorg-name-azure`).
+- **Invalid client** — Double-check Application (client) ID and client secret. Confirm the secret has not expired under **Certificates & secrets**.
+- **Tenant** — Use the correct Directory (tenant) ID in the Issuer URL. For multi-tenant apps, you may use `common` instead of the tenant ID (e.g. `https://login.microsoftonline.com/common/v2.0`).
+- **Scopes** — Ensure the app registration has the right API permissions (e.g. **OpenID permissions**, **User.Read**) if required for `openid`, `email`, and `profile`.
+
+For help with your setup, [contact us](https://dokploy.com/contact).

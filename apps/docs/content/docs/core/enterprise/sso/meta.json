@@ -2,6 +2,7 @@
 	"title": "SSO",
 	"pages": [
 		"auth0",
+		"azure",
 		"keycloak",
 		"okta"
 	]
