@@ -61,7 +61,7 @@ description: Configure SSO with Okta (OIDC or SAML)
 2. Enable **SSO** and choose **SAML**.
 3. Enter:
    - **Provider**: myorg-name-okta-saml (unique name for this provider)
-   - **Entity ID**: the Okta Identity Provider issuer (Entity ID) located in `Sign On` tab called `Issuer` (eg. `http://www.okta.com/exkzq3acyuEtIuNrW697`)
+   - **Issuer URL**: the Okta Identity Provider issuer (Entity ID) located in `Sign On` tab called `Issuer` (eg. `http://www.okta.com/exkzq3acyuEtIuNrW697`)
    - **SSO URL**: the Okta Identity Provider single sign-on URL located in `Sign On` tab called `Single sign-on URL` (eg. `https://trial-2804699.okta.com/app/trial-2802699_something/exkzqi3cyuEtIuNrW697/sso/saml`)
    - **Certificate**: go to `Signing Certificate` tab and download the certificate active (x509) and paste it in the `Certificate` field.
    - **Federation Metadata XML**: copy the idp metadata XML from the certificate active and paste it in the `Metadata XML` field.

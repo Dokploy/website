@@ -62,7 +62,7 @@ description: Configure SSO with Azure AD / Microsoft Entra ID (OIDC or SAML)
 2. Enable **SSO** and choose **SAML**.
 3. Enter:
    - **Provider**: myorg-name-azure-saml (unique name for this provider)
-   - **Entity ID**: the Azure SAML Entity ID (Identifier) from the Enterprise application (eg. `https://sts.windows.net/YOUR_TENANT_ID/`).
+   - **Issuer URL**: the Azure SAML Entity ID (Identifier) from the Enterprise application (eg. `https://sts.windows.net/YOUR_TENANT_ID/`).
    - **SSO URL**: the Azure Login URL (Single Sign-On URL) (eg. `https://login.microsoftonline.com/YOUR_TENANT_ID/saml2`)
    - **Certificate**: the IdP signing certificate (x509 Base64) from Azure
    - **Federation Metadata XML**: the Federation Metadata XML file from Azure
