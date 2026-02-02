@@ -47,6 +47,7 @@ export function Footer() {
 						>
 							Docs
 						</NavLink>
+						<NavLink href="/terms-of-service">Terms of Service</NavLink>
 						<NavLink href="/privacy">Privacy Policy</NavLink>
 					</div>
 				</nav>
