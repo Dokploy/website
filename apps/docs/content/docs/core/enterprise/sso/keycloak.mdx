@@ -21,7 +21,7 @@ description: Configure SSO with Keycloak
 3. Enter:
    - **Provider**: my-client-id (Unique)
    - **Issuer URL**: your Keycloak realm URL (e.g. `https://keycloak.example.com/realms/your-realm`)
-   - **Domain**: `your-domain.com`
+   - **Domain**: the domain users use to authenticate via Keycloak (e.g. your organization domain like `acme.com`), not the Dokploy instance URL
    - **Client ID**: my-client-id
    - **Client Secret**: the secret from the Keycloak client Credentials tab
    - **Scopes**: openid email profile

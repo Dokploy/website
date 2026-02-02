@@ -18,7 +18,7 @@ description: Configure SSO with Auth0
 3. Enter:
    - **Provider**: myorg-name-auth0 (Unique)
    - **Issuer URL**: `https://YOUR_AUTH0_DOMAIN/` (Make sure add the trailing slash)
-   - **Domain**: `your-domain.com` (Your domain)
+   - **Domain**: the domain users use to authenticate via Auth0 (e.g. your organization domain like `acme.com`), not the Dokploy instance URL
    - **Client ID**: from Auth0 application
    - **Client Secret**: from Auth0 application
    - **Scopes**: openid email profile
