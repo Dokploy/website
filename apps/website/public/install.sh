@@ -8,6 +8,11 @@
 # Usage with bash: DOKPLOY_VERSION=canary bash install.sh
 # Usage with bash: DOKPLOY_VERSION=latest bash install.sh
 # Usage with bash: bash install.sh (detects latest stable version)
+#
+# Optional environment variables for dokploy container (see https://docs.dokploy.com/docs/core/manual-installation):
+# DOKPLOY_DOCKER_ENVS: Pass additional -e flags to the dokploy container
+# Example: export DOKPLOY_DOCKER_ENVS="-e TZ=America/New_York -e PORT=4000"
+# Available env vars: PORT, TRAEFIK_PORT, TRAEFIK_SSL_PORT, TZ, DATABASE_URL, REDIS_HOST
 detect_version() {
     local version="${DOKPLOY_VERSION}"
     
@@ -264,7 +269,14 @@ install_dokploy() {
     if [ "$VERSION_TAG" != "latest" ]; then
         release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
     fi
-    
+
+    # Allow custom Docker environment variables via DOKPLOY_DOCKER_ENVS environment variable
+    # Example: export DOKPLOY_DOCKER_ENVS="-e TZ=America/New_York -e PORT=4000"
+    docker_extra_envs="${DOKPLOY_DOCKER_ENVS:-}"
+    if [ -n "$docker_extra_envs" ]; then
+        echo "Using custom docker environment variables: $docker_extra_envs"
+    fi
+
     docker service create \
       --name dokploy \
       --replicas 1 \
@@ -279,6 +291,7 @@ install_dokploy() {
       --constraint 'node.role == manager' \
       $endpoint_mode \
       $release_tag_env \
+      $docker_extra_envs \
       -e ADVERTISE_ADDR=$advertise_addr \
       -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
       $DOCKER_IMAGE
