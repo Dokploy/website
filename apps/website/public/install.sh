@@ -13,6 +13,9 @@
 # DOKPLOY_DOCKER_ENVS: Pass additional -e flags to the dokploy container
 # Example: export DOKPLOY_DOCKER_ENVS="-e TZ=America/New_York -e PORT=4000"
 # Available env vars: PORT, TRAEFIK_PORT, TRAEFIK_SSL_PORT, TZ, DATABASE_URL, REDIS_HOST
+#
+# Note: If DATABASE_URL is provided, the built-in dokploy-postgres service will not be created.
+#       If REDIS_HOST is provided, the built-in dokploy-redis service will not be created.
 detect_version() {
     local version="${DOKPLOY_VERSION}"
     
@@ -235,33 +238,56 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
-    # Generate secure random password for Postgres
-    POSTGRES_PASSWORD=$(generate_random_password)
-    
-    # Store password as Docker Secret (encrypted and secure)
-    echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
-    
-    echo "Generated secure database credentials (stored in Docker Secrets)"
+    # Allow custom Docker environment variables via DOKPLOY_DOCKER_ENVS environment variable
+    # Example: export DOKPLOY_DOCKER_ENVS="-e TZ=America/New_York -e PORT=4000"
+    docker_extra_envs="${DOKPLOY_DOCKER_ENVS:-}"
+    if [ -n "$docker_extra_envs" ]; then
+        echo "Using custom docker environment variables: $docker_extra_envs"
+    fi
 
-    docker service create \
-    --name dokploy-postgres \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --env POSTGRES_USER=dokploy \
-    --env POSTGRES_DB=dokploy \
-    --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
-    --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
-    --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
-    $endpoint_mode \
-    postgres:16
+    # Check if external database/redis are provided
+    use_external_db=false
+    use_external_redis=false
+    if echo "$docker_extra_envs" | grep -q "DATABASE_URL"; then
+        use_external_db=true
+        echo "External DATABASE_URL detected, skipping dokploy-postgres service creation"
+    fi
+    if echo "$docker_extra_envs" | grep -q "REDIS_HOST"; then
+        use_external_redis=true
+        echo "External REDIS_HOST detected, skipping dokploy-redis service creation"
+    fi
 
-    docker service create \
-    --name dokploy-redis \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --mount type=volume,source=dokploy-redis,target=/data \
-    $endpoint_mode \
-    redis:7
+    # Generate secure random password for Postgres (only if using built-in postgres)
+    if [ "$use_external_db" = false ]; then
+        POSTGRES_PASSWORD=$(generate_random_password)
+
+        # Store password as Docker Secret (encrypted and secure)
+        echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
+
+        echo "Generated secure database credentials (stored in Docker Secrets)"
+
+        docker service create \
+        --name dokploy-postgres \
+        --constraint 'node.role==manager' \
+        --network dokploy-network \
+        --env POSTGRES_USER=dokploy \
+        --env POSTGRES_DB=dokploy \
+        --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+        --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+        --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
+        $endpoint_mode \
+        postgres:16
+    fi
+
+    if [ "$use_external_redis" = false ]; then
+        docker service create \
+        --name dokploy-redis \
+        --constraint 'node.role==manager' \
+        --network dokploy-network \
+        --mount type=volume,source=dokploy-redis,target=/data \
+        $endpoint_mode \
+        redis:7
+    fi
 
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
@@ -270,11 +296,12 @@ install_dokploy() {
         release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
     fi
 
-    # Allow custom Docker environment variables via DOKPLOY_DOCKER_ENVS environment variable
-    # Example: export DOKPLOY_DOCKER_ENVS="-e TZ=America/New_York -e PORT=4000"
-    docker_extra_envs="${DOKPLOY_DOCKER_ENVS:-}"
-    if [ -n "$docker_extra_envs" ]; then
-        echo "Using custom docker environment variables: $docker_extra_envs"
+    # Set postgres secret and env var only if using built-in postgres
+    postgres_secret_args=""
+    postgres_env_args=""
+    if [ "$use_external_db" = false ]; then
+        postgres_secret_args="--secret source=dokploy_postgres_password,target=/run/secrets/postgres_password"
+        postgres_env_args="-e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password"
     fi
 
     docker service create \
@@ -284,7 +311,7 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
-      --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+      $postgres_secret_args \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
@@ -293,7 +320,7 @@ install_dokploy() {
       $release_tag_env \
       $docker_extra_envs \
       -e ADVERTISE_ADDR=$advertise_addr \
-      -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+      $postgres_env_args \
       $DOCKER_IMAGE
 
     sleep 4
