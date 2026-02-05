@@ -16030,6 +16030,246 @@
         }
       }
     },
+    "/notification.createResend": {
+      "post": {
+        "operationId": "notification-createResend",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fromAddress": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "toAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "appBuildError",
+                  "databaseBackup",
+                  "volumeBackup",
+                  "dokployRestart",
+                  "name",
+                  "appDeploy",
+                  "dockerCleanup",
+                  "serverThreshold",
+                  "apiKey",
+                  "fromAddress",
+                  "toAddresses"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.updateResend": {
+      "post": {
+        "operationId": "notification-updateResend",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fromAddress": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "toAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "notificationId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "resendId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "notificationId",
+                  "resendId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.testResendConnection": {
+      "post": {
+        "operationId": "notification-testResendConnection",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fromAddress": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "toAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "apiKey",
+                  "fromAddress",
+                  "toAddresses"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/notification.remove": {
       "post": {
         "operationId": "notification-remove",
