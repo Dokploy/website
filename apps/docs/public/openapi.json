@@ -2370,8 +2370,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -3730,8 +3731,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -4709,8 +4711,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -5671,8 +5674,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -6643,8 +6647,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -7635,8 +7640,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
