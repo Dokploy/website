@@ -18011,6 +18011,10 @@
                     "type": "string",
                     "minLength": 1
                   },
+                  "giteaInternalUrl": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "redirectUri": {
                     "type": "string"
                   },
@@ -18288,6 +18292,10 @@
                   "giteaUrl": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "giteaInternalUrl": {
+                    "type": "string",
+                    "nullable": true
                   },
                   "redirectUri": {
                     "type": "string"
