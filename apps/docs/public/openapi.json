@@ -12360,6 +12360,31 @@
         }
       }
     },
+    "/settings.cleanAllDeploymentQueue": {
+      "post": {
+        "operationId": "settings-cleanAllDeploymentQueue",
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/settings.reloadTraefik": {
       "post": {
         "operationId": "settings-reloadTraefik",
