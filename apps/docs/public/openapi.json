@@ -18763,6 +18763,10 @@
                     "type": "string",
                     "minLength": 1
                   },
+                  "gitlabInternalUrl": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "applicationId": {
                     "type": "string"
                   },
@@ -19045,6 +19049,10 @@
                   "gitlabUrl": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "gitlabInternalUrl": {
+                    "type": "string",
+                    "nullable": true
                   },
                   "applicationId": {
                     "type": "string"
