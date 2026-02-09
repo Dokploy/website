@@ -2414,6 +2414,33 @@
                     "additionalProperties": false,
                     "nullable": true
                   },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "nullable": true
+                  },
                   "replicas": {
                     "type": "number"
                   },
@@ -3775,6 +3802,33 @@
                     "additionalProperties": false,
                     "nullable": true
                   },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "nullable": true
+                  },
                   "replicas": {
                     "type": "number"
                   },
@@ -4755,6 +4809,33 @@
                     "additionalProperties": false,
                     "nullable": true
                   },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "nullable": true
+                  },
                   "replicas": {
                     "type": "number"
                   },
@@ -5716,6 +5797,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -6689,6 +6797,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -7682,6 +7817,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
