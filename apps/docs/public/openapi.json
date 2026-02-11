@@ -21980,6 +21980,146 @@
         }
       }
     },
+    "/sso.addTrustedOrigin": {
+      "post": {
+        "operationId": "sso-addTrustedOrigin",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "origin"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.removeTrustedOrigin": {
+      "post": {
+        "operationId": "sso-removeTrustedOrigin",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "origin"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.updateTrustedOrigin": {
+      "post": {
+        "operationId": "sso-updateTrustedOrigin",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "oldOrigin": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "newOrigin": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "oldOrigin",
+                  "newOrigin"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/schedule.create": {
       "post": {
         "operationId": "schedule-create",
