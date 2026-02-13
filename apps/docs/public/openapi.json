@@ -21631,6 +21631,345 @@
         }
       }
     },
+    "/sso.one": {
+      "get": {
+        "operationId": "sso-one",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "providerId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.update": {
+      "post": {
+        "operationId": "sso-update",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "providerId": {
+                    "type": "string"
+                  },
+                  "issuer": {
+                    "type": "string"
+                  },
+                  "domains": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "oidcConfig": {
+                    "type": "object",
+                    "properties": {
+                      "clientId": {
+                        "type": "string"
+                      },
+                      "clientSecret": {
+                        "type": "string"
+                      },
+                      "authorizationEndpoint": {
+                        "type": "string"
+                      },
+                      "tokenEndpoint": {
+                        "type": "string"
+                      },
+                      "userInfoEndpoint": {
+                        "type": "string"
+                      },
+                      "tokenEndpointAuthentication": {
+                        "type": "string",
+                        "enum": [
+                          "client_secret_post",
+                          "client_secret_basic"
+                        ]
+                      },
+                      "jwksEndpoint": {
+                        "type": "string"
+                      },
+                      "discoveryEndpoint": {
+                        "type": "string"
+                      },
+                      "skipDiscovery": {
+                        "type": "boolean"
+                      },
+                      "scopes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "pkce": {
+                        "type": "boolean",
+                        "default": true
+                      },
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "emailVerified": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "extraFields": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "clientId",
+                      "clientSecret"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "samlConfig": {
+                    "type": "object",
+                    "properties": {
+                      "entryPoint": {
+                        "type": "string"
+                      },
+                      "cert": {
+                        "type": "string"
+                      },
+                      "callbackUrl": {
+                        "type": "string"
+                      },
+                      "audience": {
+                        "type": "string"
+                      },
+                      "idpMetadata": {
+                        "type": "object",
+                        "properties": {
+                          "metadata": {
+                            "type": "string"
+                          },
+                          "entityID": {
+                            "type": "string"
+                          },
+                          "cert": {
+                            "type": "string"
+                          },
+                          "privateKey": {
+                            "type": "string"
+                          },
+                          "privateKeyPass": {
+                            "type": "string"
+                          },
+                          "isAssertionEncrypted": {
+                            "type": "boolean"
+                          },
+                          "encPrivateKey": {
+                            "type": "string"
+                          },
+                          "encPrivateKeyPass": {
+                            "type": "string"
+                          },
+                          "singleSignOnService": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Binding": {
+                                  "type": "string"
+                                },
+                                "Location": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "Binding",
+                                "Location"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "spMetadata": {
+                        "type": "object",
+                        "properties": {
+                          "metadata": {
+                            "type": "string"
+                          },
+                          "entityID": {
+                            "type": "string"
+                          },
+                          "binding": {
+                            "type": "string"
+                          },
+                          "privateKey": {
+                            "type": "string"
+                          },
+                          "privateKeyPass": {
+                            "type": "string"
+                          },
+                          "isAssertionEncrypted": {
+                            "type": "boolean"
+                          },
+                          "encPrivateKey": {
+                            "type": "string"
+                          },
+                          "encPrivateKeyPass": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "wantAssertionsSigned": {
+                        "type": "boolean"
+                      },
+                      "authnRequestsSigned": {
+                        "type": "boolean"
+                      },
+                      "signatureAlgorithm": {
+                        "type": "string"
+                      },
+                      "digestAlgorithm": {
+                        "type": "string"
+                      },
+                      "identifierFormat": {
+                        "type": "string"
+                      },
+                      "privateKey": {
+                        "type": "string"
+                      },
+                      "decryptionPvk": {
+                        "type": "string"
+                      },
+                      "additionalParams": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      },
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "emailVerified": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "extraFields": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "entryPoint",
+                      "cert",
+                      "callbackUrl",
+                      "spMetadata"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  },
+                  "overrideUserInfo": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "providerId",
+                  "issuer",
+                  "domains"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/sso.deleteProvider": {
       "post": {
         "operationId": "sso-deleteProvider",
