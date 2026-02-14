@@ -95,6 +95,7 @@ echo "🔄 Updating Dokploy service..."
 docker service update \
     --secret-add source=dokploy_postgres_password,target=/run/secrets/postgres_password \
     --env-add POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+    --env-rm DATABASE_URL \
     dokploy
 
 echo "⏳ Waiting for services to restart..."
