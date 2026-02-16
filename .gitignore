@@ -6,6 +6,7 @@ node_modules
 .pnp.js
 .docker
 
+
 # Local env files
 .env
 .env.local

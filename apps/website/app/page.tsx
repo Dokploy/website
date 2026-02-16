@@ -30,7 +30,7 @@ export default function Home() {
 					<Pricing />
 				</div>
 				<Faqs />
-				<Sponsors />
+				{/* <Sponsors /> */}
 				<CallToAction />
 			</main>
 		</div>

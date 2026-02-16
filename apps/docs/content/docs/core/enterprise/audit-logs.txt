@@ -1,0 +1,44 @@
+---
+title: Audit logs
+description: Track user actions and changes for compliance and security
+---
+
+## What is logged
+
+Typical events include:
+
+- **Authentication** — Logins, logouts, failed attempts, SSO redirects.
+- **Users and access** — User creation, updates, deletion, role changes, invite/revoke.
+- **Resources** — Creation, update, and deletion of projects, applications, compose stacks, databases, domains, environment variables, and similar resources.
+- **Deployments** — Deploy triggers, rollbacks, and related actions.
+- **Settings** — Changes to organization, security, and whitelabel settings (where applicable).
+
+Each entry usually includes:
+
+- **Timestamp** (UTC)
+- **Actor** (user ID, email, or service account)
+- **Action** (e.g. `user.login`, `application.create`, `compose.deploy`)
+- **Resource** (type and identifier)
+- **Details** (e.g. old/new values or reason, when relevant)
+- **IP address** (when available)
+
+## Accessing audit logs
+
+1. Go to **Settings** → **Audit logs** (or **Organization** → **Audit logs** in Enterprise).
+2. Use filters by date range, user, action type, or resource.
+3. Export results (e.g. CSV or JSON) for external tools or compliance reviews.
+
+## Retention and storage
+
+- Retention period and storage backend (e.g. database, external logging) depend on your Enterprise agreement.
+- Configure retention and any archiving according to your compliance and security policies.
+
+## Compliance
+
+Audit logs help support:
+
+- **SOC 2** — Evidence of access control and change management.
+- **GDPR** — Documentation of access to and changes in personal data and configurations.
+- **Internal policies** — Review of who changed what and when.
+
+For retention, export formats, or integration with your SIEM or log pipeline, [contact us](https://dokploy.com/contact).

@@ -261,7 +261,11 @@ install_dokploy() {
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
     release_tag_env=""
-    if [ "$VERSION_TAG" != "latest" ]; then
+    if [[ "$VERSION_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+        # Specific version (v0.26.6, v0.26.7, etc.) → latest
+        release_tag_env="-e RELEASE_TAG=latest"
+    elif [ "$VERSION_TAG" != "latest" ]; then
+        # canary, feature/*, etc. → use the tag as-is
         release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
     fi
     

@@ -820,7 +820,10 @@
                     "minLength": 1
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -910,7 +913,10 @@
                 "type": "object",
                 "properties": {
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "applicationId": {
                     "type": "string"
@@ -1854,7 +1860,10 @@
                     "minLength": 1
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -2361,8 +2370,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -2402,6 +2412,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -2789,7 +2826,10 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9._-]+$"
             }
           }
         ],
@@ -2922,7 +2962,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "dockerImage": {
                     "type": "string",
@@ -2958,12 +3000,10 @@
                 },
                 "required": [
                   "name",
-                  "appName",
                   "environmentId",
                   "databaseName",
                   "databaseUser",
-                  "databasePassword",
-                  "databaseRootPassword"
+                  "databasePassword"
                 ],
                 "additionalProperties": false
               }
@@ -3276,7 +3316,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   }
                 },
                 "required": [
@@ -3422,7 +3464,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -3714,8 +3758,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -3755,6 +3800,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -3904,7 +3976,10 @@
                     "minLength": 1
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "databaseName": {
                     "type": "string",
@@ -3936,7 +4011,6 @@
                 },
                 "required": [
                   "name",
-                  "appName",
                   "databaseName",
                   "databaseUser",
                   "databasePassword",
@@ -4344,7 +4418,10 @@
                     "type": "string"
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   }
                 },
                 "required": [
@@ -4397,7 +4474,10 @@
                     "minLength": 1
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "databaseName": {
                     "type": "string",
@@ -4685,8 +4765,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -4726,6 +4807,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -4876,7 +4984,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "databasePassword": {
                     "type": "string"
@@ -4899,7 +5009,6 @@
                 },
                 "required": [
                   "name",
-                  "appName",
                   "databasePassword",
                   "environmentId"
                 ],
@@ -5023,7 +5132,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   }
                 },
                 "required": [
@@ -5360,7 +5471,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -5642,8 +5755,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -5683,6 +5797,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -5830,7 +5971,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "dockerImage": {
                     "type": "string",
@@ -5863,7 +6006,6 @@
                 },
                 "required": [
                   "name",
-                  "appName",
                   "environmentId",
                   "databaseUser",
                   "databasePassword"
@@ -6179,7 +6321,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   }
                 },
                 "required": [
@@ -6325,7 +6469,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -6609,8 +6755,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -6650,6 +6797,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -6805,7 +6979,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "dockerImage": {
                     "type": "string",
@@ -6841,8 +7017,6 @@
                 },
                 "required": [
                   "name",
-                  "appName",
-                  "databaseRootPassword",
                   "environmentId",
                   "databaseName",
                   "databaseUser",
@@ -7251,7 +7425,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   }
                 },
                 "required": [
@@ -7305,7 +7481,9 @@
                   },
                   "appName": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -7597,8 +7775,9 @@
                         },
                         "DriverOpts": {
                           "type": "object",
-                          "properties": {},
-                          "additionalProperties": false
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         }
                       },
                       "additionalProperties": false
@@ -7638,6 +7817,33 @@
                       }
                     },
                     "additionalProperties": false,
+                    "nullable": true
+                  },
+                  "ulimitsSwarm": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "Soft": {
+                          "type": "integer",
+                          "minimum": -1
+                        },
+                        "Hard": {
+                          "type": "integer",
+                          "minimum": -1
+                        }
+                      },
+                      "required": [
+                        "Name",
+                        "Soft",
+                        "Hard"
+                      ],
+                      "additionalProperties": false
+                    },
                     "nullable": true
                   },
                   "replicas": {
@@ -7801,7 +8007,10 @@
                     ]
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "serverId": {
                     "type": "string",
@@ -7895,7 +8104,10 @@
                     "minLength": 1
                   },
                   "appName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "pattern": "^[a-zA-Z0-9._-]+$"
                   },
                   "description": {
                     "type": "string",
@@ -9380,6 +9592,13 @@
                   },
                   "allowImpersonation": {
                     "type": "boolean"
+                  },
+                  "enableEnterpriseFeatures": {
+                    "type": "boolean"
+                  },
+                  "licenseKey": {
+                    "type": "string",
+                    "nullable": true
                   },
                   "stripeCustomerId": {
                     "type": "string",
@@ -12281,6 +12500,31 @@
     "/settings.reloadRedis": {
       "post": {
         "operationId": "settings-reloadRedis",
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/settings.cleanAllDeploymentQueue": {
+      "post": {
+        "operationId": "settings-cleanAllDeploymentQueue",
         "tags": [
           "settings"
         ],
@@ -15979,6 +16223,246 @@
         }
       }
     },
+    "/notification.createResend": {
+      "post": {
+        "operationId": "notification-createResend",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fromAddress": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "toAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "appBuildError",
+                  "databaseBackup",
+                  "volumeBackup",
+                  "dokployRestart",
+                  "name",
+                  "appDeploy",
+                  "dockerCleanup",
+                  "serverThreshold",
+                  "apiKey",
+                  "fromAddress",
+                  "toAddresses"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.updateResend": {
+      "post": {
+        "operationId": "notification-updateResend",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fromAddress": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "toAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "notificationId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "resendId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "notificationId",
+                  "resendId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.testResendConnection": {
+      "post": {
+        "operationId": "notification-testResendConnection",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apiKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fromAddress": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "toAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "apiKey",
+                  "fromAddress",
+                  "toAddresses"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/notification.remove": {
       "post": {
         "operationId": "notification-remove",
@@ -17689,6 +18173,10 @@
                     "type": "string",
                     "minLength": 1
                   },
+                  "giteaInternalUrl": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "redirectUri": {
                     "type": "string"
                   },
@@ -17966,6 +18454,10 @@
                   "giteaUrl": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "giteaInternalUrl": {
+                    "type": "string",
+                    "nullable": true
                   },
                   "redirectUri": {
                     "type": "string"
@@ -18441,6 +18933,10 @@
                     "type": "string",
                     "minLength": 1
                   },
+                  "gitlabInternalUrl": {
+                    "type": "string",
+                    "nullable": true
+                  },
                   "applicationId": {
                     "type": "string"
                   },
@@ -18723,6 +19219,10 @@
                   "gitlabUrl": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "gitlabInternalUrl": {
+                    "type": "string",
+                    "nullable": true
                   },
                   "applicationId": {
                     "type": "string"
@@ -20875,6 +21375,1070 @@
                 },
                 "required": [
                   "organizationId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/licenseKey.activate": {
+      "post": {
+        "operationId": "licenseKey-activate",
+        "tags": [
+          "licenseKey"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "licenseKey": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "licenseKey"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/licenseKey.validate": {
+      "post": {
+        "operationId": "licenseKey-validate",
+        "tags": [
+          "licenseKey"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/licenseKey.deactivate": {
+      "post": {
+        "operationId": "licenseKey-deactivate",
+        "tags": [
+          "licenseKey"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/licenseKey.getEnterpriseSettings": {
+      "get": {
+        "operationId": "licenseKey-getEnterpriseSettings",
+        "tags": [
+          "licenseKey"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/licenseKey.haveValidLicenseKey": {
+      "get": {
+        "operationId": "licenseKey-haveValidLicenseKey",
+        "tags": [
+          "licenseKey"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/licenseKey.updateEnterpriseSettings": {
+      "post": {
+        "operationId": "licenseKey-updateEnterpriseSettings",
+        "tags": [
+          "licenseKey"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enableEnterpriseFeatures": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.showSignInWithSSO": {
+      "get": {
+        "operationId": "sso-showSignInWithSSO",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.listProviders": {
+      "get": {
+        "operationId": "sso-listProviders",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.one": {
+      "get": {
+        "operationId": "sso-one",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "providerId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.update": {
+      "post": {
+        "operationId": "sso-update",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "providerId": {
+                    "type": "string"
+                  },
+                  "issuer": {
+                    "type": "string"
+                  },
+                  "domains": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "oidcConfig": {
+                    "type": "object",
+                    "properties": {
+                      "clientId": {
+                        "type": "string"
+                      },
+                      "clientSecret": {
+                        "type": "string"
+                      },
+                      "authorizationEndpoint": {
+                        "type": "string"
+                      },
+                      "tokenEndpoint": {
+                        "type": "string"
+                      },
+                      "userInfoEndpoint": {
+                        "type": "string"
+                      },
+                      "tokenEndpointAuthentication": {
+                        "type": "string",
+                        "enum": [
+                          "client_secret_post",
+                          "client_secret_basic"
+                        ]
+                      },
+                      "jwksEndpoint": {
+                        "type": "string"
+                      },
+                      "discoveryEndpoint": {
+                        "type": "string"
+                      },
+                      "skipDiscovery": {
+                        "type": "boolean"
+                      },
+                      "scopes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "pkce": {
+                        "type": "boolean",
+                        "default": true
+                      },
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "emailVerified": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "extraFields": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "clientId",
+                      "clientSecret"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "samlConfig": {
+                    "type": "object",
+                    "properties": {
+                      "entryPoint": {
+                        "type": "string"
+                      },
+                      "cert": {
+                        "type": "string"
+                      },
+                      "callbackUrl": {
+                        "type": "string"
+                      },
+                      "audience": {
+                        "type": "string"
+                      },
+                      "idpMetadata": {
+                        "type": "object",
+                        "properties": {
+                          "metadata": {
+                            "type": "string"
+                          },
+                          "entityID": {
+                            "type": "string"
+                          },
+                          "cert": {
+                            "type": "string"
+                          },
+                          "privateKey": {
+                            "type": "string"
+                          },
+                          "privateKeyPass": {
+                            "type": "string"
+                          },
+                          "isAssertionEncrypted": {
+                            "type": "boolean"
+                          },
+                          "encPrivateKey": {
+                            "type": "string"
+                          },
+                          "encPrivateKeyPass": {
+                            "type": "string"
+                          },
+                          "singleSignOnService": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Binding": {
+                                  "type": "string"
+                                },
+                                "Location": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "Binding",
+                                "Location"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "spMetadata": {
+                        "type": "object",
+                        "properties": {
+                          "metadata": {
+                            "type": "string"
+                          },
+                          "entityID": {
+                            "type": "string"
+                          },
+                          "binding": {
+                            "type": "string"
+                          },
+                          "privateKey": {
+                            "type": "string"
+                          },
+                          "privateKeyPass": {
+                            "type": "string"
+                          },
+                          "isAssertionEncrypted": {
+                            "type": "boolean"
+                          },
+                          "encPrivateKey": {
+                            "type": "string"
+                          },
+                          "encPrivateKeyPass": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "wantAssertionsSigned": {
+                        "type": "boolean"
+                      },
+                      "authnRequestsSigned": {
+                        "type": "boolean"
+                      },
+                      "signatureAlgorithm": {
+                        "type": "string"
+                      },
+                      "digestAlgorithm": {
+                        "type": "string"
+                      },
+                      "identifierFormat": {
+                        "type": "string"
+                      },
+                      "privateKey": {
+                        "type": "string"
+                      },
+                      "decryptionPvk": {
+                        "type": "string"
+                      },
+                      "additionalParams": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      },
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "emailVerified": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "extraFields": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "entryPoint",
+                      "cert",
+                      "callbackUrl",
+                      "spMetadata"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  },
+                  "overrideUserInfo": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "providerId",
+                  "issuer",
+                  "domains"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.deleteProvider": {
+      "post": {
+        "operationId": "sso-deleteProvider",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "providerId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "providerId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.register": {
+      "post": {
+        "operationId": "sso-register",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "providerId": {
+                    "type": "string"
+                  },
+                  "issuer": {
+                    "type": "string"
+                  },
+                  "domains": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "oidcConfig": {
+                    "type": "object",
+                    "properties": {
+                      "clientId": {
+                        "type": "string"
+                      },
+                      "clientSecret": {
+                        "type": "string"
+                      },
+                      "authorizationEndpoint": {
+                        "type": "string"
+                      },
+                      "tokenEndpoint": {
+                        "type": "string"
+                      },
+                      "userInfoEndpoint": {
+                        "type": "string"
+                      },
+                      "tokenEndpointAuthentication": {
+                        "type": "string",
+                        "enum": [
+                          "client_secret_post",
+                          "client_secret_basic"
+                        ]
+                      },
+                      "jwksEndpoint": {
+                        "type": "string"
+                      },
+                      "discoveryEndpoint": {
+                        "type": "string"
+                      },
+                      "skipDiscovery": {
+                        "type": "boolean"
+                      },
+                      "scopes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "pkce": {
+                        "type": "boolean",
+                        "default": true
+                      },
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "emailVerified": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "extraFields": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "clientId",
+                      "clientSecret"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "samlConfig": {
+                    "type": "object",
+                    "properties": {
+                      "entryPoint": {
+                        "type": "string"
+                      },
+                      "cert": {
+                        "type": "string"
+                      },
+                      "callbackUrl": {
+                        "type": "string"
+                      },
+                      "audience": {
+                        "type": "string"
+                      },
+                      "idpMetadata": {
+                        "type": "object",
+                        "properties": {
+                          "metadata": {
+                            "type": "string"
+                          },
+                          "entityID": {
+                            "type": "string"
+                          },
+                          "cert": {
+                            "type": "string"
+                          },
+                          "privateKey": {
+                            "type": "string"
+                          },
+                          "privateKeyPass": {
+                            "type": "string"
+                          },
+                          "isAssertionEncrypted": {
+                            "type": "boolean"
+                          },
+                          "encPrivateKey": {
+                            "type": "string"
+                          },
+                          "encPrivateKeyPass": {
+                            "type": "string"
+                          },
+                          "singleSignOnService": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Binding": {
+                                  "type": "string"
+                                },
+                                "Location": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "Binding",
+                                "Location"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "spMetadata": {
+                        "type": "object",
+                        "properties": {
+                          "metadata": {
+                            "type": "string"
+                          },
+                          "entityID": {
+                            "type": "string"
+                          },
+                          "binding": {
+                            "type": "string"
+                          },
+                          "privateKey": {
+                            "type": "string"
+                          },
+                          "privateKeyPass": {
+                            "type": "string"
+                          },
+                          "isAssertionEncrypted": {
+                            "type": "boolean"
+                          },
+                          "encPrivateKey": {
+                            "type": "string"
+                          },
+                          "encPrivateKeyPass": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "wantAssertionsSigned": {
+                        "type": "boolean"
+                      },
+                      "authnRequestsSigned": {
+                        "type": "boolean"
+                      },
+                      "signatureAlgorithm": {
+                        "type": "string"
+                      },
+                      "digestAlgorithm": {
+                        "type": "string"
+                      },
+                      "identifierFormat": {
+                        "type": "string"
+                      },
+                      "privateKey": {
+                        "type": "string"
+                      },
+                      "decryptionPvk": {
+                        "type": "string"
+                      },
+                      "additionalParams": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      },
+                      "mapping": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "emailVerified": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "extraFields": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "entryPoint",
+                      "cert",
+                      "callbackUrl",
+                      "spMetadata"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  },
+                  "overrideUserInfo": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "providerId",
+                  "issuer",
+                  "domains"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.addTrustedOrigin": {
+      "post": {
+        "operationId": "sso-addTrustedOrigin",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "origin"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.removeTrustedOrigin": {
+      "post": {
+        "operationId": "sso-removeTrustedOrigin",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "origin"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/sso.updateTrustedOrigin": {
+      "post": {
+        "operationId": "sso-updateTrustedOrigin",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "oldOrigin": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "newOrigin": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "oldOrigin",
+                  "newOrigin"
                 ],
                 "additionalProperties": false
               }

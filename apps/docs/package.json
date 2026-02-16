@@ -9,7 +9,8 @@
 		"types:check": "fumadocs-mdx && tsc --noEmit",
 		"postinstall": "fumadocs-mdx",
 		"fix-openapi": "node scripts/fix-openapi.mjs",
-		"build:docs": "npm run fix-openapi && node generate-docs.mjs"
+		"generate-templates": "node scripts/generate-templates.mjs",
+		"build:docs": "npm run fix-openapi && npm run generate-templates && node generate-docs.mjs"
 	},
 	"dependencies": {
 		"@next/third-parties": "16.0.7",
@@ -21,7 +22,7 @@
 		"fumadocs-openapi": "10.1.1",
 		"fumadocs-ui": "16.2.3",
 		"lucide-react": "^0.552.0",
-		"next": "16.0.10",
+		"next": "16.1.5",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"shiki": "3.19.0",

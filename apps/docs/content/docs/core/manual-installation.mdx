@@ -372,3 +372,34 @@ curl -sSL https://dokploy.com/install.sh | sh
 export ADVERTISE_ADDR=192.168.1.100
 curl -sSL https://dokploy.com/install.sh | sh
 ```
+
+## Updating Traefik Manually
+
+Dokploy does not update the Traefik container automatically when you upgrade. This is intentional to avoid unexpected downtime for your services. If you need a newer Traefik version (for example, due to a breaking change or security fix), you can update it manually.
+
+1. Remove the existing Traefik container.
+2. Create a new container with the desired Traefik image version and the same configuration.
+3. Connect the new container to the Dokploy network.
+
+Example (replace `v3.6.7` with the version you want):
+
+```bash
+docker rm -f dokploy-traefik
+
+docker run -d \
+  --name dokploy-traefik \
+  --restart always \
+  -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
+  -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -p 80:80/tcp \
+  -p 443:443/tcp \
+  -p 443:443/udp \
+  traefik:v3.6.7
+
+docker network connect dokploy-network dokploy-traefik
+```
+
+<Callout type='warn'>
+  **Breaking changes:** Some Traefik versions introduce breaking changes that may not be compatible with the configuration and structure Dokploy uses. Before upgrading, check the [Traefik release notes](https://github.com/traefik/traefik/releases) and [Dokploy releases](https://github.com/Dokploy/dokploy/releases) for any announced breaking changes. Using an incompatible version can cause routing issues (e.g. 404s for applications using domains).
+</Callout>

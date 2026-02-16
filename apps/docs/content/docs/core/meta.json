@@ -35,7 +35,6 @@
 		"applications",
 		"docker-compose",
 		"databases",
-		"templates",
 		"(examples)",
 		"auto-deploy",
 		"schedule-jobs",
@@ -49,11 +48,17 @@
 		"remote-servers/deployments",
 		"remote-servers/security",
 		"remote-servers/validate",
+		"---Advanced---",
+		"cluster",
+		"---Enterprise---",
+		"enterprise/index",
+		"enterprise/license-keys",
+		"enterprise/sso",
+		"enterprise/whitelabeling",
+		"enterprise/audit-logs",
 		"---Guides---",
 		"guides/cloudflare-tunnels",
 		"guides/tailscale",
-		"guides/ec2-instructions",
-		"---Advanced---",
-		"cluster"
+		"guides/ec2-instructions"
 	]
 }
