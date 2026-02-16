@@ -18,9 +18,32 @@ Dokploy provides two methods for creating Docker Compose configurations:
 
 Configure the source of your code, the way your application is built, and also manage actions like deploying, updating, and deleting your application, and stopping it.
 
-### Enviroment
+### Environment
 
-A code editor within Dokploy allows you to specify environment variables for your Docker Compose file. By default, Dokploy creates a `.env` file in the specified Docker Compose file path.
+The code editor in Dokploy allows you to define environment variables for your Docker Compose deployment. By default, Dokploy saves these variables to a `.env` file in the same directory as your `docker-compose.yml`.
+
+<Callout type="warning">
+Environment variables set in the UI are written to the `.env` file, but are **not automatically injected into containers**. You have two options:
+
+**1. Inject all variables** — Use the `env_file` option in your `docker-compose.yml` to load every variable from the `.env` file into the container:
+
+```yaml
+services:
+  app:
+    env_file:
+      - .env
+```
+
+**2. Use specific variables** — Reference only the variables you need using the standard `${VAR_NAME}` syntax in your `docker-compose.yml`:
+
+```yaml
+services:
+  app:
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - API_KEY=${API_KEY}
+```
+</Callout>
 
 ### Monitoring
 
