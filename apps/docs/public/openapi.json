@@ -17528,6 +17528,209 @@
         }
       }
     },
+    "/notification.createTeams": {
+      "post": {
+        "operationId": "notification-createTeams",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "webhookUrl": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "appBuildError",
+                  "databaseBackup",
+                  "volumeBackup",
+                  "dokployRestart",
+                  "name",
+                  "appDeploy",
+                  "dockerCleanup",
+                  "serverThreshold",
+                  "webhookUrl"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.updateTeams": {
+      "post": {
+        "operationId": "notification-updateTeams",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appBuildError": {
+                    "type": "boolean"
+                  },
+                  "databaseBackup": {
+                    "type": "boolean"
+                  },
+                  "volumeBackup": {
+                    "type": "boolean"
+                  },
+                  "dokployRestart": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "appDeploy": {
+                    "type": "boolean"
+                  },
+                  "dockerCleanup": {
+                    "type": "boolean"
+                  },
+                  "serverThreshold": {
+                    "type": "boolean"
+                  },
+                  "webhookUrl": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "notificationId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "teamsId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "organizationId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "notificationId",
+                  "teamsId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/notification.testTeamsConnection": {
+      "post": {
+        "operationId": "notification-testTeamsConnection",
+        "tags": [
+          "notification"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "webhookUrl": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "webhookUrl"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/notification.createPushover": {
       "post": {
         "operationId": "notification-createPushover",
