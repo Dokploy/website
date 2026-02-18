@@ -21968,6 +21968,31 @@
         }
       }
     },
+    "/sso.getTrustedOrigins": {
+      "get": {
+        "operationId": "sso-getTrustedOrigins",
+        "tags": [
+          "sso"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
     "/sso.one": {
       "get": {
         "operationId": "sso-one",
