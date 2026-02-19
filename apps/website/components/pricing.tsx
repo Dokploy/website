@@ -77,7 +77,8 @@ export function Pricing() {
 	const [openPartnerModal, setOpenPartnerModal] = useState(false);
 
 	const hobbyMonthlyPrice = 4.5;
-	const hobbyAnnualPrice = hobbyMonthlyPrice * 12 * 0.8; // 20% discount
+	const hobbyAnnualTotal = hobbyMonthlyPrice * 12 * 0.8; // 20% discount, total per year
+	const hobbyAnnualPerMonth = hobbyAnnualTotal / 12;
 	const startupBaseMonthly = 15;
 	const startupBaseAnnual = startupBaseMonthly * 12 * 0.8;
 
@@ -151,16 +152,15 @@ export function Pricing() {
 								<span className="text-2xl font-semibold text-primary">
 									$
 									{isAnnual
-										? hobbyAnnualPrice.toFixed(2)
+										? hobbyAnnualPerMonth.toFixed(2)
 										: hobbyMonthlyPrice.toFixed(2)}
 									/mo
 								</span>
-								{isAnnual && (
-									<span className="ml-2 text-sm text-muted-foreground">
-										per server
-									</span>
-								)}
-								{!isAnnual && (
+								{isAnnual ? (
+									<p className="mt-1 text-sm text-muted-foreground">
+										${hobbyAnnualTotal.toFixed(2)}/year per server
+									</p>
+								) : (
 									<span className="ml-2 text-sm text-muted-foreground">
 										per server (add as many servers as you&apos;d like for $4.50/mo)
 									</span>
@@ -209,6 +209,11 @@ export function Pricing() {
 										: startupBaseMonthly.toFixed(0)}
 									/mo
 								</span>
+								{isAnnual ? (
+									<p className="mt-1 text-sm text-muted-foreground">
+										${startupBaseAnnual.toFixed(0)}/year
+									</p>
+								) : null}
 								<p className="mt-1 text-xs text-muted-foreground">
 									Add more servers as you&apos;d like for $4.50/mo
 								</p>
