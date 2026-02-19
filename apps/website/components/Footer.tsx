@@ -40,6 +40,9 @@ export function Footer() {
 				<nav className="mt-10 text-sm" aria-label="quick links">
 					<div className="-my-1 flex flex-wrap justify-center gap-6">
 						<NavLink href="/#features">Features</NavLink>
+						<NavLink href="/features/application-deployment-platform">
+							Application Deployment
+						</NavLink>
 						<NavLink href="/#faqs">FAQ</NavLink>
 						<NavLink href="/dokploy-vs-coolify">Dokploy vs. Coolify</NavLink>
 						<NavLink
