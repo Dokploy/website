@@ -41,6 +41,7 @@ export function Footer() {
 					<div className="-my-1 flex flex-wrap justify-center gap-6">
 						<NavLink href="/#features">Features</NavLink>
 						<NavLink href="/#faqs">FAQ</NavLink>
+						<NavLink href="/dokploy-vs-coolify">Dokploy vs. Coolify</NavLink>
 						<NavLink
 							href="https://docs.dokploy.com/docs/core"
 							target="_blank"
