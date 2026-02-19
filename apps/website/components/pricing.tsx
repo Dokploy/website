@@ -73,9 +73,6 @@ const enterpriseFeatures = [
 
 export function Pricing() {
 	const [isAnnual, setIsAnnual] = useState(false);
-	const [hostingType, setHostingType] = useState<"cloud" | "self-hosted">(
-		"cloud",
-	);
 	const [openContactModal, setOpenContactModal] = useState(false);
 	const [openPartnerModal, setOpenPartnerModal] = useState(false);
 
@@ -135,24 +132,9 @@ export function Pricing() {
 							<TabsTrigger value="monthly">Monthly</TabsTrigger>
 						</TabsList>
 					</Tabs>
-
-					{/* Cloud vs Self-Hosted */}
-					<Tabs
-						defaultValue="cloud"
-						value={hostingType}
-						onValueChange={(v) =>
-							setHostingType(v as "cloud" | "self-hosted")
-						}
-					>
-						<TabsList>
-							<TabsTrigger value="cloud">Cloud</TabsTrigger>
-							<TabsTrigger value="self-hosted">Self-Hosted</TabsTrigger>
-						</TabsList>
-					</Tabs>
 				</div>
 
-				{hostingType === "cloud" && (
-					<div className="mx-auto mt-12 flex max-w-6xl flex-col gap-8">
+				<div className="mx-auto mt-12 flex max-w-6xl flex-col gap-8">
 						{/* Hobby, Startup, Enterprise - 3 column grid */}
 						<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 						{/* Hobby */}
@@ -315,42 +297,17 @@ export function Pricing() {
 								</Button>
 							</div>
 						</section>
-					</div>
-				)}
-
-				{hostingType === "self-hosted" && (
-					<div className="mx-auto mt-12 flex max-w-lg flex-col items-center rounded-3xl border-2 border-dashed border-border/50 bg-black/50 px-8 py-12 text-center">
-						<h3 className="text-xl font-medium text-white">
-							Dokploy Open Source
-						</h3>
-						<p className="mt-2 text-muted-foreground">
-							Install and manage Dokploy UI on your own server. Free forever,
-							unlimited servers.
-						</p>
-						<Link
-							href="https://docs.dokploy.com/docs/core/installation#docker"
-							target="_blank"
-							className={buttonVariants({
-								variant: "default",
-								className: "mt-6",
-							})}
-						>
-							Get Started
-						</Link>
-					</div>
-				)}
+				</div>
 
 				{/* Feature breakdown */}
-				{hostingType === "cloud" && (
-					<div className="mx-auto mt-24 max-w-6xl">
+				<div className="mx-auto mt-24 max-w-6xl">
 						<h3 className="text-center text-2xl font-semibold text-white">
 							Feature breakdown by plan
 						</h3>
 						<div className="mt-8">
 							<PricingFeatureTable />
 						</div>
-					</div>
-				)}
+				</div>
 			</Container>
 
 			<ContactFormModal
