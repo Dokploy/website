@@ -119,9 +119,6 @@ function MobileNavigation() {
 						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight  text-primary shadow-xl ring-1 ring-border/5"
 					>
 						<MobileNavLink href="/#pricing">Pricing</MobileNavLink>
-						<MobileNavLink href="/features/application-deployment-platform">
-							Application Deployment
-						</MobileNavLink>
 						<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
 						<MobileNavLink
 							href="https://docs.dokploy.com/docs/core"
@@ -166,9 +163,6 @@ export function Header() {
 						</Link>
 						<div className="hidden md:flex md:gap-x-6">
 							<NavLink href="/#pricing">Pricing</NavLink>
-							<NavLink href="/features/application-deployment-platform">
-								Application Deployment
-							</NavLink>
 							<NavLink href="/#faqs">FAQ</NavLink>
 							<NavLink
 								href="https://docs.dokploy.com/docs/core"
