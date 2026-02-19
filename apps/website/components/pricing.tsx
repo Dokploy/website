@@ -221,7 +221,7 @@ export function Pricing() {
 							</p>
 							<div className="mt-4">
 								<span className="text-2xl font-semibold text-primary">
-									Starting @ $
+									Starting at $
 									{isAnnual
 										? (startupBaseAnnual / 12).toFixed(2)
 										: startupBaseMonthly.toFixed(0)}
