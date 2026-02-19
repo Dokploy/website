@@ -7,7 +7,7 @@ import NumberTicker from "./ui/number-ticker";
 
 const statsValues = {
 	githubStars: 26000,
-	dockerDownloads: 4000000,
+	dockerDownloads: 6500000,
 	contributors: 200,
 	sponsors: 50,
 };
