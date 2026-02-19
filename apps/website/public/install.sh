@@ -202,6 +202,10 @@ install_dokploy() {
     fi
     echo "Using advertise address: $advertise_addr"
 
+
+    docker network rm -f docker_gwbridge 2>/dev/null
+    docker network create docker_gwbridge --ipv4 --ipv6 --driver bridge
+
     # Allow custom Docker Swarm init arguments via DOCKER_SWARM_INIT_ARGS environment variable
     # Example: export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
     # This is useful to avoid CIDR overlapping with cloud provider VPCs (e.g., AWS)
@@ -213,6 +217,7 @@ install_dokploy() {
     else
         docker swarm init --advertise-addr $advertise_addr
     fi
+
     
      if [ $? -ne 0 ]; then
         echo "Error: Failed to initialize Docker Swarm" >&2
@@ -222,9 +227,12 @@ install_dokploy() {
     echo "Swarm initialized"
 
     docker network rm -f dokploy-network 2>/dev/null
-    docker network create --driver overlay --attachable dokploy-network
+    docker network create --driver overlay --attachable --ipv4 --ipv6 dokploy-network
+    yes | docker network rm -f ingress 2>/dev/null
+    sleep 1 # race condition after the delete
+    docker network create --ipv4 --ipv6 --driver overlay --ingress ingress
 
-    echo "Network created"
+    echo "Networks created"
 
     mkdir -p /etc/dokploy
 
@@ -291,6 +299,7 @@ install_dokploy() {
 
     docker run -d \
         --name dokploy-traefik \
+        --network dokploy-network \
         --restart always \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
