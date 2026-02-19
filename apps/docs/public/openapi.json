@@ -20667,6 +20667,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "tier": {
+                    "type": "string",
+                    "enum": [
+                      "legacy",
+                      "hobby",
+                      "startup"
+                    ]
+                  },
                   "productId": {
                     "type": "string"
                   },
@@ -20679,6 +20687,7 @@
                   }
                 },
                 "required": [
+                  "tier",
                   "productId",
                   "serverQuantity",
                   "isAnnual"
@@ -20713,6 +20722,63 @@
             "Authorization": []
           }
         ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/stripe.upgradeSubscription": {
+      "post": {
+        "operationId": "stripe-upgradeSubscription",
+        "tags": [
+          "stripe"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tier": {
+                    "type": "string",
+                    "enum": [
+                      "hobby",
+                      "startup"
+                    ]
+                  },
+                  "serverQuantity": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "isAnnual": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "tier",
+                  "serverQuantity",
+                  "isAnnual"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
         "parameters": [],
         "responses": {
           "200": {
