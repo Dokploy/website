@@ -16,9 +16,7 @@ detect_version() {
         echo "Detecting latest stable version from GitHub..." >&2
         
         # Try to get latest release from GitHub by following redirects
-        version=$(curl -fsSL -o /dev/null -w '%{url_effective}\n' \
-            https://github.com/dokploy/dokploy/releases/latest 2>/dev/null | \
-            sed 's#.*/tag/##')
+        version=$(curl -s https://api.github.com/repos/dokploy/dokploy/releases/latest | grep "\"tag_name\":" | cut -d "\"" -f 4)
         
         # Fallback to latest tag if detection fails
         if [ -z "$version" ]; then
