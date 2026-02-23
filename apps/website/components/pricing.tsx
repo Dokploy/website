@@ -250,10 +250,20 @@ export function Pricing() {
 							<p className="mt-1 text-sm text-muted-foreground">
 								For large organizations who want more control
 							</p>
-							<div className="mt-4">
-								<span className="text-xl font-semibold text-primary">
-									Contact Sales
-								</span>
+							{/* Cloud & Self Hosted options */}
+							<div className="mt-4 grid grid-cols-2 gap-3">
+								<div className="rounded-xl border border-border/50 bg-background/50 px-4 py-3">
+									<p className="font-medium text-white text-center">Cloud</p>
+									<p className="mt-0.5 text-xs text-muted-foreground text-center">
+										We host and manage everything for you
+									</p>
+								</div>
+								<div className="rounded-xl border border-border/50 bg-background/50 px-4 py-3">
+									<p className="font-medium text-white text-center">Self Hosted</p>
+									<p className="mt-0.5 text-xs text-muted-foreground text-center">
+										Install on-prem or in your own cloud
+									</p>
+								</div>
 							</div>
 							<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
 								{enterpriseFeatures.map((f) => (
