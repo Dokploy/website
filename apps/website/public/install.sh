@@ -190,7 +190,7 @@ install_dokploy() {
     get_private_ip() {
         if [ "$IS_MAC" = true ]; then
             # macOS: Use osascript for reliable local IP
-            osascript -e "IPv4 address of (system info)" 2>/dev/null || echo "127.0.0.1"
+            ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo "127.0.0.1"
         else
             ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
         fi
