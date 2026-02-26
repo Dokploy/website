@@ -329,8 +329,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -514,8 +513,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -605,8 +603,7 @@
                 "stack",
                 "docker-compose"
               ]
-            },
-            "required": true
+            }
           },
           {
             "in": "query",
@@ -623,8 +620,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -720,8 +716,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           },
           {
             "in": "query",
@@ -829,8 +824,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -926,8 +920,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -17083,8 +17076,7 @@
             "name": "baseUrl",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -17170,8 +17162,7 @@
             "name": "baseUrl",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -22131,8 +22122,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -24472,7 +24462,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -24641,7 +24631,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -24724,7 +24714,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -24807,7 +24797,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -24890,7 +24880,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -24973,7 +24963,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -25056,7 +25046,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "required": true,
+          "required": false,
           "content": {
             "application/json": {
               "schema": {
@@ -26350,8 +26340,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -26541,8 +26530,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -26868,8 +26856,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -27044,8 +27031,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -27608,8 +27594,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -27808,8 +27793,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -30002,8 +29986,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -30178,8 +30161,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -30265,8 +30247,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -35885,8 +35866,7 @@
             "name": "giteaId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -36671,8 +36651,7 @@
             "name": "bitbucketId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -37353,8 +37332,7 @@
             "name": "id",
             "schema": {
               "type": "number"
-            },
-            "required": true
+            }
           },
           {
             "in": "query",
@@ -37377,8 +37355,7 @@
             "name": "gitlabId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -37872,8 +37849,7 @@
             "name": "githubId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -40264,8 +40240,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -40359,8 +40334,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -40446,8 +40420,7 @@
             "name": "serverId",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
