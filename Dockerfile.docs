@@ -20,7 +20,7 @@ RUN pnpm --filter=./apps/docs run generate-templates
 
 ENV NODE_ENV=production
 RUN pnpm --filter=./apps/docs run build
-RUN pnpm --filter=./apps/docs --prod deploy /prod/docs
+RUN pnpm --filter=./apps/docs --prod deploy --legacy /prod/docs
 
 RUN cp -R /usr/src/app/apps/docs/.next /prod/docs/.next
 

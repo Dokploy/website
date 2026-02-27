@@ -15,7 +15,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/w
 
 ENV NODE_ENV=production
 RUN pnpm --filter=./apps/website run build
-RUN pnpm --filter=./apps/website --prod deploy /prod/website
+RUN pnpm --filter=./apps/website --prod deploy --legacy /prod/website
 
 RUN cp -R /usr/src/app/apps/website/.next /prod/website/.next
 
