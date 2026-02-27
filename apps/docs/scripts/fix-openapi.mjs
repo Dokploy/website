@@ -6,7 +6,15 @@ const openapiPath = join(process.cwd(), "public", "openapi.json");
 console.log("Fixing OpenAPI schema...");
 
 try {
-	const openapi = JSON.parse(readFileSync(openapiPath, "utf8"));
+	let openapi = JSON.parse(readFileSync(openapiPath, "utf8"));
+
+	let unwrapped = false;
+	// If the spec is nested (e.g. result.data.json from a migrated/source API), use the inner spec
+	if (openapi.result?.data?.json && typeof openapi.result.data.json === "object") {
+		openapi = openapi.result.data.json;
+		unwrapped = true;
+		console.log("✓ Unwrapped nested OpenAPI spec (result.data.json)");
+	}
 
 	let fixed = 0;
 	let securityFixed = false;
@@ -87,7 +95,7 @@ try {
 		}
 	}
 
-	if (fixed > 0 || securityFixed) {
+	if (unwrapped || fixed > 0 || securityFixed) {
 		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
 		if (fixed > 0) console.log(`✓ Fixed ${fixed} empty response schemas`);
 		if (securityFixed) console.log("✓ Added x-api-key security scheme");
