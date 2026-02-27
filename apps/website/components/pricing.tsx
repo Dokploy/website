@@ -239,7 +239,6 @@ export function Pricing() {
 								</Link>
 							</div>
 						</section>
-
 						{/* Enterprise */}
 						<section
 							className={clsx(
