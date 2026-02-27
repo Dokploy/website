@@ -136,7 +136,7 @@
     "url": "https://docs.dokploy.com"
   },
   "paths": {
-    "/admin/setupMonitoring": {
+    "/admin.setupMonitoring": {
       "post": {
         "operationId": "admin-setupMonitoring",
         "tags": [
@@ -312,7 +312,7 @@
         }
       }
     },
-    "/docker/getContainers": {
+    "/docker.getContainers": {
       "get": {
         "operationId": "docker-getContainers",
         "tags": [
@@ -398,7 +398,7 @@
         }
       }
     },
-    "/docker/restartContainer": {
+    "/docker.restartContainer": {
       "post": {
         "operationId": "docker-restartContainer",
         "tags": [
@@ -486,7 +486,7 @@
         }
       }
     },
-    "/docker/getConfig": {
+    "/docker.getConfig": {
       "get": {
         "operationId": "docker-getConfig",
         "tags": [
@@ -582,7 +582,7 @@
         }
       }
     },
-    "/docker/getContainersByAppNameMatch": {
+    "/docker.getContainersByAppNameMatch": {
       "get": {
         "operationId": "docker-getContainersByAppNameMatch",
         "tags": [
@@ -689,7 +689,7 @@
         }
       }
     },
-    "/docker/getContainersByAppLabel": {
+    "/docker.getContainersByAppLabel": {
       "get": {
         "operationId": "docker-getContainersByAppLabel",
         "tags": [
@@ -797,7 +797,7 @@
         }
       }
     },
-    "/docker/getStackContainersByAppName": {
+    "/docker.getStackContainersByAppName": {
       "get": {
         "operationId": "docker-getStackContainersByAppName",
         "tags": [
@@ -893,7 +893,7 @@
         }
       }
     },
-    "/docker/getServiceContainersByAppName": {
+    "/docker.getServiceContainersByAppName": {
       "get": {
         "operationId": "docker-getServiceContainersByAppName",
         "tags": [
@@ -989,7 +989,7 @@
         }
       }
     },
-    "/project/create": {
+    "/project.create": {
       "post": {
         "operationId": "project-create",
         "tags": [
@@ -1089,7 +1089,7 @@
         }
       }
     },
-    "/project/one": {
+    "/project.one": {
       "get": {
         "operationId": "project-one",
         "tags": [
@@ -1177,7 +1177,7 @@
         }
       }
     },
-    "/project/all": {
+    "/project.all": {
       "get": {
         "operationId": "project-all",
         "tags": [
@@ -1254,7 +1254,7 @@
         }
       }
     },
-    "/project/remove": {
+    "/project.remove": {
       "post": {
         "operationId": "project-remove",
         "tags": [
@@ -1341,7 +1341,7 @@
         }
       }
     },
-    "/project/update": {
+    "/project.update": {
       "post": {
         "operationId": "project-update",
         "tags": [
@@ -1451,7 +1451,7 @@
         }
       }
     },
-    "/project/duplicate": {
+    "/project.duplicate": {
       "post": {
         "operationId": "project-duplicate",
         "tags": [
@@ -1579,7 +1579,7 @@
         }
       }
     },
-    "/application/create": {
+    "/application.create": {
       "post": {
         "operationId": "application-create",
         "tags": [
@@ -1696,7 +1696,7 @@
         }
       }
     },
-    "/application/one": {
+    "/application.one": {
       "get": {
         "operationId": "application-one",
         "tags": [
@@ -1784,7 +1784,7 @@
         }
       }
     },
-    "/application/reload": {
+    "/application.reload": {
       "post": {
         "operationId": "application-reload",
         "tags": [
@@ -1877,7 +1877,7 @@
         }
       }
     },
-    "/application/delete": {
+    "/application.delete": {
       "post": {
         "operationId": "application-delete",
         "tags": [
@@ -1964,7 +1964,7 @@
         }
       }
     },
-    "/application/stop": {
+    "/application.stop": {
       "post": {
         "operationId": "application-stop",
         "tags": [
@@ -2051,7 +2051,7 @@
         }
       }
     },
-    "/application/start": {
+    "/application.start": {
       "post": {
         "operationId": "application-start",
         "tags": [
@@ -2138,7 +2138,7 @@
         }
       }
     },
-    "/application/redeploy": {
+    "/application.redeploy": {
       "post": {
         "operationId": "application-redeploy",
         "tags": [
@@ -2231,7 +2231,7 @@
         }
       }
     },
-    "/application/saveEnvironment": {
+    "/application.saveEnvironment": {
       "post": {
         "operationId": "application-saveEnvironment",
         "tags": [
@@ -2354,7 +2354,7 @@
         }
       }
     },
-    "/application/saveBuildType": {
+    "/application.saveBuildType": {
       "post": {
         "operationId": "application-saveBuildType",
         "tags": [
@@ -2527,7 +2527,7 @@
         }
       }
     },
-    "/application/saveGithubProvider": {
+    "/application.saveGithubProvider": {
       "post": {
         "operationId": "application-saveGithubProvider",
         "tags": [
@@ -2694,7 +2694,7 @@
         }
       }
     },
-    "/application/saveGitlabProvider": {
+    "/application.saveGitlabProvider": {
       "post": {
         "operationId": "application-saveGitlabProvider",
         "tags": [
@@ -2875,7 +2875,7 @@
         }
       }
     },
-    "/application/saveBitbucketProvider": {
+    "/application.saveBitbucketProvider": {
       "post": {
         "operationId": "application-saveBitbucketProvider",
         "tags": [
@@ -3045,7 +3045,7 @@
         }
       }
     },
-    "/application/saveGiteaProvider": {
+    "/application.saveGiteaProvider": {
       "post": {
         "operationId": "application-saveGiteaProvider",
         "tags": [
@@ -3204,7 +3204,7 @@
         }
       }
     },
-    "/application/saveDockerProvider": {
+    "/application.saveDockerProvider": {
       "post": {
         "operationId": "application-saveDockerProvider",
         "tags": [
@@ -3334,7 +3334,7 @@
         }
       }
     },
-    "/application/saveGitProvider": {
+    "/application.saveGitProvider": {
       "post": {
         "operationId": "application-saveGitProvider",
         "tags": [
@@ -3481,7 +3481,7 @@
         }
       }
     },
-    "/application/disconnectGitProvider": {
+    "/application.disconnectGitProvider": {
       "post": {
         "operationId": "application-disconnectGitProvider",
         "tags": [
@@ -3568,7 +3568,7 @@
         }
       }
     },
-    "/application/markRunning": {
+    "/application.markRunning": {
       "post": {
         "operationId": "application-markRunning",
         "tags": [
@@ -3655,7 +3655,7 @@
         }
       }
     },
-    "/application/update": {
+    "/application.update": {
       "post": {
         "operationId": "application-update",
         "tags": [
@@ -4995,7 +4995,7 @@
         }
       }
     },
-    "/application/refreshToken": {
+    "/application.refreshToken": {
       "post": {
         "operationId": "application-refreshToken",
         "tags": [
@@ -5082,7 +5082,7 @@
         }
       }
     },
-    "/application/deploy": {
+    "/application.deploy": {
       "post": {
         "operationId": "application-deploy",
         "tags": [
@@ -5175,7 +5175,7 @@
         }
       }
     },
-    "/application/cleanQueues": {
+    "/application.cleanQueues": {
       "post": {
         "operationId": "application-cleanQueues",
         "tags": [
@@ -5262,7 +5262,7 @@
         }
       }
     },
-    "/application/clearDeployments": {
+    "/application.clearDeployments": {
       "post": {
         "operationId": "application-clearDeployments",
         "tags": [
@@ -5349,7 +5349,7 @@
         }
       }
     },
-    "/application/killBuild": {
+    "/application.killBuild": {
       "post": {
         "operationId": "application-killBuild",
         "tags": [
@@ -5436,7 +5436,7 @@
         }
       }
     },
-    "/application/readTraefikConfig": {
+    "/application.readTraefikConfig": {
       "get": {
         "operationId": "application-readTraefikConfig",
         "tags": [
@@ -5524,7 +5524,7 @@
         }
       }
     },
-    "/application/updateTraefikConfig": {
+    "/application.updateTraefikConfig": {
       "post": {
         "operationId": "application-updateTraefikConfig",
         "tags": [
@@ -5614,7 +5614,7 @@
         }
       }
     },
-    "/application/readAppMonitoring": {
+    "/application.readAppMonitoring": {
       "get": {
         "operationId": "application-readAppMonitoring",
         "tags": [
@@ -5702,7 +5702,7 @@
         }
       }
     },
-    "/application/move": {
+    "/application.move": {
       "post": {
         "operationId": "application-move",
         "tags": [
@@ -5792,7 +5792,7 @@
         }
       }
     },
-    "/application/cancelDeployment": {
+    "/application.cancelDeployment": {
       "post": {
         "operationId": "application-cancelDeployment",
         "tags": [
@@ -5879,7 +5879,7 @@
         }
       }
     },
-    "/mysql/create": {
+    "/mysql.create": {
       "post": {
         "operationId": "mysql-create",
         "tags": [
@@ -6019,7 +6019,7 @@
         }
       }
     },
-    "/mysql/one": {
+    "/mysql.one": {
       "get": {
         "operationId": "mysql-one",
         "tags": [
@@ -6107,7 +6107,7 @@
         }
       }
     },
-    "/mysql/start": {
+    "/mysql.start": {
       "post": {
         "operationId": "mysql-start",
         "tags": [
@@ -6194,7 +6194,7 @@
         }
       }
     },
-    "/mysql/stop": {
+    "/mysql.stop": {
       "post": {
         "operationId": "mysql-stop",
         "tags": [
@@ -6281,7 +6281,7 @@
         }
       }
     },
-    "/mysql/saveExternalPort": {
+    "/mysql.saveExternalPort": {
       "post": {
         "operationId": "mysql-saveExternalPort",
         "tags": [
@@ -6378,7 +6378,7 @@
         }
       }
     },
-    "/mysql/deploy": {
+    "/mysql.deploy": {
       "post": {
         "operationId": "mysql-deploy",
         "tags": [
@@ -6464,7 +6464,7 @@
         }
       }
     },
-    "/mysql/changeStatus": {
+    "/mysql.changeStatus": {
       "post": {
         "operationId": "mysql-changeStatus",
         "tags": [
@@ -6560,7 +6560,7 @@
         }
       }
     },
-    "/mysql/reload": {
+    "/mysql.reload": {
       "post": {
         "operationId": "mysql-reload",
         "tags": [
@@ -6653,7 +6653,7 @@
         }
       }
     },
-    "/mysql/remove": {
+    "/mysql.remove": {
       "post": {
         "operationId": "mysql-remove",
         "tags": [
@@ -6740,7 +6740,7 @@
         }
       }
     },
-    "/mysql/saveEnvironment": {
+    "/mysql.saveEnvironment": {
       "post": {
         "operationId": "mysql-saveEnvironment",
         "tags": [
@@ -6837,7 +6837,7 @@
         }
       }
     },
-    "/mysql/update": {
+    "/mysql.update": {
       "post": {
         "operationId": "mysql-update",
         "tags": [
@@ -7507,7 +7507,7 @@
         }
       }
     },
-    "/mysql/move": {
+    "/mysql.move": {
       "post": {
         "operationId": "mysql-move",
         "tags": [
@@ -7597,7 +7597,7 @@
         }
       }
     },
-    "/mysql/rebuild": {
+    "/mysql.rebuild": {
       "post": {
         "operationId": "mysql-rebuild",
         "tags": [
@@ -7683,7 +7683,7 @@
         }
       }
     },
-    "/postgres/create": {
+    "/postgres.create": {
       "post": {
         "operationId": "postgres-create",
         "tags": [
@@ -7819,7 +7819,7 @@
         }
       }
     },
-    "/postgres/one": {
+    "/postgres.one": {
       "get": {
         "operationId": "postgres-one",
         "tags": [
@@ -7907,7 +7907,7 @@
         }
       }
     },
-    "/postgres/start": {
+    "/postgres.start": {
       "post": {
         "operationId": "postgres-start",
         "tags": [
@@ -7994,7 +7994,7 @@
         }
       }
     },
-    "/postgres/stop": {
+    "/postgres.stop": {
       "post": {
         "operationId": "postgres-stop",
         "tags": [
@@ -8081,7 +8081,7 @@
         }
       }
     },
-    "/postgres/saveExternalPort": {
+    "/postgres.saveExternalPort": {
       "post": {
         "operationId": "postgres-saveExternalPort",
         "tags": [
@@ -8178,7 +8178,7 @@
         }
       }
     },
-    "/postgres/deploy": {
+    "/postgres.deploy": {
       "post": {
         "operationId": "postgres-deploy",
         "tags": [
@@ -8264,7 +8264,7 @@
         }
       }
     },
-    "/postgres/changeStatus": {
+    "/postgres.changeStatus": {
       "post": {
         "operationId": "postgres-changeStatus",
         "tags": [
@@ -8360,7 +8360,7 @@
         }
       }
     },
-    "/postgres/remove": {
+    "/postgres.remove": {
       "post": {
         "operationId": "postgres-remove",
         "tags": [
@@ -8447,7 +8447,7 @@
         }
       }
     },
-    "/postgres/saveEnvironment": {
+    "/postgres.saveEnvironment": {
       "post": {
         "operationId": "postgres-saveEnvironment",
         "tags": [
@@ -8544,7 +8544,7 @@
         }
       }
     },
-    "/postgres/reload": {
+    "/postgres.reload": {
       "post": {
         "operationId": "postgres-reload",
         "tags": [
@@ -8637,7 +8637,7 @@
         }
       }
     },
-    "/postgres/update": {
+    "/postgres.update": {
       "post": {
         "operationId": "postgres-update",
         "tags": [
@@ -9303,7 +9303,7 @@
         }
       }
     },
-    "/postgres/move": {
+    "/postgres.move": {
       "post": {
         "operationId": "postgres-move",
         "tags": [
@@ -9393,7 +9393,7 @@
         }
       }
     },
-    "/postgres/rebuild": {
+    "/postgres.rebuild": {
       "post": {
         "operationId": "postgres-rebuild",
         "tags": [
@@ -9479,7 +9479,7 @@
         }
       }
     },
-    "/redis/create": {
+    "/redis.create": {
       "post": {
         "operationId": "redis-create",
         "tags": [
@@ -9604,7 +9604,7 @@
         }
       }
     },
-    "/redis/one": {
+    "/redis.one": {
       "get": {
         "operationId": "redis-one",
         "tags": [
@@ -9692,7 +9692,7 @@
         }
       }
     },
-    "/redis/start": {
+    "/redis.start": {
       "post": {
         "operationId": "redis-start",
         "tags": [
@@ -9779,7 +9779,7 @@
         }
       }
     },
-    "/redis/reload": {
+    "/redis.reload": {
       "post": {
         "operationId": "redis-reload",
         "tags": [
@@ -9872,7 +9872,7 @@
         }
       }
     },
-    "/redis/stop": {
+    "/redis.stop": {
       "post": {
         "operationId": "redis-stop",
         "tags": [
@@ -9959,7 +9959,7 @@
         }
       }
     },
-    "/redis/saveExternalPort": {
+    "/redis.saveExternalPort": {
       "post": {
         "operationId": "redis-saveExternalPort",
         "tags": [
@@ -10056,7 +10056,7 @@
         }
       }
     },
-    "/redis/deploy": {
+    "/redis.deploy": {
       "post": {
         "operationId": "redis-deploy",
         "tags": [
@@ -10142,7 +10142,7 @@
         }
       }
     },
-    "/redis/changeStatus": {
+    "/redis.changeStatus": {
       "post": {
         "operationId": "redis-changeStatus",
         "tags": [
@@ -10238,7 +10238,7 @@
         }
       }
     },
-    "/redis/remove": {
+    "/redis.remove": {
       "post": {
         "operationId": "redis-remove",
         "tags": [
@@ -10325,7 +10325,7 @@
         }
       }
     },
-    "/redis/saveEnvironment": {
+    "/redis.saveEnvironment": {
       "post": {
         "operationId": "redis-saveEnvironment",
         "tags": [
@@ -10422,7 +10422,7 @@
         }
       }
     },
-    "/redis/update": {
+    "/redis.update": {
       "post": {
         "operationId": "redis-update",
         "tags": [
@@ -11079,7 +11079,7 @@
         }
       }
     },
-    "/redis/move": {
+    "/redis.move": {
       "post": {
         "operationId": "redis-move",
         "tags": [
@@ -11169,7 +11169,7 @@
         }
       }
     },
-    "/redis/rebuild": {
+    "/redis.rebuild": {
       "post": {
         "operationId": "redis-rebuild",
         "tags": [
@@ -11255,7 +11255,7 @@
         }
       }
     },
-    "/mongo/create": {
+    "/mongo.create": {
       "post": {
         "operationId": "mongo-create",
         "tags": [
@@ -11397,7 +11397,7 @@
         }
       }
     },
-    "/mongo/one": {
+    "/mongo.one": {
       "get": {
         "operationId": "mongo-one",
         "tags": [
@@ -11485,7 +11485,7 @@
         }
       }
     },
-    "/mongo/start": {
+    "/mongo.start": {
       "post": {
         "operationId": "mongo-start",
         "tags": [
@@ -11572,7 +11572,7 @@
         }
       }
     },
-    "/mongo/stop": {
+    "/mongo.stop": {
       "post": {
         "operationId": "mongo-stop",
         "tags": [
@@ -11659,7 +11659,7 @@
         }
       }
     },
-    "/mongo/saveExternalPort": {
+    "/mongo.saveExternalPort": {
       "post": {
         "operationId": "mongo-saveExternalPort",
         "tags": [
@@ -11756,7 +11756,7 @@
         }
       }
     },
-    "/mongo/deploy": {
+    "/mongo.deploy": {
       "post": {
         "operationId": "mongo-deploy",
         "tags": [
@@ -11842,7 +11842,7 @@
         }
       }
     },
-    "/mongo/changeStatus": {
+    "/mongo.changeStatus": {
       "post": {
         "operationId": "mongo-changeStatus",
         "tags": [
@@ -11938,7 +11938,7 @@
         }
       }
     },
-    "/mongo/reload": {
+    "/mongo.reload": {
       "post": {
         "operationId": "mongo-reload",
         "tags": [
@@ -12031,7 +12031,7 @@
         }
       }
     },
-    "/mongo/remove": {
+    "/mongo.remove": {
       "post": {
         "operationId": "mongo-remove",
         "tags": [
@@ -12118,7 +12118,7 @@
         }
       }
     },
-    "/mongo/saveEnvironment": {
+    "/mongo.saveEnvironment": {
       "post": {
         "operationId": "mongo-saveEnvironment",
         "tags": [
@@ -12215,7 +12215,7 @@
         }
       }
     },
-    "/mongo/update": {
+    "/mongo.update": {
       "post": {
         "operationId": "mongo-update",
         "tags": [
@@ -12888,7 +12888,7 @@
         }
       }
     },
-    "/mongo/move": {
+    "/mongo.move": {
       "post": {
         "operationId": "mongo-move",
         "tags": [
@@ -12978,7 +12978,7 @@
         }
       }
     },
-    "/mongo/rebuild": {
+    "/mongo.rebuild": {
       "post": {
         "operationId": "mongo-rebuild",
         "tags": [
@@ -13064,7 +13064,7 @@
         }
       }
     },
-    "/mariadb/create": {
+    "/mariadb.create": {
       "post": {
         "operationId": "mariadb-create",
         "tags": [
@@ -13204,7 +13204,7 @@
         }
       }
     },
-    "/mariadb/one": {
+    "/mariadb.one": {
       "get": {
         "operationId": "mariadb-one",
         "tags": [
@@ -13292,7 +13292,7 @@
         }
       }
     },
-    "/mariadb/start": {
+    "/mariadb.start": {
       "post": {
         "operationId": "mariadb-start",
         "tags": [
@@ -13379,7 +13379,7 @@
         }
       }
     },
-    "/mariadb/stop": {
+    "/mariadb.stop": {
       "post": {
         "operationId": "mariadb-stop",
         "tags": [
@@ -13466,7 +13466,7 @@
         }
       }
     },
-    "/mariadb/saveExternalPort": {
+    "/mariadb.saveExternalPort": {
       "post": {
         "operationId": "mariadb-saveExternalPort",
         "tags": [
@@ -13563,7 +13563,7 @@
         }
       }
     },
-    "/mariadb/deploy": {
+    "/mariadb.deploy": {
       "post": {
         "operationId": "mariadb-deploy",
         "tags": [
@@ -13649,7 +13649,7 @@
         }
       }
     },
-    "/mariadb/changeStatus": {
+    "/mariadb.changeStatus": {
       "post": {
         "operationId": "mariadb-changeStatus",
         "tags": [
@@ -13745,7 +13745,7 @@
         }
       }
     },
-    "/mariadb/remove": {
+    "/mariadb.remove": {
       "post": {
         "operationId": "mariadb-remove",
         "tags": [
@@ -13832,7 +13832,7 @@
         }
       }
     },
-    "/mariadb/saveEnvironment": {
+    "/mariadb.saveEnvironment": {
       "post": {
         "operationId": "mariadb-saveEnvironment",
         "tags": [
@@ -13929,7 +13929,7 @@
         }
       }
     },
-    "/mariadb/reload": {
+    "/mariadb.reload": {
       "post": {
         "operationId": "mariadb-reload",
         "tags": [
@@ -14022,7 +14022,7 @@
         }
       }
     },
-    "/mariadb/update": {
+    "/mariadb.update": {
       "post": {
         "operationId": "mariadb-update",
         "tags": [
@@ -14692,7 +14692,7 @@
         }
       }
     },
-    "/mariadb/move": {
+    "/mariadb.move": {
       "post": {
         "operationId": "mariadb-move",
         "tags": [
@@ -14782,7 +14782,7 @@
         }
       }
     },
-    "/mariadb/rebuild": {
+    "/mariadb.rebuild": {
       "post": {
         "operationId": "mariadb-rebuild",
         "tags": [
@@ -14868,7 +14868,7 @@
         }
       }
     },
-    "/compose/create": {
+    "/compose.create": {
       "post": {
         "operationId": "compose-create",
         "tags": [
@@ -14995,7 +14995,7 @@
         }
       }
     },
-    "/compose/one": {
+    "/compose.one": {
       "get": {
         "operationId": "compose-one",
         "tags": [
@@ -15083,7 +15083,7 @@
         }
       }
     },
-    "/compose/update": {
+    "/compose.update": {
       "post": {
         "operationId": "compose-update",
         "tags": [
@@ -15524,7 +15524,7 @@
         }
       }
     },
-    "/compose/delete": {
+    "/compose.delete": {
       "post": {
         "operationId": "compose-delete",
         "tags": [
@@ -15615,7 +15615,7 @@
         }
       }
     },
-    "/compose/cleanQueues": {
+    "/compose.cleanQueues": {
       "post": {
         "operationId": "compose-cleanQueues",
         "tags": [
@@ -15702,7 +15702,7 @@
         }
       }
     },
-    "/compose/clearDeployments": {
+    "/compose.clearDeployments": {
       "post": {
         "operationId": "compose-clearDeployments",
         "tags": [
@@ -15789,7 +15789,7 @@
         }
       }
     },
-    "/compose/killBuild": {
+    "/compose.killBuild": {
       "post": {
         "operationId": "compose-killBuild",
         "tags": [
@@ -15876,7 +15876,7 @@
         }
       }
     },
-    "/compose/loadServices": {
+    "/compose.loadServices": {
       "get": {
         "operationId": "compose-loadServices",
         "tags": [
@@ -15976,7 +15976,7 @@
         }
       }
     },
-    "/compose/loadMountsByService": {
+    "/compose.loadMountsByService": {
       "get": {
         "operationId": "compose-loadMountsByService",
         "tags": [
@@ -16073,7 +16073,7 @@
         }
       }
     },
-    "/compose/fetchSourceType": {
+    "/compose.fetchSourceType": {
       "post": {
         "operationId": "compose-fetchSourceType",
         "tags": [
@@ -16160,7 +16160,7 @@
         }
       }
     },
-    "/compose/randomizeCompose": {
+    "/compose.randomizeCompose": {
       "post": {
         "operationId": "compose-randomizeCompose",
         "tags": [
@@ -16250,7 +16250,7 @@
         }
       }
     },
-    "/compose/isolatedDeployment": {
+    "/compose.isolatedDeployment": {
       "post": {
         "operationId": "compose-isolatedDeployment",
         "tags": [
@@ -16340,7 +16340,7 @@
         }
       }
     },
-    "/compose/getConvertedCompose": {
+    "/compose.getConvertedCompose": {
       "get": {
         "operationId": "compose-getConvertedCompose",
         "tags": [
@@ -16428,7 +16428,7 @@
         }
       }
     },
-    "/compose/deploy": {
+    "/compose.deploy": {
       "post": {
         "operationId": "compose-deploy",
         "tags": [
@@ -16521,7 +16521,7 @@
         }
       }
     },
-    "/compose/redeploy": {
+    "/compose.redeploy": {
       "post": {
         "operationId": "compose-redeploy",
         "tags": [
@@ -16614,7 +16614,7 @@
         }
       }
     },
-    "/compose/stop": {
+    "/compose.stop": {
       "post": {
         "operationId": "compose-stop",
         "tags": [
@@ -16701,7 +16701,7 @@
         }
       }
     },
-    "/compose/start": {
+    "/compose.start": {
       "post": {
         "operationId": "compose-start",
         "tags": [
@@ -16788,7 +16788,7 @@
         }
       }
     },
-    "/compose/getDefaultCommand": {
+    "/compose.getDefaultCommand": {
       "get": {
         "operationId": "compose-getDefaultCommand",
         "tags": [
@@ -16876,7 +16876,7 @@
         }
       }
     },
-    "/compose/refreshToken": {
+    "/compose.refreshToken": {
       "post": {
         "operationId": "compose-refreshToken",
         "tags": [
@@ -16963,7 +16963,7 @@
         }
       }
     },
-    "/compose/deployTemplate": {
+    "/compose.deployTemplate": {
       "post": {
         "operationId": "compose-deployTemplate",
         "tags": [
@@ -17059,7 +17059,7 @@
         }
       }
     },
-    "/compose/templates": {
+    "/compose.templates": {
       "get": {
         "operationId": "compose-templates",
         "tags": [
@@ -17145,7 +17145,7 @@
         }
       }
     },
-    "/compose/getTags": {
+    "/compose.getTags": {
       "get": {
         "operationId": "compose-getTags",
         "tags": [
@@ -17231,7 +17231,7 @@
         }
       }
     },
-    "/compose/disconnectGitProvider": {
+    "/compose.disconnectGitProvider": {
       "post": {
         "operationId": "compose-disconnectGitProvider",
         "tags": [
@@ -17318,7 +17318,7 @@
         }
       }
     },
-    "/compose/move": {
+    "/compose.move": {
       "post": {
         "operationId": "compose-move",
         "tags": [
@@ -17408,7 +17408,7 @@
         }
       }
     },
-    "/compose/processTemplate": {
+    "/compose.processTemplate": {
       "post": {
         "operationId": "compose-processTemplate",
         "tags": [
@@ -17499,7 +17499,7 @@
         }
       }
     },
-    "/compose/import": {
+    "/compose.import": {
       "post": {
         "operationId": "compose-import",
         "tags": [
@@ -17590,7 +17590,7 @@
         }
       }
     },
-    "/compose/cancelDeployment": {
+    "/compose.cancelDeployment": {
       "post": {
         "operationId": "compose-cancelDeployment",
         "tags": [
@@ -17677,7 +17677,7 @@
         }
       }
     },
-    "/user/all": {
+    "/user.all": {
       "get": {
         "operationId": "user-all",
         "tags": [
@@ -17754,7 +17754,7 @@
         }
       }
     },
-    "/user/one": {
+    "/user.one": {
       "get": {
         "operationId": "user-one",
         "tags": [
@@ -17841,7 +17841,7 @@
         }
       }
     },
-    "/user/get": {
+    "/user.get": {
       "get": {
         "operationId": "user-get",
         "tags": [
@@ -17918,7 +17918,7 @@
         }
       }
     },
-    "/user/haveRootAccess": {
+    "/user.haveRootAccess": {
       "get": {
         "operationId": "user-haveRootAccess",
         "tags": [
@@ -17995,7 +17995,7 @@
         }
       }
     },
-    "/user/getBackups": {
+    "/user.getBackups": {
       "get": {
         "operationId": "user-getBackups",
         "tags": [
@@ -18072,7 +18072,7 @@
         }
       }
     },
-    "/user/getServerMetrics": {
+    "/user.getServerMetrics": {
       "get": {
         "operationId": "user-getServerMetrics",
         "tags": [
@@ -18149,7 +18149,7 @@
         }
       }
     },
-    "/user/update": {
+    "/user.update": {
       "post": {
         "operationId": "user-update",
         "tags": [
@@ -18368,7 +18368,7 @@
         }
       }
     },
-    "/user/getUserByToken": {
+    "/user.getUserByToken": {
       "get": {
         "operationId": "user-getUserByToken",
         "tags": [
@@ -18456,7 +18456,7 @@
         }
       }
     },
-    "/user/getMetricsToken": {
+    "/user.getMetricsToken": {
       "get": {
         "operationId": "user-getMetricsToken",
         "tags": [
@@ -18533,7 +18533,7 @@
         }
       }
     },
-    "/user/remove": {
+    "/user.remove": {
       "post": {
         "operationId": "user-remove",
         "tags": [
@@ -18619,7 +18619,7 @@
         }
       }
     },
-    "/user/assignPermissions": {
+    "/user.assignPermissions": {
       "post": {
         "operationId": "user-assignPermissions",
         "tags": [
@@ -18771,7 +18771,7 @@
         }
       }
     },
-    "/user/getInvitations": {
+    "/user.getInvitations": {
       "get": {
         "operationId": "user-getInvitations",
         "tags": [
@@ -18848,7 +18848,7 @@
         }
       }
     },
-    "/user/getContainerMetrics": {
+    "/user.getContainerMetrics": {
       "get": {
         "operationId": "user-getContainerMetrics",
         "tags": [
@@ -18959,7 +18959,7 @@
         }
       }
     },
-    "/user/generateToken": {
+    "/user.generateToken": {
       "post": {
         "operationId": "user-generateToken",
         "tags": [
@@ -19026,7 +19026,7 @@
         }
       }
     },
-    "/user/deleteApiKey": {
+    "/user.deleteApiKey": {
       "post": {
         "operationId": "user-deleteApiKey",
         "tags": [
@@ -19112,7 +19112,7 @@
         }
       }
     },
-    "/user/createApiKey": {
+    "/user.createApiKey": {
       "post": {
         "operationId": "user-createApiKey",
         "tags": [
@@ -19235,7 +19235,7 @@
         }
       }
     },
-    "/user/checkUserOrganizations": {
+    "/user.checkUserOrganizations": {
       "get": {
         "operationId": "user-checkUserOrganizations",
         "tags": [
@@ -19322,7 +19322,7 @@
         }
       }
     },
-    "/user/sendInvitation": {
+    "/user.sendInvitation": {
       "post": {
         "operationId": "user-sendInvitation",
         "tags": [
@@ -19414,7 +19414,7 @@
         }
       }
     },
-    "/domain/create": {
+    "/domain.create": {
       "post": {
         "operationId": "domain-create",
         "tags": [
@@ -19613,7 +19613,7 @@
         }
       }
     },
-    "/domain/byApplicationId": {
+    "/domain.byApplicationId": {
       "get": {
         "operationId": "domain-byApplicationId",
         "tags": [
@@ -19701,7 +19701,7 @@
         }
       }
     },
-    "/domain/byComposeId": {
+    "/domain.byComposeId": {
       "get": {
         "operationId": "domain-byComposeId",
         "tags": [
@@ -19789,7 +19789,7 @@
         }
       }
     },
-    "/domain/generateDomain": {
+    "/domain.generateDomain": {
       "post": {
         "operationId": "domain-generateDomain",
         "tags": [
@@ -19878,7 +19878,7 @@
         }
       }
     },
-    "/domain/canGenerateTraefikMeDomains": {
+    "/domain.canGenerateTraefikMeDomains": {
       "get": {
         "operationId": "domain-canGenerateTraefikMeDomains",
         "tags": [
@@ -19965,7 +19965,7 @@
         }
       }
     },
-    "/domain/update": {
+    "/domain.update": {
       "post": {
         "operationId": "domain-update",
         "tags": [
@@ -20138,7 +20138,7 @@
         }
       }
     },
-    "/domain/one": {
+    "/domain.one": {
       "get": {
         "operationId": "domain-one",
         "tags": [
@@ -20226,7 +20226,7 @@
         }
       }
     },
-    "/domain/delete": {
+    "/domain.delete": {
       "post": {
         "operationId": "domain-delete",
         "tags": [
@@ -20313,7 +20313,7 @@
         }
       }
     },
-    "/domain/validateDomain": {
+    "/domain.validateDomain": {
       "post": {
         "operationId": "domain-validateDomain",
         "tags": [
@@ -20402,7 +20402,7 @@
         }
       }
     },
-    "/destination/create": {
+    "/destination.create": {
       "post": {
         "operationId": "destination-create",
         "tags": [
@@ -20523,7 +20523,7 @@
         }
       }
     },
-    "/destination/testConnection": {
+    "/destination.testConnection": {
       "post": {
         "operationId": "destination-testConnection",
         "tags": [
@@ -20644,7 +20644,7 @@
         }
       }
     },
-    "/destination/one": {
+    "/destination.one": {
       "get": {
         "operationId": "destination-one",
         "tags": [
@@ -20732,7 +20732,7 @@
         }
       }
     },
-    "/destination/all": {
+    "/destination.all": {
       "get": {
         "operationId": "destination-all",
         "tags": [
@@ -20809,7 +20809,7 @@
         }
       }
     },
-    "/destination/remove": {
+    "/destination.remove": {
       "post": {
         "operationId": "destination-remove",
         "tags": [
@@ -20895,7 +20895,7 @@
         }
       }
     },
-    "/destination/update": {
+    "/destination.update": {
       "post": {
         "operationId": "destination-update",
         "tags": [
@@ -21020,7 +21020,7 @@
         }
       }
     },
-    "/backup/create": {
+    "/backup.create": {
       "post": {
         "operationId": "backup-create",
         "tags": [
@@ -21236,7 +21236,7 @@
         }
       }
     },
-    "/backup/one": {
+    "/backup.one": {
       "get": {
         "operationId": "backup-one",
         "tags": [
@@ -21324,7 +21324,7 @@
         }
       }
     },
-    "/backup/update": {
+    "/backup.update": {
       "post": {
         "operationId": "backup-update",
         "tags": [
@@ -21481,7 +21481,7 @@
         }
       }
     },
-    "/backup/remove": {
+    "/backup.remove": {
       "post": {
         "operationId": "backup-remove",
         "tags": [
@@ -21567,7 +21567,7 @@
         }
       }
     },
-    "/backup/manualBackupPostgres": {
+    "/backup.manualBackupPostgres": {
       "post": {
         "operationId": "backup-manualBackupPostgres",
         "tags": [
@@ -21654,7 +21654,7 @@
         }
       }
     },
-    "/backup/manualBackupMySql": {
+    "/backup.manualBackupMySql": {
       "post": {
         "operationId": "backup-manualBackupMySql",
         "tags": [
@@ -21741,7 +21741,7 @@
         }
       }
     },
-    "/backup/manualBackupMariadb": {
+    "/backup.manualBackupMariadb": {
       "post": {
         "operationId": "backup-manualBackupMariadb",
         "tags": [
@@ -21828,7 +21828,7 @@
         }
       }
     },
-    "/backup/manualBackupCompose": {
+    "/backup.manualBackupCompose": {
       "post": {
         "operationId": "backup-manualBackupCompose",
         "tags": [
@@ -21915,7 +21915,7 @@
         }
       }
     },
-    "/backup/manualBackupMongo": {
+    "/backup.manualBackupMongo": {
       "post": {
         "operationId": "backup-manualBackupMongo",
         "tags": [
@@ -22002,7 +22002,7 @@
         }
       }
     },
-    "/backup/manualBackupWebServer": {
+    "/backup.manualBackupWebServer": {
       "post": {
         "operationId": "backup-manualBackupWebServer",
         "tags": [
@@ -22089,7 +22089,7 @@
         }
       }
     },
-    "/backup/listBackupFiles": {
+    "/backup.listBackupFiles": {
       "get": {
         "operationId": "backup-listBackupFiles",
         "tags": [
@@ -22191,7 +22191,7 @@
         }
       }
     },
-    "/deployment/all": {
+    "/deployment.all": {
       "get": {
         "operationId": "deployment-all",
         "tags": [
@@ -22279,7 +22279,7 @@
         }
       }
     },
-    "/deployment/allByCompose": {
+    "/deployment.allByCompose": {
       "get": {
         "operationId": "deployment-allByCompose",
         "tags": [
@@ -22367,7 +22367,7 @@
         }
       }
     },
-    "/deployment/allByServer": {
+    "/deployment.allByServer": {
       "get": {
         "operationId": "deployment-allByServer",
         "tags": [
@@ -22455,7 +22455,7 @@
         }
       }
     },
-    "/deployment/allByType": {
+    "/deployment.allByType": {
       "get": {
         "operationId": "deployment-allByType",
         "tags": [
@@ -22560,7 +22560,7 @@
         }
       }
     },
-    "/deployment/killProcess": {
+    "/deployment.killProcess": {
       "post": {
         "operationId": "deployment-killProcess",
         "tags": [
@@ -22647,7 +22647,7 @@
         }
       }
     },
-    "/deployment/removeDeployment": {
+    "/deployment.removeDeployment": {
       "post": {
         "operationId": "deployment-removeDeployment",
         "tags": [
@@ -22734,7 +22734,7 @@
         }
       }
     },
-    "/previewDeployment/all": {
+    "/previewDeployment.all": {
       "get": {
         "operationId": "previewDeployment-all",
         "tags": [
@@ -22822,7 +22822,7 @@
         }
       }
     },
-    "/previewDeployment/delete": {
+    "/previewDeployment.delete": {
       "post": {
         "operationId": "previewDeployment-delete",
         "tags": [
@@ -22908,7 +22908,7 @@
         }
       }
     },
-    "/previewDeployment/one": {
+    "/previewDeployment.one": {
       "get": {
         "operationId": "previewDeployment-one",
         "tags": [
@@ -22995,7 +22995,7 @@
         }
       }
     },
-    "/previewDeployment/redeploy": {
+    "/previewDeployment.redeploy": {
       "post": {
         "operationId": "previewDeployment-redeploy",
         "tags": [
@@ -23087,7 +23087,7 @@
         }
       }
     },
-    "/mounts/create": {
+    "/mounts.create": {
       "post": {
         "operationId": "mounts-create",
         "tags": [
@@ -23241,7 +23241,7 @@
         }
       }
     },
-    "/mounts/remove": {
+    "/mounts.remove": {
       "post": {
         "operationId": "mounts-remove",
         "tags": [
@@ -23327,7 +23327,7 @@
         }
       }
     },
-    "/mounts/one": {
+    "/mounts.one": {
       "get": {
         "operationId": "mounts-one",
         "tags": [
@@ -23415,7 +23415,7 @@
         }
       }
     },
-    "/mounts/update": {
+    "/mounts.update": {
       "post": {
         "operationId": "mounts-update",
         "tags": [
@@ -23637,7 +23637,7 @@
         }
       }
     },
-    "/mounts/allNamedByApplicationId": {
+    "/mounts.allNamedByApplicationId": {
       "get": {
         "operationId": "mounts-allNamedByApplicationId",
         "tags": [
@@ -23725,7 +23725,7 @@
         }
       }
     },
-    "/mounts/listByServiceId": {
+    "/mounts.listByServiceId": {
       "get": {
         "operationId": "mounts-listByServiceId",
         "tags": [
@@ -23830,7 +23830,7 @@
         }
       }
     },
-    "/certificates/create": {
+    "/certificates.create": {
       "post": {
         "operationId": "certificates-create",
         "tags": [
@@ -23957,7 +23957,7 @@
         }
       }
     },
-    "/certificates/one": {
+    "/certificates.one": {
       "get": {
         "operationId": "certificates-one",
         "tags": [
@@ -24045,7 +24045,7 @@
         }
       }
     },
-    "/certificates/remove": {
+    "/certificates.remove": {
       "post": {
         "operationId": "certificates-remove",
         "tags": [
@@ -24132,7 +24132,7 @@
         }
       }
     },
-    "/certificates/all": {
+    "/certificates.all": {
       "get": {
         "operationId": "certificates-all",
         "tags": [
@@ -24209,7 +24209,7 @@
         }
       }
     },
-    "/settings/getWebServerSettings": {
+    "/settings.getWebServerSettings": {
       "get": {
         "operationId": "settings-getWebServerSettings",
         "tags": [
@@ -24286,7 +24286,7 @@
         }
       }
     },
-    "/settings/reloadServer": {
+    "/settings.reloadServer": {
       "post": {
         "operationId": "settings-reloadServer",
         "tags": [
@@ -24353,7 +24353,7 @@
         }
       }
     },
-    "/settings/cleanRedis": {
+    "/settings.cleanRedis": {
       "post": {
         "operationId": "settings-cleanRedis",
         "tags": [
@@ -24420,7 +24420,7 @@
         }
       }
     },
-    "/settings/reloadRedis": {
+    "/settings.reloadRedis": {
       "post": {
         "operationId": "settings-reloadRedis",
         "tags": [
@@ -24487,7 +24487,7 @@
         }
       }
     },
-    "/settings/cleanAllDeploymentQueue": {
+    "/settings.cleanAllDeploymentQueue": {
       "post": {
         "operationId": "settings-cleanAllDeploymentQueue",
         "tags": [
@@ -24554,7 +24554,7 @@
         }
       }
     },
-    "/settings/reloadTraefik": {
+    "/settings.reloadTraefik": {
       "post": {
         "operationId": "settings-reloadTraefik",
         "tags": [
@@ -24637,7 +24637,7 @@
         }
       }
     },
-    "/settings/toggleDashboard": {
+    "/settings.toggleDashboard": {
       "post": {
         "operationId": "settings-toggleDashboard",
         "tags": [
@@ -24723,7 +24723,7 @@
         }
       }
     },
-    "/settings/cleanUnusedImages": {
+    "/settings.cleanUnusedImages": {
       "post": {
         "operationId": "settings-cleanUnusedImages",
         "tags": [
@@ -24806,7 +24806,7 @@
         }
       }
     },
-    "/settings/cleanUnusedVolumes": {
+    "/settings.cleanUnusedVolumes": {
       "post": {
         "operationId": "settings-cleanUnusedVolumes",
         "tags": [
@@ -24889,7 +24889,7 @@
         }
       }
     },
-    "/settings/cleanStoppedContainers": {
+    "/settings.cleanStoppedContainers": {
       "post": {
         "operationId": "settings-cleanStoppedContainers",
         "tags": [
@@ -24972,7 +24972,7 @@
         }
       }
     },
-    "/settings/cleanDockerBuilder": {
+    "/settings.cleanDockerBuilder": {
       "post": {
         "operationId": "settings-cleanDockerBuilder",
         "tags": [
@@ -25055,7 +25055,7 @@
         }
       }
     },
-    "/settings/cleanDockerPrune": {
+    "/settings.cleanDockerPrune": {
       "post": {
         "operationId": "settings-cleanDockerPrune",
         "tags": [
@@ -25138,7 +25138,7 @@
         }
       }
     },
-    "/settings/cleanAll": {
+    "/settings.cleanAll": {
       "post": {
         "operationId": "settings-cleanAll",
         "tags": [
@@ -25221,7 +25221,7 @@
         }
       }
     },
-    "/settings/cleanMonitoring": {
+    "/settings.cleanMonitoring": {
       "post": {
         "operationId": "settings-cleanMonitoring",
         "tags": [
@@ -25288,7 +25288,7 @@
         }
       }
     },
-    "/settings/saveSSHPrivateKey": {
+    "/settings.saveSSHPrivateKey": {
       "post": {
         "operationId": "settings-saveSSHPrivateKey",
         "tags": [
@@ -25374,7 +25374,7 @@
         }
       }
     },
-    "/settings/assignDomainServer": {
+    "/settings.assignDomainServer": {
       "post": {
         "operationId": "settings-assignDomainServer",
         "tags": [
@@ -25492,7 +25492,7 @@
         }
       }
     },
-    "/settings/cleanSSHPrivateKey": {
+    "/settings.cleanSSHPrivateKey": {
       "post": {
         "operationId": "settings-cleanSSHPrivateKey",
         "tags": [
@@ -25559,7 +25559,7 @@
         }
       }
     },
-    "/settings/updateDockerCleanup": {
+    "/settings.updateDockerCleanup": {
       "post": {
         "operationId": "settings-updateDockerCleanup",
         "tags": [
@@ -25648,7 +25648,7 @@
         }
       }
     },
-    "/settings/readTraefikConfig": {
+    "/settings.readTraefikConfig": {
       "get": {
         "operationId": "settings-readTraefikConfig",
         "tags": [
@@ -25725,7 +25725,7 @@
         }
       }
     },
-    "/settings/updateTraefikConfig": {
+    "/settings.updateTraefikConfig": {
       "post": {
         "operationId": "settings-updateTraefikConfig",
         "tags": [
@@ -25812,7 +25812,7 @@
         }
       }
     },
-    "/settings/readWebServerTraefikConfig": {
+    "/settings.readWebServerTraefikConfig": {
       "get": {
         "operationId": "settings-readWebServerTraefikConfig",
         "tags": [
@@ -25889,7 +25889,7 @@
         }
       }
     },
-    "/settings/updateWebServerTraefikConfig": {
+    "/settings.updateWebServerTraefikConfig": {
       "post": {
         "operationId": "settings-updateWebServerTraefikConfig",
         "tags": [
@@ -25976,7 +25976,7 @@
         }
       }
     },
-    "/settings/readMiddlewareTraefikConfig": {
+    "/settings.readMiddlewareTraefikConfig": {
       "get": {
         "operationId": "settings-readMiddlewareTraefikConfig",
         "tags": [
@@ -26053,7 +26053,7 @@
         }
       }
     },
-    "/settings/updateMiddlewareTraefikConfig": {
+    "/settings.updateMiddlewareTraefikConfig": {
       "post": {
         "operationId": "settings-updateMiddlewareTraefikConfig",
         "tags": [
@@ -26140,7 +26140,7 @@
         }
       }
     },
-    "/settings/getUpdateData": {
+    "/settings.getUpdateData": {
       "post": {
         "operationId": "settings-getUpdateData",
         "tags": [
@@ -26207,7 +26207,7 @@
         }
       }
     },
-    "/settings/updateServer": {
+    "/settings.updateServer": {
       "post": {
         "operationId": "settings-updateServer",
         "tags": [
@@ -26274,7 +26274,7 @@
         }
       }
     },
-    "/settings/getDokployVersion": {
+    "/settings.getDokployVersion": {
       "get": {
         "operationId": "settings-getDokployVersion",
         "tags": [
@@ -26351,7 +26351,7 @@
         }
       }
     },
-    "/settings/getReleaseTag": {
+    "/settings.getReleaseTag": {
       "get": {
         "operationId": "settings-getReleaseTag",
         "tags": [
@@ -26428,7 +26428,7 @@
         }
       }
     },
-    "/settings/readDirectories": {
+    "/settings.readDirectories": {
       "get": {
         "operationId": "settings-readDirectories",
         "tags": [
@@ -26514,7 +26514,7 @@
         }
       }
     },
-    "/settings/updateTraefikFile": {
+    "/settings.updateTraefikFile": {
       "post": {
         "operationId": "settings-updateTraefikFile",
         "tags": [
@@ -26609,7 +26609,7 @@
         }
       }
     },
-    "/settings/readTraefikFile": {
+    "/settings.readTraefikFile": {
       "get": {
         "operationId": "settings-readTraefikFile",
         "tags": [
@@ -26704,7 +26704,7 @@
         }
       }
     },
-    "/settings/getIp": {
+    "/settings.getIp": {
       "get": {
         "operationId": "settings-getIp",
         "tags": [
@@ -26781,7 +26781,7 @@
         }
       }
     },
-    "/settings/updateServerIp": {
+    "/settings.updateServerIp": {
       "post": {
         "operationId": "settings-updateServerIp",
         "tags": [
@@ -26867,7 +26867,7 @@
         }
       }
     },
-    "/settings/getOpenApiDocument": {
+    "/settings.getOpenApiDocument": {
       "get": {
         "operationId": "settings-getOpenApiDocument",
         "tags": [
@@ -26944,7 +26944,7 @@
         }
       }
     },
-    "/settings/readTraefikEnv": {
+    "/settings.readTraefikEnv": {
       "get": {
         "operationId": "settings-readTraefikEnv",
         "tags": [
@@ -27030,7 +27030,7 @@
         }
       }
     },
-    "/settings/writeTraefikEnv": {
+    "/settings.writeTraefikEnv": {
       "post": {
         "operationId": "settings-writeTraefikEnv",
         "tags": [
@@ -27119,7 +27119,7 @@
         }
       }
     },
-    "/settings/haveTraefikDashboardPortEnabled": {
+    "/settings.haveTraefikDashboardPortEnabled": {
       "get": {
         "operationId": "settings-haveTraefikDashboardPortEnabled",
         "tags": [
@@ -27205,7 +27205,7 @@
         }
       }
     },
-    "/settings/haveActivateRequests": {
+    "/settings.haveActivateRequests": {
       "get": {
         "operationId": "settings-haveActivateRequests",
         "tags": [
@@ -27282,7 +27282,7 @@
         }
       }
     },
-    "/settings/toggleRequests": {
+    "/settings.toggleRequests": {
       "post": {
         "operationId": "settings-toggleRequests",
         "tags": [
@@ -27368,7 +27368,7 @@
         }
       }
     },
-    "/settings/isCloud": {
+    "/settings.isCloud": {
       "get": {
         "operationId": "settings-isCloud",
         "tags": [
@@ -27445,7 +27445,7 @@
         }
       }
     },
-    "/settings/isUserSubscribed": {
+    "/settings.isUserSubscribed": {
       "get": {
         "operationId": "settings-isUserSubscribed",
         "tags": [
@@ -27522,7 +27522,7 @@
         }
       }
     },
-    "/settings/health": {
+    "/settings.health": {
       "get": {
         "operationId": "settings-health",
         "tags": [
@@ -27599,7 +27599,7 @@
         }
       }
     },
-    "/settings/setupGPU": {
+    "/settings.setupGPU": {
       "post": {
         "operationId": "settings-setupGPU",
         "tags": [
@@ -27682,7 +27682,7 @@
         }
       }
     },
-    "/settings/checkGPUStatus": {
+    "/settings.checkGPUStatus": {
       "get": {
         "operationId": "settings-checkGPUStatus",
         "tags": [
@@ -27768,7 +27768,7 @@
         }
       }
     },
-    "/settings/updateTraefikPorts": {
+    "/settings.updateTraefikPorts": {
       "post": {
         "operationId": "settings-updateTraefikPorts",
         "tags": [
@@ -27881,7 +27881,7 @@
         }
       }
     },
-    "/settings/getTraefikPorts": {
+    "/settings.getTraefikPorts": {
       "get": {
         "operationId": "settings-getTraefikPorts",
         "tags": [
@@ -27967,7 +27967,7 @@
         }
       }
     },
-    "/settings/updateLogCleanup": {
+    "/settings.updateLogCleanup": {
       "post": {
         "operationId": "settings-updateLogCleanup",
         "tags": [
@@ -28060,7 +28060,7 @@
         }
       }
     },
-    "/settings/getLogCleanupStatus": {
+    "/settings.getLogCleanupStatus": {
       "get": {
         "operationId": "settings-getLogCleanupStatus",
         "tags": [
@@ -28137,7 +28137,7 @@
         }
       }
     },
-    "/settings/getDokployCloudIps": {
+    "/settings.getDokployCloudIps": {
       "get": {
         "operationId": "settings-getDokployCloudIps",
         "tags": [
@@ -28214,7 +28214,7 @@
         }
       }
     },
-    "/security/create": {
+    "/security.create": {
       "post": {
         "operationId": "security-create",
         "tags": [
@@ -28310,7 +28310,7 @@
         }
       }
     },
-    "/security/one": {
+    "/security.one": {
       "get": {
         "operationId": "security-one",
         "tags": [
@@ -28398,7 +28398,7 @@
         }
       }
     },
-    "/security/delete": {
+    "/security.delete": {
       "post": {
         "operationId": "security-delete",
         "tags": [
@@ -28485,7 +28485,7 @@
         }
       }
     },
-    "/security/update": {
+    "/security.update": {
       "post": {
         "operationId": "security-update",
         "tags": [
@@ -28582,7 +28582,7 @@
         }
       }
     },
-    "/redirects/create": {
+    "/redirects.create": {
       "post": {
         "operationId": "redirects-create",
         "tags": [
@@ -28682,7 +28682,7 @@
         }
       }
     },
-    "/redirects/one": {
+    "/redirects.one": {
       "get": {
         "operationId": "redirects-one",
         "tags": [
@@ -28770,7 +28770,7 @@
         }
       }
     },
-    "/redirects/delete": {
+    "/redirects.delete": {
       "post": {
         "operationId": "redirects-delete",
         "tags": [
@@ -28857,7 +28857,7 @@
         }
       }
     },
-    "/redirects/update": {
+    "/redirects.update": {
       "post": {
         "operationId": "redirects-update",
         "tags": [
@@ -28958,7 +28958,7 @@
         }
       }
     },
-    "/port/create": {
+    "/port.create": {
       "post": {
         "operationId": "port-create",
         "tags": [
@@ -29071,7 +29071,7 @@
         }
       }
     },
-    "/port/one": {
+    "/port.one": {
       "get": {
         "operationId": "port-one",
         "tags": [
@@ -29159,7 +29159,7 @@
         }
       }
     },
-    "/port/delete": {
+    "/port.delete": {
       "post": {
         "operationId": "port-delete",
         "tags": [
@@ -29246,7 +29246,7 @@
         }
       }
     },
-    "/port/update": {
+    "/port.update": {
       "post": {
         "operationId": "port-update",
         "tags": [
@@ -29359,7 +29359,7 @@
         }
       }
     },
-    "/registry/create": {
+    "/registry.create": {
       "post": {
         "operationId": "registry-create",
         "tags": [
@@ -29481,7 +29481,7 @@
         }
       }
     },
-    "/registry/remove": {
+    "/registry.remove": {
       "post": {
         "operationId": "registry-remove",
         "tags": [
@@ -29568,7 +29568,7 @@
         }
       }
     },
-    "/registry/update": {
+    "/registry.update": {
       "post": {
         "operationId": "registry-update",
         "tags": [
@@ -29703,7 +29703,7 @@
         }
       }
     },
-    "/registry/all": {
+    "/registry.all": {
       "get": {
         "operationId": "registry-all",
         "tags": [
@@ -29780,7 +29780,7 @@
         }
       }
     },
-    "/registry/one": {
+    "/registry.one": {
       "get": {
         "operationId": "registry-one",
         "tags": [
@@ -29868,7 +29868,7 @@
         }
       }
     },
-    "/registry/testRegistry": {
+    "/registry.testRegistry": {
       "post": {
         "operationId": "registry-testRegistry",
         "tags": [
@@ -29987,7 +29987,7 @@
         }
       }
     },
-    "/registry/testRegistryById": {
+    "/registry.testRegistryById": {
       "post": {
         "operationId": "registry-testRegistryById",
         "tags": [
@@ -30074,7 +30074,7 @@
         }
       }
     },
-    "/cluster/getNodes": {
+    "/cluster.getNodes": {
       "get": {
         "operationId": "cluster-getNodes",
         "tags": [
@@ -30160,7 +30160,7 @@
         }
       }
     },
-    "/cluster/removeWorker": {
+    "/cluster.removeWorker": {
       "post": {
         "operationId": "cluster-removeWorker",
         "tags": [
@@ -30249,7 +30249,7 @@
         }
       }
     },
-    "/cluster/addWorker": {
+    "/cluster.addWorker": {
       "get": {
         "operationId": "cluster-addWorker",
         "tags": [
@@ -30335,7 +30335,7 @@
         }
       }
     },
-    "/cluster/addManager": {
+    "/cluster.addManager": {
       "get": {
         "operationId": "cluster-addManager",
         "tags": [
@@ -30421,7 +30421,7 @@
         }
       }
     },
-    "/notification/createSlack": {
+    "/notification.createSlack": {
       "post": {
         "operationId": "notification-createSlack",
         "tags": [
@@ -30544,7 +30544,7 @@
         }
       }
     },
-    "/notification/updateSlack": {
+    "/notification.updateSlack": {
       "post": {
         "operationId": "notification-updateSlack",
         "tags": [
@@ -30669,7 +30669,7 @@
         }
       }
     },
-    "/notification/testSlackConnection": {
+    "/notification.testSlackConnection": {
       "post": {
         "operationId": "notification-testSlackConnection",
         "tags": [
@@ -30760,7 +30760,7 @@
         }
       }
     },
-    "/notification/createTelegram": {
+    "/notification.createTelegram": {
       "post": {
         "operationId": "notification-createTelegram",
         "tags": [
@@ -30888,7 +30888,7 @@
         }
       }
     },
-    "/notification/updateTelegram": {
+    "/notification.updateTelegram": {
       "post": {
         "operationId": "notification-updateTelegram",
         "tags": [
@@ -31018,7 +31018,7 @@
         }
       }
     },
-    "/notification/testTelegramConnection": {
+    "/notification.testTelegramConnection": {
       "post": {
         "operationId": "notification-testTelegramConnection",
         "tags": [
@@ -31114,7 +31114,7 @@
         }
       }
     },
-    "/notification/createDiscord": {
+    "/notification.createDiscord": {
       "post": {
         "operationId": "notification-createDiscord",
         "tags": [
@@ -31237,7 +31237,7 @@
         }
       }
     },
-    "/notification/updateDiscord": {
+    "/notification.updateDiscord": {
       "post": {
         "operationId": "notification-updateDiscord",
         "tags": [
@@ -31363,7 +31363,7 @@
         }
       }
     },
-    "/notification/testDiscordConnection": {
+    "/notification.testDiscordConnection": {
       "post": {
         "operationId": "notification-testDiscordConnection",
         "tags": [
@@ -31453,7 +31453,7 @@
         }
       }
     },
-    "/notification/createEmail": {
+    "/notification.createEmail": {
       "post": {
         "operationId": "notification-createEmail",
         "tags": [
@@ -31600,7 +31600,7 @@
         }
       }
     },
-    "/notification/updateEmail": {
+    "/notification.updateEmail": {
       "post": {
         "operationId": "notification-updateEmail",
         "tags": [
@@ -31746,7 +31746,7 @@
         }
       }
     },
-    "/notification/testEmailConnection": {
+    "/notification.testEmailConnection": {
       "post": {
         "operationId": "notification-testEmailConnection",
         "tags": [
@@ -31861,7 +31861,7 @@
         }
       }
     },
-    "/notification/createResend": {
+    "/notification.createResend": {
       "post": {
         "operationId": "notification-createResend",
         "tags": [
@@ -31993,7 +31993,7 @@
         }
       }
     },
-    "/notification/updateResend": {
+    "/notification.updateResend": {
       "post": {
         "operationId": "notification-updateResend",
         "tags": [
@@ -32127,7 +32127,7 @@
         }
       }
     },
-    "/notification/testResendConnection": {
+    "/notification.testResendConnection": {
       "post": {
         "operationId": "notification-testResendConnection",
         "tags": [
@@ -32227,7 +32227,7 @@
         }
       }
     },
-    "/notification/remove": {
+    "/notification.remove": {
       "post": {
         "operationId": "notification-remove",
         "tags": [
@@ -32314,7 +32314,7 @@
         }
       }
     },
-    "/notification/one": {
+    "/notification.one": {
       "get": {
         "operationId": "notification-one",
         "tags": [
@@ -32402,7 +32402,7 @@
         }
       }
     },
-    "/notification/all": {
+    "/notification.all": {
       "get": {
         "operationId": "notification-all",
         "tags": [
@@ -32479,7 +32479,7 @@
         }
       }
     },
-    "/notification/receiveNotification": {
+    "/notification.receiveNotification": {
       "post": {
         "operationId": "notification-receiveNotification",
         "tags": [
@@ -32597,7 +32597,7 @@
         }
       }
     },
-    "/notification/createGotify": {
+    "/notification.createGotify": {
       "post": {
         "operationId": "notification-createGotify",
         "tags": [
@@ -32726,7 +32726,7 @@
         }
       }
     },
-    "/notification/updateGotify": {
+    "/notification.updateGotify": {
       "post": {
         "operationId": "notification-updateGotify",
         "tags": [
@@ -32857,7 +32857,7 @@
         }
       }
     },
-    "/notification/testGotifyConnection": {
+    "/notification.testGotifyConnection": {
       "post": {
         "operationId": "notification-testGotifyConnection",
         "tags": [
@@ -32957,7 +32957,7 @@
         }
       }
     },
-    "/notification/createNtfy": {
+    "/notification.createNtfy": {
       "post": {
         "operationId": "notification-createNtfy",
         "tags": [
@@ -33086,7 +33086,7 @@
         }
       }
     },
-    "/notification/updateNtfy": {
+    "/notification.updateNtfy": {
       "post": {
         "operationId": "notification-updateNtfy",
         "tags": [
@@ -33217,7 +33217,7 @@
         }
       }
     },
-    "/notification/testNtfyConnection": {
+    "/notification.testNtfyConnection": {
       "post": {
         "operationId": "notification-testNtfyConnection",
         "tags": [
@@ -33318,7 +33318,7 @@
         }
       }
     },
-    "/notification/createCustom": {
+    "/notification.createCustom": {
       "post": {
         "operationId": "notification-createCustom",
         "tags": [
@@ -33439,7 +33439,7 @@
         }
       }
     },
-    "/notification/updateCustom": {
+    "/notification.updateCustom": {
       "post": {
         "operationId": "notification-updateCustom",
         "tags": [
@@ -33571,7 +33571,7 @@
         }
       }
     },
-    "/notification/testCustomConnection": {
+    "/notification.testCustomConnection": {
       "post": {
         "operationId": "notification-testCustomConnection",
         "tags": [
@@ -33667,7 +33667,7 @@
         }
       }
     },
-    "/notification/createLark": {
+    "/notification.createLark": {
       "post": {
         "operationId": "notification-createLark",
         "tags": [
@@ -33786,7 +33786,7 @@
         }
       }
     },
-    "/notification/updateLark": {
+    "/notification.updateLark": {
       "post": {
         "operationId": "notification-updateLark",
         "tags": [
@@ -33909,7 +33909,7 @@
         }
       }
     },
-    "/notification/testLarkConnection": {
+    "/notification.testLarkConnection": {
       "post": {
         "operationId": "notification-testLarkConnection",
         "tags": [
@@ -33996,7 +33996,7 @@
         }
       }
     },
-    "/notification/createTeams": {
+    "/notification.createTeams": {
       "post": {
         "operationId": "notification-createTeams",
         "tags": [
@@ -34115,7 +34115,7 @@
         }
       }
     },
-    "/notification/updateTeams": {
+    "/notification.updateTeams": {
       "post": {
         "operationId": "notification-updateTeams",
         "tags": [
@@ -34238,7 +34238,7 @@
         }
       }
     },
-    "/notification/testTeamsConnection": {
+    "/notification.testTeamsConnection": {
       "post": {
         "operationId": "notification-testTeamsConnection",
         "tags": [
@@ -34325,7 +34325,7 @@
         }
       }
     },
-    "/notification/createPushover": {
+    "/notification.createPushover": {
       "post": {
         "operationId": "notification-createPushover",
         "tags": [
@@ -34471,7 +34471,7 @@
         }
       }
     },
-    "/notification/updatePushover": {
+    "/notification.updatePushover": {
       "post": {
         "operationId": "notification-updatePushover",
         "tags": [
@@ -34626,7 +34626,7 @@
         }
       }
     },
-    "/notification/testPushoverConnection": {
+    "/notification.testPushoverConnection": {
       "post": {
         "operationId": "notification-testPushoverConnection",
         "tags": [
@@ -34747,7 +34747,7 @@
         }
       }
     },
-    "/notification/getEmailProviders": {
+    "/notification.getEmailProviders": {
       "get": {
         "operationId": "notification-getEmailProviders",
         "tags": [
@@ -34824,7 +34824,7 @@
         }
       }
     },
-    "/sshKey/create": {
+    "/sshKey.create": {
       "post": {
         "operationId": "sshKey-create",
         "tags": [
@@ -34933,7 +34933,7 @@
         }
       }
     },
-    "/sshKey/remove": {
+    "/sshKey.remove": {
       "post": {
         "operationId": "sshKey-remove",
         "tags": [
@@ -35019,7 +35019,7 @@
         }
       }
     },
-    "/sshKey/one": {
+    "/sshKey.one": {
       "get": {
         "operationId": "sshKey-one",
         "tags": [
@@ -35107,7 +35107,7 @@
         }
       }
     },
-    "/sshKey/all": {
+    "/sshKey.all": {
       "get": {
         "operationId": "sshKey-all",
         "tags": [
@@ -35184,7 +35184,7 @@
         }
       }
     },
-    "/sshKey/generate": {
+    "/sshKey.generate": {
       "post": {
         "operationId": "sshKey-generate",
         "tags": [
@@ -35271,7 +35271,7 @@
         }
       }
     },
-    "/sshKey/update": {
+    "/sshKey.update": {
       "post": {
         "operationId": "sshKey-update",
         "tags": [
@@ -35381,7 +35381,7 @@
         }
       }
     },
-    "/gitProvider/getAll": {
+    "/gitProvider.getAll": {
       "get": {
         "operationId": "gitProvider-getAll",
         "tags": [
@@ -35458,7 +35458,7 @@
         }
       }
     },
-    "/gitProvider/remove": {
+    "/gitProvider.remove": {
       "post": {
         "operationId": "gitProvider-remove",
         "tags": [
@@ -35545,7 +35545,7 @@
         }
       }
     },
-    "/gitea/create": {
+    "/gitea.create": {
       "post": {
         "operationId": "gitea-create",
         "tags": [
@@ -35683,7 +35683,7 @@
         }
       }
     },
-    "/gitea/one": {
+    "/gitea.one": {
       "get": {
         "operationId": "gitea-one",
         "tags": [
@@ -35771,7 +35771,7 @@
         }
       }
     },
-    "/gitea/giteaProviders": {
+    "/gitea.giteaProviders": {
       "get": {
         "operationId": "gitea-giteaProviders",
         "tags": [
@@ -35848,7 +35848,7 @@
         }
       }
     },
-    "/gitea/getGiteaRepositories": {
+    "/gitea.getGiteaRepositories": {
       "get": {
         "operationId": "gitea-getGiteaRepositories",
         "tags": [
@@ -35936,7 +35936,7 @@
         }
       }
     },
-    "/gitea/getGiteaBranches": {
+    "/gitea.getGiteaBranches": {
       "get": {
         "operationId": "gitea-getGiteaBranches",
         "tags": [
@@ -36040,7 +36040,7 @@
         }
       }
     },
-    "/gitea/testConnection": {
+    "/gitea.testConnection": {
       "post": {
         "operationId": "gitea-testConnection",
         "tags": [
@@ -36126,7 +36126,7 @@
         }
       }
     },
-    "/gitea/update": {
+    "/gitea.update": {
       "post": {
         "operationId": "gitea-update",
         "tags": [
@@ -36267,7 +36267,7 @@
         }
       }
     },
-    "/gitea/getGiteaUrl": {
+    "/gitea.getGiteaUrl": {
       "get": {
         "operationId": "gitea-getGiteaUrl",
         "tags": [
@@ -36355,7 +36355,7 @@
         }
       }
     },
-    "/bitbucket/create": {
+    "/bitbucket.create": {
       "post": {
         "operationId": "bitbucket-create",
         "tags": [
@@ -36470,7 +36470,7 @@
         }
       }
     },
-    "/bitbucket/one": {
+    "/bitbucket.one": {
       "get": {
         "operationId": "bitbucket-one",
         "tags": [
@@ -36558,7 +36558,7 @@
         }
       }
     },
-    "/bitbucket/bitbucketProviders": {
+    "/bitbucket.bitbucketProviders": {
       "get": {
         "operationId": "bitbucket-bitbucketProviders",
         "tags": [
@@ -36635,7 +36635,7 @@
         }
       }
     },
-    "/bitbucket/getBitbucketRepositories": {
+    "/bitbucket.getBitbucketRepositories": {
       "get": {
         "operationId": "bitbucket-getBitbucketRepositories",
         "tags": [
@@ -36723,7 +36723,7 @@
         }
       }
     },
-    "/bitbucket/getBitbucketBranches": {
+    "/bitbucket.getBitbucketBranches": {
       "get": {
         "operationId": "bitbucket-getBitbucketBranches",
         "tags": [
@@ -36825,7 +36825,7 @@
         }
       }
     },
-    "/bitbucket/testConnection": {
+    "/bitbucket.testConnection": {
       "post": {
         "operationId": "bitbucket-testConnection",
         "tags": [
@@ -36929,7 +36929,7 @@
         }
       }
     },
-    "/bitbucket/update": {
+    "/bitbucket.update": {
       "post": {
         "operationId": "bitbucket-update",
         "tags": [
@@ -37045,7 +37045,7 @@
         }
       }
     },
-    "/gitlab/create": {
+    "/gitlab.create": {
       "post": {
         "operationId": "gitlab-create",
         "tags": [
@@ -37167,7 +37167,7 @@
         }
       }
     },
-    "/gitlab/one": {
+    "/gitlab.one": {
       "get": {
         "operationId": "gitlab-one",
         "tags": [
@@ -37255,7 +37255,7 @@
         }
       }
     },
-    "/gitlab/gitlabProviders": {
+    "/gitlab.gitlabProviders": {
       "get": {
         "operationId": "gitlab-gitlabProviders",
         "tags": [
@@ -37332,7 +37332,7 @@
         }
       }
     },
-    "/gitlab/getGitlabRepositories": {
+    "/gitlab.getGitlabRepositories": {
       "get": {
         "operationId": "gitlab-getGitlabRepositories",
         "tags": [
@@ -37420,7 +37420,7 @@
         }
       }
     },
-    "/gitlab/getGitlabBranches": {
+    "/gitlab.getGitlabBranches": {
       "get": {
         "operationId": "gitlab-getGitlabBranches",
         "tags": [
@@ -37529,7 +37529,7 @@
         }
       }
     },
-    "/gitlab/testConnection": {
+    "/gitlab.testConnection": {
       "post": {
         "operationId": "gitlab-testConnection",
         "tags": [
@@ -37619,7 +37619,7 @@
         }
       }
     },
-    "/gitlab/update": {
+    "/gitlab.update": {
       "post": {
         "operationId": "gitlab-update",
         "tags": [
@@ -37743,7 +37743,7 @@
         }
       }
     },
-    "/github/one": {
+    "/github.one": {
       "get": {
         "operationId": "github-one",
         "tags": [
@@ -37831,7 +37831,7 @@
         }
       }
     },
-    "/github/getGithubRepositories": {
+    "/github.getGithubRepositories": {
       "get": {
         "operationId": "github-getGithubRepositories",
         "tags": [
@@ -37919,7 +37919,7 @@
         }
       }
     },
-    "/github/getGithubBranches": {
+    "/github.getGithubBranches": {
       "get": {
         "operationId": "github-getGithubBranches",
         "tags": [
@@ -38023,7 +38023,7 @@
         }
       }
     },
-    "/github/githubProviders": {
+    "/github.githubProviders": {
       "get": {
         "operationId": "github-githubProviders",
         "tags": [
@@ -38100,7 +38100,7 @@
         }
       }
     },
-    "/github/testConnection": {
+    "/github.testConnection": {
       "post": {
         "operationId": "github-testConnection",
         "tags": [
@@ -38187,7 +38187,7 @@
         }
       }
     },
-    "/github/update": {
+    "/github.update": {
       "post": {
         "operationId": "github-update",
         "tags": [
@@ -38289,7 +38289,7 @@
         }
       }
     },
-    "/server/create": {
+    "/server.create": {
       "post": {
         "operationId": "server-create",
         "tags": [
@@ -38418,7 +38418,7 @@
         }
       }
     },
-    "/server/one": {
+    "/server.one": {
       "get": {
         "operationId": "server-one",
         "tags": [
@@ -38506,7 +38506,7 @@
         }
       }
     },
-    "/server/getDefaultCommand": {
+    "/server.getDefaultCommand": {
       "get": {
         "operationId": "server-getDefaultCommand",
         "tags": [
@@ -38594,7 +38594,7 @@
         }
       }
     },
-    "/server/all": {
+    "/server.all": {
       "get": {
         "operationId": "server-all",
         "tags": [
@@ -38671,7 +38671,7 @@
         }
       }
     },
-    "/server/count": {
+    "/server.count": {
       "get": {
         "operationId": "server-count",
         "tags": [
@@ -38748,7 +38748,7 @@
         }
       }
     },
-    "/server/withSSHKey": {
+    "/server.withSSHKey": {
       "get": {
         "operationId": "server-withSSHKey",
         "tags": [
@@ -38825,7 +38825,7 @@
         }
       }
     },
-    "/server/buildServers": {
+    "/server.buildServers": {
       "get": {
         "operationId": "server-buildServers",
         "tags": [
@@ -38902,7 +38902,7 @@
         }
       }
     },
-    "/server/setup": {
+    "/server.setup": {
       "post": {
         "operationId": "server-setup",
         "tags": [
@@ -38989,7 +38989,7 @@
         }
       }
     },
-    "/server/validate": {
+    "/server.validate": {
       "get": {
         "operationId": "server-validate",
         "tags": [
@@ -39077,7 +39077,7 @@
         }
       }
     },
-    "/server/security": {
+    "/server.security": {
       "get": {
         "operationId": "server-security",
         "tags": [
@@ -39165,7 +39165,7 @@
         }
       }
     },
-    "/server/setupMonitoring": {
+    "/server.setupMonitoring": {
       "post": {
         "operationId": "server-setupMonitoring",
         "tags": [
@@ -39346,7 +39346,7 @@
         }
       }
     },
-    "/server/remove": {
+    "/server.remove": {
       "post": {
         "operationId": "server-remove",
         "tags": [
@@ -39433,7 +39433,7 @@
         }
       }
     },
-    "/server/update": {
+    "/server.update": {
       "post": {
         "operationId": "server-update",
         "tags": [
@@ -39570,7 +39570,7 @@
         }
       }
     },
-    "/server/publicIp": {
+    "/server.publicIp": {
       "get": {
         "operationId": "server-publicIp",
         "tags": [
@@ -39647,7 +39647,7 @@
         }
       }
     },
-    "/server/getServerTime": {
+    "/server.getServerTime": {
       "get": {
         "operationId": "server-getServerTime",
         "tags": [
@@ -39724,7 +39724,7 @@
         }
       }
     },
-    "/server/getServerMetrics": {
+    "/server.getServerMetrics": {
       "get": {
         "operationId": "server-getServerMetrics",
         "tags": [
@@ -39827,7 +39827,7 @@
         }
       }
     },
-    "/stripe/getCurrentPlan": {
+    "/stripe.getCurrentPlan": {
       "get": {
         "operationId": "stripe-getCurrentPlan",
         "tags": [
@@ -39904,7 +39904,7 @@
         }
       }
     },
-    "/stripe/getProducts": {
+    "/stripe.getProducts": {
       "get": {
         "operationId": "stripe-getProducts",
         "tags": [
@@ -39981,7 +39981,7 @@
         }
       }
     },
-    "/stripe/createCheckoutSession": {
+    "/stripe.createCheckoutSession": {
       "post": {
         "operationId": "stripe-createCheckoutSession",
         "tags": [
@@ -40085,7 +40085,7 @@
         }
       }
     },
-    "/stripe/createCustomerPortalSession": {
+    "/stripe.createCustomerPortalSession": {
       "post": {
         "operationId": "stripe-createCustomerPortalSession",
         "tags": [
@@ -40152,7 +40152,7 @@
         }
       }
     },
-    "/stripe/upgradeSubscription": {
+    "/stripe.upgradeSubscription": {
       "post": {
         "operationId": "stripe-upgradeSubscription",
         "tags": [
@@ -40251,7 +40251,7 @@
         }
       }
     },
-    "/stripe/canCreateMoreServers": {
+    "/stripe.canCreateMoreServers": {
       "get": {
         "operationId": "stripe-canCreateMoreServers",
         "tags": [
@@ -40328,7 +40328,7 @@
         }
       }
     },
-    "/stripe/getInvoices": {
+    "/stripe.getInvoices": {
       "get": {
         "operationId": "stripe-getInvoices",
         "tags": [
@@ -40405,7 +40405,7 @@
         }
       }
     },
-    "/swarm/getNodes": {
+    "/swarm.getNodes": {
       "get": {
         "operationId": "swarm-getNodes",
         "tags": [
@@ -40491,7 +40491,7 @@
         }
       }
     },
-    "/swarm/getNodeInfo": {
+    "/swarm.getNodeInfo": {
       "get": {
         "operationId": "swarm-getNodeInfo",
         "tags": [
@@ -40585,7 +40585,7 @@
         }
       }
     },
-    "/swarm/getNodeApps": {
+    "/swarm.getNodeApps": {
       "get": {
         "operationId": "swarm-getNodeApps",
         "tags": [
@@ -40671,7 +40671,7 @@
         }
       }
     },
-    "/ai/one": {
+    "/ai.one": {
       "get": {
         "operationId": "ai-one",
         "tags": [
@@ -40758,7 +40758,7 @@
         }
       }
     },
-    "/ai/getModels": {
+    "/ai.getModels": {
       "get": {
         "operationId": "ai-getModels",
         "tags": [
@@ -40854,7 +40854,7 @@
         }
       }
     },
-    "/ai/create": {
+    "/ai.create": {
       "post": {
         "operationId": "ai-create",
         "tags": [
@@ -40959,7 +40959,7 @@
         }
       }
     },
-    "/ai/update": {
+    "/ai.update": {
       "post": {
         "operationId": "ai-update",
         "tags": [
@@ -41067,7 +41067,7 @@
         }
       }
     },
-    "/ai/getAll": {
+    "/ai.getAll": {
       "get": {
         "operationId": "ai-getAll",
         "tags": [
@@ -41144,7 +41144,7 @@
         }
       }
     },
-    "/ai/get": {
+    "/ai.get": {
       "get": {
         "operationId": "ai-get",
         "tags": [
@@ -41231,7 +41231,7 @@
         }
       }
     },
-    "/ai/delete": {
+    "/ai.delete": {
       "post": {
         "operationId": "ai-delete",
         "tags": [
@@ -41317,7 +41317,7 @@
         }
       }
     },
-    "/ai/suggest": {
+    "/ai.suggest": {
       "post": {
         "operationId": "ai-suggest",
         "tags": [
@@ -41410,7 +41410,7 @@
         }
       }
     },
-    "/ai/deploy": {
+    "/ai.deploy": {
       "post": {
         "operationId": "ai-deploy",
         "tags": [
@@ -41568,7 +41568,7 @@
         }
       }
     },
-    "/organization/create": {
+    "/organization.create": {
       "post": {
         "operationId": "organization-create",
         "tags": [
@@ -41657,7 +41657,7 @@
         }
       }
     },
-    "/organization/all": {
+    "/organization.all": {
       "get": {
         "operationId": "organization-all",
         "tags": [
@@ -41734,7 +41734,7 @@
         }
       }
     },
-    "/organization/one": {
+    "/organization.one": {
       "get": {
         "operationId": "organization-one",
         "tags": [
@@ -41821,7 +41821,7 @@
         }
       }
     },
-    "/organization/update": {
+    "/organization.update": {
       "post": {
         "operationId": "organization-update",
         "tags": [
@@ -41914,7 +41914,7 @@
         }
       }
     },
-    "/organization/delete": {
+    "/organization.delete": {
       "post": {
         "operationId": "organization-delete",
         "tags": [
@@ -42000,7 +42000,7 @@
         }
       }
     },
-    "/organization/allInvitations": {
+    "/organization.allInvitations": {
       "get": {
         "operationId": "organization-allInvitations",
         "tags": [
@@ -42077,7 +42077,7 @@
         }
       }
     },
-    "/organization/removeInvitation": {
+    "/organization.removeInvitation": {
       "post": {
         "operationId": "organization-removeInvitation",
         "tags": [
@@ -42163,7 +42163,7 @@
         }
       }
     },
-    "/organization/updateMemberRole": {
+    "/organization.updateMemberRole": {
       "post": {
         "operationId": "organization-updateMemberRole",
         "tags": [
@@ -42257,7 +42257,7 @@
         }
       }
     },
-    "/organization/setDefault": {
+    "/organization.setDefault": {
       "post": {
         "operationId": "organization-setDefault",
         "tags": [
@@ -42344,7 +42344,7 @@
         }
       }
     },
-    "/licenseKey/activate": {
+    "/licenseKey.activate": {
       "post": {
         "operationId": "licenseKey-activate",
         "tags": [
@@ -42431,7 +42431,7 @@
         }
       }
     },
-    "/licenseKey/validate": {
+    "/licenseKey.validate": {
       "post": {
         "operationId": "licenseKey-validate",
         "tags": [
@@ -42498,7 +42498,7 @@
         }
       }
     },
-    "/licenseKey/deactivate": {
+    "/licenseKey.deactivate": {
       "post": {
         "operationId": "licenseKey-deactivate",
         "tags": [
@@ -42565,7 +42565,7 @@
         }
       }
     },
-    "/licenseKey/getEnterpriseSettings": {
+    "/licenseKey.getEnterpriseSettings": {
       "get": {
         "operationId": "licenseKey-getEnterpriseSettings",
         "tags": [
@@ -42642,7 +42642,7 @@
         }
       }
     },
-    "/licenseKey/haveValidLicenseKey": {
+    "/licenseKey.haveValidLicenseKey": {
       "get": {
         "operationId": "licenseKey-haveValidLicenseKey",
         "tags": [
@@ -42719,7 +42719,7 @@
         }
       }
     },
-    "/licenseKey/updateEnterpriseSettings": {
+    "/licenseKey.updateEnterpriseSettings": {
       "post": {
         "operationId": "licenseKey-updateEnterpriseSettings",
         "tags": [
@@ -42802,7 +42802,7 @@
         }
       }
     },
-    "/sso/showSignInWithSSO": {
+    "/sso.showSignInWithSSO": {
       "get": {
         "operationId": "sso-showSignInWithSSO",
         "tags": [
@@ -42879,7 +42879,7 @@
         }
       }
     },
-    "/sso/listProviders": {
+    "/sso.listProviders": {
       "get": {
         "operationId": "sso-listProviders",
         "tags": [
@@ -42956,7 +42956,7 @@
         }
       }
     },
-    "/sso/getTrustedOrigins": {
+    "/sso.getTrustedOrigins": {
       "get": {
         "operationId": "sso-getTrustedOrigins",
         "tags": [
@@ -43033,7 +43033,7 @@
         }
       }
     },
-    "/sso/one": {
+    "/sso.one": {
       "get": {
         "operationId": "sso-one",
         "tags": [
@@ -43121,7 +43121,7 @@
         }
       }
     },
-    "/sso/update": {
+    "/sso.update": {
       "post": {
         "operationId": "sso-update",
         "tags": [
@@ -43469,7 +43469,7 @@
         }
       }
     },
-    "/sso/deleteProvider": {
+    "/sso.deleteProvider": {
       "post": {
         "operationId": "sso-deleteProvider",
         "tags": [
@@ -43556,7 +43556,7 @@
         }
       }
     },
-    "/sso/register": {
+    "/sso.register": {
       "post": {
         "operationId": "sso-register",
         "tags": [
@@ -43904,7 +43904,7 @@
         }
       }
     },
-    "/sso/addTrustedOrigin": {
+    "/sso.addTrustedOrigin": {
       "post": {
         "operationId": "sso-addTrustedOrigin",
         "tags": [
@@ -43991,7 +43991,7 @@
         }
       }
     },
-    "/sso/removeTrustedOrigin": {
+    "/sso.removeTrustedOrigin": {
       "post": {
         "operationId": "sso-removeTrustedOrigin",
         "tags": [
@@ -44078,7 +44078,7 @@
         }
       }
     },
-    "/sso/updateTrustedOrigin": {
+    "/sso.updateTrustedOrigin": {
       "post": {
         "operationId": "sso-updateTrustedOrigin",
         "tags": [
@@ -44170,7 +44170,7 @@
         }
       }
     },
-    "/schedule/create": {
+    "/schedule.create": {
       "post": {
         "operationId": "schedule-create",
         "tags": [
@@ -44362,7 +44362,7 @@
         }
       }
     },
-    "/schedule/update": {
+    "/schedule.update": {
       "post": {
         "operationId": "schedule-update",
         "tags": [
@@ -44556,7 +44556,7 @@
         }
       }
     },
-    "/schedule/delete": {
+    "/schedule.delete": {
       "post": {
         "operationId": "schedule-delete",
         "tags": [
@@ -44642,7 +44642,7 @@
         }
       }
     },
-    "/schedule/list": {
+    "/schedule.list": {
       "get": {
         "operationId": "schedule-list",
         "tags": [
@@ -44743,7 +44743,7 @@
         }
       }
     },
-    "/schedule/one": {
+    "/schedule.one": {
       "get": {
         "operationId": "schedule-one",
         "tags": [
@@ -44830,7 +44830,7 @@
         }
       }
     },
-    "/schedule/runManually": {
+    "/schedule.runManually": {
       "post": {
         "operationId": "schedule-runManually",
         "tags": [
@@ -44917,7 +44917,7 @@
         }
       }
     },
-    "/rollback/delete": {
+    "/rollback.delete": {
       "post": {
         "operationId": "rollback-delete",
         "tags": [
@@ -45004,7 +45004,7 @@
         }
       }
     },
-    "/rollback/rollback": {
+    "/rollback.rollback": {
       "post": {
         "operationId": "rollback-rollback",
         "tags": [
@@ -45091,7 +45091,7 @@
         }
       }
     },
-    "/volumeBackups/list": {
+    "/volumeBackups.list": {
       "get": {
         "operationId": "volumeBackups-list",
         "tags": [
@@ -45196,7 +45196,7 @@
         }
       }
     },
-    "/volumeBackups/create": {
+    "/volumeBackups.create": {
       "post": {
         "operationId": "volumeBackups-create",
         "tags": [
@@ -45419,7 +45419,7 @@
         }
       }
     },
-    "/volumeBackups/one": {
+    "/volumeBackups.one": {
       "get": {
         "operationId": "volumeBackups-one",
         "tags": [
@@ -45507,7 +45507,7 @@
         }
       }
     },
-    "/volumeBackups/delete": {
+    "/volumeBackups.delete": {
       "post": {
         "operationId": "volumeBackups-delete",
         "tags": [
@@ -45594,7 +45594,7 @@
         }
       }
     },
-    "/volumeBackups/update": {
+    "/volumeBackups.update": {
       "post": {
         "operationId": "volumeBackups-update",
         "tags": [
@@ -45822,7 +45822,7 @@
         }
       }
     },
-    "/volumeBackups/runManually": {
+    "/volumeBackups.runManually": {
       "post": {
         "operationId": "volumeBackups-runManually",
         "tags": [
@@ -45909,7 +45909,7 @@
         }
       }
     },
-    "/environment/create": {
+    "/environment.create": {
       "post": {
         "operationId": "environment-create",
         "tags": [
@@ -46004,7 +46004,7 @@
         }
       }
     },
-    "/environment/one": {
+    "/environment.one": {
       "get": {
         "operationId": "environment-one",
         "tags": [
@@ -46092,7 +46092,7 @@
         }
       }
     },
-    "/environment/byProjectId": {
+    "/environment.byProjectId": {
       "get": {
         "operationId": "environment-byProjectId",
         "tags": [
@@ -46179,7 +46179,7 @@
         }
       }
     },
-    "/environment/remove": {
+    "/environment.remove": {
       "post": {
         "operationId": "environment-remove",
         "tags": [
@@ -46266,7 +46266,7 @@
         }
       }
     },
-    "/environment/update": {
+    "/environment.update": {
       "post": {
         "operationId": "environment-update",
         "tags": [
@@ -46366,7 +46366,7 @@
         }
       }
     },
-    "/environment/duplicate": {
+    "/environment.duplicate": {
       "post": {
         "operationId": "environment-duplicate",
         "tags": [
@@ -46461,7 +46461,7 @@
         }
       }
     },
-    "/patch/create": {
+    "/patch.create": {
       "post": {
         "operationId": "patch-create",
         "tags": [
@@ -46583,7 +46583,7 @@
         }
       }
     },
-    "/patch/one": {
+    "/patch.one": {
       "get": {
         "operationId": "patch-one",
         "tags": [
@@ -46671,7 +46671,7 @@
         }
       }
     },
-    "/patch/byEntityId": {
+    "/patch.byEntityId": {
       "get": {
         "operationId": "patch-byEntityId",
         "tags": [
@@ -46770,7 +46770,7 @@
         }
       }
     },
-    "/patch/update": {
+    "/patch.update": {
       "post": {
         "operationId": "patch-update",
         "tags": [
@@ -46888,7 +46888,7 @@
         }
       }
     },
-    "/patch/delete": {
+    "/patch.delete": {
       "post": {
         "operationId": "patch-delete",
         "tags": [
@@ -46975,7 +46975,7 @@
         }
       }
     },
-    "/patch/toggleEnabled": {
+    "/patch.toggleEnabled": {
       "post": {
         "operationId": "patch-toggleEnabled",
         "tags": [
@@ -47066,7 +47066,7 @@
         }
       }
     },
-    "/patch/ensureRepo": {
+    "/patch.ensureRepo": {
       "post": {
         "operationId": "patch-ensureRepo",
         "tags": [
@@ -47160,7 +47160,7 @@
         }
       }
     },
-    "/patch/readRepoDirectories": {
+    "/patch.readRepoDirectories": {
       "get": {
         "operationId": "patch-readRepoDirectories",
         "tags": [
@@ -47268,7 +47268,7 @@
         }
       }
     },
-    "/patch/readRepoFile": {
+    "/patch.readRepoFile": {
       "get": {
         "operationId": "patch-readRepoFile",
         "tags": [
@@ -47376,7 +47376,7 @@
         }
       }
     },
-    "/patch/saveFileAsPatch": {
+    "/patch.saveFileAsPatch": {
       "post": {
         "operationId": "patch-saveFileAsPatch",
         "tags": [
@@ -47487,7 +47487,7 @@
         }
       }
     },
-    "/patch/markFileForDeletion": {
+    "/patch.markFileForDeletion": {
       "post": {
         "operationId": "patch-markFileForDeletion",
         "tags": [
@@ -47586,7 +47586,7 @@
         }
       }
     },
-    "/patch/cleanPatchRepos": {
+    "/patch.cleanPatchRepos": {
       "post": {
         "operationId": "patch-cleanPatchRepos",
         "tags": [
