@@ -88,7 +88,9 @@ export function Pricing() {
 	const router = useRouter();
 	const [isAnnual, setIsAnnual] = useState(false);
 	const [serverQuantity, setServerQuantity] = useState(1);
-	const featured = true;
+	const [enterpriseDeployment, setEnterpriseDeployment] = useState<
+		"cloud" | "self-hosted"
+	>("cloud");
 
 	const [openVideo, setOpenVideo] = useState(false);
 	const [openContactModal, setOpenContactModal] = useState(false);
@@ -141,281 +143,245 @@ export function Pricing() {
 								<TabsTrigger value="annual">Annual</TabsTrigger>
 							</TabsList>
 						</Tabs>
-						<div className="mx-auto flex max-w-4xl flex-col gap-8">
-							<div className="flex gap-4 max-sm:flex-wrap max-sm:justify-center sm:flex-row">
-								<section
-									className={clsx(
-										"flex max-w-sm flex-col  rounded-3xl border-2 border-dashed border-muted px-4",
-										featured
-											? "order-first border bg-black py-8 lg:order-none"
-											: "lg:py-8",
-									)}
-								>
-								<div className="flex flex-row items-center gap-2">
-									<p className=" text-2xl font-semibold tracking-tight text-primary ">
-										Free
-									</p>
-									|
-									<p className=" text-base font-semibold tracking-tight text-muted-foreground">
-										Open Source
-									</p>
-								</div>
-
-								<h3 className="mt-5 text-lg font-medium text-white">
-									Dokploy Open Source
-								</h3>
-								<p
-									className={clsx(
-										"text-sm",
-										featured ? "text-white" : "text-slate-400",
-									)}
-								>
-									Install and manage Dokploy UI on your own server.
-								</p>
-
-								<ul
-									role="list"
-									className={clsx(
-										" mt-4 flex flex-col gap-y-2 text-sm",
-										featured ? "text-white" : "text-slate-200",
-									)}
-								>
-									{[
-										"Complete Flexibility: Install Dokploy UI on your own infrastructure",
-										"Self-hosted Infrastructure",
-										"Community Support",
-										"Access to Core Features",
-										"Access to All Updates",
-										"Unlimited Servers",
-									].map((feature) => (
-										<li key={feature} className="flex text-muted-foreground">
-											<CheckIcon />
-											<span className="ml-2">{feature}</span>
+						<div className="mx-auto w-full max-w-6xl">
+							<div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
+								{/* Hobby */}
+								<section className="flex flex-col rounded-3xl border-2 border-dashed border-muted bg-black p-6">
+									<h3 className="text-center text-xl font-semibold tracking-tight text-white">
+										Hobby
+									</h3>
+									<ul className="mt-6 flex flex-col gap-y-2 text-sm text-muted-foreground">
+										{[
+											"Managed Hosting: No need to manage your own servers",
+											"Unlimited Deployments",
+											"Unlimited Databases",
+											"Unlimited Applications",
+											"Up to 1 user",
+											"1 environment",
+											"1 organization",
+										].map((feature) => (
+											<li key={feature} className="flex">
+												<CheckIcon className="text-muted-foreground" />
+												<span className="ml-2">{feature}</span>
+											</li>
+										))}
+										<li className="flex">
+											<XCircleIcon className="size-5 self-center text-destructive" />
+											<span className="ml-3 text-destructive">
+												Remote Servers Monitoring
+											</span>
 										</li>
-									))}
-									<li className="flex text-muted-foreground">
-										<XCircleIcon className="size-5 self-center text-destructive" />
-										<span className="ml-3 text-destructive">
-											Remote Servers Monitoring
-										</span>
-									</li>
-								</ul>
-								<div className="mt-4 flex flex-col gap-2">
-									<div className="flex flex-col items-center justify-center gap-2">
-										<span className="text-sm text-muted-foreground">
-											Unlimited Servers
-										</span>
-										<Link
-											href="https://docs.dokploy.com/docs/core/installation#docker"
-											target="_blank"
-											className="flex items-start text-sm text-primary"
-										>
-											Start deploying{" "}
-											<ArrowRight className="ml-2 size-4 self-center" />
-										</Link>
-									</div>
-								</div>
-							</section>
-							<section
-								className={clsx(
-									"flex max-w-sm flex-col  rounded-3xl  border-2 border-dashed px-4",
-									featured
-										? "order-first border bg-black py-8 lg:order-none"
-										: "lg:py-8",
-								)}
-							>
-								{isAnnual && (
-									<div className="mb-4 flex flex-row items-center gap-2">
-										<Badge>Recommended 🚀</Badge>
-									</div>
-								)}
-
-								{isAnnual ? (
-									<div className="flex flex-row items-center gap-2">
-										<p className=" text-2xl font-semibold tracking-tight text-primary ">
-											$ {calculatePrice(serverQuantity, isAnnual).toFixed(2)}{" "}
-											USD
-										</p>
-										|
-										<p className=" text-base font-semibold tracking-tight text-muted-foreground">
-											${" "}
-											{(calculatePrice(serverQuantity, isAnnual) / 12).toFixed(
-												2,
-											)}{" "}
-											/ Month USD
-										</p>
-									</div>
-								) : (
-									<p className=" text-2xl font-semibold tracking-tight text-primary">
-										$ {calculatePrice(serverQuantity, isAnnual).toFixed(2)} USD
-									</p>
-								)}
-								<h3 className="mt-5 text-lg font-medium text-white">
-									Dokploy Plan
-								</h3>
-								<p
-									className={clsx(
-										"text-sm",
-										featured ? "text-white" : "text-slate-400",
-									)}
-								>
-									We manage the Dokploy UI infrastructure, we take care of it
-									for you.
-								</p>
-
-								<ul
-									role="list"
-									className={clsx(
-										" mt-4 flex flex-col gap-y-2 text-sm",
-										featured ? "text-white" : "text-slate-200",
-									)}
-								>
-									{[
-										"Managed Hosting: No need to manage your own servers",
-										"Unlimited Deployments",
-										"Unlimited Databases",
-										"Unlimited Applications",
-										"Unlimited Users",
-										"Remote Servers Monitoring",
-										"Priority Support",
-									].map((feature, index) => (
-										<li
-											key={`${feature}-${index}`}
-											className="flex text-muted-foreground"
-										>
-											<CheckIcon />
-											<span className="ml-2">{feature}</span>
+										<li className="flex">
+											<XCircleIcon className="size-5 self-center text-destructive" />
+											<span className="ml-3 text-destructive">Email Support</span>
 										</li>
-									))}
-								</ul>
-								<div className="mt-4 flex flex-col gap-2">
-									<div className="flex items-center justify-center gap-2">
-										<span className="text-sm text-muted-foreground">
-											No. of {serverQuantity} Servers (You bring the servers)
-										</span>
-										<TooltipProvider>
-											<Tooltip open={openVideo}>
-												<TooltipTrigger onClick={() => setOpenVideo(true)}>
-													<IconInfoCircle className="size-5 text-muted-foreground transition-colors hover:text-primary " />
-												</TooltipTrigger>
-												<TooltipContent className=" z-[200] w-[400px] rounded-lg text-center font-semibold text-white">
-													<div className="mb-2 flex w-full justify-end self-end text-muted-foreground transition-colors hover:text-primary">
-														<X
-															onClick={() => setOpenVideo(false)}
-															className="flex size-4 cursor-pointer self-end text-muted-foreground transition-colors hover:text-primary"
-														/>
-													</div>
-													<p className="mb-2 text-left text-primary">
-														We recommend you to watch the video to understand
-														the benefits of Dokploy Cloud
-													</p>
+									</ul>
 
-													<HeroVideoDialog
-														className="z-20 block w-full max-w-md rounded-xl"
-														animationStyle="top-in-bottom-out"
-														videoSrc="https://www.youtube.com/embed/x2s_Y5ON-ms?si=i6gntgMmyPDLuPih"
-														thumbnailSrc="https://dokploy.com/banner.png"
-														thumbnailAlt="Hero Video"
-													/>
-												</TooltipContent>
-											</Tooltip>
-										</TooltipProvider>
-									</div>
-
-									<div className="flex items-center space-x-2">
-										<Button
-											disabled={serverQuantity <= 1}
-											variant="outline"
-											onClick={() => {
-												if (serverQuantity <= 1) return;
-
-												setServerQuantity(serverQuantity - 1);
-											}}
-										>
-											<MinusIcon className="h-4 w-4" />
-										</Button>
-										<NumberInput
-											value={serverQuantity}
-											onChange={(e) => {
-												setServerQuantity(e.target.value as unknown as number);
-											}}
-										/>
-
-										<Button
-											variant="outline"
-											onClick={() => {
-												setServerQuantity(serverQuantity + 1);
-											}}
-										>
-											<PlusIcon className="h-4 w-4" />
-										</Button>
-									</div>
-									<div
-										className={cn(
-											"justify-between",
-											"mt-4 flex  flex-row items-center gap-2",
-										)}
-									>
-										<div className="w-full justify-end">
-											<Link
-												href="https://app.dokploy.com/register"
-												target="_blank"
-												className={buttonVariants({
-													className: "w-full",
-												})}
-											>
-												Subscribe
-											</Link>
+									<div className="mt-auto pt-8">
+										<div className="rounded-2xl bg-muted/10 p-4 text-center">
+											<p className="text-lg font-semibold text-primary">
+												$
+												{calculatePrice(1, isAnnual).toFixed(isAnnual ? 1 : 2)}
+												{isAnnual ? "/yr" : "/mo"} per server
+											</p>
 										</div>
 									</div>
-								</div>
-							</section>
-							</div>
-							<div className="flex justify-center">
-								<section
-									className={clsx(
-										"flex w-full max-w-4xl flex-col rounded-3xl border-2 border-dashed border-muted px-4 py-4",
-									)}
-								>
-									<div className="flex flex-row items-center justify-start gap-3 w-fit">
-										<p className="text-xl font-semibold tracking-tight text-primary">
-											Enterprise
-										</p>
-										<AnimatedGradientText className="text-xs">
-											Premium ✨
-										</AnimatedGradientText>
-									</div>
+								</section>
 
-									<h3 className="mt-3 text-base font-medium text-white">
-										Enterprise Support & Services
+								{/* Startup */}
+								<section className="flex flex-col rounded-3xl border-2 border-dashed border-muted bg-black p-6">
+									<h3 className="text-center text-xl font-semibold tracking-tight text-white">
+										Startup
 									</h3>
-									<p className="text-sm text-muted-foreground">
-										Custom solutions and dedicated support for your organization.
-									</p>
-
-									<ul className="mt-3 grid grid-cols-2 gap-y-1 text-sm text-slate-200">
+									<ul className="mt-6 flex flex-col gap-y-2 text-sm text-muted-foreground">
 										{[
-											"SLA Guarantees / Priority Support",
-											"Aditional Security & Governance",
-											"Custom Solutions",
-											"Private Labeling",
+											"All the features of Hobby, plus...",
+											"Audit Logs",
+											"Multiple Environments (3 included)",
+											"Unlimited users",
+											"3 servers included",
+											"3 organizations included",
 										].map((feature) => (
-											<li key={feature} className="flex text-muted-foreground">
-												<CheckIcon />
+											<li key={feature} className="flex">
+												<CheckIcon className="text-muted-foreground" />
 												<span className="ml-2">{feature}</span>
 											</li>
 										))}
 									</ul>
-									<div className="mt-4 flex flex-col gap-2">
+
+									<div className="mt-8 flex flex-col gap-4">
+										<div className="flex items-center justify-center gap-2">
+											<span className="text-sm text-muted-foreground">
+												No. of {serverQuantity} Servers (You bring the servers)
+											</span>
+											<TooltipProvider>
+												<Tooltip open={openVideo}>
+													<TooltipTrigger onClick={() => setOpenVideo(true)}>
+														<IconInfoCircle className="size-5 text-muted-foreground transition-colors hover:text-primary " />
+													</TooltipTrigger>
+													<TooltipContent className=" z-[200] w-[400px] rounded-lg text-center font-semibold text-white">
+														<div className="mb-2 flex w-full justify-end self-end text-muted-foreground transition-colors hover:text-primary">
+															<X
+																onClick={() => setOpenVideo(false)}
+																className="flex size-4 cursor-pointer self-end text-muted-foreground transition-colors hover:text-primary"
+															/>
+														</div>
+														<p className="mb-2 text-left text-primary">
+															We recommend you to watch the video to understand
+															the benefits of Dokploy Cloud
+														</p>
+
+														<HeroVideoDialog
+															className="z-20 block w-full max-w-md rounded-xl"
+															animationStyle="top-in-bottom-out"
+															videoSrc="https://www.youtube.com/embed/x2s_Y5ON-ms?si=i6gntgMmyPDLuPih"
+															thumbnailSrc="https://dokploy.com/banner.png"
+															thumbnailAlt="Hero Video"
+														/>
+													</TooltipContent>
+												</Tooltip>
+											</TooltipProvider>
+										</div>
+
+										<div className="flex items-center justify-center space-x-2">
+											<Button
+												disabled={serverQuantity <= 1}
+												variant="outline"
+												onClick={() => {
+													if (serverQuantity <= 1) return;
+													setServerQuantity(serverQuantity - 1);
+												}}
+											>
+												<MinusIcon className="h-4 w-4" />
+											</Button>
+											<NumberInput
+												value={serverQuantity}
+												onChange={(e) => {
+													setServerQuantity(
+														e.target.value as unknown as number,
+													);
+												}}
+											/>
+
+											<Button
+												variant="outline"
+												onClick={() => setServerQuantity(serverQuantity + 1)}
+											>
+												<PlusIcon className="h-4 w-4" />
+											</Button>
+										</div>
+
+										<div className="rounded-2xl bg-muted/10 p-4 text-center">
+											<p className="text-lg font-semibold text-primary">
+												Starting @{" "}
+												{isAnnual
+													? `$${(15 * 12).toFixed(0)}/yr`
+													: "$15/mo"}
+											</p>
+										</div>
+
+										<Link
+											href="https://app.dokploy.com/register"
+											target="_blank"
+											className={buttonVariants({ className: "w-full" })}
+										>
+											Subscribe
+										</Link>
+									</div>
+								</section>
+
+								{/* Enterprise */}
+								<section className="flex flex-col rounded-3xl border-2 border-dashed border-muted bg-black p-6">
+									<div className="flex flex-col items-center gap-2">
+										<h3 className="text-center text-xl font-semibold tracking-tight text-white">
+											Enterprise
+										</h3>
+										<div className="mt-2">
+											<Tabs
+												value={enterpriseDeployment}
+												onValueChange={(v) =>
+													setEnterpriseDeployment(
+														v === "self-hosted" ? "self-hosted" : "cloud",
+													)
+												}
+											>
+												<TabsList className="grid w-[260px] grid-cols-2 h-auto">
+													<TabsTrigger value="cloud">Cloud</TabsTrigger>
+													<TabsTrigger value="self-hosted">
+														Self-Hosted
+													</TabsTrigger>
+												</TabsList>
+											</Tabs>
+										</div>
+									</div>
+
+									<ul className="mt-6 flex flex-col gap-y-2 text-sm text-muted-foreground">
+										<li className="flex">
+											<CheckIcon className="text-muted-foreground" />
+											<span className="ml-2">
+												All the features of Business, plus...
+											</span>
+										</li>
+										{[
+											"SSO",
+											"Role based access controls",
+											"Unlimited Environments",
+											"Priority Support",
+											"MSA/SLA",
+											"White Labeling",
+										].map((feature) => (
+											<li key={feature} className="flex">
+												<CheckIcon className="text-muted-foreground" />
+												<span className="ml-2">{feature}</span>
+											</li>
+										))}
+										{enterpriseDeployment === "self-hosted" && (
+											<li className="flex">
+												<CheckIcon className="text-muted-foreground" />
+												<span className="ml-2">
+													Self-hosted deployment support
+												</span>
+											</li>
+										)}
+									</ul>
+
+									<div className="mt-auto pt-8">
+										<div className="rounded-2xl bg-muted/10 p-4 text-center">
+											<p className="text-lg font-semibold text-primary">
+												Contact Sales
+											</p>
+										</div>
 										<Button
 											onClick={() => setOpenContactModal(true)}
-											className="w-full"
+											className="mt-4 w-full"
 										>
-											Get in touch
+											Contact Sales
 										</Button>
 									</div>
 								</section>
 							</div>
+
+							{/* Agency */}
+							<section className="mt-6 rounded-3xl border-2 border-dashed border-muted bg-black p-6">
+								<div className="flex flex-col items-center gap-3 text-center">
+									<div className="flex items-center gap-3">
+										<p className="text-xl font-semibold tracking-tight text-white">
+											Agency
+										</p>
+										<AnimatedGradientText className="text-xs">
+											Partner ✨
+										</AnimatedGradientText>
+									</div>
+									<p className="max-w-3xl text-sm text-muted-foreground">
+										Our Agency plan is uniquely tailored to the needs of agencies.
+										Please contact us to learn more about this option as well as
+										becoming a certified Dokploy partner.
+									</p>
+									<Button onClick={() => setOpenContactModal(true)}>
+										Contact The Partner Team
+									</Button>
+								</div>
+							</section>
 						</div>
 					</div>
 				</div>
