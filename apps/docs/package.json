@@ -10,7 +10,7 @@
 		"postinstall": "fumadocs-mdx",
 		"fix-openapi": "node scripts/fix-openapi.mjs",
 		"generate-templates": "node scripts/generate-templates.mjs",
-		"build:docs": "npm run fix-openapi && npm run generate-templates && node generate-docs.mjs"
+		"build:docs": "npm run fix-openapi && npm run generate-templates && node generate-docs.mjs && node scripts/fix-api-paths.mjs"
 	},
 	"dependencies": {
 		"@next/third-parties": "16.0.7",
