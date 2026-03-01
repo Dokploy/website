@@ -144,7 +144,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -320,7 +320,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -406,7 +406,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -494,7 +494,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -590,7 +590,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -697,7 +697,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -805,7 +805,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -901,7 +901,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -997,7 +997,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -1097,7 +1097,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -1185,7 +1185,84 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.BAD_REQUEST"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.FORBIDDEN"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.NOT_FOUND"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.INTERNAL_SERVER_ERROR"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project.allForPermissions": {
+      "get": {
+        "operationId": "project-allForPermissions",
+        "tags": [
+          "project"
+        ],
+        "security": [
+          {
+            "Authorization": []
           }
         ],
         "responses": {
@@ -1262,7 +1339,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -1381,7 +1458,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -1468,7 +1545,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -1578,7 +1655,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -1706,7 +1783,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -1823,7 +1900,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -1911,7 +1988,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2004,7 +2081,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2091,7 +2168,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2178,7 +2255,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2265,7 +2342,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2358,7 +2435,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2481,7 +2558,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2654,7 +2731,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -2821,7 +2898,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3002,7 +3079,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3172,7 +3249,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3331,7 +3408,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3461,7 +3538,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3608,7 +3685,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3695,7 +3772,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -3782,7 +3859,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5122,7 +5199,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5209,7 +5286,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5302,7 +5379,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5389,7 +5466,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5476,7 +5553,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5563,7 +5640,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -5651,7 +5728,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5741,7 +5818,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -5829,7 +5906,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -5919,7 +5996,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6006,7 +6083,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -6167,7 +6244,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6307,7 +6384,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -6395,7 +6472,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6482,7 +6559,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6569,7 +6646,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6666,7 +6743,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6752,7 +6829,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6848,7 +6925,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -6941,7 +7018,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -7028,7 +7105,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -7125,7 +7202,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -7795,7 +7872,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -7885,7 +7962,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -7971,7 +8048,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -8111,7 +8188,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8247,7 +8324,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -8335,7 +8412,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8422,7 +8499,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8509,7 +8586,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8606,7 +8683,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8692,7 +8769,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8788,7 +8865,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8875,7 +8952,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -8972,7 +9049,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -9065,7 +9142,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -9731,7 +9808,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -9821,7 +9898,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -9907,7 +9984,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -10047,7 +10124,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10172,7 +10249,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -10260,7 +10337,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10347,7 +10424,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10440,7 +10517,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10527,7 +10604,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10624,7 +10701,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10710,7 +10787,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10806,7 +10883,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10893,7 +10970,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -10990,7 +11067,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -11647,7 +11724,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -11737,7 +11814,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -11823,7 +11900,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -11963,7 +12040,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12105,7 +12182,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -12193,7 +12270,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12280,7 +12357,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12367,7 +12444,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12464,7 +12541,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12550,7 +12627,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12646,7 +12723,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12739,7 +12816,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12826,7 +12903,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -12923,7 +13000,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -13596,7 +13673,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -13686,7 +13763,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -13772,7 +13849,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -13912,7 +13989,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14052,7 +14129,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -14140,7 +14217,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14227,7 +14304,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14314,7 +14391,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14411,7 +14488,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14497,7 +14574,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14593,7 +14670,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14680,7 +14757,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14777,7 +14854,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -14870,7 +14947,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -15540,7 +15617,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -15630,7 +15707,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -15716,7 +15793,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -15856,7 +15933,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -15983,7 +16060,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -16071,7 +16148,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -16512,7 +16589,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -16603,7 +16680,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -16690,7 +16767,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -16777,7 +16854,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -16864,7 +16941,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -16964,7 +17041,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -17061,7 +17138,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17148,7 +17225,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17238,7 +17315,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17328,7 +17405,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -17416,7 +17493,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17509,7 +17586,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17602,7 +17679,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17689,7 +17766,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17776,7 +17853,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -17864,7 +17941,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -17951,7 +18028,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -18047,7 +18124,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -18133,7 +18210,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -18219,7 +18296,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -18306,7 +18383,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -18396,7 +18473,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -18487,7 +18564,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -18578,7 +18655,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -18665,7 +18742,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -18805,7 +18882,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -18882,7 +18959,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -18969,7 +19046,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -19046,7 +19123,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -19123,7 +19200,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -19200,7 +19277,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -19277,7 +19354,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -19496,7 +19573,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -19584,7 +19661,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -19661,7 +19738,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -19747,7 +19824,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -19899,7 +19976,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -19976,7 +20053,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -20087,7 +20164,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -20154,7 +20231,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -20240,7 +20317,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -20363,7 +20440,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -20450,7 +20527,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -20542,7 +20619,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -20741,7 +20818,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -20829,7 +20906,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -20917,7 +20994,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -21006,7 +21083,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -21093,7 +21170,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -21266,7 +21343,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -21354,7 +21431,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -21441,7 +21518,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -21530,7 +21607,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -21651,7 +21728,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -21772,7 +21849,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -21860,7 +21937,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -21937,7 +22014,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22023,7 +22100,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22148,7 +22225,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22364,7 +22441,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -22452,7 +22529,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22609,7 +22686,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22695,7 +22772,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22782,7 +22859,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22869,7 +22946,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -22956,7 +23033,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -23043,7 +23120,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -23130,7 +23207,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -23217,7 +23294,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -23319,7 +23396,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -23407,7 +23484,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -23495,7 +23572,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -23583,7 +23660,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -23688,7 +23765,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -23775,7 +23852,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -23862,7 +23939,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -23950,7 +24027,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -24036,7 +24113,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -24123,7 +24200,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -24215,7 +24292,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -24369,7 +24446,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -24455,7 +24532,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -24543,7 +24620,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -24765,7 +24842,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -24853,7 +24930,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -24958,7 +25035,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -25085,7 +25162,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -25173,7 +25250,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -25260,7 +25337,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -25337,7 +25414,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -25414,7 +25491,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -25481,7 +25558,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -25548,7 +25625,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -25615,7 +25692,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -25682,7 +25759,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -25765,7 +25842,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -25851,7 +25928,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -25934,7 +26011,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26017,7 +26094,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26100,7 +26177,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26183,7 +26260,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26266,7 +26343,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26349,7 +26426,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -26416,7 +26493,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26502,7 +26579,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26620,7 +26697,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -26687,7 +26764,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26776,7 +26853,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -26853,7 +26930,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -26940,7 +27017,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27017,7 +27094,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -27104,7 +27181,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27181,7 +27258,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -27268,7 +27345,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27335,7 +27412,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27402,7 +27479,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27479,7 +27556,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27556,7 +27633,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -27642,7 +27719,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -27737,7 +27814,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -27832,7 +27909,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -27909,7 +27986,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -27995,7 +28072,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -28072,7 +28149,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -28158,7 +28235,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -28247,7 +28324,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -28333,7 +28410,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -28410,7 +28487,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -28496,7 +28573,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -28573,7 +28650,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -28650,7 +28727,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -28727,7 +28804,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -28810,7 +28887,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -28896,7 +28973,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29009,7 +29086,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -29095,7 +29172,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29188,7 +29265,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -29265,7 +29342,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -29342,7 +29419,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29438,7 +29515,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -29526,7 +29603,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29613,7 +29690,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29710,7 +29787,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29810,7 +29887,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -29898,7 +29975,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -29985,7 +30062,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30086,7 +30163,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30199,7 +30276,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -30287,7 +30364,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30374,7 +30451,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30487,7 +30564,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30609,7 +30686,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30696,7 +30773,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -30831,7 +30908,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -30908,7 +30985,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -30996,7 +31073,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -31115,7 +31192,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -31202,7 +31279,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -31288,7 +31365,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -31377,7 +31454,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -31463,7 +31540,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -31549,7 +31626,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -31672,7 +31749,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -31797,7 +31874,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -31888,7 +31965,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32016,7 +32093,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32146,7 +32223,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32242,7 +32319,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32365,7 +32442,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32491,7 +32568,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32581,7 +32658,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32728,7 +32805,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32874,7 +32951,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -32989,7 +33066,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33121,7 +33198,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33255,7 +33332,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33355,7 +33432,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33442,7 +33519,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -33530,7 +33607,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -33607,7 +33684,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33725,7 +33802,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33854,7 +33931,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -33985,7 +34062,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34085,7 +34162,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34214,7 +34291,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34345,7 +34422,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34446,7 +34523,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34567,7 +34644,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34699,7 +34776,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34795,7 +34872,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -34914,7 +34991,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35037,7 +35114,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35124,7 +35201,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35243,7 +35320,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35366,7 +35443,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35453,7 +35530,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35599,7 +35676,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35754,7 +35831,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -35875,7 +35952,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -35952,7 +36029,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -36061,7 +36138,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -36147,7 +36224,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -36235,7 +36312,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -36312,7 +36389,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -36399,7 +36476,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -36509,7 +36586,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -36586,7 +36663,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -36673,7 +36750,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -36811,7 +36888,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -36899,7 +36976,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -36976,7 +37053,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -37064,7 +37141,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -37168,7 +37245,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -37254,7 +37331,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -37395,7 +37472,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -37483,7 +37560,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -37598,7 +37675,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -37686,7 +37763,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -37763,7 +37840,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -37851,7 +37928,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -37953,7 +38030,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -38057,7 +38134,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -38173,7 +38250,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -38295,7 +38372,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -38383,7 +38460,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -38460,7 +38537,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -38548,7 +38625,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -38657,7 +38734,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -38747,7 +38824,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -38871,7 +38948,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -38959,7 +39036,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -39047,7 +39124,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -39151,7 +39228,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -39228,7 +39305,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -39315,7 +39392,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -39417,7 +39494,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -39546,7 +39623,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -39634,7 +39711,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -39722,7 +39799,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -39799,7 +39876,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -39876,7 +39953,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -39953,7 +40030,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -40030,7 +40107,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -40117,7 +40194,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -40205,7 +40282,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -40293,7 +40370,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -40474,7 +40551,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -40561,7 +40638,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -40698,7 +40775,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -40775,7 +40852,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -40852,7 +40929,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -40955,7 +41032,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -41032,7 +41109,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -41109,7 +41186,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -41213,7 +41290,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -41280,7 +41357,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -41379,7 +41456,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -41456,7 +41533,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -41533,7 +41610,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -41619,7 +41696,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -41713,7 +41790,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -41799,7 +41876,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -41886,7 +41963,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -41982,7 +42059,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -42087,7 +42164,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -42195,7 +42272,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -42272,7 +42349,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -42359,7 +42436,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -42445,7 +42522,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -42538,7 +42615,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -42696,7 +42773,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -42785,7 +42862,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -42862,7 +42939,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -42949,7 +43026,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43042,7 +43119,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43128,7 +43205,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -43205,7 +43282,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43291,7 +43368,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43385,7 +43462,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43472,7 +43549,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43559,7 +43636,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -43626,7 +43703,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -43693,7 +43770,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -43770,7 +43847,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -43847,7 +43924,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -43930,7 +44007,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -44007,7 +44084,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -44084,7 +44161,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "responses": {
@@ -44161,7 +44238,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -44249,7 +44326,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -44597,7 +44674,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -44684,7 +44761,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45032,7 +45109,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45119,7 +45196,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45206,7 +45283,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45298,7 +45375,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45490,7 +45567,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45684,7 +45761,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -45770,7 +45847,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -45871,7 +45948,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -45958,7 +46035,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -46045,7 +46122,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -46132,7 +46209,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -46219,7 +46296,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -46324,7 +46401,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -46547,7 +46624,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -46635,7 +46712,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -46722,7 +46799,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -46950,7 +47027,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -47037,7 +47114,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -47132,7 +47209,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -47220,7 +47297,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -47307,7 +47384,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -47394,7 +47471,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -47494,7 +47571,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -47589,7 +47666,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -47715,7 +47792,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -47837,7 +47914,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -47925,7 +48002,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -48024,7 +48101,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -48142,7 +48219,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -48229,7 +48306,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -48320,7 +48397,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -48414,7 +48491,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -48522,7 +48599,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [
@@ -48630,7 +48707,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -48741,7 +48818,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -48840,7 +48917,7 @@
         ],
         "security": [
           {
-            "x-api-key": []
+            "Authorization": []
           }
         ],
         "parameters": [],
@@ -49145,22 +49222,12 @@
         "in": "header",
         "name": "x-api-key",
         "description": "API key authentication. Generate an API key from your Dokploy dashboard under Settings > API Keys."
-      },
-      "x-api-key": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "x-api-key",
-        "description": "API key authentication. Use YOUR-GENERATED-API-KEY",
-        "x-default": "your-key"
       }
     }
   },
   "security": [
     {
       "apiKey": []
-    },
-    {
-      "x-api-key": []
     }
   ]
 }
