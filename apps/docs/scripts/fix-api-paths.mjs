@@ -1,7 +1,7 @@
 /**
  * Normalizes OpenAPI path references in API docs MDX files.
- * Converts dot notation (/tag.operation) to slash notation (/tag/operation)
- * to match the OpenAPI schema paths.
+ * Converts slash notation (/tag/operation) to dot notation (/tag.operation)
+ * so they match our OpenAPI schema paths and display the real API path.
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -13,15 +13,18 @@ for (const name of readdirSync(API_DOCS_DIR)) {
 	if (!name.endsWith(".mdx")) continue;
 	const file = join(API_DOCS_DIR, name);
 	const content = readFileSync(file, "utf8");
+	// Match path in both orders: "path":"/x/y" and "path":"/a/b"
 	const newContent = content.replace(/"path":"(\/[^"]+)"/g, (_, path) => {
-		if (path.includes(".")) {
+		// Convert /tag/operation or /tag/op/subop to /tag.operation or /tag.op.subop to match schema
+		if (path.includes("/") && !path.includes(".")) {
+			const dotPath = "/" + path.slice(1).replace(/\//g, ".");
 			totalFixed++;
-			return `"path":"${path.replace(/\./g, "/")}"`;
+			return `"path":"${dotPath}"`;
 		}
 		return `"path":"${path}"`;
 	});
 	if (newContent !== content) writeFileSync(file, newContent);
 }
 if (totalFixed > 0) {
-	console.log(`✓ Normalized ${totalFixed} API path(s) in MDX (dot → slash)`);
+	console.log(`✓ Normalized ${totalFixed} API path(s) in MDX (slash → dot)`);
 }

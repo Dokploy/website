@@ -99,7 +99,25 @@ try {
 		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
 		if (fixed > 0) console.log(`✓ Fixed ${fixed} empty response schemas`);
 		if (securityFixed) console.log("✓ Added x-api-key security scheme");
-	} else {
+	}
+
+	// Keep only canonical paths (dot notation). Remove slash-aliases if present.
+	let removed = 0;
+	for (const pathKey of Object.keys(openapi.paths || {})) {
+		if (pathKey.includes("/") && !pathKey.includes(".")) {
+			const dotKey = "/" + pathKey.slice(1).replace(/\//g, ".");
+			if (openapi.paths[dotKey]) {
+				delete openapi.paths[pathKey];
+				removed++;
+			}
+		}
+	}
+	if (removed > 0) {
+		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
+		console.log(`✓ Removed ${removed} slash path alias(es), keeping dot paths only`);
+	}
+
+	if (!(unwrapped || fixed > 0 || securityFixed) && removed === 0) {
 		console.log("✓ No fixes needed");
 	}
 } catch (error) {
