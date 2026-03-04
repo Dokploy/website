@@ -24500,7 +24500,6 @@
                     "minLength": 1
                   },
                   "serviceType": {
-                    "default": "application",
                     "type": "string",
                     "enum": [
                       "application",
@@ -24838,7 +24837,6 @@
                     ]
                   },
                   "serviceType": {
-                    "default": "application",
                     "type": "string",
                     "enum": [
                       "application",
