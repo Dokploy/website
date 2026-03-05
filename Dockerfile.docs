@@ -16,13 +16,9 @@ RUN pnpm --filter=./apps/docs run build:docs
 
 # Generate templates
 RUN pnpm --filter=./apps/docs run generate-templates
-# Deploy only the dokploy app
 
 ENV NODE_ENV=production
 RUN pnpm --filter=./apps/docs run build
-RUN pnpm --filter=./apps/docs --prod deploy --legacy /prod/docs
-
-RUN cp -R /usr/src/app/apps/docs/.next /prod/docs/.next
 
 FROM base AS dokploy
 WORKDIR /app
@@ -30,11 +26,11 @@ WORKDIR /app
 # Set production
 ENV NODE_ENV=production
 
-# Copy only the necessary files
-COPY --from=build /prod/docs/.next ./.next
-COPY --from=build /prod/docs/public ./public
-COPY --from=build /prod/docs/package.json ./package.json
-COPY --from=build /prod/docs/node_modules ./node_modules
+# Copy standalone output (includes all traced dependencies)
+COPY --from=build /usr/src/app/apps/docs/.next/standalone ./
+# Copy static assets and public files
+COPY --from=build /usr/src/app/apps/docs/.next/static ./apps/docs/.next/static
+COPY --from=build /usr/src/app/apps/docs/public ./apps/docs/public
 
 EXPOSE 3000
-CMD HOSTNAME=0.0.0.0 && pnpm start
+CMD HOSTNAME=0.0.0.0 node apps/docs/server.js
