@@ -2795,6 +2795,17 @@
                       }
                     ]
                   },
+                  "triggerType": {
+                    "default": "push",
+                    "type": "string",
+                    "enum": [
+                      "push",
+                      "tag"
+                    ]
+                  },
+                  "enableSubmodules": {
+                    "type": "boolean"
+                  },
                   "watchPaths": {
                     "anyOf": [
                       {
@@ -2807,17 +2818,6 @@
                         "type": "null"
                       }
                     ]
-                  },
-                  "enableSubmodules": {
-                    "type": "boolean"
-                  },
-                  "triggerType": {
-                    "default": "push",
-                    "type": "string",
-                    "enum": [
-                      "push",
-                      "tag"
-                    ]
                   }
                 },
                 "required": [
@@ -2827,8 +2827,7 @@
                   "owner",
                   "buildPath",
                   "githubId",
-                  "watchPaths",
-                  "enableSubmodules"
+                  "triggerType"
                 ]
               }
             }
@@ -2982,6 +2981,9 @@
                       }
                     ]
                   },
+                  "enableSubmodules": {
+                    "type": "boolean"
+                  },
                   "watchPaths": {
                     "anyOf": [
                       {
@@ -2994,9 +2996,6 @@
                         "type": "null"
                       }
                     ]
-                  },
-                  "enableSubmodules": {
-                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -3007,9 +3006,7 @@
                   "gitlabRepository",
                   "gitlabId",
                   "gitlabProjectId",
-                  "gitlabPathNamespace",
-                  "watchPaths",
-                  "enableSubmodules"
+                  "gitlabPathNamespace"
                 ]
               }
             }
@@ -3153,6 +3150,9 @@
                   "applicationId": {
                     "type": "string"
                   },
+                  "enableSubmodules": {
+                    "type": "boolean"
+                  },
                   "watchPaths": {
                     "anyOf": [
                       {
@@ -3165,9 +3165,6 @@
                         "type": "null"
                       }
                     ]
-                  },
-                  "enableSubmodules": {
-                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -3177,9 +3174,7 @@
                   "bitbucketRepository",
                   "bitbucketRepositorySlug",
                   "bitbucketId",
-                  "applicationId",
-                  "watchPaths",
-                  "enableSubmodules"
+                  "applicationId"
                 ]
               }
             }
@@ -3313,6 +3308,9 @@
                       }
                     ]
                   },
+                  "enableSubmodules": {
+                    "type": "boolean"
+                  },
                   "watchPaths": {
                     "anyOf": [
                       {
@@ -3325,9 +3323,6 @@
                         "type": "null"
                       }
                     ]
-                  },
-                  "enableSubmodules": {
-                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -3336,9 +3331,7 @@
                   "giteaBuildPath",
                   "giteaOwner",
                   "giteaRepository",
-                  "giteaId",
-                  "watchPaths",
-                  "enableSubmodules"
+                  "giteaId"
                 ]
               }
             }
@@ -3614,8 +3607,7 @@
                   "applicationId",
                   "customGitBuildPath",
                   "customGitUrl",
-                  "watchPaths",
-                  "enableSubmodules"
+                  "watchPaths"
                 ]
               }
             }
