@@ -17,6 +17,10 @@ const footerSections = [
 				href: "/features/application-deployment-platform",
 				label: "Application Deployment Platform",
 			},
+			{
+				href: "/features/database-management-tool",
+				label: "Databases",
+			},
 			{ href: "/contact", label: "Contact" },
 		],
 	},
