@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Container } from "./Container";
+import AnimatedGradientText from "./ui/animated-gradient-text";
 import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Button } from "./ui/button";
 
@@ -93,14 +94,20 @@ export function EnterpriseLanding() {
 					<Container className="relative z-10">
 						<div className="text-center">
 							<motion.div
-								className="mb-6 inline-block"
+								className="relative z-10 mb-6 inline-block"
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.3 }}
 							>
-								<span className="rounded-full border border-green-500/20 bg-green-500/10 px-4 py-2 text-sm font-medium text-green-400">
-									ENTERPRISE
-								</span>
+								<AnimatedGradientText>
+									<span
+										className={cn(
+											"inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent",
+										)}
+									>
+										Enterprise
+									</span>
+								</AnimatedGradientText>
 							</motion.div>
 
 							<motion.h1
