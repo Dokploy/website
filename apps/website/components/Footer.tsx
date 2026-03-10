@@ -21,7 +21,8 @@ const footerSections = [
 				href: "/features/database-management-tool",
 				label: "Databases",
 			},
-			{ href: "/contact", label: "Contact" },
+			{ href: "/enterprise", label: "Enterprise" },
+		{ href: "/contact", label: "Contact" },
 		],
 	},
 	{
