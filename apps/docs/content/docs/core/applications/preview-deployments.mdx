@@ -31,6 +31,10 @@ preview-${appName}-${uniqueId}.traefik.me
 
 To make this work, you need to point your wildcard DNS record (*) to your server's IP address.
 
+<Callout type="info">
+**Hint:** If you need to reference the generated domain in the preview deployment's environment variables, you can do so utilising `${{DOKPLOY_DEPLOY_URL}}`. See [variables documentation](/docs/core/variables#service-level-variables) for more information.
+</Callout>
+
 ## How It Works
 
 Once enabled, preview deployments are automatically created whenever a pull request is opened against your target branch (configured in your provider settings).
