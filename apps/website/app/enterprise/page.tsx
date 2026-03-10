@@ -2,9 +2,9 @@ import { EnterpriseLanding } from "@/components/EnterpriseLanding";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Enterprise - Deploy Anywhere, Without Compromise",
+	title: "Dokploy Enterprise | Secure, Flexible App Deployment",
 	description:
-		"Scale with confidence. Deploy on-premises or in the cloud with enterprise security, compliance, and support built for organizations that demand the best.",
+		"Deploy on-premises or in the cloud with enterprise-grade security, SSO, audit logs, fine-grained RBAC, and dedicated SLAs. Scale on your own terms.",
 };
 
 export default function EnterprisePage() {
