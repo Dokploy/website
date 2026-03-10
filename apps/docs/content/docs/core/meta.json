@@ -38,6 +38,7 @@
 		"(examples)",
 		"auto-deploy",
 		"schedule-jobs",
+		"patches",
 		"volume-backups",
 		"providers",
 		"watch-paths",
