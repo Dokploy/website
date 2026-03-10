@@ -3,7 +3,6 @@ import { Faqs } from "@/components/Faqs";
 import { Hero } from "@/components/Hero";
 import { Testimonials } from "@/components/Testimonials";
 import { FirstFeaturesSection } from "@/components/first-features";
-import { Pricing } from "@/components/pricing";
 import { SecondaryFeaturesSections } from "@/components/secondary-features";
 import { Sponsors } from "@/components/sponsors";
 import { StatsSection } from "@/components/stats";
@@ -26,9 +25,6 @@ export default function Home() {
 				<SecondaryFeaturesSections />
 				<StatsSection />
 				<Testimonials />
-				<div className="relative w-full">
-					<Pricing />
-				</div>
 				<Faqs />
 				{/* <Sponsors /> */}
 				<CallToAction />

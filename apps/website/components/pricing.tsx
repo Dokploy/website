@@ -10,6 +10,8 @@ import { Badge } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 import { PricingFeatureTable } from "./pricing/PricingFeatureTable";
+import AnimatedGridPattern from "./ui/animated-grid-pattern";
+import { cn } from "@/lib/utils";
 
 const CLOUD_APP_URL = "https://app.dokploy.com";
 
@@ -86,25 +88,20 @@ export function Pricing() {
 		<section
 			id="pricing"
 			aria-label="Pricing"
-			className="border-t border-border/30 bg-black py-20 sm:py-32"
+			className="relative border-t border-border/30 bg-black py-20 sm:py-32 overflow-hidden"
 		>
-			<div className="absolute inset-0 pointer-events-none">
-				<svg viewBox="0 0 2000 1000" xmlns="http://www.w3.org/2000/svg">
-					<mask id="b" x="0" y="0" width="2000" height="1000">
-						<path fill="url(#a)" d="M0 0h2000v1000H0z" />
-					</mask>
-					<path d="M0 0h2000v1000H0z" />
-					<g stroke="#22222233" strokeWidth=".4" fill="none" mask="url(#b)">
-						<path d="M0 0h50v50H0z" />
-					</g>
-					<defs>
-						<radialGradient id="a">
-							<stop offset="50%" stopColor="#fff" stopOpacity="0" />
-							<stop offset="1" stopColor="#fff" stopOpacity="1" />
-						</radialGradient>
-					</defs>
-				</svg>
-			</div>
+			<AnimatedGridPattern
+				numSquares={30}
+				maxOpacity={0.1}
+				height={40}
+				width={40}
+				duration={3}
+				repeatDelay={1}
+				className={cn(
+					"[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
+					"absolute inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+				)}
+			/>
 			<Container className="relative">
 				<div className="text-center">
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
