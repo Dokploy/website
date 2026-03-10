@@ -11,8 +11,10 @@ import {
 	Shield,
 	Users,
 } from "lucide-react";
+import { useState } from "react";
 import Link from "next/link";
 import { Container } from "./Container";
+import { ContactFormModal } from "./ContactFormModal";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Button } from "./ui/button";
@@ -74,8 +76,11 @@ const hostingOptions = [
 ];
 
 export function EnterpriseLanding() {
+	const [contactOpen, setContactOpen] = useState(false);
+
 	return (
 		<div className="bg-black">
+			<ContactFormModal open={contactOpen} onOpenChange={setContactOpen} />
 			{/* Hero Section */}
 			<div className="relative overflow-hidden bg-background pt-20 pb-16 lg:pt-32">
 				<div className="relative">
@@ -147,8 +152,8 @@ export function EnterpriseLanding() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.3, delay: 0.4 }}
 							>
-								<Button className="rounded-full" asChild>
-									<Link href="/contact">Contact sales</Link>
+								<Button className="rounded-full" onClick={() => setContactOpen(true)}>
+									Contact sales
 								</Button>
 								<Button variant="outline" className="rounded-full" asChild>
 									<Link href="https://docs.dokploy.com" target="_blank">
@@ -257,8 +262,8 @@ export function EnterpriseLanding() {
 							Talk to our team about your deployment needs and discover how
 							Dokploy Enterprise can transform your infrastructure.
 						</p>
-						<Button className="mt-8 rounded-full" asChild>
-							<Link href="/contact">Schedule a call with sales</Link>
+						<Button className="mt-8 rounded-full" onClick={() => setContactOpen(true)}>
+							Schedule a call with sales
 						</Button>
 						<p className="mt-6 text-sm text-gray-500">
 							Questions? Email us at{" "}

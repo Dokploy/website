@@ -6,6 +6,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { Container } from "./Container";
 import { ContactFormModal } from "./ContactFormModal";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "./ui/accordion";
 import { Badge } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
@@ -14,6 +20,49 @@ import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 
 const CLOUD_APP_URL = "https://app.dokploy.com";
+
+const pricingFaqs = [
+	{
+		question: "What happens if I need more than one server?",
+		answer:
+			"You can add as many servers as you need. Each additional server costs $4.50/month on the Hobby plan. On the Startup plan, 3 servers are included in the base price, and you can add more at $4.50/month each.",
+	},
+	{
+		question: "How does the annual billing discount work?",
+		answer:
+			"When you choose annual billing, you get a 20% discount on all plans. For example, the Hobby plan goes from $4.50/month to $3.60/month per server, billed annually.",
+	},
+	{
+		question: "Can I switch between plans?",
+		answer:
+			"Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. When downgrading, the change takes effect at the start of your next billing cycle.",
+	},
+	{
+		question: "Is there a limit on the number of deployments?",
+		answer:
+			"No, there is no limit on the number of deployments in any of the plans. You can deploy unlimited applications and databases.",
+	},
+	{
+		question: "What's included in the Enterprise plan?",
+		answer:
+			"The Enterprise plan includes unlimited servers and organizations, fine-grained RBAC, SSO/SAML integration (Azure, OKTA, etc.), audit logs, MSA/SLA, white labeling, and priority support. It's available as both Cloud and Self-Hosted.",
+	},
+	{
+		question: "Do you offer refunds?",
+		answer:
+			"We do not offer refunds. However, you can cancel your subscription at any time. Feel free to try our open-source version for free before making a purchase.",
+	},
+	{
+		question: "What kind of support do I get with each plan?",
+		answer:
+			"The Hobby plan includes community support via Discord. The Startup plan adds email and chat support. The Enterprise plan includes priority support and dedicated services.",
+	},
+	{
+		question: "Do I need to provide my own server?",
+		answer:
+			"Yes, you provide your own server (e.g., Hetzner, Hostinger, AWS, etc.) VPS, and we manage the Dokploy UI infrastructure for you.",
+	},
+];
 
 function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
 	return (
@@ -318,6 +367,30 @@ export function Pricing() {
 						<div className="mt-8">
 							<PricingFeatureTable />
 						</div>
+				</div>
+
+				{/* Pricing FAQ */}
+				<div className="mx-auto mt-24 max-w-3xl">
+					<h3 className="text-center text-2xl font-semibold text-white">
+						Frequently asked questions
+					</h3>
+					<p className="mt-4 text-center text-sm text-muted-foreground">
+						Have a different question? Contact us via Discord or email.
+					</p>
+					<Accordion
+						type="single"
+						collapsible
+						className="mt-8 w-full"
+					>
+						{pricingFaqs.map((faq, index) => (
+							<AccordionItem value={`${index}`} key={index}>
+								<AccordionTrigger className="text-left">
+									{faq.question}
+								</AccordionTrigger>
+								<AccordionContent>{faq.answer}</AccordionContent>
+							</AccordionItem>
+						))}
+					</Accordion>
 				</div>
 			</Container>
 
