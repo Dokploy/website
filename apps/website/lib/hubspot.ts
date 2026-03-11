@@ -72,6 +72,11 @@ export function formatContactDataForHubSpot(
 				value: contactData.message,
 			},
 			{
+				objectTypeId: "0-1", // Contact property for company
+				name: "company",
+				value: contactData.company,
+			},
+			{
 				objectTypeId: "0-2", // Company object type
 				name: "name",
 				value: contactData.company,
