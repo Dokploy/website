@@ -47,7 +47,7 @@
 		"rehype-raw": "^7.0.0",
 		"remark-gfm": "^4.0.1",
 		"remark-toc": "^9.0.0",
-		"resend": "6.5.2",
+		"resend": "6.9.3",
 		"satori": "^0.12.1",
 		"sharp": "^0.33.5",
 		"shiki": "^3.20.0",

@@ -113,7 +113,7 @@ Sent from Dokploy website contact form
 				: ["support@dokploy.com"];
 
 		await resend.emails.send({
-			from: "Dokploy Contact Form <noreply@emails.dokploy.com>",
+			from: "Dokploy Team <hello@notifications.dokploy.com>",
 			to: recipients,
 			subject: emailSubject,
 			text: emailBody,
@@ -145,7 +145,7 @@ If you need immediate assistance, contact us at contact@dokploy.com
 		`.trim();
 
 		await resend.emails.send({
-			from: "Dokploy Team <noreply@emails.dokploy.com>",
+			from: "Dokploy Team <hello@notifications.dokploy.com>",
 			to: [body.email],
 			subject: confirmationSubject,
 			text: confirmationBody,
