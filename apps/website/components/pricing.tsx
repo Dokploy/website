@@ -139,20 +139,20 @@ export function Pricing() {
 			aria-label="Pricing"
 			className="relative border-t border-border/30 bg-black py-20 sm:py-32 overflow-hidden"
 		>
-			<AnimatedGridPattern
-				numSquares={30}
-				maxOpacity={0.1}
-				height={40}
-				width={40}
-				duration={3}
-				repeatDelay={1}
-				className={cn(
-					"[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
-					"absolute inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
-				)}
-			/>
 			<Container className="relative">
-				<div className="text-center">
+				<div className="relative text-center overflow-hidden py-8 -my-8">
+					<AnimatedGridPattern
+						numSquares={20}
+						maxOpacity={0.1}
+						height={40}
+						width={40}
+						duration={3}
+						repeatDelay={1}
+						className={cn(
+							"[mask-image:radial-gradient(600px_circle_at_50%_50%,white,transparent)]",
+							"absolute inset-0",
+						)}
+					/>
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />
