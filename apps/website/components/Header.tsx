@@ -107,7 +107,12 @@ function MobileNavigation() {
 						as="div"
 						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight text-primary shadow-xl ring-1 ring-border/5"
 					>
-						<MobileNavLink href="/#features">Features</MobileNavLink>
+						<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+							Features
+						</p>
+						<MobileNavLink href="/features/application-deployment-platform">Application Deployment</MobileNavLink>
+						<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
+						<hr className="m-2 border-border" />
 						<MobileNavLink href="/pricing">Pricing</MobileNavLink>
 						<hr className="m-2 border-border" />
 						<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
@@ -205,23 +210,17 @@ export function Header() {
 							<NavigationMenu>
 								<NavigationMenuList>
 									<NavigationMenuItem>
-										<NavigationMenuLink
-											asChild
-											className={navigationMenuTriggerStyle()}
-										>
-											<Link
-												href="/#features"
-												onClick={() =>
-													trackGAEvent({
-														action: "Nav Link Clicked",
-														category: "Navigation",
-														label: "/#features",
-													})
-												}
-											>
-												Features
-											</Link>
-										</NavigationMenuLink>
+										<NavigationMenuTrigger>Features</NavigationMenuTrigger>
+										<NavigationMenuContent>
+											<ul className="grid w-[200px] gap-1 p-2">
+												<ListItem href="/features/application-deployment-platform" title="Application Deployment">
+													Deploy and manage applications with ease
+												</ListItem>
+												<ListItem href="/features/database-management-tool" title="Databases">
+													Manage your databases effortlessly
+												</ListItem>
+											</ul>
+										</NavigationMenuContent>
 									</NavigationMenuItem>
 
 									<NavigationMenuItem>
