@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Fragment, type JSX, type SVGProps } from "react";
+import { Fragment, useEffect, type JSX, type SVGProps } from "react";
+import { createPortal } from "react-dom";
 import { Container } from "./Container";
 import GithubStars from "./GithubStars";
 import { trackGAEvent } from "./analitycs";
@@ -72,84 +73,91 @@ function MobileNavIcon({ open }: { open: boolean }) {
 	);
 }
 
+function BodyScrollLock({ lock }: { lock: boolean }) {
+	useEffect(() => {
+		document.body.style.overflow = lock ? "hidden" : "";
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [lock]);
+	return null;
+}
+
 function MobileNavigation() {
 	return (
 		<Popover>
-			<Popover.Button
-				className="relative z-10 flex h-8 w-8 items-center justify-center ui-not-focus-visible:outline-none"
-				aria-label="Toggle Navigation"
-			>
-				{({ open }) => <MobileNavIcon open={open} />}
-			</Popover.Button>
-			<Transition.Root>
-				<Transition.Child
-					as={Fragment as any}
-					enter="duration-150 ease-out"
-					enterFrom="opacity-0"
-					enterTo="opacity-100"
-					leave="duration-150 ease-in"
-					leaveFrom="opacity-100"
-					leaveTo="opacity-0"
-				>
-					<Popover.Overlay className="fixed inset-0 bg-background/50" />
-				</Transition.Child>
-
-				<Transition.Child
-					as={Fragment as any}
-					enter="duration-150 ease-out"
-					enterFrom="opacity-0 scale-95"
-					enterTo="opacity-100 scale-100"
-					leave="duration-100 ease-in"
-					leaveFrom="opacity-100 scale-100"
-					leaveTo="opacity-0 scale-95"
-				>
-					<Popover.Panel
-						as="div"
-						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight text-primary shadow-xl ring-1 ring-border/5"
+			{({ open, close }) => (
+				<>
+					<BodyScrollLock lock={open} />
+					<Popover.Button
+						className="relative z-10 flex h-8 w-8 items-center justify-center ui-not-focus-visible:outline-none"
+						aria-label="Toggle Navigation"
 					>
-						<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
-							Features
-						</p>
-						<MobileNavLink href="/features/application-deployment-platform">Application Deployment</MobileNavLink>
-						<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
-						<hr className="m-2 border-border" />
-						<MobileNavLink href="/pricing">Pricing</MobileNavLink>
-						<hr className="m-2 border-border" />
-						<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
-							Solutions
-						</p>
-						<MobileNavLink href="/enterprise">Enterprise</MobileNavLink>
-						<MobileNavLink href="/partners">Partners</MobileNavLink>
-						<hr className="m-2 border-border" />
-						<MobileNavLink
-							href="https://docs.dokploy.com/docs/core"
-							target="_blank"
+						<MobileNavIcon open={open} />
+					</Popover.Button>
+					{open && createPortal(
+						<div className="fixed inset-0 z-40 bg-background/50" onClick={() => close()} />,
+						document.body
+					)}
+					<Transition.Root>
+						<Transition.Child
+							as={Fragment as any}
+							enter="duration-150 ease-out"
+							enterFrom="opacity-0 scale-95"
+							enterTo="opacity-100 scale-100"
+							leave="duration-100 ease-in"
+							leaveFrom="opacity-100 scale-100"
+							leaveTo="opacity-0 scale-95"
 						>
-							Docs
-						</MobileNavLink>
-						<hr className="m-2 border-border" />
-						<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
-							Resources
-						</p>
-						<MobileNavLink href="https://templates.dokploy.com" target="_blank">Templates</MobileNavLink>
-						<MobileNavLink href="/blog">Blog</MobileNavLink>
-						<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
-						<hr className="m-2 border-border" />
-						<MobileNavLink href="/contact">Contact</MobileNavLink>
-						<MobileNavLink
-							href="https://app.dokploy.com/register"
-							target="_blank"
-						>
-							<Button className="w-full" asChild>
-								<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
-									<span>Sign In</span>
-									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-								</div>
-							</Button>
-						</MobileNavLink>
-					</Popover.Panel>
-				</Transition.Child>
-			</Transition.Root>
+							<Popover.Panel
+								as="div"
+								className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight text-primary shadow-xl ring-1 ring-border/5 max-h-[80vh] overflow-y-auto"
+							>
+								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+									Features
+								</p>
+								<MobileNavLink href="/features/application-deployment-platform">Application Deployment</MobileNavLink>
+								<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<MobileNavLink href="/pricing">Pricing</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+									Solutions
+								</p>
+								<MobileNavLink href="/enterprise">Enterprise</MobileNavLink>
+								<MobileNavLink href="/partners">Partners</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<MobileNavLink
+									href="https://docs.dokploy.com/docs/core"
+									target="_blank"
+								>
+									Docs
+								</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+									Resources
+								</p>
+								<MobileNavLink href="https://templates.dokploy.com" target="_blank">Templates</MobileNavLink>
+								<MobileNavLink href="/blog">Blog</MobileNavLink>
+								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<MobileNavLink href="/contact">Contact</MobileNavLink>
+								<MobileNavLink
+									href="https://app.dokploy.com/register"
+									target="_blank"
+								>
+									<Button className="w-full" asChild>
+										<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
+											<span>Sign In</span>
+											<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+										</div>
+									</Button>
+								</MobileNavLink>
+							</Popover.Panel>
+						</Transition.Child>
+					</Transition.Root>
+				</>
+			)}
 		</Popover>
 	);
 }
