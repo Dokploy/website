@@ -107,6 +107,36 @@ When you enable the Dockerfile build type, two additional fields become availabl
 
 
 
+### Automatic Build Variables
+
+Dokploy automatically injects the following build-time variables into every build, across all builder types:
+
+| Variable                   | Description                                      |
+| :------------------------- | :----------------------------------------------- |
+| `DOKPLOY_COMMIT_HASH`     | The short git commit hash of the deployed commit |
+| `DOKPLOY_COMMIT_MESSAGE`  | The commit message of the deployed commit        |
+
+These variables allow you to track which exact commit is running inside a deployed container, useful for debugging, health endpoints, and observability.
+
+#### Usage with Dockerfile
+
+To make these available at runtime, add the following to your Dockerfile:
+
+```dockerfile
+ARG DOKPLOY_COMMIT_HASH
+ARG DOKPLOY_COMMIT_MESSAGE
+ENV DOKPLOY_COMMIT_HASH=$DOKPLOY_COMMIT_HASH
+ENV DOKPLOY_COMMIT_MESSAGE=$DOKPLOY_COMMIT_MESSAGE
+```
+
+#### Usage with Nixpacks, Heroku, Paketo, and Railpack
+
+For non-Dockerfile builders, these variables are automatically passed as environment variables during the build and are available at runtime without any extra configuration.
+
+<Callout type="info">
+  If the source is not a git repository (e.g., Docker image source), these variables will be set to `unknown`.
+</Callout>
+
 ### Buildpack
 
 Dokploy supports two types of buildpacks:
