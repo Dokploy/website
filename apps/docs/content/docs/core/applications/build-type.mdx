@@ -111,10 +111,11 @@ When you enable the Dockerfile build type, two additional fields become availabl
 
 Dokploy automatically injects the following build-time variables into every build, across all builder types:
 
-| Variable                   | Description                                      |
-| :------------------------- | :----------------------------------------------- |
-| `DOKPLOY_COMMIT_HASH`     | The short git commit hash of the deployed commit |
-| `DOKPLOY_COMMIT_MESSAGE`  | The commit message of the deployed commit        |
+| Variable                   | Description                                       |
+| :------------------------- | :------------------------------------------------ |
+| `DOKPLOY_COMMIT_HASH`     | The short (7-char) git commit hash                |
+| `DOKPLOY_COMMIT_HASH_LONG`| The full git commit hash                          |
+| `DOKPLOY_COMMIT_MESSAGE`  | The commit message of the deployed commit         |
 
 These variables allow you to track which exact commit is running inside a deployed container, useful for debugging, health endpoints, and observability.
 
@@ -124,8 +125,10 @@ To make these available at runtime, add the following to your Dockerfile:
 
 ```dockerfile
 ARG DOKPLOY_COMMIT_HASH
+ARG DOKPLOY_COMMIT_HASH_LONG
 ARG DOKPLOY_COMMIT_MESSAGE
 ENV DOKPLOY_COMMIT_HASH=$DOKPLOY_COMMIT_HASH
+ENV DOKPLOY_COMMIT_HASH_LONG=$DOKPLOY_COMMIT_HASH_LONG
 ENV DOKPLOY_COMMIT_MESSAGE=$DOKPLOY_COMMIT_MESSAGE
 ```
 
