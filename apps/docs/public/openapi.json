@@ -7246,7 +7246,6 @@
                     "pattern": "^[a-zA-Z0-9@#%^&*()_+\\-=[\\]{}|;:,.<>?~`]*$"
                   },
                   "dockerImage": {
-                    "default": "mysql:8",
                     "type": "string"
                   },
                   "command": {
@@ -9182,7 +9181,6 @@
                     ]
                   },
                   "dockerImage": {
-                    "default": "postgres:18",
                     "type": "string"
                   },
                   "command": {
@@ -11098,7 +11096,6 @@
                     "type": "string"
                   },
                   "dockerImage": {
-                    "default": "redis:8",
                     "type": "string"
                   },
                   "command": {
@@ -13036,7 +13033,6 @@
                     "pattern": "^[a-zA-Z0-9@#%^&*()_+\\-=[\\]{}|;:,.<>?~`]*$"
                   },
                   "dockerImage": {
-                    "default": "mongo:15",
                     "type": "string"
                   },
                   "command": {
@@ -14991,7 +14987,6 @@
                     "pattern": "^[a-zA-Z0-9@#%^&*()_+\\-=[\\]{}|;:,.<>?~`]*$"
                   },
                   "dockerImage": {
-                    "default": "mariadb:6",
                     "type": "string"
                   },
                   "command": {
