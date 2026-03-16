@@ -4,6 +4,7 @@
 		"auth0",
 		"azure",
 		"keycloak",
-		"okta"
+		"okta",
+		"zitadel"
 	]
 }
