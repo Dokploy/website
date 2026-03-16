@@ -33,6 +33,10 @@ const footerSections = [
 				href: "/dokploy-vs-coolify",
 				label: "Dokploy vs. Coolify",
 			},
+			{
+				href: "/dokploy-vs-portainer",
+				label: "Dokploy vs. Portainer",
+			},
 			{ href: "/blog", label: "Blog" },
 			{
 				href: "https://docs.dokploy.com/docs/core",
