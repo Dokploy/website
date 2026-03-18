@@ -56,6 +56,7 @@
 		"enterprise/license-keys",
 		"enterprise/sso",
 		"enterprise/whitelabeling",
+		"enterprise/custom-roles",
 		"enterprise/audit-logs",
 		"---Guides---",
 		"guides/cloudflare-tunnels",
