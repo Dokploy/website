@@ -138,6 +138,7 @@ function MobileNavigation() {
 									Resources
 								</p>
 								<MobileNavLink href="https://templates.dokploy.com" target="_blank">Templates</MobileNavLink>
+								<MobileNavLink href="/comparison">Dokploy vs.</MobileNavLink>
 								<MobileNavLink href="/blog">Blog</MobileNavLink>
 								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
 								<hr className="m-2 border-border" />
@@ -292,6 +293,9 @@ export function Header() {
 											<ul className="grid w-[200px] gap-1 p-2">
 												<ListItem href="https://templates.dokploy.com" target="_blank" title="Templates">
 													Ready-to-deploy templates
+												</ListItem>
+												<ListItem href="/comparison" title="Dokploy vs.">
+													Compare Dokploy to alternatives
 												</ListItem>
 												<ListItem href="/blog" title="Blog">
 													Latest news and updates
