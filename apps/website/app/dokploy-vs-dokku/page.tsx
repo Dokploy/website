@@ -3,14 +3,14 @@ import { CallToAction } from "@/components/CallToAction";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Globe, Bell, Users } from "lucide-react";
+import { Check, X, Zap, Globe, Bell, Users, Shield } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-	title: "Dokploy vs. Dokku Comparison | Dokploy",
+	title: "Dokploy vs. Dokku Comparison | Dokploy | Dokploy",
 	description:
 		"Dokploy vs. Dokku: Compare self-hosted PaaS platforms. See how Dokploy's UI-first approach stacks up against Dokku's CLI-based workflow for deployments.",
 };
@@ -28,7 +28,7 @@ const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
 	{ feature: "One-command installation", dokploy: true, dokku: true, section: "Setup & Installation" },
 	{ feature: "Web-based UI dashboard", dokploy: true, dokku: false },
-	{ feature: "Works with firewall and TailScale out of the box", dokploy: true, dokku: false },
+	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, dokku: false },
 	{ feature: "Lightweight CPU usage while idle", dokploy: true, dokku: true },
 	// Deployment
 	{ feature: "Deploy from GitHub, GitLab, Bitbucket", dokploy: true, dokku: "limited", section: "Deployment" },
@@ -101,6 +101,16 @@ const whyChooseItems = [
 			alt: "Dokploy deploy settings with provider and domain configuration",
 		},
 	},
+	{
+		icon: Shield,
+		title: "Give teams more control over access",
+		description:
+			"Dokploy gives teams built-in role-based access and project organization in the UI, so you can manage services, databases, and infrastructure as you grow across multiple servers—with the right level of oversight for developers seeking control without handing out broad server access. Dokku user access starts at the SSH key level. More granular control for users with specific needs depends on extra plugins or tooling.",
+		image: {
+			src: "/images/dokploy-projects-dashboard.png",
+			alt: "Dokploy team access and role-based permissions dashboard",
+		},
+	},
 ];
 
 const integrationRows = [
@@ -168,8 +178,21 @@ export default function DokployVsDokkuPage() {
 									For experienced developers who prefer a CLI-driven,
 									Heroku-like PaaS that's minimal and scriptable, with a
 									plugin ecosystem for extending functionality—choose Dokku.
+									Trade-offs include fewer enterprise features and
+									integrations.
 								</p>
 							</div>
+						</div>
+
+						<div className="mt-16">
+							<h2 className="text-xl font-semibold text-white sm:text-2xl">
+								A Dokploy vs. Dokku comparison for growing teams
+							</h2>
+							<p className="mt-4 text-muted-foreground">
+								Choose Dokploy if you want complete control over your
+								infrastructure with a simpler way to manage apps, databases,
+								and multiple servers.
+							</p>
 						</div>
 
 						<Button className="mt-10 rounded-full" asChild>
@@ -337,8 +360,9 @@ export default function DokployVsDokkuPage() {
 						<p className="mt-6 text-lg text-muted-foreground">
 							Whether you've outgrown Dokku's CLI-only workflow or you're
 							choosing your first self-hosted PaaS, Dokploy gives you the visual
-							interface, team features, and built-in tooling that Dokku relies on
-							plugins and shell scripts for—all in one cohesive platform.
+							interface, team features, Docker Compose support, and built-in
+							tooling that Dokku relies on plugins and shell scripts for—all in
+							one cohesive platform.
 						</p>
 					</div>
 				</Container>

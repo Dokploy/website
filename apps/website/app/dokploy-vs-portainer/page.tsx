@@ -28,7 +28,7 @@ const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
 	{ feature: "One-command installation", dokploy: true, portainer: true, section: "Setup & Installation" },
 	{ feature: "Installation feedback and progress logs", dokploy: true, portainer: false },
-	{ feature: "Works with firewall and TailScale out of the box", dokploy: true, portainer: false },
+	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, portainer: false },
 	{ feature: "Lightweight CPU usage while idle", dokploy: true, portainer: true },
 	// Deployment
 	{ feature: "Deploy web apps from git repos (GitHub, GitLab, Bitbucket)", dokploy: true, portainer: "limited", section: "Deployment" },

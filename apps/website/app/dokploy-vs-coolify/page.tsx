@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const featureComparisonRows = [
 	{ feature: "One-command installation", dokploy: true, coolify: true },
 	{ feature: "Installation feedback and progress logs", dokploy: true, coolify: true },
-	{ feature: "Works with firewall and TailScale out of the box", dokploy: true, coolify: false },
+	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, coolify: false },
 	{ feature: "Lightweight CPU usage while idle", dokploy: true, coolify: false },
 	{ feature: "Low memory usage", dokploy: true, coolify: true },
 	{ feature: "Teams and organizations support", dokploy: true, coolify: true },
@@ -46,7 +46,7 @@ const whyChooseItems = [
 		icon: Zap,
 		title: "Benefit from a fast, reliable setup",
 		description:
-			"Use a single command to deploy with Dokploy, which works seamlessly across firewalls, TailScale, and secure environments. Launch applications faster with Dokploy's optimized build system.",
+			"Use a single command to deploy with Dokploy, which works seamlessly across firewalls, Tailscale, and secure environments. Launch applications faster with Dokploy's optimized build system.",
 	},
 	{
 		icon: Cpu,

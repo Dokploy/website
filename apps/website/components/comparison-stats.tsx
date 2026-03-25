@@ -14,24 +14,38 @@ const statsValues = {
 
 export function ComparisonStats() {
 	const [githubStars, setGithubStars] = useState(statsValues.githubStars);
+	const [dockerDownloads, setDockerDownloads] = useState(
+		statsValues.dockerDownloads,
+	);
+	const [contributors, setContributors] = useState(
+		statsValues.contributors,
+	);
 
 	useEffect(() => {
-		const fetchGitHubStars = async () => {
-			try {
-				const response = await fetch(
-					"/api/github-stars?owner=dokploy&repo=dokploy",
-				);
+		const fetchStats = async () => {
+			const [starsRes, dockerRes, contribRes] = await Promise.allSettled([
+				fetch("/api/github-stars?owner=dokploy&repo=dokploy"),
+				fetch("/api/docker-stats"),
+				fetch("/api/github-contributors"),
+			]);
 
-				if (response.ok) {
-					const data = await response.json();
-					setGithubStars(data.stargazers_count);
-				}
-			} catch (error) {
-				console.error("Error fetching GitHub stars:", error);
+			if (starsRes.status === "fulfilled" && starsRes.value.ok) {
+				const data = await starsRes.value.json();
+				setGithubStars(data.stargazers_count);
+			}
+
+			if (dockerRes.status === "fulfilled" && dockerRes.value.ok) {
+				const data = await dockerRes.value.json();
+				setDockerDownloads(data.pull_count);
+			}
+
+			if (contribRes.status === "fulfilled" && contribRes.value.ok) {
+				const data = await contribRes.value.json();
+				setContributors(data.contributors_count);
 			}
 		};
 
-		fetchGitHubStars();
+		fetchStats();
 	}, []);
 
 	return (
@@ -66,7 +80,7 @@ export function ComparisonStats() {
 							DockerHub Downloads
 						</p>
 						<p className="relative z-20 mt-2 text-3xl font-bold">
-							<NumberTicker value={statsValues.dockerDownloads} />+
+							<NumberTicker value={dockerDownloads} />+
 						</p>
 						<p className="relative z-20 mt-2 text-sm text-muted-foreground">
 							Go-to solution for deployments
@@ -78,7 +92,7 @@ export function ComparisonStats() {
 							Community Contributors
 						</p>
 						<p className="relative z-20 mt-2 text-3xl font-bold">
-							<NumberTicker value={statsValues.contributors} />+
+							<NumberTicker value={contributors} />+
 						</p>
 						<p className="relative z-20 mt-2 text-sm text-muted-foreground">
 							Thriving open source community

@@ -28,7 +28,7 @@ const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
 	{ feature: "One-command installation", dokploy: true, caprover: true, section: "Setup & Installation" },
 	{ feature: "Installation feedback and progress logs", dokploy: true, caprover: false },
-	{ feature: "Works with firewall and TailScale out of the box", dokploy: true, caprover: false },
+	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, caprover: false },
 	{ feature: "Lightweight CPU usage while idle", dokploy: true, caprover: false },
 	{ feature: "Built with Next.js / TypeScript", dokploy: true, caprover: false },
 	// Deployment
