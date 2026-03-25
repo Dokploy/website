@@ -22,7 +22,29 @@ const footerSections = [
 				label: "Databases",
 			},
 			{ href: "/enterprise", label: "Enterprise" },
-		{ href: "/contact", label: "Contact" },
+			{ href: "/contact", label: "Contact" },
+		],
+	},
+	{
+		title: "Enterprise Features",
+		ariaLabel: "Enterprise features",
+		links: [
+			{
+				href: "/features/role-based-access-control",
+				label: "RBAC",
+			},
+			{
+				href: "/features/single-sign-on",
+				label: "SSO",
+			},
+			{
+				href: "/features/audit-logs",
+				label: "Audit Logs",
+			},
+			{
+				href: "/features/white-labeling",
+				label: "White Labeling",
+			},
 		],
 	},
 	{
