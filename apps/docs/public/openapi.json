@@ -12969,6 +12969,19 @@
                   },
                   "stripPath": {
                     "type": "boolean"
+                  },
+                  "middlewares": {
+                    "anyOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -13500,6 +13513,19 @@
                   },
                   "stripPath": {
                     "type": "boolean"
+                  },
+                  "middlewares": {
+                    "anyOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
                   },
                   "domainId": {
                     "type": "string"
