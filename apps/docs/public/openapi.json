@@ -2693,6 +2693,24 @@
                       }
                     ]
                   },
+                  "icon": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "maxLength": 2097152
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
                   "refreshToken": {
                     "anyOf": [
                       {
