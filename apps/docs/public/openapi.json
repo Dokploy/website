@@ -3423,8 +3423,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
@@ -17785,8 +17784,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
@@ -19546,8 +19544,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
@@ -21584,8 +21581,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
@@ -24376,8 +24372,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
@@ -31645,8 +31640,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
@@ -35172,8 +35166,7 @@
                       {
                         "anyOf": [
                           {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "number"
                           },
                           {
                             "type": "null"
