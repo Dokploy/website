@@ -37208,6 +37208,83 @@
         }
       }
     },
+    "/server.allForPermissions": {
+      "get": {
+        "operationId": "server-allForPermissions",
+        "tags": [
+          "server"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.BAD_REQUEST"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.UNAUTHORIZED"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.FORBIDDEN"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.NOT_FOUND"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error.INTERNAL_SERVER_ERROR"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/server.count": {
       "get": {
         "operationId": "server-count",
@@ -45153,6 +45230,12 @@
                       "type": "string"
                     }
                   },
+                  "accessedServers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
                   "canCreateProjects": {
                     "type": "boolean"
                   },
@@ -45193,6 +45276,7 @@
                   "accessedEnvironments",
                   "accessedServices",
                   "accessedGitProviders",
+                  "accessedServers",
                   "canCreateProjects",
                   "canCreateServices",
                   "canDeleteProjects",
