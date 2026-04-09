@@ -1,0 +1,129 @@
+---
+title: Cloud vs Self-Hosted
+description: "Detailed comparison between Dokploy Cloud and the Self-Hosted version."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+Both versions of Dokploy are **functionally identical** — same deployment engine, same features, same Docker/Traefik integration, same API. The difference is purely operational: **who manages the Dokploy instance itself**.
+
+## Same features, different operations
+
+Every feature available in Self-Hosted is also available in Cloud, and vice versa. This includes:
+
+- Application, Database, and Docker Compose deployments
+- Git integration (GitHub, GitLab, Bitbucket, Gitea)
+- Traefik reverse proxy with custom domains & SSL
+- Remote servers and multi-server management
+- Monitoring, notifications, backups, rollbacks
+- Preview deployments, environments, templates
+- API & CLI, schedule jobs, watch paths
+- User permissions and all Enterprise features (SSO, custom roles, audit logs, whitelabeling)
+
+There are **no feature gates** between Cloud and Self-Hosted. The core product is the same.
+
+## What's actually different
+
+The differences come down to three things:
+
+### 1. Managed uptime
+
+With **Self-Hosted**, you are responsible for keeping the Dokploy instance running. If your server goes down, restarts, or runs out of disk — you need to fix it yourself.
+
+With **Cloud**, the Dokploy team manages the uptime of the control plane (the UI, database, and management layer). Your applications still run on your own servers, but the management dashboard is maintained by us.
+
+### 2. Automatic updates
+
+With **Self-Hosted**, you update Dokploy manually when new versions are released.
+
+With **Cloud**, updates are applied automatically — you're always on the latest version without doing anything.
+
+### 3. Support
+
+With **Self-Hosted**, support is community-based (Discord, GitHub issues).
+
+With **Cloud**, you get direct support depending on your plan:
+
+| Plan | Support level |
+|------|--------------|
+| **Hobby** | Community (Discord) |
+| **Startup** | Email & Chat |
+| **Enterprise** | Priority support with SLA |
+
+## Architecture
+
+Both versions use the same architecture. The only difference is **where** the control plane runs.
+
+### Self-Hosted
+
+The Dokploy UI, PostgreSQL, Redis, and your applications all run on the same server(s) that you manage.
+
+```
+┌─────────────────────────────────┐
+│     Your Server (you manage)    │
+│                                 │
+│  Dokploy UI + PostgreSQL + Redis│
+│  Traefik (reverse proxy)        │
+│  ─────────────────────────────  │
+│  Your Apps & Databases          │
+└─────────────────────────────────┘
+```
+
+### Cloud
+
+The control plane runs on Dokploy's infrastructure. Your servers only run your workloads.
+
+```
+┌─────────────────┐         ┌──────────────────────┐
+│  Dokploy Cloud   │  SSH    │   Your Server(s)     │
+│  (managed by us) │────────►│   Apps + Databases   │
+│                  │         │   Traefik            │
+│  UI, DB, Redis   │         └──────────────────────┘
+└─────────────────┘
+```
+
+<Callout type="info">
+Your **applications keep running independently** even if the Cloud control plane is temporarily unavailable. The control plane is only needed for management operations (deploys, config changes, monitoring dashboard, etc.).
+</Callout>
+
+## When to choose what
+
+| Choose Self-Hosted if... | Choose Cloud if... |
+|--------------------------|-------------------|
+| You want zero cost | You don't want to maintain Dokploy itself |
+| You want full control over everything | You want automatic updates |
+| You prefer air-gapped or private networks | You want managed uptime for the control plane |
+| You're comfortable managing servers | You want direct support (Startup/Enterprise) |
+
+## Cloud Plans
+
+If you choose Dokploy Cloud, there are several plans depending on your needs:
+
+### Plan comparison
+
+| | Hobby | Startup | Enterprise | Agency |
+|---|:---:|:---:|:---:|:---:|
+| **Price** | $4.50/mo per server | $15/mo (3 servers included) | Custom | Custom |
+| **Additional servers** | $4.50/mo each | $4.50/mo each | Custom | Custom |
+| **Organizations** | 1 | 3 | Custom | Custom |
+| **Users** | 1 | Unlimited | Unlimited | Unlimited |
+| **Environments** | 2 | Unlimited | Unlimited | Unlimited |
+| **Backups** | 1 per app/database | Unlimited | Unlimited | Unlimited |
+| **Scheduled jobs** | 1 | Unlimited | Unlimited | Unlimited |
+| **RBAC** | Basic (Owner, Admin, Member) | Basic (Admin/Developer roles) | Fine-grained + custom roles | Fine-grained + custom roles |
+| **2FA** | ❌ | ✅ | ✅ | ✅ |
+| **SSO / SAML** | ❌ | ❌ | ✅ | ✅ |
+| **Audit logs** | ❌ | ❌ | ✅ | ✅ |
+| **White labeling** | ❌ | ❌ | ✅ | ✅ |
+| **Support** | Community (Discord) | Email & Chat | Priority with SLA | Partner team |
+
+<Callout type="info">
+Annual billing saves **20%** on all plans. See the [Pricing](https://dokploy.com/pricing) page for the latest details.
+</Callout>
+
+### Which plan do I need?
+
+- **Hobby** — You're a solo developer deploying personal projects or small client sites on a single server.
+- **Startup** — You have a team, need multiple environments (production, staging, dev), and want unlimited backups and scheduled jobs.
+- **Enterprise** — You need SSO/SAML, audit logs, white labeling, custom roles with fine-grained permissions, and priority support with SLA.
+- **Agency** — You manage infrastructure for multiple clients and need a tailored partnership.
