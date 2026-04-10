@@ -238,9 +238,14 @@ install_dokploy() {
     
     echo "Generated secure database credentials (stored in Docker Secrets)"
 
+    # Add label to current node so we can constrain our services to this node
+    docker node update \
+    --label-add role=dokploy-main \
+    $(hostname)
+
     docker service create \
     --name dokploy-postgres \
-    --constraint 'node.role==manager' \
+    --constraint 'node.labels.role==dokploy-main' \
     --network dokploy-network \
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
@@ -252,7 +257,7 @@ install_dokploy() {
 
     docker service create \
     --name dokploy-redis \
-    --constraint 'node.role==manager' \
+    --constraint 'node.labels.role==dokploy-main' \
     --network dokploy-network \
     --mount type=volume,source=dokploy-redis,target=/data \
     $endpoint_mode \
@@ -280,7 +285,7 @@ install_dokploy() {
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
-      --constraint 'node.role == manager' \
+      --constraint 'node.labels.role==dokploy-main' \
       $endpoint_mode \
       $release_tag_env \
       -e ADVERTISE_ADDR=$advertise_addr \
@@ -306,7 +311,7 @@ install_dokploy() {
     # Optional: Use docker service create instead of docker run
     #   docker service create \
     #     --name dokploy-traefik \
-    #     --constraint 'node.role==manager' \
+    #     --constraint 'node.labels.role==dokploy-main' \
     #     --network dokploy-network \
     #     --mount type=bind,source=/etc/dokploy/traefik/traefik.yml,target=/etc/traefik/traefik.yml \
     #     --mount type=bind,source=/etc/dokploy/traefik/dynamic,target=/etc/dokploy/traefik/dynamic \
