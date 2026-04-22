@@ -250,13 +250,18 @@ install_dokploy() {
     $endpoint_mode \
     postgres:16
 
+    redis_args=""
+    if [ -n "$REDIS_HZ" ]; then
+        redis_args="redis-server --hz $REDIS_HZ --dynamic-hz yes"
+    fi
+
     docker service create \
     --name dokploy-redis \
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --mount type=volume,source=dokploy-redis,target=/data \
     $endpoint_mode \
-    redis:7
+    redis:7 $redis_args
 
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
