@@ -288,6 +288,17 @@ install_dokploy() {
       $DOCKER_IMAGE
 
     sleep 4
+    
+    HEALTH_EXTRA_OPTS=""
+    if [ "$HEALTH_CMD" = "none" ]; then
+    HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --no-healthcheck"
+    elif [ -n "$HEALTH_CMD" ]; then
+        HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-cmd '$HEALTH_CMD'"
+    fi
+    [ -n "$HEALTH_INTERVAL" ] && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-interval '$HEALTH_INTERVAL'"
+    [ -n "$HEALTH_TIMEOUT" ]  && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-timeout '$HEALTH_TIMEOUT'"
+    [ -n "$HEALTH_RETRIES" ]  && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-retries '$HEALTH_RETRIES'"
+    [ -n "$HEALTH_START_PERIOD" ] && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-start-period '$HEALTH_START_PERIOD'"
 
     docker run -d \
         --name dokploy-traefik \
@@ -295,6 +306,7 @@ install_dokploy() {
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
         -v /var/run/docker.sock:/var/run/docker.sock:ro \
+        $HEALTH_EXTRA_OPTS \
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
