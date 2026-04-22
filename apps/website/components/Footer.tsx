@@ -22,6 +22,7 @@ const footerSections = [
 				label: "Databases",
 			},
 			{ href: "/deploy-ai", label: "Deploy AI" },
+			{ href: "/self-hosted-paas", label: "Self-Hosted PaaS" },
 			{ href: "/enterprise", label: "Enterprise" },
 			{ href: "/contact", label: "Contact" },
 		],

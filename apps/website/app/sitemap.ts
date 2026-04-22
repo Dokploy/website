@@ -7,6 +7,7 @@ const corePages: { path: string; priority: number }[] = [
 	{ path: "/pricing", priority: 0.9 },
 	{ path: "/enterprise", priority: 0.9 },
 	{ path: "/deploy-ai", priority: 0.8 },
+	{ path: "/self-hosted-paas", priority: 0.8 },
 	{ path: "/contact", priority: 0.7 },
 	{ path: "/partners", priority: 0.6 },
 	{ path: "/changelog", priority: 0.6 },
