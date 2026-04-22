@@ -21,6 +21,7 @@ const footerSections = [
 				href: "/features/database-management-tool",
 				label: "Databases",
 			},
+			{ href: "/deploy-ai", label: "Deploy AI" },
 			{ href: "/enterprise", label: "Enterprise" },
 			{ href: "/contact", label: "Contact" },
 		],
