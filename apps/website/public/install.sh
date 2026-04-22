@@ -271,7 +271,7 @@ install_dokploy() {
 
     HEALTH_EXTRA_OPTS=""
     if [ "$HEALTH_CMD" = "none" ]; then
-    HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --no-healthcheck"
+        HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --no-healthcheck"
     elif [ -n "$HEALTH_CMD" ]; then
         HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-cmd '$HEALTH_CMD'"
     fi
