@@ -273,12 +273,12 @@ install_dokploy() {
     if [ "$HEALTH_CMD" = "none" ]; then
         HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --no-healthcheck"
     elif [ -n "$HEALTH_CMD" ]; then
-        HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-cmd '$HEALTH_CMD'"
+        HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-cmd $HEALTH_CMD"
     fi
-    [ -n "$HEALTH_INTERVAL" ] && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-interval '$HEALTH_INTERVAL'"
-    [ -n "$HEALTH_TIMEOUT" ]  && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-timeout '$HEALTH_TIMEOUT'"
-    [ -n "$HEALTH_RETRIES" ]  && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-retries '$HEALTH_RETRIES'"
-    [ -n "$HEALTH_START_PERIOD" ] && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-start-period '$HEALTH_START_PERIOD'"
+    [ -n "$HEALTH_INTERVAL" ] && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-interval $HEALTH_INTERVAL"
+    [ -n "$HEALTH_TIMEOUT" ]  && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-timeout $HEALTH_TIMEOUT"
+    [ -n "$HEALTH_RETRIES" ]  && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-retries $HEALTH_RETRIES"
+    [ -n "$HEALTH_START_PERIOD" ] && HEALTH_EXTRA_OPTS="$HEALTH_EXTRA_OPTS --health-start-period $HEALTH_START_PERIOD"
     
     docker service create \
       --name dokploy \
