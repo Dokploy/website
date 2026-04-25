@@ -8,6 +8,13 @@
 # Usage with bash: DOKPLOY_VERSION=canary bash install.sh
 # Usage with bash: DOKPLOY_VERSION=latest bash install.sh
 # Usage with bash: bash install.sh (detects latest stable version)
+
+# Detect OS
+IS_MAC=false
+if [ "$(uname)" = "Darwin" ]; then
+    IS_MAC=true
+fi
+
 detect_version() {
     local version="${DOKPLOY_VERSION}"
     
@@ -78,6 +85,15 @@ generate_random_password() {
     echo "$password"
 }
 
+check_port() {
+    local port=$1
+    if [ "$IS_MAC" = true ]; then
+        lsof -Pi :$port -sTCP:LISTEN >/dev/null 2>&1
+    else
+        ss -tulnp | grep ":$port " >/dev/null 2>&1
+    fi
+}
+
 install_dokploy() {
     # Detect version tag
     VERSION_TAG=$(detect_version)
@@ -89,36 +105,19 @@ install_dokploy() {
         exit 1
     fi
 
-    # check if is Mac OS
-    if [ "$(uname)" = "Darwin" ]; then
-        echo "This script must be run on Linux" >&2
-        exit 1
-    fi
-
     # check if is running inside a container
     if [ -f /.dockerenv ]; then
         echo "This script must be run on Linux" >&2
         exit 1
     fi
 
-    # check if something is running on port 80
-    if ss -tulnp | grep ':80 ' >/dev/null; then
-        echo "Error: something is already running on port 80" >&2
-        exit 1
-    fi
-
-    # check if something is running on port 443
-    if ss -tulnp | grep ':443 ' >/dev/null; then
-        echo "Error: something is already running on port 443" >&2
-        exit 1
-    fi
-
-    # check if something is running on port 3000
-    if ss -tulnp | grep ':3000 ' >/dev/null; then
-        echo "Error: something is already running on port 3000" >&2
-        echo "Dokploy requires port 3000 to be available. Please stop any service using this port." >&2
-        exit 1
-    fi
+    # Port availability checks
+    for port in 80 443 3000; do
+        if check_port $port; then
+            echo "Error: something is already running on port $port" >&2
+            exit 1
+        fi
+    done
 
     command_exists() {
       command -v "$@" > /dev/null 2>&1
@@ -189,7 +188,12 @@ install_dokploy() {
     }
 
     get_private_ip() {
-        ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
+        if [ "$IS_MAC" = true ]; then
+            # macOS: Use osascript for reliable local IP
+            ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo "127.0.0.1"
+        else
+            ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
+        fi
     }
 
     advertise_addr="${ADVERTISE_ADDR:-$(get_private_ip)}"
@@ -216,6 +220,13 @@ install_dokploy() {
     
      if [ $? -ne 0 ]; then
         echo "Error: Failed to initialize Docker Swarm" >&2
+        if [ "$IS_MAC" = true ]; then
+            echo "" >&2
+            echo "💡 Tip for macOS users:" >&2
+            echo "Docker Desktop for Mac sometimes fails to recognize the host IP." >&2
+            echo "Please try running the script with a manual IP like this:" >&2
+            echo "sudo ADVERTISE_ADDR=127.0.0.1 bash install.sh" >&2
+        fi
         exit 1
     fi
 
