@@ -250,7 +250,7 @@ install_dokploy() {
     $endpoint_mode \
     postgres:16
 
-    redis_args=""
+    redis_args="redis-server"
     if [ -n "$REDIS_HZ" ]; then
         redis_args="redis-server --hz $REDIS_HZ --dynamic-hz yes"
     fi
