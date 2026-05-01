@@ -119,6 +119,7 @@ function MobileNavigation() {
 								<MobileNavLink href="/features/application-deployment-platform">Application Deployment</MobileNavLink>
 								<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
 								<MobileNavLink href="/features/application-management-software">Application Management</MobileNavLink>
+								<MobileNavLink href="/features/container-server-monitoring">Monitoring</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink href="/pricing">Pricing</MobileNavLink>
 								<hr className="m-2 border-border" />
@@ -231,6 +232,9 @@ export function Header() {
 												</ListItem>
 												<ListItem href="/features/application-management-software" title="Application Management">
 													Monitor and control your applications
+												</ListItem>
+												<ListItem href="/features/container-server-monitoring" title="Monitoring">
+													Keep your systems running
 												</ListItem>
 											</ul>
 										</NavigationMenuContent>
