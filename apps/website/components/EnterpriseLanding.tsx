@@ -10,6 +10,7 @@ import {
 	Server,
 	Shield,
 	Users,
+	GitBranch,
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -49,6 +50,12 @@ const features = [
 		title: "Flexible Hosting",
 		description:
 			"Deploy on-premises for maximum security or in the cloud for scalability—your infrastructure, your choice.",
+	},
+	{
+		icon: GitBranch,
+		title: "Granular User Controls",
+		description:
+			"Assign remote servers and specific git providers to individual team members.",
 	},
 ];
 
@@ -247,6 +254,77 @@ export function EnterpriseLanding() {
 							Need the best of both worlds? Deploy Dokploy across multiple
 							environments with centralized management and unified monitoring.
 						</p>
+					</div>
+				</Container>
+			</section>
+
+			{/* RBAC Screenshots Section */}
+			<section className="py-20">
+				<Container>
+					<div className="mb-16 text-center">
+						<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
+							Granular Access Control, Visualized
+						</h2>
+						<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+							Powerful RBAC tools that give you complete visibility and control
+							over who can access what—down to the individual resource level.
+						</p>
+					</div>
+
+					<div className="grid gap-6 md:grid-cols-3">
+						<div className="group overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black transition hover:border-border/60">
+							<div className="aspect-video w-full overflow-hidden bg-gray-900/80">
+								<img
+									src="/enterprise/custom-roles.png"
+									alt="Create custom roles with fine-grained permissions"
+									className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
+								/>
+							</div>
+							<div className="p-6">
+								<h3 className="mb-2 text-lg font-semibold text-white">
+									Custom Roles
+								</h3>
+								<p className="text-sm text-muted-foreground">
+									Define roles with preset templates or build from scratch with granular permission toggles per resource.
+								</p>
+							</div>
+						</div>
+
+						<div className="group overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black transition hover:border-border/60">
+							<div className="w-full overflow-hidden bg-gray-950 p-4">
+								<img
+									src="/enterprise/git-permission.png"
+									alt="Assign git providers to individual team members"
+									className="w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.02]"
+								/>
+							</div>
+							<div className="p-6">
+								<h3 className="mb-2 text-lg font-semibold text-white">
+									Git Provider Access
+								</h3>
+								<p className="text-sm text-muted-foreground">
+									Control which Git providers each team member can access across GitHub, GitLab, Bitbucket, and Gitea.
+								</p>
+							</div>
+						</div>
+
+						<div className="group overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black transition hover:border-border/60">
+							<div className="w-full overflow-hidden bg-gray-950 p-4">
+								<img
+									src="/enterprise/servers-permission.png"
+									alt="Assign remote servers to individual team members"
+									className="w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.02]"
+								/>
+							</div>
+							<div className="p-6">
+								<h3 className="mb-2 text-lg font-semibold text-white">
+									Server Assignment
+								</h3>
+								<p className="text-sm text-muted-foreground">
+									Assign specific remote servers to individual team members so they only see what they need.
+								</p>
+							</div>
+						</div>
 					</div>
 				</Container>
 			</section>
