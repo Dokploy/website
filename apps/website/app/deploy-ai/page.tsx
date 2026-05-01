@@ -279,7 +279,7 @@ export default function DeployAIPage() {
 						<div className="mt-10">
 							<Button variant="outline" className="rounded-full" asChild>
 								<Link
-									href="https://docs.dokploy.com/docs/core"
+									href="https://docs.dokploy.com/docs/templates/openclaw"
 									target="_blank"
 									rel="noopener noreferrer"
 								>

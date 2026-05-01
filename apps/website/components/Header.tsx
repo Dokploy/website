@@ -120,6 +120,7 @@ function MobileNavigation() {
 								<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
 								<MobileNavLink href="/features/application-management-software">Application Management</MobileNavLink>
 								<MobileNavLink href="/features/container-server-monitoring">Monitoring</MobileNavLink>
+								<MobileNavLink href="/deploy-ai">AI Deployment</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink href="/pricing">Pricing</MobileNavLink>
 								<hr className="m-2 border-border" />
@@ -128,6 +129,7 @@ function MobileNavigation() {
 								</p>
 								<MobileNavLink href="/enterprise">Enterprise</MobileNavLink>
 								<MobileNavLink href="/partners">Partners</MobileNavLink>
+								<MobileNavLink href="/self-hosted-paas">Self-Hosted</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink
 									href="https://docs.dokploy.com/docs/core"
@@ -236,6 +238,9 @@ export function Header() {
 												<ListItem href="/features/container-server-monitoring" title="Monitoring">
 													Keep your systems running
 												</ListItem>
+												<ListItem href="/deploy-ai" title="AI Deployment">
+													Empower your team to deploy AI tools
+												</ListItem>
 											</ul>
 										</NavigationMenuContent>
 									</NavigationMenuItem>
@@ -269,6 +274,9 @@ export function Header() {
 												</ListItem>
 												<ListItem href="/partners" title="Partners">
 													Partner program and integrations
+												</ListItem>
+												<ListItem href="/self-hosted-paas" title="Self-Hosted">
+													Self-hosted PaaS built for developers
 												</ListItem>
 											</ul>
 										</NavigationMenuContent>
