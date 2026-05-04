@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 
+const FREE_EMAIL_DOMAINS: Set<string> = new Set(require("free-email-domains"));
+
 interface ContactFormData {
 	inquiryType: "" | "support" | "sales";
 	deploymentType: "" | "cloud" | "self-hosted";
@@ -69,6 +71,12 @@ export function ContactForm({
 			newErrors.email = "Email is required";
 		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
 			newErrors.email = "Please enter a valid email address";
+		} else if (
+			formData.inquiryType === "sales" &&
+			FREE_EMAIL_DOMAINS.has(formData.email.split("@")[1]?.toLowerCase())
+		) {
+			newErrors.email =
+				"Please use your work email address to contact sales";
 		}
 		if (!formData.company.trim()) {
 			newErrors.company = "Company name is required";

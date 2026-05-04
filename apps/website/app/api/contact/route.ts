@@ -4,6 +4,8 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+const FREE_EMAIL_DOMAINS: Set<string> = new Set(require("free-email-domains"));
+
 interface ContactFormData {
 	inquiryType: "support" | "sales";
 	firstName: string;
@@ -50,6 +52,17 @@ export async function POST(request: NextRequest) {
 				{ error: "Invalid email format" },
 				{ status: 400 },
 			);
+		}
+
+		// Reject free email providers for sales inquiries
+		if (body.inquiryType === "sales") {
+			const domain = body.email.split("@")[1]?.toLowerCase();
+			if (domain && FREE_EMAIL_DOMAINS.has(domain)) {
+				return NextResponse.json(
+					{ error: "Please use your work email address to contact sales" },
+					{ status: 400 },
+				);
+			}
 		}
 
 		// Submit to HubSpot if it's a sales inquiry

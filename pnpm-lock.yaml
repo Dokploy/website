@@ -32,7 +32,7 @@ importers:
     dependencies:
       '@next/third-parties':
         specifier: 16.0.7
-        version: 16.0.7(next@16.1.5(@babel/core@7.26.9)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
+        version: 16.0.7(next@16.1.5(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.1.16
         version: 2.1.16(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -111,7 +111,7 @@ importers:
         version: 0.2.1(tailwindcss@3.4.7)
       '@next/third-parties':
         specifier: 16.0.7
-        version: 16.0.7(next@16.1.5(@babel/core@7.26.9)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
+        version: 16.0.7(next@16.1.5(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
       '@prettier/plugin-xml':
         specifier: ^3.4.1
         version: 3.4.1(prettier@3.3.3)
@@ -172,6 +172,9 @@ importers:
       framer-motion:
         specifier: ^11.3.19
         version: 11.3.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      free-email-domains:
+        specifier: ^1.2.26
+        version: 1.2.26
       hast-util-to-jsx-runtime:
         specifier: ^2.3.5
         version: 2.3.6
@@ -2783,6 +2786,10 @@ packages:
       react-dom:
         optional: true
 
+  free-email-domains@1.2.26:
+    resolution: {integrity: sha512-HHk4Fp8ts63MDIpnd3LCbfUNAqj6Ea9kjXWUv15zbmEZRR7f7TtBLUvK56ZtyjR6voCdZ1xG1DNIme7yUl9vww==}
+    engines: {node: '>= 18'}
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -5153,7 +5160,7 @@ snapshots:
   '@next/swc-win32-x64-msvc@16.1.5':
     optional: true
 
-  '@next/third-parties@16.0.7(next@16.1.5(@babel/core@7.26.9)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)':
+  '@next/third-parties@16.0.7(next@16.1.5(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)':
     dependencies:
       next: 16.1.5(@babel/core@7.26.9)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react: 19.2.1
@@ -6857,6 +6864,8 @@ snapshots:
     optionalDependencies:
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
+
+  free-email-domains@1.2.26: {}
 
   fsevents@2.3.3:
     optional: true
