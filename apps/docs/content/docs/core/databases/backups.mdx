@@ -13,7 +13,37 @@ To configure database backups, navigate to the `Backup` tab within your Dokploy 
 - **Database Name**: Enter the name of the database you want to backup.
 - **Schedule Cron**: Define the schedule for your backups using cron syntax.
 - **Prefix**: Choose a prefix under which backups will be stored in your bucket.
+- **File Name Format**: Customize the backup file name using variables (see below).
 - **Enabled**: Toggle whether backups are active. The default setting is enabled.
+
+### Custom File Name Format
+
+You can customize the backup file name using variables that will be replaced when the backup is created.
+
+#### Available Variables
+
+| Variable | Description | Example Output |
+|----------|-------------|----------------|
+| `{timestamp}` | Full ISO timestamp | `2024-01-15T10:30:00` |
+| `{date}` | Date only | `2024-01-15` |
+| `{time}` | Time only (file-safe) | `10-30-00` |
+| `{year}` | Year | `2024` |
+| `{month}` | Month (zero-padded) | `01` |
+| `{day}` | Day (zero-padded) | `15` |
+| `{hour}` | Hour (zero-padded) | `10` |
+| `{minute}` | Minute (zero-padded) | `30` |
+| `{epoch}` | Unix timestamp | `1705315800` |
+| `{uuid}` | Full UUID | `550e8400-e29b-41d4-a716-446655440000` |
+| `{shortUuid}` | 8-character UUID | `550e8400` |
+| `{appName}` | Application name | `my-app` |
+| `{volumeName}` | Volume name | `my-volume` |
+| `{databaseType}` | Database type | `postgres` |
+
+#### Example Formats
+
+- `{appName}-{date}` → `my-app-2024-01-15`
+- `{databaseType}-{timestamp}` → `postgres-2024-01-15T10:30:00`
+- `{appName}-{databaseType}-{shortUuid}` → `my-app-postgres-550e8400`
 
 ### Testing Your Backup Configuration
 
