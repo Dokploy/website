@@ -17,6 +17,8 @@ const FREE_EMAIL_DOMAINS: Set<string> = new Set(require("free-email-domains"));
 interface ContactFormData {
 	inquiryType: "" | "support" | "sales";
 	deploymentType: "" | "cloud" | "self-hosted";
+	teamSize: string;
+	serverCount: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -44,6 +46,8 @@ export function ContactForm({
 	const [formData, setFormData] = useState<ContactFormData>({
 		inquiryType: defaultInquiryType || "",
 		deploymentType: "",
+		teamSize: "",
+		serverCount: "",
 		firstName: "",
 		lastName: "",
 		email: "",
@@ -77,6 +81,9 @@ export function ContactForm({
 		) {
 			newErrors.email =
 				"Please use your work email address to contact sales";
+		}
+		if (formData.inquiryType === "sales" && !formData.teamSize) {
+			newErrors.teamSize = "Please select your team size";
 		}
 		if (!formData.company.trim()) {
 			newErrors.company = "Company name is required";
@@ -125,6 +132,8 @@ export function ContactForm({
 				setFormData({
 					inquiryType: defaultInquiryType || "",
 					deploymentType: "",
+					teamSize: "",
+					serverCount: "",
 					firstName: "",
 					lastName: "",
 					email: "",
@@ -294,6 +303,67 @@ export function ContactForm({
 							</div>
 						</div>
 					)}
+				</div>
+			)}
+
+			{formData.inquiryType === "sales" && (
+				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+					<div className="space-y-2">
+						<label
+							htmlFor="teamSize"
+							className="block text-sm font-medium text-foreground"
+						>
+							Number of Employees <span className="text-red-500">*</span>
+						</label>
+						<Select
+							value={formData.teamSize}
+							onValueChange={(value) => handleInputChange("teamSize", value)}
+						>
+							<SelectTrigger className="bg-input">
+								<SelectValue placeholder="Select range" />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="1-10">1–10</SelectItem>
+								<SelectItem value="11-50">11–50</SelectItem>
+								<SelectItem value="51-200">51–200</SelectItem>
+								<SelectItem value="201-500">201–500</SelectItem>
+								<SelectItem value="501-1000">501–1,000</SelectItem>
+								<SelectItem value="1000+">1,000+</SelectItem>
+							</SelectContent>
+						</Select>
+						{errors.teamSize && (
+							<p className="text-sm text-red-600">{errors.teamSize}</p>
+						)}
+					</div>
+
+					<div className="space-y-2">
+						<label
+							htmlFor="serverCount"
+							className="block text-sm font-medium text-foreground"
+						>
+							Number of Servers
+						</label>
+						<Select
+							value={formData.serverCount}
+							onValueChange={(value) =>
+								handleInputChange("serverCount", value)
+							}
+						>
+							<SelectTrigger className="bg-input">
+								<SelectValue placeholder="Select range" />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="1-5">1–5</SelectItem>
+								<SelectItem value="6-20">6–20</SelectItem>
+								<SelectItem value="21-50">21–50</SelectItem>
+								<SelectItem value="51-100">51–100</SelectItem>
+								<SelectItem value="100+">100+</SelectItem>
+							</SelectContent>
+						</Select>
+						{errors.serverCount && (
+							<p className="text-sm text-red-600">{errors.serverCount}</p>
+						)}
+					</div>
 				</div>
 			)}
 

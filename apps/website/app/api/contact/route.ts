@@ -8,6 +8,8 @@ const FREE_EMAIL_DOMAINS: Set<string> = new Set(require("free-email-domains"));
 
 interface ContactFormData {
 	inquiryType: "support" | "sales";
+	teamSize?: string;
+	serverCount?: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -103,6 +105,10 @@ export async function POST(request: NextRequest) {
 
 		// Format email content
 		const emailSubject = `[${body.inquiryType.toUpperCase()}] New contact form submission from ${body.firstName} ${body.lastName}`;
+		const salesFields =
+			body.inquiryType === "sales"
+				? `Employees: ${body.teamSize || "N/A"}\nServers: ${body.serverCount || "N/A"}\n`
+				: "";
 		const emailBody = `
 New contact form submission:
 
@@ -111,7 +117,7 @@ First Name: ${body.firstName}
 Last Name: ${body.lastName}
 Email: ${body.email}
 Company: ${body.company}
-
+${salesFields}
 Message:
 ${body.message}
 
