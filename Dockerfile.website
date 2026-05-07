@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/website --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/website --frozen-lockfile --config.confirmModulesPurge=false
 
 # Deploy only the dokploy app
 
