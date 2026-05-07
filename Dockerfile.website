@@ -8,9 +8,10 @@ ENV CI=true
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
+RUN echo "confirm-module-purge=false" >> /usr/src/app/.npmrc
 
 # Install dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/website --frozen-lockfile --config.confirmModulesPurge=false
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/website --frozen-lockfile
 
 # Deploy only the dokploy app
 
