@@ -1,14 +1,11 @@
 FROM node:24.4-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN npm install -g pnpm@10.22.0
 
 FROM base AS build
-ENV CI=true
 COPY . /usr/src/app
 WORKDIR /usr/src/app
-
-RUN echo "confirm-module-purge=false" >> /usr/src/app/.npmrc
 
 # Install dependencies
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/website --frozen-lockfile
