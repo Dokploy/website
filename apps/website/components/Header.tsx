@@ -145,7 +145,9 @@ function MobileNavigation() {
 								<MobileNavLink href="/comparison">Dokploy vs.</MobileNavLink>
 								<MobileNavLink href="/blog">Blog</MobileNavLink>
 								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
+								<MobileNavLink href="/jobs">Jobs</MobileNavLink>
 								<hr className="m-2 border-border" />
+								<MobileNavLink href="/jobs">Careers</MobileNavLink>
 								<MobileNavLink href="/contact">Contact</MobileNavLink>
 								<MobileNavLink
 									href="https://app.dokploy.com/register"
@@ -304,6 +306,26 @@ export function Header() {
 									</NavigationMenuItem>
 
 									<NavigationMenuItem>
+										<NavigationMenuLink
+											asChild
+											className={navigationMenuTriggerStyle()}
+										>
+											<Link
+												href="/jobs"
+												onClick={() =>
+													trackGAEvent({
+														action: "Nav Link Clicked",
+														category: "Navigation",
+														label: "/jobs",
+													})
+												}
+											>
+												Careers
+											</Link>
+										</NavigationMenuLink>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
 										<NavigationMenuTrigger>Resources</NavigationMenuTrigger>
 										<NavigationMenuContent>
 											<ul className="grid w-[200px] gap-1 p-2">
@@ -318,6 +340,9 @@ export function Header() {
 												</ListItem>
 												<ListItem href="/#faqs" title="FAQ">
 													Frequently asked questions
+												</ListItem>
+												<ListItem href="/jobs" title="Jobs">
+													See open positions at Dokploy
 												</ListItem>
 											</ul>
 										</NavigationMenuContent>

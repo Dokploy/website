@@ -78,9 +78,10 @@ const footerSections = [
 		],
 	},
 	{
-		title: "Legal",
-		ariaLabel: "Legal and policies",
+		title: "Company",
+		ariaLabel: "Company",
 		links: [
+			{ href: "/jobs", label: "Careers" },
 			{ href: "/terms-of-service", label: "Terms of Service" },
 			{ href: "/privacy", label: "Privacy Policy" },
 		],

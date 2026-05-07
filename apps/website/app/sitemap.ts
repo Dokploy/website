@@ -11,6 +11,7 @@ const corePages: { path: string; priority: number }[] = [
 	{ path: "/contact", priority: 0.7 },
 	{ path: "/partners", priority: 0.6 },
 	{ path: "/changelog", priority: 0.6 },
+	{ path: "/jobs", priority: 0.7 },
 ];
 
 const featurePages = [
