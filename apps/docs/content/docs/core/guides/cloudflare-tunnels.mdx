@@ -163,3 +163,57 @@ This allows all subdomains (`app1.example.com`, `app2.example.com`, etc.) to rou
 <Callout type="info">
   With wildcard routing, you only need ONE public hostname in Cloudflare Tunnel. Traefik handles routing to different apps based on the domain configured in Dokploy.
 </Callout>
+
+## Using Cloudflare Access (Zero Trust) with Dokploy
+
+If you protect your Dokploy dashboard with **Cloudflare Access** (Zero Trust), there are a few extra steps required to make login work correctly.
+
+### Why login hangs behind Cloudflare Access
+
+When Cloudflare Access sits in front of Dokploy, the login request (`POST /api/auth/sign-in/email`) may appear to hang indefinitely even with valid credentials. Invalid credentials still return a `401` immediately, which makes it easy to miss this issue.
+
+The root cause is that Better Auth (Dokploy's auth library) validates the `Origin` header of every request. When the request comes through Cloudflare Access, the origin may not match any of the trusted origins Dokploy knows about, so the request is silently dropped.
+
+### Required configuration
+
+You need to configure three things:
+
+**1. Set a stable `BETTER_AUTH_SECRET`**
+
+Make sure this value is set and does not change between restarts. If it is missing or rotates, sessions are invalidated and auth flows may break.
+
+```bash
+BETTER_AUTH_SECRET=your-random-secret-here
+```
+
+Generate a secure value with:
+
+```bash
+openssl rand -hex 32
+```
+
+**2. Add your domain to trusted origins**
+
+Set the `BETTER_AUTH_TRUSTED_ORIGINS` environment variable to include all origins that can reach Dokploy:
+
+```bash
+BETTER_AUTH_TRUSTED_ORIGINS=http://localhost:3000,http://<internal-ip>:3000,https://dokploy.example.com
+```
+
+Replace `dokploy.example.com` with your actual public domain.
+
+**3. Configure Web Server settings in the Dokploy UI**
+
+Go to **Settings → Server** and set:
+- **Host**: `dokploy.example.com` (your public domain)
+- **HTTPS**: enabled
+
+This ensures Dokploy includes your domain as a trusted origin automatically.
+
+<Callout type="info">
+  After applying these changes, redeploy the Dokploy service so the new environment variables take effect.
+</Callout>
+
+<Callout type="warn">
+  If you access Dokploy through multiple origins (public domain, internal IP, Tailscale), make sure all of them are listed in `BETTER_AUTH_TRUSTED_ORIGINS`.
+</Callout>
