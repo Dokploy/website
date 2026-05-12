@@ -217,9 +217,3 @@ This ensures Dokploy includes your domain as a trusted origin automatically.
 <Callout type="warn">
   If you access Dokploy through multiple origins (public domain, internal IP, Tailscale), make sure all of them are listed in `BETTER_AUTH_TRUSTED_ORIGINS`.
 </Callout>
-
-## Cloudflare Mesh
-
-Cloudflare Tunnel and Access are best for public or human-facing entrypoints, such as the Dokploy dashboard, browser-protected tools, human SSH through Access, and public websites.
-
-For private Dokploy server-to-server connectivity, such as remote-server SSH over a private IP, see the [Cloudflare Mesh guide](/docs/core/guides/cloudflare-mesh).

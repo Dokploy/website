@@ -22,7 +22,7 @@ Cloudflare Mesh connects enrolled devices through Cloudflare Zero Trust and give
 - **Cloudflare Zero Trust**: Manage Mesh enrollment and device policy from Cloudflare
 
 <Callout type="info">
-  Mesh is not a replacement for Cloudflare Tunnel routes. Public websites and admin panels should continue to use Tunnel and Access so Cloudflare can terminate HTTP(S), apply Access and WAF controls, and keep origin ports closed.
+  Mesh is not a replacement for [Cloudflare Tunnel routes](/docs/core/guides/cloudflare-tunnels). Public websites and admin panels should continue to use Tunnel and Access so Cloudflare can terminate HTTP(S), apply Access and WAF controls, and keep origin ports closed.
 </Callout>
 
 ## Prerequisites
@@ -66,9 +66,25 @@ Install Cloudflare One Client/WARP on:
 - The Dokploy admin server
 - Each remote server that Dokploy manages over SSH
 
-Use Cloudflare's current installation instructions for your server operating system, then confirm `warp-cli` is available.
+Use Cloudflare's [headless Linux Cloudflare One Client tutorial](https://developers.cloudflare.com/cloudflare-one/tutorials/deploy-client-headless-linux/) or the current installation instructions for your server operating system, then confirm `warp-cli` is available.
 
-### Step 4: Enroll and connect each server
+### Step 4: Configure and verify the WARP device profile
+
+Before connecting WARP on a server, create or verify a dedicated Mesh-node device profile in Cloudflare Zero Trust:
+
+- Use **Traffic and DNS** mode
+- Use [Split Tunnels](https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/) **Include** mode
+- Include `100.96.0.0/12` for Cloudflare Mesh device IPs
+
+On each server, check the applied WARP settings before connecting:
+
+```bash
+warp-cli --accept-tos settings
+```
+
+Do not run `warp-cli connect` if the expected Mesh profile, Include mode, and `100.96.0.0/12` route are not shown, or if the profile would broadly reroute server traffic.
+
+### Step 5: Enroll and connect each server
 
 On each server, enroll the device with your Mesh node token:
 
@@ -84,7 +100,7 @@ sudo warp-cli --accept-tos connect
 
 After connecting, confirm the device appears in Cloudflare Zero Trust and has a Mesh IP address.
 
-### Step 5: Verify Mesh connectivity
+### Step 6: Verify Mesh connectivity
 
 From the Dokploy admin server, test SSH to the remote server's Mesh IP:
 
