@@ -232,11 +232,17 @@ install_dokploy() {
 
     # Generate secure random password for Postgres
     POSTGRES_PASSWORD=$(generate_random_password)
-    
+
     # Store password as Docker Secret (encrypted and secure)
     echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
-    
-    echo "Generated secure database credentials (stored in Docker Secrets)"
+
+    # Generate secure auth secret for Better Auth
+    AUTH_SECRET=$(openssl rand -hex 32)
+
+    # Store auth secret as Docker Secret (encrypted and secure)
+    echo "$AUTH_SECRET" | docker secret create dokploy_auth_secret - 2>/dev/null || true
+
+    echo "Generated secure database credentials and auth secret (stored in Docker Secrets)"
 
     docker service create \
     --name dokploy-postgres \
@@ -277,6 +283,7 @@ install_dokploy() {
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
       --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+      --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
@@ -285,6 +292,7 @@ install_dokploy() {
       $release_tag_env \
       -e ADVERTISE_ADDR=$advertise_addr \
       -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+      -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
       $DOCKER_IMAGE
 
     sleep 4
