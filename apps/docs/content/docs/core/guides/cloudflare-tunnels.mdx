@@ -217,3 +217,63 @@ This ensures Dokploy includes your domain as a trusted origin automatically.
 <Callout type="warn">
   If you access Dokploy through multiple origins (public domain, internal IP, Tailscale), make sure all of them are listed in `BETTER_AUTH_TRUSTED_ORIGINS`.
 </Callout>
+
+## Cloudflare Mesh
+
+Cloudflare Mesh is useful when Dokploy needs private server-to-server connectivity. Keep Cloudflare Tunnel and Access for public or human-facing entrypoints, such as the Dokploy dashboard, browser-protected tools, human SSH through Access, and public websites. Use Mesh for private paths where Dokploy expects a normal IP address and port, such as connecting the Dokploy admin server to remote Dokploy nodes over SSH.
+
+Do not use Mesh as the public website publishing layer. Public websites and admin panels should continue to use Tunnel routes so Cloudflare can terminate HTTP(S), apply Access and WAF controls, and keep origin ports closed.
+
+### When to use Mesh
+
+- Dokploy admin server to remote Dokploy nodes
+- Deployments that need SSH access to worker or application servers
+- Private service calls between Dokploy-managed machines
+- Closing public SSH while preserving Dokploy remote-server management
+
+### Prerequisites
+
+Before using Cloudflare Mesh with Dokploy, ensure you have:
+
+- Cloudflare Zero Trust with Mesh enabled
+- Cloudflare One Client/WARP installed on the Dokploy admin server and each remote server
+- A Mesh node token created in **Zero Trust** → **Networks** → **Mesh**
+- SSH access or console access kept available while testing
+
+<Callout type="warn">
+  Verify your device profile and split tunnel settings before running `warp-cli connect`. Broad WARP routing can interrupt server connectivity. Keep public SSH or another recovery path open until Mesh and Dokploy remote connectivity are verified.
+</Callout>
+
+### Setup overview
+
+1. In Cloudflare Zero Trust, go to **Networks** → **Mesh**.
+2. Enable Mesh connections and unique IP addresses for devices.
+3. Create a node token. Store it securely and do not commit it to your repository.
+4. Install Cloudflare One Client/WARP on the Dokploy admin server and each remote server.
+5. Enroll each server with the node token, then connect WARP.
+6. Confirm each server receives a Mesh IP, often in the `100.96.0.0/12` range.
+
+### Update Dokploy remote servers
+
+After Mesh is connected, update each Dokploy remote server to use the remote server's Mesh IP:
+
+```txt
+Host: <REMOTE_SERVER_MESH_IP>
+Port: 22
+```
+
+From the Dokploy admin server, verify SSH over Mesh before changing firewall rules:
+
+```bash
+ssh root@<REMOTE_SERVER_MESH_IP> hostname
+```
+
+Then verify in Dokploy that the remote server connects successfully on port `22`.
+
+<Callout type="info">
+  Mesh gives Dokploy a normal private IP endpoint, which is cleaner for Dokploy remote servers than Access SSH patterns that require a client-side `cloudflared access ssh` ProxyCommand.
+</Callout>
+
+<Callout type="warn">
+  Only close public SSH in your host or cloud firewall after Mesh SSH and Dokploy remote-server connectivity both work. Keep `sshd` running so the server remains reachable over the Mesh path.
+</Callout>
