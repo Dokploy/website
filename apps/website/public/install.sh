@@ -16,12 +16,16 @@ detect_version() {
         echo "Detecting latest stable version from GitHub..." >&2
         
         # Try to get latest release from GitHub by following redirects
-        version=$(curl -fsSL -o /dev/null -w '%{url_effective}\n' \
-            https://github.com/dokploy/dokploy/releases/latest 2>/dev/null | \
-            sed 's#.*/tag/##')
+        effective_url=$(curl -fsSL -o /dev/null -w '%{url_effective}\n' \
+            https://github.com/dokploy/dokploy/releases/latest 2>/dev/null)
         
-        # Fallback to latest tag if detection fails
-        if [ -z "$version" ]; then
+        # Extract tag from URL (format: .../releases/tag/v0.x.x)
+        if echo "$effective_url" | grep -q '/tag/'; then
+            version=$(echo "$effective_url" | sed 's#.*/tag/##')
+        fi
+        
+        # Validate version looks like a tag (starts with 'v' or is a valid semver)
+        if [ -z "$version" ] || echo "$version" | grep -q '^http'; then
             echo "Warning: Could not detect latest version from GitHub, using fallback version latest" >&2
             version="latest"
         else
