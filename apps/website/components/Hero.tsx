@@ -104,7 +104,7 @@ export function Hero() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3, delay: 0.2 }}
 						>
-							Manage containerized deployments across multiple servers with ease
+							Manage containerized deployments and AI-built apps across multiple servers with ease,
 							thanks to our all-in-one platform for developers.
 						</motion.p>
 						<motion.div

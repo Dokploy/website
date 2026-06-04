@@ -25,6 +25,9 @@ import {
 	LayoutDashboard,
 	CloudCog,
 	Clock,
+	Users,
+	Bot,
+	Shield,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -140,6 +143,33 @@ const platformFeatures = [
 	},
 ];
 
+const aiDeploymentFeatures = [
+	{
+		icon: Users,
+		title: "Anyone can deploy",
+		description:
+			"Once Dokploy is set up, non-technical users can take code from an AI tool to a running app without engineering support.",
+	},
+	{
+		icon: Layers,
+		title: "Isolated team environments",
+		description:
+			"Multitenancy keeps every team's projects and data separate. AI experimentation stays contained.",
+	},
+	{
+		icon: Bot,
+		title: "AI agents via MCP",
+		description:
+			"Dokploy's MCP server lets AI agents trigger deployments, query app state, and manage services without a custom integration.",
+	},
+	{
+		icon: Shield,
+		title: "Governed by default",
+		description:
+			"SSO, audit logs, IP allowlisting, and rollback in seconds. Speed from AI tools doesn't have to come at the cost of control.",
+	},
+];
+
 const faqs = [
 	{
 		question: "Can I deploy Docker Compose apps with Dokploy?",
@@ -171,6 +201,11 @@ const faqs = [
 			"What's the difference between a deployment platform and a software deployment platform?",
 		answer:
 			"In practice, they overlap. A deployment platform often focuses on the mechanics of deployment tools and infrastructure, while a software deployment platform emphasizes end-to-end software delivery, including CI/CD, continuous integration, and continuous delivery. A software deployment platform typically ties deployment workflows to version control systems, configuration files, and multiple environments, so teams can maintain consistency from development to production, with rollback capabilities when code changes introduce issues.",
+	},
+	{
+		question: "Can I use Dokploy to deploy AI-generated apps?",
+		answer:
+			"Yes. Dokploy works with code from any source, including apps built or scaffolded by AI coding tools. You deploy using the same Git, Docker, and Compose workflows as any other application—there's no separate process for AI-generated code.",
 	},
 ];
 
@@ -243,6 +278,47 @@ export default function ApplicationDeploymentPlatformPage() {
 								</p>
 							</div>
 						))}
+					</div>
+				</Container>
+			</section>
+
+			{/* AI deployment */}
+			<section className="border-b border-border/30 py-20 sm:py-32">
+				<Container>
+					<div className="mx-auto max-w-2xl text-center">
+						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
+							Deploy the apps your teams are already building with AI
+						</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							AI coding tools are changing how applications get written. Dokploy handles the deployment side, from AI-generated code to a live URL, powered by your existing workflows.
+						</p>
+					</div>
+					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
+						{aiDeploymentFeatures.map((feature) => (
+							<div
+								key={feature.title}
+								className="rounded-xl border border-border/50 bg-card p-6"
+							>
+								<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
+									<feature.icon className="h-6 w-6" />
+								</div>
+								<h3 className="text-lg font-semibold">{feature.title}</h3>
+								<p className="mt-3 text-sm text-muted-foreground">
+									{feature.description}
+								</p>
+							</div>
+						))}
+					</div>
+					<div className="mx-auto mt-16 max-w-2xl rounded-xl border border-border/50 bg-card p-8 text-center">
+						<h3 className="text-xl font-semibold">Need a governed environment for AI tools?</h3>
+						<p className="mt-3 text-muted-foreground">
+							See how Dokploy handles sandboxed deploys, non-technical users, and enterprise security for AI-built apps.
+						</p>
+						<div className="mt-6">
+							<Button className="rounded-full" asChild>
+								<Link href="/enterprise">Deploy AI tools with Dokploy</Link>
+							</Button>
+						</div>
 					</div>
 				</Container>
 			</section>

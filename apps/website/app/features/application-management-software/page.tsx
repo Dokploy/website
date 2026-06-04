@@ -399,6 +399,53 @@ export default function ApplicationManagementSoftwarePage() {
 				</Container>
 			</section>
 
+			{/* Deploy AI in a controlled environment */}
+			<section className="border-b border-border/30 py-20 sm:py-32">
+				<Container>
+					<div className="mx-auto max-w-2xl text-center">
+						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
+							Deploy AI in a controlled environment
+						</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Use Dokploy to create sandbox environments separated from production infrastructure, where technical and non-technical employees can launch AI-coded apps safely.
+						</p>
+					</div>
+					<div className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-3">
+						{[
+							{
+								number: "1",
+								title: "Set up in minutes",
+								description:
+									"Create a sandboxed environment on your own infrastructure with a single command. Configure access controls, connect your Git repo, and your team's ready to deploy.",
+							},
+							{
+								number: "2",
+								title: "Deploy from any source",
+								description:
+									"Once Dokploy is set up, team members can take AI-coded apps from a Git repo, Docker image, or Compose file to a running environment without engineering support.",
+							},
+							{
+								number: "3",
+								title: "Monitor and recover fast",
+								description:
+									"Real-time metrics, centralized logs, RBAC, and quick rollback give your team full visibility and control over every AI-built app, so you can catch problems early before they reach production.",
+							},
+						].map((step) => (
+							<div
+								key={step.number}
+								className="relative rounded-xl border border-border/50 bg-card p-6"
+							>
+								<div className="absolute right-6 top-6 font-display text-4xl font-bold text-primary/30">
+									{step.number}
+								</div>
+								<h3 className="text-lg font-semibold">{step.title}</h3>
+								<p className="mt-3 text-sm text-muted-foreground">{step.description}</p>
+							</div>
+						))}
+					</div>
+				</Container>
+			</section>
+
 			{/* Take control of your application landscape */}
 			<section className="border-b border-border/30 bg-black py-20 sm:py-32">
 				<Container>

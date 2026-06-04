@@ -23,6 +23,8 @@ import {
 	CheckCircle2,
 	Cloud,
 	Server,
+	Bot,
+	Cpu,
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -60,6 +62,18 @@ const controlFeatures = [
 		title: "Customize to your exact requirements",
 		description:
 			"SSH access, custom Docker images, environment variables, resource limits, and container orchestration settings—all configurable without waiting on a cloud provider.",
+	},
+	{
+		icon: Bot,
+		title: "Run your AI tools in-house",
+		description:
+			"Your AI tools run on your own server, so code, prompts, and outputs never leave your infrastructure. Create sandboxes where your team can deploy vibe-coded tools safely.",
+	},
+	{
+		icon: Cpu,
+		title: "Choose and switch your AI models",
+		description:
+			"You can run any open source model you want and swap it out without changing your stack, avoiding being tied to a single AI provider's pricing or availability.",
 	},
 ];
 
@@ -300,7 +314,7 @@ export default function SelfHostedPaasPage() {
 							decisions for you.
 						</p>
 					</div>
-					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
+					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
 						{controlFeatures.map((feature) => (
 							<div
 								key={feature.title}

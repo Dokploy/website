@@ -11,6 +11,10 @@ import {
 	Shield,
 	Users,
 	GitBranch,
+	ScrollText,
+	Box,
+	KeyRound,
+	RotateCcw,
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -254,6 +258,69 @@ export function EnterpriseLanding() {
 							Need the best of both worlds? Deploy Dokploy across multiple
 							environments with centralized management and unified monitoring.
 						</p>
+					</div>
+				</Container>
+			</section>
+
+			{/* AI governance section */}
+			<section className="py-20">
+				<Container>
+					<div className="mb-12 text-center">
+						<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
+							Enterprise-grade governance for AI-built apps
+						</h2>
+						<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+							AI tools have accelerated how teams ship software. Dokploy gives enterprises a safe way to do it, with audit trails, access controls, and isolated environments.
+						</p>
+					</div>
+
+					<div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						{[
+							{
+								icon: ScrollText,
+								title: "Audited deployments",
+								description:
+									"Every deployment triggered by an AI agent or team member is logged—who did what, when, and what changed.",
+							},
+							{
+								icon: Box,
+								title: "Sandbox environments",
+								description:
+									"AI-built apps run in isolated containers, separated from production infrastructure. Multitenancy keeps every workspace apart.",
+							},
+							{
+								icon: KeyRound,
+								title: "Controlled access",
+								description:
+									"Use fine-grained RBAC and SSO to decide who can deploy, see, and approve AI-built apps at every level of the organization.",
+							},
+							{
+								icon: RotateCcw,
+								title: "Instant rollback",
+								description:
+									"When an AI-built app behaves unexpectedly in production, roll back in seconds—no manual intervention, no downtime spiral.",
+							},
+						].map((item) => (
+							<div
+								key={item.title}
+								className="group rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black p-8 transition hover:border-border/60"
+							>
+								<div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 transition group-hover:bg-green-500/20">
+									<item.icon className="h-6 w-6 text-green-400" />
+								</div>
+								<h3 className="mb-3 text-lg font-semibold text-white">{item.title}</h3>
+								<p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+							</div>
+						))}
+					</div>
+
+					<div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-border/30 bg-gradient-to-r from-green-500/5 to-blue-500/5 p-8 text-center">
+						<p className="text-lg text-muted-foreground">
+							See how Dokploy handles AI deployment — from AI-generated code to a governed, production-ready environment.
+						</p>
+						<Button className="mt-6 rounded-full" asChild>
+							<Link href="/features/application-deployment-platform">Explore AI deployment</Link>
+						</Button>
 					</div>
 				</Container>
 			</section>

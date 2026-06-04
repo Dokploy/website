@@ -283,6 +283,30 @@ export default function DokployVsPortainerPage() {
 				</Container>
 			</section>
 
+			{/* Deploy AI tools in a secure environment */}
+			<section className="border-b border-border/30 py-20 sm:py-32">
+				<Container>
+					<div className="mx-auto max-w-3xl text-center">
+						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
+							Deploy AI tools in a secure environment
+						</h2>
+						<p className="mt-6 text-lg text-muted-foreground">
+							Create sandboxes with Dokploy that combine multitenancy, SSO, audit logs, and IP allowlisting in a single setup. Every deployment is logged, access is tied to your identity provider, workspaces are kept separate, and non-technical users can go from code to a running app without an engineer involved.
+						</p>
+					</div>
+					<div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-border/50 shadow-2xl">
+						<Image
+							src="/dashboard.png"
+							alt="Dokploy dashboard showing secure AI deployment environment"
+							width={1200}
+							height={750}
+							className="w-full object-cover"
+							sizes="(max-width: 768px) 100vw, 1200px"
+						/>
+					</div>
+				</Container>
+			</section>
+
 			{/* Dokploy integrates with the leading solutions */}
 			<section className="border-b border-border/30 py-20 sm:py-32">
 				<Container>

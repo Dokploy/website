@@ -3,7 +3,7 @@ import { CallToAction } from "@/components/CallToAction";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Cpu, Plug, LayoutDashboard, Bell } from "lucide-react";
+import { Check, X, Zap, Cpu, Plug, LayoutDashboard, Bell, Bot } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -71,6 +71,12 @@ const whyChooseItems = [
 		title: "Know what's happening before it's a problem",
 		description:
 			"Built-in metrics, automated alerting, and volume backups make Dokploy ideal for serious deployments. Monitor CPU, memory, and disk usage, automate notifications, and keep data safe with S3-compatible backups.",
+	},
+	{
+		icon: Bot,
+		title: "Deploy apps built with AI tools",
+		description:
+			"Provide your team with a governed environment to ship AI-built apps, including sandboxed environments, enterprise security, and a path from AI-generated code to a live URL.",
 	},
 ];
 
@@ -276,6 +282,16 @@ export default function DokployVsCoolifyPage() {
 											<Image
 												src="/images/dokploy-create-backup.png"
 												alt="Dokploy Create Backup modal for database and volume backups"
+												fill
+												className="object-cover object-top"
+												sizes="(max-width: 768px) 100vw, 50vw"
+											/>
+										</div>
+									) : index === 5 ? (
+										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
+											<Image
+												src="/images/dokploy-projects-dashboard.png"
+												alt="Dokploy projects dashboard showing AI app deployments"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"
