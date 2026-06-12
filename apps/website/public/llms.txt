@@ -1,0 +1,91 @@
+# Dokploy
+
+> Dokploy is a self-hostable Platform as a Service (PaaS) that simplifies the deployment and management of applications and databases. The core product is open source and free to self-host, making it a compelling alternative to platforms like Heroku, Vercel, and Netlify. It is built on Docker and Traefik, and is available as a self-hosted installation or as a managed cloud product. Enterprise features—including SSO, fine-grained RBAC, audit logs, and white labelling—require a commercial licence. Dokploy is designed for individual developers, small teams, and large enterprises alike.
+
+Dokploy lets teams deploy any application—using Nixpacks, Heroku Buildpacks, or a custom Dockerfile—alongside databases and Docker Compose stacks, across single or multiple servers. It supports Docker Swarm for clustering, real-time monitoring, automated backups, and granular role-based access control. AI-assisted deployments are supported via an MCP (Model Context Protocol) server, enabling AI agents and tools to interact with Dokploy directly.
+
+Key facts:
+- Core product is open source (GitHub: github.com/dokploy/dokploy) with 26,000+ stars and 200+ contributors; enterprise features require a commercial licence
+- Over 6 million DockerHub downloads
+- Supports MySQL, PostgreSQL, MongoDB, MariaDB, and Redis with built-in backup management
+- Multi-server and Docker Swarm cluster support with zero-configuration setup
+- Enterprise features include SSO/SAML (Okta, Azure), fine-grained RBAC, audit logs, and white labelling
+- One-click templates for popular tools including Supabase, Cal.com, and PocketBase
+- Full REST API, CLI access, and Swagger documentation
+- Notifications via Slack, Discord, Telegram, email, and webhooks
+
+## Docs
+
+- [Welcome to Dokploy](https://docs.dokploy.com/docs/core): Overview, philosophy, and getting started
+- [Architecture](https://docs.dokploy.com/docs/core/architecture): How Dokploy's core components fit together
+- [Features](https://docs.dokploy.com/docs/core/features): Full feature list
+- [Installation](https://docs.dokploy.com/docs/core/installation): Install Dokploy on a server with a single command
+- [Manual Installation](https://docs.dokploy.com/docs/core/manual-installation): Step-by-step manual setup
+- [Applications](https://docs.dokploy.com/docs/core/applications): Deploy and manage applications
+- [Docker Compose](https://docs.dokploy.com/docs/core/docker-compose): Native Docker Compose support
+- [Databases](https://docs.dokploy.com/docs/core/databases): Deploy and manage databases
+- [Domains](https://docs.dokploy.com/docs/core/domains): Custom domain and SSL/TLS configuration
+- [Environment Variables](https://docs.dokploy.com/docs/core/variables): Manage environment variables across services
+- [Backups](https://docs.dokploy.com/docs/core/backups): Volume and database backup configuration
+- [Remote Servers](https://docs.dokploy.com/docs/core/remote-servers): Multi-server deployment setup
+- [Cluster (Docker Swarm)](https://docs.dokploy.com/docs/core/cluster): Scale with Docker Swarm
+- [Auto Deploy](https://docs.dokploy.com/docs/core/auto-deploy): Trigger deployments automatically via webhooks
+- [Schedule Jobs](https://docs.dokploy.com/docs/core/schedule-jobs): Scheduled tasks and cron jobs
+- [AI Assistant](https://docs.dokploy.com/docs/core/ai): AI-assisted deployment and MCP integration
+- [Multi-Tenancy](https://docs.dokploy.com/docs/core/multi-tenancy): Organisation and project isolation
+- [Monitoring](https://docs.dokploy.com/docs/core/monitoring): Real-time CPU, memory, and network metrics
+- [SSH Keys](https://docs.dokploy.com/docs/core/ssh-keys): Manage SSH key access
+- [Certificates](https://docs.dokploy.com/docs/core/certificates): TLS certificate management
+- [Registry](https://docs.dokploy.com/docs/core/registry): Docker registry configuration
+- [Troubleshooting](https://docs.dokploy.com/docs/core/troubleshooting): Common issues and fixes
+- [Dokploy Cloud vs Self-Hosted](https://docs.dokploy.com/docs/core/differences): Feature and operational differences
+
+## Enterprise docs
+
+- [Enterprise Introduction](https://docs.dokploy.com/docs/core/enterprise): Overview of enterprise capabilities
+- [License Keys](https://docs.dokploy.com/docs/core/enterprise/license-keys): Activating enterprise features
+- [SSO](https://docs.dokploy.com/docs/core/enterprise/sso): Single sign-on with Okta, Azure, and more
+- [Custom Roles](https://docs.dokploy.com/docs/core/enterprise/custom-roles): Fine-grained RBAC configuration
+- [Audit Logs](https://docs.dokploy.com/docs/core/enterprise/audit-logs): Track changes across your organisation
+- [White Labelling](https://docs.dokploy.com/docs/core/enterprise/whitelabeling): Brand Dokploy for your organisation or customers
+
+## Product pages
+
+- [Home](https://dokploy.com/): Product overview
+- [Application Deployment Platform](https://dokploy.com/features/application-deployment-platform): Deploy apps from any source
+- [Database Management](https://dokploy.com/features/database-management-tool): Manage and back up databases
+- [Deploy AI](https://dokploy.com/deploy-ai): Deploy AI-built apps in a governed sandbox with MCP, SSO, and multitenancy
+- [Self-Hosted PaaS](https://dokploy.com/self-hosted-paas): Run Dokploy on your own infrastructure
+- [Enterprise](https://dokploy.com/enterprise): Enterprise-grade features and support
+- [RBAC](https://dokploy.com/features/role-based-access-control): Role-based access control
+- [SSO](https://dokploy.com/features/single-sign-on): Single sign-on integrations
+- [Audit Logs](https://dokploy.com/features/audit-logs): Compliance and change tracking
+- [White Labelling](https://dokploy.com/features/white-labeling): Rebrand Dokploy for agency or reseller use
+
+## Pricing
+
+- [Pricing](https://dokploy.com/pricing): Hobby ($4.50/mo per server), Startup (from $15/mo), Enterprise (contact sales), and Agency plans. The core product is open source and free to self-host; enterprise features (SSO, fine-grained RBAC, audit logs, white labelling) require a commercial licence.
+
+## Compare & learn
+
+- [Dokploy vs Coolify](https://dokploy.com/dokploy-vs-coolify)
+- [Dokploy vs Portainer](https://dokploy.com/dokploy-vs-portainer)
+- [Dokploy vs CapRover](https://dokploy.com/dokploy-vs-caprover)
+- [Dokploy vs Dokku](https://dokploy.com/dokploy-vs-dokku)
+- [Feature Comparison](https://docs.dokploy.com/docs/core/comparison)
+
+## Resources
+
+- [Blog](https://dokploy.com/blog): Deployment guides and product updates
+- [Documentation](https://docs.dokploy.com/docs/core): Full technical documentation
+- [Guides: Cloudflare Tunnels](https://docs.dokploy.com/docs/core/guides/cloudflare-tunnels)
+- [Guides: EC2 Setup](https://docs.dokploy.com/docs/core/guides/ec2-instructions)
+- [Partners / Agency Programme](https://dokploy.com/partners)
+
+## External pages
+
+- [GitHub Repository](https://github.com/dokploy/dokploy): Source code, issues, and contributions
+- [Discord Community](https://discord.gg/2tBnJ3jDJc): Community support
+- [X / Twitter](https://x.com/getdokploy): Product updates
+- [Careers](https://dokploy.com/jobs): Open roles at Dokploy
+- [Contact / Sales](https://dokploy.com/contact): Enterprise and agency enquiries
