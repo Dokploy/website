@@ -224,7 +224,13 @@ export default function TermsOfServicePage() {
 				</p>
 				<p>
 					If you discover a violation of the AUP, you must report it within 24
-					(twenty-four) hours of the discovery to &lt;insert contact email&gt;
+					(twenty-four) hours of the discovery to{" "}
+					<a
+						href="mailto:contact@dokploy.com"
+						className="text-primary underline hover:no-underline"
+					>
+						contact@dokploy.com
+					</a>{" "}
 					with as much information as you have including, but not limited to,
 					the date and time of the violation and any identifying information
 					regarding the violator including e-mail or IP address, if available.
@@ -486,6 +492,34 @@ export default function TermsOfServicePage() {
 				<p>
 					You retain all intellectual property rights in applications, code, and
 					content you develop or deploy using the Services.
+				</p>
+				<h3 className="text-xl font-medium">10.4 Marketing Rights</h3>
+				<h4 className="text-lg font-medium">10.4.1 Customer Logo and Name</h4>
+				<p>
+					By accepting these Terms, you grant Dokploy a limited, non-exclusive,
+					royalty-free, worldwide license to use your company name, logo, and
+					trademarks solely for the purpose of identifying you as a customer of
+					Dokploy in marketing materials, case studies, website pages (including
+					a &quot;customers&quot; or &quot;trusted by&quot; page), press
+					releases, and investor presentations (&quot;Marketing Use&quot;).
+				</p>
+				<h4 className="text-lg font-medium">10.4.2 Restrictions</h4>
+				<p>
+					Dokploy&apos;s Marketing Use of your name and logo is subject to the
+					following conditions: (a) Dokploy shall use your logo only in the form
+					you have provided or approved, and in accordance with any brand
+					guidelines you provide in writing; (b) nothing in this Section grants
+					Dokploy the right to imply your endorsement of any specific Dokploy
+					product, feature, or statement without your prior written consent; and
+					(c) Dokploy shall not use your name or logo in any manner that is
+					disparaging, misleading, or otherwise harmful to your brand or
+					reputation.
+				</p>
+				<h4 className="text-lg font-medium">10.4.3 No Further Rights</h4>
+				<p>
+					Except as expressly set forth in this Section 10.4, nothing in these
+					Terms grants either party any rights in the other party&apos;s
+					trademarks, service marks, or logos.
 				</p>
 			</section>
 
@@ -751,6 +785,10 @@ export default function TermsOfServicePage() {
 					purposes only. This Agreement may be executed in counterparts
 					(including electronic copies and PDFs), each of which is deemed an
 					original and which together form one and the same Agreement.
+					Modifications to these standard Terms are not permitted except by a
+					separately executed Order Form or Enterprise Agreement. Custom
+					commercial terms, including amendments to these Terms, are available
+					under Dokploy&apos;s Enterprise plan.
 				</p>
 				<h3 className="text-xl font-medium">20.2 Waivers and Severability</h3>
 				<p>
