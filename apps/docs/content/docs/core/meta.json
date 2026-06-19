@@ -62,6 +62,7 @@
 		"enterprise/audit-logs",
 		"---Guides---",
 		"guides/cloudflare-tunnels",
+		"guides/cloudflare-mesh",
 		"guides/tailscale",
 		"guides/ec2-instructions"
 	]
