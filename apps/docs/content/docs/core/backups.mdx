@@ -26,6 +26,33 @@ When a backup is created, Dokploy will:
 - Combine and compress both into a single backup file (.zip)
 - Upload the backup to your specified S3 destination
 
+### Custom File Name Format
+
+You can customize the backup file name using the **File Name Format** option. This allows you to define a pattern using variables that will be replaced when the backup is created.
+
+#### Available Variables
+
+| Variable | Description | Example Output |
+|----------|-------------|----------------|
+| `{timestamp}` | Full ISO timestamp | `2024-01-15T10:30:00` |
+| `{date}` | Date only | `2024-01-15` |
+| `{time}` | Time only (file-safe) | `10-30-00` |
+| `{year}` | Year | `2024` |
+| `{month}` | Month (zero-padded) | `01` |
+| `{day}` | Day (zero-padded) | `15` |
+| `{hour}` | Hour (zero-padded) | `10` |
+| `{minute}` | Minute (zero-padded) | `30` |
+| `{epoch}` | Unix timestamp | `1705315800` |
+| `{uuid}` | Full UUID | `550e8400-e29b-41d4-a716-446655440000` |
+| `{shortUuid}` | 8-character UUID | `550e8400` |
+
+#### Example Formats
+
+- `dokploy-{date}` → `dokploy-2024-01-15`
+- `backup-{timestamp}` → `backup-2024-01-15T10:30:00`
+- `{year}/{month}/dokploy-{day}` → `2024/01/dokploy-15`
+- `dokploy-{shortUuid}` → `dokploy-550e8400`
+
 ## Restoring Backups
 
 To restore a backup:
