@@ -67,7 +67,7 @@ const whyChooseItems = [
 		description:
 			"Dokku requires SSH access and CLI commands for every operation—deploying, scaling, configuring domains, managing databases. Dokploy puts all of that in a visual dashboard. Connect your repo, configure your service, and deploy—all without touching a terminal. You still get full Docker access when you need it.",
 		image: {
-			src: "/images/dokploy-deployment-log.png",
+			src: "/images/dokploy-build-logs.png",
 			alt: "Dokploy deployment panel showing build and deployment logs",
 		},
 	},
@@ -78,7 +78,7 @@ const whyChooseItems = [
 			"Dokku has no built-in monitoring or backup system—you'd need to set up separate tools and cron jobs. Dokploy includes real-time CPU, memory, and disk metrics, automated alerts, and scheduled S3-compatible backups for both databases and Docker volumes from day one.",
 		image: {
 			src: "/images/dokploy-monitoring-dashboard.png",
-			alt: "Dokploy monitoring dashboard showing CPU, memory, disk and I/O metrics",
+			alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
 		},
 	},
 	{
@@ -87,8 +87,8 @@ const whyChooseItems = [
 		description:
 			"Dokku is fundamentally a single-server, single-user tool. Dokploy supports multi-user access with role-based permissions, project organization, and multi-server deployments. When your project grows from a solo effort to a team operation, Dokploy scales with you.",
 		image: {
-			src: "/images/dokploy-projects-dashboard.png",
-			alt: "Dokploy projects dashboard with services grid and environment selector",
+			src: "/images/dokploy-environments.png",
+			alt: "Dokploy project organization with production and staging environments",
 		},
 	},
 	{
@@ -97,8 +97,8 @@ const whyChooseItems = [
 		description:
 			"With Dokku, databases, SSL, and domains each require separate plugins and CLI commands. Dokploy integrates database management, domain configuration, SSL certificates, Docker Compose, and deployment pipelines into a single, cohesive interface—reducing context-switching and operational overhead.",
 		image: {
-			src: "/images/dokploy-provider-settings.png",
-			alt: "Dokploy deploy settings with provider and domain configuration",
+			src: "/images/dokploy-domains.png",
+			alt: "Dokploy domains configuration with automatic HTTPS certificates",
 		},
 	},
 	{
@@ -107,7 +107,7 @@ const whyChooseItems = [
 		description:
 			"Dokploy gives teams built-in role-based access and project organization in the UI, so you can manage services, databases, and infrastructure as you grow across multiple servers—with the right level of oversight for developers seeking control without handing out broad server access. Dokku user access starts at the SSH key level. More granular control for users with specific needs depends on extra plugins or tooling.",
 		image: {
-			src: "/images/dokploy-projects-dashboard.png",
+			src: "/images/dokploy-users.png",
 			alt: "Dokploy team access and role-based permissions dashboard",
 		},
 	},

@@ -67,7 +67,7 @@ const whyChooseItems = [
 		description:
 			"CapRover is great for getting a single app online fast, but Dokploy handles the full deployment lifecycle. From git-connected builds with Nixpacks and Buildpacks to Docker Compose orchestration, preview deployments, and multi-server scaling—Dokploy grows with your project instead of hitting a ceiling.",
 		image: {
-			src: "/images/dokploy-deployment-log.png",
+			src: "/images/dokploy-build-logs.png",
 			alt: "Dokploy deployment panel showing build and deployment logs",
 		},
 	},
@@ -78,7 +78,7 @@ const whyChooseItems = [
 			"CapRover doesn't include built-in monitoring or backup tools—you'd need to bolt on Prometheus, Grafana, or custom scripts. Dokploy ships with real-time CPU, memory, and disk metrics, automated alerting, and scheduled S3-compatible backups for databases and volumes, all in one dashboard.",
 		image: {
 			src: "/images/dokploy-monitoring-dashboard.png",
-			alt: "Dokploy monitoring dashboard showing CPU, memory, disk and I/O metrics",
+			alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
 		},
 	},
 	{
@@ -87,8 +87,8 @@ const whyChooseItems = [
 		description:
 			"CapRover is designed for single-user setups with no built-in team management, RBAC, or project organization. Dokploy supports multiple users, role-based permissions, and project grouping out of the box—making it ready for teams and agencies, not just solo side projects.",
 		image: {
-			src: "/images/dokploy-projects-dashboard.png",
-			alt: "Dokploy projects dashboard with services grid and environment selector",
+			src: "/images/dokploy-users.png",
+			alt: "Dokploy team members with role-based access permissions",
 		},
 	},
 	{
@@ -97,8 +97,8 @@ const whyChooseItems = [
 		description:
 			"Dokploy's UI is built with Next.js and TypeScript, offering a fast, consistent experience with predictable workflows. CapRover's captain dashboard is functional but dated, and many operations require CLI commands or manual configuration. Dokploy keeps everything accessible in the browser.",
 		image: {
-			src: "/images/dokploy-provider-settings.png",
-			alt: "Dokploy deploy settings with provider and domain configuration",
+			src: "/images/dokploy-projects-dashboard.png",
+			alt: "Dokploy dashboard with projects and services grid",
 		},
 	},
 ];

@@ -68,7 +68,7 @@ const whyChooseItems = [
 		description:
 			"Dokploy is a full deployment platform. Connect your git repos, and it handles the rest: building code, running it in containers, routing traffic through its built-in reverse proxy, and issuing SSL certificates automatically. Whether you're deploying web apps with Docker Compose files or spinning up databases on a cheap VPS, there's no bash script to maintain and no separate proxy to configure.",
 		image: {
-			src: "/images/dokploy-deployment-log.png",
+			src: "/images/dokploy-build-logs.png",
 			alt: "Dokploy deployment panel showing build and deployment logs",
 		},
 	},
@@ -78,8 +78,8 @@ const whyChooseItems = [
 		description:
 			"Dokploy offers SSL, built-in reverse proxy, and managed domains and cert issuance encryption. It ships with Traefik integrated, so assigning a domain to a service and getting a valid HTTPS certificate is a few clicks in the UI. You can also manage Traefik config directly via the file editor if you need more control.",
 		image: {
-			src: "/images/dokploy-provider-settings.png",
-			alt: "Dokploy deploy settings with provider and domain configuration",
+			src: "/images/dokploy-domains.png",
+			alt: "Dokploy domains configuration with automatic HTTPS certificates",
 		},
 	},
 	{
@@ -89,7 +89,7 @@ const whyChooseItems = [
 			"Dokploy has real-time CPU, memory, and disk metrics enabled by default, automated alerts, and scheduled S3-compatible database and volume backups built in. There's less to install, less to maintain, and less to go wrong. Troubleshooting is also simpler: logs, metrics, and alerts all live in the same UI.",
 		image: {
 			src: "/images/dokploy-monitoring-dashboard.png",
-			alt: "Dokploy monitoring dashboard showing CPU, memory, disk and I/O metrics",
+			alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
 		},
 	},
 	{
@@ -296,8 +296,8 @@ export default function DokployVsPortainerPage() {
 					</div>
 					<div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-border/50 shadow-2xl">
 						<Image
-							src="/dashboard.png"
-							alt="Dokploy dashboard showing secure AI deployment environment"
+							src="/images/dokploy-audit-logs.png"
+							alt="Dokploy audit logs tracking every deployment and user action"
 							width={1200}
 							height={750}
 							className="w-full object-cover"

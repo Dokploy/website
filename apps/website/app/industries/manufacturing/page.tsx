@@ -135,7 +135,7 @@ const data: IndustryPageData = {
 			"Self-hosted and cloud deployment options let organizations choose a model that fits their operational and IT requirements.",
 		],
 		screenshotAlt:
-			"Dokploy dashboard for a manufacturing operations project with environments for plant-a-staging, plant-a-production, and regional-demo, plus logs, monitoring, domains, and server status",
+			"Dokploy dashboard for a manufacturing operations project with production and staging environments and running services",
 	},
 	detailRows: [
 		{

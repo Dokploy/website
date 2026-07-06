@@ -127,7 +127,7 @@ const data: IndustryPageData = {
 			"Teams can run Dokploy in the model that fits their requirements. Use Dokploy Cloud when you want the control plane managed by Dokploy and apps running on your own servers, or choose self-hosting when the full platform should stay under internal operations.",
 		],
 		screenshotAlt:
-			"Dokploy project dashboard for a banking platform with environments for review, staging, and production, plus visible deployments, logs, monitoring, domains, and rollback history",
+			"Dokploy project dashboard for a banking platform with separate production and staging environments and running services",
 	},
 	detailRows: [
 		{

@@ -134,7 +134,7 @@ const data: IndustryPageData = {
 			"For larger agencies, Enterprise features add SSO, custom roles, audit logs, and whitelabeling, making it easier to give internal teams and client stakeholders the right level of access without handing over raw server credentials.",
 		],
 		screenshotAlt:
-			"Dokploy dashboard showing agency projects grouped by client, with one app open to preview deployments, production domains, logs, monitoring, and database services",
+			"Dokploy dashboard showing an agency project with web, API, database and worker services, and an environment selector with production and staging",
 	},
 	detailRows: [
 		{

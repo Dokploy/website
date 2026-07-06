@@ -127,7 +127,7 @@ const data: IndustryPageData = {
 			"For organizations with stricter infrastructure needs, Dokploy can be self-hosted. Teams that want Dokploy to manage the control plane can use Dokploy Cloud while connecting their own servers for application workloads.",
 		],
 		screenshotAlt:
-			"Dokploy dashboard for a healthcare technology project with environments for clinical-review, staging, and production, plus deployment logs, monitoring, domains, and database services",
+			"Dokploy dashboard for a healthcare technology project with production and staging environments and running services",
 	},
 	detailRows: [
 		{

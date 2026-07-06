@@ -274,8 +274,8 @@ export default function DokployVsRenderPage() {
 									{index === 0 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-provider-settings.png"
-												alt="Dokploy deploy settings showing server and provider configuration"
+												src="/images/dokploy-remote-servers.png"
+												alt="Dokploy remote servers showing connected VPS infrastructure"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"
@@ -284,8 +284,8 @@ export default function DokployVsRenderPage() {
 									) : index === 1 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-deployment-log.png"
-												alt="Dokploy deployment panel showing build and deployment logs"
+												src="/images/dokploy-compose-editor.png"
+												alt="Dokploy Docker Compose editor with multi-service configuration"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"
@@ -305,7 +305,7 @@ export default function DokployVsRenderPage() {
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
 												src="/images/dokploy-monitoring-dashboard.png"
-												alt="Dokploy monitoring dashboard showing CPU, memory, disk and I/O metrics"
+												alt="Dokploy monitoring dashboard showing CPU, memory and disk metrics"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"
@@ -314,8 +314,8 @@ export default function DokployVsRenderPage() {
 									) : (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-projects-dashboard.png"
-												alt="Dokploy projects dashboard showing AI app deployments"
+												src="/images/dokploy-audit-logs.png"
+												alt="Dokploy audit logs tracking deployments in governed environments"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"

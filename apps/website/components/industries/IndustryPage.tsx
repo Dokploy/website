@@ -226,7 +226,7 @@ export function IndustryPage({ data }: { data: IndustryPageData }) {
 						<div className="flex-1">
 							<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 								<Image
-									src="/images/dokploy-projects-dashboard.png"
+									src="/images/dokploy-environments.png"
 									alt={data.builtFor.screenshotAlt}
 									fill
 									className="object-cover object-top"

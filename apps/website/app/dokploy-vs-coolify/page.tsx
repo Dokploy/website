@@ -240,7 +240,7 @@ export default function DokployVsCoolifyPage() {
 									{index === 0 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-deployment-log.png"
+												src="/images/dokploy-build-logs.png"
 												alt="Dokploy deployment panel showing build and deployment logs"
 												fill
 												className="object-cover object-top"
@@ -251,7 +251,7 @@ export default function DokployVsCoolifyPage() {
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
 												src="/images/dokploy-monitoring-dashboard.png"
-												alt="Dokploy monitoring dashboard showing CPU, memory, disk and I/O metrics"
+												alt="Dokploy monitoring dashboard showing CPU, memory and disk metrics"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"
@@ -280,8 +280,8 @@ export default function DokployVsCoolifyPage() {
 									) : index === 4 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-create-backup.png"
-												alt="Dokploy Create Backup modal for database and volume backups"
+												src="/images/dokploy-backups.png"
+												alt="Dokploy scheduled database backups with S3 destination"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"
@@ -290,8 +290,8 @@ export default function DokployVsCoolifyPage() {
 									) : index === 5 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-projects-dashboard.png"
-												alt="Dokploy projects dashboard showing AI app deployments"
+												src="/images/dokploy-audit-logs.png"
+												alt="Dokploy audit logs tracking deployments in governed environments"
 												fill
 												className="object-cover object-top"
 												sizes="(max-width: 768px) 100vw, 50vw"

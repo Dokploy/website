@@ -136,7 +136,7 @@ const data: IndustryPageData = {
 			"The platform supports both self-hosted and cloud control-plane models, which gives infrastructure and compliance stakeholders room to choose how closely the deployment platform should sit inside the organization’s own environment.",
 		],
 		screenshotAlt:
-			"Dokploy dashboard for a pharmaceutical R&D platform with environments for validation, staging, and production, plus deployments, audit-oriented access controls, monitoring, logs, and database services",
+			"Dokploy dashboard for a pharmaceutical R&D platform with separate production and staging environments and running services",
 	},
 	detailRows: [
 		{
