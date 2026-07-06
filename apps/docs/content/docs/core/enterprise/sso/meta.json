@@ -5,6 +5,7 @@
 		"azure",
 		"keycloak",
 		"okta",
-		"zitadel"
+		"zitadel",
+		"application-authentication"
 	]
 }
