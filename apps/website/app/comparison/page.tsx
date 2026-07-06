@@ -44,6 +44,12 @@ const competitors = [
 		description:
 			"Compare Dokploy's self-hosted infrastructure ownership to Render's fully managed, per-service PaaS.",
 	},
+	{
+		name: "Vercel",
+		href: "/dokploy-vs-vercel",
+		description:
+			"See how Dokploy's Docker-native, full-stack deployment compares to Vercel's serverless, frontend-first platform.",
+	},
 ];
 
 const whyDokploy = [

@@ -73,6 +73,10 @@ const footerSections = [
 				href: "/dokploy-vs-render",
 				label: "Dokploy vs. Render",
 			},
+			{
+				href: "/dokploy-vs-vercel",
+				label: "Dokploy vs. Vercel",
+			},
 			{ href: "/blog", label: "Blog" },
 			{
 				href: "https://docs.dokploy.com/docs/core",
