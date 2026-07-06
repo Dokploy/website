@@ -1,0 +1,41 @@
+---
+title: Concurrent Builds
+description: "Learn how Dokploy manages build/deployment concurrency per server and how to configure it."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy processes deployments through a queue that is scoped **per server**. Every server, including the Dokploy server itself, has its own independent concurrency setting that controls how many builds can run at the same time on it.
+
+## How the Queue Works
+
+Each server (the local Dokploy server, and every remote/build server) has its own queue partition:
+
+- Jobs are grouped by server, so builds on different servers never block each other.
+- Within a server's queue, up to **N** jobs can run in parallel, where **N** is that server's configured concurrency.
+- Multiple builds of the **same application or Docker Compose service** are always serialized (FIFO), even if concurrency is greater than 1. This prevents two builds of the same service from colliding (same source directory, same container name, etc).
+
+This means increasing concurrency lets **different** applications on the same server build at the same time, it does not parallelize multiple deployments of the same app.
+
+## Default Concurrency
+
+By default, every server, the Dokploy server and any remote server, has a concurrency of **1**. This means builds on that server run one at a time.
+
+## Limits by Plan
+
+<Callout type="info">
+  Concurrent builds are a self-hosted feature and are configured per server. They are not available on Dokploy Cloud.
+</Callout>
+
+- **OSS (free)**: You can increase concurrency up to a maximum of **2** per server.
+- **Enterprise**: With a valid enterprise license, concurrency is **unlimited** and can be set to any value per server.
+
+If you set a value higher than 2 without a valid enterprise license, Dokploy will reject the change until a valid license is applied. If a license expires, concurrency is automatically clamped back down to the OSS limits so deployments keep working without breaking anything.
+
+## Configuring Concurrency
+
+1. Go to **Dashboard → Settings → Deployments**.
+2. Under **Dokploy Server**, set the concurrency for the local server.
+3. Under **Remote Servers**, set the concurrency for each remote or build server individually.
+
+Each server's concurrency is configured independently, so you can, for example, keep the Dokploy server at 1 while increasing concurrency on a dedicated [build server](/docs/core/remote-servers/build-server) with more resources.
