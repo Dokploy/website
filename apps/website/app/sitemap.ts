@@ -30,6 +30,17 @@ const comparisonPages = [
 	"/dokploy-vs-portainer",
 	"/dokploy-vs-caprover",
 	"/dokploy-vs-dokku",
+	"/dokploy-vs-render",
+	"/dokploy-vs-vercel",
+];
+
+const industryPages = [
+	"/industries",
+	"/industries/finance-banking",
+	"/industries/agencies",
+	"/industries/healthcare",
+	"/industries/manufacturing",
+	"/industries/pharmaceuticals",
 ];
 
 const legalPages = ["/terms-of-service", "/terms", "/privacy"];
@@ -68,6 +79,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			lastModified: now,
 			changeFrequency: "monthly" as const,
 			priority: 0.6,
+		})),
+		...industryPages.map((path) => ({
+			url: `${BASE_URL}${path}`,
+			lastModified: now,
+			changeFrequency: "monthly" as const,
+			priority: 0.7,
 		})),
 		...legalPages.map((path) => ({
 			url: `${BASE_URL}${path}`,

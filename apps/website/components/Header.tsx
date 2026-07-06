@@ -130,6 +130,7 @@ function MobileNavigation() {
 								<MobileNavLink href="/enterprise">Enterprise</MobileNavLink>
 								<MobileNavLink href="/partners">Partners</MobileNavLink>
 								<MobileNavLink href="/self-hosted-paas">Self-Hosted</MobileNavLink>
+								<MobileNavLink href="/industries">Industries</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink
 									href="https://docs.dokploy.com/docs/core"
@@ -279,6 +280,9 @@ export function Header() {
 												</ListItem>
 												<ListItem href="/self-hosted-paas" title="Self-Hosted">
 													Self-hosted PaaS built for developers
+												</ListItem>
+												<ListItem href="/industries" title="Industries">
+													Deployment solutions by industry
 												</ListItem>
 											</ul>
 										</NavigationMenuContent>

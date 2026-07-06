@@ -50,6 +50,17 @@ const footerSections = [
 		],
 	},
 	{
+		title: "Industries",
+		ariaLabel: "Industry solutions",
+		links: [
+			{ href: "/industries/finance-banking", label: "Finance & Banking" },
+			{ href: "/industries/agencies", label: "Agencies" },
+			{ href: "/industries/healthcare", label: "Healthcare" },
+			{ href: "/industries/manufacturing", label: "Manufacturing" },
+			{ href: "/industries/pharmaceuticals", label: "Pharmaceuticals" },
+		],
+	},
+	{
 		title: "Compare & Learn",
 		ariaLabel: "Comparisons and guides",
 		links: [
@@ -117,7 +128,7 @@ export function Footer() {
 					</div>
 
 					{/* Link columns - SEO-friendly grouping */}
-					<div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+					<div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
 						{footerSections.map((section) => (
 							<nav
 								key={section.title}
