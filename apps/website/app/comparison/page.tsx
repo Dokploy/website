@@ -38,6 +38,12 @@ const competitors = [
 		description:
 			"See how Dokploy's visual dashboard and built-in tooling compare to Dokku's CLI-first workflow.",
 	},
+	{
+		name: "Render",
+		href: "/dokploy-vs-render",
+		description:
+			"Compare Dokploy's self-hosted infrastructure ownership to Render's fully managed, per-service PaaS.",
+	},
 ];
 
 const whyDokploy = [
