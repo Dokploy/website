@@ -324,6 +324,18 @@ curl -sSL https://dokploy.com/install.sh | sh -s update
 
 The installation script automatically detects the latest stable version from GitHub. You can also specify a particular version:
 
+**Install a Specific Version (Recommended):**
+
+Every [Dokploy release](https://github.com/Dokploy/dokploy/releases) includes its own `install.sh` as a release asset, which installs exactly that version with the setup it expects. Just replace the version tag in the URL with the one you want:
+
+```bash
+curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.15.0/install.sh | sh
+```
+
+<Callout type='info'>
+  This is the recommended way to install older versions of Dokploy. The main script at `dokploy.com/install.sh` always targets the latest release, so its setup may not be compatible with older versions.
+</Callout>
+
 **Install/Update to Canary (Development):**
 ```bash
 export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
