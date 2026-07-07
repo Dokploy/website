@@ -148,7 +148,12 @@ install_dokploy() {
 
     # Check if running in Proxmox LXC container and set endpoint mode
     endpoint_mode=""
-    if is_proxmox_lxc; then
+    if [ "$ENDPOINT_MODE" = "dnsrr" ]; then
+        echo "ENDPOINT_MODE=dnsrr set — adding --endpoint-mode dnsrr to Docker services."
+        echo "Use this on kernels without IPVS support (e.g. ZimaOS / Buildroot-based images)."
+        echo ""
+        endpoint_mode="--endpoint-mode dnsrr"
+    elif is_proxmox_lxc; then
         echo "⚠️ WARNING: Detected Proxmox LXC container environment!"
         echo "Adding --endpoint-mode dnsrr to Docker services for LXC compatibility."
         echo "This may affect service discovery but is required for LXC containers."
