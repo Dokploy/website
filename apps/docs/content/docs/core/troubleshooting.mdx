@@ -627,22 +627,16 @@ docker service create \
 
 ### Recreate Dokploy Service
 
-First, get the private IP of your server for the ADVERTISE_ADDR:
-
-```bash
-# Get the private IP of your server (excludes Docker-created interfaces like docker0)
-ip -o -4 addr show scope global | awk '$2 !~ /^(docker|br-|veth)/ {print $4}' | cut -d/ -f1 | grep -E "^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)" | head -n1
-```
-
-Copy the IP address from the output and use it in the command below.
-
 Remove and recreate the dokploy service:
+
+<Callout type='info'>
+  If the `dokploy_auth_secret` secret doesn't exist on your server (installations older than v0.29.3), create it first: `openssl rand -hex 32 | docker secret create dokploy_auth_secret -`
+</Callout>
 
 ```bash
 docker service rm dokploy
 
 # Create the dokploy service
-# Replace <YOUR_PRIVATE_IP> with the IP you got from the command above
 docker service create \
   --name dokploy \
   --replicas 1 \
@@ -651,12 +645,13 @@ docker service create \
   --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
   --mount type=volume,source=dokploy,target=/root/.docker \
   --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
   --publish published=3000,target=3000,mode=host \
   --update-parallelism 1 \
   --update-order stop-first \
   --constraint 'node.role == manager' \
-  -e ADVERTISE_ADDR=<YOUR_PRIVATE_IP> \
   -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+  -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
   dokploy/dokploy:latest
 ```
 
@@ -671,13 +666,14 @@ docker service create \
   --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
   --mount type=volume,source=dokploy,target=/root/.docker \
   --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
   --publish published=3000,target=3000,mode=host \
   --update-parallelism 1 \
   --update-order stop-first \
   --constraint 'node.role == manager' \
   --endpoint-mode dnsrr \
-  -e ADVERTISE_ADDR=<YOUR_PRIVATE_IP> \
   -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+  -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
   dokploy/dokploy:latest
 ```
 

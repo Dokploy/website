@@ -322,7 +322,6 @@ install_dokploy() {
       --constraint 'node.role == manager' \
       $endpoint_mode \
       $release_tag_env \
-      -e ADVERTISE_ADDR=$advertise_addr \
       -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
       -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
       $DOCKER_IMAGE
