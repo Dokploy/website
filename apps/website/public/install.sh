@@ -291,14 +291,21 @@ install_dokploy() {
 
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
+    # POSIX-compatible (no [[ ]]): the script is documented as `curl ... | sh`,
+    # and on Debian/Ubuntu sh is dash, which has no [[ or =~ (issue #157)
     release_tag_env=""
-    if [[ "$VERSION_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-        # Specific version (v0.26.6, v0.26.7, etc.) → latest
-        release_tag_env="-e RELEASE_TAG=latest"
-    elif [ "$VERSION_TAG" != "latest" ]; then
-        # canary, feature/*, etc. → use the tag as-is
-        release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
-    fi
+    case "$VERSION_TAG" in
+        v[0-9]*.[0-9]*.[0-9]*)
+            # Specific version (v0.26.6, v0.26.7, etc.) → latest
+            release_tag_env="-e RELEASE_TAG=latest"
+            ;;
+        latest)
+            ;;
+        *)
+            # canary, feature/*, etc. → use the tag as-is
+            release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
+            ;;
+    esac
     
     docker service create \
       --name dokploy \
