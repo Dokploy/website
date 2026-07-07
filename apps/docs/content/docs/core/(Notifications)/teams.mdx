@@ -1,0 +1,23 @@
+---
+title: Microsoft Teams
+description: 'Configure Microsoft Teams notifications for your applications.'
+---
+
+Microsoft Teams notifications are a great way to stay up to date with important events in your Dokploy panel. You can choose to receive notifications for specific events or all events.
+
+## Microsoft Teams Notifications
+
+To start receiving Teams notifications, you need to fill the form with the following details:
+
+- **Name**: Enter any name you want.
+- **Webhook URL**: Enter the incoming webhook URL for your Teams channel (e.g. `https://outlook.office.com/webhook/...` or a URL from the Workflows app).
+
+To set up Microsoft Teams notifications, follow these steps:
+
+1. Open Microsoft Teams and go to the channel where you want to receive notifications.
+2. Click the **•••** (More options) next to the channel name and select **Connectors** or **Workflows**.
+3. **Option A – Incoming Webhook (Connectors):** Search for **Incoming Webhook**, configure it with a name (e.g. `Dokploy`), and copy the generated **Webhook URL**.
+4. **Option B – Workflows app:** Use the “Send webhook alerts to a channel” template, add the workflow to the channel, and copy the generated webhook URL.
+5. Go to Dokploy **Notifications** and select **Microsoft Teams** as the notification provider.
+6. Paste the **Webhook URL** you copied.
+7. Click **Test** to verify the connection, then click **Create** to save the notification.
