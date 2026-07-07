@@ -263,14 +263,6 @@ install_dokploy() {
     $endpoint_mode \
     postgres:16
 
-    docker service create \
-    --name dokploy-redis \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --mount type=volume,source=dokploy-redis,target=/data \
-    $endpoint_mode \
-    redis:7
-
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
     release_tag_env=""

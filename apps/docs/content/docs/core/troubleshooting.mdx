@@ -319,15 +319,18 @@ First, verify the running containers:
 docker ps
 ```
 
-You should see all four of these containers running:
+You should see all three of these containers running:
 ```bash
 2a5b955c32b6   dokploy/dokploy:latest      "docker-entrypoint.s…"   4 days ago     Up 4 days     0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                             dokploy.1.4bkuszk98muz372kw5mvwkw0h
 5a989bf52bc6   postgres:16                 "docker-entrypoint.s…"   4 days ago     Up 4 days     5432/tcp                                                                                                              dokploy-postgres.1.9hvjaxrmby7ex2denjtwo0csf
-a29d56342175   redis:7                     "docker-entrypoint.s…"   4 days ago     Up 4 days     6379/tcp                                                                                                              dokploy-redis.1.epl51a9bt8yr7ur0f1akeeyuk
 05be01c5612f   traefik:v2.5                "/entrypoint.sh trae…"   4 days ago     Up 4 days     0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   dokploy-traefik.1.2oktabjmfu558x2d2dy6czt8m
 ```
 
-If all four containers are running but you still can't access the interface, it's time to debug:
+<Callout type='info'>
+  **Note:** If you're running a version older than v0.29.9, you'll also see a `dokploy-redis` container. Redis is no longer used in self-hosted Dokploy since v0.29.9.
+</Callout>
+
+If all three containers are running but you still can't access the interface, it's time to debug:
 
 ### Debugging Process
 
@@ -337,7 +340,6 @@ Start by examining the logs of each container:
 ```bash
 docker service logs dokploy # Dokploy UI
 docker service logs dokploy-postgres # Postgres
-docker service logs dokploy-redis # Redis
 docker logs dokploy-traefik # Traefik
 ```
 
@@ -464,22 +466,9 @@ In the case you want to recreate the dokploy services, you can do the following:
   **Important:** Before recreating services, make sure you have backups of your data. Recreating services will not delete your volumes, but it's always good to have backups.
 </Callout>
 
-### Recreate Redis Service
+### Recreate Postgres Service
 
-Remove and recreate the dokploy-redis service:
-```bash
-docker service rm dokploy-redis
-
-# Create a new dokploy-redis service
-docker service create \
-  --name dokploy-redis \
-  --constraint 'node.role==manager' \
-  --network dokploy-network \
-  --mount type=volume,source=dokploy-redis,target=/data \
-  redis:7
-```
-
-Remove the dokploy-postgres service:
+Remove and recreate the dokploy-postgres service:
 
 ```bash
 docker service rm dokploy-postgres
@@ -501,6 +490,8 @@ docker service create \
   **Note:** Using Docker Secrets is the recommended approach for managing sensitive data like passwords. The secret is encrypted and only available to services that have been granted access to it.
 </Callout>
 
+
+### Recreate Traefik Service
 
 Remove the dokploy-traefik service:
 
