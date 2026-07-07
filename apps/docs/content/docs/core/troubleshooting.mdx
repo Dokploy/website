@@ -296,6 +296,69 @@ curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=your-ip sh
 Note: pass `ADVERTISE_ADDR` inline as shown above — if you `export` it in your shell and then run the script with `sudo`, the variable won't reach the script because `sudo` resets the environment.
 
 
+## Services Can't Reach Each Other (Missing IPVS Kernel Modules)
+
+Docker Swarm's default service discovery (**VIP mode**) assigns each service a virtual IP and load-balances traffic to it using **IPVS**, a Linux kernel feature. Some operating systems ship kernels without IPVS support — this is common on appliance-style or minimal distributions such as **ZimaOS** and other **Buildroot-based images**, and can also happen with custom-compiled kernels.
+
+On these systems the installation appears to succeed, but nothing works afterward:
+
+- The Dokploy UI never becomes reachable on port 3000 (Dokploy can't connect to its Postgres service)
+- Containers can resolve a service name to an IP, but connections to that IP hang or are refused
+- Tools like Cloudflare Tunnel (`cloudflared`) can't reach your applications via `<app-name>:<port>`
+
+### Cause
+
+VIP mode requires the following kernel features, which your kernel must have enabled:
+
+```
+CONFIG_IP_VS
+CONFIG_IP_VS_RR
+CONFIG_IP_VS_PROTO_TCP
+CONFIG_IP_VS_PROTO_UDP
+CONFIG_IP_VS_NFCT
+CONFIG_NETFILTER_XT_MATCH_IPVS
+CONFIG_NETFILTER_XT_MARK
+```
+
+You can check whether your kernel has them:
+
+```bash
+# Try loading the IPVS module
+sudo modprobe ip_vs && lsmod | grep ip_vs
+
+# Or inspect the kernel config directly
+grep -E 'CONFIG_IP_VS|CONFIG_NETFILTER_XT_MATCH_IPVS|CONFIG_NETFILTER_XT_MARK' /boot/config-$(uname -r)
+# On systems without /boot/config-*:
+zcat /proc/config.gz | grep -E 'CONFIG_IP_VS|CONFIG_NETFILTER_XT_MATCH_IPVS|CONFIG_NETFILTER_XT_MARK'
+```
+
+If `modprobe ip_vs` fails or the config options are missing (not set to `y` or `m`), your kernel can't run Swarm services in VIP mode.
+
+### Solution
+
+If you can't switch to a kernel with IPVS support, run Dokploy's services in **DNSRR mode** (DNS round-robin), which bypasses the IPVS-based load balancer entirely.
+
+**For a fresh installation**, pass `ENDPOINT_MODE=dnsrr` to the install script:
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sudo ENDPOINT_MODE=dnsrr sh
+```
+
+**For an existing installation**, switch the Dokploy services to DNSRR mode:
+
+```bash
+docker service update --endpoint-mode dnsrr dokploy-postgres
+docker service update --endpoint-mode dnsrr dokploy
+```
+
+### Reaching Your Deployed Applications
+
+Applications you deploy through Dokploy are still created as Swarm services in VIP mode. When another container (for example, a `cloudflared` tunnel) needs to reach one of them by name, use the `tasks.<app-name>:<port>` hostname instead of `<app-name>:<port>` — the `tasks.` prefix resolves directly to the container IPs, bypassing the broken VIP load balancer.
+
+<Callout type="warning">
+  DNSRR mode has trade-offs: there is no virtual IP load balancing, so traffic distribution relies on DNS round-robin only. Running multiple replicas of a service behind a single stable address won't work the way it does in VIP mode, and services in DNSRR mode can't publish ports in ingress mode (only `mode=host`). This is the same mechanism the install script applies automatically for Proxmox LXC containers.
+</Callout>
+
 ## Builds Failing with DNS Errors (Could Not Resolve Host)
 
 On some VPS providers, the default DNS servers configured on the host don't resolve properly inside Docker containers. This is commonly reported on **Hetzner Cloud**, whose default resolvers (`185.12.64.1` and `185.12.64.2`) can fail recursive resolution from within Docker build containers, but it can affect other providers with restricted or misbehaving resolvers as well.
