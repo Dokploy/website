@@ -1,10 +1,15 @@
 import { getHubSpotUTK, submitToHubSpot } from "@/lib/hubspot";
+import { notifySlack } from "@/lib/slack";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+const FREE_EMAIL_DOMAINS: Set<string> = new Set(require("free-email-domains"));
+
 interface ContactFormData {
-	inquiryType: "support" | "sales" | "other";
+	inquiryType: "support" | "sales";
+	teamSize?: string;
+	serverCount?: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -51,6 +56,17 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
+		// Reject free email providers for sales inquiries
+		if (body.inquiryType === "sales") {
+			const domain = body.email.split("@")[1]?.toLowerCase();
+			if (domain && FREE_EMAIL_DOMAINS.has(domain)) {
+				return NextResponse.json(
+					{ error: "Please use your work email address to contact sales" },
+					{ status: 400 },
+				);
+			}
+		}
+
 		// Submit to HubSpot if it's a sales inquiry
 		if (body.inquiryType === "sales") {
 			try {
@@ -70,8 +86,29 @@ export async function POST(request: NextRequest) {
 			}
 		}
 
+		// // Send notification to Slack (sales or support channel)
+		// try {
+		// 	const slackSuccess = await notifySlack(body);
+		// 	if (slackSuccess) {
+		// 		console.log(
+		// 			`Successfully sent ${body.inquiryType} inquiry notification to Slack`,
+		// 		);
+		// 	} else {
+		// 		console.warn(
+		// 			`Failed to send ${body.inquiryType} inquiry notification to Slack, but continuing with email`,
+		// 		);
+		// 	}
+		// } catch (error) {
+		// 	console.error("Error sending to Slack:", error);
+		// 	// Continue with email even if Slack fails
+		// }
+
 		// Format email content
 		const emailSubject = `[${body.inquiryType.toUpperCase()}] New contact form submission from ${body.firstName} ${body.lastName}`;
+		const salesFields =
+			body.inquiryType === "sales"
+				? `Employees: ${body.teamSize || "N/A"}\nServers: ${body.serverCount || "N/A"}\n`
+				: "";
 		const emailBody = `
 New contact form submission:
 
@@ -80,7 +117,7 @@ First Name: ${body.firstName}
 Last Name: ${body.lastName}
 Email: ${body.email}
 Company: ${body.company}
-
+${salesFields}
 Message:
 ${body.message}
 
@@ -89,12 +126,14 @@ Sent from Dokploy website contact form
 		`.trim();
 
 		// Send email to Dokploy team
+		const recipients =
+			body.inquiryType === "sales"
+				? ["sales@dokploy.com", "contact@dokploy.com"]
+				: ["support@dokploy.com"];
+
 		await resend.emails.send({
-			from: "Dokploy Contact Form <noreply@emails.dokploy.com>",
-			to:
-				body.inquiryType === "sales"
-					? ["sales@dokploy.com", "contact@dokploy.com"]
-					: ["contact@dokploy.com"],
+			from: "Dokploy Team <hello@notifications.dokploy.com>",
+			to: recipients,
 			subject: emailSubject,
 			text: emailBody,
 			replyTo: body.email,
@@ -125,7 +164,7 @@ If you need immediate assistance, contact us at contact@dokploy.com
 		`.trim();
 
 		await resend.emails.send({
-			from: "Dokploy Team <noreply@emails.dokploy.com>",
+			from: "Dokploy Team <hello@notifications.dokploy.com>",
 			to: [body.email],
 			subject: confirmationSubject,
 			text: confirmationBody,

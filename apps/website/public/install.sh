@@ -5,14 +5,33 @@ DOCKER_VERSION="28.5.0"
 
 # Detect version from environment variable or default to latest
 # Usage with curl (export first): export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
-# Usage with curl (export first): export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
+# Usage with curl (export first): export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
 # Usage with curl (bash -s): DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
-# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (defaults to latest)
+# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (detects latest stable version)
 # Usage with bash: DOKPLOY_VERSION=canary bash install.sh
-# Usage with bash: DOKPLOY_VERSION=feature bash install.sh
-# Usage with bash: bash install.sh (defaults to latest)
+# Usage with bash: DOKPLOY_VERSION=latest bash install.sh
+# Usage with bash: bash install.sh (detects latest stable version)
 detect_version() {
-    local version="${DOKPLOY_VERSION:-latest}"
+    local version="${DOKPLOY_VERSION}"
+    
+    # If no version specified, get latest stable version from GitHub releases
+    if [ -z "$version" ]; then
+        echo "Detecting latest stable version from GitHub..." >&2
+        
+        # Try to get latest release from GitHub by following redirects
+        version=$(curl -fsSL -o /dev/null -w '%{url_effective}\n' \
+            https://github.com/dokploy/dokploy/releases/latest 2>/dev/null | \
+            sed 's#.*/tag/##')
+        
+        # Fallback to latest tag if detection fails
+        if [ -z "$version" ]; then
+            echo "Warning: Could not detect latest version from GitHub, using fallback version latest" >&2
+            version="latest"
+        else
+            echo "Latest stable version detected: $version" >&2
+        fi
+    fi
+    
     echo "$version"
 }
 
@@ -29,6 +48,37 @@ is_proxmox_lxc() {
     fi
     
     return 1  # Not LXC
+}
+
+generate_random_password() {
+    # Generate a secure random password using multiple methods with fallbacks
+    local password=""
+    
+    # Try using openssl (most reliable, available on most systems)
+    if command -v openssl >/dev/null 2>&1; then
+        password=$(openssl rand -base64 32 | tr -d "=+/" | cut -c1-32)
+    # Fallback to /dev/urandom with tr (most Linux systems)
+    elif [ -r /dev/urandom ]; then
+        password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32)
+    # Last resort fallback using date and simple hashing
+    else
+        if command -v sha256sum >/dev/null 2>&1; then
+            password=$(date +%s%N | sha256sum | base64 | head -c 32)
+        elif command -v shasum >/dev/null 2>&1; then
+            password=$(date +%s%N | shasum -a 256 | base64 | head -c 32)
+        else
+            # Very basic fallback - combines multiple sources of entropy
+            password=$(echo "$(date +%s%N)-$(hostname)-$$-$RANDOM" | base64 | tr -d "=+/" | head -c 32)
+        fi
+    fi
+    
+    # Ensure we got a password of correct length
+    if [ -z "$password" ] || [ ${#password} -lt 20 ]; then
+        echo "Error: Failed to generate random password" >&2
+        exit 1
+    fi
+    
+    echo "$password"
 }
 
 install_dokploy() {
@@ -89,7 +139,7 @@ install_dokploy() {
     endpoint_mode=""
     if is_proxmox_lxc; then
         echo "⚠️ WARNING: Detected Proxmox LXC container environment!"
-        echo "Adding --endpoint-mode dnsrr to Docker service for LXC compatibility."
+        echo "Adding --endpoint-mode dnsrr to Docker services for LXC compatibility."
         echo "This may affect service discovery but is required for LXC containers."
         echo ""
         endpoint_mode="--endpoint-mode dnsrr"
@@ -185,14 +235,30 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
+    # Generate secure random password for Postgres
+    POSTGRES_PASSWORD=$(generate_random_password)
+
+    # Store password as Docker Secret (encrypted and secure)
+    echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
+
+    # Generate secure auth secret for Better Auth
+    AUTH_SECRET=$(openssl rand -hex 32)
+
+    # Store auth secret as Docker Secret (encrypted and secure)
+    echo "$AUTH_SECRET" | docker secret create dokploy_auth_secret - 2>/dev/null || true
+
+    echo "Generated secure database credentials and auth secret (stored in Docker Secrets)"
+
     docker service create \
     --name dokploy-postgres \
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+    --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+    --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
     --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
+    $endpoint_mode \
     postgres:16
 
     docker service create \
@@ -200,12 +266,17 @@ install_dokploy() {
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --mount type=volume,source=dokploy-redis,target=/data \
+    $endpoint_mode \
     redis:7
 
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
     release_tag_env=""
-    if [ "$VERSION_TAG" != "latest" ]; then
+    if [[ "$VERSION_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+        # Specific version (v0.26.6, v0.26.7, etc.) → latest
+        release_tag_env="-e RELEASE_TAG=latest"
+    elif [ "$VERSION_TAG" != "latest" ]; then
+        # canary, feature/*, etc. → use the tag as-is
         release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
     fi
     
@@ -216,6 +287,8 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
+      --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+      --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
@@ -223,6 +296,8 @@ install_dokploy() {
       $endpoint_mode \
       $release_tag_env \
       -e ADVERTISE_ADDR=$advertise_addr \
+      -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+      -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
       $DOCKER_IMAGE
 
     sleep 4
@@ -236,7 +311,7 @@ install_dokploy() {
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
-        traefik:v3.6.1
+        traefik:v3.6.7
     
     docker network connect dokploy-network dokploy-traefik
 
@@ -252,7 +327,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.6.1
+    #     traefik:v3.6.7
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"

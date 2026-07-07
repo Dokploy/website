@@ -20,6 +20,21 @@ UFW is an essential security component that manages incoming and outgoing networ
 - ✅ Default incoming policy should be set to 'deny'
 - ✅ Only necessary ports should be opened
 
+<Callout type="warn">
+  **Important: Docker Bypasses UFW Rules**
+
+  Docker directly modifies `iptables` rules, which means it bypasses UFW firewall rules. This is a critical security issue: **ports exposed by Docker containers remain accessible from the public internet even when UFW rules should block them**, creating a false sense of security.
+
+  For example, if you have UFW configured to deny all incoming traffic by default, but you run a Docker container with `-p 3000:3000`, port 3000 will still be accessible from the internet despite your UFW configuration.
+
+  **Solutions:**
+
+  - **ufw-docker**: Use the [ufw-docker](https://github.com/chaifeng/ufw-docker) utility to properly integrate Docker with UFW, ensuring that Docker containers respect UFW firewall rules.
+
+  - **VPS Provider Firewall**: Configure your cloud provider's firewall (e.g., AWS Security Groups, DigitalOcean Firewalls) to block public access to Docker-exposed ports. This operates before Docker's iptables rules and provides reliable protection.
+
+</Callout>
+
 ### SSH Security
 Secure Shell (SSH) configuration is crucial for safe remote server access.
 

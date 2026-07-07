@@ -18,9 +18,32 @@ Dokploy provides two methods for creating Docker Compose configurations:
 
 Configure the source of your code, the way your application is built, and also manage actions like deploying, updating, and deleting your application, and stopping it.
 
-### Enviroment
+### Environment
 
-A code editor within Dokploy allows you to specify environment variables for your Docker Compose file. By default, Dokploy creates a `.env` file in the specified Docker Compose file path.
+The code editor in Dokploy allows you to define environment variables for your Docker Compose deployment. By default, Dokploy saves these variables to a `.env` file in the same directory as your `docker-compose.yml`.
+
+<Callout type="warning">
+Environment variables set in the UI are written to the `.env` file, but are **not automatically injected into containers**. You have two options:
+
+**1. Inject all variables** — Use the `env_file` option in your `docker-compose.yml` to load every variable from the `.env` file into the container:
+
+```yaml
+services:
+  app:
+    env_file:
+      - .env
+```
+
+**2. Use specific variables** — Reference only the variables you need using the standard `${VAR_NAME}` syntax in your `docker-compose.yml`:
+
+```yaml
+services:
+  app:
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - API_KEY=${API_KEY}
+```
+</Callout>
 
 ### Monitoring
 
@@ -43,6 +66,15 @@ We provide a webhook so that you can trigger your own deployments by pushing to 
 This section provides advanced configuration options for experienced users. It includes tools for custom commands within the container and volumes.
 
 - **Command**: Dokploy has a defined command to run the Docker Compose file, ensuring complete control through the UI. However, you can append flags or options to the command.
+  
+  <Callout type="info" title="Using Private Registries with Docker Stack">
+  If you're deploying with **Docker Stack** (Docker Swarm mode) using **replicas** and a **private registry**, you need to add the `--with-registry-auth` flag to ensure that registry credentials are properly distributed to all nodes in your swarm.
+  
+  Without this flag, worker nodes may fail to pull images from private registries, resulting in authentication errors like "no such image" or "docker authentication failed".
+  
+  This flag ensures that Docker shares the registry credentials with all swarm nodes during deployment, enabling them to authenticate and pull images from your private registry (GitHub Container Registry, Docker Hub private repos, etc.).
+  </Callout>
+
 - **Volumes**: To ensure data persistence across deployments, configure storage volumes for your application.
 
 <ImageZoom

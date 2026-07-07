@@ -39,6 +39,12 @@ const Ripple = React.memo(function Ripple({
 			type: "hero",
 		},
 		{
+			name: "LinkDR",
+			image: "linkdr-logo.svg",
+			link: "https://linkdr.com/?ref=dokploy",
+			type: "supporting",
+		},
+		{
 			name: "Lxaer",
 			image:
 				"https://raw.githubusercontent.com/Dokploy/dokploy/canary/.github/sponsors/lxaer.png",
@@ -91,7 +97,7 @@ const Ripple = React.memo(function Ripple({
 			link: "https://cloudblast.io/?ref=dokploy",
 			type: "supporting",
 		},
-
+		
 		{
 			name: "Synexa",
 			image:

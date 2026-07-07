@@ -85,6 +85,7 @@ networks:
 **Important Notes:**
 
 - If you don't add any domains through the UI and don't use [Isolated Deployments](/docs/core/docker-compose/utilities#isolated-deployments), your application will be deployed exactly as you specified in your original Docker Compose file - no labels or network modifications will be added.
+- If you're not using [Isolated Deployments](/docs/core/docker-compose/utilities#isolated-deployments), Dokploy will add the `dokploy-network` to the service you selected, however you need to add `dokploy-network` to the other services to maintain connectivity.
 - The Preview Compose button is useful for verifying how Dokploy will modify your compose file before deployment.
 - All label generation and network configuration is handled automatically by Dokploy based on your domain settings.
 

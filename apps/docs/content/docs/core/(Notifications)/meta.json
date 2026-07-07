@@ -7,8 +7,10 @@
 		"discord",
 		"lark",
 		"email",
+		"resend",
 		"gotify",
 		"ntfy",
+		"pushover",
 		"webhook"
 	]
 }

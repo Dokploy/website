@@ -1,4 +1,5 @@
-import { getPageImage, source } from "@/lib/source";
+import { CopyMarkdownButton } from "@/components/copy-markdown-button";
+import { getPageImage, getLLMText, source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import {
 	DocsBody,
@@ -16,10 +17,14 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	if (!page) notFound();
 
 	const MDX = page.data.body;
+	const markdown = await getLLMText(page);
 
 	return (
 		<DocsPage toc={page.data.toc} full={page.data.full}>
-			<DocsTitle>{page.data.title}</DocsTitle>
+			<div className="flex items-center justify-between">
+				<DocsTitle>{page.data.title}</DocsTitle>
+				<CopyMarkdownButton markdown={markdown} />
+			</div>
 			<DocsDescription>{page.data.description}</DocsDescription>
 			<DocsBody>
 				<MDX

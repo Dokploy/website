@@ -5,6 +5,15 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
 	reactStrictMode: true,
+	output: "standalone",
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "templates.dokploy.com",
+			},
+		],
+	},
 };
 
 export default withMDX(config);

@@ -76,15 +76,15 @@ export function FirstFeaturesSection() {
 			icon: <IconActivity />,
 		},
 		{
-			title: "Built for Developers",
+			title: "AI-assisted deployments",
 			description:
-				"Designed specifically for engineers and developers seeking control and flexibility.",
+				"Connect AI tools to Dokploy via MCP, or deploy AI-built apps in a governed sandbox with SSO and multitenancy.",
 			icon: <IconTerminal2 />,
 		},
 		{
 			title: "Self-hosted & Open Source",
 			description:
-				"Dokploy provides complete control with self-hosting capabilities and open-source transparency.",
+				"Built for developers seeking control and flexibility, with self-hosting and open-source deployment.",
 			icon: <IconEaseInOut />,
 		},
 	];

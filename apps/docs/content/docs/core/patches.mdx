@@ -1,0 +1,60 @@
+---
+title: "Patches"
+description: "Apply code patches to your repository during build to modify configs, env, or code"
+---
+
+Patches allow you to apply file-level modifications to your repository during the build process. Patches are applied after cloning the repository and before building, letting you override or add files without modifying the source repository directly.
+
+## Use Cases
+
+- Override configuration files for specific environments
+- Inject environment-specific settings
+- Modify source code before building
+- Add files that shouldn't be committed to the repository
+
+## How It Works
+
+1. Navigate to the **Patches** section in your application settings
+2. Click **Create Patch** to add a new patch
+3. Select a file from the repository tree to edit, or create a new file
+4. Make your modifications and click **Save Patch**
+
+Patches are applied in order every time a build is triggered, after the repository is cloned and before the build step runs.
+
+## Creating a Patch
+
+### Edit an Existing File
+
+1. Click **Create Patch**
+2. Browse the file tree and select the file you want to modify
+3. Edit the file content in the editor
+4. Click **Save Patch**
+
+### Create a New File
+
+1. Click **Create Patch**
+2. Navigate to the desired directory in the file tree
+3. Click **New file in root** or navigate to a subdirectory
+4. Enter the filename and content
+5. Click **Create**, then **Save Patch**
+
+### Delete a File
+
+1. Click **Create Patch**
+2. Select the file you want to remove
+3. Click **Mark for deletion**
+4. Click **Save Patch**
+
+<Callout type="info">
+Patches do not modify your original repository. They are only applied temporarily during the build process.
+</Callout>
+
+## Managing Patches
+
+You can view all configured patches in the Patches section. Each patch shows the target file path and the type of operation (edit, create, or delete). You can edit or remove patches at any time.
+
+Patches are persistent and will be applied on every build. If you no longer need a patch, make sure to remove it to avoid unintended modifications in future builds.
+
+<Callout>
+If a patch targets a file that doesn't exist in the repository (for edit operations), the build will fail. Make sure your patches reference valid file paths.
+</Callout>
