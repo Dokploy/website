@@ -131,8 +131,10 @@ install_dokploy() {
       echo "Docker already installed"
     else
       curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
-      # Hold docker packages to prevent unintended upgrades
-      apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
+      # Hold docker packages to prevent unintended upgrades (apt-based distros only)
+      if command_exists apt-mark; then
+        apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
+      fi
     fi
 
     # Check if running in Proxmox LXC container and set endpoint mode
@@ -359,28 +361,6 @@ update_dokploy() {
     DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
 
     echo "Updating Dokploy to version: ${VERSION_TAG}"
-
-    # Check Docker version and update if necessary
-    if command -v docker >/dev/null 2>&1; then
-        current_docker_version=$(docker --version | grep -oP '\d+\.\d+\.\d+' | head -1)
-        if [ "$current_docker_version" != "$DOCKER_VERSION" ]; then
-            echo "Docker version mismatch detected. Current: $current_docker_version, Target: $DOCKER_VERSION"
-            echo "Updating Docker to version $DOCKER_VERSION..."
-
-            # Unhold packages to allow update
-            apt-mark unhold docker-ce docker-ce-cli docker-ce-rootless-extras 2>/dev/null
-
-            # Install specific Docker version
-            curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
-
-            # Hold packages again
-            apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
-
-            echo "Docker updated to version $DOCKER_VERSION"
-        else
-            echo "Docker version $current_docker_version matches target version"
-        fi
-    fi
 
     # Pull the image
     docker pull $DOCKER_IMAGE
