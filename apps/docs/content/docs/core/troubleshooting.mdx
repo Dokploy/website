@@ -296,6 +296,37 @@ curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=your-ip sh
 Note: pass `ADVERTISE_ADDR` inline as shown above — if you `export` it in your shell and then run the script with `sudo`, the variable won't reach the script because `sudo` resets the environment.
 
 
+## Builds Failing with DNS Errors (Could Not Resolve Host)
+
+On some VPS providers, the default DNS servers configured on the host don't resolve properly inside Docker containers. This is commonly reported on **Hetzner Cloud**, whose default resolvers (`185.12.64.1` and `185.12.64.2`) can fail recursive resolution from within Docker build containers, but it can affect other providers with restricted or misbehaving resolvers as well.
+
+Typical symptoms:
+
+- **Nixpacks builds**: `Could not resolve host: github.com`
+- **Railpack builds**: `lookup ghcr.io on 185.12.64.1:53: server misbehaving`
+- **Dockerfile builds**: `npm ci`, `apt-get`, or similar commands hang and time out (e.g., `Exit handler never called!`)
+- **Domain validation in the UI**: fails with `queryA ENOTFOUND <domain>` even though the domain resolves correctly from the host with `nslookup`
+
+Since every build type fails the same way, the problem is the DNS configuration Docker inherits from the host, not your application.
+
+**Solution:** Configure Docker to use public DNS resolvers by adding a `dns` entry to `/etc/docker/daemon.json`:
+
+```bash
+sudo mkdir -p /etc/docker
+echo '{"dns": ["1.1.1.1", "8.8.8.8"]}' | sudo tee /etc/docker/daemon.json
+sudo systemctl restart docker
+```
+
+<Callout type="warning">
+  If `/etc/docker/daemon.json` already exists, don't overwrite it — edit the file and add the `"dns": ["1.1.1.1", "8.8.8.8"]` key to the existing JSON object instead. Also note that restarting Docker will briefly restart all running containers, including Dokploy itself.
+</Callout>
+
+You can verify DNS resolution works inside containers after the change:
+
+```bash
+docker run --rm alpine nslookup github.com
+```
+
 ## My Dokploy UI Instance is Not Accessible
 
 If you can't access your Dokploy UI instance, there could be several causes. While this issue won't occur with Dokploy Cloud (where our team manages the infrastructure), self-hosted instances might encounter configuration problems.
