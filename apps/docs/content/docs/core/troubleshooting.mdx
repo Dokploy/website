@@ -290,8 +290,10 @@ To fix this, you need to assign a the public IP address to the Docker Swarm, ide
 will need to use a public IP address.
 
 ```bash
-curl -sSL https://dokploy.com/install.sh | ADVERTISE_ADDR=your-ip sh
+curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=your-ip sh
 ```
+
+Note: pass `ADVERTISE_ADDR` inline as shown above — if you `export` it in your shell and then run the script with `sudo`, the variable won't reach the script because `sudo` resets the environment.
 
 
 ## My Dokploy UI Instance is Not Accessible

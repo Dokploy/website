@@ -373,9 +373,10 @@ curl -sSL https://dokploy.com/install.sh | sh
 
 **Manual Advertise Address:**
 ```bash
-export ADVERTISE_ADDR=192.168.1.100
-curl -sSL https://dokploy.com/install.sh | sh
+curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=192.168.1.100 sh
 ```
+
+Note: if you run the installer with `sudo`, pass the variable inline as shown above. Using `export` beforehand won't work because `sudo` resets the environment before executing the script.
 
 ## Updating Traefik Manually
 
