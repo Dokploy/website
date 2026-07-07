@@ -366,11 +366,18 @@ install_dokploy() {
     }
 
     public_ip="${ADVERTISE_ADDR:-$(get_ip)}"
+    private_ip=$(get_private_ip)
     formatted_addr=$(format_ip_for_url "$public_ip")
     echo ""
     printf "${GREEN}Congratulations, Dokploy is installed!${NC}\n"
     printf "${BLUE}Wait 15 seconds for the server to start${NC}\n"
-    printf "${YELLOW}Please go to http://${formatted_addr}:3000${NC}\n\n"
+    printf "${YELLOW}Please go to http://${formatted_addr}:3000${NC}\n"
+    # Home servers and local VMs are often not reachable on their public IP
+    # (no port forwarding), so also print the private IP when there is one.
+    if [ -n "$private_ip" ] && [ "$private_ip" != "$public_ip" ]; then
+        printf "${YELLOW}If you are on the same local network, use http://${private_ip}:3000${NC}\n"
+    fi
+    printf "\n"
 }
 
 update_dokploy() {
