@@ -19,10 +19,19 @@ detect_version() {
         echo "Detecting latest stable version from GitHub..." >&2
         
         # Try to get latest release from GitHub by following redirects
-        version=$(curl -fsSL -o /dev/null -w '%{url_effective}\n' \
+        version=$(curl -fsSL --connect-timeout 10 -o /dev/null -w '%{url_effective}\n' \
             https://github.com/dokploy/dokploy/releases/latest 2>/dev/null | \
             sed 's#.*/tag/##')
-        
+
+        # When the request fails (unreachable network, rate limit), curl still
+        # prints the attempted URL, which would produce an invalid image tag
+        # like dokploy/dokploy:https://... Accept only values that look like a
+        # release tag (e.g. v0.29.10).
+        case "$version" in
+            v[0-9]*) ;;
+            *) version="" ;;
+        esac
+
         # Fallback to latest tag if detection fails
         if [ -z "$version" ]; then
             echo "Warning: Could not detect latest version from GitHub, using fallback version latest" >&2
