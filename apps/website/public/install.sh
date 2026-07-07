@@ -196,15 +196,27 @@ install_dokploy() {
     }
 
     get_private_ip() {
-        ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
+        # Pick the first private (RFC1918) IP from a real interface. Docker-created
+        # interfaces (docker0, br-*, veth*) are excluded: their IPs (e.g. 172.17.0.1)
+        # are host-local and never reachable from other swarm nodes.
+        ip -o -4 addr show scope global \
+            | awk '$2 !~ /^(docker|br-|veth)/ {print $4}' \
+            | cut -d/ -f1 \
+            | grep -E "^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)" \
+            | head -n1
     }
 
     advertise_addr="${ADVERTISE_ADDR:-$(get_private_ip)}"
 
+    # Servers with only a public IP have no private interface: fall back to the public IP
     if [ -z "$advertise_addr" ]; then
-        echo "ERROR: We couldn't find a private IP address."
+        advertise_addr=$(get_ip)
+    fi
+
+    if [ -z "$advertise_addr" ]; then
+        echo "ERROR: We couldn't detect your server IP address."
         echo "Please set the ADVERTISE_ADDR environment variable manually."
-        echo "Example: export ADVERTISE_ADDR=192.168.1.100"
+        echo "Example: curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=192.168.1.100 sh"
         exit 1
     fi
     echo "Using advertise address: $advertise_addr"

@@ -536,8 +536,8 @@ docker service create \
 First, get the private IP of your server for the ADVERTISE_ADDR:
 
 ```bash
-# Get the private IP of your server
-ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
+# Get the private IP of your server (excludes Docker-created interfaces like docker0)
+ip -o -4 addr show scope global | awk '$2 !~ /^(docker|br-|veth)/ {print $4}' | cut -d/ -f1 | grep -E "^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)" | head -n1
 ```
 
 Copy the IP address from the output and use it in the command below.
