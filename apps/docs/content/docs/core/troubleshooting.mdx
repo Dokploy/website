@@ -390,6 +390,91 @@ You can verify DNS resolution works inside containers after the change:
 docker run --rm alpine nslookup github.com
 ```
 
+## Deployments Failing with "All Predefined Address Pools Have Been Fully Subnetted"
+
+If a deployment fails with this error:
+
+```
+Error response from daemon: all predefined address pools have been fully subnetted
+```
+
+it means Docker ran out of subnets for new networks. By default, Docker can only allocate around **31 local networks**, and every Docker Compose project you deploy creates at least one network of its own. On a server with many projects, you eventually hit the limit — this is a Docker default, not a Dokploy bug.
+
+You can confirm it by counting your networks:
+
+```bash
+docker network ls | wc -l
+```
+
+If the count is around 30 or more, you've exhausted the default address pools.
+
+### Quick Fix: Remove Unused Networks
+
+```bash
+docker network prune -f
+```
+
+This only removes networks that no container is using, so it's safe to run. It frees up space immediately, but you'll hit the limit again as you deploy more projects.
+
+### Permanent Fix: Expand Docker's Address Pools
+
+Configure larger address pools in `/etc/docker/daemon.json`. First check whether the file already has content:
+
+```bash
+cat /etc/docker/daemon.json
+```
+
+<Callout type="warning">
+  If `/etc/docker/daemon.json` already exists (for example with `log-driver` or `dns` settings), don't overwrite it — add the `default-address-pools` key to the existing JSON object instead.
+</Callout>
+
+For example, on a typical Dokploy server that already has the log configuration, the merged file looks like this:
+
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  },
+  "default-address-pools": [
+    { "base": "172.17.0.0/12", "size": 24 },
+    { "base": "10.100.0.0/16", "size": 24 }
+  ]
+}
+```
+
+With `"size": 24`, each new network gets a `/24` subnet (254 IPs — plenty for a Compose project) instead of a whole `/16`, raising the limit from ~31 networks to several thousand.
+
+Restart Docker:
+
+```bash
+sudo systemctl restart docker
+```
+
+<Callout type="warning">
+  Restarting Docker briefly restarts all running containers, including Dokploy itself, so do this during a low-traffic window. Everything recovers automatically: `dokploy` and `dokploy-postgres` are Swarm services, and `dokploy-traefik` has `--restart always`.
+</Callout>
+
+A few things to keep in mind:
+
+- Existing networks and containers are not affected — they keep their current subnets. The new pools only apply to networks created afterwards, and Docker automatically skips any subnet that is already in use.
+- No redeployment of your projects is needed.
+- Choose `base` ranges that don't overlap with your VPS's private network or any VPN you use (this is why the example avoids `192.168.0.0/16`, which is commonly taken by LANs).
+
+Verify the new pools are active:
+
+```bash
+docker info | grep -A 5 "Default Address Pools"
+
+# root@srv594061:~# docker info | grep -A 5 "Default Address Pools"
+#  Default Address Pools:
+#    Base: 172.16.0.0/12, Size: 24
+#    Base: 10.100.0.0/16, Size: 24
+
+# root@srv594061:~# 
+```
+
 ## My Dokploy UI Instance is Not Accessible
 
 If you can't access your Dokploy UI instance, there could be several causes. While this issue won't occur with Dokploy Cloud (where our team manages the infrastructure), self-hosted instances might encounter configuration problems.
