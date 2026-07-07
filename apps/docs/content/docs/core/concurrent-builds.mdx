@@ -38,4 +38,6 @@ If you set a value higher than 2 without a valid enterprise license, Dokploy wil
 2. Under **Dokploy Server**, set the concurrency for the local server.
 3. Under **Remote Servers**, set the concurrency for each remote or build server individually.
 
+<ImageZoom src="/assets/images/ui/concurrent-builds.png" alt="Per-server concurrency configuration under Settings > Deployments" width={1600} height={775} className="rounded-lg"/>
+
 Each server's concurrency is configured independently, so you can, for example, keep the Dokploy server at 1 while increasing concurrency on a dedicated [build server](/docs/core/remote-servers/build-server) with more resources.
