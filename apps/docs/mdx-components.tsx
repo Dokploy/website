@@ -1,3 +1,4 @@
+import { CommunityGuide } from "@/components/community-guide";
 import { APIPage } from "@/lib/source";
 import { Callout } from "fumadocs-ui/components/callout";
 import { ImageZoom } from "fumadocs-ui/components/image-zoom";
@@ -10,6 +11,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		...defaultMdxComponents,
 		ImageZoom,
 		Callout,
+		CommunityGuide,
 		Tab,
 		Tabs,
 		APIPage,

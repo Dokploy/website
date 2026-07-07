@@ -66,6 +66,9 @@
 		"---Guides---",
 		"guides/cloudflare-tunnels",
 		"guides/tailscale",
-		"guides/ec2-instructions"
+		"guides/ec2-instructions",
+		"---Community Guides---",
+		"community-guides/index",
+		"community-guides/cloudflare-mesh"
 	]
 }

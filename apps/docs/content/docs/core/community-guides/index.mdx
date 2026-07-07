@@ -1,0 +1,71 @@
+---
+title: Community Guides
+description: Guides written and maintained by the Dokploy community, covering environment-specific setups and advanced configurations.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+Community Guides are written and maintained by Dokploy users. They cover real-world setups that fall outside the scope of the official documentation: specific hosting providers, home lab environments, networking tools, and advanced configurations that the community has tested in production.
+
+<Callout type="warn">
+  These guides are **not officially supported** by the Dokploy team. Each guide states who contributed it and which Dokploy version it was last tested with. Steps may vary depending on your environment, so always keep a recovery path available before making changes to your servers.
+</Callout>
+
+## Why Community Guides?
+
+The official documentation covers what the Dokploy team can test and guarantee across all supported environments. But a lot of valuable knowledge comes from users running Dokploy on specific providers (Hetzner, Proxmox, Raspberry Pi), with specific tools (Cloudflare, Tailscale, WireGuard), or in less common configurations.
+
+Instead of losing that knowledge in closed issues and chat threads, Community Guides give it a permanent, searchable home.
+
+## Contributing a Guide
+
+Have a setup you have tested and want to share? We would love to have it:
+
+1. Fork the [website repository](https://github.com/Dokploy/website)
+2. Create your guide in `apps/docs/content/docs/core/community-guides/your-guide-name.mdx`
+3. Add your page to the **Community Guides** section in `apps/docs/content/docs/core/meta.json`
+4. Open a Pull Request describing what you built and how you verified it
+
+### Guide Template
+
+Start from this template. The `<CommunityGuide />` banner at the top is required — it credits you and tells readers which Dokploy version you tested against:
+
+```mdx
+---
+title: Your Guide Title
+description: One sentence describing what this guide helps the reader accomplish.
+---
+
+<CommunityGuide contributor="your-github-username" lastTested="v0.28.6 (May 2026)" />
+
+Brief introduction: what problem does this solve and who is it for?
+
+## Prerequisites
+
+- What the reader needs before starting (accounts, versions, access)
+
+## Setup
+
+### Step 1: ...
+
+Explain each step with the exact commands you ran:
+
+\`\`\`bash
+echo "commands the reader can copy"
+\`\`\`
+
+## Verification
+
+How does the reader confirm it works?
+
+## Troubleshooting
+
+Common failure modes you hit and how you solved them.
+```
+
+### What Makes a Good Guide
+
+- **Tested for real**: you ran it end-to-end on actual servers, not just in theory
+- **Exact commands**: copy-pasteable, with placeholders like `<YOUR_SERVER_IP>` clearly marked
+- **Failure modes included**: what went wrong for you will go wrong for others
+- **Scoped**: one setup per guide — a guide that solves one problem well beats one that solves three halfway
