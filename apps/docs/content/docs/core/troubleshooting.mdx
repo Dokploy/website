@@ -290,9 +290,105 @@ To fix this, you need to assign a the public IP address to the Docker Swarm, ide
 will need to use a public IP address.
 
 ```bash
-curl -sSL https://dokploy.com/install.sh | ADVERTISE_ADDR=your-ip sh
+curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=your-ip sh
 ```
 
+Note: pass `ADVERTISE_ADDR` inline as shown above — if you `export` it in your shell and then run the script with `sudo`, the variable won't reach the script because `sudo` resets the environment.
+
+
+## Services Can't Reach Each Other (Missing IPVS Kernel Modules)
+
+Docker Swarm's default service discovery (**VIP mode**) assigns each service a virtual IP and load-balances traffic to it using **IPVS**, a Linux kernel feature. Some operating systems ship kernels without IPVS support — this is common on appliance-style or minimal distributions such as **ZimaOS** and other **Buildroot-based images**, and can also happen with custom-compiled kernels.
+
+On these systems the installation appears to succeed, but nothing works afterward:
+
+- The Dokploy UI never becomes reachable on port 3000 (Dokploy can't connect to its Postgres service)
+- Containers can resolve a service name to an IP, but connections to that IP hang or are refused
+- Tools like Cloudflare Tunnel (`cloudflared`) can't reach your applications via `<app-name>:<port>`
+
+### Cause
+
+VIP mode requires the following kernel features, which your kernel must have enabled:
+
+```
+CONFIG_IP_VS
+CONFIG_IP_VS_RR
+CONFIG_IP_VS_PROTO_TCP
+CONFIG_IP_VS_PROTO_UDP
+CONFIG_IP_VS_NFCT
+CONFIG_NETFILTER_XT_MATCH_IPVS
+CONFIG_NETFILTER_XT_MARK
+```
+
+You can check whether your kernel has them:
+
+```bash
+# Try loading the IPVS module
+sudo modprobe ip_vs && lsmod | grep ip_vs
+
+# Or inspect the kernel config directly
+grep -E 'CONFIG_IP_VS|CONFIG_NETFILTER_XT_MATCH_IPVS|CONFIG_NETFILTER_XT_MARK' /boot/config-$(uname -r)
+# On systems without /boot/config-*:
+zcat /proc/config.gz | grep -E 'CONFIG_IP_VS|CONFIG_NETFILTER_XT_MATCH_IPVS|CONFIG_NETFILTER_XT_MARK'
+```
+
+If `modprobe ip_vs` fails or the config options are missing (not set to `y` or `m`), your kernel can't run Swarm services in VIP mode.
+
+### Solution
+
+If you can't switch to a kernel with IPVS support, run Dokploy's services in **DNSRR mode** (DNS round-robin), which bypasses the IPVS-based load balancer entirely.
+
+**For a fresh installation**, pass `ENDPOINT_MODE=dnsrr` to the install script:
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sudo ENDPOINT_MODE=dnsrr sh
+```
+
+**For an existing installation**, switch the Dokploy services to DNSRR mode:
+
+```bash
+docker service update --endpoint-mode dnsrr dokploy-postgres
+docker service update --endpoint-mode dnsrr dokploy
+```
+
+### Reaching Your Deployed Applications
+
+Applications you deploy through Dokploy are still created as Swarm services in VIP mode. When another container (for example, a `cloudflared` tunnel) needs to reach one of them by name, use the `tasks.<app-name>:<port>` hostname instead of `<app-name>:<port>` — the `tasks.` prefix resolves directly to the container IPs, bypassing the broken VIP load balancer.
+
+<Callout type="warning">
+  DNSRR mode has trade-offs: there is no virtual IP load balancing, so traffic distribution relies on DNS round-robin only. Running multiple replicas of a service behind a single stable address won't work the way it does in VIP mode, and services in DNSRR mode can't publish ports in ingress mode (only `mode=host`). This is the same mechanism the install script applies automatically for Proxmox LXC containers.
+</Callout>
+
+## Builds Failing with DNS Errors (Could Not Resolve Host)
+
+On some VPS providers, the default DNS servers configured on the host don't resolve properly inside Docker containers. This is commonly reported on **Hetzner Cloud**, whose default resolvers (`185.12.64.1` and `185.12.64.2`) can fail recursive resolution from within Docker build containers, but it can affect other providers with restricted or misbehaving resolvers as well.
+
+Typical symptoms:
+
+- **Nixpacks builds**: `Could not resolve host: github.com`
+- **Railpack builds**: `lookup ghcr.io on 185.12.64.1:53: server misbehaving`
+- **Dockerfile builds**: `npm ci`, `apt-get`, or similar commands hang and time out (e.g., `Exit handler never called!`)
+- **Domain validation in the UI**: fails with `queryA ENOTFOUND <domain>` even though the domain resolves correctly from the host with `nslookup`
+
+Since every build type fails the same way, the problem is the DNS configuration Docker inherits from the host, not your application.
+
+**Solution:** Configure Docker to use public DNS resolvers by adding a `dns` entry to `/etc/docker/daemon.json`:
+
+```bash
+sudo mkdir -p /etc/docker
+echo '{"dns": ["1.1.1.1", "8.8.8.8"]}' | sudo tee /etc/docker/daemon.json
+sudo systemctl restart docker
+```
+
+<Callout type="warning">
+  If `/etc/docker/daemon.json` already exists, don't overwrite it — edit the file and add the `"dns": ["1.1.1.1", "8.8.8.8"]` key to the existing JSON object instead. Also note that restarting Docker will briefly restart all running containers, including Dokploy itself.
+</Callout>
+
+You can verify DNS resolution works inside containers after the change:
+
+```bash
+docker run --rm alpine nslookup github.com
+```
 
 ## My Dokploy UI Instance is Not Accessible
 
@@ -319,15 +415,18 @@ First, verify the running containers:
 docker ps
 ```
 
-You should see all four of these containers running:
+You should see all three of these containers running:
 ```bash
 2a5b955c32b6   dokploy/dokploy:latest      "docker-entrypoint.s…"   4 days ago     Up 4 days     0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                             dokploy.1.4bkuszk98muz372kw5mvwkw0h
 5a989bf52bc6   postgres:16                 "docker-entrypoint.s…"   4 days ago     Up 4 days     5432/tcp                                                                                                              dokploy-postgres.1.9hvjaxrmby7ex2denjtwo0csf
-a29d56342175   redis:7                     "docker-entrypoint.s…"   4 days ago     Up 4 days     6379/tcp                                                                                                              dokploy-redis.1.epl51a9bt8yr7ur0f1akeeyuk
 05be01c5612f   traefik:v2.5                "/entrypoint.sh trae…"   4 days ago     Up 4 days     0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   dokploy-traefik.1.2oktabjmfu558x2d2dy6czt8m
 ```
 
-If all four containers are running but you still can't access the interface, it's time to debug:
+<Callout type='info'>
+  **Note:** If you're running a version older than v0.29.9, you'll also see a `dokploy-redis` container. Redis is no longer used in self-hosted Dokploy since v0.29.9.
+</Callout>
+
+If all three containers are running but you still can't access the interface, it's time to debug:
 
 ### Debugging Process
 
@@ -337,7 +436,6 @@ Start by examining the logs of each container:
 ```bash
 docker service logs dokploy # Dokploy UI
 docker service logs dokploy-postgres # Postgres
-docker service logs dokploy-redis # Redis
 docker logs dokploy-traefik # Traefik
 ```
 
@@ -460,37 +558,36 @@ You should now be able to access the user interface.
 
 In the case you want to recreate the dokploy services, you can do the following:
 
+<Callout type='warn'>
+  **Important:** Before recreating services, make sure you have backups of your data. Recreating services will not delete your volumes, but it's always good to have backups.
+</Callout>
 
-Remove the dokploy-redis service:
-```bash
-docker service rm dokploy-redis
+### Recreate Postgres Service
 
-# Create a new dokploy-redis service
-  docker service create \
-  --name dokploy-redis \
-  --constraint 'node.role==manager' \
-  --network dokploy-network \
-  --mount type=volume,source=dokploy-redis,target=/data \
-  redis:7
-```
-
-Remove the dokploy-postgres service:
+Remove and recreate the dokploy-postgres service:
 
 ```bash
 docker service rm dokploy-postgres
 
-# Create a new dokploy-postgres service
-  docker service create \
+# Create a new dokploy-postgres service with Docker Secrets
+docker service create \
   --name dokploy-postgres \
   --constraint 'node.role==manager' \
   --network dokploy-network \
   --env POSTGRES_USER=dokploy \
   --env POSTGRES_DB=dokploy \
-  --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+  --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
   --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
   postgres:16
 ```
 
+<Callout type='info'>
+  **Note:** Using Docker Secrets is the recommended approach for managing sensitive data like passwords. The secret is encrypted and only available to services that have been granted access to it.
+</Callout>
+
+
+### Recreate Traefik Service
 
 Remove the dokploy-traefik service:
 
@@ -507,7 +604,7 @@ docker run -d \
     -p 80:80/tcp \
     -p 443:443/tcp \
     -p 443:443/udp \
-    traefik:v3.6.1
+    traefik:v3.6.7
 
 docker network connect dokploy-network dokploy-traefik
 
@@ -525,22 +622,19 @@ docker service create \
   --publish mode=host,published=443,target=443 \
   --publish mode=host,published=80,target=80 \
   --publish mode=host,published=443,target=443,protocol=udp \
-  traefik:v3.6.1
+  traefik:v3.6.7
 ```
 
-Remove the dokploy service:
+### Recreate Dokploy Service
+
+Remove and recreate the dokploy service:
+
+<Callout type='info'>
+  If the `dokploy_auth_secret` secret doesn't exist on your server (installations older than v0.29.3), create it first: `openssl rand -hex 32 | docker secret create dokploy_auth_secret -`
+</Callout>
 
 ```bash
 docker service rm dokploy
-
-# Create a new dokploy service
-
-# We need the advertise address to be set which is the Private IP of your server, you can get it by running the following command:
-
-# Run this command to get the private IP of your server:
-
-# Copy this value and paste in the ADVERTISE_ADDR variable:
-ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
 
 # Create the dokploy service
 docker service create \
@@ -550,11 +644,36 @@ docker service create \
   --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
   --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
   --mount type=volume,source=dokploy,target=/root/.docker \
+  --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
   --publish published=3000,target=3000,mode=host \
   --update-parallelism 1 \
   --update-order stop-first \
   --constraint 'node.role == manager' \
-  -e ADVERTISE_ADDR="Eg: 192.168.1.100" \
+  -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+  -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
+  dokploy/dokploy:latest
+```
+
+**For Proxmox LXC environments**, add the `--endpoint-mode dnsrr` flag to all services:
+
+```bash
+docker service create \
+  --name dokploy \
+  --replicas 1 \
+  --network dokploy-network \
+  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+  --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
+  --mount type=volume,source=dokploy,target=/root/.docker \
+  --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+  --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
+  --publish published=3000,target=3000,mode=host \
+  --update-parallelism 1 \
+  --update-order stop-first \
+  --constraint 'node.role == manager' \
+  --endpoint-mode dnsrr \
+  -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+  -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
   dokploy/dokploy:latest
 ```
 

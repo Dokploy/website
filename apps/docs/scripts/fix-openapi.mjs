@@ -6,7 +6,15 @@ const openapiPath = join(process.cwd(), "public", "openapi.json");
 console.log("Fixing OpenAPI schema...");
 
 try {
-	const openapi = JSON.parse(readFileSync(openapiPath, "utf8"));
+	let openapi = JSON.parse(readFileSync(openapiPath, "utf8"));
+
+	let unwrapped = false;
+	// If the spec is nested (e.g. result.data.json from a migrated/source API), use the inner spec
+	if (openapi.result?.data?.json && typeof openapi.result.data.json === "object") {
+		openapi = openapi.result.data.json;
+		unwrapped = true;
+		console.log("✓ Unwrapped nested OpenAPI spec (result.data.json)");
+	}
 
 	let fixed = 0;
 	let securityFixed = false;
@@ -87,11 +95,29 @@ try {
 		}
 	}
 
-	if (fixed > 0 || securityFixed) {
+	if (unwrapped || fixed > 0 || securityFixed) {
 		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
 		if (fixed > 0) console.log(`✓ Fixed ${fixed} empty response schemas`);
 		if (securityFixed) console.log("✓ Added x-api-key security scheme");
-	} else {
+	}
+
+	// Keep only canonical paths (dot notation). Remove slash-aliases if present.
+	let removed = 0;
+	for (const pathKey of Object.keys(openapi.paths || {})) {
+		if (pathKey.includes("/") && !pathKey.includes(".")) {
+			const dotKey = "/" + pathKey.slice(1).replace(/\//g, ".");
+			if (openapi.paths[dotKey]) {
+				delete openapi.paths[pathKey];
+				removed++;
+			}
+		}
+	}
+	if (removed > 0) {
+		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
+		console.log(`✓ Removed ${removed} slash path alias(es), keeping dot paths only`);
+	}
+
+	if (!(unwrapped || fixed > 0 || securityFixed) && removed === 0) {
 		console.log("✓ No fixes needed");
 	}
 } catch (error) {

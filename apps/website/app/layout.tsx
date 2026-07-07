@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter, Lexend } from "next/font/google";
@@ -59,6 +59,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				lexend.variable,
 			)}
 		>
+			<GoogleTagManager gtmId="GTM-PWBFB2V2" />
 			<head>
 				<script
 					type="text/javascript"

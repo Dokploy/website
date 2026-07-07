@@ -1,15 +1,46 @@
 #!/bin/bash
 
+# Docker version to install and maintain
+DOCKER_VERSION="28.5.0"
+
 # Detect version from environment variable or default to latest
 # Usage with curl (export first): export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
-# Usage with curl (export first): export DOKPLOY_VERSION=feature && curl -sSL https://dokploy.com/install.sh | sh
+# Usage with curl (export first): export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
 # Usage with curl (bash -s): DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
-# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (defaults to latest)
+# Usage with curl (default): curl -sSL https://dokploy.com/install.sh | sh (detects latest stable version)
 # Usage with bash: DOKPLOY_VERSION=canary bash install.sh
-# Usage with bash: DOKPLOY_VERSION=feature bash install.sh
-# Usage with bash: bash install.sh (defaults to latest)
+# Usage with bash: DOKPLOY_VERSION=latest bash install.sh
+# Usage with bash: bash install.sh (detects latest stable version)
 detect_version() {
-    local version="${DOKPLOY_VERSION:-latest}"
+    local version="${DOKPLOY_VERSION}"
+    
+    # If no version specified, get latest stable version from GitHub releases
+    if [ -z "$version" ]; then
+        echo "Detecting latest stable version from GitHub..." >&2
+        
+        # Try to get latest release from GitHub by following redirects
+        version=$(curl -fsSL --connect-timeout 10 -o /dev/null -w '%{url_effective}\n' \
+            https://github.com/dokploy/dokploy/releases/latest 2>/dev/null | \
+            sed 's#.*/tag/##')
+
+        # When the request fails (unreachable network, rate limit), curl still
+        # prints the attempted URL, which would produce an invalid image tag
+        # like dokploy/dokploy:https://... Accept only values that look like a
+        # release tag (e.g. v0.29.10).
+        case "$version" in
+            v[0-9]*) ;;
+            *) version="" ;;
+        esac
+
+        # Fallback to latest tag if detection fails
+        if [ -z "$version" ]; then
+            echo "Warning: Could not detect latest version from GitHub, using fallback version latest" >&2
+            version="latest"
+        else
+            echo "Latest stable version detected: $version" >&2
+        fi
+    fi
+    
     echo "$version"
 }
 
@@ -26,6 +57,37 @@ is_proxmox_lxc() {
     fi
     
     return 1  # Not LXC
+}
+
+generate_random_password() {
+    # Generate a secure random password using multiple methods with fallbacks
+    local password=""
+    
+    # Try using openssl (most reliable, available on most systems)
+    if command -v openssl >/dev/null 2>&1; then
+        password=$(openssl rand -base64 32 | tr -d "=+/" | cut -c1-32)
+    # Fallback to /dev/urandom with tr (most Linux systems)
+    elif [ -r /dev/urandom ]; then
+        password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32)
+    # Last resort fallback using date and simple hashing
+    else
+        if command -v sha256sum >/dev/null 2>&1; then
+            password=$(date +%s%N | sha256sum | base64 | head -c 32)
+        elif command -v shasum >/dev/null 2>&1; then
+            password=$(date +%s%N | shasum -a 256 | base64 | head -c 32)
+        else
+            # Very basic fallback - combines multiple sources of entropy
+            password=$(echo "$(date +%s%N)-$(hostname)-$$-$RANDOM" | base64 | tr -d "=+/" | head -c 32)
+        fi
+    fi
+    
+    # Ensure we got a password of correct length
+    if [ -z "$password" ] || [ ${#password} -lt 20 ]; then
+        echo "Error: Failed to generate random password" >&2
+        exit 1
+    fi
+    
+    echo "$password"
 }
 
 install_dokploy() {
@@ -77,14 +139,23 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
+      curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
+      # Hold docker packages to prevent unintended upgrades (apt-based distros only)
+      if command_exists apt-mark; then
+        apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
+      fi
     fi
 
     # Check if running in Proxmox LXC container and set endpoint mode
     endpoint_mode=""
-    if is_proxmox_lxc; then
+    if [ "$ENDPOINT_MODE" = "dnsrr" ]; then
+        echo "ENDPOINT_MODE=dnsrr set — adding --endpoint-mode dnsrr to Docker services."
+        echo "Use this on kernels without IPVS support (e.g. ZimaOS / Buildroot-based images)."
+        echo ""
+        endpoint_mode="--endpoint-mode dnsrr"
+    elif is_proxmox_lxc; then
         echo "⚠️ WARNING: Detected Proxmox LXC container environment!"
-        echo "Adding --endpoint-mode dnsrr to Docker service for LXC compatibility."
+        echo "Adding --endpoint-mode dnsrr to Docker services for LXC compatibility."
         echo "This may affect service discovery but is required for LXC containers."
         echo ""
         endpoint_mode="--endpoint-mode dnsrr"
@@ -139,15 +210,27 @@ install_dokploy() {
     }
 
     get_private_ip() {
-        ip addr show | grep -E "inet (192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)" | head -n1 | awk '{print $2}' | cut -d/ -f1
+        # Pick the first private (RFC1918) IP from a real interface. Docker-created
+        # interfaces (docker0, br-*, veth*) are excluded: their IPs (e.g. 172.17.0.1)
+        # are host-local and never reachable from other swarm nodes.
+        ip -o -4 addr show scope global \
+            | awk '$2 !~ /^(docker|br-|veth)/ {print $4}' \
+            | cut -d/ -f1 \
+            | grep -E "^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)" \
+            | head -n1
     }
 
     advertise_addr="${ADVERTISE_ADDR:-$(get_private_ip)}"
 
+    # Servers with only a public IP have no private interface: fall back to the public IP
     if [ -z "$advertise_addr" ]; then
-        echo "ERROR: We couldn't find a private IP address."
+        advertise_addr=$(get_ip)
+    fi
+
+    if [ -z "$advertise_addr" ]; then
+        echo "ERROR: We couldn't detect your server IP address."
         echo "Please set the ADVERTISE_ADDR environment variable manually."
-        echo "Example: export ADVERTISE_ADDR=192.168.1.100"
+        echo "Example: curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=192.168.1.100 sh"
         exit 1
     fi
     echo "Using advertise address: $advertise_addr"
@@ -180,29 +263,49 @@ install_dokploy() {
 
     chmod 777 /etc/dokploy
 
+    # Generate secure random password for Postgres
+    POSTGRES_PASSWORD=$(generate_random_password)
+
+    # Store password as Docker Secret (encrypted and secure)
+    echo "$POSTGRES_PASSWORD" | docker secret create dokploy_postgres_password - 2>/dev/null || true
+
+    # Generate secure auth secret for Better Auth
+    AUTH_SECRET=$(openssl rand -hex 32)
+
+    # Store auth secret as Docker Secret (encrypted and secure)
+    echo "$AUTH_SECRET" | docker secret create dokploy_auth_secret - 2>/dev/null || true
+
+    echo "Generated secure database credentials and auth secret (stored in Docker Secrets)"
+
     docker service create \
     --name dokploy-postgres \
     --constraint 'node.role==manager' \
     --network dokploy-network \
     --env POSTGRES_USER=dokploy \
     --env POSTGRES_DB=dokploy \
-    --env POSTGRES_PASSWORD=amukds4wi9001583845717ad2 \
+    --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+    --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
     --mount type=volume,source=dokploy-postgres,target=/var/lib/postgresql/data \
+    $endpoint_mode \
     postgres:16
-
-    docker service create \
-    --name dokploy-redis \
-    --constraint 'node.role==manager' \
-    --network dokploy-network \
-    --mount type=volume,source=dokploy-redis,target=/data \
-    redis:7
 
     # Installation
     # Set RELEASE_TAG environment variable for canary/feature versions
+    # POSIX-compatible (no [[ ]]): the script is documented as `curl ... | sh`,
+    # and on Debian/Ubuntu sh is dash, which has no [[ or =~ (issue #157)
     release_tag_env=""
-    if [ "$VERSION_TAG" != "latest" ]; then
-        release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
-    fi
+    case "$VERSION_TAG" in
+        v[0-9]*.[0-9]*.[0-9]*)
+            # Specific version (v0.26.6, v0.26.7, etc.) → latest
+            release_tag_env="-e RELEASE_TAG=latest"
+            ;;
+        latest)
+            ;;
+        *)
+            # canary, feature/*, etc. → use the tag as-is
+            release_tag_env="-e RELEASE_TAG=$VERSION_TAG"
+            ;;
+    esac
     
     docker service create \
       --name dokploy \
@@ -211,13 +314,16 @@ install_dokploy() {
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount type=bind,source=/etc/dokploy,target=/etc/dokploy \
       --mount type=volume,source=dokploy,target=/root/.docker \
+      --secret source=dokploy_postgres_password,target=/run/secrets/postgres_password \
+      --secret source=dokploy_auth_secret,target=/run/secrets/dokploy_auth_secret \
       --publish published=3000,target=3000,mode=host \
       --update-parallelism 1 \
       --update-order stop-first \
       --constraint 'node.role == manager' \
       $endpoint_mode \
       $release_tag_env \
-      -e ADVERTISE_ADDR=$advertise_addr \
+      -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
+      -e BETTER_AUTH_SECRET_FILE=/run/secrets/dokploy_auth_secret \
       $DOCKER_IMAGE
 
     sleep 4
@@ -231,7 +337,7 @@ install_dokploy() {
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
-        traefik:v3.6.1
+        traefik:v3.6.7
     
     docker network connect dokploy-network dokploy-traefik
 
@@ -247,7 +353,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.6.1
+    #     traefik:v3.6.7
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
@@ -266,20 +372,27 @@ install_dokploy() {
     }
 
     public_ip="${ADVERTISE_ADDR:-$(get_ip)}"
+    private_ip=$(get_private_ip)
     formatted_addr=$(format_ip_for_url "$public_ip")
     echo ""
     printf "${GREEN}Congratulations, Dokploy is installed!${NC}\n"
     printf "${BLUE}Wait 15 seconds for the server to start${NC}\n"
-    printf "${YELLOW}Please go to http://${formatted_addr}:3000${NC}\n\n"
+    printf "${YELLOW}Please go to http://${formatted_addr}:3000${NC}\n"
+    # Home servers and local VMs are often not reachable on their public IP
+    # (no port forwarding), so also print the private IP when there is one.
+    if [ -n "$private_ip" ] && [ "$private_ip" != "$public_ip" ]; then
+        printf "${YELLOW}If you are on the same local network, use http://${private_ip}:3000${NC}\n"
+    fi
+    printf "\n"
 }
 
 update_dokploy() {
     # Detect version tag
     VERSION_TAG=$(detect_version)
     DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
-    
+
     echo "Updating Dokploy to version: ${VERSION_TAG}"
-    
+
     # Pull the image
     docker pull $DOCKER_IMAGE
 

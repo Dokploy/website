@@ -72,7 +72,7 @@ Enhance your Docker Compose experience with these advanced functionalities:
   2. Cancel queued deployments in case you have a lot of deployments in the queue, the most common is when you push alot of times in your repository, you can cancel the incoming queues, not the deployments that are already running.
 
 **Advanced Settings**:
-  1. Append command, by default we use a internal command to build the docker compose however, you can append a command to the existing one.
+  1. Custom command, by default we use an internal command to build the docker compose, however you can override it with your own command. Note that the custom command fully replaces the default one (the default command is shown in the UI as a reference, and the command always starts with `docker`).
   2. Manage volumes and mounts.
 
 ## Database Deployment

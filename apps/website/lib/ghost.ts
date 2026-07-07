@@ -15,10 +15,11 @@ const api = GhostContentAPI({
 	// @ts-ignore
 	makeRequest: ({ url, method, params, headers }) => {
 		const apiUrl = new URL(url);
-		// @ts-ignore
-		Object.keys(params).map((key) =>
-			apiUrl.searchParams.set(key, encodeURIComponent(params[key])),
-		);
+		// Slug is already in the path; Ghost returns 422 if we also send it as query param
+		const { slug: _slug, ...queryParams } = params;
+		for (const key of Object.keys(queryParams)) {
+			apiUrl.searchParams.set(key, encodeURIComponent(queryParams[key]));
+		}
 
 		return fetch(apiUrl.toString(), { method, headers })
 			.then(async (res) => {
@@ -31,6 +32,7 @@ const api = GhostContentAPI({
 			})
 			.catch((error) => {
 				console.error("Fetch error:", error);
+				throw error;
 			});
 	},
 });
@@ -95,7 +97,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 	try {
 		const result = (await api.posts.read({
 			slug,
-			include: ["authors"],
+			include: "authors",
 		})) as Post;
 
 		return result;

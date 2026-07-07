@@ -54,7 +54,12 @@ const faqs = [
 	},
 	{
 		question: "Is it open source?",
-		answer: "Yes, Dokploy is open source and free to use.",
+		answer: "Yes, Dokploy offers a plan that is open source and free to use.",
+	},
+	{
+		question: "Can I use Dokploy to deploy AI-built apps?",
+		answer:
+			"Yes. Dokploy works with code from any source, including apps built with AI coding tools. You can deploy using your existing Git, Docker, and Compose workflows, or create a sandbox environment to give teams a governed space where they can ship AI-built apps with SSO, audit logs, and multitenancy built in.",
 	},
 	{
 		question: "What types of languages can I deploy with Dokploy?",

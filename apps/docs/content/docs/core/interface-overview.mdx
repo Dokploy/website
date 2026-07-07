@@ -1,0 +1,214 @@
+---
+title: Interface Overview
+description: 'A visual tour of the Dokploy dashboard — screenshots of every major section of the panel.'
+---
+
+This page is a visual tour of the Dokploy dashboard. Use it to get familiar with each section of the panel before diving into the feature guides. Click any image to zoom in.
+
+## Home
+
+The home dashboard summarizes your organization at a glance: projects, services, recent deployments and their status.
+
+<ImageZoom src="/assets/images/ui/home.png" alt="Dokploy home dashboard with projects, services and recent deployments" width={1600} height={775} className="rounded-lg"/>
+
+## Projects
+
+Projects group your services. Each project can hold applications, databases and Docker Compose services, organized per environment.
+
+<ImageZoom src="/assets/images/ui/projects.png" alt="Projects list" width={1600} height={775} className="rounded-lg"/>
+
+Inside a project you see every service with its live status:
+
+<ImageZoom src="/assets/images/ui/project-services.png" alt="Project services grid" width={1600} height={775} className="rounded-lg"/>
+
+### Environments
+
+Every project supports multiple environments (for example `production` and `staging`), each with its own set of services and shared variables.
+
+<ImageZoom src="/assets/images/ui/environments.png" alt="Environment selector with production and staging" width={1600} height={775} className="rounded-lg"/>
+
+## Applications
+
+The application view centralizes everything about a deployed app.
+
+### General & Providers
+
+Connect GitHub, GitLab, Bitbucket, Gitea, any Git URL, a Docker image, or drop files directly:
+
+<ImageZoom src="/assets/images/ui/application-general.png" alt="Application general tab with provider configuration" width={1600} height={775} className="rounded-lg"/>
+
+### Environment Variables
+
+<ImageZoom src="/assets/images/ui/application-environment.png" alt="Application environment variables editor" width={1600} height={775} className="rounded-lg"/>
+
+### Domains
+
+Add domains with automatic HTTPS via Let's Encrypt:
+
+<ImageZoom src="/assets/images/ui/application-domains.png" alt="Application domains with automatic HTTPS" width={1600} height={775} className="rounded-lg"/>
+
+### Deployments
+
+Every deployment is tracked, with a webhook URL for auto-deploys and full build logs:
+
+<ImageZoom src="/assets/images/ui/application-deployments.png" alt="Application deployments history" width={1600} height={775} className="rounded-lg"/>
+
+<ImageZoom src="/assets/images/ui/build-logs.png" alt="Build and deployment logs" width={1600} height={775} className="rounded-lg"/>
+
+### Logs
+
+Real-time runtime logs with container selection, search and filters:
+
+<ImageZoom src="/assets/images/ui/application-logs.png" alt="Real-time application logs" width={1600} height={775} className="rounded-lg"/>
+
+### Monitoring
+
+Per-service CPU, memory, network and disk metrics:
+
+<ImageZoom src="/assets/images/ui/application-monitoring.png" alt="Per-service monitoring" width={1600} height={775} className="rounded-lg"/>
+
+### Advanced
+
+Custom commands, cluster settings, resources, and mounts:
+
+<ImageZoom src="/assets/images/ui/application-advanced.png" alt="Application advanced settings" width={1600} height={775} className="rounded-lg"/>
+
+## Databases
+
+Deploy PostgreSQL, MySQL, MariaDB, MongoDB and Redis with a few clicks:
+
+<ImageZoom src="/assets/images/ui/database-postgres.png" alt="PostgreSQL database view" width={1600} height={775} className="rounded-lg"/>
+
+### Backups
+
+Schedule automatic backups to any S3-compatible destination:
+
+<ImageZoom src="/assets/images/ui/database-backups.png" alt="Scheduled database backups" width={1600} height={775} className="rounded-lg"/>
+
+<ImageZoom src="/assets/images/ui/create-backup.png" alt="Create backup modal" width={1600} height={775} className="rounded-lg"/>
+
+## Docker Compose
+
+Deploy multi-service stacks from a Git repository or a raw compose file, with a built-in editor:
+
+<ImageZoom src="/assets/images/ui/compose-editor.png" alt="Docker Compose editor" width={1600} height={775} className="rounded-lg"/>
+
+## Templates
+
+Deploy hundreds of open-source apps with one click:
+
+<ImageZoom src="/assets/images/ui/templates.png" alt="Open source templates gallery" width={1600} height={775} className="rounded-lg"/>
+
+## Monitoring
+
+Server-level metrics: CPU, memory, disk and Docker usage:
+
+<ImageZoom src="/assets/images/ui/server-monitoring.png" alt="Server monitoring dashboard" width={1600} height={775} className="rounded-lg"/>
+
+## Traefik File System
+
+Edit the Traefik configuration directly from the panel:
+
+<ImageZoom src="/assets/images/ui/traefik-file-system.png" alt="Traefik file system editor" width={1600} height={775} className="rounded-lg"/>
+
+## Docker & Swarm
+
+Inspect containers, images and Swarm nodes:
+
+<ImageZoom src="/assets/images/ui/docker.png" alt="Docker containers view" width={1600} height={775} className="rounded-lg"/>
+
+<ImageZoom src="/assets/images/ui/swarm.png" alt="Docker Swarm nodes" width={1600} height={775} className="rounded-lg"/>
+
+## Requests
+
+Analyze incoming HTTP requests handled by Traefik:
+
+<ImageZoom src="/assets/images/ui/requests.png" alt="Requests analytics" width={1600} height={775} className="rounded-lg"/>
+
+## Schedules
+
+Run cron jobs against your services:
+
+<ImageZoom src="/assets/images/ui/schedules.png" alt="Scheduled jobs" width={1600} height={775} className="rounded-lg"/>
+
+## Settings
+
+### Web Server
+
+Domain, certificates, and maintenance actions for the Dokploy panel itself:
+
+<ImageZoom src="/assets/images/ui/settings-web-server.png" alt="Web server settings" width={1600} height={775} className="rounded-lg"/>
+
+### Remote Servers
+
+Deploy to any VPS over SSH:
+
+<ImageZoom src="/assets/images/ui/settings-remote-servers.png" alt="Remote servers" width={1600} height={775} className="rounded-lg"/>
+
+### Users
+
+Invite team members and manage roles:
+
+<ImageZoom src="/assets/images/ui/settings-users.png" alt="Users and roles" width={1600} height={775} className="rounded-lg"/>
+
+### Audit Logs
+
+Track every action performed in your organization:
+
+<ImageZoom src="/assets/images/ui/settings-audit-logs.png" alt="Audit logs" width={1600} height={775} className="rounded-lg"/>
+
+### SSH Keys
+
+<ImageZoom src="/assets/images/ui/settings-ssh-keys.png" alt="SSH keys" width={1600} height={775} className="rounded-lg"/>
+
+### Git Providers
+
+<ImageZoom src="/assets/images/ui/settings-git.png" alt="Git providers" width={1600} height={775} className="rounded-lg"/>
+
+### Registry
+
+<ImageZoom src="/assets/images/ui/settings-registry.png" alt="Docker registry settings" width={1600} height={775} className="rounded-lg"/>
+
+### S3 Destinations
+
+<ImageZoom src="/assets/images/ui/settings-s3-destinations.png" alt="S3 destinations for backups" width={1600} height={775} className="rounded-lg"/>
+
+### Certificates
+
+<ImageZoom src="/assets/images/ui/settings-certificates.png" alt="Certificates" width={1600} height={775} className="rounded-lg"/>
+
+### Notifications
+
+Connect Slack, Discord, Telegram, email and more:
+
+<ImageZoom src="/assets/images/ui/settings-notifications.png" alt="Notification channels" width={1600} height={775} className="rounded-lg"/>
+
+### AI
+
+Configure AI providers to enable AI-assisted features:
+
+<ImageZoom src="/assets/images/ui/settings-ai.png" alt="AI settings" width={1600} height={775} className="rounded-lg"/>
+
+## Enterprise
+
+### SSO
+
+Configure OIDC/SAML providers and protect deployed applications with forward auth:
+
+<ImageZoom src="/assets/images/ui/settings-sso.png" alt="SSO settings" width={1600} height={775} className="rounded-lg"/>
+
+### Custom Roles
+
+Create roles with granular permissions, starting from presets like Viewer, Developer, Deployer or DevOps:
+
+<ImageZoom src="/assets/images/ui/create-custom-role.png" alt="Create custom role modal" width={1600} height={775} className="rounded-lg"/>
+
+### Whitelabeling
+
+Rebrand your Dokploy instance with your own name, logos and colors:
+
+<ImageZoom src="/assets/images/ui/settings-whitelabeling.png" alt="Whitelabeling settings" width={1600} height={775} className="rounded-lg"/>
+
+### License
+
+<ImageZoom src="/assets/images/ui/settings-license.png" alt="License settings" width={1600} height={775} className="rounded-lg"/>

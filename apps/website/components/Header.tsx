@@ -2,16 +2,24 @@
 
 import { cn } from "@/lib/utils";
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronRight, HeartIcon } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Fragment, type JSX, type SVGProps } from "react";
+import { Fragment, useEffect, type JSX, type SVGProps } from "react";
+import { createPortal } from "react-dom";
 import { Container } from "./Container";
 import GithubStars from "./GithubStars";
-import { NavLink } from "./NavLink";
 import { trackGAEvent } from "./analitycs";
 import { Logo } from "./shared/Logo";
-import AnimatedGradientText from "./ui/animated-gradient-text";
-import { Button, buttonVariants } from "./ui/button";
+import { Button } from "./ui/button";
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	navigationMenuTriggerStyle,
+} from "./ui/navigation-menu";
 
 function MobileNavLink({
 	href,
@@ -65,90 +73,143 @@ function MobileNavIcon({ open }: { open: boolean }) {
 	);
 }
 
-const I18nIcon = (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		width={24}
-		height={24}
-		fill="currentColor"
-		stroke="currentColor"
-		strokeWidth={0}
-		viewBox="0 0 512 512"
-		{...props}
-	>
-		<path
-			stroke="none"
-			d="m478.33 433.6-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362 368 281.65 401.17 362zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73 39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93.92 1.19 1.83 2.35 2.74 3.51-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59 22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z"
-		/>
-	</svg>
-);
+function BodyScrollLock({ lock }: { lock: boolean }) {
+	useEffect(() => {
+		document.body.style.overflow = lock ? "hidden" : "";
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [lock]);
+	return null;
+}
 
 function MobileNavigation() {
 	return (
 		<Popover>
-			<Popover.Button
-				className="relative z-10 flex h-8 w-8 items-center justify-center ui-not-focus-visible:outline-none"
-				aria-label="Toggle Navigation"
-			>
-				{({ open }) => <MobileNavIcon open={open} />}
-			</Popover.Button>
-			<Transition.Root>
-				<Transition.Child
-					as={Fragment as any}
-					enter="duration-150 ease-out"
-					enterFrom="opacity-0"
-					enterTo="opacity-100"
-					leave="duration-150 ease-in"
-					leaveFrom="opacity-100"
-					leaveTo="opacity-0"
-				>
-					<Popover.Overlay className="fixed inset-0 bg-background/50" />
-				</Transition.Child>
-
-				<Transition.Child
-					as={Fragment as any}
-					enter="duration-150 ease-out"
-					enterFrom="opacity-0 scale-95"
-					enterTo="opacity-100 scale-100"
-					leave="duration-100 ease-in"
-					leaveFrom="opacity-100 scale-100"
-					leaveTo="opacity-0 scale-95"
-				>
-					<Popover.Panel
-						as="div"
-						className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight  text-primary shadow-xl ring-1 ring-border/5"
+			{({ open, close }) => (
+				<>
+					<BodyScrollLock lock={open} />
+					<Popover.Button
+						className="relative z-10 flex h-8 w-8 items-center justify-center ui-not-focus-visible:outline-none"
+						aria-label="Toggle Navigation"
 					>
-						<MobileNavLink href="/#pricing">Pricing</MobileNavLink>
-						<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
-						<MobileNavLink
-							href="https://docs.dokploy.com/docs/core"
-							target="_blank"
+						<MobileNavIcon open={open} />
+					</Popover.Button>
+					{open && createPortal(
+						<div className="fixed inset-0 z-40 bg-background/50" onClick={() => close()} />,
+						document.body
+					)}
+					<Transition.Root>
+						<Transition.Child
+							as={Fragment as any}
+							enter="duration-150 ease-out"
+							enterFrom="opacity-0 scale-95"
+							enterTo="opacity-100 scale-100"
+							leave="duration-100 ease-in"
+							leaveFrom="opacity-100 scale-100"
+							leaveTo="opacity-0 scale-95"
 						>
-							Docs
-						</MobileNavLink>
-						<MobileNavLink href="/blog">Blog</MobileNavLink>
-						<MobileNavLink href="/contact">Contact</MobileNavLink>
-						<MobileNavLink
-							href="https://docs.dokploy.com/docs/core"
-							target="_blank"
-						>
-							<Button className=" w-full" asChild>
-								<Link
-									href="https://app.dokploy.com/register"
-									aria-label="Sign In Dokploy Cloud"
+							<Popover.Panel
+								as="div"
+								className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl border border-border bg-background p-4 text-lg tracking-tight text-primary shadow-xl ring-1 ring-border/5 max-h-[80vh] overflow-y-auto"
+							>
+								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+									Features
+								</p>
+								<MobileNavLink href="/features/application-deployment-platform">Application Deployment</MobileNavLink>
+								<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
+								<MobileNavLink href="/features/application-management-software">Application Management</MobileNavLink>
+								<MobileNavLink href="/features/container-server-monitoring">Monitoring</MobileNavLink>
+								<MobileNavLink href="/deploy-ai">AI Deployment</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<MobileNavLink href="/pricing">Pricing</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+									Solutions
+								</p>
+								<MobileNavLink href="/enterprise">Enterprise</MobileNavLink>
+								<MobileNavLink href="/partners">Partners</MobileNavLink>
+								<MobileNavLink href="/self-hosted-paas">Self-Hosted</MobileNavLink>
+								<MobileNavLink href="/industries">Industries</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<MobileNavLink
+									href="https://docs.dokploy.com/docs/core"
 									target="_blank"
 								>
-									<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
-										<span>Sign In</span>
-										<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-									</div>
-								</Link>
-							</Button>
-						</MobileNavLink>
-					</Popover.Panel>
-				</Transition.Child>
-			</Transition.Root>
+									Docs
+								</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
+									Resources
+								</p>
+								<MobileNavLink href="https://templates.dokploy.com" target="_blank">Templates</MobileNavLink>
+								<MobileNavLink href="/comparison">Dokploy vs.</MobileNavLink>
+								<MobileNavLink href="/blog">Blog</MobileNavLink>
+								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
+								<MobileNavLink href="/jobs">Jobs</MobileNavLink>
+								<hr className="m-2 border-border" />
+								<MobileNavLink href="/jobs">Careers</MobileNavLink>
+								<MobileNavLink href="/contact">Contact</MobileNavLink>
+								<MobileNavLink
+									href="https://app.dokploy.com/register"
+									target="_blank"
+								>
+									<Button className="w-full" asChild>
+										<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
+											<span>Sign In</span>
+											<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+										</div>
+									</Button>
+								</MobileNavLink>
+							</Popover.Panel>
+						</Transition.Child>
+					</Transition.Root>
+				</>
+			)}
 		</Popover>
+	);
+}
+
+function ListItem({
+	className,
+	title,
+	href,
+	target,
+	children,
+}: {
+	className?: string;
+	title: string;
+	href: string;
+	target?: string;
+	children?: React.ReactNode;
+}) {
+	return (
+		<li>
+			<NavigationMenuLink asChild>
+				<Link
+					href={href}
+					target={target}
+					onClick={() =>
+						trackGAEvent({
+							action: "Nav Link Clicked",
+							category: "Navigation",
+							label: href,
+						})
+					}
+					className={cn(
+						"block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+						className,
+					)}
+				>
+					<div className="text-sm font-medium leading-none">{title}</div>
+					{children && (
+						<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+							{children}
+						</p>
+					)}
+				</Link>
+			</NavigationMenuLink>
+		</li>
 	);
 }
 
@@ -161,16 +222,137 @@ export function Header() {
 						<Link href="/" aria-label="Home">
 							<Logo className="h-10 w-auto" />
 						</Link>
-						<div className="hidden md:flex md:gap-x-6">
-							<NavLink href="/#pricing">Pricing</NavLink>
-							<NavLink href="/#faqs">FAQ</NavLink>
-							<NavLink
-								href="https://docs.dokploy.com/docs/core"
-								target="_blank"
-							>
-								Docs
-							</NavLink>
-							<NavLink href="/blog">Blog</NavLink>
+						<div className="hidden md:flex">
+							<NavigationMenu>
+								<NavigationMenuList>
+									<NavigationMenuItem>
+										<NavigationMenuTrigger>Features</NavigationMenuTrigger>
+										<NavigationMenuContent>
+											<ul className="grid w-[200px] gap-1 p-2">
+												<ListItem href="/features/application-deployment-platform" title="Application Deployment">
+													Deploy and manage applications with ease
+												</ListItem>
+												<ListItem href="/features/database-management-tool" title="Databases">
+													Manage your databases effortlessly
+												</ListItem>
+												<ListItem href="/features/application-management-software" title="Application Management">
+													Monitor and control your applications
+												</ListItem>
+												<ListItem href="/features/container-server-monitoring" title="Monitoring">
+													Keep your systems running
+												</ListItem>
+												<ListItem href="/deploy-ai" title="AI Deployment">
+													Empower your team to deploy AI tools
+												</ListItem>
+											</ul>
+										</NavigationMenuContent>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavigationMenuLink
+											asChild
+											className={navigationMenuTriggerStyle()}
+										>
+											<Link
+												href="/pricing"
+												onClick={() =>
+													trackGAEvent({
+														action: "Nav Link Clicked",
+														category: "Navigation",
+														label: "/pricing",
+													})
+												}
+											>
+												Pricing
+											</Link>
+										</NavigationMenuLink>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
+										<NavigationMenuContent>
+											<ul className="grid w-[200px] gap-1 p-2">
+												<ListItem href="/enterprise" title="Enterprise">
+													Enterprise-grade deployment platform
+												</ListItem>
+												<ListItem href="/partners" title="Partners">
+													Partner program and integrations
+												</ListItem>
+												<ListItem href="/self-hosted-paas" title="Self-Hosted">
+													Self-hosted PaaS built for developers
+												</ListItem>
+												<ListItem href="/industries" title="Industries">
+													Deployment solutions by industry
+												</ListItem>
+											</ul>
+										</NavigationMenuContent>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavigationMenuLink
+											asChild
+											className={navigationMenuTriggerStyle()}
+										>
+											<Link
+												href="https://docs.dokploy.com/docs/core"
+												target="_blank"
+												onClick={() =>
+													trackGAEvent({
+														action: "Nav Link Clicked",
+														category: "Navigation",
+														label: "https://docs.dokploy.com/docs/core",
+													})
+												}
+											>
+												Docs
+											</Link>
+										</NavigationMenuLink>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavigationMenuLink
+											asChild
+											className={navigationMenuTriggerStyle()}
+										>
+											<Link
+												href="/jobs"
+												onClick={() =>
+													trackGAEvent({
+														action: "Nav Link Clicked",
+														category: "Navigation",
+														label: "/jobs",
+													})
+												}
+											>
+												Careers
+											</Link>
+										</NavigationMenuLink>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+										<NavigationMenuContent>
+											<ul className="grid w-[200px] gap-1 p-2">
+												<ListItem href="https://templates.dokploy.com" target="_blank" title="Templates">
+													Ready-to-deploy templates
+												</ListItem>
+												<ListItem href="/comparison" title="Dokploy vs.">
+													Compare Dokploy to alternatives
+												</ListItem>
+												<ListItem href="/blog" title="Blog">
+													Latest news and updates
+												</ListItem>
+												<ListItem href="/#faqs" title="FAQ">
+													Frequently asked questions
+												</ListItem>
+												<ListItem href="/jobs" title="Jobs">
+													See open positions at Dokploy
+												</ListItem>
+											</ul>
+										</NavigationMenuContent>
+									</NavigationMenuItem>
+								</NavigationMenuList>
+							</NavigationMenu>
 						</div>
 					</div>
 					<div className="flex items-center gap-x-4 md:gap-x-5">
@@ -207,20 +389,6 @@ export function Header() {
 								Contact
 							</Link>
 						</Button>
-
-						{/* <Link
-							className={buttonVariants({
-								variant: "outline",
-								className: " flex items-center gap-2 !rounded-full",
-							})}
-							href="https://opencollective.com/dokploy"
-							target="_blank"
-						>
-							<span className="text-sm font-semibold">
-								{t("navigation.support")}{" "}
-							</span>
-							<HeartIcon className="animate-heartbeat size-4 fill-red-600 text-red-500 " />
-						</Link> */}
 
 						<Button className="rounded-full max-md:hidden" asChild>
 							<Link

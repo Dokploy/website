@@ -1,0 +1,11 @@
+{
+	"title": "SSO",
+	"pages": [
+		"auth0",
+		"azure",
+		"keycloak",
+		"okta",
+		"zitadel",
+		"application-authentication"
+	]
+}

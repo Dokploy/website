@@ -3,12 +3,16 @@
 	"pages": [
 		"overview",
 		"slack",
+		"mattermost",
 		"telegram",
 		"discord",
 		"lark",
+		"teams",
 		"email",
+		"resend",
 		"gotify",
 		"ntfy",
+		"pushover",
 		"webhook"
 	]
 }
