@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Detect version from environment variable or detect latest stable from GitHub
+# Docker version to install and maintain
+DOCKER_VERSION="28.5.0"
+
+# Detect version from environment variable or default to latest
 # Usage with curl (export first): export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
 # Usage with curl (export first): export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
 # Usage with curl (bash -s): DOKPLOY_VERSION=canary bash -s < <(curl -sSL https://dokploy.com/install.sh)
@@ -127,7 +130,11 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh -s -- --version 28.5.0
+      curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
+      # Hold docker packages to prevent unintended upgrades (apt-based distros only)
+      if command_exists apt-mark; then
+        apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
+      fi
     fi
 
     # Check if running in Proxmox LXC container and set endpoint mode
@@ -352,9 +359,9 @@ update_dokploy() {
     # Detect version tag
     VERSION_TAG=$(detect_version)
     DOCKER_IMAGE="dokploy/dokploy:${VERSION_TAG}"
-    
+
     echo "Updating Dokploy to version: ${VERSION_TAG}"
-    
+
     # Pull the image
     docker pull $DOCKER_IMAGE
 
