@@ -5,22 +5,54 @@ description: "Detailed comparison between Dokploy Cloud and the Self-Hosted vers
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
-Both versions of Dokploy are **functionally identical** — same deployment engine, same features, same Docker/Traefik integration, same API. The difference is purely operational: **who manages the Dokploy instance itself**.
+Both versions of Dokploy share the same **deployment engine** — same Docker/Traefik integration, same API, same core features. The main difference is operational: **who manages the Dokploy instance itself**. On top of that, there are four editions with different limits and extras, summarized below.
 
-## Same features, different operations
+## Editions at a glance
 
-Every feature available in Self-Hosted is also available in Cloud, and vice versa. This includes:
+Dokploy comes in four editions: **Self-Hosted (OSS)**, **Cloud**, **Enterprise Self-Hosted**, and **Enterprise Cloud**.
 
-- Application, Database, and Docker Compose deployments
-- Git integration (GitHub, GitLab, Bitbucket, Gitea)
-- Traefik reverse proxy with custom domains & SSL
-- Remote servers and multi-server management
-- Monitoring, notifications, backups, rollbacks
-- Preview deployments, environments, templates
-- API & CLI, schedule jobs, watch paths
-- User permissions and all Enterprise features (SSO, custom roles, audit logs, whitelabeling)
+| | Self-Hosted (OSS) | Cloud | Enterprise Self-Hosted | Enterprise Cloud |
+|---|:---:|:---:|:---:|:---:|
+| **Price** | Free | From $4.50/mo | License ([contact us](https://dokploy.com/contact)) | Custom |
+| **Control plane** | You manage it | Managed by Dokploy | You manage it | Managed by Dokploy |
+| **Updates** | Manual | Automatic | Manual | Automatic |
+| **Core deployments** (apps, databases, Compose, domains, SSL, templates) | ✅ | ✅ | ✅ | ✅ |
+| **Multi-server / remote servers** | ✅ | ✅ | ✅ | ✅ |
+| **Basic roles** (Owner, Admin, Member) | ✅ | ✅ | ✅ | ✅ |
+| **Custom roles** (granular permissions) | ❌ | Plan-dependent | ✅ | ✅ |
+| **SSO (OIDC / SAML)** | ❌ | ❌ | ✅ | ✅ |
+| **Application Authentication** (SSO gate for your apps) | ❌ | ❌ | ✅ | ✅ |
+| **Audit logs** | ❌ | ❌ | ✅ | ✅ |
+| **Whitelabeling** | ❌ | ❌ | ✅ | ❌ |
+| **Concurrent builds per server** | Up to 2 | Managed | Unlimited | Managed |
+| **Advanced monitoring dashboard** | Basic monitoring | ✅ | Basic monitoring | ✅ |
+| **Support** | Community (Discord) | Email & Chat | Priority | Priority with SLA |
 
-There are **no feature gates** between Cloud and Self-Hosted. The core product is the same.
+<Callout type="info">
+The core deployment experience is identical in every edition — the differences are in team/enterprise capabilities (SSO, custom roles, audit logs, whitelabeling), build concurrency, and who operates the control plane.
+</Callout>
+
+## Enterprise: Cloud vs Self-Hosted
+
+There are **two ways to get Enterprise**, and they are not the same thing:
+
+- **Enterprise Self-Hosted** — you run your own Dokploy instance and activate a [license key](/docs/core/enterprise/license-keys) issued by the Dokploy team. You keep full control of your infrastructure (including air-gapped setups) and unlock SSO, custom roles, audit logs, [Application Authentication](/docs/core/enterprise/sso/application-authentication), **whitelabeling**, and **unlimited concurrent builds** per server.
+- **Enterprise Cloud** — the Dokploy team manages the control plane for you with a custom plan. You get the same enterprise capabilities (SSO, custom roles, audit logs, Application Authentication) plus managed uptime, automatic updates, and priority support with SLA.
+
+<Callout type="info">
+Both Enterprise flavors include **all upcoming Enterprise features**: every new Enterprise capability we release is automatically part of your license or plan, at no extra cost.
+</Callout>
+
+Key differences between the two Enterprise flavors:
+
+| | Enterprise Self-Hosted | Enterprise Cloud |
+|---|:---:|:---:|
+| **Activation** | License key on your instance | Cloud subscription |
+| **Control plane uptime & updates** | Your responsibility | Managed by Dokploy |
+| **Whitelabeling** | ✅ | ❌ (control plane is shared infrastructure) |
+| **Concurrent builds** | Unlimited, configured per server | Managed by the platform |
+| **Air-gapped / private networks** | ✅ | ❌ |
+| **Advanced monitoring dashboard** | Basic monitoring | ✅ |
 
 ## What's actually different
 
