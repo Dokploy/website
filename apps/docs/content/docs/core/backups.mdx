@@ -46,6 +46,22 @@ During restoration, Dokploy will:
 After restoration is complete, you may need to log in again. If necessary, you can restart Traefik to ensure all services are properly configured.
 </Callout>
 
+## Encryption Key
+
+Environment variables are stored encrypted in the Dokploy database, using a key derived from your `BETTER_AUTH_SECRET` (or a dedicated `ENCRYPTION_KEY` if you configured one). A backup alone is not enough to restore them — **the restoring server must use the same secret**.
+
+<Callout type="warn">
+  A complete Dokploy backup is the backup file **plus** your `BETTER_AUTH_SECRET` / `ENCRYPTION_KEY`. Store the secret somewhere safe (for example, a password manager) when you set up backups.
+</Callout>
+
+To retrieve the secret from a running server installed via the install script:
+
+```bash
+docker exec $(docker ps -qf name=dokploy.1) cat /run/secrets/dokploy_auth_secret
+```
+
+When restoring on a **new server**, set the same secret before restoring. If the secrets don't match, Dokploy still works, but environment variables will show as `enc:v1:...` strings until you re-enter them manually.
+
 ## Post-Restoration Steps
 
 After restoring a backup, especially if you're restoring to a different server, consider the following:
@@ -57,4 +73,6 @@ After restoring a backup, especially if you're restoring to a different server, 
    - Recreate Traefik.me domains if you're using them
 
 2. If you're using domain names instead of IPs for Git providers, no additional configuration is needed.
+
+3. If you restored to a server with a different `BETTER_AUTH_SECRET` / `ENCRYPTION_KEY`, environment variables will be unreadable — see [Encryption Key](#encryption-key).
 
