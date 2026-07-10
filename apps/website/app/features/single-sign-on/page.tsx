@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 import {
 	KeyRound,
 	Link2,
-	Users,
+	Paintbrush,
+	ScrollText,
+	Shield,
 	ShieldCheck,
 	UserMinus,
-	Shield,
-	ScrollText,
-	Paintbrush,
+	Users,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Single Sign-On for Businesses and Enterprise Teams",
@@ -41,9 +41,9 @@ const coreFeatures = [
 	},
 	{
 		icon: UserMinus,
-		title: "Deprovision access instantly",
+		title: "Provision and deprovision automatically",
 		description:
-			"When a team member leaves or changes a role, revoking their access in your identity provider immediately removes their access to Dokploy\u2014no manual cleanup across multiple tools.",
+			"With SCIM provisioning, your identity provider creates, updates, and deactivates Dokploy accounts as your directory changes. When someone leaves, their access is revoked automatically\u2014no manual cleanup across multiple tools.",
 	},
 ];
 

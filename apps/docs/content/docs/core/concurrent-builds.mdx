@@ -21,16 +21,13 @@ This means increasing concurrency lets **different** applications on the same se
 
 By default, every server, the Dokploy server and any remote server, has a concurrency of **1**. This means builds on that server run one at a time.
 
-## Limits by Plan
+## Limits
 
 <Callout type="info">
-  Concurrent builds are a self-hosted feature and are configured per server. They are not available on Dokploy Cloud.
+  Concurrent builds are a self-hosted feature and are configured per server. They are not available on Dokploy Cloud, where build scheduling is managed by the platform.
 </Callout>
 
-- **OSS (free)**: You can increase concurrency up to a maximum of **2** per server.
-- **Enterprise**: With a valid enterprise license, concurrency is **unlimited** and can be set to any value per server.
-
-If you set a value higher than 2 without a valid enterprise license, Dokploy will reject the change until a valid license is applied. If a license expires, concurrency is automatically clamped back down to the OSS limits so deployments keep working without breaking anything.
+Concurrent builds are fully available in the open-source version — no license required. You can set each server's concurrency to any value between **1** and **100**.
 
 ## Configuring Concurrency
 

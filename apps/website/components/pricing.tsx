@@ -1,23 +1,23 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Container } from "./Container";
 import { ContactFormModal } from "./ContactFormModal";
+import { Container } from "./Container";
+import { PricingFeatureTable } from "./pricing/PricingFeatureTable";
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from "./ui/accordion";
+import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Badge } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
-import { PricingFeatureTable } from "./pricing/PricingFeatureTable";
-import AnimatedGridPattern from "./ui/animated-grid-pattern";
-import { cn } from "@/lib/utils";
 
 const CLOUD_APP_URL = "https://app.dokploy.com";
 
@@ -45,7 +45,7 @@ const pricingFaqs = [
 	{
 		question: "What's included in the Enterprise plan?",
 		answer:
-			"The Enterprise plan includes unlimited servers and organizations, fine-grained RBAC, SSO/SAML integration (Azure, OKTA, etc.), audit logs, MSA/SLA, white labeling, and priority support. It's available as both Cloud and Self-Hosted.",
+			"The Enterprise plan includes unlimited servers and organizations, fine-grained RBAC, SSO/SAML integration (Azure, OKTA, etc.), SCIM user provisioning, audit logs, MSA/SLA, white labeling, and priority support. It's available as both Cloud and Self-Hosted.",
 	},
 	{
 		question: "Do you offer refunds?",
@@ -116,6 +116,7 @@ const enterpriseFeatures = [
 	"Fine-grained RBAC",
 	"Complete Hosting Flexibility",
 	"SSO / SAML (Azure, OKTA, etc)",
+	"SCIM User Provisioning",
 	"Audit Logs",
 	"MSA/SLA",
 	"White Labeling",
@@ -173,17 +174,15 @@ export function Pricing() {
 						onValueChange={(v) => setIsAnnual(v === "annual")}
 					>
 						<TabsList className=" w-full ">
-							<TabsTrigger value="annual">
-								Yearly (20% discount)
-							</TabsTrigger>
+							<TabsTrigger value="annual">Yearly (20% discount)</TabsTrigger>
 							<TabsTrigger value="monthly">Monthly</TabsTrigger>
 						</TabsList>
 					</Tabs>
 				</div>
 
 				<div className="mx-auto mt-12 flex max-w-6xl flex-col gap-8">
-						{/* Hobby, Startup, Enterprise - 3 column grid */}
-						<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+					{/* Hobby, Startup, Enterprise - 3 column grid */}
+					<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 						{/* Hobby */}
 						<section
 							className={clsx(
@@ -208,7 +207,8 @@ export function Pricing() {
 									</p>
 								) : (
 									<span className="ml-2 text-sm text-muted-foreground">
-										per server (add as many servers as you&apos;d like for $4.50/mo)
+										per server (add as many servers as you&apos;d like for
+										$4.50/mo)
 									</span>
 								)}
 							</div>
@@ -240,9 +240,7 @@ export function Pricing() {
 								"relative flex flex-col rounded-3xl border-2 border-primary/50 bg-black/80 px-6 py-8",
 							)}
 						>
-							<Badge className="absolute -top-2.5 left-6">
-								Recommended
-							</Badge>
+							<Badge className="absolute -top-2.5 left-6">Recommended</Badge>
 							<h3 className="text-lg font-medium text-white">Startup</h3>
 							<p className="mt-1 text-sm text-muted-foreground">
 								Perfect for small to mid-size teams
@@ -304,7 +302,9 @@ export function Pricing() {
 									</p>
 								</div>
 								<div className="rounded-xl border border-border/50 bg-background/50 px-4 py-3">
-									<p className="font-medium text-white text-center">Self Hosted</p>
+									<p className="font-medium text-white text-center">
+										Self Hosted
+									</p>
 									<p className="mt-0.5 text-xs text-muted-foreground text-center">
 										Install on-prem or in your own cloud
 									</p>
@@ -327,46 +327,43 @@ export function Pricing() {
 								</Button>
 							</div>
 						</section>
-						</div>
+					</div>
 
-						{/* Agency - below the 3 main plans */}
-						<section
-							className={clsx(
-								"flex flex-col rounded-3xl border-2 border-dashed border-border/50 bg-black/50 px-6 py-8",
-							)}
-						>
-							<h3 className="text-lg font-medium text-white">Agency</h3>
-							<p className="mt-1 text-sm text-muted-foreground">
-								Our Agency plan is uniquely tailored to the needs of agencies.
-								Please contact us below to learn more about this option, as well
-								as about becoming a certified Dokploy partner.{" "}
-								<Link
-									href="/partners"
-									className="text-primary hover:underline"
-								>
-									Learn more here
-								</Link>
-							</p>
-							<div className="mt-6">
-								<Button
-									onClick={() => setOpenPartnerModal(true)}
-									className="w-full sm:w-auto"
-									variant="outline"
-								>
-									Contact The Partner Team
-								</Button>
-							</div>
-						</section>
+					{/* Agency - below the 3 main plans */}
+					<section
+						className={clsx(
+							"flex flex-col rounded-3xl border-2 border-dashed border-border/50 bg-black/50 px-6 py-8",
+						)}
+					>
+						<h3 className="text-lg font-medium text-white">Agency</h3>
+						<p className="mt-1 text-sm text-muted-foreground">
+							Our Agency plan is uniquely tailored to the needs of agencies.
+							Please contact us below to learn more about this option, as well
+							as about becoming a certified Dokploy partner.{" "}
+							<Link href="/partners" className="text-primary hover:underline">
+								Learn more here
+							</Link>
+						</p>
+						<div className="mt-6">
+							<Button
+								onClick={() => setOpenPartnerModal(true)}
+								className="w-full sm:w-auto"
+								variant="outline"
+							>
+								Contact The Partner Team
+							</Button>
+						</div>
+					</section>
 				</div>
 
 				{/* Feature breakdown */}
 				<div className="mx-auto mt-24 max-w-6xl">
-						<h3 className="text-center text-2xl font-semibold text-white">
-							Feature breakdown by plan
-						</h3>
-						<div className="mt-8">
-							<PricingFeatureTable />
-						</div>
+					<h3 className="text-center text-2xl font-semibold text-white">
+						Feature breakdown by plan
+					</h3>
+					<div className="mt-8">
+						<PricingFeatureTable />
+					</div>
 				</div>
 
 				{/* Pricing FAQ */}
@@ -377,11 +374,7 @@ export function Pricing() {
 					<p className="mt-4 text-center text-sm text-muted-foreground">
 						Have a different question? Contact us via Discord or email.
 					</p>
-					<Accordion
-						type="single"
-						collapsible
-						className="mt-8 w-full"
-					>
+					<Accordion type="single" collapsible className="mt-8 w-full">
 						{pricingFaqs.map((faq, index) => (
 							<AccordionItem value={`${index}`} key={index}>
 								<AccordionTrigger className="text-left">

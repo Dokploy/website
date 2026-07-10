@@ -3,23 +3,25 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
+	Box,
 	Check,
 	Cloud,
+	GitBranch,
 	Headphones,
+	KeyRound,
 	Lock,
+	Paintbrush,
+	RotateCcw,
+	ScrollText,
 	Server,
 	Shield,
+	UserCog,
 	Users,
-	GitBranch,
-	ScrollText,
-	Box,
-	KeyRound,
-	RotateCcw,
 } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
-import { Container } from "./Container";
+import { useState } from "react";
 import { ContactFormModal } from "./ContactFormModal";
+import { Container } from "./Container";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Button } from "./ui/button";
@@ -30,6 +32,12 @@ const features = [
 		title: "SSO / SAML",
 		description:
 			"Seamless authentication with enterprise identity providers for secure, centralized access control.",
+	},
+	{
+		icon: UserCog,
+		title: "SCIM Provisioning",
+		description:
+			"Automatically provision, update, and deactivate users from Okta, Entra ID, or any SCIM 2.0 identity provider.",
 	},
 	{
 		icon: Shield,
@@ -60,6 +68,12 @@ const features = [
 		title: "Granular User Controls",
 		description:
 			"Assign remote servers and specific git providers to individual team members.",
+	},
+	{
+		icon: Paintbrush,
+		title: "White Labeling",
+		description:
+			"Present Dokploy as your own platform with custom branding, logo, and colors for your organization or clients.",
 	},
 ];
 
@@ -163,7 +177,10 @@ export function EnterpriseLanding() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.3, delay: 0.4 }}
 							>
-								<Button className="rounded-full" onClick={() => setContactOpen(true)}>
+								<Button
+									className="rounded-full"
+									onClick={() => setContactOpen(true)}
+								>
 									Contact sales
 								</Button>
 								<Button variant="outline" className="rounded-full" asChild>
@@ -190,7 +207,7 @@ export function EnterpriseLanding() {
 						</p>
 					</div>
 
-					<div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					<div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
 						{features.map((feature) => (
 							<div
 								key={feature.title}
@@ -270,7 +287,9 @@ export function EnterpriseLanding() {
 							Enterprise-grade governance for AI-built apps
 						</h2>
 						<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-							AI tools have accelerated how teams ship software. Dokploy gives enterprises a safe way to do it, with audit trails, access controls, and isolated environments.
+							AI tools have accelerated how teams ship software. Dokploy gives
+							enterprises a safe way to do it, with audit trails, access
+							controls, and isolated environments.
 						</p>
 					</div>
 
@@ -308,18 +327,25 @@ export function EnterpriseLanding() {
 								<div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 transition group-hover:bg-green-500/20">
 									<item.icon className="h-6 w-6 text-green-400" />
 								</div>
-								<h3 className="mb-3 text-lg font-semibold text-white">{item.title}</h3>
-								<p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+								<h3 className="mb-3 text-lg font-semibold text-white">
+									{item.title}
+								</h3>
+								<p className="text-sm leading-relaxed text-muted-foreground">
+									{item.description}
+								</p>
 							</div>
 						))}
 					</div>
 
 					<div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-border/30 bg-gradient-to-r from-green-500/5 to-blue-500/5 p-8 text-center">
 						<p className="text-lg text-muted-foreground">
-							See how Dokploy handles AI deployment — from AI-generated code to a governed, production-ready environment.
+							See how Dokploy handles AI deployment — from AI-generated code to
+							a governed, production-ready environment.
 						</p>
 						<Button className="mt-6 rounded-full" asChild>
-							<Link href="/features/application-deployment-platform">Explore AI deployment</Link>
+							<Link href="/features/application-deployment-platform">
+								Explore AI deployment
+							</Link>
 						</Button>
 					</div>
 				</Container>
@@ -352,7 +378,8 @@ export function EnterpriseLanding() {
 									Custom Roles
 								</h3>
 								<p className="text-sm text-muted-foreground">
-									Define roles with preset templates or build from scratch with granular permission toggles per resource.
+									Define roles with preset templates or build from scratch with
+									granular permission toggles per resource.
 								</p>
 							</div>
 						</div>
@@ -370,7 +397,8 @@ export function EnterpriseLanding() {
 									Git Provider Access
 								</h3>
 								<p className="text-sm text-muted-foreground">
-									Control which Git providers each team member can access across GitHub, GitLab, Bitbucket, and Gitea.
+									Control which Git providers each team member can access across
+									GitHub, GitLab, Bitbucket, and Gitea.
 								</p>
 							</div>
 						</div>
@@ -388,7 +416,8 @@ export function EnterpriseLanding() {
 									Server Assignment
 								</h3>
 								<p className="text-sm text-muted-foreground">
-									Assign specific remote servers to individual team members so they only see what they need.
+									Assign specific remote servers to individual team members so
+									they only see what they need.
 								</p>
 							</div>
 						</div>
@@ -407,7 +436,10 @@ export function EnterpriseLanding() {
 							Talk to our team about your deployment needs and discover how
 							Dokploy Enterprise can transform your infrastructure.
 						</p>
-						<Button className="mt-8 rounded-full" onClick={() => setContactOpen(true)}>
+						<Button
+							className="mt-8 rounded-full"
+							onClick={() => setContactOpen(true)}
+						>
 							Schedule a call with sales
 						</Button>
 						<p className="mt-6 text-sm text-gray-500">

@@ -21,23 +21,24 @@ Dokploy comes in four editions: **Self-Hosted (OSS)**, **Cloud**, **Enterprise S
 | **Basic roles** (Owner, Admin, Member) | ✅ | ✅ | ✅ | ✅ |
 | **Custom roles** (granular permissions) | ❌ | Plan-dependent | ✅ | ✅ |
 | **SSO (OIDC / SAML)** | ❌ | ❌ | ✅ | ✅ |
+| **SCIM provisioning** (automated user lifecycle) | ❌ | ❌ | ✅ | ✅ |
 | **Application Authentication** (SSO gate for your apps) | ❌ | ❌ | ✅ | ✅ |
 | **Audit logs** | ❌ | ❌ | ✅ | ✅ |
 | **Whitelabeling** | ❌ | ❌ | ✅ | ❌ |
-| **Concurrent builds per server** | Up to 2 | Managed | Unlimited | Managed |
+| **Concurrent builds per server** | ✅ Configurable | Managed | ✅ Configurable | Managed |
 | **Advanced monitoring dashboard** | Basic monitoring | ✅ | Basic monitoring | ✅ |
 | **Support** | Community (Discord) | Email & Chat | Priority | Priority with SLA |
 
 <Callout type="info">
-The core deployment experience is identical in every edition — the differences are in team/enterprise capabilities (SSO, custom roles, audit logs, whitelabeling), build concurrency, and who operates the control plane.
+The core deployment experience is identical in every edition — the differences are in team/enterprise capabilities (SSO, SCIM provisioning, custom roles, audit logs, whitelabeling) and who operates the control plane. [Concurrent builds](/docs/core/concurrent-builds) are included in every self-hosted edition, no license required.
 </Callout>
 
 ## Enterprise: Cloud vs Self-Hosted
 
 There are **two ways to get Enterprise**, and they are not the same thing:
 
-- **Enterprise Self-Hosted** — you run your own Dokploy instance and activate a [license key](/docs/core/enterprise/license-keys) issued by the Dokploy team. You keep full control of your infrastructure (including air-gapped setups) and unlock SSO, custom roles, audit logs, [Application Authentication](/docs/core/enterprise/sso/application-authentication), **whitelabeling**, and **unlimited concurrent builds** per server.
-- **Enterprise Cloud** — the Dokploy team manages the control plane for you with a custom plan. You get the same enterprise capabilities (SSO, custom roles, audit logs, Application Authentication) plus managed uptime, automatic updates, and priority support with SLA.
+- **Enterprise Self-Hosted** — you run your own Dokploy instance and activate a [license key](/docs/core/enterprise/license-keys) issued by the Dokploy team. You keep full control of your infrastructure (including air-gapped setups) and unlock SSO, [SCIM provisioning](/docs/core/enterprise/scim), custom roles, audit logs, [Application Authentication](/docs/core/enterprise/sso/application-authentication), and **whitelabeling**.
+- **Enterprise Cloud** — the Dokploy team manages the control plane for you with a custom plan. You get the same enterprise capabilities (SSO, SCIM provisioning, custom roles, audit logs, Application Authentication) plus managed uptime, automatic updates, and priority support with SLA.
 
 <Callout type="info">
 Both Enterprise flavors include **all upcoming Enterprise features**: every new Enterprise capability we release is automatically part of your license or plan, at no extra cost.
@@ -50,7 +51,6 @@ Key differences between the two Enterprise flavors:
 | **Activation** | License key on your instance | Cloud subscription |
 | **Control plane uptime & updates** | Your responsibility | Managed by Dokploy |
 | **Whitelabeling** | ✅ | ❌ (control plane is shared infrastructure) |
-| **Concurrent builds** | Unlimited, configured per server | Managed by the platform |
 | **Air-gapped / private networks** | ✅ | ❌ |
 | **Advanced monitoring dashboard** | Basic monitoring | ✅ |
 
@@ -145,6 +145,7 @@ If you choose Dokploy Cloud, there are several plans depending on your needs:
 | **RBAC** | Basic (Owner, Admin, Member) | Basic (Admin/Developer roles) | Fine-grained + custom roles | Fine-grained + custom roles |
 | **2FA** | ❌ | ✅ | ✅ | ✅ |
 | **SSO / SAML** | ❌ | ❌ | ✅ | ✅ |
+| **SCIM provisioning** | ❌ | ❌ | ✅ | ✅ |
 | **Audit logs** | ❌ | ❌ | ✅ | ✅ |
 | **White labeling** | ❌ | ❌ | ✅ | ✅ |
 | **Support** | Community (Discord) | Email & Chat | Priority with SLA | Partner team |
@@ -157,5 +158,5 @@ Annual billing saves **20%** on all plans. See the [Pricing](https://dokploy.com
 
 - **Hobby** — You're a solo developer deploying personal projects or small client sites on a single server.
 - **Startup** — You have a team, need multiple environments (production, staging, dev), and want unlimited backups and scheduled jobs.
-- **Enterprise** — You need SSO/SAML, audit logs, white labeling, custom roles with fine-grained permissions, and priority support with SLA.
+- **Enterprise** — You need SSO/SAML, SCIM provisioning, audit logs, white labeling, custom roles with fine-grained permissions, and priority support with SLA.
 - **Agency** — You manage infrastructure for multiple clients and need a tailored partnership.

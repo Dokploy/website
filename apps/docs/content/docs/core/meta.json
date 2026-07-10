@@ -60,6 +60,7 @@
 		"enterprise/index",
 		"enterprise/license-keys",
 		"enterprise/sso",
+		"enterprise/scim",
 		"enterprise/whitelabeling",
 		"enterprise/custom-roles",
 		"enterprise/audit-logs",
