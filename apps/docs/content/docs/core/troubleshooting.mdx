@@ -778,3 +778,24 @@ If you are using Dokploy Cloud, you don't need to worry about this, our team wil
 
 Start using Dokploy Cloud https://app.dokploy.com/
 </Callout>
+
+## Environment Variables Empty or Showing `enc:v1:` Values
+
+Environment variables are stored encrypted in the Dokploy database, using a key derived from `BETTER_AUTH_SECRET` (or a dedicated `ENCRYPTION_KEY`). Two symptoms indicate a key mismatch:
+
+- Environment variable fields in the UI show `enc:v1:...` strings instead of your values
+- Deployments finish successfully but the container starts with **no environment variables**
+
+Check the Dokploy logs for this message to confirm:
+
+```
+Failed to decrypt an encrypted column
+```
+
+Common causes:
+
+1. **`BETTER_AUTH_SECRET` changed** after the values were encrypted — for example, a fresh install with a restored database, or a rotated secret. Restore the original secret, or set `ENCRYPTION_KEY` to the old `BETTER_AUTH_SECRET` value (it produces the same derived key), or re-enter the affected variables.
+
+2. **Multiple Dokploy components with different secrets** — if you run any additional Dokploy service that reads the same database (for example, a separate deployments worker, schedules, or monitoring service), **every component must use exactly the same `BETTER_AUTH_SECRET` and `ENCRYPTION_KEY`**. A component with different keys cannot decrypt the variables and may deploy services with an empty environment.
+
+Your data is not lost in either case — the encrypted values remain intact in the database. Once the keys are aligned, **redeploy the affected services** so the environment variables are injected again.
