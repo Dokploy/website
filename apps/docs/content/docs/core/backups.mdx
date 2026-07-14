@@ -46,6 +46,24 @@ During restoration, Dokploy will:
 After restoration is complete, you may need to log in again. If necessary, you can restart Traefik to ensure all services are properly configured.
 </Callout>
 
+## Encryption Key
+
+Environment variables are stored encrypted in the Dokploy database, using a key derived from your `BETTER_AUTH_SECRET` (or a dedicated `ENCRYPTION_KEY` if you configured one).
+
+By default, web server backups have **Include encryption key** enabled: the backup contains the derived encryption keys (never the raw secrets), so restoring on a brand-new server works out of the box — environment variables decrypt automatically and are re-encrypted with the new server's key as they are saved.
+
+<Callout type="warn">
+  With **Include encryption key** enabled, anyone with access to the backup file can decrypt the environment variables inside it. Protect your S3 destination accordingly, or disable the toggle for stricter security.
+</Callout>
+
+If you disable **Include encryption key**, a backup alone is not enough — the restoring server must use the same secret. Store your `BETTER_AUTH_SECRET` / `ENCRYPTION_KEY` somewhere safe (for example, a password manager). To retrieve it from a running server installed via the install script:
+
+```bash
+docker exec $(docker ps -qf name=dokploy.1) cat /run/secrets/dokploy_auth_secret
+```
+
+If the secrets don't match when restoring, Dokploy still works, but environment variables will show as `enc:v1:...` strings until you re-enter them manually — or set `ENCRYPTION_KEY` on the new server to the old server's `BETTER_AUTH_SECRET` value, which produces the same derived key.
+
 ## Post-Restoration Steps
 
 After restoring a backup, especially if you're restoring to a different server, consider the following:
@@ -57,4 +75,6 @@ After restoring a backup, especially if you're restoring to a different server, 
    - Recreate Traefik.me domains if you're using them
 
 2. If you're using domain names instead of IPs for Git providers, no additional configuration is needed.
+
+3. If you restored to a server with a different `BETTER_AUTH_SECRET` / `ENCRYPTION_KEY`, environment variables will be unreadable — see [Encryption Key](#encryption-key).
 

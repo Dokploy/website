@@ -110,3 +110,23 @@ DATABASE_URL=postgresql://${{DATABASE_USER}}:${{DATABASE_PASSWORD}}@service-data
 - Use shared variables for credentials and configurations that repeat across services
 - Keep descriptive variable names
 - Document the purpose of each variable for easier maintenance
+
+## Encryption at Rest
+
+Environment variables (including build args and build secrets) are encrypted with AES-256-GCM before being stored in the Dokploy database. Database dumps and backups only contain ciphertext.
+
+By default, the encryption key is derived from your `BETTER_AUTH_SECRET` — no configuration is needed. Optionally, you can set a dedicated key to decouple data encryption from the auth secret:
+
+```bash
+ENCRYPTION_KEY=your-random-secret
+# or, using Docker secrets:
+ENCRYPTION_KEY_FILE=/run/secrets/dokploy_encryption_key
+```
+
+With a dedicated `ENCRYPTION_KEY` set, you can rotate `BETTER_AUTH_SECRET` without affecting stored variables. Values encrypted before the switch remain readable and are re-encrypted with the new key the next time they are saved.
+
+<Callout type="warn">
+  Back up your `BETTER_AUTH_SECRET` (or `ENCRYPTION_KEY`) together with your database backups. Without the original secret, encrypted values cannot be recovered — they will show as `enc:v1:...` strings until re-entered manually. See [Backups](/docs/core/backups#encryption-key) for details.
+</Callout>
+
+Existing installations upgrade seamlessly: previously stored plaintext values keep working and are encrypted the next time they are saved.
