@@ -38,7 +38,27 @@ Remove the docker network created by Dokploy:
    ```
  
 </Step>
- 
+
+<Step>
+
+If you were running a Cluster, then for each worker node, remove all it's services and make it leave the swarm:
+
+   ```bash
+   docker service rm $(docker service ls -q)
+   docker system prune -a -f
+   docker swarm leave
+   ```
+</Step>
+
+<Step>
+
+Make the manager node (where Dokploy is installed) leave the swarm (run it on all manager nodes if you had more than one):
+
+   ```bash
+   docker swarm leave --force
+   ```
+</Step>
+
 <Step>
 
 Docker cleanup to remove leftovers:
