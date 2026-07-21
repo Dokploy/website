@@ -1,0 +1,60 @@
+---
+title: Deployment Options
+description: "Dokploy Server vs Remote Servers vs Swarm Nodes: choose where your applications run."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy gives you three ways to run your applications. All of them use the same deployment engine — the difference is **where your apps run** and how the servers relate to each other.
+
+1. **Dokploy Server**: everything runs on the same machine where the Dokploy UI is installed.
+2. **Remote Servers**: independent servers connected via SSH, each running its own apps.
+3. **Swarm Nodes (Cluster)**: servers joined to the Dokploy server's Docker Swarm to replicate applications across machines.
+
+## Dokploy Server
+
+This is the default. When you install Dokploy, the UI, the builds, and your applications all run on the same server.
+
+- **No extra configuration**: deploy immediately after installation.
+- **Scaling**: vertical — add more CPU and RAM through your VPS provider.
+- **Best for**: most users. It's the simplest option and the recommended starting point; only move to the other options when a single server is no longer enough.
+
+## Remote Servers
+
+[Remote Servers](/docs/core/remote-servers) are independent machines that Dokploy manages over SSH. Each remote server runs its own standalone Docker and its own Traefik instance — they don't form a cluster and don't know about each other.
+
+- **Isolation**: each server is independent. If one goes down, apps on other servers are unaffected, and your apps don't compete for resources with the Dokploy UI.
+- **Two types**: [deployment servers](/docs/core/remote-servers) run your apps, and [build servers](/docs/core/remote-servers/build-server) only build images and push them to a registry.
+- **Requirements**: SSH access to each server. A Docker registry is only needed if you use build servers.
+- **Best for**: separating apps per environment, region, or customer; keeping the Dokploy UI on a small server while apps run elsewhere.
+
+## Swarm Nodes (Cluster)
+
+The [Cluster](/docs/core/cluster) feature joins additional servers as worker or manager nodes of the Dokploy server's Docker Swarm. Traefik on the manager load-balances traffic to the nodes where your application replicas run.
+
+- **Replication**: run multiple replicas of the same application across machines, with load balancing handled by Traefik.
+- **Requirements**: a Docker registry (images must be pushed so other nodes can pull them) and servers with the same architecture as the Dokploy server.
+- **Trade-offs**: more setup and operational complexity, and Dokploy does not perform automatic storage cleanup on the extra nodes.
+- **Best for**: horizontally scaling the same application for high availability.
+
+## Comparison
+
+|                                  | Dokploy Server | Remote Servers            | Swarm Nodes (Cluster)   |
+| -------------------------------- | -------------- | ------------------------- | ----------------------- |
+| **Where apps run**               | Same machine as the UI | Independent servers | Nodes of a shared Swarm |
+| **Connection**                   | —              | SSH                       | Swarm join token        |
+| **Docker registry required**     | No             | Only for build servers    | Yes                     |
+| **Isolation between servers**    | —              | High (fully independent)  | Low (shared cluster)    |
+| **Replicas across servers**      | No             | No                        | Yes                     |
+| **Automatic storage cleanup**    | Yes            | Yes (configurable)        | No                      |
+| **Setup complexity**             | None           | Low                       | High                    |
+
+## Which one should I choose?
+
+- **Start with the Dokploy Server** and scale vertically (more CPU/RAM). It covers the vast majority of use cases with zero extra configuration.
+- **Use Remote Servers** when you want isolation: production apps separated from the Dokploy UI, different servers per project or region, or a dedicated build server.
+- **Use Swarm Nodes** only when you need the *same* application replicated across multiple machines with load balancing.
+
+<Callout type="info">
+  These options are not mutually exclusive. A common setup is a small server running only the Dokploy UI, with applications deployed to remote servers. You can also add a Swarm node as a remote server to configure storage cleanups on it.
+</Callout>

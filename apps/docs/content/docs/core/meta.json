@@ -48,6 +48,7 @@
 		"providers",
 		"watch-paths",
 		"---Remote Servers---",
+		"deployment-options",
 		"remote-servers/index",
 		"remote-servers/instructions",
 		"remote-servers/build-server",
