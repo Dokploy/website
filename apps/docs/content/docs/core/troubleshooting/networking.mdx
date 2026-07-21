@@ -1,0 +1,201 @@
+---
+title: Networking & DNS
+description: Fix Docker Swarm initialization, service connectivity, DNS resolution, and network address pool issues.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Failed to initialize Docker Swarm
+
+Error response from daemon: must specify a listening address because the address to advertise is not recognized as a system address, and a system's IP address to use could not be uniquely identified
+
+This error occurs when the Docker Swarm is not properly initialized.
+
+To fix this, you need to assign a the public IP address to the Docker Swarm, ideally you can use a private IP address from your network, but if you require features from docker swarm, you
+will need to use a public IP address.
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=your-ip sh
+```
+
+Note: pass `ADVERTISE_ADDR` inline as shown above — if you `export` it in your shell and then run the script with `sudo`, the variable won't reach the script because `sudo` resets the environment.
+
+
+## Services Can't Reach Each Other (Missing IPVS Kernel Modules)
+
+Docker Swarm's default service discovery (**VIP mode**) assigns each service a virtual IP and load-balances traffic to it using **IPVS**, a Linux kernel feature. Some operating systems ship kernels without IPVS support — this is common on appliance-style or minimal distributions such as **ZimaOS** and other **Buildroot-based images**, and can also happen with custom-compiled kernels.
+
+On these systems the installation appears to succeed, but nothing works afterward:
+
+- The Dokploy UI never becomes reachable on port 3000 (Dokploy can't connect to its Postgres service)
+- Containers can resolve a service name to an IP, but connections to that IP hang or are refused
+- Tools like Cloudflare Tunnel (`cloudflared`) can't reach your applications via `<app-name>:<port>`
+
+### Cause
+
+VIP mode requires the following kernel features, which your kernel must have enabled:
+
+```
+CONFIG_IP_VS
+CONFIG_IP_VS_RR
+CONFIG_IP_VS_PROTO_TCP
+CONFIG_IP_VS_PROTO_UDP
+CONFIG_IP_VS_NFCT
+CONFIG_NETFILTER_XT_MATCH_IPVS
+CONFIG_NETFILTER_XT_MARK
+```
+
+You can check whether your kernel has them:
+
+```bash
+# Try loading the IPVS module
+sudo modprobe ip_vs && lsmod | grep ip_vs
+
+# Or inspect the kernel config directly
+grep -E 'CONFIG_IP_VS|CONFIG_NETFILTER_XT_MATCH_IPVS|CONFIG_NETFILTER_XT_MARK' /boot/config-$(uname -r)
+# On systems without /boot/config-*:
+zcat /proc/config.gz | grep -E 'CONFIG_IP_VS|CONFIG_NETFILTER_XT_MATCH_IPVS|CONFIG_NETFILTER_XT_MARK'
+```
+
+If `modprobe ip_vs` fails or the config options are missing (not set to `y` or `m`), your kernel can't run Swarm services in VIP mode.
+
+### Solution
+
+If you can't switch to a kernel with IPVS support, run Dokploy's services in **DNSRR mode** (DNS round-robin), which bypasses the IPVS-based load balancer entirely.
+
+**For a fresh installation**, pass `ENDPOINT_MODE=dnsrr` to the install script:
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sudo ENDPOINT_MODE=dnsrr sh
+```
+
+**For an existing installation**, switch the Dokploy services to DNSRR mode:
+
+```bash
+docker service update --endpoint-mode dnsrr dokploy-postgres
+docker service update --endpoint-mode dnsrr dokploy
+```
+
+### Reaching Your Deployed Applications
+
+Applications you deploy through Dokploy are still created as Swarm services in VIP mode. When another container (for example, a `cloudflared` tunnel) needs to reach one of them by name, use the `tasks.<app-name>:<port>` hostname instead of `<app-name>:<port>` — the `tasks.` prefix resolves directly to the container IPs, bypassing the broken VIP load balancer.
+
+<Callout type="warning">
+  DNSRR mode has trade-offs: there is no virtual IP load balancing, so traffic distribution relies on DNS round-robin only. Running multiple replicas of a service behind a single stable address won't work the way it does in VIP mode, and services in DNSRR mode can't publish ports in ingress mode (only `mode=host`). This is the same mechanism the install script applies automatically for Proxmox LXC containers.
+</Callout>
+
+## Builds Failing with DNS Errors (Could Not Resolve Host)
+
+On some VPS providers, the default DNS servers configured on the host don't resolve properly inside Docker containers. This is commonly reported on **Hetzner Cloud**, whose default resolvers (`185.12.64.1` and `185.12.64.2`) can fail recursive resolution from within Docker build containers, but it can affect other providers with restricted or misbehaving resolvers as well.
+
+Typical symptoms:
+
+- **Nixpacks builds**: `Could not resolve host: github.com`
+- **Railpack builds**: `lookup ghcr.io on 185.12.64.1:53: server misbehaving`
+- **Dockerfile builds**: `npm ci`, `apt-get`, or similar commands hang and time out (e.g., `Exit handler never called!`)
+- **Domain validation in the UI**: fails with `queryA ENOTFOUND <domain>` even though the domain resolves correctly from the host with `nslookup`
+
+Since every build type fails the same way, the problem is the DNS configuration Docker inherits from the host, not your application.
+
+**Solution:** Configure Docker to use public DNS resolvers by adding a `dns` entry to `/etc/docker/daemon.json`:
+
+```bash
+sudo mkdir -p /etc/docker
+echo '{"dns": ["1.1.1.1", "8.8.8.8"]}' | sudo tee /etc/docker/daemon.json
+sudo systemctl restart docker
+```
+
+<Callout type="warning">
+  If `/etc/docker/daemon.json` already exists, don't overwrite it — edit the file and add the `"dns": ["1.1.1.1", "8.8.8.8"]` key to the existing JSON object instead. Also note that restarting Docker will briefly restart all running containers, including Dokploy itself.
+</Callout>
+
+You can verify DNS resolution works inside containers after the change:
+
+```bash
+docker run --rm alpine nslookup github.com
+```
+
+## Deployments Failing with "All Predefined Address Pools Have Been Fully Subnetted"
+
+If a deployment fails with this error:
+
+```
+Error response from daemon: all predefined address pools have been fully subnetted
+```
+
+it means Docker ran out of subnets for new networks. By default, Docker can only allocate around **31 local networks**, and every Docker Compose project you deploy creates at least one network of its own. On a server with many projects, you eventually hit the limit — this is a Docker default, not a Dokploy bug.
+
+You can confirm it by counting your networks:
+
+```bash
+docker network ls | wc -l
+```
+
+If the count is around 30 or more, you've exhausted the default address pools.
+
+### Quick Fix: Remove Unused Networks
+
+```bash
+docker network prune -f
+```
+
+This only removes networks that no container is using, so it's safe to run. It frees up space immediately, but you'll hit the limit again as you deploy more projects.
+
+### Permanent Fix: Expand Docker's Address Pools
+
+Configure larger address pools in `/etc/docker/daemon.json`. First check whether the file already has content:
+
+```bash
+cat /etc/docker/daemon.json
+```
+
+<Callout type="warning">
+  If `/etc/docker/daemon.json` already exists (for example with `log-driver` or `dns` settings), don't overwrite it — add the `default-address-pools` key to the existing JSON object instead.
+</Callout>
+
+For example, on a typical Dokploy server that already has the log configuration, the merged file looks like this:
+
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  },
+  "default-address-pools": [
+    { "base": "172.17.0.0/12", "size": 24 },
+    { "base": "10.100.0.0/16", "size": 24 }
+  ]
+}
+```
+
+With `"size": 24`, each new network gets a `/24` subnet (254 IPs — plenty for a Compose project) instead of a whole `/16`, raising the limit from ~31 networks to several thousand.
+
+Restart Docker:
+
+```bash
+sudo systemctl restart docker
+```
+
+<Callout type="warning">
+  Restarting Docker briefly restarts all running containers, including Dokploy itself, so do this during a low-traffic window. Everything recovers automatically: `dokploy` and `dokploy-postgres` are Swarm services, and `dokploy-traefik` has `--restart always`.
+</Callout>
+
+A few things to keep in mind:
+
+- Existing networks and containers are not affected — they keep their current subnets. The new pools only apply to networks created afterwards, and Docker automatically skips any subnet that is already in use.
+- No redeployment of your projects is needed.
+- Choose `base` ranges that don't overlap with your VPS's private network or any VPN you use (this is why the example avoids `192.168.0.0/16`, which is commonly taken by LANs).
+
+Verify the new pools are active:
+
+```bash
+docker info | grep -A 5 "Default Address Pools"
+
+# root@srv594061:~# docker info | grep -A 5 "Default Address Pools"
+#  Default Address Pools:
+#    Base: 172.16.0.0/12, Size: 24
+#    Base: 10.100.0.0/16, Size: 24
+
+# root@srv594061:~# 
+```

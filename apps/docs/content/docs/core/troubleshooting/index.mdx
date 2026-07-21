@@ -1,0 +1,42 @@
+---
+title: Troubleshooting
+description: Solve the most common problems that occur when using Dokploy.
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card';
+
+This section collects solutions to the most common problems you may run into when using Dokploy, organized by area. Pick the category that matches your issue:
+
+<Cards>
+  <Card
+    href="/docs/core/troubleshooting/domains"
+    title="Domains & Traefik"
+    description="Domains not working, 404 errors on templates, Bad Gateway errors, and Traefik routing issues."
+  />
+  <Card
+    href="/docs/core/troubleshooting/volumes-mounts"
+    title="Volumes & Mounts"
+    description="Docker Compose volumes, file mounts, and using files from your repository."
+  />
+  <Card
+    href="/docs/core/troubleshooting/networking"
+    title="Networking & DNS"
+    description="Docker Swarm initialization, services unable to reach each other, DNS build failures, and network address pools."
+  />
+  <Card
+    href="/docs/core/troubleshooting/logs-monitoring"
+    title="Logs & Monitoring"
+    description="Logs or monitoring not loading on worker nodes and remote servers."
+  />
+  <Card
+    href="/docs/core/troubleshooting/instance"
+    title="Dokploy Instance"
+    description="Dokploy UI not accessible, debugging core containers, and recreating the Dokploy services."
+  />
+</Cards>
+
+<Callout title="Dokploy Cloud" type="info">
+If you are using Dokploy Cloud, you don't need to worry about instance-level issues, our team will handle the infrastructure for you.
+
+Start using Dokploy Cloud https://app.dokploy.com/
+</Callout>

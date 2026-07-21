@@ -1,0 +1,15 @@
+---
+title: Logs & Monitoring
+description: Fix logs and monitoring that aren't loading on worker nodes or remote servers.
+---
+
+## Logs and Monitoring Not Working After Changing Application Placement?
+
+This is expected behavior. If the application is running on a different node (worker), the UI won't have access to logs or monitoring, as they're not on the same node.
+
+## Logs Not Loading When Deploying to a Remote Server?
+
+There are a few potential reasons for this:
+
+1. **Slow Server:**: If the server is too slow, it may struggle to handle concurrent requests, leading to SSL handshake errors.
+2. **Insufficient Disk Space:** If the server doesn't have enough disk space, the logs may not load.
