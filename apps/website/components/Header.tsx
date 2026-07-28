@@ -151,12 +151,18 @@ function MobileNavigation() {
 								<MobileNavLink href="/jobs">Careers</MobileNavLink>
 								<MobileNavLink href="/contact">Contact</MobileNavLink>
 								<MobileNavLink
+									href="https://app.dokploy.com/"
+									target="_blank"
+								>
+									Sign In
+								</MobileNavLink>
+								<MobileNavLink
 									href="https://app.dokploy.com/register"
 									target="_blank"
 								>
 									<Button className="w-full" asChild>
 										<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
-											<span>Sign In</span>
+											<span>Sign Up</span>
 											<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 										</div>
 									</Button>
@@ -358,18 +364,15 @@ export function Header() {
 					<div className="flex items-center gap-x-4 md:gap-x-5">
 						<GithubStars className="max-md:hidden" />
 
-						<Link href="https://x.com/getdokploy" target="_blank">
-							<svg
-								stroke="currentColor"
-								fill="currentColor"
-								strokeWidth="0"
-								viewBox="0 0 512 512"
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5 fill-muted-foreground hover:fill-muted-foreground/80 group-hover:fill-muted-foreground/70"
+						<Button variant="ghost" className="rounded-full max-md:hidden" asChild>
+							<Link
+								href="https://app.dokploy.com/"
+								aria-label="Sign In Dokploy Cloud"
+								target="_blank"
 							>
-								<path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-							</svg>
-						</Link>
+								Sign In
+							</Link>
+						</Button>
 
 						<Button
 							variant="outline"
@@ -393,11 +396,11 @@ export function Header() {
 						<Button className="rounded-full max-md:hidden" asChild>
 							<Link
 								href="https://app.dokploy.com/register"
-								aria-label="Sign In Dokploy Cloud"
+								aria-label="Sign Up Dokploy Cloud"
 								target="_blank"
 							>
 								<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
-									<span>Sign In</span>
+									<span>Sign Up</span>
 									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 								</div>
 							</Link>

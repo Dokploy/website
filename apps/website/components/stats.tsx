@@ -61,12 +61,12 @@ export function StatsSection() {
 			</div>
 			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-4">
 				{getGrid({ githubStars, dockerDownloads, contributors }).map(
-					(feature) => (
+					(feature, index) => (
 						<div
 							key={feature.title}
 							className="relative overflow-hidden rounded-3xl bg-gradient-to-b  from-neutral-900 to-neutral-950 p-6"
 						>
-							<Grid size={20} />
+							<Grid size={20} seed={index + 1} />
 
 							<p className="relative z-20 flex flex-row items-center gap-4 text-base font-bold text-white">
 								{feature.title}
@@ -152,20 +152,37 @@ function getGrid({
 	];
 }
 
+// Seeded PRNG so the server and client render identical squares (no hydration
+// mismatch) and generated pairs never repeat (unique React keys).
+function generatePattern(seed: number) {
+	let state = seed * 747796405 + 2891336453;
+	const random = () => {
+		state = (state * 1664525 + 1013904223) % 4294967296;
+		return state / 4294967296;
+	};
+	const squares: number[][] = [];
+	const used = new Set<string>();
+	while (squares.length < 5) {
+		const x = Math.floor(random() * 4) + 7;
+		const y = Math.floor(random() * 6) + 1;
+		if (!used.has(`${x}-${y}`)) {
+			used.add(`${x}-${y}`);
+			squares.push([x, y]);
+		}
+	}
+	return squares;
+}
+
 export const Grid = ({
 	pattern,
 	size,
+	seed = 1,
 }: {
 	pattern?: number[][];
 	size?: number;
+	seed?: number;
 }) => {
-	const p = pattern ?? [
-		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-		[Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
-	];
+	const p = pattern ?? generatePattern(seed);
 	return (
 		<div className="pointer-events-none absolute left-1/2 top-0  -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
 			<div className="absolute inset-0 bg-gradient-to-r  from-zinc-900/30 to-zinc-900/30 opacity-100 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)]">
@@ -207,10 +224,10 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
 			/>
 			{squares && (
 				<svg x={x} y={y} className="overflow-visible">
-					{squares.map(([x, y]: any) => (
+					{squares.map(([x, y]: any, index: number) => (
 						<rect
 							strokeWidth="0"
-							key={`${x}-${y}`}
+							key={`${x}-${y}-${index}`}
 							width={width + 1}
 							height={height + 1}
 							x={x * width}

@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 	},
 	description: "Deploy your applications with ease using Dokploy",
 	icons: {
-		icon: "icon.svg",
-		apple: "apple-touch-icon.png",
+		icon: "/icon.svg",
+		apple: "/apple-touch-icon.png",
 	},
 	openGraph: {
 		title: "Dokploy - Deploy your applications with ease",
