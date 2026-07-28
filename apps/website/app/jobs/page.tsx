@@ -12,14 +12,12 @@ export const metadata: Metadata = {
 		"Join Dokploy and help developers and teams ship faster with open-source and scalable deployment tools built for the modern web.",
 };
 
-const OPEN_POSITIONS = [
-	{
-		title: "Founding Engineer",
-		region: "Central America, South America",
-		description: "Become the first official hire at Dokploy.",
-		href: "https://app.talenttracker.io/288/founding-engineer",
-	},
-];
+const OPEN_POSITIONS: {
+	title: string;
+	region: string;
+	description: string;
+	href: string;
+}[] = [];
 
 export default function JobsPage() {
 	return (
