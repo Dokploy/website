@@ -131,6 +131,7 @@ function MobileNavigation() {
 								<MobileNavLink href="/partners">Partners</MobileNavLink>
 								<MobileNavLink href="/self-hosted-paas">Self-Hosted</MobileNavLink>
 								<MobileNavLink href="/industries">Industries</MobileNavLink>
+								<MobileNavLink href="/industries/higher-education">Education</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink
 									href="https://docs.dokploy.com/docs/core"
@@ -289,6 +290,12 @@ export function Header() {
 												</ListItem>
 												<ListItem href="/industries" title="Industries">
 													Deployment solutions by industry
+												</ListItem>
+												<ListItem
+													href="/industries/higher-education"
+													title="Education"
+												>
+													How Dokploy supports universities and colleges
 												</ListItem>
 											</ul>
 										</NavigationMenuContent>

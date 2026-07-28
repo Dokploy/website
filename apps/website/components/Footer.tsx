@@ -56,8 +56,10 @@ const footerSections = [
 			{ href: "/industries/finance-banking", label: "Finance & Banking" },
 			{ href: "/industries/agencies", label: "Agencies" },
 			{ href: "/industries/healthcare", label: "Healthcare" },
+			{ href: "/industries/government", label: "Government" },
 			{ href: "/industries/manufacturing", label: "Manufacturing" },
 			{ href: "/industries/pharmaceuticals", label: "Pharmaceuticals" },
+			{ href: "/industries/higher-education", label: "Higher Education" },
 		],
 	},
 	{

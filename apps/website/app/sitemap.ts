@@ -39,8 +39,10 @@ const industryPages = [
 	"/industries/finance-banking",
 	"/industries/agencies",
 	"/industries/healthcare",
+	"/industries/government",
 	"/industries/manufacturing",
 	"/industries/pharmaceuticals",
+	"/industries/higher-education",
 ];
 
 const legalPages = ["/terms-of-service", "/terms", "/privacy"];

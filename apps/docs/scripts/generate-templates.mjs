@@ -46,6 +46,13 @@ function formatCodeForMdx(code) {
         .join('\n');
 }
 
+/** Pick a fence longer than any backtick run in the code so embedded ``` blocks don't close it early. */
+function fenceFor(code) {
+    const runs = (code || '').match(/`+/g) || [];
+    const maxRun = runs.reduce((max, run) => Math.max(max, run.length), 0);
+    return '`'.repeat(Math.max(3, maxRun + 1));
+}
+
 /** Build Base64 payload for Dokploy import (same format as UI: compose + config as JSON, then base64). */
 function templateToBase64(dockerCompose, config) {
     const configObj = {
@@ -85,6 +92,8 @@ async function generateTemplates() {
                 const instructionsSafe = hasRealInstructions
                     ? instructionsRaw.trim().replace(/\$\{/g, '\\${')
                     : '';
+                const composeFence = fenceFor(composeYaml);
+                const tomlFence = fenceFor(templateToml);
                 const safeDescription = template.description.replace(/"/g, '\\"');
                 const safeName = template.name.replace(/"/g, '\\"');
                 const logoUrl = `${BASE_BLUEPRINT_URL}/${template.id}/${template.logo}`;
@@ -106,14 +115,14 @@ description: "${safeDescription}"
 
 <Tabs items={["docker-compose.yml", "template.toml"]}>
   <Tab value="docker-compose.yml">
-    \`\`\`yaml
+    ${composeFence}yaml
 ${formatCodeForMdx(composeYaml)}
-    \`\`\`
+    ${composeFence}
   </Tab>
   <Tab value="template.toml">
-    \`\`\`toml
+    ${tomlFence}toml
 ${formatCodeForMdx(templateToml)}
-    \`\`\`
+    ${tomlFence}
   </Tab>
 </Tabs>
 

@@ -4,8 +4,10 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
 	Briefcase,
+	Building2,
 	Factory,
 	FlaskConical,
+	GraduationCap,
 	HeartPulse,
 	Landmark,
 } from "lucide-react";
@@ -15,7 +17,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
 	title: "Industries: Deployment Solutions by Sector",
 	description:
-		"See how teams in finance, healthcare, manufacturing, pharmaceuticals, and agencies use Dokploy to deploy applications in environments they control.",
+		"See how teams in finance, healthcare, government, manufacturing, pharmaceuticals, higher education, and agencies use Dokploy to deploy applications in environments they control.",
 	alternates: {
 		canonical: "https://dokploy.com/industries",
 	},
@@ -44,6 +46,13 @@ const industries = [
 		href: "/industries/healthcare",
 	},
 	{
+		icon: Building2,
+		title: "Government",
+		description:
+			"Deploy citizen services, case management systems, and department tools in self-hosted, audit-ready environments your agency controls.",
+		href: "/industries/government",
+	},
+	{
 		icon: Factory,
 		title: "Manufacturing",
 		description:
@@ -56,6 +65,13 @@ const industries = [
 		description:
 			"Deploy research tools, lab applications, and quality systems with review workflows, rollback options, and enterprise governance.",
 		href: "/industries/pharmaceuticals",
+	},
+	{
+		icon: GraduationCap,
+		title: "Higher Education",
+		description:
+			"Give students a safe sandbox to deploy coursework apps, course projects, and teaching tools that IT teams can manage centrally.",
+		href: "/industries/higher-education",
 	},
 ];
 
