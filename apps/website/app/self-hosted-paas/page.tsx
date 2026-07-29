@@ -271,15 +271,20 @@ export default function SelfHostedPaasPage() {
 						</p>
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>
-								<Link href="/contact">Contact sales</Link>
-							</Button>
-							<Button variant="outline" className="rounded-full" asChild>
 								<Link
-									href="https://docs.dokploy.com/docs/core"
+									href="https://app.dokploy.com/register"
+									aria-label="Get Started with Dokploy"
 									target="_blank"
-									rel="noopener noreferrer"
 								>
-									View documentation
+									Get Started
+								</Link>
+							</Button>
+							<Button
+								className="rounded-full bg-[#5965F2] hover:bg-[#4A55E0]"
+								asChild
+							>
+								<Link href="/contact" aria-label="Contact Us" className="text-white">
+									Contact Us
 								</Link>
 							</Button>
 						</div>
