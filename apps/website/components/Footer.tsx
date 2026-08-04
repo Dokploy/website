@@ -32,6 +32,10 @@ const footerSections = [
 		ariaLabel: "Enterprise features",
 		links: [
 			{
+				href: "/features/security",
+				label: "Security",
+			},
+			{
 				href: "/features/role-based-access-control",
 				label: "RBAC",
 			},

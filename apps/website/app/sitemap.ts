@@ -18,6 +18,7 @@ const featurePages = [
 	"/features/application-deployment-platform",
 	"/features/application-management-software",
 	"/features/database-management-tool",
+	"/features/security",
 	"/features/role-based-access-control",
 	"/features/single-sign-on",
 	"/features/audit-logs",
