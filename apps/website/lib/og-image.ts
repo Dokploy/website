@@ -5,6 +5,7 @@ import sharp from "sharp";
 
 interface GenerateOGImageOptions {
 	title: string;
+	label?: string;
 	author?: {
 		name: string;
 		image?: string;
@@ -46,6 +47,7 @@ const DOKPLOY_LOGO = {
 
 export async function generateOGImage({
 	title,
+	label = "Dokploy - Blog Post",
 	author,
 	date,
 	readingTime,
@@ -87,7 +89,7 @@ export async function generateOGImage({
 							color: "#fff",
 							zIndex: 1,
 						},
-						children: "Dokploy - Blog Post",
+						children: label,
 					},
 				},
 				{

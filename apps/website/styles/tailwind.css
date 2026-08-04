@@ -50,3 +50,27 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .code-editor pre.shiki {
+    background: transparent !important;
+    padding: 0.875rem 0;
+  }
+  .code-editor code {
+    display: block;
+    min-width: max-content;
+    counter-reset: line;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+  .code-editor code .line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2rem;
+    margin-right: 1.25rem;
+    text-align: right;
+    color: rgb(255 255 255 / 0.22);
+    user-select: none;
+  }
+}

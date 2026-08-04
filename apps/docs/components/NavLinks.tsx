@@ -6,7 +6,15 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
-import { Github, Globe, Heart, LogIn, Rss, UserPlus } from "lucide-react";
+import {
+	Github,
+	Globe,
+	Heart,
+	LayoutGrid,
+	LogIn,
+	Rss,
+	UserPlus,
+} from "lucide-react";
 
 export function NavLinks() {
 	const links = [
@@ -24,6 +32,11 @@ export function NavLinks() {
 			text: "Website",
 			url: "https://dokploy.com",
 			icon: Globe,
+		},
+		{
+			text: "Templates",
+			url: "https://dokploy.com/templates",
+			icon: LayoutGrid,
 		},
 		{
 			text: "Discord",
@@ -61,6 +74,7 @@ export function NavLinks() {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<button
+					type="button"
 					className="inline-flex items-center justify-center rounded-md p-2 hover:bg-fd-accent hover:text-fd-accent-foreground transition-colors"
 					aria-label="Quick links menu"
 				>
@@ -70,7 +84,7 @@ export function NavLinks() {
 			<DropdownMenuContent align="end" className="w-56">
 				{links.map((link, index) => {
 					const IconComponent = link.icon;
-					const showSeparator = index === 2;
+					const showSeparator = index === 3;
 
 					return (
 						<div key={link.text}>

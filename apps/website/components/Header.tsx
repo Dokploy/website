@@ -143,7 +143,7 @@ function MobileNavigation() {
 								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
 									Resources
 								</p>
-								<MobileNavLink href="https://templates.dokploy.com" target="_blank">Templates</MobileNavLink>
+								<MobileNavLink href="/templates">Templates</MobileNavLink>
 								<MobileNavLink href="/comparison">Dokploy vs.</MobileNavLink>
 								<MobileNavLink href="/blog">Blog</MobileNavLink>
 								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
@@ -346,7 +346,7 @@ export function Header() {
 										<NavigationMenuTrigger>Resources</NavigationMenuTrigger>
 										<NavigationMenuContent>
 											<ul className="grid w-[200px] gap-1 p-2">
-												<ListItem href="https://templates.dokploy.com" target="_blank" title="Templates">
+												<ListItem href="/templates" title="Templates">
 													Ready-to-deploy templates
 												</ListItem>
 												<ListItem href="/comparison" title="Dokploy vs.">

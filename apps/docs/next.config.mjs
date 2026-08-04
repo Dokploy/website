@@ -14,6 +14,20 @@ const config = {
 			},
 		],
 	},
+	async redirects() {
+		return [
+			{
+				source: "/docs/templates",
+				destination: "https://dokploy.com/templates",
+				permanent: true,
+			},
+			{
+				source: "/docs/templates/:id*",
+				destination: "https://dokploy.com/templates/:id*",
+				permanent: true,
+			},
+		];
+	},
 };
 
 export default withMDX(config);
