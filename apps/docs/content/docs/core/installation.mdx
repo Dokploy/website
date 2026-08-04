@@ -13,19 +13,17 @@ You need to follow this steps in the same order:
 
 There are multiple VPS providers to choose from:
 
-We have tested on the following Linux Distros:
+The production installer supports these 64-bit platforms:
 
-- Ubuntu 24.04 LTS
-- Ubuntu 23.10
-- Ubuntu 22.04 LTS
-- Ubuntu 20.04 LTS
-- Ubuntu 18.04 LTS
-- Debian 12
-- Debian 11
-- Debian 10
-- Fedora 40
-- Centos 9
-- Centos 8
+- Ubuntu 24.04 LTS (`amd64` and `arm64`)
+- Ubuntu 22.04 LTS (`amd64` and `arm64`)
+- Debian 12 (`amd64` and `arm64`)
+
+Other systemd-based Linux distributions with an existing supported Docker
+Engine installation are experimental and require
+`DOKPLOY_ALLOW_UNSUPPORTED=1`. Rootless Docker, Docker installed through Snap,
+Podman aliases, Docker Desktop, remote Docker contexts, Docker/OpenVZ containers,
+and WSL are not supported server environments.
 
 ### Providers
 
@@ -42,7 +40,10 @@ We have tested on the following Linux Distros:
 
 ### Requirements
 
-To ensure a smooth experience with Dokploy, your server should have at least 2GB of RAM and 30GB of disk space. This specification helps to handle the resources consumed by Docker during builds and prevents system freezes.
+Dokploy requires at least 2 GB of RAM and 10 GB of free disk space. Four GB of
+RAM and 30 GB of free disk space are recommended for Docker builds and backups.
+Systems with 1–2 GB of RAM require `DOKPLOY_ALLOW_LOW_RESOURCES=1`; systems below
+1 GB are rejected. Linux kernel 5.4+, systemd, and Bash 4.3+ are required.
 
 import { Callout } from "fumadocs-ui/components/callout";
 
@@ -73,48 +74,104 @@ Dokploy utilizes Docker, so it is essential to have Docker installed on your ser
  Dokploy Cloud:  Use Dokploy directly without worrying about maintenance or updates. Enjoy a hassle-free experience with Dokploy Cloud.  <a href="https://app.dokploy.com/register" className="text-green-600 underline">Sign up</a>
 </div>
 
+For an inspectable installation, download the installer and its checksum first:
+
 ```bash
-curl -sSL https://dokploy.com/install.sh | sh
+curl --fail --show-error --location --retry 5 \
+  --output install.sh https://dokploy.com/install.sh
+curl --fail --show-error --location --retry 5 \
+  --output install.sh.sha256 https://dokploy.com/install.sh.sha256
+sha256sum --check install.sh.sha256
+less install.sh
+sudo bash install.sh
 ```
+
+The shorter convenience command is also available:
+
+```bash
+curl --fail --show-error --location https://dokploy.com/install.sh | sudo bash
+```
+
+The installer requires Bash; do not invoke it with `sh`.
 
 See [Manual Installation](/docs/core/manual-installation) if you want to customize your Dokploy installation.
 
 
+### Check Your Server Before Installation
+
+Check mode performs platform, dependency, resource, filesystem, port, Docker,
+DNS, TLS, registry, version, and configuration validation without installing
+packages, writing files, pulling images, creating Docker resources, or restarting
+services:
+
+```bash
+curl --fail --show-error --location --output install.sh https://dokploy.com/install.sh
+sudo DOKPLOY_INSTALL_ACTION=check bash install.sh
+```
+
+`DRY_RUN=1` is an alias for check mode and also prints the actions that would be
+performed.
+
 ### Advanced Installation Options
 
-The installation script automatically detects and installs the latest stable version from GitHub. However, you can customize the installation using environment variables:
+The installer resolves `latest` to an immutable stable release tag before
+changing the host. All important choices can be supplied noninteractively with
+environment variables.
 
 #### Install Specific Versions
 
 **Install Canary Version (Development):**
 ```bash
-export DOKPLOY_VERSION=canary && curl -sSL https://dokploy.com/install.sh | sh
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_VERSION=canary bash
 ```
 
 **Install Latest Stable:**
 ```bash
-export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_VERSION=latest bash
 ```
 
 **Install a Specific Version:**
 
-Every [Dokploy release](https://github.com/Dokploy/dokploy/releases) includes its own `install.sh` as a release asset, which installs exactly that version with the setup it expects. Replace the version tag in the URL with the one you want:
+Pin the requested version for reproducible provisioning:
 
 ```bash
-curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.26.6/install.sh | sh
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_VERSION=v0.29.13 bash
 ```
 
 <Callout type='info'>
-  Don't use `DOKPLOY_VERSION` to install a specific version — the main script at `dokploy.com/install.sh` always targets the latest release, so its setup may not be compatible with older versions.
+  Review release notes and test upgrade paths before pinning an older or breaking
+  version. Major-version transitions and downgrades require
+  `DOKPLOY_ALLOW_BREAKING_UPGRADE=1`.
 </Callout>
+
+#### Installation Actions
+
+`DOKPLOY_INSTALL_ACTION` accepts the following values:
+
+- `auto` (default): install, upgrade, repair, or validate according to detected state
+- `install`: require a completely fresh Dokploy state
+- `upgrade`: require an existing healthy installation with a different target version
+- `repair`: recreate only missing or unhealthy resources while preserving data
+- `abort`: report the detected state and stop
+- `check`: run the non-destructive preflight only
+
+The installer classifies existing hosts as fresh, healthy, upgradeable, in need
+of repair, partial, or conflicting. A healthy rerun performs validation without
+rotating secrets or recreating resources.
 
 #### Custom Network Configuration
 
-If you need to customize the Docker Swarm network configuration (useful to avoid CIDR conflicts with cloud provider VPCs):
+If you need to customize Docker Swarm's address pool to avoid a VPC CIDR
+conflict, pass the legacy `DOCKER_SWARM_INIT_ARGS` option inline. The installer
+splits this value without `eval`, so quoted values containing spaces are not
+supported:
 
 ```bash
-export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
-curl -sSL https://dokploy.com/install.sh | sh
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24" bash
 ```
 
 #### Manual Advertise Address
@@ -122,11 +179,14 @@ curl -sSL https://dokploy.com/install.sh | sh
 If the script cannot detect your server's IP automatically, or you want the Swarm to use a specific interface (e.g. a VPN/WireGuard IP), specify it manually:
 
 ```bash
-curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=192.168.1.100 sh
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_ADVERTISE_ADDR=192.168.1.100 bash
 ```
 
 <Callout type='warn'>
-  If you run the installer with `sudo`, don't rely on `export ADVERTISE_ADDR=...` from your user shell — `sudo` resets the environment, so the variable never reaches the script and it falls back to auto-detection. Pass the variable inline as shown above, or use `sudo -E sh` to preserve your environment. The same applies to `DOKPLOY_VERSION`, `DOCKER_SWARM_INIT_ARGS`, and `ENDPOINT_MODE`.
+  Do not rely on variables exported before `sudo`, because `sudo` normally
+  resets the environment. Pass variables with `sudo env` as shown above.
+  `ADVERTISE_ADDR` and `ENDPOINT_MODE` remain supported as deprecated aliases.
 </Callout>
 
 #### Kernels Without IPVS Support
@@ -134,7 +194,8 @@ curl -sSL https://dokploy.com/install.sh | sudo ADVERTISE_ADDR=192.168.1.100 sh
 Docker Swarm's default service discovery requires IPVS support in the kernel. Some minimal or appliance-style distributions (e.g. ZimaOS and other Buildroot-based images) ship kernels without it. On those systems, install with DNSRR endpoint mode:
 
 ```bash
-curl -sSL https://dokploy.com/install.sh | sudo ENDPOINT_MODE=dnsrr sh
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_ENDPOINT_MODE=dnsrr DOKPLOY_ALLOW_UNSUPPORTED=1 bash
 ```
 
 See [Services Can't Reach Each Other (Missing IPVS Kernel Modules)](/docs/core/troubleshooting/networking#services-cant-reach-each-other-missing-ipvs-kernel-modules) for how to detect this situation and its trade-offs.
@@ -142,7 +203,9 @@ See [Services Can't Reach Each Other (Missing IPVS Kernel Modules)](/docs/core/t
 ### Proxmox LXC Support
 
 <Callout type='info'>
-  The installation script automatically detects Proxmox LXC containers and applies the necessary configurations (`--endpoint-mode dnsrr`) for compatibility.
+  Proxmox LXC is experimental. The installer detects it, requires
+  `DOKPLOY_ALLOW_UNSUPPORTED=1`, and automatically uses DNSRR endpoint mode.
+  Docker and OpenVZ containers remain unsupported.
 </Callout>
 
 ### Updating Dokploy
@@ -150,16 +213,89 @@ See [Services Can't Reach Each Other (Missing IPVS Kernel Modules)](/docs/core/t
 To update your Dokploy installation to the latest version:
 
 ```bash
-curl -sSL https://dokploy.com/install.sh | sh -s update
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_INSTALL_ACTION=upgrade bash
 ```
 
 **Update to Specific Version:**
 
-Use the `install.sh` from that version's [GitHub release](https://github.com/Dokploy/dokploy/releases):
+Pin the target version explicitly:
 
 ```bash
-curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.26.6/install.sh | sh -s update
+curl --fail --show-error --location https://dokploy.com/install.sh |
+  sudo env DOKPLOY_INSTALL_ACTION=upgrade DOKPLOY_VERSION=v0.29.13 bash
 ```
+
+Before an upgrade, the installer records the installed and target versions,
+classifies the upgrade, validates compatibility, creates a protected backup,
+pulls images, and resolves them to immutable repository digests. It validates
+the database, application, mounts, networks, reverse proxy, restart counts, and
+a stabilization period before reporting success.
+
+Automatic rollback is enabled only for an upgrade pair explicitly marked
+`database-safe` in `DOKPLOY_ROLLBACK_COMPATIBILITY_FILE`. Otherwise the backup
+is preserved for manual recovery instead of risking an unsafe database restore.
+
+### Ports and Existing Reverse Proxies
+
+Use `DOKPLOY_HTTP_PORT`, `DOKPLOY_HTTPS_PORT`, and `DOKPLOY_APP_PORT` to choose
+alternate host ports. If an existing proxy will route to Dokploy, set
+`DOKPLOY_SKIP_TRAEFIK=1`. `DOKPLOY_ALLOW_PORT_CONFLICT=1` acknowledges a known
+conflict, but does not make two processes able to bind the same port.
+
+### Configuration Reference
+
+All installer input is validated before host changes. Boolean options accept
+only `0` or `1`; ports must be from 1 to 65535; paths must be absolute; and
+versions must be `latest`, `canary`, or a release tag such as `v0.29.13`.
+
+| Variable | Default | Purpose and scope |
+| --- | --- | --- |
+| `DOKPLOY_VERSION` | `latest` | Immutable target release for install or upgrade. |
+| `DOKPLOY_INSTALL_ACTION` | `auto` | Selects `auto`, `install`, `upgrade`, `repair`, `abort`, or `check`. |
+| `DOKPLOY_DATA_DIR` | `/etc/dokploy` | Protected host configuration directory. Existing content is backed up before replacement. |
+| `DOKPLOY_BACKUP_DIR` | `/var/backups/dokploy` | Upgrade backup location; should be on a trusted local filesystem. |
+| `DOKPLOY_LOG_DIR` | `/var/log/dokploy` | Persistent installer logs and failure diagnostics. |
+| `DOKPLOY_HTTP_PORT` / `DOKPLOY_HTTPS_PORT` / `DOKPLOY_APP_PORT` | `80` / `443` / `3000` | Validated host ports used during installation and health checks. |
+| `DOKPLOY_NETWORK_NAME` | `dokploy-network` | Overlay network name; must be a safe Docker resource name. |
+| `DOKPLOY_ADVERTISE_ADDR` | auto-detected | IPv4/IPv6 address or interface advertised by a newly initialized Swarm. |
+| `DOKPLOY_ENDPOINT_MODE` | `auto` | `auto`, `vip`, or `dnsrr`; DNSRR is selected automatically when IPVS is unavailable. |
+| `DOKPLOY_DOMAIN` | empty | Optional domain used for the HTTPS routing health check. |
+| `DOKPLOY_EMAIL` | empty | Validated contact metadata reserved for installation automation; it is not logged. |
+| `DOKPLOY_TIMEZONE` | `UTC` | Validated IANA timezone for installation metadata. |
+| `DOKPLOY_SKIP_DOCKER_INSTALL` | `0` | Require an existing supported Docker Engine instead of installing it. |
+| `DOKPLOY_SKIP_TRAEFIK` | `0` | Integrate with an existing reverse proxy rather than create Dokploy's Traefik container. |
+| `DOKPLOY_REUSE_EXISTING_SWARM` | `0` | Permit installation into an existing manager Swarm without leaving or reinitializing it. |
+| `DOKPLOY_ALLOW_PORT_CONFLICT` | `0` | Explicitly acknowledge detected port ownership; use only after verifying the integration. |
+| `DOKPLOY_ALLOW_UNSUPPORTED` | `0` | Opt into an experimental platform after reviewing the preflight report. |
+| `DOKPLOY_ALLOW_LOW_RESOURCES` | `0` | Permit 1–2 GB RAM or capacity below the recommended values, but never below hard limits. |
+| `DOKPLOY_ALLOW_BREAKING_UPGRADE` | `0` | Explicitly permit a major-version transition or downgrade. |
+| `DOKPLOY_MIN_UPGRADE_VERSION` | empty | Optional minimum installed version accepted by an automated upgrade policy. |
+| `DOKPLOY_ROLLBACK_COMPATIBILITY_FILE` | data-directory metadata file | Lists `old-version new-version database-safe` upgrade pairs eligible for automatic rollback. |
+| `DOKPLOY_DIAGNOSTICS` | `1` | Create a local, sanitized failure bundle; set to `0` to opt out. Nothing is uploaded. |
+| `DOKPLOY_HEALTH_ATTEMPTS` / `DOKPLOY_HEALTH_INTERVAL` | `45` / `2` | Number and interval in seconds for health retries. |
+| `DOKPLOY_STABILIZATION_SECONDS` | `10` | Required healthy period before installation success. |
+| `DOKPLOY_DOCKER_VERSION` | `28.5` | Docker package stream installed on supported distributions when Docker is absent. |
+| `DOKPLOY_LOCK_FILE` | `/var/lock/dokploy-installer.lock` | `flock` lock preventing concurrent installer runs. |
+| `DOKPLOY_NONINTERACTIVE` | auto | Forces automation-friendly behavior; no prompt is required by default. |
+| `DRY_RUN` | `0` | Alias for non-destructive check mode. |
+| `DEBUG` | `0` | Enables Bash tracing except around secret operations. |
+| `NO_COLOR` | empty | Disables color; non-terminal output is plain automatically. |
+
+### Logs, Backups, and Diagnostics
+
+Every run writes a timestamped log under `/var/log/dokploy`, including installer
+and target versions, the preflight report, commands, upgrades, warnings, and
+health results. On failure, a sanitized diagnostics archive is created in the
+same directory by default. It includes host and Docker state but redacts common
+password, token, key, cookie, and connection-string patterns; application
+environment variables are excluded. Review any bundle before sharing it.
+
+Upgrade backups are written under `/var/backups/dokploy` with restrictive
+permissions. They preserve installer metadata, relevant host configuration,
+service specifications, image references, and a PostgreSQL dump. Cleanup never
+deletes persistent volumes or existing user data, and a database dump is never
+restored automatically unless the upgrade path is explicitly declared safe.
 
 ## Completing the Setup
 
@@ -207,4 +343,3 @@ docker service update --publish-rm "published=3000,target=3000,mode=host" dokplo
 ```
 
 To further secure your installation, consider reading the [Security recommendations](/docs/core/remote-servers/security#security-recommendations) section.
-

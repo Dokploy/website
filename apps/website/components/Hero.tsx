@@ -104,8 +104,9 @@ export function Hero() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3, delay: 0.2 }}
 						>
-							Manage containerized deployments and AI-built apps across multiple servers with ease,
-							thanks to our all-in-one platform for developers.
+							Manage containerized deployments and AI-built apps across multiple
+							servers with ease, thanks to our all-in-one platform for
+							developers.
 						</motion.p>
 						<motion.div
 							className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
@@ -139,13 +140,14 @@ export function Hero() {
 								</div>
 								<div className="flex flex-wrap items-center justify-center gap-6 md:flex-nowrap">
 									<code className="flex flex-row items-center gap-4 rounded-xl border p-3 font-sans">
-										curl -sSL https://dokploy.com/install.sh | sh
+										curl --fail --show-error --location
+										https://dokploy.com/install.sh | sudo bash
 										<button
 											type="button"
 											onClick={() =>
 												navigator.clipboard
 													.writeText(
-														"curl -sSL https://dokploy.com/install.sh | sh",
+														"curl --fail --show-error --location https://dokploy.com/install.sh | sudo bash",
 													)
 													.then(() => setIsCopied(true))
 													.catch(() => setIsCopied(false))
