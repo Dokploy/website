@@ -1,0 +1,196 @@
+name: Installer quality
+
+on:
+  pull_request:
+    paths:
+      - apps/website/public/install.sh
+      - apps/website/public/install.sh.sha256
+      - apps/docs/content/docs/core/installation.mdx
+      - apps/docs/content/docs/core/manual-installation.mdx
+      - apps/docs/content/docs/core/troubleshooting/networking.mdx
+      - apps/website/components/Hero.tsx
+      - apps/website/app/self-hosted-paas/page.tsx
+      - tests/installer/**
+      - .github/workflows/installer.yml
+  push:
+    branches: [main, canary]
+    paths:
+      - apps/website/public/install.sh
+      - apps/website/public/install.sh.sha256
+      - apps/docs/content/docs/core/installation.mdx
+      - apps/docs/content/docs/core/manual-installation.mdx
+      - apps/docs/content/docs/core/troubleshooting/networking.mdx
+      - apps/website/components/Hero.tsx
+      - apps/website/app/self-hosted-paas/page.tsx
+      - tests/installer/**
+      - .github/workflows/installer.yml
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  shell-quality:
+    name: ShellCheck, shfmt, syntax, and Bats
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shell quality tools
+        run: sudo apt-get update && sudo apt-get install -y bats shellcheck shfmt
+      - name: Validate Bash syntax
+        run: bash -n apps/website/public/install.sh
+      - name: Verify published installer checksum
+        working-directory: apps/website/public
+        run: sha256sum --check install.sh.sha256
+      - name: Run ShellCheck
+        run: shellcheck --severity=style apps/website/public/install.sh tests/installer/install.bats
+      - name: Verify shfmt
+        run: shfmt -d -i 0 -ci apps/website/public/install.sh tests/installer/install.bats
+      - name: Run installer unit tests
+        run: bats tests/installer/install.bats
+      - name: Verify checksum tamper detection
+        run: |
+          checksum_dir=$(mktemp -d)
+          cp apps/website/public/install.sh "$checksum_dir/install.sh"
+          cd "$checksum_dir"
+          sha256sum install.sh >install.sh.sha256
+          sha256sum --check install.sh.sha256
+          printf '\n# tampered\n' >>install.sh
+          if sha256sum --check install.sh.sha256; then
+            echo "Checksum verification accepted a modified installer" >&2
+            exit 1
+          fi
+
+  platform-contract:
+    name: Platform contract (${{ matrix.name }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu 22.04 amd64
+            image: ubuntu:22.04
+          - name: Ubuntu 24.04 amd64
+            image: ubuntu:24.04
+          - name: Debian 12 amd64
+            image: debian:12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate platform and architecture detection
+        run: |
+          docker run --rm \
+            -v "$PWD:/work:ro" \
+            -w /work \
+            "${{ matrix.image }}" \
+            bash -c 'source ./apps/website/public/install.sh; detect_platform; test "$PLATFORM_CLASS" = supported; test "$ARCHITECTURE" = amd64'
+
+  arm64-contract:
+    name: Platform contract (Ubuntu 24.04 arm64)
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate arm64 architecture detection
+        run: |
+          docker run --rm \
+            -v "$PWD:/work:ro" \
+            -w /work \
+            ubuntu:24.04 \
+            bash -c 'source ./apps/website/public/install.sh; detect_platform; test "$PLATFORM_CLASS" = supported; test "$ARCHITECTURE" = arm64'
+
+  integration-versions:
+    name: Resolve integration upgrade path
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    outputs:
+      initial: ${{ steps.versions.outputs.initial }}
+      target: ${{ steps.versions.outputs.target }}
+    steps:
+      - name: Resolve stable upgrade pair
+        id: versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            releases=$(curl --fail --show-error --location --retry 5 \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              'https://api.github.com/repos/Dokploy/dokploy/releases?per_page=10')
+            initial=$(node -e '
+              const releases = JSON.parse(process.argv[1]).filter((release) => !release.draft && !release.prerelease);
+              if (releases.length < 2) process.exit(1);
+              process.stdout.write(releases[1].tag_name);
+            ' "$releases")
+            echo "initial=$initial" >>"$GITHUB_OUTPUT"
+            echo "target=latest" >>"$GITHUB_OUTPUT"
+          else
+            echo "initial=latest" >>"$GITHUB_OUTPUT"
+            echo "target=canary" >>"$GITHUB_OUTPUT"
+          fi
+
+  vm-integration:
+    name: VM integration (${{ matrix.runner }})
+    needs: integration-versions
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check host readiness without changes
+        run: sudo env DOKPLOY_INSTALL_ACTION=check DOKPLOY_VERSION="${{ needs.integration-versions.outputs.initial }}" DOKPLOY_ALLOW_LOW_RESOURCES=1 bash apps/website/public/install.sh
+      - name: Fresh installation on a systemd VM
+        run: sudo env DOKPLOY_VERSION="${{ needs.integration-versions.outputs.initial }}" DOKPLOY_ALLOW_LOW_RESOURCES=1 DOKPLOY_STABILIZATION_SECONDS=3 bash apps/website/public/install.sh
+      - name: Idempotent rerun
+        run: sudo env DOKPLOY_VERSION="${{ needs.integration-versions.outputs.initial }}" DOKPLOY_ALLOW_LOW_RESOURCES=1 DOKPLOY_STABILIZATION_SECONDS=3 bash apps/website/public/install.sh
+      - name: Upgrade and validate
+        run: sudo env DOKPLOY_VERSION="${{ needs.integration-versions.outputs.target }}" DOKPLOY_ALLOW_LOW_RESOURCES=1 DOKPLOY_STABILIZATION_SECONDS=3 bash apps/website/public/install.sh
+      - name: Preserve failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer-diagnostics-${{ matrix.runner }}
+          path: /var/log/dokploy/
+          if-no-files-found: ignore
+
+  debian-vm-integration:
+    name: VM integration (Debian 12 amd64)
+    needs: integration-versions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lima-vm/lima-actions/setup@v1
+        id: lima
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/lima
+          key: lima-${{ steps.lima.outputs.version }}-debian-12
+      - name: Start Debian 12 systemd VM
+        run: limactl start --plain --name=debian --cpus=4 --memory=6 --disk=40 template://debian-12
+      - name: Copy installer sources into VM
+        run: |
+          ssh lima-debian mkdir -p /tmp/dokploy
+          scp apps/website/public/install.sh lima-debian:/tmp/dokploy/install.sh
+      - name: Check host readiness without changes
+        run: ssh lima-debian sudo env DOKPLOY_INSTALL_ACTION=check DOKPLOY_VERSION="${{ needs.integration-versions.outputs.initial }}" bash /tmp/dokploy/install.sh
+      - name: Fresh install, idempotent rerun, and upgrade
+        run: |
+          ssh lima-debian sudo env DOKPLOY_VERSION="${{ needs.integration-versions.outputs.initial }}" DOKPLOY_STABILIZATION_SECONDS=3 bash /tmp/dokploy/install.sh
+          ssh lima-debian sudo env DOKPLOY_VERSION="${{ needs.integration-versions.outputs.initial }}" DOKPLOY_STABILIZATION_SECONDS=3 bash /tmp/dokploy/install.sh
+          ssh lima-debian sudo env DOKPLOY_VERSION="${{ needs.integration-versions.outputs.target }}" DOKPLOY_STABILIZATION_SECONDS=3 bash /tmp/dokploy/install.sh
+      - name: Collect failure diagnostics
+        if: failure()
+        run: |
+          if ssh lima-debian 'sudo tar -C /var/log -czf /tmp/dokploy-diagnostics.tar.gz dokploy'; then
+            scp lima-debian:/tmp/dokploy-diagnostics.tar.gz .
+          fi
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer-diagnostics-debian-12
+          path: dokploy-diagnostics.tar.gz
+          if-no-files-found: ignore
