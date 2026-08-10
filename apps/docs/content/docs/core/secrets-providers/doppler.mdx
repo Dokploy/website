@@ -1,0 +1,41 @@
+---
+title: Doppler
+description: "Use Doppler secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create a Token
+
+The recommended token type is a **Service Token** (`dp.st.`): it is read-only and scoped to a single project + config, so a leaked token only exposes that config.
+
+1. In Doppler, open your **project → config** (e.g. `prd`).
+2. Go to the **Access** tab and click **Generate Service Token**.
+3. Copy the token.
+
+Personal (`dp.pt.`) and CLI (`dp.ct.`) tokens also work, but since they are not bound to a config you must additionally fill in the **Project** and **Config** fields.
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **Doppler** and fill in:
+
+- **Name**: the identifier used in references, e.g. `doppler-prd`.
+- **Token**: the Doppler token.
+- **Project / Config** (optional): only required for personal/CLI tokens — service tokens already carry them.
+
+Use **Test Connection** to validate the token before saving, then assign the projects/environments where the provider may be used.
+
+<Callout type="info">
+  A provider points at a single Doppler config. For several configs (e.g. `dev` and `prd`), create one provider per config and assign each one to the matching Dokploy environments.
+</Callout>
+
+## Reference Format
+
+Doppler secrets are flat key/value pairs within the config, so references use the secret name directly:
+
+```bash
+DATABASE_URL=${{vault.doppler-prd.DATABASE_URL}}
+STRIPE_KEY=${{vault.doppler-prd.STRIPE_KEY}}
+```
+
+The autocomplete lists the real secret names of the configured Doppler config.

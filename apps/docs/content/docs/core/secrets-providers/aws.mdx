@@ -1,0 +1,55 @@
+---
+title: AWS Secrets Manager
+description: "Use AWS Secrets Manager secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create IAM Credentials
+
+Create an IAM user (or use an existing one) with programmatic access and a least-privilege policy for the secrets Dokploy should reach:
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": ["secretsmanager:GetSecretValue", "secretsmanager:ListSecrets"],
+			"Resource": "arn:aws:secretsmanager:*:*:secret:dokploy/*"
+		}
+	]
+}
+```
+
+`ListSecrets` is only used to power the autocomplete; you can omit it and the provider still resolves references.
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **AWS Secrets Manager** and fill in:
+
+- **Name**: the identifier used in references, e.g. `aws-sm`.
+- **Region**: the region your secrets live in, e.g. `us-east-1`.
+- **Access Key ID / Secret Access Key**: the IAM credentials.
+- **Endpoint** (optional): a custom endpoint for VPC endpoints or API-compatible emulators (e.g. LocalStack). Leave empty for regular AWS.
+
+Use **Test Connection** to validate the credentials before saving, then assign the projects/environments where the provider may be used.
+
+## Reference Format
+
+References use the secret **name** (not the ARN). Two forms are supported:
+
+```bash
+# Raw SecretString — returns the value exactly as stored
+API_TOKEN=${{vault.aws-sm.api-token}}
+
+# JSON secrets — extract a single field with :<field>
+DB_PASSWORD=${{vault.aws-sm.prod/database:password}}
+DB_HOST=${{vault.aws-sm.prod/database:host}}
+```
+
+If the secret stores a JSON object (the common pattern for database credentials), append `:<field>` to pick one key. Without a field, the whole `SecretString` is injected as-is — useful for apps that parse a JSON config blob from a single variable.
+
+<Callout type="warn">
+  Binary secrets are not supported — only `SecretString` values.
+</Callout>

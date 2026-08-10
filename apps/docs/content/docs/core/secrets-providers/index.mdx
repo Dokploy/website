@@ -1,0 +1,104 @@
+---
+title: Secrets Providers
+description: "Reference secrets from external secret managers (HashiCorp Vault, OpenBao, Infisical, AWS Secrets Manager, Doppler, Azure Key Vault) directly in your environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## What are Secrets Providers?
+
+Secrets Providers let you connect Dokploy to an external secret manager and reference its secrets from any environment variable editor:
+
+```bash
+DATABASE_URL=${{vault.prod-vault.myapp/creds:DB_URL}}
+API_KEY=${{vault.doppler-prod.API_KEY}}
+```
+
+Secrets are fetched from the provider **at deploy time** and injected into the prepared environment. The values are never stored in the Dokploy database — your vault remains the single source of truth, and what members see in the env editor is the reference, not the value.
+
+<Callout type="info">
+  Available from **v0.30.0**.
+</Callout>
+
+Supported providers:
+
+- [HashiCorp Vault / OpenBao](/docs/core/secrets-providers/hashicorp)
+- [Infisical](/docs/core/secrets-providers/infisical)
+- [AWS Secrets Manager](/docs/core/secrets-providers/aws)
+- [Doppler](/docs/core/secrets-providers/doppler)
+- [Azure Key Vault](/docs/core/secrets-providers/azure)
+
+## Reference Syntax
+
+```
+${{vault.<provider-name>.<ref>}}
+```
+
+- `<provider-name>` — the name you gave the provider when creating it. It is unique per organization and can only contain letters, numbers, dashes and underscores.
+- `<ref>` — provider-specific:
+
+| Provider | Ref format | Example |
+|---|---|---|
+| HashiCorp Vault / OpenBao | `<path>:<field>` | `myapp/prod:DB_PASSWORD` |
+| Infisical | `<SECRET_NAME>` | `DB_PASSWORD` |
+| AWS Secrets Manager | `<secret-name>` or `<secret-name>:<field>` | `prod/myapp:password` |
+| Doppler | `<SECRET_NAME>` | `DB_PASSWORD` |
+| Azure Key Vault | `<secret-name>` | `db-password` |
+
+References work in every place that flows into a deployment:
+
+- Service environment variables (applications, Docker Compose, databases)
+- Project-level shared variables
+- Environment-level shared variables
+- Build-time arguments and build secrets
+
+They resolve **before** `${{project.X}}` and `${{environment.X}}` interpolation, so both compose naturally:
+
+```bash
+# Environment-level shared variable
+DB_PASSWORD=${{vault.prod-vault.myapp/prod:DB_PASSWORD}}
+
+# Service variable consuming it
+DATABASE_URL=postgres://app:${{environment.DB_PASSWORD}}@db:5432/app
+```
+
+You don't need to remember the syntax: the environment editors autocomplete it. Type `${{` and the editor suggests `project.`, `environment.` and `vault.`; picking `vault.` lists your providers, and picking a provider lists the real secret names fetched from it.
+
+## Creating a Provider
+
+Go to **Settings → Secrets** and click **Add Provider**. Each provider type has its own form — see the provider pages for step-by-step credentials setup. Every form includes a **Test Connection** button that validates the credentials before saving.
+
+Credentials are masked in every API response and in the UI after saving; when editing a provider, leaving a masked field untouched keeps the stored value.
+
+## Access Control
+
+Two independent layers control secrets providers:
+
+### Project and environment assignments
+
+Each provider carries an explicit **assignment list** that defines where it can be used. In the provider form, select the projects that may reference it; for each selected project you can optionally narrow it down to specific environments.
+
+- Selecting a project with **no environments** enables the provider in **all** environments of that project (including ones created later).
+- Selecting specific environments enables it **only** there — for example, a `prod-vault` provider assigned only to the `production` environment cannot be referenced from `development`.
+- A provider with **no assignments** is enabled nowhere until you assign it.
+
+Enforcement happens on the server before any request reaches your vault: a reference to a provider that is not enabled for the deploying project/environment fails the deployment with a clear error, and the autocomplete only suggests providers enabled for the editor you are typing in.
+
+<Callout type="warn">
+  Project-level shared variables are evaluated by every environment of the project. If you reference an environment-restricted provider from a project-level variable, deployments in the other environments will fail. Put references to restricted providers in the environment-level or service-level variables instead.
+</Callout>
+
+### Role permissions
+
+Managing providers is covered by the `vaultProvider` permission resource:
+
+- **Owners and admins** can create, update, delete and test providers.
+- **Members** can read provider names and secret names — this is what powers the autocomplete. They never see credentials or secret values.
+- With an enterprise license, **custom roles** can grant each action (`read`, `create`, `update`, `delete`) granularly.
+
+## Security Model
+
+- **Values never touch the Dokploy database or the UI.** Members with access to a service see `${{vault.prod-vault.DB_URL}}` in the editor, not the value.
+- **Rotation requires a redeploy.** Values are fetched at deploy time, so rotating a secret in your vault takes effect on the next deployment.
+- **Use least-privilege credentials on the vault side.** Whoever can edit environment variables and deploy in an assigned project can read what the provider's token reaches there — the same trust model as any CI/CD system. Scope the token per environment where your provider supports it (Doppler service tokens, Vault policies, Infisical machine identities).
+- A deleted or missing secret fails the deployment with an explicit error instead of injecting an empty value.

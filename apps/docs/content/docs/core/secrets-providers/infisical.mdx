@@ -1,0 +1,46 @@
+---
+title: Infisical
+description: "Use Infisical secrets (cloud or self-hosted) in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy authenticates against Infisical with a **Machine Identity** using Universal Auth — the method Infisical recommends for programmatic access. Both Infisical Cloud and self-hosted instances are supported.
+
+## Create a Machine Identity
+
+1. In Infisical, go to your **Organization → Access Control → Identities** and create a new identity, e.g. `dokploy`.
+2. Add the **Universal Auth** method to it and create a **Client Secret**. Copy the **Client ID** and the **Client Secret**.
+3. Add the identity to the project you want to expose, with a role that can read secrets.
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **Infisical** and fill in:
+
+- **Name**: the identifier used in references, e.g. `infisical-prod`.
+- **Site URL**: `https://app.infisical.com` for Infisical Cloud, or the URL of your self-hosted instance.
+- **Client ID / Client Secret**: from the Universal Auth method of your machine identity.
+- **Project ID**: the Infisical project to read from (visible in the project settings).
+- **Environment**: the Infisical environment slug, e.g. `dev`, `staging` or `prod`.
+- **Secret Path**: defaults to `/`.
+
+Use **Test Connection** to validate everything before saving, then assign the Dokploy projects/environments where the provider may be used.
+
+<Callout type="info">
+  A provider points at a single Infisical project + environment. To use several Infisical environments, create one provider per environment (e.g. `infisical-dev`, `infisical-prod`) and assign each one to the matching Dokploy environments.
+</Callout>
+
+## Reference Format
+
+Infisical secrets are flat key/value pairs within the configured project + environment, so references use the secret name directly:
+
+```bash
+DB_PASSWORD=${{vault.infisical-prod.DB_PASSWORD}}
+STRIPE_KEY=${{vault.infisical-prod.STRIPE_KEY}}
+```
+
+The autocomplete lists the real secret names of the configured environment.
+
+<Callout type="info">
+  You can run Infisical itself on Dokploy — it is available as a template — and point the provider at it.
+</Callout>

@@ -105,6 +105,16 @@ DATABASE_URL=postgresql://${{DATABASE_USER}}:${{DATABASE_PASSWORD}}@service-data
   It can be used as `${{DOKPLOY_DEPLOY_URL}}` for variables like `APP_URL=https://${{DOKPLOY_DEPLOY_URL}}`.
 </Callout>
 
+## Secrets from External Vaults
+
+Besides shared variables, you can reference secrets stored in an external secret manager (HashiCorp Vault/OpenBao, Infisical, AWS Secrets Manager, Doppler, Azure Key Vault):
+
+```bash
+DB_PASSWORD=${{vault.prod-vault.myapp/prod:DB_PASSWORD}}
+```
+
+Values are fetched at deploy time and never stored in Dokploy. See [Secrets Providers](/docs/core/secrets-providers) for setup, reference formats and access control.
+
 ### Best Practices
 
 - Use shared variables for credentials and configurations that repeat across services
