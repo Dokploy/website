@@ -5,6 +5,7 @@
 		"infisical",
 		"aws",
 		"doppler",
-		"azure"
+		"azure",
+		"scaleway"
 	]
 }

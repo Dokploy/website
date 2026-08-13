@@ -1,0 +1,49 @@
+---
+title: Scaleway Secret Manager
+description: "Use Scaleway Secret Manager secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create an API Key
+
+Dokploy authenticates with a Scaleway **API key** scoped to the project your secrets live in.
+
+1. In the Scaleway console, go to **IAM → API Keys → Generate an API key**.
+2. Scope it to the project that holds your secrets, and attach a permission set that includes **SecretManagerReadOnly** (or a policy with equivalent read access).
+3. Copy the **Secret Key** — like other Scaleway API keys, it is only shown once.
+
+<Callout type="warn">
+  The Secret Key is the credential, there is no separate access key ID — Dokploy authenticates with it alone via the `X-Auth-Token` header.
+</Callout>
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **Scaleway Secret Manager** and fill in:
+
+- **Name**: the identifier used in references, e.g. `scaleway-sm`.
+- **Region**: the region your secrets live in — `fr-par`, `nl-ams` or `pl-waw`.
+- **Project ID**: the Scaleway project holding the secrets.
+- **Secret Key**: the API key's secret key.
+- **API URL** (optional): defaults to `https://api.scaleway.com`. Override only for API-compatible proxies/emulators.
+
+Use **Test Connection** to validate the credentials before saving, then assign the projects/environments where the provider may be used.
+
+## Reference Format
+
+References use the secret **name**, optionally prefixed with its folder path, and optionally suffixed with `:<field>` to extract a key from a JSON payload:
+
+```bash
+# Secret at the root
+API_TOKEN=${{vault.scaleway-sm.api-token}}
+
+# Secret inside a folder
+DB_PASSWORD=${{vault.scaleway-sm.prod/database:password}}
+DB_HOST=${{vault.scaleway-sm.prod/database:host}}
+```
+
+If the secret's latest enabled version stores a JSON object, append `:<field>` to pick one key. Without a field, the whole payload is injected as-is.
+
+<Callout type="info">
+  Only the **latest enabled version** of a secret is read.
+</Callout>
