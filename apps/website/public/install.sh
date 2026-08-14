@@ -331,6 +331,7 @@ install_dokploy() {
     docker run -d \
         --name dokploy-traefik \
         --restart always \
+        --network dokploy-network \
         -v /etc/dokploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
         -v /etc/dokploy/traefik/dynamic:/etc/dokploy/traefik/dynamic \
         -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -338,8 +339,6 @@ install_dokploy() {
         -p 443:443/tcp \
         -p 443:443/udp \
         traefik:v3.6.7
-    
-    docker network connect dokploy-network dokploy-traefik
 
 
     # Optional: Use docker service create instead of docker run
