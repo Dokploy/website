@@ -36,9 +36,6 @@ importers:
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.1.16
         version: 2.1.16(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
-      '@swc/helpers':
-        specifier: 0.5.23
-        version: 0.5.23
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.1
