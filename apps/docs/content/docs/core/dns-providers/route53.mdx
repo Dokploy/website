@@ -1,0 +1,48 @@
+---
+title: AWS Route53
+description: "Connect AWS Route53 to create A/CNAME records for your domains from Dokploy."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create IAM Credentials
+
+Create an IAM user (or role) with programmatic access and a least-privilege policy for the hosted zones Dokploy should manage:
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"route53:ListHostedZones",
+				"route53:ListResourceRecordSets",
+				"route53:ChangeResourceRecordSets"
+			],
+			"Resource": "*"
+		}
+	]
+}
+```
+
+Avoid root account credentials — scope a dedicated IAM user to this policy.
+
+## Configuration
+
+In **Settings → DNS Providers**, add a provider, choose **AWS Route53** and fill in:
+
+- **Name**: the identifier for this provider, e.g. `route53-main`.
+- **Access Key ID / Secret Access Key**: the IAM credentials.
+
+Use **Test Connection** to validate the credentials before saving.
+
+<Callout type="info">
+  Route53 is a global service, so there is no region field — Dokploy talks to it directly. There is also no custom endpoint override: this integration only works against real AWS, not LocalStack or other Route53-compatible emulators.
+</Callout>
+
+## Managing Records
+
+Click **View Domains** on the provider row to list your hosted zones, then click a zone to view and manage its **A** and **CNAME** records. See [DNS Providers](/docs/core/dns-providers) for the full record form reference.
+
+Route53 defaults the **TTL** to `300` seconds when the field is left empty. Since Route53 has no native record ID, renaming a record's name or type is applied as a delete of the old record plus creation of the new one.

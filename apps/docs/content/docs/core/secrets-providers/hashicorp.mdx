@@ -1,0 +1,61 @@
+---
+title: HashiCorp Vault / OpenBao
+description: "Use HashiCorp Vault or OpenBao KV v2 secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy talks to the KV version 2 secrets engine. The same provider works with **HashiCorp Vault** and **[OpenBao](https://openbao.org)** (the open-source fork) — their APIs are identical.
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **HashiCorp Vault / OpenBao** and fill in:
+
+- **Name**: the identifier used in references, e.g. `prod-vault`.
+- **Vault URL**: the address of your Vault/OpenBao server, e.g. `https://vault.example.com:8200`. It must be reachable from your Dokploy server.
+- **Token**: a Vault token with `read` (and `list`, for autocomplete) capabilities on the secrets you want to expose.
+- **KV Mount**: the mount path of the KV v2 engine. Defaults to `secret`.
+- **Namespace** (optional): for Vault Enterprise or OpenBao namespaces, e.g. `admin`.
+
+Use **Test Connection** to validate the token before saving, then assign the projects/environments where the provider may be used.
+
+<Callout type="info">
+  Create a token from a policy that only grants read/list on the paths Dokploy needs, for example:
+
+```hcl
+path "secret/data/myapp/*" {
+  capabilities = ["read"]
+}
+path "secret/metadata/*" {
+  capabilities = ["list"]
+}
+```
+</Callout>
+
+## Reference Format
+
+KV v2 secrets are maps of fields, so references always include the path **and** the field, separated by a colon:
+
+```bash
+DB_PASSWORD=${{vault.prod-vault.myapp/prod:DB_PASSWORD}}
+API_KEY=${{vault.prod-vault.shared:API_KEY}}
+```
+
+`myapp/prod` is the secret path inside the KV mount and `DB_PASSWORD` is the field inside that secret. The autocomplete walks your KV tree and suggests complete `path:field` references.
+
+## Trying it with OpenBao
+
+For a quick local test, OpenBao's dev mode gives you a ready-to-use server:
+
+```bash
+docker run -d --name openbao -p 8200:8200 \
+  -e BAO_DEV_ROOT_TOKEN_ID=dev-token \
+  -e BAO_DEV_LISTEN_ADDRESS=0.0.0.0:8200 \
+  openbao/openbao:latest
+```
+
+Then create the provider with URL `http://<your-host>:8200`, token `dev-token` and mount `secret`.
+
+<Callout type="warn">
+  Dev mode stores everything in memory and is for testing only.
+</Callout>

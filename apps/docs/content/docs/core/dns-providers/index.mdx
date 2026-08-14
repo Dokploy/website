@@ -1,0 +1,57 @@
+---
+title: DNS Providers
+description: "Connect Cloudflare or AWS Route53 to create and manage A/CNAME records for your domains without leaving Dokploy."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## What are DNS Providers?
+
+DNS Providers let you connect Dokploy to Cloudflare or AWS Route53 so you can browse your zones and create the **A** or **CNAME** record a domain needs, instead of switching to your DNS provider's dashboard by hand.
+
+<Callout type="info">
+  Enterprise feature. Managing DNS providers is covered by the `dnsProvider` permission resource — grant it granularly with a [custom role](/docs/core/enterprise/custom-roles), or use it as owner/admin.
+</Callout>
+
+Supported providers:
+
+- [Cloudflare](/docs/core/dns-providers/cloudflare)
+- [AWS Route53](/docs/core/dns-providers/route53)
+
+## Creating a Provider
+
+Go to **Settings → DNS Providers** and click to add a provider. Pick **Cloudflare** or **AWS Route53**, give it a name, and fill in the credentials — see the provider pages for exact steps. Use **Test Connection** to validate the credentials before saving.
+
+Credentials are masked in the UI after saving; leaving a masked field untouched on an edit keeps the stored value. The provider type is locked once created — to switch providers, create a new one.
+
+## Managing Records
+
+From the provider list, click **View Domains** to open the zones your credentials can see. Click a zone to expand its records:
+
+- Records of type **A** and **CNAME** are editable and deletable from Dokploy.
+- Other record types (MX, TXT, NS, etc.) returned by the provider are listed read-only.
+
+To add a record, click **Add Record** and fill in:
+
+- **Type**: A or CNAME.
+- **Name**: the hostname, e.g. `app.example.com`. Use `@` for the zone's root/apex domain.
+- **Content**: labeled **IPv4 Address** for A records or **Target** for CNAME records. For A records, an optional **Fill from server** dropdown auto-fills this with the public IP of the Dokploy panel server or any registered remote server.
+- **TTL** (optional): leave empty for the provider's automatic/default TTL.
+
+<Callout type="warn">
+  Deleting a record from this screen removes it from the actual DNS provider, not just from Dokploy — the confirmation dialog calls this out explicitly.
+</Callout>
+
+## Relationship to Domains
+
+DNS Providers is a standalone integration under **Settings**. It is not (yet) wired into the "add domain" flow on applications or Compose services — creating a domain there still expects the DNS record to already point at your server. Use DNS Providers to create that record first (or in parallel), then add the domain in the service as usual.
+
+## Access Control
+
+Managing DNS providers is covered by the `dnsProvider` permission resource:
+
+- **Owners and admins** can create, update, delete and test providers.
+- **Members** can read configured providers and zones.
+- With an enterprise license, **custom roles** can grant each action (`read`, `create`, `update`, `delete`) granularly.
+
+Every create, update and delete on a DNS provider is recorded in the [Audit Log](/docs/core/enterprise/audit-logs).

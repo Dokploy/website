@@ -1,0 +1,49 @@
+---
+title: Azure Key Vault
+description: "Use Azure Key Vault secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy authenticates with an **App Registration** (service principal) using the OAuth2 client credentials flow.
+
+## Create an App Registration
+
+1. In the Azure Portal, go to **App registrations → New registration**, name it (e.g. `dokploy`) and register it with the defaults — no redirect URI needed.
+2. Copy the **Application (client) ID** and the **Directory (tenant) ID** from the overview page.
+3. Go to **Certificates & secrets → New client secret** and copy the secret **Value** immediately — it is only shown once.
+
+## Grant Access to the Vault
+
+On your Key Vault:
+
+- **RBAC permission model** (recommended): go to **Access control (IAM) → Add role assignment**, pick the **Key Vault Secrets User** role (read-only) and assign it to the `dokploy` app.
+- **Access policies model**: add a policy granting the app `Get` and `List` on secrets.
+
+<Callout type="warn">
+  RBAC role assignments can take a few minutes to propagate. If Test Connection fails with a permission error right after assigning the role, wait a moment and retry.
+</Callout>
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **Azure Key Vault** and fill in:
+
+- **Name**: the identifier used in references, e.g. `azure-kv`.
+- **Vault URI**: e.g. `https://my-vault.vault.azure.net`.
+- **Tenant ID**: the Directory (tenant) ID.
+- **Client ID / Client Secret**: from the App Registration.
+
+Use **Test Connection** to validate everything before saving, then assign the projects/environments where the provider may be used.
+
+## Reference Format
+
+Azure Key Vault secrets are flat values, so references use the secret name directly:
+
+```bash
+DB_PASSWORD=${{vault.azure-kv.db-password}}
+STRIPE_KEY=${{vault.azure-kv.stripe-key}}
+```
+
+<Callout type="info">
+  Azure secret names only allow letters, digits and dashes — no underscores. Name your secrets accordingly (e.g. `db-password` instead of `DB_PASSWORD`).
+</Callout>

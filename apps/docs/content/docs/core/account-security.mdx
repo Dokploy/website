@@ -1,0 +1,48 @@
+---
+title: Account Security
+description: "Protect your Dokploy account with passkeys (WebAuthn) and two-factor authentication."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy supports two mechanisms to secure panel access, and they can be combined: **passkeys** for passwordless sign-in and **two-factor authentication (2FA)** on top of password logins.
+
+## Passkeys
+
+Passkeys are a passwordless sign-in method based on WebAuthn. Instead of typing a password (and a 2FA code), you authenticate with your device — Touch ID, Face ID, Windows Hello, or a hardware security key like a YubiKey. The credential never leaves your device and is resistant to phishing: it only works on your Dokploy panel's domain.
+
+### Registering a passkey
+
+1. Go to **Settings → Profile**.
+2. In the **Passkeys** section, click add and follow your browser's prompt (fingerprint, face, PIN, or security key).
+3. Give it a recognizable name — you can register several (e.g. laptop + phone) and remove them individually at any time.
+
+### Signing in
+
+On the login page, use the passkey option and pick the credential — no password or 2FA code required.
+
+<Callout type="info">
+  Register at least two passkeys (or keep your password + 2FA working) so losing a device doesn't lock you out.
+</Callout>
+
+## Two-Factor Authentication (2FA)
+
+2FA adds a time-based one-time code (TOTP) to password logins, from any authenticator app (Google Authenticator, 1Password, Authy, etc.).
+
+### Enabling 2FA
+
+1. Go to **Settings → Profile**.
+2. In the **2FA** section, click enable and scan the QR code with your authenticator app.
+3. Confirm with a generated code, and store the backup codes somewhere safe — they are the recovery path if you lose the authenticator.
+
+Once enabled, password sign-ins require the current code from your app.
+
+## Which one should I use?
+
+- **Passkeys** are the strongest and most convenient option — phishing-resistant and no codes to type. Prefer them for day-to-day sign-in.
+- **2FA** protects the password flow, which remains available as a fallback. If you keep using passwords, enable it.
+- Using both gives you a secure fallback chain: passkey for daily use, password + 2FA if a device is unavailable.
+
+<Callout type="info">
+  Organization owners on Dokploy Cloud and self-hosted instances with SSO can additionally enforce sign-in through their identity provider — see the SSO documentation.
+</Callout>

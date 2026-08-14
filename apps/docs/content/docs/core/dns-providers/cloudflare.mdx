@@ -1,0 +1,32 @@
+---
+title: Cloudflare
+description: "Connect Cloudflare to create A/CNAME records for your domains from Dokploy."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create an API Token
+
+1. In the Cloudflare dashboard, go to **My Profile → API Tokens → Create Token**.
+2. Use the **Edit zone DNS** template, or create a custom token scoped to **Zone → DNS → Edit**.
+3. Under **Zone Resources**, select the zones you want Dokploy to manage — either all zones or specific ones.
+4. Create the token and copy it — it is only shown once.
+
+<Callout type="warn">
+  Avoid the account-wide Global API Key. Scope the token to Zone → DNS → Edit for only the zones Dokploy needs.
+</Callout>
+
+## Configuration
+
+In **Settings → DNS Providers**, add a provider, choose **Cloudflare** and fill in:
+
+- **Name**: the identifier for this provider, e.g. `cloudflare-main`.
+- **API Token**: the token created above.
+
+Use **Test Connection** to validate the token before saving.
+
+## Managing Records
+
+Click **View Domains** on the provider row to list the zones the token can see, then click a zone to view and manage its **A** and **CNAME** records. See [DNS Providers](/docs/core/dns-providers) for the full record form reference.
+
+Cloudflare's default/automatic TTL is used when the **TTL** field is left empty.
