@@ -23,6 +23,7 @@ const footerSections = [
 				label: "Databases",
 			},
 			{ href: "/deploy-ai", label: "Deploy AI" },
+			{ href: "/sandbox-software", label: "Sandbox Software" },
 			{ href: "/self-hosted-paas", label: "Self-Hosted PaaS" },
 			{ href: "/enterprise", label: "Enterprise" },
 			{ href: "/contact", label: "Contact" },
@@ -127,7 +128,9 @@ export function Footer() {
 							className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black rounded"
 						>
 							<Logo className="h-10 w-auto" />
-							<span className="text-xl font-semibold text-primary">Dokploy</span>
+							<span className="text-xl font-semibold text-primary">
+								Dokploy
+							</span>
 						</Link>
 						<span className="text-sm font-medium text-muted-foreground">
 							Deploy your applications with ease
@@ -149,10 +152,7 @@ export function Footer() {
 									{section.links.map((item) => (
 										<li key={item.href + item.label}>
 											{"external" in item && item.external ? (
-												<NavLink
-													href={item.href}
-													target="_blank"
-												>
+												<NavLink href={item.href} target="_blank">
 													{item.label}
 												</NavLink>
 											) : (
@@ -171,7 +171,10 @@ export function Footer() {
 					<p className="text-sm text-muted-foreground order-2 sm:order-1">
 						© {new Date().getFullYear()} Dokploy. All rights reserved.
 					</p>
-					<div className="flex items-center gap-6 order-1 sm:order-2" aria-label="Social links">
+					<div
+						className="flex items-center gap-6 order-1 sm:order-2"
+						aria-label="Social links"
+					>
 						<Link
 							href="https://x.com/getdokploy"
 							target="_blank"

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Fragment, useEffect, type JSX, type SVGProps } from "react";
+import { Fragment, type JSX, type SVGProps, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Container } from "./Container";
 import GithubStars from "./GithubStars";
@@ -95,10 +95,14 @@ function MobileNavigation() {
 					>
 						<MobileNavIcon open={open} />
 					</Popover.Button>
-					{open && createPortal(
-						<div className="fixed inset-0 z-40 bg-background/50" onClick={() => close()} />,
-						document.body
-					)}
+					{open &&
+						createPortal(
+							<div
+								className="fixed inset-0 z-40 bg-background/50"
+								onClick={() => close()}
+							/>,
+							document.body,
+						)}
 					<Transition.Root>
 						<Transition.Child
 							as={Fragment as any}
@@ -116,10 +120,24 @@ function MobileNavigation() {
 								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
 									Features
 								</p>
-								<MobileNavLink href="/features/application-deployment-platform">Application Deployment</MobileNavLink>
-								<MobileNavLink href="/features/database-management-tool">Databases</MobileNavLink>
-								<MobileNavLink href="/features/application-management-software">Application Management</MobileNavLink>
-								<MobileNavLink href="/features/container-server-monitoring">Monitoring</MobileNavLink>
+								<MobileNavLink href="/features/application-deployment-platform">
+									Application Deployment
+								</MobileNavLink>
+								<MobileNavLink href="/features/database-management-tool">
+									Databases
+								</MobileNavLink>
+								<MobileNavLink href="/features/application-management-software">
+									Application Management
+								</MobileNavLink>
+								<MobileNavLink href="/features/container-server-monitoring">
+									Monitoring
+								</MobileNavLink>
+								<MobileNavLink href="/features/security">
+									Security
+								</MobileNavLink>
+								<MobileNavLink href="/sandbox-software">
+									Sandbox Software
+								</MobileNavLink>
 								<MobileNavLink href="/deploy-ai">AI Deployment</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink href="/pricing">Pricing</MobileNavLink>
@@ -129,9 +147,13 @@ function MobileNavigation() {
 								</p>
 								<MobileNavLink href="/enterprise">Enterprise</MobileNavLink>
 								<MobileNavLink href="/partners">Partners</MobileNavLink>
-								<MobileNavLink href="/self-hosted-paas">Self-Hosted</MobileNavLink>
+								<MobileNavLink href="/self-hosted-paas">
+									Self-Hosted
+								</MobileNavLink>
 								<MobileNavLink href="/industries">Industries</MobileNavLink>
-								<MobileNavLink href="/industries/higher-education">Education</MobileNavLink>
+								<MobileNavLink href="/industries/higher-education">
+									Education
+								</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<MobileNavLink
 									href="https://docs.dokploy.com/docs/core"
@@ -151,10 +173,7 @@ function MobileNavigation() {
 								<hr className="m-2 border-border" />
 								<MobileNavLink href="/jobs">Careers</MobileNavLink>
 								<MobileNavLink href="/contact">Contact</MobileNavLink>
-								<MobileNavLink
-									href="https://app.dokploy.com/"
-									target="_blank"
-								>
+								<MobileNavLink href="https://app.dokploy.com/" target="_blank">
 									Sign In
 								</MobileNavLink>
 								<MobileNavLink
@@ -236,17 +255,38 @@ export function Header() {
 										<NavigationMenuTrigger>Features</NavigationMenuTrigger>
 										<NavigationMenuContent>
 											<ul className="grid w-[200px] gap-1 p-2">
-												<ListItem href="/features/application-deployment-platform" title="Application Deployment">
+												<ListItem
+													href="/features/application-deployment-platform"
+													title="Application Deployment"
+												>
 													Deploy and manage applications with ease
 												</ListItem>
-												<ListItem href="/features/database-management-tool" title="Databases">
+												<ListItem
+													href="/features/database-management-tool"
+													title="Databases"
+												>
 													Manage your databases effortlessly
 												</ListItem>
-												<ListItem href="/features/application-management-software" title="Application Management">
+												<ListItem
+													href="/features/application-management-software"
+													title="Application Management"
+												>
 													Monitor and control your applications
 												</ListItem>
-												<ListItem href="/features/container-server-monitoring" title="Monitoring">
+												<ListItem
+													href="/features/container-server-monitoring"
+													title="Monitoring"
+												>
 													Keep your systems running
+												</ListItem>
+												<ListItem href="/features/security" title="Security">
+													Access control, SSO, RBAC, and audit logs
+												</ListItem>
+												<ListItem
+													href="/sandbox-software"
+													title="Sandbox Software"
+												>
+													Build and ship internal apps safely
 												</ListItem>
 												<ListItem href="/deploy-ai" title="AI Deployment">
 													Empower your team to deploy AI tools
@@ -371,7 +411,11 @@ export function Header() {
 					<div className="flex items-center gap-x-4 md:gap-x-5">
 						<GithubStars className="max-md:hidden" />
 
-						<Button variant="ghost" className="rounded-full max-md:hidden" asChild>
+						<Button
+							variant="ghost"
+							className="rounded-full max-md:hidden"
+							asChild
+						>
 							<Link
 								href="https://app.dokploy.com/"
 								aria-label="Sign In Dokploy Cloud"
