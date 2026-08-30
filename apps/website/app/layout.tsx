@@ -1,4 +1,5 @@
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { OpenPanelComponent } from "@openpanel/nextjs";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter, Lexend } from "next/font/google";
@@ -71,6 +72,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			</head>
 			<body>
 				<GoogleAnalytics gaId="G-0RTZ5EPB26" />
+				<OpenPanelComponent
+					apiUrl="https://openpanel.dokploy.com/api"
+					clientId="bf5a178b-7f28-4461-bf47-d63feff15922"
+					trackScreenViews={true}
+					trackOutgoingLinks={true}
+					trackAttributes={true}
+					globalProperties={{ site: "website" }}
+				/>
 				<div className="flex h-full flex-col">
 					<Header />
 					{children}
