@@ -2,6 +2,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import "./global.css";
 import SearchDialog from "@/components/SearchDialog";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { OpenPanelComponent } from "@openpanel/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -37,6 +38,14 @@ export default function Layout({ children }: LayoutProps<"/">) {
 		<html lang="en" className={inter.className} suppressHydrationWarning>
 			<body className="flex flex-col min-h-screen">
 				<GoogleAnalytics gaId="G-HZ71HG38HN" />
+				<OpenPanelComponent
+					apiUrl="https://openpanel.dokploy.com/api"
+					clientId="bf5a178b-7f28-4461-bf47-d63feff15922"
+					trackScreenViews={true}
+					trackOutgoingLinks={true}
+					trackAttributes={true}
+					globalProperties={{ site: "docs" }}
+				/>
 				<RootProvider
 					search={{
 						SearchDialog,
