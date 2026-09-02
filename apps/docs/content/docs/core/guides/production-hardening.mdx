@@ -1,0 +1,279 @@
+---
+title: Production Hardening Guide
+description: A checklist-style guide to hardening a self-hosted Dokploy deployment — host, Docker, Dokploy, Traefik, and database — written to implement in an afternoon and review as a checklist.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+This guide covers the baseline hardening for a production Dokploy instance: the host it runs on, the Docker engine, Dokploy itself, the Traefik reverse proxy, and the databases it manages. It's written to be implemented end-to-end in an afternoon, and to double as a checklist you can walk through directly (see the [Final Checklist](#8-final-checklist) and [Compliance Mapping](#9-compliance-mapping)).
+
+Each ⬜ below is one control to implement and check off; [Section 8](#8-final-checklist) collects all of them into a single table.
+
+<Callout type="warn">
+  This is a baseline. Depending on your threat model, regulatory scope, and data sensitivity, you may need additional controls beyond what's listed here.
+</Callout>
+
+## 1. Shared Responsibility
+
+Dokploy secures the application layer — authentication, authorization, TLS automation, secrets referencing, audit trails. You're responsible for the infrastructure it runs on: the host OS, the network perimeter, the database engine's placement, and backup storage security.
+
+| Layer | Dokploy (the product) | You (the operator) |
+|---|---|---|
+| Access control | 2FA, passkeys, RBAC, custom roles, SSO/OIDC/SAML, SCIM (Enterprise) | Assigning least-privilege roles, offboarding users promptly |
+| API/CLI | Token-based auth scoped to your organization, optional expiration, `Access to API/CLI` permission | Who gets that permission, setting an expiration on every token, not sharing tokens across integrations |
+| Secrets | Secrets Provider integration (Vault, Infisical, AWS SM, Doppler, Azure KV, Scaleway) — values never stored in the Dokploy DB when referenced this way | Operating the external vault, least-privilege vault credentials, not pasting raw secrets into env vars |
+| Reverse proxy / TLS | Traefik auto-config, automatic Let's Encrypt certs, HTTP→HTTPS redirect on Applications | DNS records, custom Traefik middlewares (HSTS, rate limiting), keeping the Traefik dashboard closed |
+| Docker engine | None — Dokploy is a Docker/Swarm consumer, not a daemon hardener | `daemon.json` config, socket exposure, image provenance, host-level container isolation |
+| Host OS | Automated security check (OS, UFW, SSH, Fail2Ban) on servers added via Remote Servers | Patching, SSH configuration, firewall rules, non-root operator accounts |
+| Database engine | Internal/external credential toggle, connection UI | Network placement (internal-only vs. exposed), engine patching if self-managed |
+| Backups | Orchestrates backup/restore to your S3 destination | Bucket security, encryption at rest, retention policy, testing restores |
+| Observability | Audit Logs (Enterprise), deployment notifications | Log shipping, SIEM integration, alerting on auth anomalies |
+
+## 2. Host OS
+
+Run this section on the box before (or right after) installing Dokploy — as root or via `sudo`.
+
+- ⬜ Ubuntu or Debian LTS — the only OS families Dokploy's automated security check currently targets.
+- ⬜ `unattended-upgrades` installed and enabled for automatic security patches.
+- ⬜ SSH: key-based authentication only, root login disabled, password authentication disabled.
+- ⬜ Non-standard SSH port (optional — reduces automated scan noise, not a substitute for the above).
+- ⬜ Fail2Ban (or CrowdSec) installed, enabled, and jailing SSH.
+- ⬜ Firewall allowing only **22 (or your custom SSH port), 80, 443**, with `ufw-docker` installed so those rules actually apply to Docker-published ports. Keep Dokploy's UI port (**3000**) closed to the public internet — put it behind Traefik on a domain (see [Certificates](/docs/core/certificates)) or behind a VPN (see the [Tailscale guide](/docs/core/guides/tailscale)).
+- ⬜ A non-root user for day-to-day operations (log review, manual `docker` commands), in the `docker` group. Reserve root for provisioning and the SSH key Dokploy itself uses to manage the host.
+
+<Callout type="info">
+  Dokploy validates most of this automatically for servers added under **Remote Servers**: OS, UFW status and default policy, SSH key-based auth, and Fail2Ban — see [Remote Servers → Security](/docs/core/remote-servers/security) for the live check.
+</Callout>
+
+### Commands
+
+Automatic security patches:
+
+```bash
+sudo apt update && sudo apt install -y unattended-upgrades apt-listchanges
+sudo dpkg-reconfigure -plow unattended-upgrades
+systemctl status unattended-upgrades
+```
+
+SSH — make sure your key is already in `~/.ssh/authorized_keys` for the user you'll log in as *before* you touch this, then edit `/etc/ssh/sshd_config`:
+
+```
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin no
+```
+
+Reload — don't close your current session until a new connection confirms it works:
+
+```bash
+sudo systemctl reload sshd
+```
+
+For a non-standard port, add `Port 2222` (or your choice) to the same file, reload again, and update the firewall rule below to match.
+
+Fail2Ban, jailing SSH:
+
+```bash
+sudo apt install -y fail2ban
+sudo tee /etc/fail2ban/jail.local <<'EOF'
+[sshd]
+enabled = true
+mode = aggressive
+bantime = 1h
+findtime = 10m
+maxretry = 5
+EOF
+sudo systemctl enable --now fail2ban
+```
+
+Firewall:
+
+```bash
+sudo apt install -y ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
+```
+
+<Callout type="warn">
+  UFW alone does **not** protect Docker-published ports — Docker writes directly to `iptables` and bypasses UFW's rules. Install [ufw-docker](https://github.com/chaifeng/ufw-docker) so UFW and Docker agree on what's exposed, then see [Remote Servers → Security](/docs/core/remote-servers/security) for the full explanation of why this matters.
+</Callout>
+
+```bash
+sudo wget -O /usr/local/bin/ufw-docker https://github.com/chaifeng/ufw-docker/raw/master/ufw-docker
+sudo chmod +x /usr/local/bin/ufw-docker
+sudo ufw-docker install
+sudo systemctl restart ufw
+```
+
+Non-root operator user, added to the `docker` group so it doesn't need `sudo` for every container command:
+
+```bash
+sudo adduser deploy
+sudo usermod -aG sudo,docker deploy
+```
+
+Copy your public key into `/home/deploy/.ssh/authorized_keys` before you rely on this account to log in.
+
+## 3. Docker Engine
+
+- ⬜ `/etc/docker/daemon.json` hardened — `live-restore`, no userland proxy, log rotation (see Commands below).
+- ⬜ `no-new-privileges` applied — not a daemon-wide setting, it's set per service.
+- ⬜ **Never expose the Docker socket over TCP** (`dockerd -H tcp://...`, ports 2375/2376) on any host Dokploy manages. Dokploy orchestrates remote servers over SSH, not the Docker remote API — a TCP socket isn't required for it to work, and one left open is unauthenticated root on the host.
+- ⬜ Private registry credentials configured in Dokploy (see [Registry](/docs/core/registry)) rather than `docker login` credentials sitting in shell history; use a registry token scoped to pull/push only what's needed.
+- ⬜ Pin image tags in production (avoid `:latest`) so a redeploy doesn't silently pull an untested image.
+
+### Commands
+
+`/etc/docker/daemon.json` — a sane baseline:
+
+```json
+{
+  "live-restore": true,
+  "userland-proxy": false,
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
+```
+
+Restart the daemon to apply it — this briefly stops `dockerd` (not your containers, since `live-restore` keeps them running through the restart once it's set):
+
+```bash
+sudo systemctl restart docker
+```
+
+The log options cap `json-file` growth — without them, a noisy container can fill the disk.
+
+`no-new-privileges`, per service, in the Docker Compose file or the app's Advanced settings:
+
+```yaml
+security_opt:
+  - no-new-privileges:true
+```
+
+## 4. Dokploy
+
+- ⬜ **2FA or passkeys** for every member with panel access — see [Account Security](/docs/core/account-security). Passkeys are phishing-resistant and preferred for day-to-day sign-in.
+- ⬜ **SSO/OIDC or SAML** if you have an IdP (Enterprise) — see [SSO](/docs/core/enterprise/sso). Enterprise lets you **force SSO** for the organization, disabling password-based sign-in so every member authenticates through your IdP (and inherits whatever MFA policy you enforce there). Combine with [SCIM Provisioning](/docs/core/enterprise/scim) to auto-deprovision users the moment they leave your IdP, rather than relying on someone remembering to remove them from Dokploy.
+- ⬜ **Least-privilege roles.** Use the built-in Member permissions (see [Permissions](/docs/core/permissions)) or, on Enterprise, [Custom Roles](/docs/core/enterprise/custom-roles) scoped per project/environment. Don't hand out Admin by default.
+- ⬜ **Secrets Providers** instead of raw values in env vars — see [Secrets Providers](/docs/core/secrets-providers). Values are fetched at deploy time and never stored in the Dokploy database; your vault stays the source of truth, and rotation there takes effect on the next deploy.
+- ⬜ **API/CLI tokens** — restrict the `Access to API/CLI` permission to who actually needs it. Tokens are scoped to your organization and can be created with an expiration — always set one instead of leaving a token to stand forever, issue a separate token per integration (CI, webhook, script) so you can revoke one without breaking the others, and regenerate immediately on offboarding or suspected exposure.
+- ⬜ **Audit Logs** (Enterprise) covering logins, role changes, deployments, and infrastructure changes — see [Audit Logs](/docs/core/enterprise/audit-logs). This is usually the single most-requested control in a security review.
+
+<Callout type="warn">
+  Without SSO, there's no org-wide "require 2FA" toggle today — enablement is per-user, so treat it as a policy you communicate and audit (via Audit Logs, Enterprise). On Enterprise, forcing SSO for the organization is the actual enforcement path: it removes the password fallback entirely, so whatever MFA your IdP requires becomes mandatory for everyone.
+</Callout>
+
+## 5. Traefik & Networking
+
+- ⬜ TLS is automatic for domains managed through Dokploy's Applications flow — Let's Encrypt via `certResolver`, with an HTTP router that redirects to HTTPS by default. Docker Compose domains use Traefik labels instead and need the same redirect added explicitly — see [Domains](/docs/core/domains) and [Docker Compose Domains](/docs/core/docker-compose/domains).
+- ⬜ **HSTS**, applied via a custom middleware — not automatic today (see [Config snippets](#config-snippets) below).
+- ⬜ Keep the **Traefik dashboard** off — it isn't exposed by a default Dokploy install, and it should stay that way unless it's behind auth and off the public network.
+- ⬜ **Rate limiting** on public-facing services — no UI toggle for this yet, so it also goes through a custom middleware.
+- ⬜ **Isolate networks per project.** By default, apps share `dokploy-network`. For Docker Compose stacks, enable [Isolated Deployments](/docs/core/docker-compose/utilities#isolated-deployments) so each stack gets its own network and containers can't reach services in unrelated projects by name.
+- ⬜ No Docker socket over TCP anywhere in the cluster (see [Section 3](#3-docker-engine)) — this is as much a networking control as a Docker one.
+
+### Config snippets
+
+Dokploy's Applications flow writes a domain config like the one shown in [Domains](/docs/core/domains) — a `routers` + `services` block per domain, editable from the app's **Advanced → Traefik File System** tab. Add a `headers` middleware for HSTS and reference it from the `websecure` router's `middlewares` list:
+
+```yaml
+http:
+  middlewares:
+    secure-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+  routers:
+    dokploy-app-name-router-websecure-1:
+      middlewares:
+        - secure-headers
+      # ...rest of the router config Dokploy already generated
+```
+
+Same file, a `ratelimit` middleware:
+
+```yaml
+http:
+  middlewares:
+    rate-limit:
+      rateLimit:
+        average: 100
+        burst: 50
+  routers:
+    dokploy-app-name-router-websecure-1:
+      middlewares:
+        - rate-limit
+```
+
+`average` is requests/second sustained per source, `burst` is the short spike allowed above it — tune both to your traffic pattern before relying on them.
+
+## 6. Database
+
+- ⬜ Use **Internal Credentials** for anything an application in the same network needs — never enable **External Credentials** (a published port) unless there's a real requirement, and if there is, restrict it with a firewall rule or put it behind a VPN rather than leaving it open to the internet. See [Database Connection](/docs/core/databases/connection).
+- ⬜ **Backups** to an S3 destination — see [Database Backups](/docs/core/databases/backups). Dokploy doesn't encrypt the backup archive itself, so enable encryption at rest on the bucket (SSE-S3 or SSE-KMS) and scope the destination credentials to that bucket only.
+- ⬜ **Test restores.** A backup you haven't restored isn't a backup — see [Restore](/docs/core/databases/restore) (or [Volume Backups](/docs/core/volume-backups) for volumes) and schedule a periodic restore drill. That's the evidence that actually matters, not the backup schedule itself.
+
+## 7. Observability
+
+- ⬜ **Audit Logs** (Enterprise) as your primary who-did-what trail — see [Audit Logs](/docs/core/enterprise/audit-logs).
+- ⬜ **External log shipping.** Dokploy's built-in Monitoring is currently a Cloud-only feature — for self-hosted, ship container and host logs (Docker's log driver, syslog, or a log shipper) to something outside the box you're monitoring, so a compromised host can't erase its own trail.
+- ⬜ **Alert on auth anomalies** — repeated Fail2Ban bans, spikes in Traefik 401/403s, failed Dokploy logins. Wire up a [notification provider](/docs/core/overview) (Slack, email, webhook) for at least deployment failures and server thresholds as a baseline signal.
+
+## 8. Final Checklist
+
+| # | Item | Section | Status |
+|---|---|---|---|
+| 1 | Ubuntu/Debian LTS with `unattended-upgrades` | Host OS | ⬜ |
+| 2 | SSH: keys only, no root login, no password auth | Host OS | ⬜ |
+| 3 | Fail2Ban/CrowdSec active on SSH | Host OS | ⬜ |
+| 4 | Firewall limited to 22/80/443; port 3000 not public | Host OS | ⬜ |
+| 5 | Non-root operator user with scoped sudo | Host OS | ⬜ |
+| 6 | `daemon.json` hardened (live-restore, log rotation) | Docker | ⬜ |
+| 7 | Docker socket never exposed over TCP | Docker | ⬜ |
+| 8 | Registry credentials scoped and stored in Dokploy | Docker | ⬜ |
+| 9 | 2FA or passkeys enabled for every member | Dokploy | ⬜ |
+| 10 | SSO/OIDC configured, and forced org-wide if on Enterprise | Dokploy | ⬜ |
+| 11 | SCIM auto-deprovisioning (if on SSO) | Dokploy | ⬜ |
+| 12 | Roles follow least privilege / Custom Roles in use | Dokploy | ⬜ |
+| 13 | Secrets referenced via a Secrets Provider, not raw env vars | Dokploy | ⬜ |
+| 14 | API/CLI tokens issued per-integration, with an expiration set | Dokploy | ⬜ |
+| 15 | Audit Logs enabled | Dokploy | ⬜ |
+| 16 | HTTPS enforced with redirect on every domain | Traefik | ⬜ |
+| 17 | HSTS middleware applied to public domains | Traefik | ⬜ |
+| 18 | Traefik dashboard not publicly exposed | Traefik | ⬜ |
+| 19 | Rate limiting on public-facing services | Traefik | ⬜ |
+| 20 | Isolated Deployments enabled per project (Compose) | Traefik | ⬜ |
+| 21 | Databases use Internal Credentials only | Database | ⬜ |
+| 22 | Backups encrypted at rest in S3 | Database | ⬜ |
+| 23 | Restore tested within the last quarter | Database | ⬜ |
+| 24 | Logs shipped to an external system | Observability | ⬜ |
+| 25 | Alerting on auth failures / deployment failures | Observability | ⬜ |
+
+## 9. Compliance Mapping
+
+Illustrative mapping to common SOC 2 Trust Services Criteria and ISO/IEC 27001:2022 Annex A control families — use it as a starting point and align the exact control IDs with your own GRC tooling.
+
+| Guide section | SOC 2 (Trust Services Criteria) | ISO/IEC 27001:2022 Annex A |
+|---|---|---|
+| Host OS (patching, SSH, firewall) | CC6.1, CC6.6 — logical & physical access, network protection | A.8.8 (vulnerabilities), A.8.20 (network security) |
+| Docker engine hardening | CC6.1, CC6.8 — access control, malicious software prevention | A.8.9 (config management), A.8.20 |
+| Dokploy: 2FA/SSO/RBAC | CC6.1, CC6.2, CC6.3 — access provisioning & authentication | A.5.15 (access control), A.8.5 (authentication) |
+| Secrets Providers | CC6.1, CC6.7 — restricted access, data transmission | A.8.24 (cryptography), A.8.12 (data leakage prevention) |
+| Audit Logs | CC7.2 — monitoring for anomalies | A.8.15 (logging), A.5.28 (evidence collection) |
+| Traefik / TLS / HSTS | CC6.7 — encryption in transit | A.8.24 (cryptography), A.8.26 (application security) |
+| Network isolation | CC6.6 — boundary protection | A.8.20, A.8.22 (network segregation) |
+| Database placement | CC6.1, CC6.6 | A.8.20, A.5.10 (acceptable use of assets) |
+| Backups & restore testing | A1.2, A1.3 — availability & recovery | A.8.13 (backup), A.5.29 (continuity) |
+| Observability & alerting | CC7.2, CC7.3 — monitoring & incident response | A.8.15, A.5.24 (incident management) |
+
+<Callout type="info">
+  Already tracking these in a GRC platform (e.g. Vanta)? Import this table as evidence links against the matching controls rather than re-deriving the mapping — the control IDs above are the standard families, not your tenant-specific ones.
+</Callout>

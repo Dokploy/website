@@ -75,6 +75,7 @@
 		"troubleshooting/logs-monitoring",
 		"troubleshooting/instance",
 		"---Guides---",
+		"guides/production-hardening",
 		"guides/cloudflare-tunnels",
 		"guides/tailscale"
 	]
