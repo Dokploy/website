@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { ContactFormModal } from "./ContactFormModal";
@@ -154,6 +154,20 @@ export function Pricing() {
 							"absolute inset-0",
 						)}
 					/>
+					<Link
+						href={`${CLOUD_APP_URL}/register`}
+						target="_blank"
+						aria-label="Start your 14-day free trial, no credit card required"
+						className="relative mb-4 inline-flex"
+					>
+						<Badge
+							variant="secondary"
+							className="gap-1.5 border-primary/30 bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/20"
+						>
+							<Sparkles className="h-3.5 w-3.5" />
+							14-day free trial · No credit card required
+						</Badge>
+					</Link>
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />

@@ -55,28 +55,33 @@ export function Hero() {
 			<div className=" bottom-0 flex w-full items-center justify-center overflow-hidden rounded-lg  bg-background md:shadow-xl">
 				<div className="relative px-4">
 					<div className="text-center">
-						{/* <motion.a
-							href="#pricing"
+						<motion.div
 							className="relative z-10 mb-4 inline-block"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3 }}
 						>
-							<div className="z-10 flex items-center justify-center">
-								<AnimatedGradientText>
-									🎉{' '}
-									<hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{' '}
-									<span
-										className={cn(
-											'inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent',
-										)}
-									>
-										Introducing Dokploy Cloud
-									</span>
-									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-								</AnimatedGradientText>
-							</div>
-						</motion.a> */}
+							<a
+								href="https://app.dokploy.com/register"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="Start your 14-day free trial, no credit card required"
+							>
+								<div className="z-10 flex items-center justify-center">
+									<AnimatedGradientText>
+										🎉 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
+										<span
+											className={cn(
+												"inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent",
+											)}
+										>
+											14-day free trial · No credit card required
+										</span>
+										<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+									</AnimatedGradientText>
+								</div>
+							</a>
+						</motion.div>
 
 						<motion.h1
 							className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-muted-foreground sm:text-7xl"
@@ -104,8 +109,9 @@ export function Hero() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3, delay: 0.2 }}
 						>
-							Manage containerized deployments and AI-built apps across multiple servers with ease,
-							thanks to our all-in-one platform for developers.
+							Manage containerized deployments and AI-built apps across multiple
+							servers with ease, thanks to our all-in-one platform for
+							developers.
 						</motion.p>
 						<motion.div
 							className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
