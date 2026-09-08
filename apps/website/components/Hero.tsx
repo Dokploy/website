@@ -65,7 +65,7 @@ export function Hero() {
 								href="https://app.dokploy.com/register"
 								target="_blank"
 								rel="noopener noreferrer"
-								aria-label="Start your 14-day free trial, no credit card required"
+								aria-label="Start your 7-day free trial, no credit card required"
 							>
 								<div className="z-10 flex items-center justify-center">
 									<AnimatedGradientText>
@@ -75,7 +75,7 @@ export function Hero() {
 												"inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent",
 											)}
 										>
-											14-day free trial · No credit card required
+											7-day free trial · No credit card required
 										</span>
 										<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 									</AnimatedGradientText>

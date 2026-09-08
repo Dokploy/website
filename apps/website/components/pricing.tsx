@@ -157,7 +157,7 @@ export function Pricing() {
 					<Link
 						href={`${CLOUD_APP_URL}/register`}
 						target="_blank"
-						aria-label="Start your 14-day free trial, no credit card required"
+						aria-label="Start your 7-day free trial, no credit card required"
 						className="relative mb-4 inline-flex"
 					>
 						<Badge
@@ -165,7 +165,7 @@ export function Pricing() {
 							className="gap-1.5 border-primary/30 bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/20"
 						>
 							<Sparkles className="h-3.5 w-3.5" />
-							14-day free trial · No credit card required
+							7-day free trial · No credit card required
 						</Badge>
 					</Link>
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
