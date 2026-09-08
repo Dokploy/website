@@ -25,7 +25,7 @@ const faqs = [
 	{
 		question: "What happens if I need more than one server?",
 		answer:
-			"The first server costs $4.50/month, if you buy more than one it will be $3.50/month per server.",
+			"You can add as many servers as you need. Each additional server costs $4.50/month on the Hobby plan. On the Startup plan, 3 servers are included in the base price, and you can add more at $4.50/month each.",
 	},
 	{
 		question: "Is there a limit on the number of deployments?",

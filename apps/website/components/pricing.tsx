@@ -85,7 +85,7 @@ const hobbyFeatures = [
 	"Unlimited Deployments",
 	"Unlimited Databases",
 	"Unlimited Applications",
-	"1 Server Included",
+	"Setup 1 Server",
 	"1 Organization",
 	"1 User",
 	"2 Environments",
@@ -97,7 +97,7 @@ const hobbyFeatures = [
 
 const startupFeatures = [
 	"All the features of Hobby, plus…",
-	"3 Servers Included",
+	"Setup up to 3 Servers",
 	"3 Organizations",
 	"Unlimited Users",
 	"Unlimited Environments",
@@ -111,7 +111,7 @@ const startupFeatures = [
 
 const enterpriseFeatures = [
 	"All the features of Startup, plus…",
-	"Up to Unlimited Servers",
+	"Setup Unlimited Servers",
 	"Up to Unlimited Organizations",
 	"Fine-grained RBAC",
 	"Complete Hosting Flexibility",
