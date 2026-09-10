@@ -6,6 +6,7 @@
 		"aws",
 		"doppler",
 		"azure",
-		"scaleway"
+		"scaleway",
+		"phase"
 	]
 }
