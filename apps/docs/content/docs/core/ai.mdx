@@ -1,6 +1,6 @@
 ---
 title: AI Assistant
-description: "Use AI to generate Docker Compose templates in Dokploy."
+description: "Generate Docker Compose templates and investigate deployment or runtime logs with AI."
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -69,6 +69,33 @@ Once you have a provider configured, you can use AI to generate Docker Compose t
 <Callout>
 Always review the generated configuration before deploying. The AI provides a starting point — you may need to adjust environment variables, resource limits, or volumes for your specific use case.
 </Callout>
+
+## Analyzing deployment and runtime logs
+
+Open a deployment log dialog or a runtime log viewer, click **AI**, select a provider, and click **Analyze latest N lines**. Dokploy fetches recent logs directly for that deployment, container, or Swarm service. The analysis does not depend on the viewer's search, filters, or loaded-line count.
+
+Configure each provider separately under **Settings → AI → Edit AI**:
+
+| Setting | Default | Behavior |
+|---------|---------|----------|
+| **Log lines sent to AI** | 200 | Fetch up to this many recent lines for deployment and runtime analysis. Accepts 1–10,000 lines. |
+| **Inspect source code when analyzing logs** | Off | Allow the model to list, search, and read relevant source files alongside the logs. Requires a model that supports tool calling. |
+
+The result shows the actual number of log lines analyzed, whether source was inspected, and the inspected file paths. Log content is limited to 1 MiB; any truncation is reported. If your model rejects the context size, lower its log-line limit or disable source inspection.
+
+### Source inspection
+
+When enabled, the agent reads the application's or Compose service's existing checkout, including checkouts on remote build/deployment servers and preview checkouts. It can follow errors into source files and reference file paths and line numbers in its diagnosis. Access is read-only: the agent cannot edit files, execute commands, or redeploy services.
+
+<Callout type="info">
+Relevant code is sent to the selected AI provider. The available checkout may differ from the revision that produced the logs, particularly for older deployments. Dokploy does not fetch historical revisions for analysis.
+</Callout>
+
+Source access stays within the selected checkout. Credential files, `.env` files, Git internals, dependencies, generated output, binary files, and symbolic links are excluded. Secrets embedded in otherwise ordinary source or log text may still be sent; consider what your application records and stores before choosing a provider.
+
+Investigation is bounded to eight tool rounds, twenty file reads, 64 KiB per file, and 256 KiB of source content. The result reports incomplete investigation when a limit is reached. If the checkout is unavailable, the target has no associated source (for example, a standalone Docker image), or the model does not support source tools, Dokploy explains the limitation and analyzes logs alone.
+
+Older log dialogs without a deployment or service target analyze their currently loaded log text, subject to the provider's line limit, without source access.
 
 ## Managing providers
 
