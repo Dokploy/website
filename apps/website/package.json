@@ -39,7 +39,7 @@
 		"free-email-domains": "^1.2.26",
 		"hast-util-to-jsx-runtime": "^2.3.5",
 		"lucide-react": "0.364.0",
-		"next": "16.3.1",
+		"next": "16.3.3",
 		"prettier": "^3.3.3",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
