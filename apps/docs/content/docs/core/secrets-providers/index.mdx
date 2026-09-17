@@ -1,6 +1,6 @@
 ---
 title: Secrets Providers
-description: "Reference secrets from external secret managers (HashiCorp Vault, OpenBao, Infisical, AWS Secrets Manager, Doppler, Azure Key Vault, Scaleway Secret Manager) directly in your environment variables."
+description: "Reference secrets from external secret managers (HashiCorp Vault, OpenBao, Infisical, AWS Secrets Manager, Doppler, Azure Key Vault, Scaleway Secret Manager, Phase) directly in your environment variables."
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -28,6 +28,7 @@ Supported providers:
 - [Doppler](/docs/core/secrets-providers/doppler)
 - [Azure Key Vault](/docs/core/secrets-providers/azure)
 - [Scaleway Secret Manager](/docs/core/secrets-providers/scaleway)
+- [Phase](/docs/core/secrets-providers/phase)
 
 ## Reference Syntax
 
@@ -46,6 +47,7 @@ ${{vault.<provider-name>.<ref>}}
 | Doppler | `<SECRET_NAME>` | `DB_PASSWORD` |
 | Azure Key Vault | `<secret-name>` | `db-password` |
 | Scaleway Secret Manager | `[folder/]<secret-name>[:field]` | `prod/database:password` |
+| Phase | `<SECRET_NAME>` | `DB_PASSWORD` |
 
 References work in every place that flows into a deployment:
 

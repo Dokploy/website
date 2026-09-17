@@ -107,7 +107,7 @@ DATABASE_URL=postgresql://${{DATABASE_USER}}:${{DATABASE_PASSWORD}}@service-data
 
 ## Secrets from External Vaults
 
-Besides shared variables, you can reference secrets stored in an external secret manager (HashiCorp Vault/OpenBao, Infisical, AWS Secrets Manager, Doppler, Azure Key Vault):
+Besides shared variables, you can reference secrets stored in an external secret manager (HashiCorp Vault/OpenBao, Infisical, AWS Secrets Manager, Doppler, Azure Key Vault, Scaleway Secret Manager, Phase):
 
 ```bash
 DB_PASSWORD=${{vault.prod-vault.myapp/prod:DB_PASSWORD}}
