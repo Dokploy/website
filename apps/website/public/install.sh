@@ -338,7 +338,7 @@ install_dokploy() {
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
-        traefik:v3.6.7
+        traefik:v3.6.25
 
 
     # Optional: Use docker service create instead of docker run
@@ -352,7 +352,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.6.7
+    #     traefik:v3.6.25
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
