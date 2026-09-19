@@ -88,4 +88,5 @@ Key facts:
 - [Discord Community](https://discord.gg/2tBnJ3jDJc): Community support
 - [X / Twitter](https://x.com/getdokploy): Product updates
 - [Jobs](https://dokploy.com/jobs): Open roles at Dokploy
+- [Contributors](https://dokploy.com/contributors): Meet the open-source contributors
 - [Contact / Sales](https://dokploy.com/contact): Enterprise and agency enquiries

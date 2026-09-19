@@ -22,6 +22,9 @@ const nextConfig = {
 			{
 				hostname: "cms.dokploy.com",
 			},
+			{
+				hostname: "avatars.githubusercontent.com",
+			},
 		],
 		// domains: [
 		// 	"static.ghost.org",
