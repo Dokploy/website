@@ -161,6 +161,7 @@ function MobileNavigation() {
 								>
 									Docs
 								</MobileNavLink>
+								<MobileNavLink href="/contributors">Contributors</MobileNavLink>
 								<hr className="m-2 border-border" />
 								<p className="px-2 py-1 text-xs font-semibold uppercase text-muted-foreground">
 									Resources
@@ -170,8 +171,6 @@ function MobileNavigation() {
 								<MobileNavLink href="/blog">Blog</MobileNavLink>
 								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
 								<MobileNavLink href="/jobs">Jobs</MobileNavLink>
-								<hr className="m-2 border-border" />
-								<MobileNavLink href="/jobs">Careers</MobileNavLink>
 								<MobileNavLink href="/contact">Contact</MobileNavLink>
 								<MobileNavLink href="https://app.dokploy.com/" target="_blank">
 									Sign In
@@ -244,11 +243,11 @@ export function Header() {
 		<header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 py-5 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 			<Container>
 				<nav className="relative z-50 flex justify-between">
-					<div className="flex items-center md:gap-x-12">
+					<div className="flex items-center xl:gap-x-12">
 						<Link href="/" aria-label="Home">
 							<Logo className="h-10 w-auto" />
 						</Link>
-						<div className="hidden md:flex">
+						<div className="hidden xl:flex">
 							<NavigationMenu>
 								<NavigationMenuList>
 									<NavigationMenuItem>
@@ -368,16 +367,16 @@ export function Header() {
 											className={navigationMenuTriggerStyle()}
 										>
 											<Link
-												href="/jobs"
+												href="/contributors"
 												onClick={() =>
 													trackGAEvent({
 														action: "Nav Link Clicked",
 														category: "Navigation",
-														label: "/jobs",
+														label: "/contributors",
 													})
 												}
 											>
-												Careers
+												Contributors
 											</Link>
 										</NavigationMenuLink>
 									</NavigationMenuItem>
@@ -408,12 +407,12 @@ export function Header() {
 							</NavigationMenu>
 						</div>
 					</div>
-					<div className="flex items-center gap-x-4 md:gap-x-5">
+					<div className="flex items-center gap-x-4 xl:gap-x-5">
 						<GithubStars className="max-md:hidden" />
 
 						<Button
 							variant="ghost"
-							className="rounded-full max-md:hidden"
+							className="rounded-full max-xl:hidden"
 							asChild
 						>
 							<Link
@@ -427,7 +426,7 @@ export function Header() {
 
 						<Button
 							variant="outline"
-							className="rounded-full max-md:hidden"
+							className="rounded-full max-xl:hidden"
 							asChild
 						>
 							<Link
@@ -444,7 +443,7 @@ export function Header() {
 							</Link>
 						</Button>
 
-						<Button className="rounded-full max-md:hidden" asChild>
+						<Button className="rounded-full max-xl:hidden" asChild>
 							<Link
 								href="https://app.dokploy.com/register"
 								aria-label="Sign Up Dokploy Cloud"
@@ -456,7 +455,7 @@ export function Header() {
 								</div>
 							</Link>
 						</Button>
-						<div className="-mr-1 md:hidden">
+						<div className="-mr-1 xl:hidden">
 							<MobileNavigation />
 						</div>
 					</div>
