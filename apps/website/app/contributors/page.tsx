@@ -1,6 +1,5 @@
 import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { getContributors } from "@/lib/github";
 import type { Metadata } from "next";
 import { ContributorsClient } from "./ContributorsClient";
 
@@ -10,9 +9,7 @@ export const metadata: Metadata = {
 		"Meet the amazing contributors who are building and shaping the future of Dokploy.",
 };
 
-export default async function ContributorsPage() {
-	const contributors = await getContributors();
-
+export default function ContributorsPage() {
 	return (
 		<div className="relative bg-black">
 			<AnimatedGridPattern
@@ -42,7 +39,7 @@ export default async function ContributorsPage() {
 			</section>
 
 			{/* Contributors List & CTA */}
-			<ContributorsClient contributors={contributors} />
+			<ContributorsClient />
 		</div>
 	);
 }

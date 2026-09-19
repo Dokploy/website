@@ -15,30 +15,72 @@ type Contributor = {
 	contributions: number;
 };
 
-export function ContributorsClient({
-	contributors,
-}: { contributors: Contributor[] }) {
+export function ContributorsClient() {
+	const [contributors, setContributors] = useState<Contributor[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasError, setHasError] = useState(false);
 	const [limit, setLimit] = useState(40);
 	const [increment, setIncrement] = useState(40);
-	const [mounted, setMounted] = useState(false);
 
-	// Adjust initial limit and increment for mobile
 	useEffect(() => {
-		setMounted(true);
+		// Set correct limits for mobile immediately after hydration
 		if (window.innerWidth < 768) {
 			setLimit(20);
 			setIncrement(20);
 		}
+
+		const fetchContributors = async () => {
+			try {
+				setHasError(false);
+				const response = await fetch("/api/contributors");
+				if (response.ok) {
+					const data: Contributor[] = await response.json();
+					setContributors(data);
+				} else {
+					setHasError(true);
+				}
+			} catch (error) {
+				console.error("Error fetching contributors:", error);
+				setHasError(true);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchContributors();
 	}, []);
 
 	const handleShowMore = () => {
 		setLimit((prev) => prev + increment);
 	};
 
-	// To prevent hydration layout flash, we use the server's default 40 until mounted
-	const currentLimit = mounted ? limit : 40;
-	const displayedContributors = contributors.slice(0, currentLimit);
-	const hasMore = currentLimit < contributors.length;
+	const displayedContributors = contributors.slice(0, limit);
+	const hasMore = limit < contributors.length;
+
+	if (isLoading) {
+		return (
+			<div className="relative z-10 border-b border-border/30 pt-10 pb-16 sm:pt-12 sm:pb-20">
+				<Container>
+					<div className="grid w-full grid-cols-2 sm:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
+						{Array.from({ length: 40 }).map((_, i) => (
+							<div
+								key={`skeleton-${i}`}
+								className={`flex-col items-center gap-3 rounded-2xl border border-border/50 bg-[#0d0d0d] p-6 ${
+									i >= 20 ? "hidden md:flex" : "flex"
+								}`}
+							>
+								<div className="h-20 w-20 rounded-full bg-white/10 animate-pulse" />
+								<div className="flex flex-col items-center gap-2 animate-pulse">
+									<div className="h-4 w-20 rounded bg-white/10" />
+									<div className="h-3 w-16 rounded bg-white/10" />
+								</div>
+							</div>
+						))}
+					</div>
+				</Container>
+			</div>
+		);
+	}
 
 	return (
 		<div className="relative z-10 border-b border-border/30 pt-10 pb-16 sm:pt-12 sm:pb-20">
@@ -52,7 +94,7 @@ export function ContributorsClient({
 									href={contributor.html_url}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="group flex flex-col items-center gap-3 rounded-2xl border border-border/50 bg-white/5 backdrop-blur-md p-6 transition-colors hover:bg-white/10"
+									className="group flex flex-col items-center gap-3 rounded-2xl border border-border/50 bg-[#0d0d0d] p-6 transition-colors hover:bg-[#1a1a1a]"
 								>
 									<div className="relative h-20 w-20 overflow-hidden rounded-full ring-2 ring-border/50 transition-all group-hover:ring-primary">
 										<Image
@@ -86,8 +128,32 @@ export function ContributorsClient({
 							</Button>
 						)}
 					</div>
+				) : hasError ? (
+					<div className="rounded-2xl border border-border/50 bg-[#0d0d0d] p-12 text-center">
+						<p className="text-muted-foreground">
+							Failed to load contributors. Please try again.
+						</p>
+						<Button
+							variant="outline"
+							size="lg"
+							className="mt-6"
+							onClick={() => {
+								setIsLoading(true);
+								fetch("/api/contributors")
+									.then((res) => (res.ok ? res.json() : Promise.reject()))
+									.then((data) => {
+										setContributors(data);
+										setHasError(false);
+									})
+									.catch(() => setHasError(true))
+									.finally(() => setIsLoading(false));
+							}}
+						>
+							Retry
+						</Button>
+					</div>
 				) : (
-					<div className="rounded-2xl border border-border/50 bg-white/5 backdrop-blur-md p-12 text-center">
+					<div className="rounded-2xl border border-border/50 bg-[#0d0d0d] p-12 text-center">
 						<p className="text-muted-foreground">
 							No contributors found at the moment.
 						</p>
