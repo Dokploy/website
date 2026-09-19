@@ -171,7 +171,6 @@ function MobileNavigation() {
 								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
 								<MobileNavLink href="/jobs">Jobs</MobileNavLink>
 								<hr className="m-2 border-border" />
-								<MobileNavLink href="/jobs">Careers</MobileNavLink>
 								<MobileNavLink href="/contact">Contact</MobileNavLink>
 								<MobileNavLink href="https://app.dokploy.com/" target="_blank">
 									Sign In
@@ -362,25 +361,6 @@ export function Header() {
 										</NavigationMenuLink>
 									</NavigationMenuItem>
 
-									<NavigationMenuItem>
-										<NavigationMenuLink
-											asChild
-											className={navigationMenuTriggerStyle()}
-										>
-											<Link
-												href="/jobs"
-												onClick={() =>
-													trackGAEvent({
-														action: "Nav Link Clicked",
-														category: "Navigation",
-														label: "/jobs",
-													})
-												}
-											>
-												Careers
-											</Link>
-										</NavigationMenuLink>
-									</NavigationMenuItem>
 
 									<NavigationMenuItem>
 										<NavigationMenuTrigger>Resources</NavigationMenuTrigger>

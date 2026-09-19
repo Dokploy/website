@@ -108,7 +108,7 @@ const footerSections = [
 		title: "Company",
 		ariaLabel: "Company",
 		links: [
-			{ href: "/jobs", label: "Careers" },
+			{ href: "/jobs", label: "Jobs" },
 			{ href: "/terms-of-service", label: "Terms of Service" },
 			{ href: "/privacy", label: "Privacy Policy" },
 		],
