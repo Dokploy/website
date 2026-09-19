@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/Container";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Github, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ type Contributor = {
 
 export function ContributorsClient() {
 	const [contributors, setContributors] = useState<Contributor[]>([]);
+	const [anonymousCount, setAnonymousCount] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasError, setHasError] = useState(false);
 	const [limit, setLimit] = useState(40);
@@ -34,8 +35,15 @@ export function ContributorsClient() {
 				setHasError(false);
 				const response = await fetch("/api/contributors");
 				if (response.ok) {
-					const data: Contributor[] = await response.json();
-					setContributors(data);
+					const data = await response.json();
+					// Handle edge case where HMR serves the old array cache format
+					if (Array.isArray(data)) {
+						setContributors(data);
+						setAnonymousCount(0);
+					} else {
+						setContributors(data.contributors || []);
+						setAnonymousCount(data.anonymousCount || 0);
+					}
 				} else {
 					setHasError(true);
 				}
@@ -54,8 +62,9 @@ export function ContributorsClient() {
 		setLimit((prev) => prev + increment);
 	};
 
-	const displayedContributors = contributors.slice(0, limit);
-	const hasMore = limit < contributors.length;
+	const safeContributors = Array.isArray(contributors) ? contributors : [];
+	const displayedContributors = safeContributors.slice(0, limit);
+	const hasMore = limit < safeContributors.length;
 
 	if (isLoading) {
 		return (
@@ -85,7 +94,7 @@ export function ContributorsClient() {
 	return (
 		<div className="relative z-10 border-b border-border/30 pt-10 pb-16 sm:pt-12 sm:pb-20">
 			<Container>
-				{contributors.length > 0 ? (
+				{safeContributors.length > 0 ? (
 					<div className="flex flex-col items-center">
 						<div className="grid w-full grid-cols-2 sm:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
 							{displayedContributors.map((contributor) => (
@@ -115,6 +124,22 @@ export function ContributorsClient() {
 									</div>
 								</Link>
 							))}
+
+							{!hasMore && anonymousCount > 0 && (
+								<div className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-border/50 bg-[#0d0d0d] p-6 transition-colors hover:bg-[#1a1a1a]">
+									<div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-border/50 bg-white/5 transition-all group-hover:border-primary/50">
+										<Users className="h-8 w-8 text-muted-foreground" />
+									</div>
+									<div className="flex flex-col items-center text-center">
+										<h3 className="text-sm font-medium text-white sm:text-base">
+											Anonymous
+										</h3>
+										<p className="text-xs text-muted-foreground">
+											+ {anonymousCount} unlinked contributions
+										</p>
+									</div>
+								</div>
+							)}
 						</div>
 
 						{hasMore && (
@@ -142,7 +167,13 @@ export function ContributorsClient() {
 								fetch("/api/contributors")
 									.then((res) => (res.ok ? res.json() : Promise.reject()))
 									.then((data) => {
-										setContributors(data);
+										if (Array.isArray(data)) {
+											setContributors(data);
+											setAnonymousCount(0);
+										} else {
+											setContributors(data.contributors || []);
+											setAnonymousCount(data.anonymousCount || 0);
+										}
 										setHasError(false);
 									})
 									.catch(() => setHasError(true))
