@@ -5,10 +5,10 @@ description: "Learn how to configure a custom build server to compile your appli
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Build servers allow you to separate the build process from your deployment servers. This is particularly useful when you want to compile your applications on a dedicated server with more resources, or when you want to keep your deployment servers lightweight.
+Build servers allow you to separate the build process from your deployment servers. This is useful when you want to compile applications or Compose images on a dedicated server with more resources, or keep deployment servers lightweight.
 
 <Callout type="info">
-  Build servers are currently **only available for Applications**. This feature is not supported for Docker Compose deployments.
+  Build servers are supported for **Applications** and **Docker Compose** services with `build:` sections in the compose file.
 </Callout>
 
 ## Overview
@@ -135,4 +135,41 @@ When you deploy an application with a custom build server:
 
 Build servers require a Docker registry to store built images. For detailed instructions on configuring a registry, see the [Docker Registry](/docs/core/registry) guide.
 
+## Docker Compose
+
+Compose services can use the same build-server flow as applications when your compose file defines `build:` sections.
+
+### Configure a Compose service
+
+1. Open your Compose service in the dashboard.
+2. Go to the **Advanced** tab.
+3. Under **Build Server**, select both:
+   - **Build Server** — the host that runs `docker compose build` and pushes images
+   - **Build Registry** — where built images are stored
+4. Click **Save**, then redeploy.
+
+Build Server and Build Registry must be set together, or both set to **None**.
+
+<Callout type="info">
+  Only services with a `build:` block are built on the build server and pushed to the registry. Services that use a prebuilt `image:` are unchanged.
+</Callout>
+
+### Deploy behavior
+
+When a build server is configured for Compose:
+
+1. Dokploy logs in to the registry on the build server.
+2. Services with `build:` are built on the build server and tagged for your registry.
+3. Images are pushed to the registry.
+4. The deploy server logs in, pulls the images, and runs `docker compose up --no-build`.
+
+When no build server is set, Compose deploys behave as before and builds run on the deploy server.
+
+### Custom deploy commands
+
+If you use a custom deploy command, do **not** include `--build` when a build server is configured. Dokploy handles the build phase on the build server; the deploy server only pulls and starts containers.
+
+### Logs
+
+Build and deploy may run on different hosts. The **Deployments** tab shows the main deployment log (including the build phase when servers differ). After the build finishes, allow a few moments for the deploy server to pull images, then check the **Logs** tab to confirm containers started. Image pull activity on the deploy server may not appear in the build deployment log.
 
