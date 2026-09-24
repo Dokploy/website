@@ -34,7 +34,7 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
 	const templates = await getTemplates();
-	return templates.slice(0, 30).map((template) => ({ id: template.id }));
+	return templates.map((template) => ({ id: template.id }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
