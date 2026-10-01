@@ -235,6 +235,14 @@ export default function PrivacyPage() {
 					data. Dokploy does not sell your personal data.
 				</p>
 				<p>
+					You can delete your Dokploy Cloud account at any time, without
+					contacting us, from your account settings in the hosted platform
+					(app.dokploy.com). Deleting your account permanently removes your
+					account and associated personal data, as described in Section 5,
+					except where we are required to retain certain information to comply
+					with legal obligations.
+				</p>
+				<p>
 					To exercise these rights or opt out of analytics and marketing cookies,
 					please contact us at{" "}
 					<a
