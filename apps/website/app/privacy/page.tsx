@@ -205,6 +205,12 @@ export default function PrivacyPage() {
 						will delete or anonymise your personal data, except to comply with
 						legal obligations.
 					</li>
+					<li>
+						<strong>Backups.</strong> We take automated backups twice daily and
+						retain them for 30 days. Deleted data may remain in encrypted backups
+						for up to 30 days, after which it is permanently purged as backups
+						expire.
+					</li>
 				</ul>
 			</section>
 
@@ -233,6 +239,14 @@ export default function PrivacyPage() {
 					information we collect, the right to request deletion of your personal
 					information and the right to opt out of the sale or sharing of your
 					data. Dokploy does not sell your personal data.
+				</p>
+				<p>
+					You can delete your Dokploy Cloud account at any time, without
+					contacting us, from your account settings in the hosted platform
+					(app.dokploy.com). Deleting your account permanently removes your
+					account and associated personal data, as described in Section 5,
+					except where we are required to retain certain information to comply
+					with legal obligations.
 				</p>
 				<p>
 					To exercise these rights or opt out of analytics and marketing cookies,
