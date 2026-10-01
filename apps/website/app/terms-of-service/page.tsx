@@ -9,9 +9,7 @@ export const metadata: Metadata = {
 export default function TermsOfServicePage() {
 	return (
 		<div className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-12">
-			<h1 className="mb-6 text-center text-3xl font-bold">
-				Terms of Service
-			</h1>
+			<h1 className="mb-6 text-center text-3xl font-bold">Terms of Service</h1>
 			<p className="text-center text-sm text-muted-foreground">
 				Dokploy.com · Last Updated: January 2026
 			</p>
@@ -41,9 +39,7 @@ export default function TermsOfServicePage() {
 			</section>
 
 			<section className="flex flex-col gap-2">
-				<h2 className="mb-2 text-2xl font-semibold">
-					Section 1 – Definitions
-				</h2>
+				<h2 className="mb-2 text-2xl font-semibold">Section 1 – Definitions</h2>
 				<ul className="list-inside list-disc space-y-1">
 					<li>
 						<strong>&quot;Authorized Users&quot;</strong> means individuals
@@ -103,8 +99,8 @@ export default function TermsOfServicePage() {
 					accessible via the internet. We are responsible for infrastructure
 					maintenance, security updates, and platform availability in accordance
 					with our Service Level Agreement (Section 7). The services provided
-					are permitted to be used by businesses and individuals over the age
-					of 18 years.
+					are permitted to be used by businesses and individuals over the age of
+					18 years.
 				</p>
 				<h3 className="text-xl font-medium">2.2 On-Premise Software</h3>
 				<p>
@@ -141,9 +137,9 @@ export default function TermsOfServicePage() {
 				<p>
 					You are responsible for maintaining the confidentiality of your
 					account credentials and for all activities that occur under your
-					account. You must immediately notify us of any unauthorized use of your
-					account or any other breach of security. We are not liable for any
-					loss arising from unauthorized use of your account.
+					account. You must immediately notify us of any unauthorized use of
+					your account or any other breach of security. We are not liable for
+					any loss arising from unauthorized use of your account.
 				</p>
 				<h3 className="text-xl font-medium">3.3 Account Information</h3>
 				<p>
@@ -155,7 +151,9 @@ export default function TermsOfServicePage() {
 			</section>
 
 			<section className="flex flex-col gap-2">
-				<h2 className="mb-2 text-2xl font-semibold">Section 4 – License Grant</h2>
+				<h2 className="mb-2 text-2xl font-semibold">
+					Section 4 – License Grant
+				</h2>
 				<h3 className="text-xl font-medium">4.1 Cloud Services License</h3>
 				<p>
 					Subject to these Terms and payment of applicable fees, we grant you a
@@ -168,9 +166,9 @@ export default function TermsOfServicePage() {
 					Subject to these Terms and payment of applicable fees, we grant you a
 					limited, non-exclusive, non-transferable, non-sublicensable license to
 					install and use the On-Premise Software on your own infrastructure
-					during the Subscription Term. This license is limited to the number
-					of instances, nodes, or users specified in your subscription plan.
-					The On-Premise Software may be used solely for Customer&apos;s internal
+					during the Subscription Term. This license is limited to the number of
+					instances, nodes, or users specified in your subscription plan. The
+					On-Premise Software may be used solely for Customer&apos;s internal
 					business purposes and may not be used to provide services to third
 					parties, operate as a managed service, or otherwise make the
 					On-Premise Software available to any third party without our prior
@@ -178,9 +176,8 @@ export default function TermsOfServicePage() {
 				</p>
 				<h3 className="text-xl font-medium">4.3 Documentation License</h3>
 				<p>
-					We grant you a limited, non-exclusive license to use the
-					Documentation solely in connection with your authorized use of the
-					Services.
+					We grant you a limited, non-exclusive license to use the Documentation
+					solely in connection with your authorized use of the Services.
 				</p>
 				<h3 className="text-xl font-medium">4.4 Restrictions</h3>
 				<p>
@@ -235,7 +232,9 @@ export default function TermsOfServicePage() {
 					the date and time of the violation and any identifying information
 					regarding the violator including e-mail or IP address, if available.
 				</p>
-				<h3 className="text-xl font-medium">5.2 Hosting-Specific Prohibitions</h3>
+				<h3 className="text-xl font-medium">
+					5.2 Hosting-Specific Prohibitions
+				</h3>
 				<p>The following activities are strictly prohibited on our platform:</p>
 				<ul className="list-inside list-disc space-y-1">
 					<li>
@@ -247,14 +246,16 @@ export default function TermsOfServicePage() {
 						botnets, or any malicious software;
 					</li>
 					<li>
-						(c) Hosting content that exploits minors in any way, including
-						child sexual abuse material (CSAM);
+						(c) Hosting content that exploits minors in any way, including child
+						sexual abuse material (CSAM);
 					</li>
 					<li>
 						(d) Operating open proxies, anonymizers, or services designed to
 						obscure network traffic origins;
 					</li>
-					<li>(e) Launching or facilitating denial-of-service (DoS/DDoS) attacks;</li>
+					<li>
+						(e) Launching or facilitating denial-of-service (DoS/DDoS) attacks;
+					</li>
 					<li>
 						(f) Sending spam, unsolicited bulk messages, or phishing
 						communications;
@@ -264,8 +265,8 @@ export default function TermsOfServicePage() {
 						quotas, or usage restrictions;
 					</li>
 					<li>
-						(h) Hosting content or applications that violate export control
-						laws or sanctions.
+						(h) Hosting content or applications that violate export control laws
+						or sanctions.
 					</li>
 				</ul>
 				<h3 className="text-xl font-medium">5.3 Resource Usage</h3>
@@ -281,8 +282,8 @@ export default function TermsOfServicePage() {
 					may lead to suspension or termination of your account and legal
 					action. We reserve the right to take any other remedial action
 					including reporting illegal activities to appropriate law enforcement
-					authorities. You may be required to pay for the costs of
-					investigation and remedial action related to AUP violations.
+					authorities. You may be required to pay for the costs of investigation
+					and remedial action related to AUP violations.
 				</p>
 			</section>
 
@@ -348,8 +349,8 @@ export default function TermsOfServicePage() {
 					Maintenance; (b) outages caused by factors outside our reasonable
 					control, including force majeure events, internet service provider
 					failures, or third-party service outages; (c) outages resulting from
-					Customer actions or inactions, including misconfiguration; (d)
-					outages during beta or preview features.
+					Customer actions or inactions, including misconfiguration; (d) outages
+					during beta or preview features.
 				</p>
 				<h3 className="text-xl font-medium">7.3 Service Credits</h3>
 				<p>
@@ -403,7 +404,9 @@ export default function TermsOfServicePage() {
 			</section>
 
 			<section className="flex flex-col gap-2">
-				<h2 className="mb-2 text-2xl font-semibold">Section 9 – Customer Data</h2>
+				<h2 className="mb-2 text-2xl font-semibold">
+					Section 9 – Customer Data
+				</h2>
 				<h3 className="text-xl font-medium">9.1 Ownership</h3>
 				<p>
 					You retain all rights, title, and interest in and to your Customer
@@ -421,7 +424,9 @@ export default function TermsOfServicePage() {
 					troubleshooting. Any such processing will be performed in accordance
 					with the DPA incorporated herein.
 				</p>
-				<h3 className="text-xl font-medium">9.3 Data Security (Cloud Services)</h3>
+				<h3 className="text-xl font-medium">
+					9.3 Data Security (Cloud Services)
+				</h3>
 				<p>
 					We implement industry-standard security measures to protect Customer
 					Data in our Cloud Services, including encryption in transit and at
@@ -437,7 +442,9 @@ export default function TermsOfServicePage() {
 					</a>
 					.
 				</p>
-				<h3 className="text-xl font-medium">9.4 Data Security (On-Premise Software)</h3>
+				<h3 className="text-xl font-medium">
+					9.4 Data Security (On-Premise Software)
+				</h3>
 				<p>
 					For On-Premise Software, Customer is solely responsible for
 					implementing appropriate security measures, including encryption,
@@ -464,8 +471,8 @@ export default function TermsOfServicePage() {
 					&quot;DPA&quot;) attached hereto as Appendix I and is incorporated by
 					reference. The DPA applies only to the extent that the Services
 					involve the processing of Personal Data on behalf of the customer. In
-					the event of a conflict between these terms and the DPA, the DPA
-					shall prevail solely with respect to the Processing of Personal Data.
+					the event of a conflict between these terms and the DPA, the DPA shall
+					prevail solely with respect to the Processing of Personal Data.
 				</p>
 			</section>
 
@@ -530,10 +537,9 @@ export default function TermsOfServicePage() {
 				<h3 className="text-xl font-medium">11.1 Definition</h3>
 				<p>
 					&quot;Confidential Information&quot; means any non-public information
-					disclosed by one party to the other that is designated as
-					confidential or that a reasonable person would understand to be
-					confidential, including pricing, business plans, technical data, and
-					Customer Data.
+					disclosed by one party to the other that is designated as confidential
+					or that a reasonable person would understand to be confidential,
+					including pricing, business plans, technical data, and Customer Data.
 				</p>
 				<h3 className="text-xl font-medium">11.2 Obligations</h3>
 				<p>
@@ -565,9 +571,9 @@ export default function TermsOfServicePage() {
 				<p>
 					Confidentiality obligations do not apply to information that: (a) is
 					or becomes publicly available without breach; (b) was known prior to
-					disclosure; (c) is received from a third party without
-					confidentiality restrictions; or (d) is independently developed
-					without use of Confidential Information.
+					disclosure; (c) is received from a third party without confidentiality
+					restrictions; or (d) is independently developed without use of
+					Confidential Information.
 				</p>
 			</section>
 
@@ -578,10 +584,10 @@ export default function TermsOfServicePage() {
 				<p>
 					The Services may integrate with or rely upon third-party services,
 					including container registries, cloud providers, and external APIs.
-					Your use of third-party services is subject to their respective
-					terms and conditions. We are not responsible for the availability,
-					accuracy, or content of third-party services, and we make no
-					warranties regarding them.
+					Your use of third-party services is subject to their respective terms
+					and conditions. We are not responsible for the availability, accuracy,
+					or content of third-party services, and we make no warranties
+					regarding them.
 				</p>
 			</section>
 
@@ -594,23 +600,25 @@ export default function TermsOfServicePage() {
 					These Terms commence upon your first use of the Services and continue
 					until terminated. Subscription Terms automatically renew for
 					successive periods of the same duration unless either party provides
-					written notice of non-renewal at least thirty [30] days before the
-					end of the current term.
+					written notice of non-renewal at least thirty [30] days before the end
+					of the current term.
 				</p>
-				<h3 className="text-xl font-medium">13.2 Termination for Convenience</h3>
+				<h3 className="text-xl font-medium">
+					13.2 Termination for Convenience
+				</h3>
 				<p>
 					You may terminate your subscription at any time and without cause by
 					providing thirty (30) days written notice. If you terminate for
 					convenience under this Section, you will remain liable for the full
-					balance of fees due for the remainder of the Term of the Agreement.
-					No refunds are provided for unused portions of prepaid fees except as
+					balance of fees due for the remainder of the Term of the Agreement. No
+					refunds are provided for unused portions of prepaid fees except as
 					expressly stated in Section 6.5.
 				</p>
 				<h3 className="text-xl font-medium">13.3 Termination for Cause</h3>
 				<p>
 					Either party may terminate this Agreement for the other&apos;s
-					material breach by written notice specifying, in detail, the nature
-					of the breach. The breaching party will have thirty (30) days from the
+					material breach by written notice specifying, in detail, the nature of
+					the breach. The breaching party will have thirty (30) days from the
 					date the party receives notice of the breach to cure the breach. If
 					the breaching party fails to cure the breach within thirty (30) days,
 					the other party may terminate at the expiration of the cure period.
@@ -635,8 +643,8 @@ export default function TermsOfServicePage() {
 					control; (c) you may export Customer Data for thirty [30] days as
 					provided in Section 9.6; (d) each party must return or destroy the
 					other party&apos;s Confidential Information. Sections that by their
-					nature should survive termination shall survive, including Sections
-					9, 10, 11, 14, 15, and 16.
+					nature should survive termination shall survive, including Sections 9,
+					10, 11, 14, 15, and 16.
 				</p>
 			</section>
 
@@ -663,15 +671,14 @@ export default function TermsOfServicePage() {
 					error-free, or completely secure. Without limiting the generality of
 					the foregoing, we have no obligation to indemnify, defend, or hold
 					harmless Customer, including without limitation against claims related
-					to product liability or infringement of intellectual property
-					rights, unless this Agreement specifically provides for such an
-					indemnity.
+					to product liability or infringement of intellectual property rights,
+					unless this Agreement specifically provides for such an indemnity.
 				</p>
 				<h3 className="text-xl font-medium">14.3 Beta Features</h3>
 				<p>
-					Beta, preview, or experimental features are provided &quot;as
-					is&quot; without any warranty. We may modify or discontinue beta
-					features at any time without notice.
+					Beta, preview, or experimental features are provided &quot;as is&quot;
+					without any warranty. We may modify or discontinue beta features at
+					any time without notice.
 				</p>
 			</section>
 
@@ -736,17 +743,17 @@ export default function TermsOfServicePage() {
 				</h2>
 				<h3 className="text-xl font-medium">17.1 Governing Law</h3>
 				<p>
-					These Terms shall be governed by and construed in accordance with
-					the laws of the State of Delaware, United States, without regard to
-					its conflict of law principles.
+					These Terms shall be governed by and construed in accordance with the
+					laws of the State of Delaware, United States, without regard to its
+					conflict of law principles.
 				</p>
 				<h3 className="text-xl font-medium">17.2 Dispute Resolution</h3>
 				<p>
-					[OPTION 1 - ARBITRATION: Any dispute arising from these Terms shall
-					be resolved by binding arbitration administered by AAA in accordance
-					with its Commercial Arbitration Rules. The arbitration shall be
-					conducted in the State of Delaware. The arbitrator&apos;s decision
-					shall be final and binding.]
+					[OPTION 1 - ARBITRATION: Any dispute arising from these Terms shall be
+					resolved by binding arbitration administered by AAA in accordance with
+					its Commercial Arbitration Rules. The arbitration shall be conducted
+					in the State of Delaware. The arbitrator&apos;s decision shall be
+					final and binding.]
 				</p>
 				<h3 className="text-xl font-medium">17.3 Waiver of Jury Trial</h3>
 				<p className="uppercase">
@@ -764,8 +771,8 @@ export default function TermsOfServicePage() {
 					will provide at least thirty [30] days&apos; notice via email or
 					through the Services. Your continued use of the Services after the
 					effective date of changes constitutes acceptance of the updated Terms.
-					If you do not agree to the changes, you may terminate your subscription
-					before the changes take effect.
+					If you do not agree to the changes, you may terminate your
+					subscription before the changes take effect.
 				</p>
 			</section>
 
@@ -778,8 +785,8 @@ export default function TermsOfServicePage() {
 					This Agreement is the parties&apos; entire agreement regarding its
 					subject matter and supersedes any prior or contemporaneous agreements
 					regarding its subject matter. In this Agreement, headings are for
-					convenience only and &quot;including&quot; and similar terms are to
-					be construed without limitation. Excluding Orders, terms in business
+					convenience only and &quot;including&quot; and similar terms are to be
+					construed without limitation. Excluding Orders, terms in business
 					forms, purchase orders or quotes used by either party will not amend
 					or modify this Agreement; any such documents are for administrative
 					purposes only. This Agreement may be executed in counterparts
@@ -803,22 +810,25 @@ export default function TermsOfServicePage() {
 					Neither party may assign this Agreement without the prior consent of
 					the other party, except that either party may assign this Agreement,
 					with notice to the other party, in connection with the assigning
-					party&apos;s merger, reorganization, acquisition or other transfer
-					of all or substantially all of its assets or voting securities. Any
+					party&apos;s merger, reorganization, acquisition or other transfer of
+					all or substantially all of its assets or voting securities. Any
 					non-permitted assignment is void. This Agreement will bind and inure
 					to the benefit of each party&apos;s permitted successors and assigns.
 				</p>
 				<h3 className="text-xl font-medium">20.5 Notices</h3>
 				<p>
-					A. Except as set out in this Agreement, notices, requests and approvals
-					under this Agreement must be in writing to the addresses on the Cover
-					Page and will be deemed given: (1) upon receipt if by personal
-					delivery, (2) upon receipt if by certified or registered U.S. mail
-					(return receipt requested), (3) one day after dispatch if by a
-					commercial overnight delivery or (4) upon delivery if by email.
-					Either party may update its address with notice to the other.
+					A. Except as set out in this Agreement, notices, requests and
+					approvals under this Agreement must be in writing to the addresses on
+					the Cover Page and will be deemed given: (1) upon receipt if by
+					personal delivery, (2) upon receipt if by certified or registered U.S.
+					mail (return receipt requested), (3) one day after dispatch if by a
+					commercial overnight delivery or (4) upon delivery if by email. Either
+					party may update its address with notice to the other.
 				</p>
-				<p>B. Provider may also send operational notices through the Cloud Service.</p>
+				<p>
+					B. Provider may also send operational notices through the Cloud
+					Service.
+				</p>
 				<h3 className="text-xl font-medium">20.6 Force Majeure</h3>
 				<p>
 					Neither party is liable for a delay or failure to perform this
@@ -846,8 +856,7 @@ export default function TermsOfServicePage() {
 					at:
 				</p>
 				<p className="font-medium">Dokploy Technologies, Inc.</p>
-				<p>2912 Steiner St Unit 4
-				San Francisco, CA 94123</p>
+				<p>2912 Steiner St Unit 4 San Francisco, CA 94123</p>
 				<p>
 					Email:{" "}
 					<a
@@ -884,11 +893,12 @@ export default function TermsOfServicePage() {
 					<li>&quot;Audit Report&quot; is defined in Section 9.2 below.</li>
 					<li>
 						&quot;Controller&quot; means the natural or legal person, public
-						authority, agency or other body which, alone or jointly with
-						others, determines the purposes and means of Processing of
-						Personal Data.
+						authority, agency or other body which, alone or jointly with others,
+						determines the purposes and means of Processing of Personal Data.
 					</li>
-					<li>&quot;Customer Instructions&quot; is defined in Section 3.1 below.</li>
+					<li>
+						&quot;Customer Instructions&quot; is defined in Section 3.1 below.
+					</li>
 					<li>
 						&quot;Customer Personal Data&quot; means Personal Data in Customer
 						Data (as defined in the Agreement).
@@ -900,9 +910,9 @@ export default function TermsOfServicePage() {
 						Privacy Act, as amended by the California Privacy Rights Act, and
 						any binding regulations promulgated thereunder (&quot;CCPA&quot;),
 						(ii) the General Data Protection Regulation (Regulation (EU)
-						2016/679) (&quot;EU GDPR&quot; or &quot;GDPR&quot;), (iii) the
-						Swiss Federal Act on Data Protection (&quot;FADP&quot;), (iv) the EU
-						GDPR as it forms part of the law of England and Wales by virtue of
+						2016/679) (&quot;EU GDPR&quot; or &quot;GDPR&quot;), (iii) the Swiss
+						Federal Act on Data Protection (&quot;FADP&quot;), (iv) the EU GDPR
+						as it forms part of the law of England and Wales by virtue of
 						section 3 of the European Union (Withdrawal) Act 2018 (the &quot;UK
 						GDPR&quot;) and (v) the UK Data Protection Act 2018; in each case,
 						as updated, amended or replaced from time to time.
@@ -916,26 +926,25 @@ export default function TermsOfServicePage() {
 					</li>
 					<li>
 						&quot;DPA Setup Page&quot; means a separate document executed by
-						Customer and Provider which causes this DPA to become an
-						Attachment to their Agreement.
+						Customer and Provider which causes this DPA to become an Attachment
+						to their Agreement.
 					</li>
 					<li>&quot;EEA&quot; means European Economic Area.</li>
 					<li>
 						&quot;Key Terms&quot; means Agreement, DPA Effective Date and
-						Subprocessor List as specified by the parties on the DPA Setup
-						Page.
+						Subprocessor List as specified by the parties on the DPA Setup Page.
 					</li>
 					<li>
 						&quot;Personal Data&quot; means information about an identified or
 						identifiable natural person or which otherwise constitutes
 						&quot;personal data&quot;, &quot;personal information&quot;,
-						&quot;personally identifiable information&quot; or similar terms
-						as defined in Data Protection Laws.
+						&quot;personally identifiable information&quot; or similar terms as
+						defined in Data Protection Laws.
 					</li>
 					<li>
 						&quot;Processing&quot; and inflections thereof refer to any
-						operation or set of operations that is performed on Personal Data
-						or on sets of Personal Data, whether or not by automated means.
+						operation or set of operations that is performed on Personal Data or
+						on sets of Personal Data, whether or not by automated means.
 					</li>
 					<li>
 						&quot;Processor&quot; means a natural or legal person, public
@@ -944,13 +953,13 @@ export default function TermsOfServicePage() {
 					</li>
 					<li>
 						&quot;Restricted Transfer&quot; means: (i) where EU GDPR applies, a
-						transfer of Customer Personal Data from the EEA to a country
-						outside the EEA that is not subject to an adequacy determination,
-						(ii) where UK GDPR applies, a transfer of Customer Personal Data
-						from the United Kingdom to any other country that is not subject to
-						an adequacy determination or (iii) where FADP applies, a transfer
-						of Customer Personal Data from Switzerland to any other country
-						that is not subject to an adequacy determination.
+						transfer of Customer Personal Data from the EEA to a country outside
+						the EEA that is not subject to an adequacy determination, (ii) where
+						UK GDPR applies, a transfer of Customer Personal Data from the
+						United Kingdom to any other country that is not subject to an
+						adequacy determination or (iii) where FADP applies, a transfer of
+						Customer Personal Data from Switzerland to any other country that is
+						not subject to an adequacy determination.
 					</li>
 					<li>
 						&quot;Schedules&quot; means one or more schedules incorporated by
@@ -977,10 +986,11 @@ export default function TermsOfServicePage() {
 				</ul>
 				<p className="mt-4">
 					The full DPA continues with sections on Scope and Duration, Processing
-					of Personal Data, Confidentiality, Compliance with Laws, Subprocessors,
-					Security, Data Subject Requests, Data Return or Deletion, Audits, and
-					Cross-Border Transfers/Region-Specific Terms. For the complete
-					legal text of the Data Processing Addendum, please contact{" "}
+					of Personal Data, Confidentiality, Compliance with Laws,
+					Subprocessors, Security, Data Subject Requests, Data Return or
+					Deletion, Audits, and Cross-Border Transfers/Region-Specific Terms.
+					For the complete legal text of the Data Processing Addendum, please
+					contact{" "}
 					<a
 						href="mailto:support@dokploy.com"
 						className="text-primary underline hover:no-underline"

@@ -2,17 +2,17 @@ import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Shield,
-	Users,
 	FolderLock,
+	KeyRound,
+	Paintbrush,
+	ScrollText,
+	Shield,
 	SlidersHorizontal,
 	UserPlus,
-	KeyRound,
-	ScrollText,
-	Paintbrush,
+	Users,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Role-Based Access Control for Teams",
@@ -186,8 +186,8 @@ export default function RoleBasedAccessControlPage() {
 							Ready to take your business to the next level?
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Talk to us about fine-grained RBAC and the rest of
-							Dokploy&apos;s higher-tier feature set.
+							Talk to us about fine-grained RBAC and the rest of Dokploy&apos;s
+							higher-tier feature set.
 						</p>
 						<div className="mt-10">
 							<Button className="rounded-full" asChild>

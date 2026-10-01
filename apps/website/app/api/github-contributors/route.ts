@@ -12,8 +12,7 @@ export async function GET() {
 			{ contributors_count: cachedContributors.count },
 			{
 				headers: {
-					"Cache-Control":
-						"public, s-maxage=1800, stale-while-revalidate=3600",
+					"Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
 				},
 			},
 		);
@@ -43,9 +42,7 @@ export async function GET() {
 
 		if (linkHeader) {
 			// Parse last page number from Link header: <...?page=N>; rel="last"
-			const lastMatch = linkHeader.match(
-				/[&?]page=(\d+)[^>]*>;\s*rel="last"/,
-			);
+			const lastMatch = linkHeader.match(/[&?]page=(\d+)[^>]*>;\s*rel="last"/);
 			if (lastMatch) {
 				count = Number.parseInt(lastMatch[1], 10);
 			}
@@ -60,8 +57,7 @@ export async function GET() {
 			{ contributors_count: count },
 			{
 				headers: {
-					"Cache-Control":
-						"public, s-maxage=1800, stale-while-revalidate=3600",
+					"Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
 				},
 			},
 		);

@@ -18,7 +18,7 @@ interface ContactFormModalProps {
 export function ContactFormModal({
 	open,
 	onOpenChange,
-	defaultInquiryType = "sales",
+	defaultInquiryType = "sales" as any,
 }: ContactFormModalProps) {
 	const handleSuccess = () => {
 		// Close modal after a short delay to show success message
@@ -39,7 +39,7 @@ export function ContactFormModal({
 				</DialogHeader>
 				<div className="mt-4">
 					<ContactForm
-						defaultInquiryType={defaultInquiryType}
+						defaultInquiryType={defaultInquiryType as any}
 						onSuccess={handleSuccess}
 						onCancel={() => onOpenChange(false)}
 						showCancelButton={true}
@@ -50,4 +50,3 @@ export function ContactFormModal({
 		</Dialog>
 	);
 }
-

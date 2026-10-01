@@ -10,9 +10,9 @@ export async function highlight(code: string, lang: BundledLanguage) {
 		lang,
 		theme: "houston",
 	});
-	return toJsxRuntime(out, { 
-		Fragment: react.Fragment, 
-		jsx: jsxRuntime.jsx, 
-		jsxs: jsxRuntime.jsxs 
+	return toJsxRuntime(out, {
+		Fragment: react.Fragment,
+		jsx: jsxRuntime.jsx,
+		jsxs: jsxRuntime.jsxs,
 	}) as JSX.Element;
 }

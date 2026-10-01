@@ -1,16 +1,16 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import { Testimonials } from "@/components/Testimonials";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, GitBranch, Activity, Users, Gauge } from "lucide-react";
-import Link from "next/link";
+import { Activity, ArrowRight, Gauge, GitBranch, Users } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Dokploy Vs. and PaaS Comparison Pages | Dokploy",
 	description:
-		"How does Dokploy compare to other application deployment, database management, and PaaS solutions? Learn on our \"Dokploy vs.\" alternative comparison pages.",
+		'How does Dokploy compare to other application deployment, database management, and PaaS solutions? Learn on our "Dokploy vs." alternative comparison pages.',
 };
 
 const competitors = [

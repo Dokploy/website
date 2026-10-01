@@ -10,7 +10,7 @@ export default function PrivacyPage() {
 	return (
 		<div className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-12">
 			<h1 className="mb-6 text-center text-3xl font-bold">
-				 Dokploy Privacy Policy
+				Dokploy Privacy Policy
 			</h1>
 
 			<section className="flex flex-col gap-4">
@@ -65,13 +65,15 @@ export default function PrivacyPage() {
 				</div>
 
 				<div className="flex flex-col gap-2">
-					<h3 className="text-xl font-medium">Contact and account information</h3>
+					<h3 className="text-xl font-medium">
+						Contact and account information
+					</h3>
 					<p>
 						If you contact us, request a demo or register for an account, we may
 						collect your name, email address, company name and any message you
-						include. When you sign up for the hosted platform, we collect account
-						details and log‑in credentials as described in our main privacy
-						policy.
+						include. When you sign up for the hosted platform, we collect
+						account details and log‑in credentials as described in our main
+						privacy policy.
 					</p>
 				</div>
 
@@ -93,18 +95,21 @@ export default function PrivacyPage() {
 						Server metrics and deployment data
 					</h3>
 					<p>
-						If you deploy applications or databases through Dokploy, our platform
-						collects server and container metrics (CPU, memory, disk and network
-						usage), environment variables, deployment logs and backup credentials
-						to operate and maintain your deployments. This data is used strictly
-						to provide the service and is retained as configured by you (see
-						Section 5). No PII data is collected through these processes.
+						If you deploy applications or databases through Dokploy, our
+						platform collects server and container metrics (CPU, memory, disk
+						and network usage), environment variables, deployment logs and
+						backup credentials to operate and maintain your deployments. This
+						data is used strictly to provide the service and is retained as
+						configured by you (see Section 5). No PII data is collected through
+						these processes.
 					</p>
 				</div>
 			</section>
 
 			<section className="flex flex-col gap-4">
-				<h2 className="text-2xl font-semibold">2. How We Use the Information</h2>
+				<h2 className="text-2xl font-semibold">
+					2. How We Use the Information
+				</h2>
 				<p>We use the information we collect to:</p>
 				<ul className="list-inside list-disc space-y-1">
 					<li>
@@ -165,18 +170,18 @@ export default function PrivacyPage() {
 						for our website and app.
 					</li>
 					<li>
-						<strong>Stripe</strong> – processes payments for our cloud service; we
-						receive customer and subscription IDs only.
+						<strong>Stripe</strong> – processes payments for our cloud service;
+						we receive customer and subscription IDs only.
 					</li>
 					<li>
 						<strong>ProfitWell</strong> – provides subscription and revenue
 						metrics for internal business analysis.
 					</li>
 					<li>
-						<strong>Version‑control providers and storage services</strong> – when
-						you deploy applications, you may authorise us to access code
-						repositories (e.g., GitHub, GitLab) and backup storage (e.g., AWS S3,
-						Backblaze B2, Cloudflare R2); we securely encrypt and store the
+						<strong>Version‑control providers and storage services</strong> –
+						when you deploy applications, you may authorise us to access code
+						repositories (e.g., GitHub, GitLab) and backup storage (e.g., AWS
+						S3, Backblaze B2, Cloudflare R2); we securely encrypt and store the
 						credentials you provide only to deliver the service.
 					</li>
 				</ul>
@@ -205,6 +210,12 @@ export default function PrivacyPage() {
 						will delete or anonymise your personal data, except to comply with
 						legal obligations.
 					</li>
+					<li>
+						<strong>Backups.</strong> We take automated backups twice daily and
+						retain them for 30 days. Deleted data may remain in encrypted
+						backups for up to 30 days, after which it is permanently purged as
+						backups expire.
+					</li>
 				</ul>
 			</section>
 
@@ -213,10 +224,10 @@ export default function PrivacyPage() {
 				<p>
 					We take reasonable technical and organisational measures to protect
 					your data from loss, misuse and unauthorised access. This includes
-					using encryption for data in transit, secure storage of access keys and
-					credentials and limiting employee access to personal data. However, no
-					method of transmission or storage is 100% secure; please use strong
-					passwords and keep your login credentials confidential.
+					using encryption for data in transit, secure storage of access keys
+					and credentials and limiting employee access to personal data.
+					However, no method of transmission or storage is 100% secure; please
+					use strong passwords and keep your login credentials confidential.
 				</p>
 			</section>
 
@@ -235,8 +246,16 @@ export default function PrivacyPage() {
 					data. Dokploy does not sell your personal data.
 				</p>
 				<p>
-					To exercise these rights or opt out of analytics and marketing cookies,
-					please contact us at{" "}
+					You can delete your Dokploy Cloud account at any time, without
+					contacting us, from your account settings in the hosted platform
+					(app.dokploy.com). Deleting your account permanently removes your
+					account and associated personal data, as described in Section 5,
+					except where we are required to retain certain information to comply
+					with legal obligations.
+				</p>
+				<p>
+					To exercise these rights or opt out of analytics and marketing
+					cookies, please contact us at{" "}
 					<a
 						href="mailto:support@dokploy.com"
 						className="text-blue-500 hover:underline"

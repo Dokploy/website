@@ -17,9 +17,7 @@ export function StatsSection() {
 	const [dockerDownloads, setDockerDownloads] = useState(
 		defaultStats.dockerDownloads,
 	);
-	const [contributors, setContributors] = useState(
-		defaultStats.contributors,
-	);
+	const [contributors, setContributors] = useState(defaultStats.contributors);
 
 	useEffect(() => {
 		const fetchStats = async () => {

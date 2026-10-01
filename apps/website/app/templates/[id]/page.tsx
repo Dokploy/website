@@ -20,7 +20,7 @@ import { TemplateConfigTabs } from "../components/TemplateConfigTabs";
 import { TemplateMarkdown } from "../components/TemplateMarkdown";
 
 type Props = {
-	params: { id: string };
+	params: Promise<{ id: string }>;
 };
 
 // buttonVariants lives in a client module, so mirror its classes here

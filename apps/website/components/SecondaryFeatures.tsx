@@ -342,7 +342,7 @@ function FeaturesDesktop() {
 											<span className="absolute inset-0" />
 											{feature.name}
 										</Tab>
-									),
+									) as any,
 								}}
 								isActive={featureIndex === selectedIndex}
 								className="relative"

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Props = {
-	params: { tag: string };
+	params: Promise<{ tag: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 
 	const tagName =
-		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
+		(posts as any[])[0]?.tags?.find((t: { slug: string }) => t.slug === tag)
+			?.name || tag;
 
 	return {
 		title: `${tagName} Posts`,
@@ -30,8 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-	const tags = await getTags();
-	return tags.map((tag: { slug: string }) => ({ tag: tag.slug }));
+	const tags = (await getTags()) as any[];
+	return tags.map((tag: any) => ({ tag: tag.slug }));
 }
 
 export default async function TagPage({ params }: Props) {
@@ -43,7 +44,8 @@ export default async function TagPage({ params }: Props) {
 	}
 
 	const tagName =
-		posts[0].tags?.find((t: { slug: string }) => t.slug === tag)?.name || tag;
+		(posts as any[])[0]?.tags?.find((t: { slug: string }) => t.slug === tag)
+			?.name || tag;
 
 	return (
 		<div className="container mx-auto px-4 py-12">
@@ -77,7 +79,7 @@ export default async function TagPage({ params }: Props) {
 			</div>
 
 			<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-				{posts.map((post: Post) => (
+				{(posts as any[]).map((post: Post) => (
 					<BlogPostCard key={post.id} post={post} />
 				))}
 			</div>

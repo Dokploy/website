@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
 const openapiPath = join(process.cwd(), "public", "openapi.json");
 
@@ -10,7 +10,10 @@ try {
 
 	let unwrapped = false;
 	// If the spec is nested (e.g. result.data.json from a migrated/source API), use the inner spec
-	if (openapi.result?.data?.json && typeof openapi.result.data.json === "object") {
+	if (
+		openapi.result?.data?.json &&
+		typeof openapi.result.data.json === "object"
+	) {
 		openapi = openapi.result.data.json;
 		unwrapped = true;
 		console.log("✓ Unwrapped nested OpenAPI spec (result.data.json)");
@@ -28,8 +31,8 @@ try {
 	}
 
 	// Remove old Authorization scheme
-	if (openapi.components.securitySchemes["Authorization"]) {
-		delete openapi.components.securitySchemes["Authorization"];
+	if (openapi.components.securitySchemes.Authorization) {
+		openapi.components.securitySchemes.Authorization = undefined;
 		securityFixed = true;
 	}
 
@@ -45,7 +48,7 @@ try {
 
 	// Replace global security from Authorization to x-api-key
 	if (openapi.security) {
-		openapi.security = openapi.security.filter((sec) => !sec["Authorization"]);
+		openapi.security = openapi.security.filter((sec) => !sec.Authorization);
 	} else {
 		openapi.security = [];
 	}
@@ -59,10 +62,10 @@ try {
 	// Replace Authorization with x-api-key in all operation security
 	for (const [path, pathItem] of Object.entries(openapi.paths || {})) {
 		for (const [method, operation] of Object.entries(pathItem)) {
-			if (operation && operation.security) {
+			if (operation?.security) {
 				// Replace Authorization with x-api-key
 				operation.security = operation.security.map((sec) => {
-					if (sec["Authorization"] !== undefined) {
+					if (sec.Authorization !== undefined) {
 						securityFixed = true;
 						return { "x-api-key": [] };
 					}
@@ -77,7 +80,7 @@ try {
 		for (const [method, operation] of Object.entries(pathItem)) {
 			if (operation.responses) {
 				for (const [status, response] of Object.entries(operation.responses)) {
-					if (response.content && response.content["application/json"]) {
+					if (response.content?.["application/json"]) {
 						const content = response.content["application/json"];
 						// Check if schema is completely empty or missing
 						if (Object.keys(content).length === 0 || !content.schema) {
@@ -105,7 +108,7 @@ try {
 	let removed = 0;
 	for (const pathKey of Object.keys(openapi.paths || {})) {
 		if (pathKey.includes("/") && !pathKey.includes(".")) {
-			const dotKey = "/" + pathKey.slice(1).replace(/\//g, ".");
+			const dotKey = `/${pathKey.slice(1).replace(/\//g, ".")}`;
 			if (openapi.paths[dotKey]) {
 				delete openapi.paths[pathKey];
 				removed++;
@@ -114,7 +117,9 @@ try {
 	}
 	if (removed > 0) {
 		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
-		console.log(`✓ Removed ${removed} slash path alias(es), keeping dot paths only`);
+		console.log(
+			`✓ Removed ${removed} slash path alias(es), keeping dot paths only`,
+		);
 	}
 
 	if (!(unwrapped || fixed > 0 || securityFixed) && removed === 0) {

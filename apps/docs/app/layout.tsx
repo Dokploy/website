@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://docs.dokploy.com"),
 	title: {
 		default: "Dokploy Documentation",
 		template: "%s | Dokploy",

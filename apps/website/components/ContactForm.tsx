@@ -79,8 +79,7 @@ export function ContactForm({
 			formData.inquiryType === "sales" &&
 			FREE_EMAIL_DOMAINS.has(formData.email.split("@")[1]?.toLowerCase())
 		) {
-			newErrors.email =
-				"Please use your work email address to contact sales";
+			newErrors.email = "Please use your work email address to contact sales";
 		}
 		if (formData.inquiryType === "sales" && !formData.teamSize) {
 			newErrors.teamSize = "Please select your team size";
@@ -195,39 +194,36 @@ export function ContactForm({
 		);
 	}
 
-		return (
-			<form onSubmit={handleSubmit} className="space-y-6">
-				{!hideInquiryType && (
-					<div className="space-y-2">
-						<label
-							htmlFor="inquiryType"
-							className="block text-sm font-medium text-foreground"
-						>
-							What can we help you with today?{" "}
-							<span className="text-red-500">*</span>
-						</label>
-						<Select
-							value={formData.inquiryType}
-							onValueChange={(value) =>
-								handleInputChange(
-									"inquiryType",
-									value as "support" | "sales",
-								)
-							}
-						>
-							<SelectTrigger className="bg-input">
-								<SelectValue placeholder="Select an option" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="support">Support</SelectItem>
-								<SelectItem value="sales">Sales</SelectItem>
-							</SelectContent>
-						</Select>
-						{errors.inquiryType && (
-							<p className="text-sm text-red-600">{errors.inquiryType}</p>
-						)}
-					</div>
-				)}
+	return (
+		<form onSubmit={handleSubmit} className="space-y-6">
+			{!hideInquiryType && (
+				<div className="space-y-2">
+					<label
+						htmlFor="inquiryType"
+						className="block text-sm font-medium text-foreground"
+					>
+						What can we help you with today?{" "}
+						<span className="text-red-500">*</span>
+					</label>
+					<Select
+						value={formData.inquiryType}
+						onValueChange={(value) =>
+							handleInputChange("inquiryType", value as "support" | "sales")
+						}
+					>
+						<SelectTrigger className="bg-input">
+							<SelectValue placeholder="Select an option" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="support">Support</SelectItem>
+							<SelectItem value="sales">Sales</SelectItem>
+						</SelectContent>
+					</Select>
+					{errors.inquiryType && (
+						<p className="text-sm text-red-600">{errors.inquiryType}</p>
+					)}
+				</div>
+			)}
 
 			{formData.inquiryType === "support" && (
 				<div className="space-y-2">
@@ -256,9 +252,7 @@ export function ContactForm({
 						</SelectContent>
 					</Select>
 					{errors.deploymentType && (
-						<p className="text-sm text-red-600">
-							{errors.deploymentType}
-						</p>
+						<p className="text-sm text-red-600">{errors.deploymentType}</p>
 					)}
 
 					{formData.deploymentType === "self-hosted" && (
@@ -345,9 +339,7 @@ export function ContactForm({
 						</label>
 						<Select
 							value={formData.serverCount}
-							onValueChange={(value) =>
-								handleInputChange("serverCount", value)
-							}
+							onValueChange={(value) => handleInputChange("serverCount", value)}
 						>
 							<SelectTrigger className="bg-input">
 								<SelectValue placeholder="Select range" />
@@ -379,9 +371,7 @@ export function ContactForm({
 						id="firstName"
 						type="text"
 						value={formData.firstName}
-						onChange={(e) =>
-							handleInputChange("firstName", e.target.value)
-						}
+						onChange={(e) => handleInputChange("firstName", e.target.value)}
 						placeholder="Your first name"
 					/>
 					{errors.firstName && (
@@ -400,9 +390,7 @@ export function ContactForm({
 						id="lastName"
 						type="text"
 						value={formData.lastName}
-						onChange={(e) =>
-							handleInputChange("lastName", e.target.value)
-						}
+						onChange={(e) => handleInputChange("lastName", e.target.value)}
 						placeholder="Your last name"
 					/>
 					{errors.lastName && (
@@ -425,9 +413,7 @@ export function ContactForm({
 					onChange={(e) => handleInputChange("email", e.target.value)}
 					placeholder="your.email@company.com"
 				/>
-				{errors.email && (
-					<p className="text-sm text-red-600">{errors.email}</p>
-				)}
+				{errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
 			</div>
 
 			<div className="space-y-2">
@@ -495,4 +481,3 @@ export function ContactForm({
 		</form>
 	);
 }
-

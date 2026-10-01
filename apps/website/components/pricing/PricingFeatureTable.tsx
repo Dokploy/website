@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import { Check } from "lucide-react";
-import { pricingFeatures, type FeatureValue } from "./pricing-data";
+import React from "react";
+import { type FeatureValue, pricingFeatures } from "./pricing-data";
 
 function FeatureCell({ value }: { value: FeatureValue }) {
 	if (value === true) {

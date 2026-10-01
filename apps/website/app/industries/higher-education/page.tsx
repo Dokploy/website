@@ -139,7 +139,8 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Git workflows",
-			support: "GitHub, GitLab, Bitbucket, Gitea, and webhook-based auto deploys",
+			support:
+				"GitHub, GitLab, Bitbucket, Gitea, and webhook-based auto deploys",
 		},
 		{
 			area: "Access control",
@@ -178,7 +179,8 @@ const data: IndustryPageData = {
 					"Yes. Dokploy supports multiple deployment methods, including Git-based apps, Dockerfiles, and Docker Compose. It also supports common databases used in coursework, including PostgreSQL, MySQL, MongoDB, Redis, and MariaDB.",
 			},
 			{
-				question: "Can universities connect Dokploy to existing identity systems?",
+				question:
+					"Can universities connect Dokploy to existing identity systems?",
 				answer:
 					"Dokploy Enterprise includes single sign-on options through providers such as Auth0, Keycloak, and other OIDC/SAML providers. That makes it easier to fit Dokploy into existing institutional access workflows.",
 			},

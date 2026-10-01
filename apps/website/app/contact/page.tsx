@@ -1,7 +1,7 @@
 "use client";
 
-import { Container } from "@/components/Container";
 import { ContactForm } from "@/components/ContactForm";
+import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 import { useState } from "react";

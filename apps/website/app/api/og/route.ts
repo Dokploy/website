@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 				label: "Dokploy - Open Source Templates",
 			});
 
-			return new Response(ogImage, {
+			return new Response(ogImage as any, {
 				headers: {
 					"Content-Type": "image/png",
 					"Cache-Control": "public, max-age=86400, stale-while-revalidate",
@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
 			readingTime: post.reading_time,
 		});
 
-		return new Response(ogImage, {
+		return new Response(ogImage as any, {
 			headers: {
 				"Content-Type": "image/png",
 				"Cache-Control": "public, max-age=31536000, immutable",

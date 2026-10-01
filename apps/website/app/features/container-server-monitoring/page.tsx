@@ -2,19 +2,19 @@ import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Cpu,
-	MemoryStick,
-	HardDrive,
-	Network,
 	Bell,
-	Settings,
-	Server,
-	Shield,
+	Cpu,
 	Database,
+	HardDrive,
 	LayoutDashboard,
+	MemoryStick,
+	Network,
+	Server,
+	Settings,
+	Shield,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Server & Container Monitoring | Network, CPU, Memory Monitoring Tool",
@@ -65,8 +65,7 @@ const alertFeatures = [
 	{
 		icon: Settings,
 		title: "Easy alert management",
-		description:
-			"Disable alerts by just setting your limits to zero.",
+		description: "Disable alerts by just setting your limits to zero.",
 	},
 ];
 
@@ -359,7 +358,9 @@ export default function ContainerServerMonitoringPage() {
 								<h3 className="text-lg font-semibold text-white">
 									{faq.question}
 								</h3>
-								<p className="mt-3 text-sm text-muted-foreground">{faq.answer}</p>
+								<p className="mt-3 text-sm text-muted-foreground">
+									{faq.answer}
+								</p>
 							</div>
 						))}
 					</div>
@@ -374,8 +375,8 @@ export default function ContainerServerMonitoringPage() {
 							Container and Server monitoring tool
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Take advantage of Dokploy&apos;s comprehensive container and server
-							monitoring software alongside the rest of the platform.
+							Take advantage of Dokploy&apos;s comprehensive container and
+							server monitoring software alongside the rest of the platform.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-3">
