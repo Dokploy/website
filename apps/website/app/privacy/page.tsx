@@ -205,6 +205,12 @@ export default function PrivacyPage() {
 						will delete or anonymise your personal data, except to comply with
 						legal obligations.
 					</li>
+					<li>
+						<strong>Backups.</strong> We take automated backups twice daily and
+						retain them for 30 days. Deleted data may remain in encrypted backups
+						for up to 30 days, after which it is permanently purged as backups
+						expire.
+					</li>
 				</ul>
 			</section>
 
