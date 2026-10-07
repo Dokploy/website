@@ -1,0 +1,63 @@
+---
+title: Log Management
+description: "Ship container logs from your servers to an external log provider with Vector"
+---
+
+Log Management sends a copy of your container logs to an external provider for retention, search and alerting. It runs a [Vector](https://vector.dev) agent as a Swarm service (`dokploy-vector`) on each server you enable, and it does not replace the live log viewer in the dashboard.
+
+### Supported Providers
+
+| Provider | Required fields | Optional fields |
+|---|---|---|
+| Grafana Loki | Endpoint | User / Instance ID, Password / API Token, Tenant ID |
+| Datadog Logs | API Key | Site (default `datadoghq.com`) |
+| Better Stack (Logtail) | Source Token, Ingesting Host | |
+| Elasticsearch / OpenSearch | Endpoint | Username, Password / API Key, Index |
+| Splunk HTTP Event Collector | Endpoint, HEC Token | Index, Source Type |
+| AWS CloudWatch Logs | Access Key ID, Secret Access Key, Region, Log Group Name | Log Stream Name Template |
+
+For Grafana Cloud, use the Loki endpoint of your stack with your numeric instance ID as the user and an API token as the password.
+
+### Add a Provider
+
+1. Go to **Settings → Log Management**.
+2. Click **Add Log Provider**, pick the provider and fill in its credentials.
+3. Click **Test connection**. Dokploy sends a test request to the provider, and some providers (Better Stack, for example) store a real test log in your account.
+4. Save the provider.
+
+When you edit a provider, leave a secret field blank to keep the stored value. Disabled providers are skipped when the agent configuration is generated.
+
+### Deploy the Agent
+
+Under **Servers**, each server lists your providers as checkboxes:
+
+1. Select the providers that server should ship to.
+2. Click **Deploy**. Dokploy writes the Vector configuration on that server and starts the `dokploy-vector` service.
+3. The badge changes to **Running**. Use **Remove** to stop shipping and delete the agent.
+
+The agent only runs on manager nodes, and remote servers need an SSH key configured.
+
+### Applying Changes
+
+Changes to a provider only reach a server after you **Redeploy** it. This includes new credentials, enabling or disabling the provider, and deleting it. After you edit or delete a provider that is in use, the dashboard tells you which servers need a redeploy.
+
+### Log Metadata
+
+Dokploy labels the containers it deploys (applications, Docker Compose services, including stacks, and databases) with their organization, project, environment and service. Vector adds them to every log line as `dokploy_organization`, `dokploy_project`, `dokploy_environment`, `dokploy_application` and `dokploy_service`, plus their IDs, so you can filter by them in your provider.
+
+Services deployed before Log Management was available don't have these labels yet. Redeploy them so their logs carry the metadata.
+
+### Multiple Organizations
+
+- **Remote servers** belong to a single organization, so the agent ships all container logs from that server.
+- **The Dokploy server** can be shared by several organizations. The first organization that deploys the agent there owns it. It only ships logs from containers that belong to that organization, and other organizations can't deploy or remove it until the owner removes it. Containers without Dokploy labels, including services deployed before the upgrade, are not shipped from the Dokploy server.
+
+### Dokploy Cloud
+
+In Dokploy Cloud, Log Management is available for your remote servers only. The agent can't be deployed on the Dokploy control plane. Provider connection tests can't target private or loopback addresses.
+
+### Troubleshooting
+
+- **Test connection fails:** check the endpoint and credentials. Redirects are not followed, so use the final URL of your provider.
+- **No logs arrive:** make sure the server is **Running** and selected with the provider, then redeploy it. Check the agent logs with `docker service logs dokploy-vector` on that server.
+- **Logs arrive without project or app fields:** redeploy those services so they get the Dokploy labels.

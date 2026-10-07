@@ -35,6 +35,7 @@
 		"ssh-keys",
 		"certificates",
 		"backups",
+		"log-management",
 		"concurrent-builds",
 		"---Services---",
 		"variables",
