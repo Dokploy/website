@@ -1,0 +1,94 @@
+---
+title: Logs & Metrics
+description: "Ship container logs and host/container metrics from your servers to an external provider with Vector"
+---
+
+Logs & Metrics sends a copy of your container logs and of your host and container metrics to an external provider for retention, search, dashboards and alerting. It runs a [Vector](https://vector.dev) agent as a Swarm service (`dokploy-vector`) on each server you enable and, on servers that ship metrics, a [cAdvisor](https://github.com/google/cadvisor) service (`dokploy-cadvisor`) next to it. It does not replace the live log viewer or the Monitoring page in the dashboard.
+
+### Supported Providers
+
+Each provider sends logs, metrics or both. You pick what it sends when you create it.
+
+| Provider | Sends | Required fields | Optional fields |
+|---|---|---|---|
+| Grafana Loki | Logs | Endpoint | User / Instance ID, Password / API Token, Tenant ID |
+| Prometheus remote write (Prometheus, Grafana Cloud, Grafana Mimir, VictoriaMetrics, Thanos, Cortex) | Metrics | Remote write URL | Username / Instance ID, Password / Token, Tenant ID |
+| New Relic | Metrics | License key, Account ID | Region (`us` or `eu`) |
+| InfluxDB 2.x / 3.x | Metrics | URL, Organization, Bucket, API token | |
+| Datadog | Logs, Metrics | API Key | Site (default `datadoghq.com`) |
+| AWS CloudWatch | Logs, Metrics | Access Key ID, Secret Access Key, Region, Log Group Name (logs), Metrics namespace (metrics) | Log Stream Name Template |
+| Splunk HTTP Event Collector | Logs, Metrics | Endpoint, HEC Token, Metrics index (metrics) | Index, Source Type |
+| Elasticsearch / OpenSearch | Logs, Metrics | Endpoint | Username, Password / API Key, Index, Metrics index |
+| Better Stack | Logs, Metrics | Source Token, Ingesting Host | |
+
+Notes per provider:
+
+- **Grafana Cloud**: use a Loki provider for logs (Loki endpoint, numeric Loki Instance ID as the user, an API token as the password) and a Prometheus remote write provider for metrics (the `/api/prom/push` URL from the Prometheus card, the Prometheus Instance ID as the username and an Access Policy token with `metrics:write` as the token).
+- **Prometheus**: start it with `--web.enable-remote-write-receiver` and use `http://host:9090/api/v1/write`. Mimir uses `http://host:9009/api/v1/push` and VictoriaMetrics `http://host:8428/api/v1/write`. The Tenant ID is only for multi-tenant Mimir/Cortex.
+- **AWS CloudWatch**: the IAM user needs the CloudWatch Logs permissions on the log group and `cloudwatch:PutMetricData` for metrics. The metrics namespace cannot start with `AWS/`. Only a fixed set of 14 metrics is sent to CloudWatch (see below).
+- **Splunk**: the metrics index must be an index of type Metrics that the HEC token can write to. If the token can't, create a second Splunk provider for metrics with another token.
+- **Elasticsearch / OpenSearch**: logs and metrics go to daily indexes (`vector-%Y.%m.%d` and `dokploy-metrics-%Y.%m.%d` by default). Keep them separate.
+- **Better Stack**: not every source accepts metrics. If yours doesn't, create a second provider for metrics with a source that does.
+
+### Add a Provider
+
+1. Go to **Settings → Logs & Metrics**.
+2. Click **Add provider**, pick the provider type and choose what it **Sends** (Logs, Metrics or Logs & Metrics, depending on what the type supports). The form only shows the fields that apply to the selected signals.
+3. Fill in the credentials and click **Test connection**. Dokploy sends a test request for each selected signal. Some providers (New Relic, InfluxDB, Better Stack, Splunk and AWS CloudWatch metrics among them) store a real test data point in your account.
+4. Save the provider.
+
+When you edit a provider, leave a secret field blank to keep the stored value. You can't remove a signal from a provider while a server still ships that signal with it: remove it from that server first. Disabled providers are skipped when the agent configuration is generated.
+
+### Deploy the Agent
+
+The page has two server sections, **Log servers** and **Metrics servers**. Each one lists your servers with the providers that send that signal as checkboxes:
+
+1. Select the providers that server should ship to.
+2. Click **Deploy**. Dokploy saves the selection, writes the Vector configuration on that server, validates it and starts (or updates) the `dokploy-vector` service. For metrics it also starts `dokploy-cadvisor`.
+3. The badge changes to **Running**. Use **Remove** to stop shipping that signal. The agent keeps running if the other signal is still configured; removing the last one deletes the agent and cAdvisor from the server.
+
+A server can ship logs and metrics to different providers, or both signals to the same provider. The agent only runs on manager nodes, and remote servers need an SSH key configured.
+
+### Applying Changes
+
+Changes to a provider only reach a server after you **Redeploy** it in the section of the signal you want to apply. This includes new credentials, enabling or disabling the provider, and deleting it. After you edit or delete a provider that is in use, the dashboard tells you which servers need a redeploy.
+
+If a deploy fails (for example, Vector rejects the generated configuration), the selection stays saved and the server keeps its previous configuration. The error is shown on the server card; fix the provider and click **Redeploy**.
+
+### What Is Sent
+
+**Logs**: every container log line, with the Dokploy metadata below.
+
+**Metrics**, every 30 seconds:
+
+- Host metrics from Vector's `host_metrics` source: CPU, memory, disk, filesystem, network and load, under the `host` namespace (for example `host.cpu_seconds_total`, `host.memory_used_bytes`, `host.load1`).
+- Container metrics from cAdvisor: `container_cpu_usage_seconds_total`, `container_memory_usage_bytes`, `container_network_receive_bytes_total`, `container_fs_usage_bytes` and the rest of cAdvisor's per-container series, scraped from `127.0.0.1:4510` on the server. cAdvisor only listens on localhost.
+
+Every metric carries a `dokploy_server` tag with the server name. AWS CloudWatch receives only these 14 metrics, in the namespace you configure: `cpu_seconds_total`, `memory_used_bytes`, `memory_total_bytes`, `filesystem_used_bytes`, `filesystem_total_bytes`, `network_receive_bytes_total`, `network_transmit_bytes_total`, `load1`, `load5`, `load15`, `container_cpu_usage_seconds_total`, `container_memory_usage_bytes`, `container_network_receive_bytes_total` and `container_network_transmit_bytes_total`.
+
+Counters are cumulative. Datadog and CloudWatch convert them to deltas on the way out, so the first point of every counter series is used as a baseline and not sent: counters show up about 30 seconds after gauges, and again after each restart of the agent. The other providers receive the cumulative value.
+
+### Metadata and Tags
+
+Dokploy labels the containers it deploys (applications, Docker Compose services, including stacks, and databases) with their organization, project, environment and service. Vector adds them to every log line as `dokploy_organization`, `dokploy_project`, `dokploy_environment`, `dokploy_application` and `dokploy_service`, plus their IDs, and to every container metric as tags with the same names, so you can filter by them in your provider.
+
+Services deployed before Logs & Metrics was available don't have these labels yet. Redeploy them so their logs and metrics carry the metadata.
+
+### Multiple Organizations
+
+- **Remote servers** belong to a single organization, so the agent ships all container logs and metrics from that server. Containers without Dokploy labels are shipped without the `dokploy_*` fields.
+- **The Dokploy server** can be shared by several organizations. The first organization that deploys the agent there, for either signal, owns it. It only ships logs and container metrics from containers that belong to that organization (host metrics are not filtered), and other organizations can't deploy or remove it until the owner stops shipping both signals. Containers without Dokploy labels, including services deployed before the upgrade, are not shipped from the Dokploy server.
+
+### Dokploy Cloud
+
+In Dokploy Cloud, Logs & Metrics is available for your remote servers only. The agent can't be deployed on the Dokploy control plane. Provider connection tests can't target private or loopback addresses.
+
+### Troubleshooting
+
+- **Test connection fails:** check the endpoint and credentials. Redirects are not followed, so use the final URL of your provider. A Prometheus remote write endpoint answers the test with `400` when the URL and credentials are right (it only rejects the empty test body); `401` means the credentials are wrong and `404` the path.
+- **CloudWatch metrics test fails with a permission error:** the IAM user needs `cloudwatch:PutMetricData`.
+- **Splunk metrics test says the token can't write to the index:** the HEC token needs the metrics index in its allowed indexes, or use a second provider with another token.
+- **No logs or metrics arrive:** make sure the server is **Running** in that section and selected with the provider, then redeploy it. Check the agent logs with `docker service logs dokploy-vector` on that server; for container metrics, `docker service logs dokploy-cadvisor`.
+- **Counters are missing right after a deploy:** on Datadog and CloudWatch they appear about 30 seconds after the gauges (see above).
+- **Container metrics without project or app tags:** redeploy those services so they get the Dokploy labels.
+- **Port 4510 is already in use:** cAdvisor can't start, Vector logs scrape errors and logs keep shipping. Free the port and redeploy.
