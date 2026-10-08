@@ -448,7 +448,7 @@ export default function ApplicationDeploymentPlatformPage() {
 				<Container>
 					<div className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-border/50 shadow-2xl">
 						<Image
-							src="/dashboard.png"
+							src="/dashboard.webp"
 							alt="Dokploy dashboard showing projects and deployed services"
 							width={1200}
 							height={750}

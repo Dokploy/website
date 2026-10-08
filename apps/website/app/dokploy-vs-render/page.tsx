@@ -274,7 +274,7 @@ export default function DokployVsRenderPage() {
 									{index === 0 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-remote-servers.png"
+												src="/images/dokploy-remote-servers.webp"
 												alt="Dokploy remote servers showing connected VPS infrastructure"
 												fill
 												className="object-cover object-top"
@@ -284,7 +284,7 @@ export default function DokployVsRenderPage() {
 									) : index === 1 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-compose-editor.png"
+												src="/images/dokploy-compose-editor.webp"
 												alt="Dokploy Docker Compose editor with multi-service configuration"
 												fill
 												className="object-cover object-top"
@@ -294,7 +294,7 @@ export default function DokployVsRenderPage() {
 									) : index === 2 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-create-backup.png"
+												src="/images/dokploy-create-backup.webp"
 												alt="Dokploy Create Backup modal for database and volume backups"
 												fill
 												className="object-cover object-top"
@@ -304,7 +304,7 @@ export default function DokployVsRenderPage() {
 									) : index === 3 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-monitoring-dashboard.png"
+												src="/images/dokploy-monitoring-dashboard.webp"
 												alt="Dokploy monitoring dashboard showing CPU, memory and disk metrics"
 												fill
 												className="object-cover object-top"
@@ -314,7 +314,7 @@ export default function DokployVsRenderPage() {
 									) : (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-audit-logs.png"
+												src="/images/dokploy-audit-logs.webp"
 												alt="Dokploy audit logs tracking deployments in governed environments"
 												fill
 												className="object-cover object-top"

@@ -19,7 +19,7 @@ const features: Array<Feature> = [
 		summary: "One click to deploy open source templates.",
 		description:
 			"Deploy open source templates with one click, powered by Docker Compose, (Plausible, Calcom, Pocketbase, etc.)",
-		image: "/secondary/templates.png",
+		image: "/secondary/templates.webp",
 		icon: function ReportingIcon() {
 			return (
 				<>
@@ -34,7 +34,7 @@ const features: Array<Feature> = [
 			"Modify Traefik settings on-the-fly via a graphical interface or API.",
 		description:
 			"Users can adjust Traefik's configuration, including middleware, forwarding rules, and SSL certificates through an intuitive interface or API. This feature enables seamless traffic routing and security adjustments without the need to restart services",
-		image: "/secondary/traefik.png",
+		image: "/secondary/traefik.webp",
 		icon: function ReportingIcon() {
 			return (
 				<>
@@ -222,7 +222,7 @@ const features: Array<Feature> = [
 			"Detailed control over user permissions for accessing and managing projects and services.",
 		description:
 			"Allows administrators to define specific roles and permissions for each user, including the ability to create, modify, or delete applications and databases. This feature ensures secure and efficient management of large and diverse teams.",
-		image: "/secondary/users.png",
+		image: "/secondary/users.webp",
 		icon: function InventoryIcon() {
 			return (
 				<>
@@ -237,7 +237,7 @@ const features: Array<Feature> = [
 			"Direct access to each container's and server terminal for advanced management.",
 		description:
 			"Provides an interface to access the command line of any active container, allowing developers to execute commands, manage services, and troubleshoot directly from the dashboard",
-		image: "/secondary/terminal.png",
+		image: "/secondary/terminal.webp",
 		icon: function ContactsIcon() {
 			return (
 				<>

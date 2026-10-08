@@ -314,7 +314,7 @@ export function PricingLegacy() {
 														className="z-20 block w-full max-w-md rounded-xl"
 														animationStyle="top-in-bottom-out"
 														videoSrc="https://www.youtube.com/embed/x2s_Y5ON-ms?si=i6gntgMmyPDLuPih"
-														thumbnailSrc="https://dokploy.com/banner.png"
+														thumbnailSrc="/banner.webp"
 														thumbnailAlt="Hero Video"
 													/>
 												</TooltipContent>
