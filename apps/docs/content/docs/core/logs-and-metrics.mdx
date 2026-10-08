@@ -37,7 +37,9 @@ Notes per provider:
 3. Fill in the credentials and click **Test connection**. Dokploy sends a test request for each selected signal. Some providers (New Relic, InfluxDB, Better Stack, Splunk and AWS CloudWatch metrics among them) store a real test data point in your account.
 4. Save the provider.
 
-When you edit a provider, leave a secret field blank to keep the stored value. You can't remove a signal from a provider while a server still ships that signal with it: remove it from that server first. Disabled providers are skipped when the agent configuration is generated.
+When you edit a provider, leave a secret field blank to keep the stored value. You can't remove a signal from a provider while a server still ships that signal with it: remove it from that server first.
+
+Editing a provider's credentials or signals, disabling it or deleting it re-applies the Vector agent on every server that ships to it right away, so no server keeps shipping to a stale endpoint. A disabled provider is left out of the configuration; deleting the last provider of a server removes its agent (and releases the Dokploy server for other organizations). If a server can't be re-applied (for example it is unreachable), the dashboard shows a warning and you can **Redeploy** it later.
 
 ### Deploy the Agent
 
@@ -45,13 +47,13 @@ The page has two server sections, **Log servers** and **Metrics servers**. Each 
 
 1. Select the providers that server should ship to.
 2. Click **Deploy**. Dokploy saves the selection, writes the Vector configuration on that server, validates it and starts (or updates) the `dokploy-vector` service. For metrics it also starts `dokploy-cadvisor`.
-3. The badge changes to **Running**. Use **Remove** to stop shipping that signal. The agent keeps running if the other signal is still configured; removing the last one deletes the agent and cAdvisor from the server.
+3. The badge changes to **Running** (for metrics, only when cAdvisor is running too). Use **Remove** to stop shipping that signal. The agent keeps running if the other signal is still configured; removing the last one deletes the agent and cAdvisor from the server.
 
-A server can ship logs and metrics to different providers, or both signals to the same provider. The agent only runs on manager nodes, and remote servers need an SSH key configured.
+A server can ship logs and metrics to different providers, or both signals to the same provider. The agent only runs on manager nodes, and remote servers need an SSH key configured: a server without one can't be selected.
 
 ### Applying Changes
 
-Changes to a provider only reach a server after you **Redeploy** it in the section of the signal you want to apply. This includes new credentials, enabling or disabling the provider, and deleting it. After you edit or delete a provider that is in use, the dashboard tells you which servers need a redeploy.
+**Redeploy** re-applies the current selection of a server for one signal. Vector watches its configuration file, so a redeploy that only changes the configuration is picked up without restarting the agent and without losing logs; the agent is only restarted when its image or container settings change.
 
 If a deploy fails (for example, Vector rejects the generated configuration), the selection stays saved and the server keeps its previous configuration. The error is shown on the server card; fix the provider and click **Redeploy**.
 
