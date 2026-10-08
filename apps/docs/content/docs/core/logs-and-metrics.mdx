@@ -37,25 +37,29 @@ Notes per provider:
 3. Fill in the credentials and click **Test connection**. Dokploy sends a test request for each selected signal. Some providers (New Relic, InfluxDB, Better Stack, Splunk and AWS CloudWatch metrics among them) store a real test data point in your account.
 4. Save the provider.
 
-When you edit a provider, leave a secret field blank to keep the stored value. You can't remove a signal from a provider while a server still ships that signal with it: remove it from that server first.
+When you edit a provider, leave a secret field blank to keep the stored value.
 
-Editing a provider's credentials or signals, disabling it or deleting it re-applies the Vector agent on every server that ships to it right away, so no server keeps shipping to a stale endpoint. A disabled provider is left out of the configuration; deleting the last provider of a server removes its agent (and releases the Dokploy server for other organizations). If a server can't be re-applied (for example it is unreachable), the dashboard shows a warning and you can **Redeploy** it later.
+Editing a provider's credentials, settings or what it sends, disabling it or deleting it re-applies the Vector agent on every server that ships to it right away, so no server keeps shipping to a stale endpoint and a server starts or stops shipping a signal as soon as you change the provider's **Sends**. A disabled provider is left out of the configuration; deleting the last provider of a server removes its agent (and releases the Dokploy server for other organizations). If a server can't be re-applied (for example it is unreachable), the dashboard shows a warning and you can **Redeploy** it later.
 
 ### Deploy the Agent
 
-The page has two server sections, **Log servers** and **Metrics servers**. Each one lists your servers with the providers that send that signal as checkboxes:
+The **Servers** section lists each of your servers with all of your providers as checkboxes. Each checkbox says what the provider sends:
 
-1. Select the providers that server should ship to.
-2. Click **Deploy**. Dokploy saves the selection, writes the Vector configuration on that server, validates it and starts (or updates) the `dokploy-vector` service. For metrics it also starts `dokploy-cadvisor`.
-3. The badge changes to **Running** (for metrics, only when cAdvisor is running too). Use **Remove** to stop shipping that signal. The agent keeps running if the other signal is still configured; removing the last one deletes the agent and cAdvisor from the server.
+- `Loki prod (logs)`
+- `Prometheus (metrics)`
+- `Datadog (logs and metrics)`
 
-A server can ship logs and metrics to different providers, or both signals to the same provider. The agent only runs on manager nodes, and remote servers need an SSH key configured: a server without one can't be selected.
+1. Check the providers that server should ship to. A checked provider receives everything it sends: a `logs and metrics` provider gets both signals.
+2. Click **Deploy**. Dokploy saves the selection, writes the Vector configuration on that server, validates it and starts (or updates) the `dokploy-vector` service. If any checked provider sends metrics it also starts `dokploy-cadvisor`; if none does, cAdvisor is removed and logs keep shipping.
+3. The badge changes to **Running** (when metrics are shipped, only when cAdvisor is running too). Use **Remove** to stop the agent on that server: it deletes the agent and cAdvisor and clears the selection.
+
+A server can ship logs and metrics to different providers, or both signals to the same provider. Disabled providers are listed with a **Disabled** badge and ship nothing; you can't deploy with only disabled providers checked. The agent only runs on manager nodes, and remote servers need an SSH key configured: a server without one can't be selected.
 
 ### Applying Changes
 
-**Redeploy** re-applies the current selection of a server for one signal. Vector watches its configuration file, so a redeploy that only changes the configuration is picked up without restarting the agent and without losing logs; the agent is only restarted when its image or container settings change.
+**Redeploy** re-applies the current selection of a server. Vector watches its configuration file, so a redeploy that only changes the configuration is picked up without restarting the agent and without losing logs; the agent is only restarted when its image or container settings change. Changes to a provider are applied to its servers automatically (see [Add a Provider](#add-a-provider)).
 
-If a deploy fails (for example, Vector rejects the generated configuration), the selection stays saved and the server keeps its previous configuration. The error is shown on the server card; fix the provider and click **Redeploy**.
+If a deploy fails (for example, Vector rejects the generated configuration), the selection stays saved and the server keeps its previous configuration. The error is shown on the server card, with secrets redacted; fix the provider and click **Redeploy**.
 
 ### What Is Sent
 
@@ -79,7 +83,7 @@ Services deployed before Logs & Metrics was available don't have these labels ye
 ### Multiple Organizations
 
 - **Remote servers** belong to a single organization, so the agent ships all container logs and metrics from that server. Containers without Dokploy labels are shipped without the `dokploy_*` fields.
-- **The Dokploy server** can be shared by several organizations. The first organization that deploys the agent there, for either signal, owns it. It only ships logs and container metrics from containers that belong to that organization (host metrics are not filtered), and other organizations can't deploy or remove it until the owner stops shipping both signals. Containers without Dokploy labels, including services deployed before the upgrade, are not shipped from the Dokploy server.
+- **The Dokploy server** can be shared by several organizations. The first organization that deploys the agent there owns it. It only ships logs and container metrics from containers that belong to that organization (host metrics are not filtered), and other organizations can't deploy or remove it until the owner removes it. Containers without Dokploy labels, including services deployed before the upgrade, are not shipped from the Dokploy server.
 
 ### Dokploy Cloud
 
@@ -90,7 +94,7 @@ In Dokploy Cloud, Logs & Metrics is available for your remote servers only. The 
 - **Test connection fails:** check the endpoint and credentials. Redirects are not followed, so use the final URL of your provider. A Prometheus remote write endpoint answers the test with `400` when the URL and credentials are right (it only rejects the empty test body); `401` means the credentials are wrong and `404` the path.
 - **CloudWatch metrics test fails with a permission error:** the IAM user needs `cloudwatch:PutMetricData`.
 - **Splunk metrics test says the token can't write to the index:** the HEC token needs the metrics index in its allowed indexes, or use a second provider with another token.
-- **No logs or metrics arrive:** make sure the server is **Running** in that section and selected with the provider, then redeploy it. Check the agent logs with `docker service logs dokploy-vector` on that server; for container metrics, `docker service logs dokploy-cadvisor`.
+- **No logs or metrics arrive:** make sure the server is **Running** in **Servers** with the provider checked, then redeploy it. Check the agent logs with `docker service logs dokploy-vector` on that server; for container metrics, `docker service logs dokploy-cadvisor`.
 - **Counters are missing right after a deploy:** on Datadog and CloudWatch they appear about 30 seconds after the gauges (see above).
 - **Container metrics without project or app tags:** redeploy those services so they get the Dokploy labels.
 - **Port 4510 is already in use:** cAdvisor can't start, Vector logs scrape errors and logs keep shipping. Free the port and redeploy.
