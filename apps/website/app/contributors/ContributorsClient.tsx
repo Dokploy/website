@@ -17,54 +17,38 @@ type Contributor = {
 
 export function ContributorsClient() {
 	const [contributors, setContributors] = useState<Contributor[]>([]);
-	const [anonymousCount, setAnonymousCount] = useState(0);
+	const [totalCount, setTotalCount] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasError, setHasError] = useState(false);
-	const [limit, setLimit] = useState(40);
-	const [increment, setIncrement] = useState(40);
+	const [limit, setLimit] = useState(20);
 
-	useEffect(() => {
-		// Set correct limits for mobile immediately after hydration
-		if (window.innerWidth < 768) {
-			setLimit(20);
-			setIncrement(20);
-		}
-
-		const fetchContributors = async () => {
-			try {
-				setHasError(false);
-				const response = await fetch("/api/contributors");
-				if (response.ok) {
-					const data = await response.json();
-					// Handle edge case where HMR serves the old array cache format
-					if (Array.isArray(data)) {
-						setContributors(data);
-						setAnonymousCount(0);
-					} else {
-						setContributors(data.contributors || []);
-						setAnonymousCount(data.anonymousCount || 0);
-					}
-				} else {
-					setHasError(true);
-				}
-			} catch (error) {
-				console.error("Error fetching contributors:", error);
+	const fetchData = async () => {
+		try {
+			setHasError(false);
+			setIsLoading(true);
+			const response = await fetch("/api/contributors");
+			if (response.ok) {
+				const data = await response.json();
+				setContributors(data.contributors || []);
+				setTotalCount(data.totalCount || 0);
+			} else {
 				setHasError(true);
-			} finally {
-				setIsLoading(false);
 			}
-		};
-
-		fetchContributors();
-	}, []);
-
-	const handleShowMore = () => {
-		setLimit((prev) => prev + increment);
+		} catch (error) {
+			console.error("Error fetching contributors:", error);
+			setHasError(true);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const safeContributors = Array.isArray(contributors) ? contributors : [];
-	const displayedContributors = safeContributors.slice(0, limit);
-	const hasMore = limit < safeContributors.length;
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	const displayedContributors = contributors.slice(0, limit);
+	const hasMore = limit < contributors.length;
+	const remainingCount = Math.max(0, totalCount - contributors.length);
 
 	if (isLoading) {
 		return (
@@ -94,7 +78,7 @@ export function ContributorsClient() {
 	return (
 		<div className="relative z-10 border-b border-border/30 pt-10 pb-16 sm:pt-12 sm:pb-20">
 			<Container>
-				{safeContributors.length > 0 ? (
+				{contributors.length > 0 ? (
 					<div className="flex flex-col items-center">
 						<div className="grid w-full grid-cols-2 sm:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
 							{displayedContributors.map((contributor) => (
@@ -125,26 +109,31 @@ export function ContributorsClient() {
 								</Link>
 							))}
 
-							{!hasMore && anonymousCount > 0 && (
-								<div className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-border/50 bg-[#0d0d0d] p-6 transition-colors hover:bg-[#1a1a1a]">
+							{!hasMore && remainingCount > 0 && (
+								<Link
+									href="https://github.com/dokploy/dokploy/graphs/contributors"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-border/50 bg-[#0d0d0d] p-6 transition-colors hover:bg-[#1a1a1a]"
+								>
 									<div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-border/50 bg-white/5 transition-all group-hover:border-primary/50">
 										<Users className="h-8 w-8 text-muted-foreground" />
 									</div>
 									<div className="flex flex-col items-center text-center">
 										<h3 className="text-sm font-medium text-white sm:text-base">
-											Anonymous
+											+ {remainingCount} more
 										</h3>
 										<p className="text-xs text-muted-foreground">
-											+ {anonymousCount} unlinked contributions
+											unlisted contributors
 										</p>
 									</div>
-								</div>
+								</Link>
 							)}
 						</div>
 
 						{hasMore && (
 							<Button
-								onClick={handleShowMore}
+								onClick={() => setLimit((prev) => prev + 20)}
 								variant="outline"
 								size="lg"
 								className="mt-12"
@@ -162,23 +151,7 @@ export function ContributorsClient() {
 							variant="outline"
 							size="lg"
 							className="mt-6"
-							onClick={() => {
-								setIsLoading(true);
-								fetch("/api/contributors")
-									.then((res) => (res.ok ? res.json() : Promise.reject()))
-									.then((data) => {
-										if (Array.isArray(data)) {
-											setContributors(data);
-											setAnonymousCount(0);
-										} else {
-											setContributors(data.contributors || []);
-											setAnonymousCount(data.anonymousCount || 0);
-										}
-										setHasError(false);
-									})
-									.catch(() => setHasError(true))
-									.finally(() => setIsLoading(false));
-							}}
+							onClick={fetchData}
 						>
 							Retry
 						</Button>
