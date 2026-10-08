@@ -11,48 +11,48 @@ const features = [
 		title: "Applications & Databases",
 		description:
 			"Centralize control of your applications and databases for enhanced security and efficiency, simplifying access and management across your infrastructure.",
-		image: "/dashboard.png",
+		image: "/dashboard.webp",
 	},
 	{
 		title: "Docker Compose",
 		description:
 			"Native Docker Compose support so you can manage complex applications and services with ease.",
-		image: "/compose.png",
+		image: "/compose.webp",
 	},
 	{
 		title: "Multiserver",
 		description:
 			"Deploy applications to multiple servers without the extra effort.",
-		image: "/remote.png",
+		image: "/remote.webp",
 	},
 	{
 		title: "Logs",
 		description:
 			"Monitor and manage your applications' logs with ease, ensuring efficient troubleshooting and optimal performance.",
-		image: "/logs.png",
+		image: "/logs.webp",
 	},
 	{
 		title: "Monitoring",
 		description:
 			"Monitor your systems' performance and health in real time, ensuring continuous and uninterrupted operation.",
-		image: "/primary/monitoring.png",
+		image: "/primary/monitoring.webp",
 	},
 	{
 		title: "Backups",
 		description:
 			"Implement automatic and secure backup solutions to protect your critical data and restore it quickly when necessary.",
-		image: "/backups.png",
+		image: "/backups.webp",
 	},
 	{
 		title: "Traefik",
 		description:
 			"Manage Traefik via File Editor to configure your own domain names, certificates, and more.",
-		image: "/traefik.png",
+		image: "/traefik.webp",
 	},
 	{
 		title: "Templates",
 		description: "Deploy open source templates with one click.",
-		image: "/templates.png",
+		image: "/templates.webp",
 	},
 ];
 
