@@ -250,8 +250,8 @@ export default async function TemplatePage({ params }: Props) {
 			<section className="mt-12">
 				<h2 className="text-2xl font-semibold">Configuration</h2>
 				<p className="mt-2 text-muted-foreground">
-					The exact {template.name} Docker Compose and template configuration
-					this template deploys.
+					{template.configText ??
+						"The exact Docker Compose and template configuration this template deploys."}
 				</p>
 				<TemplateConfigTabs
 					dockerCompose={files.dockerCompose}
