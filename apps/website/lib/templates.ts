@@ -17,7 +17,7 @@ export interface Template {
 	tags: string[];
 	seoTitle?: string;
 	seoDescription?: string;
-	configText?: string;
+	newConfig?: boolean;
 }
 
 export interface TemplateFiles {
