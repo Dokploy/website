@@ -15,6 +15,8 @@ export interface Template {
 	logo: string;
 	links: TemplateLinks;
 	tags: string[];
+	seoTitle?: string;
+	seoDescription?: string;
 }
 
 export interface TemplateFiles {

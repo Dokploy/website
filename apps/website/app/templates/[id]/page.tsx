@@ -45,8 +45,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		return { title: "Template Not Found" };
 	}
 
-	const title = `Deploy ${template.name} on Dokploy`;
-	const description = `${template.description} Deploy ${template.name} on your own server with one click using Dokploy's open source template.`;
+	const title = template.seoTitle ?? `Deploy ${template.name} on Dokploy`;
+	const description = template.seoDescription ?? `${template.description} Deploy ${template.name} on your own server with one click using Dokploy's open source template.`;
 	const url = `https://dokploy.com/templates/${template.id}`;
 
 	const ogUrl = new URL(
@@ -250,8 +250,8 @@ export default async function TemplatePage({ params }: Props) {
 			<section className="mt-12">
 				<h2 className="text-2xl font-semibold">Configuration</h2>
 				<p className="mt-2 text-muted-foreground">
-					The exact Docker Compose and template configuration this template
-					deploys.
+					The exact {template.name} Docker Compose and template configuration
+					this template deploys.
 				</p>
 				<TemplateConfigTabs
 					dockerCompose={files.dockerCompose}
