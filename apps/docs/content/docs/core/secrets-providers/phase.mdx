@@ -1,0 +1,46 @@
+---
+title: Phase
+description: "Use Phase.dev secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create a Service Account Token
+
+Dokploy talks to Phase over the **REST API** using a **Service Account** token. CLI/SDK `pss_*` tokens are not accepted for this integration.
+
+1. In Phase, open your organization and create (or open) a **Service Account**.
+2. Grant the account access to the App and Environment you want Dokploy to read.
+3. Create a **REST API token** for that Service Account and copy it.
+
+<Callout type="warn">
+  The Phase App must have **Server-side Encryption (SSE)** enabled. Without SSE, the REST secrets API cannot return decrypted values and Dokploy's Test Connection / deploy-time fetch will fail.
+</Callout>
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **Phase** and fill in:
+
+- **Name**: the identifier used in references, e.g. `phase-prod`.
+- **Service Account REST API token**: the token from above.
+- **App ID**: the Phase App ID.
+- **Environment**: the Phase environment name (e.g. `production`).
+- **Path** (optional): secret path prefix; defaults to `/`.
+- **API URL** (optional): defaults to `https://api.phase.dev`. Self-hosted Phase usually uses your own API base URL.
+
+Use **Test Connection** to validate the token, App ID, environment, and SSE before saving, then assign the projects/environments where the provider may be used.
+
+<Callout type="info">
+  A provider points at a single Phase App + Environment (+ path). For several environments, create one provider per environment and assign each to the matching Dokploy environments.
+</Callout>
+
+## Reference Format
+
+Phase secrets are flat key/value pairs within the configured path, so references use the secret name directly:
+
+```bash
+DATABASE_URL=${{vault.phase-prod.DATABASE_URL}}
+STRIPE_KEY=${{vault.phase-prod.STRIPE_KEY}}
+```
+
+The autocomplete lists the real secret names returned by the Phase REST secrets API for that App/Environment/path.
