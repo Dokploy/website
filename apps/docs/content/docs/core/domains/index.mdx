@@ -102,8 +102,9 @@ Associate custom domains with your application to make it accessible over the in
 - **Internal Path**: The internal path where your application expects to receive requests.
 - **Strip Path**: Removes the **Path** from the request before forwarding to the application.
 - **Container Port**: The port on the container that the domain should route to.
+- **Custom Entrypoint**: Allows you to set manual entrypoint for Traefik configuration. Usage of Custom entrypoint is an advanced feature. For further details read "Understanding Custom Entrypoint"
 - **HTTPS**: Toggle this on to enable HTTPS for your domain, providing secure, encrypted connections.
-- **Certificate**: Select (letsencrypt) or (None)
+- **Certificate**: Select (letsencrypt), (custom) or (None)
 
 For how **Internal Path** and **Strip Path** work using Traefik middlewares, see the note below.
 
@@ -174,6 +175,129 @@ This powerful combination allows you to:
 - **Both together**: When you need to transform public URLs to match complex internal application structures
 
 These middlewares ensure your application receives requests in the exact format it expects, regardless of how you structure your public domain paths.
+
+
+### Understanding Custom Entrypoint
+
+In Traefik, an **entrypoint** defines **which network port and protocol Traefik listens on** for incoming traffic.
+Each entrypoint is bound to a specific address (for example `:80`, `:443`, or any custom port) and routers explicitly reference which entrypoint they should accept traffic from.
+
+By default, Dokploy uses Traefik’s standard entrypoints, but **Custom Entrypoint** allows you to manually select a different, user-defined entrypoint for a domain.
+
+This gives you full control over **how and where request enters Traefik**, instead of relying on the defaults.
+
+**Default Entrypoints Used by Dokploy**
+
+Dokploy ships with the following default Traefik entrypoints:
+
+- **`web`** → HTTP (port `80`)
+- **`websecure`** → HTTPS (port `443`)
+
+<Callout type="warn">
+  **Critical: Do Not Remove Default Entrypoints**
+
+  The `web` and `websecure` entrypoints are core to Dokploy’s domain management logic and **must always exist** in the Traefik configuration.
+  Removing or renaming these entrypoints will break automatic domain routing, HTTPS configuration, and redirect behavior, and may cause applications to become unreachable.
+
+  Even if you primarily use Custom Entrypoints, Dokploy still relies on the default entrypoints internally.
+  **Never delete or disable them from the Traefik configuration.**
+</Callout>
+
+When **HTTPS is enabled** for a domain **without a custom entrypoint**:
+
+* Dokploy creates **two routers**:
+
+* One for `web` (HTTP)
+* One for `websecure` (HTTPS)
+* A middleware is automatically created to **redirect HTTP → HTTPS**
+* Both entrypoints are attached to the same domain
+
+This means:
+
+* HTTP requests are accepted
+* HTTPS requests are accepted
+* HTTP traffic is transparently redirected to HTTPS
+
+This is the recommended and safest default for most users.
+
+**Why Use a Custom Entrypoint?**
+
+Custom entrypoints are useful when you need **advanced traffic separation or network isolation**, such as:
+
+* Exposing services on **non-standard ports**
+* Separating **internal** and **external** traffic
+* Running **private/internal services** that must never be reachable from the public internet
+* Creating different security or routing rules per entrypoint
+* Operating in environments with strict network policies
+
+This feature is intended for **advanced use cases** and users who are already familiar with Traefik’s architecture.
+
+<Callout type="warn">
+  **Advanced Feature Warning**
+
+  Custom Entrypoints are intended for advanced users with a solid understanding of Traefik and its internals.
+  Incorrect configuration can easily lead to unreachable services or unintended exposure.
+</Callout>
+
+**Important Behavior When Using Custom Entrypoints**
+
+When you specify a **Custom Entrypoint** in Dokploy, the behavior differs from the default configuration:
+
+- Dokploy creates **only a single router**
+- The router listens **exclusively on the specified entrypoint**
+- The router accepts **either HTTP or HTTPS traffic**, depending on whether the HTTPS option is enabled
+- **No HTTP → HTTPS redirect middleware is created automatically**
+
+In other words:
+
+- If your custom entrypoint is configured for HTTPS only, **plain HTTP requests will be rejected**
+- Any HTTP → HTTPS redirection must be handled manually at the Traefik configuration level
+- Alternatively, you can create a **separate Domain** that listens on an HTTP entrypoint to handle plain HTTP traffic explicitly
+
+> 💡 You can also configure a **global HTTP entrypoint** in Traefik that redirects all HTTP traffic to HTTPS.
+> This approach applies the redirect at the entrypoint level and must be defined manually in the Traefik static configuration.
+
+**Manual Traefik Configuration Is Required**
+
+Custom entrypoints **do not exist by default**.
+
+Before using them in Dokploy, you **must manually modify Traefik’s static configuration** to define the entrypoints.
+
+If the entrypoint does not exist in Traefik, the router created by Dokploy will fail.
+
+#### Examples
+
+**Example: Traefik Configuration With Custom Entrypoints**
+
+Below is an example of a Traefik static configuration defining **external** and **internal** entrypoints on different ports:
+
+```yaml
+entryPoints:
+  web:
+    address: ":80"
+
+  websecure:
+    address: ":443"
+
+  external-secure:
+    address: ":8443"
+
+  internal-secure:
+    address: ":9443"
+```
+
+In this setup:
+
+* `external-secure` could be exposed to the public internet
+* `internal-secure` could be bound to a private network interface or firewall-restricted port
+
+Once these entrypoints exist, you can reference them in Dokploy using **Custom Entrypoint**.
+
+**Goals** of having separate external and internal entrypoint:
+
+* External services should be accessible from the internet
+* Internal services should **never** be accessible externally
+* Prevent access via `/etc/hosts`, DNS tricks, or manual host overrides
 
 
 ### Important Clarification on Container Ports
