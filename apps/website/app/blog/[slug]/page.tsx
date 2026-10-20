@@ -1,4 +1,4 @@
-import { getPost, getPosts } from "@/lib/ghost";
+import { SITE_URL, getPost, getPostCanonicalUrl, getPosts } from "@/lib/ghost";
 import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,20 +37,23 @@ export async function generateMetadata(
 
 	const ogUrl = new URL(
 		"/api/og",
-		process.env.NODE_ENV === "production"
-			? "https://dokploy.com"
-			: "http://localhost:3001",
+		process.env.NODE_ENV === "production" ? SITE_URL : "http://localhost:3001",
 	);
 	ogUrl.searchParams.set("slug", slug);
+
+	const canonicalUrl = getPostCanonicalUrl(post);
 
 	return {
 		title: post.title,
 		description: post.custom_excerpt || post.excerpt,
+		alternates: {
+			canonical: canonicalUrl,
+		},
 		openGraph: {
 			title: post.title,
 			description: post.custom_excerpt || post.excerpt,
 			type: "article",
-			url: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${post.slug}`,
+			url: canonicalUrl,
 			images: [
 				{
 					url: ogUrl.toString(),
