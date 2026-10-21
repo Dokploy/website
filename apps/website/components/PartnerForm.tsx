@@ -207,9 +207,7 @@ export function PartnerForm() {
 					</SelectContent>
 				</Select>
 				{errors.programInterest && (
-					<p className="text-sm text-destructive">
-						{errors.programInterest}
-					</p>
+					<p className="text-sm text-destructive">{errors.programInterest}</p>
 				)}
 			</div>
 			<div className="space-y-2">
@@ -231,7 +229,11 @@ export function PartnerForm() {
 					<p className="text-sm text-destructive">{errors.message}</p>
 				)}
 			</div>
-			<Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
+			<Button
+				type="submit"
+				disabled={isSubmitting}
+				className="w-full sm:w-auto"
+			>
 				{isSubmitting ? "Sending..." : "Submit"}
 			</Button>
 		</form>

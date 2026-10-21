@@ -1,21 +1,21 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Button } from "@/components/ui/button";
 import {
-	Check,
-	X,
-	Container as ContainerLucide,
-	Settings,
-	HardDrive,
-	Gauge,
 	Bot,
+	Check,
+	Container as ContainerLucide,
+	Gauge,
+	HardDrive,
+	Settings,
+	X,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Dokploy vs. Vercel: Docker-Native vs. Serverless",
@@ -24,16 +24,48 @@ export const metadata: Metadata = {
 };
 
 const featureComparisonRows = [
-	{ feature: "Self-hostable on your own VPS or server", dokploy: true, vercel: false },
-	{ feature: "Run on any cloud provider via SSH", dokploy: true, vercel: false },
-	{ feature: "Deploy Docker images and containers", dokploy: true, vercel: false },
+	{
+		feature: "Self-hostable on your own VPS or server",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Run on any cloud provider via SSH",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Deploy Docker images and containers",
+		dokploy: true,
+		vercel: false,
+	},
 	{ feature: "Docker Compose support", dokploy: true, vercel: false },
 	{ feature: "Docker Stack support", dokploy: true, vercel: false },
-	{ feature: "Persistent filesystem (Docker volumes)", dokploy: true, vercel: false },
-	{ feature: "Persistent disk shared across services", dokploy: true, vercel: false },
-	{ feature: "Named Docker volume backups to S3", dokploy: true, vercel: false },
-	{ feature: "One-click scheduled database backups to S3", dokploy: true, vercel: false },
-	{ feature: "Long-running processes and background workers", dokploy: true, vercel: false },
+	{
+		feature: "Persistent filesystem (Docker volumes)",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Persistent disk shared across services",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Named Docker volume backups to S3",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "One-click scheduled database backups to S3",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Long-running processes and background workers",
+		dokploy: true,
+		vercel: false,
+	},
 	{
 		feature: "WebSocket connections without function duration limits",
 		dokploy: true,
@@ -48,7 +80,11 @@ const featureComparisonRows = [
 	{ feature: "Docker Swarm clustering", dokploy: true, vercel: false },
 	{ feature: "One-command installation", dokploy: true, vercel: false },
 	{ feature: "Scheduled jobs (cron)", dokploy: true, vercel: true },
-	{ feature: "Built-in monitoring metrics (CPU, RAM, Disk)", dokploy: true, vercel: false },
+	{
+		feature: "Built-in monitoring metrics (CPU, RAM, Disk)",
+		dokploy: true,
+		vercel: false,
+	},
 	{ feature: "Automated metric alerts built in", dokploy: true, vercel: true },
 	{ feature: "AI-assisted deployments", dokploy: true, vercel: true },
 	{ feature: "MCP server support", dokploy: true, vercel: true },
@@ -56,7 +92,11 @@ const featureComparisonRows = [
 	{ feature: "Fine-grained RBAC", dokploy: true, vercel: false },
 	{ feature: "SSO / SAML", dokploy: true, vercel: true },
 	{ feature: "Audit logs", dokploy: true, vercel: true },
-	{ feature: "Predictable per-server platform pricing", dokploy: true, vercel: false },
+	{
+		feature: "Predictable per-server platform pricing",
+		dokploy: true,
+		vercel: false,
+	},
 	{ feature: "No per-seat billing", dokploy: true, vercel: false },
 ];
 
@@ -94,7 +134,11 @@ const whyChooseItems = [
 ];
 
 const pricingRows = [
-	{ label: "Pricing model", dokploy: "Per server", vercel: "Per seat + metered usage" },
+	{
+		label: "Pricing model",
+		dokploy: "Per server",
+		vercel: "Per seat + metered usage",
+	},
 	{
 		label: "Entry price",
 		dokploy: "Free (open source, self-hosted)",
@@ -106,13 +150,21 @@ const pricingRows = [
 		vercel: "$20/month per deploying seat",
 	},
 	{ label: "Apps per plan", dokploy: "Unlimited", vercel: "Unlimited on Pro" },
-	{ label: "Databases", dokploy: "Unlimited per server", vercel: "Not included – third-party add-ons" },
+	{
+		label: "Databases",
+		dokploy: "Unlimited per server",
+		vercel: "Not included – third-party add-ons",
+	},
 	{
 		label: "Bandwidth",
 		dokploy: "Included (your server's allowance)",
 		vercel: "1 TB included on Pro; metered above that",
 	},
-	{ label: "Infrastructure", dokploy: "Your own servers (any provider)", vercel: "Vercel-managed only" },
+	{
+		label: "Infrastructure",
+		dokploy: "Your own servers (any provider)",
+		vercel: "Vercel-managed only",
+	},
 ];
 
 const integrationRows = [
@@ -164,9 +216,9 @@ export default function DokployVsVercelPage() {
 								<h3 className="text-xl font-semibold text-white">Dokploy</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
 									Dokploy is built for full-stack, Docker-native deployment on
-									infrastructure you own. Choose Vercel if your app is
-									primarily frontend or serverless and you want a managed
-									platform optimized for that model.
+									infrastructure you own. Choose Vercel if your app is primarily
+									frontend or serverless and you want a managed platform
+									optimized for that model.
 								</p>
 							</div>
 							<div className="rounded-xl border border-border/50 bg-card p-6 text-left">
@@ -216,8 +268,12 @@ export default function DokployVsVercelPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Dokploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Vercel</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Dokploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Vercel
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -273,7 +329,9 @@ export default function DokployVsVercelPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									{index === 0 ? (
@@ -393,7 +451,9 @@ export default function DokployVsVercelPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Dokploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Vercel</th>
 								</tr>

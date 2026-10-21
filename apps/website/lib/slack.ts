@@ -31,9 +31,7 @@ interface SlackBlock {
 /**
  * Format contact form data as a Slack message with blocks
  */
-function formatContactDataForSlack(
-	contactData: ContactFormData,
-): SlackMessage {
+function formatContactDataForSlack(contactData: ContactFormData): SlackMessage {
 	// Get emoji and label based on inquiry type
 	let inquiryTypeEmoji: string;
 	let inquiryTypeLabel: string;
@@ -153,9 +151,7 @@ export async function notifySlack(
 	const webhookUrl = process.env.SLACK_WEBHOOK_URL;
 
 	if (!webhookUrl) {
-		console.warn(
-			"Slack webhook URL is not configured (SLACK_WEBHOOK_URL)",
-		);
+		console.warn("Slack webhook URL is not configured (SLACK_WEBHOOK_URL)");
 		return false;
 	}
 

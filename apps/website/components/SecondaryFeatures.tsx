@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Layers, Terminal, Users } from "lucide-react";
 import { Container } from "./Container";
 interface Feature {
-	name: string;
+	name: React.ReactNode;
 	summary: string;
 	description: string;
 	image: string;

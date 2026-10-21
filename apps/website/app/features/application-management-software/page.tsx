@@ -1,32 +1,32 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Container } from "@/components/Container";
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
 	Activity,
-	FileText,
-	RotateCcw,
+	CheckCircle2,
 	Clock,
-	Eye,
-	Settings2,
-	Server,
 	Cloud,
 	Cpu,
-	Network,
-	Terminal,
+	Eye,
+	FileText,
 	HardDrive,
 	Lock,
-	CheckCircle2,
+	Network,
+	RotateCcw,
+	Server,
+	Settings2,
+	Terminal,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Application Management Software and Solutions",
@@ -198,7 +198,11 @@ export default function ApplicationManagementSoftwarePage() {
 								className="rounded-full bg-[#5965F2] hover:bg-[#4A55E0]"
 								asChild
 							>
-								<Link href="/contact" aria-label="Contact Us" className="text-white">
+								<Link
+									href="/contact"
+									aria-label="Contact Us"
+									className="text-white"
+								>
 									Contact Us
 								</Link>
 							</Button>
@@ -412,7 +416,9 @@ export default function ApplicationManagementSoftwarePage() {
 							Deploy AI in a controlled environment
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Use Dokploy to create sandbox environments separated from production infrastructure, where technical and non-technical employees can launch AI-coded apps safely.
+							Use Dokploy to create sandbox environments separated from
+							production infrastructure, where technical and non-technical
+							employees can launch AI-coded apps safely.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-3">
@@ -444,7 +450,9 @@ export default function ApplicationManagementSoftwarePage() {
 									{step.number}
 								</div>
 								<h3 className="text-lg font-semibold">{step.title}</h3>
-								<p className="mt-3 text-sm text-muted-foreground">{step.description}</p>
+								<p className="mt-3 text-sm text-muted-foreground">
+									{step.description}
+								</p>
 							</div>
 						))}
 					</div>

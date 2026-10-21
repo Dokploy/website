@@ -121,8 +121,7 @@ const auditLogItems = [
 	},
 	{
 		title: "Configuration changes",
-		description:
-			"environment variables, domains, backups, and scheduled jobs",
+		description: "environment variables, domains, backups, and scheduled jobs",
 	},
 	{
 		title: "Powerful filtering",
@@ -481,7 +480,9 @@ export default function SecurityPage() {
 								<h3 className="text-lg font-semibold text-white">
 									{faq.question}
 								</h3>
-								<p className="mt-3 text-sm text-muted-foreground">{faq.answer}</p>
+								<p className="mt-3 text-sm text-muted-foreground">
+									{faq.answer}
+								</p>
 							</div>
 						))}
 					</div>

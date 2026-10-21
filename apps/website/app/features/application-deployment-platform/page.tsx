@@ -1,37 +1,37 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Container } from "@/components/Container";
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Code2,
-	Layers,
-	Wrench,
-	GitBranch,
-	Webhook,
-	Eye,
-	FolderInput,
-	Server,
-	Cloud,
-	LayoutTemplate,
-	Workflow,
-	FileCode,
-	RotateCcw,
-	LayoutDashboard,
-	CloudCog,
-	Clock,
-	Users,
 	Bot,
+	Clock,
+	Cloud,
+	CloudCog,
+	Code2,
+	Eye,
+	FileCode,
+	FolderInput,
+	GitBranch,
+	Layers,
+	LayoutDashboard,
+	LayoutTemplate,
+	RotateCcw,
+	Server,
 	Shield,
+	Users,
+	Webhook,
+	Workflow,
+	Wrench,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Application & Software Deployment Platform",
@@ -247,7 +247,11 @@ export default function ApplicationDeploymentPlatformPage() {
 								className="rounded-full bg-[#5965F2] hover:bg-[#4A55E0]"
 								asChild
 							>
-								<Link href="/contact" aria-label="Contact Us" className="text-white">
+								<Link
+									href="/contact"
+									aria-label="Contact Us"
+									className="text-white"
+								>
 									Contact Us
 								</Link>
 							</Button>
@@ -295,7 +299,9 @@ export default function ApplicationDeploymentPlatformPage() {
 							Deploy the apps your teams are already building with AI
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							AI coding tools are changing how applications get written. Dokploy handles the deployment side, from AI-generated code to a live URL, powered by your existing workflows.
+							AI coding tools are changing how applications get written. Dokploy
+							handles the deployment side, from AI-generated code to a live URL,
+							powered by your existing workflows.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -315,9 +321,12 @@ export default function ApplicationDeploymentPlatformPage() {
 						))}
 					</div>
 					<div className="mx-auto mt-16 max-w-2xl rounded-xl border border-border/50 bg-card p-8 text-center">
-						<h3 className="text-xl font-semibold">Need a governed environment for AI tools?</h3>
+						<h3 className="text-xl font-semibold">
+							Need a governed environment for AI tools?
+						</h3>
 						<p className="mt-3 text-muted-foreground">
-							See how Dokploy handles sandboxed deploys, non-technical users, and enterprise security for AI-built apps.
+							See how Dokploy handles sandboxed deploys, non-technical users,
+							and enterprise security for AI-built apps.
 						</p>
 						<div className="mt-6">
 							<Button className="rounded-full" asChild>
@@ -343,8 +352,8 @@ export default function ApplicationDeploymentPlatformPage() {
 						<p className="mt-6 text-lg text-muted-foreground">
 							Connect your repo and deploy on push with webhooks. We support
 							GitHub, GitLab, Gitea, Bitbucket, Docker registry, and Git generic
-							provider. Control exactly what changes trigger a release, including
-							monorepos.
+							provider. Control exactly what changes trigger a release,
+							including monorepos.
 						</p>
 					</div>
 				</Container>
@@ -435,9 +444,9 @@ export default function ApplicationDeploymentPlatformPage() {
 							Hundreds of templates to get started
 						</h2>
 						<p className="mt-6 text-lg text-muted-foreground">
-							Deploy popular open-source apps in one click with Dokploy Templates,
-							a ready-to-run library of pre-configured apps you can deploy fast,
-							without rebuilding the same stack from scratch.
+							Deploy popular open-source apps in one click with Dokploy
+							Templates, a ready-to-run library of pre-configured apps you can
+							deploy fast, without rebuilding the same stack from scratch.
 						</p>
 					</div>
 				</Container>
