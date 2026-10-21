@@ -78,6 +78,27 @@ export interface Post {
 		bio: string | null;
 	}>;
 	url: string;
+	canonical_url: string | null;
+}
+
+export const SITE_URL = "https://dokploy.com";
+
+// Canonical for a post: Ghost's canonical_url if set, otherwise the post's
+// own /blog/[slug] URL. Always absolute, without query string or hash.
+export function getPostCanonicalUrl(
+	post: Pick<Post, "slug" | "canonical_url">,
+) {
+	const fallback = `${SITE_URL}/blog/${post.slug}`;
+	if (!post.canonical_url) return fallback;
+	try {
+		const url = new URL(post.canonical_url, SITE_URL);
+		// Never canonicalize to the Ghost CMS duplicate
+		if (url.hostname === "cms.dokploy.com") return fallback;
+		if (url.hostname === "www.dokploy.com") url.hostname = "dokploy.com";
+		return `${url.origin}${url.pathname}`;
+	} catch {
+		return fallback;
+	}
 }
 
 export async function getPosts(options = {}): Promise<Post[]> {
