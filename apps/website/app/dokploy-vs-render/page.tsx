@@ -1,21 +1,21 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Button } from "@/components/ui/button";
 import {
-	Check,
-	X,
-	Building2,
-	Container as ContainerIcon,
 	Archive,
-	Gauge,
 	Bot,
+	Building2,
+	Check,
+	Container as ContainerIcon,
+	Gauge,
+	X,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Dokploy Vs. Render: Self-Hosted Vs. Managed PaaS",
@@ -24,25 +24,49 @@ export const metadata: Metadata = {
 };
 
 const featureComparisonRows = [
-	{ feature: "Self-hostable on your own VPS or server", dokploy: true, render: false },
-	{ feature: "Run on any cloud provider via SSH", dokploy: true, render: false },
+	{
+		feature: "Self-hostable on your own VPS or server",
+		dokploy: true,
+		render: false,
+	},
+	{
+		feature: "Run on any cloud provider via SSH",
+		dokploy: true,
+		render: false,
+	},
 	{ feature: "Docker Compose support", dokploy: true, render: false },
 	{ feature: "Docker Stack support", dokploy: true, render: false },
-	{ feature: "Dockerfile and prebuilt image deploys", dokploy: true, render: true },
+	{
+		feature: "Dockerfile and prebuilt image deploys",
+		dokploy: true,
+		render: true,
+	},
 	{ feature: "Nixpacks build support", dokploy: true, render: false },
 	{ feature: "Heroku Buildpacks support", dokploy: true, render: true },
 	{ feature: "Paketo Buildpacks support", dokploy: true, render: false },
 	{ feature: "Railpack build support", dokploy: true, render: false },
 	{ feature: "Custom build servers", dokploy: true, render: false },
-	{ feature: "Named Docker volume backups to S3", dokploy: true, render: false },
-	{ feature: "Scheduled database backups to S3 (built-in)", dokploy: true, render: false },
+	{
+		feature: "Named Docker volume backups to S3",
+		dokploy: true,
+		render: false,
+	},
+	{
+		feature: "Scheduled database backups to S3 (built-in)",
+		dokploy: true,
+		render: false,
+	},
 	{ feature: "Preview deployments", dokploy: true, render: true },
 	{ feature: "Multi-server deployment", dokploy: true, render: false },
 	{ feature: "Docker Swarm clustering", dokploy: true, render: false },
 	{ feature: "One-command installation", dokploy: true, render: false },
 	{ feature: "Scheduled jobs (cron)", dokploy: true, render: true },
 	{ feature: "Background workers", dokploy: true, render: true },
-	{ feature: "Built-in monitoring metrics (CPU, RAM, Disk)", dokploy: true, render: false },
+	{
+		feature: "Built-in monitoring metrics (CPU, RAM, Disk)",
+		dokploy: true,
+		render: false,
+	},
 	{ feature: "Automated metric alerts", dokploy: true, render: false },
 	{ feature: "Metrics enabled by default", dokploy: true, render: false },
 	{ feature: "AI-assisted deployments", dokploy: true, render: false },
@@ -51,8 +75,16 @@ const featureComparisonRows = [
 	{ feature: "Fine-grained RBAC", dokploy: true, render: false },
 	{ feature: "SSO / SAML", dokploy: true, render: true },
 	{ feature: "Audit logs", dokploy: true, render: true },
-	{ feature: "Predictable per-server platform pricing", dokploy: true, render: false },
-	{ feature: "Persistent disk shared across services", dokploy: true, render: false },
+	{
+		feature: "Predictable per-server platform pricing",
+		dokploy: true,
+		render: false,
+	},
+	{
+		feature: "Persistent disk shared across services",
+		dokploy: true,
+		render: false,
+	},
 ];
 
 const whyChooseItems = [
@@ -89,7 +121,11 @@ const whyChooseItems = [
 ];
 
 const pricingRows = [
-	{ label: "Pricing model", dokploy: "Per server", render: "Workspace plan + per-service compute" },
+	{
+		label: "Pricing model",
+		dokploy: "Per server",
+		render: "Workspace plan + per-service compute",
+	},
 	{
 		label: "Entry price",
 		dokploy: "Free (open source, self-hosted)",
@@ -100,14 +136,26 @@ const pricingRows = [
 		dokploy: "$15/month (Startup, 3 servers)",
 		render: "$25/month workspace + compute per service",
 	},
-	{ label: "Apps per server or plan", dokploy: "Unlimited", render: "No service cap on paid plans" },
-	{ label: "Databases", dokploy: "Unlimited per server", render: "Billed separately per instance" },
+	{
+		label: "Apps per server or plan",
+		dokploy: "Unlimited",
+		render: "No service cap on paid plans",
+	},
+	{
+		label: "Databases",
+		dokploy: "Unlimited per server",
+		render: "Billed separately per instance",
+	},
 	{
 		label: "Bandwidth",
 		dokploy: "Included (your server's allowance)",
 		render: "25 GB included on Pro; metered above that",
 	},
-	{ label: "Infrastructure", dokploy: "Your own servers (any provider)", render: "Render-managed only" },
+	{
+		label: "Infrastructure",
+		dokploy: "Your own servers (any provider)",
+		render: "Render-managed only",
+	},
 ];
 
 const integrationRows = [
@@ -211,8 +259,12 @@ export default function DokployVsRenderPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Dokploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Render</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Dokploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Render
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -268,7 +320,9 @@ export default function DokployVsRenderPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									{index === 0 ? (
@@ -337,10 +391,11 @@ export default function DokployVsRenderPage() {
 							Pricing comparison: platform fees vs. per-service compute
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Dokploy Cloud charges per server, not per service, so your platform
-							cost stays flat as your app count grows. Render charges a workspace
-							plan fee plus a separate compute for every service instance, with
-							managed databases, storage, and bandwidth each billed on top.
+							Dokploy Cloud charges per server, not per service, so your
+							platform cost stays flat as your app count grows. Render charges a
+							workspace plan fee plus a separate compute for every service
+							instance, with managed databases, storage, and bandwidth each
+							billed on top.
 						</p>
 					</div>
 
@@ -386,7 +441,9 @@ export default function DokployVsRenderPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Dokploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Render</th>
 								</tr>

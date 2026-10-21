@@ -1,10 +1,7 @@
 {
 	"name": "website",
 	"private": true,
-	"workspaces": [
-		"apps/*",
-		"packages/*"
-	],
+	"workspaces": ["apps/*", "packages/*"],
 	"scripts": {
 		"docs:dev": "pnpm --filter=docs run dev",
 		"docs:build": "pnpm --filter=docs run build",
@@ -37,9 +34,7 @@
 		]
 	},
 	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
+		"extends": ["@commitlint/config-conventional"]
 	},
 	"resolutions": {
 		"@babel/core@<7.29.6": "^7.29.6",

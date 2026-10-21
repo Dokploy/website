@@ -2,17 +2,17 @@ import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Paintbrush,
-	Type,
-	Palette,
+	KeyRound,
 	Link2,
 	MonitorCheck,
-	Shield,
-	KeyRound,
+	Paintbrush,
+	Palette,
 	ScrollText,
+	Shield,
+	Type,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "White Label Deployment Platform",

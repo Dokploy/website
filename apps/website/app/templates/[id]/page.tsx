@@ -46,7 +46,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 
 	const title = template.seoTitle ?? `Deploy ${template.name} on Dokploy`;
-	const description = template.seoDescription ?? `${template.description} Deploy ${template.name} on your own server with one click using Dokploy's open source template.`;
+	const description =
+		template.seoDescription ??
+		`${template.description} Deploy ${template.name} on your own server with one click using Dokploy's open source template.`;
 	const url = `https://dokploy.com/templates/${template.id}`;
 
 	const ogUrl = new URL(

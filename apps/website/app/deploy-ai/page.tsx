@@ -2,20 +2,20 @@ import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
+	Activity,
 	Bot,
 	Boxes,
-	Activity,
-	Users,
+	FlaskConical,
+	KeyRound,
 	MousePointerClick,
 	Network,
-	KeyRound,
-	ShieldCheck,
-	FlaskConical,
 	Rocket,
+	ShieldCheck,
 	Sparkles,
+	Users,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Deploy AI Apps Securely with Dokploy",
@@ -133,7 +133,11 @@ export default function DeployAIPage() {
 								className="rounded-full bg-[#5965F2] hover:bg-[#4A55E0]"
 								asChild
 							>
-								<Link href="/contact" aria-label="Contact Us" className="text-white">
+								<Link
+									href="/contact"
+									aria-label="Contact Us"
+									className="text-white"
+								>
 									Contact Us
 								</Link>
 							</Button>

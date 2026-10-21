@@ -1,13 +1,22 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Cpu, Plug, LayoutDashboard, Bell, Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+	Bell,
+	Bot,
+	Check,
+	Cpu,
+	LayoutDashboard,
+	Plug,
+	X,
+	Zap,
+} from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Dokploy Vs. Coolify Comparison",
@@ -17,9 +26,21 @@ export const metadata: Metadata = {
 
 const featureComparisonRows = [
 	{ feature: "One-command installation", dokploy: true, coolify: true },
-	{ feature: "Installation feedback and progress logs", dokploy: true, coolify: true },
-	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, coolify: false },
-	{ feature: "Lightweight CPU usage while idle", dokploy: true, coolify: false },
+	{
+		feature: "Installation feedback and progress logs",
+		dokploy: true,
+		coolify: true,
+	},
+	{
+		feature: "Works with firewall and Tailscale out of the box",
+		dokploy: true,
+		coolify: false,
+	},
+	{
+		feature: "Lightweight CPU usage while idle",
+		dokploy: true,
+		coolify: false,
+	},
 	{ feature: "Low memory usage", dokploy: true, coolify: true },
 	{ feature: "Teams and organizations support", dokploy: true, coolify: true },
 	{ feature: "Projects grouping", dokploy: true, coolify: true },
@@ -27,16 +48,32 @@ const featureComparisonRows = [
 	{ feature: "Built with Next.js / TypeScript", dokploy: true, coolify: false },
 	{ feature: "AI-assisted deployments", dokploy: true, coolify: false },
 	{ feature: "Deploy from custom Docker images", dokploy: true, coolify: true },
-	{ feature: "Database deployment (Postgres, MySQL, Redis, etc.)", dokploy: true, coolify: true },
+	{
+		feature: "Database deployment (Postgres, MySQL, Redis, etc.)",
+		dokploy: true,
+		coolify: true,
+	},
 	{ feature: "Scheduled database backups (S3)", dokploy: true, coolify: true },
-	{ feature: "Back up arbitrary Docker volumes, not just databases", dokploy: true, coolify: false },
-	{ feature: "Preview deployments (review apps)", dokploy: true, coolify: true },
+	{
+		feature: "Back up arbitrary Docker volumes, not just databases",
+		dokploy: true,
+		coolify: false,
+	},
+	{
+		feature: "Preview deployments (review apps)",
+		dokploy: true,
+		coolify: true,
+	},
 	{ feature: "API and CLI tools for automation", dokploy: true, coolify: true },
 	{ feature: "Multi-server deployment", dokploy: true, coolify: true },
 	{ feature: "Docker Swarm clustering", dokploy: true, coolify: "limited" },
 	{ feature: "Cron jobs inside containers", dokploy: true, coolify: true },
 	{ feature: "Cron jobs on your host machine", dokploy: true, coolify: false },
-	{ feature: "Monitoring metrics (CPU, RAM, Disk)", dokploy: true, coolify: "limited" },
+	{
+		feature: "Monitoring metrics (CPU, RAM, Disk)",
+		dokploy: true,
+		coolify: "limited",
+	},
 	{ feature: "Metrics enabled by default", dokploy: true, coolify: false },
 	{ feature: "Automated alerts from metrics", dokploy: true, coolify: false },
 ];
@@ -88,12 +125,14 @@ const integrationRows = [
 	},
 	{
 		category: "Build and deployment systems",
-		dokploy: "Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+		dokploy:
+			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
 		coolify: "Docker, Docker Compose, Nixpacks",
 	},
 	{
 		category: "Notifications and communication",
-		dokploy: "Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+		dokploy:
+			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		coolify: "Slack, Discord, Telegram, Email (SMTP), Pushover, Resend, Teams",
 	},
 ];
@@ -175,8 +214,12 @@ export default function DokployVsCoolifyPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Dokploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Coolify</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Dokploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Coolify
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -234,7 +277,9 @@ export default function DokployVsCoolifyPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									{index === 0 ? (
@@ -320,17 +365,16 @@ export default function DokployVsCoolifyPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Dokploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Coolify</th>
 								</tr>
 							</thead>
 							<tbody>
 								{integrationRows.map((row) => (
-									<tr
-										key={row.category}
-										className="border-b border-border/50"
-									>
+									<tr key={row.category} className="border-b border-border/50">
 										<td className="px-4 py-3 font-medium">{row.category}</td>
 										<td className="px-4 py-3 text-sm text-muted-foreground">
 											{row.dokploy}

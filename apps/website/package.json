@@ -35,7 +35,7 @@
 		"axios": "^1.20.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
-		"framer-motion": "^11.3.19",
+		"framer-motion": "^11.18.2",
 		"free-email-domains": "^1.2.26",
 		"hast-util-to-jsx-runtime": "^2.3.5",
 		"lucide-react": "0.364.0",

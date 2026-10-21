@@ -2,17 +2,17 @@ import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	ScrollText,
-	Building2,
-	Search,
-	FileCheck,
 	AlertCircle,
-	Shield,
+	Building2,
+	FileCheck,
 	KeyRound,
 	Paintbrush,
+	ScrollText,
+	Search,
+	Shield,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Audit Logs for Enterprise Compliance",
