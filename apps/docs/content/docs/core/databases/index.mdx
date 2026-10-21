@@ -51,6 +51,23 @@ This section provides advanced configuration options for experienced users. It i
 - **Resources**: Adjust the CPU and memory allocation for your application.
 - **Danger Zone**: If for some reason you want to start again and delete all the data, tables, etc. you can do it here.
 
+### Enabling Redis Persistence (AOF)
+
+A Redis database runs with Redis' default persistence (RDB snapshots, no append-only file). To enable the AOF, override the start command from the **Run Command** field in the **Advanced** tab.
+
+- **Command**: `/bin/sh`
+- **Args** (one entry each): `-c`, then `redis-server --requirepass "$REDIS_PASSWORD" --appendonly yes --save 3600 1`
+
+The `REDIS_PASSWORD` environment variable is set by Dokploy, so the command can reference it instead of containing the password.
+
+Click **Deploy** after saving to apply the new command. To confirm:
+
+```bash
+redis-cli -a "$REDIS_PASSWORD" config get appendonly
+# 1) "appendonly"
+# 2) "yes"
+```
+
 ## Keyboard Shortcuts
 
 To help speed up navigating there are some built in keyboard shortcuts for
