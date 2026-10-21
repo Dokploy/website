@@ -13,6 +13,7 @@ For start receiving telegram notifications, you need to fill the form with the f
 - **Name**: Enter any name you want.
 - **Bot Token**: Enter the bot token. eg. `123456789:ABCdefGHIjklMNOPqrstUVWXYZ`
 - **Chat ID**: Enter the chat ID. eg. `123456789`
+- **SOCKS5 Proxy URL** (optional): Route Telegram notifications through a SOCKS5 proxy. Leave this field empty to connect directly.
 
 To Setup the telegram notifications, follow these steps:
 
@@ -26,3 +27,11 @@ To Setup the telegram notifications, follow these steps:
 8. Copy the `Chat ID` and paste it in Dokploy `Telegram` Modal section.
 9. Click on test to make sure everything is working.
 10. Click on `Create` to save the notification.
+
+## SOCKS5 Proxy
+
+If your Dokploy server cannot reach Telegram directly, enter a `socks5://` or `socks5h://` URL in **SOCKS5 Proxy URL**, for example `socks5://proxy.example.com:1080`. Both schemes resolve Telegram's hostname through the proxy. The port defaults to `1080` when omitted.
+
+For a proxy that requires authentication, include the username and password in the URL: `socks5://username:password@proxy.example.com:1080`. Percent-encode special characters in the username and password; for example, the password `p@ss` becomes `p%40ss`.
+
+Click **Test Notification** to verify delivery through the configured proxy before saving. The test uses the same proxy as Telegram notifications. Clear **SOCKS5 Proxy URL** and save to restore direct connections.
