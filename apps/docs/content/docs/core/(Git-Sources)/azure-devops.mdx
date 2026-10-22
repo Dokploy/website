@@ -22,9 +22,11 @@ Server has no Entra/OAuth integration in this provider. Microsoft recommends Ent
 
 ## Access and permissions
 
-Use a dedicated Azure identity with access to the required projects and repositories. The PAT and identity need project discovery and Git repository read access. Automatic deployment additionally requires permission to view, edit and delete Service Hook subscriptions in each selected project. Repository read access alone is not sufficient for automatic hook setup. By default, these permissions belong to Project Administrators. A collection administrator can grant specific Service Hooks permissions; see [the permission guide](https://learn.microsoft.com/en-us/azure/devops/service-hooks/view-permission?view=azure-devops).
+Use a dedicated Azure identity with access to the required projects and repositories. Create a **Custom defined** PAT with **Code → Read**. On Azure DevOps Server 2022, this scope was verified for project/repository/branch discovery, private clone, watch-path diffs and Service Hook creation, reading, updating and deletion. Git write and Full access scopes are not required for these operations.
 
-Validate the minimum PAT permissions on your Server build or Services organization. Azure's OAuth scope names do not necessarily correspond to PAT scope checkboxes; do not assume a `vso.hooks_write` option exists. See [Service Hooks permissions](https://learn.microsoft.com/en-us/azure/devops/service-hooks/overview?view=azure-devops).
+PAT scopes and Azure project permissions are separate. Automatic deployment additionally requires the token owner's permission to view, edit and delete Service Hook subscriptions in each selected project. Repository read access alone does not grant these project permissions. By default, these permissions belong to Project Administrators. A collection administrator can grant specific Service Hooks permissions; see [the permission guide](https://learn.microsoft.com/en-us/azure/devops/service-hooks/view-permission?view=azure-devops).
+
+The `Code (Read)` scope inherits Service Hooks scopes. A separate `vso.hooks_write` checkbox is not needed; these internal scope names do not necessarily appear in the PAT editor. See [Microsoft's scope inheritance table](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#available-scopes).
 
 Provider sharing lets another Dokploy user use its credentials to select accessible repositories. Only its creator or the organization owner/admin can manage the provider, subject to the Git Providers operation permissions. Assigned-only access permits connecting a new service; it does not grant the right to edit another user's existing source configuration.
 
