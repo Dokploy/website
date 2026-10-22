@@ -1,0 +1,81 @@
+---
+title: Azure DevOps
+description: Connect Azure DevOps Services and Server repositories using PAT authentication.
+---
+
+## Supported configuration
+
+The provider targets Azure DevOps Services and Azure DevOps Server 2022/2022.1 using REST API 7.0, HTTPS, trusted certificates and a personal access token (PAT). Enter the complete organization or collection root:
+
+```text
+https://contoso.visualstudio.com
+https://dev.azure.com/contoso
+https://ado.example.com/tfs/DefaultCollection
+https://ado.example.com:8443/DefaultCollection
+```
+
+Do not include a project, repository URL, username, password, query string or fragment. Private network addresses are supported. Dokploy and remote deployment servers must trust the Azure server's TLS certificate.
+
+Services accepts both `https://{organization}.visualstudio.com` and `https://dev.azure.com/{organization}`. The organization is in the hostname for the first form, so it needs no collection suffix. Server URLs must retain their collection path. See [Microsoft's organization URL guide](https://learn.microsoft.com/en-us/azure/devops/extend/develop/work-with-urls?view=azure-devops).
+
+Server has no Entra/OAuth integration in this provider. Microsoft recommends Entra for Services integrations; the initial Dokploy implementation uses PAT as its common Server/Services authentication method. See [authentication guidance](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance?view=azure-devops).
+
+## Access and permissions
+
+Use a dedicated Azure identity with access to the required projects and repositories. The PAT and identity need project discovery and Git repository read access. Automatic deployment additionally requires permission to view, edit and delete Service Hook subscriptions in each selected project. Repository read access alone is not sufficient for automatic hook setup. By default, these permissions belong to Project Administrators. A collection administrator can grant specific Service Hooks permissions; see [the permission guide](https://learn.microsoft.com/en-us/azure/devops/service-hooks/view-permission?view=azure-devops).
+
+Validate the minimum PAT permissions on your Server build or Services organization. Azure's OAuth scope names do not necessarily correspond to PAT scope checkboxes; do not assume a `vso.hooks_write` option exists. See [Service Hooks permissions](https://learn.microsoft.com/en-us/azure/devops/service-hooks/overview?view=azure-devops).
+
+Provider sharing lets another Dokploy user use its credentials to select accessible repositories. Only its creator or the organization owner/admin can manage the provider, subject to the Git Providers operation permissions. Assigned-only access permits connecting a new service; it does not grant the right to edit another user's existing source configuration.
+
+## Configure a provider and service
+
+1. Open **Settings → Git Providers → Azure DevOps**. Enter a name, root URL and PAT, then save.
+2. Open the provider's edit dialog and select **Test saved connection** to confirm project discovery.
+3. Open an Application or Compose service's **Provider → Azure DevOps** tab.
+4. Select the provider, project, repository and branch. Repository selection suggests its default branch. Empty repositories need an initial commit before they can be selected for deployment.
+5. For Applications, enter the build path. For Compose, enter the Compose file path. Optionally set watch paths and submodules, then save the source.
+6. Deploy manually, or enable automatic deployments and check the hook status shown beneath the source form.
+
+Source saves preserve the service's current deployment status. Repositories are referenced by GUID; display names are informational. Dokploy refreshes repository metadata before cloning so repository renames do not require saving a new clone URL.
+
+## Automatic deployment hooks
+
+Dokploy creates a project/repository/branch-filtered `git.push` subscription. No manual subscription setup is required. It updates the subscription when the selected branch or webhook token changes, removes it when automatic deployments are disabled, and recreates it when they are enabled again.
+
+A hook setup failure does not discard your source. Manual deployment remains available. Read the error and select **Retry hook synchronization** after correcting permissions or connectivity. Startup and periodic reconciliation also retry pending state. Changes to Dokploy's configured host/protocol and provider PAT trigger reconciliation.
+
+The external-link button beside **Retry hook synchronization** opens the selected project's Service Hooks page in Azure DevOps. The status badge is green when active and orange when disabled.
+
+On disconnect, source/provider changes or deletion, old callbacks become invalid and Dokploy attempts remote cleanup. If cleanup fails, the retained information appears under **Settings → Git Providers** and in the source hook status while the service exists. Remove the recorded subscription in Azure DevOps. If a create response was lost before the subscription ID could be recorded, locate the callback containing the `dokployService` marker for that service.
+
+Service Hook access to the callback URL acts as a deployment credential. Dokploy uses the service's existing webhook token and never sends the Azure PAT to the callback.
+
+## Rotation
+
+Edit the provider to replace its PAT. The PAT field starts empty; leaving it empty preserves the current token. Test the saved connection after rotation. A provider root URL cannot be changed while services remain connected; create a separate provider for another organization or collection.
+
+Rotate a service's webhook token using its existing token rotation action. Dokploy updates the subscription callback and rejects the old token. If Azure is temporarily unavailable, the status shows the error until reconciliation succeeds.
+
+## Network requirements
+
+| Direction | Purpose |
+| --- | --- |
+| Dokploy → Azure organization/collection | REST discovery, repository metadata, diffs and subscription management |
+| Deployment/build server → Azure Git HTTPS URL | Clone and same-collection submodules |
+| Azure → Dokploy public callback | Push-triggered deployment |
+
+Submodule PAT authentication is limited to HTTPS repositories inside the configured organization/collection. The Azure PAT is not sent automatically to another host, collection or organization. Git redirects are disabled. Clone credentials are temporary process configuration and do not persist in `origin` or Git config.
+
+Watch paths compare the selected branch's old/new commits, including paginated changes and rename paths. If an initial branch push, unrelated force push or API failure prevents a reliable diff, Dokploy deploys and records an explanation. An empty watch-path list needs no diff request. Webhook deliveries retain Dokploy's existing queue guarantees; they do not introduce exactly-once delivery.
+
+## Troubleshooting
+
+- **401 / login HTML / redirect:** check PAT expiration, the collection root and server authentication settings. Redirect responses are deliberately rejected.
+- **IIS Basic Authentication:** enabling the IIS Basic Authentication feature can interfere with Azure DevOps Server PAT authentication. Sending the REST `Authorization: Basic` header for a PAT is different from enabling IIS Basic Authentication. Review [Microsoft's PAT guidance](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops).
+- **403:** check both repository/project access and Service Hooks View/Edit subscription permissions. A successful repository clone does not establish permission to create hooks.
+- **404:** retain the full collection path, including `/tfs` when required, and verify project/repository access. Do not use the server host alone.
+- **TLS or connection error:** install the trusted CA on Dokploy and every deployment/build server; check DNS, firewall and port access. Certificate verification is required.
+- **Cleanup pending:** remove the recorded subscription in Azure. If the original provider still exists, retry synchronization after restoring connectivity or permissions. Deleted-provider credentials are not retained for cleanup.
+
+Preview deployments, TFVC, Windows/NTLM, OAuth/Entra, older Server releases and additional Git LFS support are not included.
