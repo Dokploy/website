@@ -45,6 +45,12 @@ const competitors = [
 			"Compare Dokploy's self-hosted infrastructure ownership to Render's fully managed, per-service PaaS.",
 	},
 	{
+		name: "Railway",
+		href: "/dokploy-vs-railway",
+		description:
+			"See how Dokploy's flat per-server pricing and native Docker Compose support compare to Railway's usage-based managed platform.",
+	},
+	{
 		name: "Vercel",
 		href: "/dokploy-vs-vercel",
 		description:
