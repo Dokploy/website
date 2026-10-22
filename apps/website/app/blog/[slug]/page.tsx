@@ -190,7 +190,7 @@ export default async function BlogPostPage({ params }: Props) {
 			<ZoomableImage
 				src={typeof src === "string" ? src : ""}
 				alt={alt || ""}
-				className="mx-auto max-w-lg overflow-hidden rounded-lg border border-border object-cover max-lg:w-64"
+				className="mx-auto h-auto w-full rounded-lg border border-border"
 			/>
 		),
 		code: ({
