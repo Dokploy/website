@@ -78,6 +78,27 @@ export interface Post {
 		bio: string | null;
 	}>;
 	url: string;
+	canonical_url: string | null;
+}
+
+export const SITE_URL = "https://dokploy.com";
+
+// Canonical for a post: Ghost's canonical_url if set, otherwise the post's
+// own /blog/[slug] URL. Always absolute, without query string or hash.
+export function getPostCanonicalUrl(
+	post: Pick<Post, "slug" | "canonical_url">,
+) {
+	const fallback = `${SITE_URL}/blog/${post.slug}`;
+	if (!post.canonical_url) return fallback;
+	try {
+		const url = new URL(post.canonical_url, SITE_URL);
+		// Never canonicalize to the Ghost CMS duplicate
+		if (url.hostname === "cms.dokploy.com") return fallback;
+		if (url.hostname === "www.dokploy.com") url.hostname = "dokploy.com";
+		return `${url.origin}${url.pathname}`;
+	} catch {
+		return fallback;
+	}
 }
 
 export async function getPosts(options = {}): Promise<Post[]> {
@@ -107,24 +128,24 @@ export async function getPost(slug: string): Promise<Post | null> {
 	}
 }
 
-export async function getTags() {
+export async function getTags(): Promise<{ slug: string; name: string }[]> {
 	try {
 		const result = await api.tags.browse();
-		return result;
+		return result as { slug: string; name: string }[];
 	} catch (error) {
 		console.error("Error fetching tags:", error);
 		return [];
 	}
 }
 
-export async function getPostsByTag(tag: string) {
+export async function getPostsByTag(tag: string): Promise<Post[]> {
 	try {
 		const result = await api.posts.browse({
 			limit: "all",
 			filter: `tag:${tag}`,
 			include: ["tags", "authors"],
 		});
-		return result;
+		return result as Post[];
 	} catch (error) {
 		console.error(`Error fetching posts with tag ${tag}:`, error);
 		return [];

@@ -1,13 +1,13 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Globe, Bell, Users, Shield } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bell, Check, Globe, Shield, Users, X, Zap } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Dokploy vs. Dokku Comparison | Dokploy | Dokploy",
@@ -26,12 +26,26 @@ interface FeatureRow {
 
 const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
-	{ feature: "One-command installation", dokploy: true, dokku: true, section: "Setup & Installation" },
+	{
+		feature: "One-command installation",
+		dokploy: true,
+		dokku: true,
+		section: "Setup & Installation",
+	},
 	{ feature: "Web-based UI dashboard", dokploy: true, dokku: false },
-	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, dokku: false },
+	{
+		feature: "Works with firewall and Tailscale out of the box",
+		dokploy: true,
+		dokku: false,
+	},
 	{ feature: "Lightweight CPU usage while idle", dokploy: true, dokku: true },
 	// Deployment
-	{ feature: "Deploy from GitHub, GitLab, Bitbucket", dokploy: true, dokku: "limited", section: "Deployment" },
+	{
+		feature: "Deploy from GitHub, GitLab, Bitbucket",
+		dokploy: true,
+		dokku: "limited",
+		section: "Deployment",
+	},
 	{ feature: "Auto-deploy on git push", dokploy: true, dokku: true },
 	{ feature: "Docker Compose support", dokploy: true, dokku: "limited" },
 	{ feature: "Deploy from custom Docker images", dokploy: true, dokku: true },
@@ -39,20 +53,44 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "Preview deployments (review apps)", dokploy: true, dokku: false },
 	{ feature: "One-click app templates", dokploy: true, dokku: false },
 	// Networking & Domains
-	{ feature: "Built-in reverse proxy", dokploy: true, dokku: true, section: "Networking & Domains" },
+	{
+		feature: "Built-in reverse proxy",
+		dokploy: true,
+		dokku: true,
+		section: "Networking & Domains",
+	},
 	{ feature: "Automatic SSL via Let's Encrypt", dokploy: true, dokku: true },
 	{ feature: "Custom domain management via UI", dokploy: true, dokku: false },
 	// Data & Backups
-	{ feature: "Database deployment (Postgres, MySQL, Redis, etc.)", dokploy: true, dokku: true, section: "Data & Backups" },
-	{ feature: "Scheduled database backups (S3)", dokploy: true, dokku: "limited" },
+	{
+		feature: "Database deployment (Postgres, MySQL, Redis, etc.)",
+		dokploy: true,
+		dokku: true,
+		section: "Data & Backups",
+	},
+	{
+		feature: "Scheduled database backups (S3)",
+		dokploy: true,
+		dokku: "limited",
+	},
 	{ feature: "Back up arbitrary Docker volumes", dokploy: true, dokku: false },
 	// Monitoring & Alerts
-	{ feature: "Real-time monitoring (CPU, RAM, disk)", dokploy: true, dokku: false, section: "Monitoring & Alerts" },
+	{
+		feature: "Real-time monitoring (CPU, RAM, disk)",
+		dokploy: true,
+		dokku: false,
+		section: "Monitoring & Alerts",
+	},
 	{ feature: "Metrics enabled by default", dokploy: true, dokku: false },
 	{ feature: "Automated alerts from metrics", dokploy: true, dokku: false },
 	{ feature: "Application log viewer in UI", dokploy: true, dokku: false },
 	// Teams & Access
-	{ feature: "Teams and multi-user support", dokploy: true, dokku: false, section: "Teams & Access" },
+	{
+		feature: "Teams and multi-user support",
+		dokploy: true,
+		dokku: false,
+		section: "Teams & Access",
+	},
 	{ feature: "Role-based access control (RBAC)", dokploy: true, dokku: false },
 	{ feature: "Projects grouping", dokploy: true, dokku: false },
 	{ feature: "Multi-server deployment", dokploy: true, dokku: false },
@@ -121,19 +159,23 @@ const integrationRows = [
 	},
 	{
 		category: "Build and deployment systems",
-		dokploy: "Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+		dokploy:
+			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
 		dokku: "Docker, Heroku Buildpacks (via plugins)",
 	},
 	{
 		category: "Notifications and communication",
-		dokploy: "Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+		dokploy:
+			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		dokku: "None built-in",
 	},
 ];
 
 function FeatureCell({ value }: { value: FeatureValue }) {
-	if (value === true) return <Check className="mx-auto h-5 w-5 text-green-500" />;
-	if (value === "limited") return <span className="text-xs text-amber-500">Limited</span>;
+	if (value === true)
+		return <Check className="mx-auto h-5 w-5 text-green-500" />;
+	if (value === "limited")
+		return <span className="text-xs text-amber-500">Limited</span>;
 	return <X className="mx-auto h-5 w-5 text-muted-foreground/50" />;
 }
 
@@ -176,10 +218,9 @@ export default function DokployVsDokkuPage() {
 								<h3 className="text-xl font-semibold text-white">Dokku</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
 									For experienced developers who prefer a CLI-driven,
-									Heroku-like PaaS that's minimal and scriptable, with a
-									plugin ecosystem for extending functionality—choose Dokku.
-									Trade-offs include fewer enterprise features and
-									integrations.
+									Heroku-like PaaS that's minimal and scriptable, with a plugin
+									ecosystem for extending functionality—choose Dokku. Trade-offs
+									include fewer enterprise features and integrations.
 								</p>
 							</div>
 						</div>
@@ -190,8 +231,8 @@ export default function DokployVsDokkuPage() {
 							</h2>
 							<p className="mt-4 text-muted-foreground">
 								Choose Dokploy if you want complete control over your
-								infrastructure with a simpler way to manage apps, databases,
-								and multiple servers.
+								infrastructure with a simpler way to manage apps, databases, and
+								multiple servers.
 							</p>
 						</div>
 
@@ -226,7 +267,9 @@ export default function DokployVsDokkuPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Dokploy</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Dokploy
+									</th>
 									<th className="px-4 py-4 text-center font-semibold">Dokku</th>
 								</tr>
 							</thead>
@@ -234,7 +277,10 @@ export default function DokployVsDokkuPage() {
 								{featureComparisonRows.map((row) => (
 									<>
 										{row.section && (
-											<tr key={`section-${row.section}`} className="border-b border-border bg-muted/20">
+											<tr
+												key={`section-${row.section}`}
+												className="border-b border-border bg-muted/20"
+											>
 												<td
 													colSpan={3}
 													className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
@@ -287,7 +333,9 @@ export default function DokployVsDokkuPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
@@ -315,8 +363,7 @@ export default function DokployVsDokkuPage() {
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
 							When it comes to a Dokploy vs. Dokku comparison, you want the
-							self-hosted PaaS that syncs with the tools in your
-							workflow.
+							self-hosted PaaS that syncs with the tools in your workflow.
 						</p>
 					</div>
 
@@ -324,17 +371,16 @@ export default function DokployVsDokkuPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Dokploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Dokku</th>
 								</tr>
 							</thead>
 							<tbody>
 								{integrationRows.map((row) => (
-									<tr
-										key={row.category}
-										className="border-b border-border/50"
-									>
+									<tr key={row.category} className="border-b border-border/50">
 										<td className="px-4 py-3 font-medium">{row.category}</td>
 										<td className="px-4 py-3 text-sm text-muted-foreground">
 											{row.dokploy}

@@ -9,8 +9,7 @@ export async function GET() {
 			{ pull_count: cachedPulls.count },
 			{
 				headers: {
-					"Cache-Control":
-						"public, s-maxage=1800, stale-while-revalidate=3600",
+					"Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
 				},
 			},
 		);
@@ -45,8 +44,7 @@ export async function GET() {
 			{ pull_count: pullCount },
 			{
 				headers: {
-					"Cache-Control":
-						"public, s-maxage=1800, stale-while-revalidate=3600",
+					"Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
 				},
 			},
 		);

@@ -139,7 +139,18 @@ install_dokploy() {
     if command_exists docker; then
       echo "Docker already installed"
     else
-      curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION
+      # get.docker.com exits without installing anything when the pinned version
+      # is missing from the distro repository (Ubuntu 26.04 only ships 29.x)
+      if ! curl -sSL https://get.docker.com | sh -s -- --version $DOCKER_VERSION; then
+        echo "Docker $DOCKER_VERSION could not be installed, retrying with the latest version from the Docker repository"
+        curl -sSL https://get.docker.com | sh
+      fi
+      if ! command_exists docker; then
+        echo "Error: Docker installation failed" >&2
+        echo "Please install Docker manually (https://docs.docker.com/engine/install/) and run the installer again" >&2
+        exit 1
+      fi
+      echo "Installed $(docker --version)"
       # Hold docker packages to prevent unintended upgrades (apt-based distros only)
       if command_exists apt-mark; then
         apt-mark hold docker-ce docker-ce-cli docker-ce-rootless-extras
