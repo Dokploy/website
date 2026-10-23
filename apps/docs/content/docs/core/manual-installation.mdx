@@ -431,10 +431,10 @@ Dokploy does not update the Traefik container automatically when you upgrade. Th
 - **Dokploy server**: go to **Web Server**, open the **Traefik** menu and click **Check Version**.
 - **Remote servers**: go to **Remote Servers**, click **Web Server Actions** on the server, open the **Traefik** menu and click **Check Version**.
 
-The dialog shows the current and the latest Traefik version for your Dokploy release. When a newer version is available, click **Update**. Dokploy downloads the new image first, then recreates Traefik with the same environment variables and port mappings, and puts the previous container back if the new one fails to start. Your applications may be unreachable for a few seconds during the update.
+The dialog shows the running Traefik version and the version recommended by your Dokploy release. The recommended version is updated in new Dokploy releases. Updating is optional: when Traefik is older than the recommended version, you can click **Update**. Dokploy downloads the new image first, then recreates Traefik with the same environment variables and port mappings, and puts the previous container back if the new one fails to start. Your applications may be unreachable for a few seconds during the update.
 
 <Callout type='info'>
-  The update is only offered when Traefik is running the official image and is older than the latest version. Start a stopped Traefik with **Reload** first. A custom Traefik image is never updated by Dokploy.
+  The update is only offered when Traefik is running the official image and is older than the recommended version. Start a stopped Traefik with **Reload** first. A custom Traefik image is never updated by Dokploy.
 </Callout>
 
 ### Updating Traefik manually
