@@ -50,7 +50,12 @@ else
 
     # Run 2FA migration inside the Dokploy container
     echo "🔄 Migrating existing 2FA records..."
-    DOKPLOY_CONTAINER=$(docker ps --filter "name=dokploy" --format "{{.ID}}" | head -n1)
+    # Select the dokploy service's task by its Swarm label: a name filter is a
+    # substring match that also hits dokploy-postgres and dokploy-traefik
+    DOKPLOY_CONTAINER=$(docker ps \
+        --filter "label=com.docker.swarm.service.name=dokploy" \
+        --format "{{.ID}}" \
+        | head -n1)
 
     if [ -n "$DOKPLOY_CONTAINER" ]; then
         # v0.29.3/v0.29.4 images finish the migration but never exit when
