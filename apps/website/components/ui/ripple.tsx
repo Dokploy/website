@@ -97,7 +97,7 @@ const Ripple = React.memo(function Ripple({
 			link: "https://cloudblast.io/?ref=dokploy",
 			type: "supporting",
 		},
-		
+
 		{
 			name: "Synexa",
 			image:
@@ -119,7 +119,7 @@ const Ripple = React.memo(function Ripple({
 		},
 	];
 
-	const communitySponsors = [];
+	const communitySponsors: { name: string; image: string; link: string }[] = [];
 
 	return (
 		<div

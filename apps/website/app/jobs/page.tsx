@@ -1,10 +1,10 @@
 import { Container } from "@/components/Container";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { MapPin, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, MapPin } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Dokploy Jobs & Open Positions",
@@ -41,8 +41,9 @@ export default function JobsPage() {
 						</h1>
 						<p className="mt-4 text-lg text-muted-foreground">
 							We&apos;re a small, focused team building tools that developers
-							actually love. If you care about open source, developer experience,
-							and shipping things that matter — you&apos;ll fit right in.
+							actually love. If you care about open source, developer
+							experience, and shipping things that matter — you&apos;ll fit
+							right in.
 						</p>
 						<Button asChild size="lg" className="mt-8">
 							<Link href="#open-positions">See open positions</Link>
@@ -103,7 +104,6 @@ export default function JobsPage() {
 					)}
 				</Container>
 			</section>
-
 		</div>
 	);
 }

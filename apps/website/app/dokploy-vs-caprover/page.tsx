@@ -1,13 +1,13 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import { Testimonials } from "@/components/Testimonials";
 import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Bell, Users, LayoutDashboard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bell, Check, LayoutDashboard, Users, X, Zap } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Dokploy vs. CapRover Comparison | Dokploy",
@@ -26,35 +26,101 @@ interface FeatureRow {
 
 const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
-	{ feature: "One-command installation", dokploy: true, caprover: true, section: "Setup & Installation" },
-	{ feature: "Installation feedback and progress logs", dokploy: true, caprover: false },
-	{ feature: "Works with firewall and Tailscale out of the box", dokploy: true, caprover: false },
-	{ feature: "Lightweight CPU usage while idle", dokploy: true, caprover: false },
-	{ feature: "Built with Next.js / TypeScript", dokploy: true, caprover: false },
+	{
+		feature: "One-command installation",
+		dokploy: true,
+		caprover: true,
+		section: "Setup & Installation",
+	},
+	{
+		feature: "Installation feedback and progress logs",
+		dokploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Works with firewall and Tailscale out of the box",
+		dokploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Lightweight CPU usage while idle",
+		dokploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Built with Next.js / TypeScript",
+		dokploy: true,
+		caprover: false,
+	},
 	// Deployment
-	{ feature: "Deploy from GitHub, GitLab, Bitbucket", dokploy: true, caprover: "limited", section: "Deployment" },
+	{
+		feature: "Deploy from GitHub, GitLab, Bitbucket",
+		dokploy: true,
+		caprover: "limited",
+		section: "Deployment",
+	},
 	{ feature: "Auto-deploy on git push", dokploy: true, caprover: true },
 	{ feature: "Docker Compose support", dokploy: true, caprover: "limited" },
-	{ feature: "Deploy from custom Docker images", dokploy: true, caprover: true },
+	{
+		feature: "Deploy from custom Docker images",
+		dokploy: true,
+		caprover: true,
+	},
 	{ feature: "Nixpacks and Buildpack support", dokploy: true, caprover: false },
-	{ feature: "Preview deployments (review apps)", dokploy: true, caprover: false },
+	{
+		feature: "Preview deployments (review apps)",
+		dokploy: true,
+		caprover: false,
+	},
 	{ feature: "One-click app templates", dokploy: true, caprover: true },
 	// Networking & Domains
-	{ feature: "Built-in reverse proxy (Dokploy: Traefik, CapRover: Nginx)", dokploy: true, caprover: true, section: "Networking & Domains" },
+	{
+		feature: "Built-in reverse proxy (Dokploy: Traefik, CapRover: Nginx)",
+		dokploy: true,
+		caprover: true,
+		section: "Networking & Domains",
+	},
 	{ feature: "Automatic SSL via Let's Encrypt", dokploy: true, caprover: true },
 	{ feature: "Custom domain management", dokploy: true, caprover: true },
 	// Infrastructure
-	{ feature: "Multi-server deployment", dokploy: true, caprover: "limited", section: "Infrastructure" },
+	{
+		feature: "Multi-server deployment",
+		dokploy: true,
+		caprover: "limited",
+		section: "Infrastructure",
+	},
 	{ feature: "Docker Swarm clustering", dokploy: true, caprover: true },
-	{ feature: "Scheduled database backups (S3)", dokploy: true, caprover: false },
-	{ feature: "Back up arbitrary Docker volumes", dokploy: true, caprover: false },
+	{
+		feature: "Scheduled database backups (S3)",
+		dokploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Back up arbitrary Docker volumes",
+		dokploy: true,
+		caprover: false,
+	},
 	// Monitoring & Alerts
-	{ feature: "Real-time monitoring (CPU, RAM, disk)", dokploy: true, caprover: false, section: "Monitoring & Alerts" },
+	{
+		feature: "Real-time monitoring (CPU, RAM, disk)",
+		dokploy: true,
+		caprover: false,
+		section: "Monitoring & Alerts",
+	},
 	{ feature: "Metrics enabled by default", dokploy: true, caprover: false },
 	{ feature: "Automated alerts from metrics", dokploy: true, caprover: false },
 	// Teams & Access
-	{ feature: "Teams and multi-user support", dokploy: true, caprover: false, section: "Teams & Access" },
-	{ feature: "Role-based access control (RBAC)", dokploy: true, caprover: false },
+	{
+		feature: "Teams and multi-user support",
+		dokploy: true,
+		caprover: false,
+		section: "Teams & Access",
+	},
+	{
+		feature: "Role-based access control (RBAC)",
+		dokploy: true,
+		caprover: false,
+	},
 	{ feature: "Projects grouping", dokploy: true, caprover: false },
 	{ feature: "API and CLI access", dokploy: true, caprover: true },
 	{ feature: "AI-assisted deployments", dokploy: true, caprover: false },
@@ -111,19 +177,23 @@ const integrationRows = [
 	},
 	{
 		category: "Build and deployment systems",
-		dokploy: "Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+		dokploy:
+			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
 		caprover: "Docker, Captain Definition file",
 	},
 	{
 		category: "Notifications and communication",
-		dokploy: "Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+		dokploy:
+			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		caprover: "None built-in",
 	},
 ];
 
 function FeatureCell({ value }: { value: FeatureValue }) {
-	if (value === true) return <Check className="mx-auto h-5 w-5 text-green-500" />;
-	if (value === "limited") return <span className="text-xs text-amber-500">Limited</span>;
+	if (value === true)
+		return <Check className="mx-auto h-5 w-5 text-green-500" />;
+	if (value === "limited")
+		return <span className="text-xs text-amber-500">Limited</span>;
 	return <X className="mx-auto h-5 w-5 text-muted-foreground/50" />;
 }
 
@@ -166,8 +236,8 @@ export default function DokployVsCapRoverPage() {
 								<h3 className="text-xl font-semibold text-white">CapRover</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
 									For solo developers who want a simple, Heroku-like PaaS with
-									one-click apps and a straightforward captain dashboard
-									that's easy to get started with—choose CapRover.
+									one-click apps and a straightforward captain dashboard that's
+									easy to get started with—choose CapRover.
 								</p>
 							</div>
 						</div>
@@ -203,15 +273,22 @@ export default function DokployVsCapRoverPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Dokploy</th>
-									<th className="px-4 py-4 text-center font-semibold">CapRover</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Dokploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										CapRover
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{featureComparisonRows.map((row) => (
 									<>
 										{row.section && (
-											<tr key={`section-${row.section}`} className="border-b border-border bg-muted/20">
+											<tr
+												key={`section-${row.section}`}
+												className="border-b border-border bg-muted/20"
+											>
 												<td
 													colSpan={3}
 													className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
@@ -264,7 +341,9 @@ export default function DokployVsCapRoverPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
@@ -300,17 +379,18 @@ export default function DokployVsCapRoverPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Dokploy</th>
-									<th className="px-4 py-4 text-left font-semibold">CapRover</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										CapRover
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{integrationRows.map((row) => (
-									<tr
-										key={row.category}
-										className="border-b border-border/50"
-									>
+									<tr key={row.category} className="border-b border-border/50">
 										<td className="px-4 py-3 font-medium">{row.category}</td>
 										<td className="px-4 py-3 text-sm text-muted-foreground">
 											{row.dokploy}

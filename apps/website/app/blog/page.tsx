@@ -1,4 +1,4 @@
-import { getPosts, getTags } from "@/lib/ghost";
+import { SITE_URL, getPosts, getTags } from "@/lib/ghost";
 import type { Post } from "@/lib/ghost";
 import { RssIcon } from "lucide-react";
 import type { Metadata } from "next";
@@ -15,6 +15,12 @@ interface Tag {
 export const metadata: Metadata = {
 	title: "Blog",
 	description: "Latest news, updates, and articles from Dokploy",
+	alternates: {
+		canonical: `${SITE_URL}/blog`,
+	},
+	openGraph: {
+		url: `${SITE_URL}/blog`,
+	},
 };
 
 export default async function BlogPage({
