@@ -15,9 +15,10 @@ This section is designed for experienced users who need to manage complex config
 - **Purpose**: Manages the scaling and distribution of the application across multiple servers or nodes.
 - **Replicas**: Set the number of instances of your **application** that should be running.
 - **Registry Selection**: Choose the Docker registry from which your container images will be pulled. This is crucial for ensuring that the correct images are used during deployment.
+- **Reuse backend connections**: On by default. Turn it off to disable Traefik backend connection reuse for the application's Swarm service. This avoids reusing a backend connection to a replica removed during a rolling update. A custom transport set through the Traefik editor is kept and continues to control that route's connection behavior.
 
 #### Important Note
-Always click 'Redeploy' after modifying the cluster settings to apply the changes.
+Always click 'Redeploy' after modifying the cluster settings to apply the changes. **Reuse backend connections** is the exception: it updates the application's routes when you save. If the route update fails, resolve the error and save again to retry; this also works when you save the currently stored value.
 
 ### Swarm Settings
 
