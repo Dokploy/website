@@ -368,7 +368,7 @@ export function EnterpriseLanding() {
 						<div className="group overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black transition hover:border-border/60">
 							<div className="aspect-video w-full overflow-hidden bg-gray-900/80">
 								<img
-									src="/enterprise/custom-roles.png"
+									src="/enterprise/custom-roles.webp"
 									alt="Create custom roles with fine-grained permissions"
 									className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
 								/>
@@ -387,7 +387,7 @@ export function EnterpriseLanding() {
 						<div className="group overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black transition hover:border-border/60">
 							<div className="w-full overflow-hidden bg-gray-950 p-4">
 								<img
-									src="/enterprise/git-permission.png"
+									src="/enterprise/git-permission.webp"
 									alt="Assign git providers to individual team members"
 									className="w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.02]"
 								/>
@@ -406,7 +406,7 @@ export function EnterpriseLanding() {
 						<div className="group overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-b from-gray-900/50 to-black transition hover:border-border/60">
 							<div className="w-full overflow-hidden bg-gray-950 p-4">
 								<img
-									src="/enterprise/servers-permission.png"
+									src="/enterprise/servers-permission.webp"
 									alt="Assign remote servers to individual team members"
 									className="w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.02]"
 								/>

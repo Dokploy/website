@@ -1,4 +1,4 @@
-import { getPost, getPosts } from "@/lib/ghost";
+import { SITE_URL, getPost, getPostCanonicalUrl, getPosts } from "@/lib/ghost";
 import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,20 +37,23 @@ export async function generateMetadata(
 
 	const ogUrl = new URL(
 		"/api/og",
-		process.env.NODE_ENV === "production"
-			? "https://dokploy.com"
-			: "http://localhost:3001",
+		process.env.NODE_ENV === "production" ? SITE_URL : "http://localhost:3001",
 	);
 	ogUrl.searchParams.set("slug", slug);
+
+	const canonicalUrl = getPostCanonicalUrl(post);
 
 	return {
 		title: post.title,
 		description: post.custom_excerpt || post.excerpt,
+		alternates: {
+			canonical: canonicalUrl,
+		},
 		openGraph: {
 			title: post.title,
 			description: post.custom_excerpt || post.excerpt,
 			type: "article",
-			url: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${post.slug}`,
+			url: canonicalUrl,
 			images: [
 				{
 					url: ogUrl.toString(),
@@ -87,21 +90,20 @@ export default async function BlogPostPage({ params }: Props) {
 			const scripts = doc.querySelectorAll(
 				'script[type="application/ld+json"], script',
 			);
-			scripts.forEach((script) => script.remove());
+			for (const script of scripts) script.remove();
 			const unwantedElements = doc.querySelectorAll("style, meta, link");
-			unwantedElements.forEach((el) => el.remove());
+			for (const el of unwantedElements) el.remove();
 			return doc.body.innerHTML;
-		} else {
-			return html
-				.replace(
-					/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
-					"",
-				)
-				.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-				.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
-				.replace(/<meta[^>]*>/gi, "")
-				.replace(/<link[^>]*>/gi, "");
 		}
+		return html
+			.replace(
+				/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi,
+				"",
+			)
+			.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+			.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+			.replace(/<meta[^>]*>/gi, "")
+			.replace(/<link[^>]*>/gi, "");
 	};
 
 	const turndownService = new TurndownService({
@@ -186,9 +188,9 @@ export default async function BlogPostPage({ params }: Props) {
 		),
 		img: ({ node, src, alt }) => (
 			<ZoomableImage
-				src={src || ""}
+				src={typeof src === "string" ? src : ""}
 				alt={alt || ""}
-				className="mx-auto max-w-lg overflow-hidden rounded-lg border border-border object-cover max-lg:w-64"
+				className="mx-auto h-auto w-full rounded-lg border border-border"
 			/>
 		),
 		code: ({
@@ -196,9 +198,9 @@ export default async function BlogPostPage({ params }: Props) {
 			children,
 			inline,
 		}: {
-			className: string;
-			children: React.ReactNode;
-			inline: boolean;
+			className?: string;
+			children?: React.ReactNode;
+			inline?: boolean;
 		}) => {
 			if (inline || !className || !/language-(\w+)/.test(className)) {
 				return (

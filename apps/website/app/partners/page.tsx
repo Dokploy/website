@@ -1,11 +1,11 @@
 import { Container } from "@/components/Container";
 import { PartnerForm } from "@/components/PartnerForm";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Check } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Partners",
@@ -33,8 +33,7 @@ const PROGRAMS = [
 		title: "Referral Program",
 		badge: "Available",
 		badgeVariant: "default" as const,
-		description:
-			"Earn 20% commission on every customer you refer to Dokploy.",
+		description: "Earn 20% commission on every customer you refer to Dokploy.",
 		features: [
 			"Co-marketing opportunities",
 			"Partner dashboard",
@@ -100,10 +99,7 @@ export default function PartnersPage() {
 								key={program.title}
 								className="flex flex-col rounded-2xl border border-border/50 bg-black/80 p-6"
 							>
-								<Badge
-									variant={program.badgeVariant}
-									className="mb-4 w-fit"
-								>
+								<Badge variant={program.badgeVariant} className="mb-4 w-fit">
 									{program.badge}
 								</Badge>
 								<h2 className="text-xl font-semibold text-white">

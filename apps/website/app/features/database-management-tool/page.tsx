@@ -1,34 +1,34 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Container } from "@/components/Container";
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Database,
 	Activity,
-	Shield,
-	Archive,
-	FileText,
-	RotateCcw,
-	Link2,
-	Container as ContainerIcon,
-	Terminal,
-	HardDrive,
-	Cpu,
-	Keyboard,
 	AlertTriangle,
-	Lock,
+	Archive,
+	Container as ContainerIcon,
+	Cpu,
+	Database,
+	FileText,
+	HardDrive,
 	KeyRound,
+	Keyboard,
+	Link2,
+	Lock,
+	RotateCcw,
+	Shield,
 	ShieldCheck,
+	Terminal,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Database Management Tool & Deployment Software",
@@ -213,7 +213,11 @@ export default function DatabaseManagementToolPage() {
 								className="rounded-full bg-[#5965F2] hover:bg-[#4A55E0]"
 								asChild
 							>
-								<Link href="/contact" aria-label="Contact Us" className="text-white">
+								<Link
+									href="/contact"
+									aria-label="Contact Us"
+									className="text-white"
+								>
 									Contact Us
 								</Link>
 							</Button>
@@ -357,9 +361,8 @@ export default function DatabaseManagementToolPage() {
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
 							Your database data is stored on your own server. Dokploy creates
-							Docker containers on your infrastructure, so you have full
-							control over your data&mdash;no third parties, no external
-							dependencies.
+							Docker containers on your infrastructure, so you have full control
+							over your data&mdash;no third parties, no external dependencies.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-3">

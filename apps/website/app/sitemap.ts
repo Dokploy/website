@@ -32,6 +32,7 @@ const comparisonPages = [
 	"/dokploy-vs-caprover",
 	"/dokploy-vs-dokku",
 	"/dokploy-vs-render",
+	"/dokploy-vs-railway",
 	"/dokploy-vs-vercel",
 ];
 

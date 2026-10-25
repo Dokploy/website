@@ -1,5 +1,5 @@
 import { CopyMarkdownButton } from "@/components/copy-markdown-button";
-import { getPageImage, getLLMText, source } from "@/lib/source";
+import { getLLMText, getPageImage, source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import {
 	DocsBody,

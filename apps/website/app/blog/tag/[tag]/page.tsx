@@ -1,4 +1,4 @@
-import { getPostsByTag, getTags } from "@/lib/ghost";
+import { SITE_URL, getPostsByTag, getTags } from "@/lib/ghost";
 import type { Post } from "@/lib/ghost";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -26,6 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	return {
 		title: `${tagName} Posts`,
 		description: `Browse all posts tagged with ${tagName}`,
+		alternates: {
+			canonical: `${SITE_URL}/blog/tag/${tag}`,
+		},
 	};
 }
 

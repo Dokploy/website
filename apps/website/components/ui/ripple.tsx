@@ -61,7 +61,7 @@ const Ripple = React.memo(function Ripple({
 	const premiumSponsors = [
 		{
 			name: "Supafort",
-			image: "supafort.png",
+			image: "supafort.webp",
 			link: "https://supafort.com/?ref=dokploy",
 			type: "premium",
 		},
@@ -84,7 +84,7 @@ const Ripple = React.memo(function Ripple({
 		},
 		{
 			name: "Tolgee",
-			image: "tolgee-logo.png",
+			image: "tolgee-logo.webp",
 			link: "https://tolg.ee/hrszh9",
 			type: "elite",
 		},
@@ -97,7 +97,7 @@ const Ripple = React.memo(function Ripple({
 			link: "https://cloudblast.io/?ref=dokploy",
 			type: "supporting",
 		},
-		
+
 		{
 			name: "Synexa",
 			image:
@@ -107,7 +107,7 @@ const Ripple = React.memo(function Ripple({
 		},
 		{
 			name: "HahuCloud",
-			image: "hahucloud_logo_1.png",
+			image: "hahucloud_logo_1.webp",
 			link: "https://www.hahucloud.com/?ref=dokploy",
 			type: "supporting",
 		},
@@ -119,7 +119,7 @@ const Ripple = React.memo(function Ripple({
 		},
 	];
 
-	const communitySponsors = [];
+	const communitySponsors: { name: string; image: string; link: string }[] = [];
 
 	return (
 		<div
