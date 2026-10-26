@@ -50,8 +50,7 @@ else
 
     # Run 2FA migration inside the Dokploy container
     echo "🔄 Migrating existing 2FA records..."
-    # Select the dokploy service's task by its Swarm label: a name filter is a
-    # substring match that also hits dokploy-postgres and dokploy-traefik
+    # Match by Swarm label: name=dokploy also matches dokploy-postgres and dokploy-traefik
     DOKPLOY_CONTAINER=$(docker ps \
         --filter "label=com.docker.swarm.service.name=dokploy" \
         --format "{{.ID}}" \
