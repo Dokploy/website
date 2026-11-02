@@ -5,6 +5,26 @@ description: "Learn how to schedule and manage backups for your databases in Dok
 
 Dokploy provides an integrated solution for backing up your databases, ensuring data safety and recovery capabilities.
 
+## MySQL backup contents
+
+A MySQL backup includes the selected database's tables and rows, views, triggers, stored procedures, functions, and event definitions. Server users and grants are outside the scope of this backup. After restoring, verify the routines and event definitions in the destination database.
+
+### Database names containing apostrophes
+
+Dokploy normally uses the dump client in the database container. If the database name contains an apostrophe, Dokploy first checks whether that client can dump the database definitions. If the check succeeds, the native client writes the backup.
+
+Dokploy uses a temporary MySQL 9.7.4 client container only for a known MySQL 8.4.11 failure. The native check exits with code 2 and reports `Unknown database` (1049) for the exact database name when dumping routines.
+
+The temporary client has three requirements.
+
+- The Docker host must have the pinned client image or be able to pull it by digest.
+- The source MySQL server must accept TCP connections with TLS on its internal port.
+- The existing MySQL root credentials must allow authentication over that connection.
+
+Dokploy verifies the server identity before dumping and removes the temporary container afterward. If a requirement is missing, the backup fails. Check the backup log before retrying.
+
+This fallback has been tested on Linux ARM64 with MySQL 8.4.11, the pinned 9.7.4 client, ASCII database names, and UTF-8 row data.
+
 ## Backing Up Your Database
 
 To configure database backups, navigate to the `Backup` tab within your Dokploy dashboard. Here’s what you’ll need to set up:
