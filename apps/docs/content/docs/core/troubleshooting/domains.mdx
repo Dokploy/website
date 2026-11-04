@@ -142,8 +142,27 @@ export default defineConfig({
 });
 ```
 
+#### Example Configuration for Next.js Standalone in Docker Compose
+A Next.js app built with `output: "standalone"` listens on the address in the `HOSTNAME` environment variable, and Docker sets `HOSTNAME` to the container ID by default. When a Docker Compose service has a domain, Dokploy attaches it to both `dokploy-network` and the project's default network, so the container ID resolves to two addresses and the app listens on only one of them. When it picks the default network address, Traefik cannot reach the app on `dokploy-network`, and the domain returns Bad Gateway on some deployments but not others.
+
+Set `HOSTNAME` to `0.0.0.0` so the app listens on every network, either in your Dockerfile, as the [official Next.js Docker example](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile) does:
+
+```dockerfile
+ENV HOSTNAME="0.0.0.0"
+```
+
+Or on the service in your Docker Compose file:
+
+```yaml
+services:
+  app:
+    environment:
+      - HOSTNAME=0.0.0.0
+```
+
 ### Framework-Specific Notes
 - **Vite Apps**: Use the configuration above
+- **Next.js (standalone output)**: Set `HOSTNAME=0.0.0.0` as shown above
 - **Astro**: Similar configuration in `astro.config.mjs`
 - **Vue.js**: Configure in `vite.config.js` if using Vite
 - **Other Frameworks**: Check your framework's documentation for network interface configuration
