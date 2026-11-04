@@ -1,0 +1,118 @@
+---
+title: Ownership Transfer
+description: "Hand your Dokploy instance and its organizations over to another user."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+When you host Dokploy yourself, the instance has a single **instance owner**. It starts as the account created during setup, and only the instance owner can create organizations.
+
+When the instance owner leaves, they can transfer ownership to another user. The new owner takes over the instance and every organization the previous owner owned.
+
+<Callout type="info">
+Ownership transfer is only available when you host Dokploy yourself. Dokploy Cloud works differently and isn't affected.
+</Callout>
+
+## Before you start
+
+The new owner must have an account on this instance, belong to any existing organization, and not be deactivated.
+
+## Transfer ownership
+
+<Steps>
+<Step>
+
+Go to **Settings → Profile**. The **Instance Ownership** card is only shown to the instance owner.
+
+</Step>
+<Step>
+
+Search for the new owner by name or email, then click **Transfer Ownership**.
+
+</Step>
+<Step>
+
+Enter your password to confirm. Dokploy creates the invitation and copies its link to your clipboard.
+
+</Step>
+<Step>
+
+Send the link to the new owner. They can also find the invitation under the notification bell in the sidebar.
+
+</Step>
+</Steps>
+
+Nothing changes until the new owner accepts. The invitation expires after 48 hours.
+
+While the invitation is pending, the card shows who it was sent to, with buttons to copy the link again or cancel the transfer. Only one invitation can be pending at a time. To send it to someone else, cancel it and start again.
+
+<Callout type="warn">
+If your account has no password, for example because you only sign in with SSO, you can't transfer ownership from the dashboard. Use the [command line](#transfer-from-the-command-line) instead.
+</Callout>
+
+## Accept the transfer
+
+The new owner signs in with the account the invitation was sent to, then opens the link or clicks **Instance ownership transfer** under the notification bell.
+
+The page shows which organizations will be transferred. Click **Accept Ownership** to take over, or **Decline** to leave ownership with the current owner.
+
+## What changes
+
+When the new owner accepts, Dokploy applies all of these changes together. If any of them fails, nothing changes.
+
+- The new owner becomes the instance owner.
+- The new owner becomes the owner of every organization the previous owner owned, and is added to any of those organizations they weren't a member of.
+- The previous owner stays in those organizations as a **member**. The new owner can change their role and permissions like any other member's.
+- The previous owner's Git providers and pending invitations in those organizations move to the new owner. Deployments keep working even if the previous owner's account is deleted later.
+- The Dokploy backups configured in **Settings → Server** move to the new owner.
+- The enterprise license key, enterprise features and SSO trusted origins move to the new owner. If both accounts have a license key, a valid license is kept over an invalid one.
+
+The previous owner can't undo the transfer. The new owner can transfer it back.
+
+<Callout type="warn">
+API keys created by the previous owner keep working, but with member permissions. If any automation needs owner access, give it an API key created by the new owner.
+</Callout>
+
+## Transfer from the command line
+
+If the instance owner is no longer available, or their account has no password, anyone with access to the server can transfer ownership from inside the Dokploy container. The transfer applies immediately, without an invitation or a password, and makes the [same changes](#what-changes) as accepting an invitation.
+
+The new owner must have an account on the instance that isn't deactivated.
+
+<Steps>
+<Step>
+
+Log in to your VPS.
+
+</Step>
+<Step>
+
+Get the container ID of the Dokploy container.
+
+```bash
+docker ps
+```
+
+</Step>
+<Step>
+
+Run the transfer with the new owner's email.
+
+```bash
+docker exec -it <container_id> bash -c "pnpm run transfer-ownership newowner@example.com"
+```
+
+</Step>
+<Step>
+
+The command prints how many organizations were transferred. The new owner can now sign in as the instance owner.
+
+</Step>
+</Steps>
+
+## Existing installations
+
+When you upgrade, the user with the owner role who registered first becomes the instance owner.
+
+Before this change, admins could create their own organizations. Those organizations keep their current owner, and a transfer doesn't move them. From now on, only the instance owner can create organizations.
