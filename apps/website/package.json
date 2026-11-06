@@ -50,7 +50,7 @@
 		"remark-gfm": "^4.0.1",
 		"remark-toc": "^9.0.0",
 		"resend": "6.12.3",
-		"satori": "^0.12.1",
+		"satori": "^0.33.5",
 		"sharp": "^0.35.4",
 		"shiki": "^3.20.0",
 		"slugify": "^1.6.6",
