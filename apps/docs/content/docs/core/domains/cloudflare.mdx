@@ -68,6 +68,11 @@ We assume that you have enabled the `Full (Strict)` mode in the previous step, i
 20. You should see the application running on the domain you just created.
 
 ### Using Cloudflare's Origin CA
+
+<Callout type="warn">
+**Already served this domain with Let's Encrypt?** The steps below are not enough on their own. Traefik keeps serving the old Let's Encrypt certificate and Cloudflare keeps returning **Error 526** in `Full (Strict)` mode, even though every step looks correct. See [Migrating a domain that already used Let's Encrypt](#migrating-a-domain-that-already-used-lets-encrypt).
+</Callout>
+
 1. Go to cloudflare dashboard and then click on `Account Home` -> Select the Domain.
 2. On the left side, click `SSL/TLS`.
 3. Click on `Origin Server`.
@@ -96,7 +101,117 @@ You can also create a certificate for wildcards domains eg. `*.dokploy.com` and 
 **Important**: With a free Cloudflare account, this methods work only for the main domain and subdomains, not for sub-subdomains. Eg. `api.dokploy.com` works but `staging.api.dokploy.com` does not work.
 </Callout>
 
+#### Migrating a domain that already used Let's Encrypt
 
+The steps above assume a domain that has never been served with a Let's Encrypt certificate. If Dokploy already issued one for it, setting the `Certificate` field to `None` is not enough: the old certificate stays in Traefik's ACME store and keeps being served, because a certificate matching the exact hostname (`api.dokploy.com`) takes precedence over a wildcard Origin CA certificate (`*.dokploy.com`). In `Full (Strict)` mode Cloudflare validates that certificate, so once it expires you get **Error 526** even though the Origin CA certificate is installed correctly.
+
+Three extra steps are needed.
+
+**1. Stop Traefik from requesting Let's Encrypt certificates for the domain**
+
+Besides the per-domain setting, the `websecure` entrypoint in `/etc/dokploy/traefik/traefik.yml` carries an instance-wide default that applies to every router which does not define its own TLS block:
+
+```yaml
+  websecure:
+    address: :443
+    http:
+      tls:
+        certResolver: letsencrypt   # remove this line only
+```
+
+It has to become:
+
+```yaml
+  websecure:
+    address: :443
+    http:
+      tls: {}
+```
+
+<Callout type="warn">
+Keep the empty braces. Written as `tls:` alone it is parsed as null and TLS is disabled on the entrypoint, which makes port 443 serve plain HTTP and every site return **Error 525 (SSL handshake failed)**. Removing the whole `http.tls` block has the same effect.
+</Callout>
+
+<Callout type="info">
+Domains that still use `Let's Encrypt` as their certificate provider are not affected: Dokploy writes `tls.certResolver` into their own router configuration, so they keep renewing normally.
+</Callout>
+
+Then confirm no router still requests a resolver:
+
+```bash
+grep -rn certResolver /etc/dokploy/traefik/dynamic/*.yml
+```
+
+Every match is a domain whose `Certificate` field is still set to `Let's Encrypt`.
+
+**2. Remove the old certificate from the ACME store**
+
+Existing certificates are stored in `/etc/dokploy/traefik/dynamic/acme.json`. Back it up, then drop the entries for the hostnames your Origin CA certificate covers, keeping the `Account` object:
+
+```bash
+docker run --rm -v /etc/dokploy/traefik/dynamic:/t alpine \
+  cp -a /t/acme.json /t/acme.json.bak
+
+docker run --rm -v /etc/dokploy/traefik/dynamic:/t python:3-alpine python - <<'EOF'
+import json
+
+# hostnames now covered by the Origin CA certificate
+REMOVE = {"api.dokploy.com"}
+
+path = "/t/acme.json"
+store = json.load(open(path))
+for name, resolver in store.items():
+    kept = []
+    for cert in resolver.get("Certificates") or []:
+        if cert["domain"]["main"] in REMOVE:
+            print("removing:", cert["domain"]["main"])
+        else:
+            kept.append(cert)
+    resolver["Certificates"] = kept
+json.dump(store, open(path, "w"))
+EOF
+
+docker run --rm -v /etc/dokploy/traefik/dynamic:/t alpine \
+  sh -c 'chown root:root /t/acme.json && chmod 600 /t/acme.json'
+```
+
+<Callout type="warn">
+Traefik refuses to start if `acme.json` is not owned by root with `0600` permissions, so do not skip the last command.
+</Callout>
+
+**3. Restart Traefik**
+
+The ACME store is only read at startup, so nothing changes until Traefik restarts. Restart the container, do not recreate it:
+
+```bash
+docker restart dokploy-traefik
+```
+
+#### Verifying the certificate is actually being served
+
+Check the origin directly, passing the hostname as SNI:
+
+```bash
+echo | openssl s_client -connect 127.0.0.1:443 -servername api.dokploy.com 2>/dev/null \
+  | openssl x509 -noout -issuer -enddate
+```
+
+The issuer must be Cloudflare:
+
+```
+issuer=C = US, O = "CloudFlare, Inc.", OU = CloudFlare Origin SSL Certificate Authority, ...
+notAfter=... 2041 GMT
+```
+
+| What you see | What it means |
+| --- | --- |
+| `issuer=... Let's Encrypt` | The old certificate is still shadowing the Origin CA one, step 2 or 3 was not applied |
+| `TRAEFIK DEFAULT CERT` | Traefik has no matching certificate, check that the hostname is covered by the certificate's SANs |
+| The handshake fails | TLS is disabled on the entrypoint, check the `tls: {}` braces from step 1 |
+
+<Callout type="warn">
+Do not verify with `curl https://your-domain`. If the hostname is protected by Cloudflare Access, Cloudflare answers with a `302` redirect to the login page at the edge and never contacts your origin, so an expired or missing origin certificate still looks healthy.
+</Callout>
 
 ## Assign a Domain Flexible
 
