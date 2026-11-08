@@ -14,6 +14,12 @@ Dokploy provides two methods for creating Docker Compose configurations:
 - **Docker Compose**: Ideal for standard Docker Compose configurations.
 - **Stack**: Geared towards orchestrating applications using Docker Swarm. Note that some Docker Compose features, such as `build`, are not available in this mode.
 
+### Swarm Secrets
+
+For **Stack** deployments, create secrets under **Docker > Swarm > Secrets**, then reference them with `external: true` in your Compose file. Grant access through each service's `secrets` entries. Ordinary **Docker Compose** deployments cannot use secrets stored in Swarm.
+
+See [Swarm Secrets](/docs/core/swarm-secrets#use-secrets-in-a-stack) for an example using environment-specific secret names and mounted files.
+
 ### General
 
 Configure the source of your code, the way your application is built, and also manage actions like deploying, updating, and deleting your application, and stopping it.

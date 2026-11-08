@@ -60,6 +60,7 @@
 		"remote-servers/validate",
 		"---Advanced---",
 		"cluster",
+		"swarm-secrets",
 		"---Enterprise---",
 		"enterprise/index",
 		"enterprise/license-keys",
