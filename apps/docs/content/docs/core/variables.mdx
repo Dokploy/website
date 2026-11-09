@@ -103,6 +103,7 @@ DATABASE_URL=postgresql://${{DATABASE_USER}}:${{DATABASE_PASSWORD}}@service-data
 <Callout type="info">
   Preview Deployments environments also include a service-level variable called `DOKPLOY_DEPLOY_URL`, which points to the deployment URL of the service.
   It can be used as `${{DOKPLOY_DEPLOY_URL}}` for variables like `APP_URL=https://${{DOKPLOY_DEPLOY_URL}}`.
+  To reference the preview URL of another application in the same pull request, use `${{<application>.DOKPLOY_DEPLOY_URL}}`. See [Connecting Multiple Applications](/docs/core/applications/preview-deployments#connecting-multiple-applications).
 </Callout>
 
 ## Secrets from External Vaults
