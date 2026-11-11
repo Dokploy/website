@@ -43,6 +43,25 @@ You should see all three of these containers running:
 
 If all three containers are running but you still can't access the interface, it's time to debug:
 
+### Traefik Stays Stopped After a Reboot
+
+Docker can try to restore the standalone `dokploy-traefik` container before the Swarm overlay network is ready. The container can remain exited with `network dokploy-network not found`, even with `--restart always` and the network set at creation. A stale overlay IP can also prevent a later start.
+
+On self-hosted production installations, Dokploy checks the local Traefik container at startup and every minute. It starts a stopped container and recreates it if its network attachment prevents it from starting. Recovery preserves the existing container image, environment, command, mounts, port bindings, and additional networks. Healthy containers are left running; Swarm-service installations continue to use Swarm's reconciliation.
+
+If the container was deleted, Dokploy creates the standard standalone setup using the existing files in `/etc/dokploy/traefik`, then reconnects deployed isolated Compose networks on that server. Custom container settings cannot be recovered after the container itself has been deleted.
+
+You can also use **Reload** in the server's Traefik actions to recover a stopped or missing container. Reload reports recovery errors to the caller. Automatic recovery failures appear in `docker service logs dokploy` and are retried on the next check. The periodic check covers the local Dokploy host; remote servers can use Reload.
+
+For an older Dokploy release, wait until Swarm is ready, then try:
+
+```bash
+docker network inspect dokploy-network
+docker start dokploy-traefik
+```
+
+If Traefik is running but routes still fail, check its logs and configuration below.
+
 ### Debugging Process
 
 #### 1. Check Container Logs
