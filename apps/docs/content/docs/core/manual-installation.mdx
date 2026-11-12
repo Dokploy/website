@@ -131,7 +131,7 @@ install_dokploy() {
 
     mkdir -p /etc/dokploy
 
-    chmod 777 /etc/dokploy
+    chmod 755 /etc/dokploy
 
     # Generate secure random password for Postgres
     POSTGRES_PASSWORD=$(openssl rand -base64 32 | tr -d "=+/" | cut -c1-32)
@@ -289,7 +289,7 @@ docker network create --driver overlay --attachable dokploy-network
 
 # 2. Create the config directory
 mkdir -p /etc/dokploy
-chmod 777 /etc/dokploy
+chmod 755 /etc/dokploy
 
 # 3. Create the secrets (Postgres password + auth secret)
 openssl rand -base64 32 | tr -d "=+/" | cut -c1-32 | docker secret create dokploy_postgres_password -

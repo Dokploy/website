@@ -272,7 +272,13 @@ install_dokploy() {
 
     mkdir -p /etc/dokploy
 
-    chmod 777 /etc/dokploy
+    # The installer runs as root and the Dokploy container also runs as root,
+    # so nothing needs /etc/dokploy to be world-writable. 0777 lets any local
+    # user rename root-owned entries (e.g. traefik/ or schedules/) and swap in
+    # their own, which Dokploy and Traefik then read and run as root. 0755
+    # keeps root as the sole writer. Remote installs already own the directory
+    # with `chown` below instead of widening permissions.
+    chmod 755 /etc/dokploy
 
     # Generate secure random password for Postgres
     POSTGRES_PASSWORD=$(generate_random_password)
