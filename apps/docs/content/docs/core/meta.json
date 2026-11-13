@@ -46,6 +46,7 @@
 		"(examples)",
 		"auto-deploy",
 		"schedule-jobs",
+		"sandboxes",
 		"patches",
 		"volume-backups",
 		"providers",
