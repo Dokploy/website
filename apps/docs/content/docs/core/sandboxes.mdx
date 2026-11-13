@@ -1,0 +1,211 @@
+---
+title: "Sandboxes"
+description: "Run untrusted or AI-generated code in ephemeral, resource-limited containers driven through the Dokploy API"
+---
+
+A sandbox is a short-lived Docker container that you create, run commands in, read and write files in, and throw away. Sandboxes are built for AI agents, code interpreters and automations that need a clean, isolated place to execute code. They are not meant for hosting services: a sandbox has no domain, no published ports and no persistent volumes.
+
+Sandboxes run on the Dokploy server or on any [remote server](/docs/core/remote-servers) connected to Dokploy.
+
+## Use Cases
+
+- Let an AI agent execute the code it writes without touching your applications
+- Run user-submitted scripts in a code interpreter
+- Execute one-off jobs in a clean environment with a specific runtime (Python, Node.js, Go, ...)
+- Try a command or a dependency without installing anything on the server
+
+## Creating a Sandbox
+
+1. Go to **Sandboxes** in the sidebar
+2. Pick the server in the **Viewing server** selector at the top right
+3. Click **Create Sandbox**
+4. Choose a template or a custom image, set the resources and click **Create**
+
+| Field | Description | Default |
+| ----- | ----------- | ------- |
+| **Name** | Label to recognize the sandbox | Generated |
+| **Template / Custom image** | Built-in template or any Docker image | |
+| **Server** | Where the container runs | Server being viewed |
+| **CPU cores** | CPU limit (0.1 to 64) | 1 |
+| **Memory (MB)** | Memory limit, swap disabled | 512 |
+| **Timeout (minutes)** | Inactivity time after which the sandbox is removed | 5 |
+| **Network** | `Isolated` (no network access) or `Internet` | Isolated |
+| **Runtime** | Docker runtime, for example `runsc` for gVisor | `runc` |
+| **Environment variables** | `KEY=value` lines available to every command | |
+
+After creating it you land on the sandbox page, which shows its details and a **Console** where you can run commands and watch the output as it streams.
+
+<Callout>
+On Dokploy Cloud, and on instances with **Remote Servers Only** enabled, sandboxes must be created on a remote server.
+</Callout>
+
+## Templates
+
+Every template runs as a non-root user (`1000:1000`) with `/home/user` as working directory.
+
+| Template | Image |
+| -------- | ----- |
+| `base` | `ubuntu:24.04` |
+| `alpine` | `alpine:3.20` |
+| `python` | `python:3.13-slim` |
+| `node` | `node:22-slim` |
+| `bun` | `oven/bun:1` |
+| `deno` | `denoland/deno:debian` |
+| `go` | `golang:1.24` |
+| `rust` | `rust:1-slim` |
+| `ruby` | `ruby:3.3-slim` |
+| `java` | `eclipse-temurin:21-jdk` |
+| `php` | `php:8.3-cli` |
+
+You can use any other image instead of a template. It must include `sh`, `sleep` and `date`, and it runs as the default user of the image.
+
+## Lifecycle
+
+A sandbox is `running` from the moment it is created until it becomes `killed`. It stops in one of three ways:
+
+- **Inactivity timeout**: the sandbox is removed after the configured timeout (5 minutes by default) without any activity. Running a command, writing a file or listing files counts as activity and restarts the countdown. A process left running inside the sandbox does not.
+- **Hard limit**: 24 hours after creation the sandbox is removed, even if it is in use.
+- **Kill**: you stop it from the dashboard or the API.
+
+Use **Extend timeout** on the sandbox page, or `sandbox.setTimeout` in the API, to change the inactivity timeout of a running sandbox.
+
+<Callout type="warn">
+Everything inside a sandbox is lost when it stops. Read the files you need before the timeout expires.
+</Callout>
+
+The container enforces its own lifetime, so sandboxes expire on time even if Dokploy is restarted or unreachable. The record stays in the list with status `killed` until you delete it.
+
+## Using the API
+
+Every sandbox operation is available in the [Dokploy API](/docs/api). Generate an API key in **Settings → Profile → API/CLI** and send it in the `x-api-key` header.
+
+```bash
+export DOKPLOY_URL=https://dokploy.example.com
+export DOKPLOY_KEY=your-api-key
+```
+
+### Create a Sandbox
+
+```bash
+curl -s -X POST "$DOKPLOY_URL/api/sandbox.create" \
+  -H "x-api-key: $DOKPLOY_KEY" -H "content-type: application/json" \
+  -d '{
+    "template": "python",
+    "name": "agent-run-42",
+    "cpu": 1,
+    "memoryMb": 512,
+    "timeoutMs": 300000,
+    "networkMode": "isolated"
+  }'
+```
+
+The response contains the `sandboxId` used by every other call. Optional fields: `image` (instead of `template`), `serverId` (omit it to use the Dokploy server), `envVars`, `pidsLimit`, `workdir`, `maxLifetimeMs` and `runtime`.
+
+### Run a Command
+
+```bash
+curl -s -X POST "$DOKPLOY_URL/api/sandbox.exec" \
+  -H "x-api-key: $DOKPLOY_KEY" -H "content-type: application/json" \
+  -d '{"sandboxId": "SANDBOX_ID", "cmd": "python3 -c \"print(1+1)\""}'
+```
+
+```json
+{ "stdout": "2\n", "stderr": "", "exitCode": 0, "timedOut": false, "truncated": false }
+```
+
+The command runs through `sh -c` in the working directory of the sandbox. You can pass `cwd`, an `env` object and a `timeoutMs` (60 seconds by default, 10 minutes at most). When the timeout is reached the command and its child processes are killed and `exitCode` is `124`.
+
+### Write and Read Files
+
+```bash
+curl -s -X POST "$DOKPLOY_URL/api/sandbox.writeFile" \
+  -H "x-api-key: $DOKPLOY_KEY" -H "content-type: application/json" \
+  -d '{"sandboxId": "SANDBOX_ID", "path": "/home/user/main.py", "content": "print(\"hi\")\n"}'
+
+curl -s "$DOKPLOY_URL/api/sandbox.readFile?sandboxId=SANDBOX_ID&path=/home/user/main.py" \
+  -H "x-api-key: $DOKPLOY_KEY"
+
+curl -s "$DOKPLOY_URL/api/sandbox.listFiles?sandboxId=SANDBOX_ID&path=/home/user" \
+  -H "x-api-key: $DOKPLOY_KEY"
+```
+
+Paths must be absolute and parent directories are created automatically. For binary files send `"encoding": "base64"` in `writeFile` and `encoding=base64` in `readFile`.
+
+### Manage Sandboxes
+
+| Endpoint | Method | Description |
+| -------- | ------ | ----------- |
+| `sandbox.list` | GET | Sandboxes of the organization. Add `serverId` to list one server with live status |
+| `sandbox.one` | GET | A single sandbox |
+| `sandbox.templates` | GET | Built-in templates |
+| `sandbox.setTimeout` | POST | Change the inactivity timeout (`timeoutMs`) |
+| `sandbox.kill` | POST | Stop the sandbox and keep the record |
+| `sandbox.remove` | POST | Stop the sandbox if needed and delete the record |
+
+### MCP
+
+The same operations are available as tools in the Dokploy MCP server: `sandbox-create`, `sandbox-exec`, `sandbox-writeFile`, `sandbox-readFile`, `sandbox-listFiles`, `sandbox-setTimeout`, `sandbox-kill`, `sandbox-remove`, `sandbox-list`, `sandbox-one` and `sandbox-templates`.
+
+### Streaming Output
+
+To receive the output of a long command as it is produced, connect to the WebSocket endpoint `/sandbox-exec?sandboxId=SANDBOX_ID` with the `x-api-key` header. Send one command at a time:
+
+```json
+{ "type": "exec", "cmd": "pip install requests", "timeoutMs": 120000 }
+```
+
+The server replies with `stdout` and `stderr` messages carrying a `data` chunk, and ends each command with an `exit` message:
+
+```json
+{ "type": "exit", "exitCode": 0, "timedOut": false }
+```
+
+## Security
+
+Each sandbox is created with a restrictive configuration:
+
+- All Linux capabilities dropped and `no-new-privileges` enabled
+- CPU, memory and process limits, with swap disabled
+- A non-root user when using a built-in template
+- A dedicated network: sandboxes cannot reach each other and are never attached to `dokploy-network` or to the network of any application
+- No network access at all in `Isolated` mode, which is the default
+- Environment variables encrypted at rest and never returned by the API
+
+<Callout type="warn">
+By default sandboxes use the standard Docker runtime (`runc`) and share the kernel of the server. If you run code from people you do not trust, use a runtime with stronger isolation such as gVisor, and prefer a server that does not host your applications.
+</Callout>
+
+### Using gVisor
+
+[gVisor](https://gvisor.dev) places a user-space kernel between the sandbox and the server, which makes escaping to the host much harder. Dokploy does not install it: you register the runtime in Docker once and then select it per sandbox. Sandboxes that do not ask for it keep using `runc`, and the rest of your containers are not affected.
+
+1. Install `runsc` on the server by following the [gVisor installation guide](https://gvisor.dev/docs/user_guide/install/). It supports Linux on x86_64 and ARM64.
+2. Register the runtime in Docker with shared file access, which Dokploy needs to read and write files in the sandbox:
+
+```bash
+sudo runsc install --runtime=runsc -- --overlay2=none --file-access=shared
+sudo systemctl reload docker
+```
+
+3. Create the sandbox with **Runtime** set to `runsc`, or `"runtime": "runsc"` in the API.
+
+<Callout type="warn">
+With gVisor, `/tmp` lives in memory inside the sandbox. Files written to `/tmp` through `sandbox.writeFile` are not visible to your commands, and `sandbox.setTimeout` does not change the inactivity timeout of a running sandbox. Write files under the working directory and set the timeout when creating the sandbox.
+</Callout>
+
+## Permissions
+
+Sandboxes belong to the organization and are not tied to a project. Owners and admins have full access. Members have no access unless a [custom role](/docs/core/enterprise/custom-roles) grants it:
+
+- **Read**: view sandboxes, read and list files
+- **Create**: create sandboxes, run commands, write files, change the timeout and kill
+- **Delete**: delete sandbox records
+
+## Limitations
+
+- No interactive shell: commands run one at a time and cannot read from stdin
+- No public domains or exposed ports
+- No snapshots or pause and resume: a stopped sandbox cannot be recovered
+- Command output is capped at 1 MiB per stream and files at 10 MiB
+- Sandboxes cannot join project or application networks
+- On remote servers each operation opens an SSH connection, so calls take longer than on the Dokploy server
