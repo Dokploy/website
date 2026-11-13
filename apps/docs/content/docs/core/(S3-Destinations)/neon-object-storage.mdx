@@ -1,0 +1,26 @@
+---
+title: Neon Object Storage
+description: 'Configure Neon Object Storage buckets for backup storage. This includes setting up access keys, secret keys, bucket names, regions, and endpoints.'
+---
+
+
+[Neon Object Storage](https://neon.com/docs/storage/overview) is S3-compatible file storage included with Neon projects. It is a cloud-based service that allows you to store and retrieve data from anywhere in the world. This is a great option for storing backups, as it is easy to set up and manage.
+
+1. In the Neon Console, open your project, select a branch, and go to the `Object storage` tab.
+2. Click `New bucket`, set any name you want, keep the access level as `Private`, and click `Create`.
+3. Go to your project's `Settings` > `Credentials`, and click `Create credential`.
+4. Give it a meaningful name, and select the `storage:read` and `storage:write` scopes.
+5. Create the credential, and copy the secret right away.
+6. Click `Connect` at the top of the sidebar, open the `Storage` tab, and select `Parameters only` to see the endpoint and region of your branch.
+
+In Dokploy, select `Any other S3 compatible provider` as the Provider, and copy the following variables:
+
+| (from) Neon             | (to) Dokploy        | Example value                                                         |
+|-------------------------|---------------------|-----------------------------------------------------------------------|
+| `AWS_ACCESS_KEY_ID`     | `Access Key Id`     | `nak_live_9043e374b584...`                                            |
+| `AWS_SECRET_ACCESS_KEY` | `Secret Access Key` | `nsk_live_6f1c2a...` keep the `nsk_live_` prefix.                     |
+| `AWS_REGION`            | `Region`            | `us-east-2, eu-central-1, etc` it will depend on the region you are using. |
+| `AWS_ENDPOINT_URL_S3`   | `Endpoint`          | `https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech` |
+| `Bucket`                | `Bucket`            | `dokploy-backups` use the name of the bucket you created.             |
+
+Test the connection and you should see a success message.
