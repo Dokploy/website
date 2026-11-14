@@ -7,20 +7,83 @@ Dokploy provides an integrated solution for backing up your databases, ensuring 
 
 ## Backing Up Your Database
 
-To configure database backups, navigate to the `Backup` tab within your Dokploy dashboard. Here’s what you’ll need to set up:
+To configure database backups, open the **Backups** tab of your database or Compose service and select **Create Backup**. Configure the database source and these storage settings:
 
-- **Select Destination S3 Bucket**: Specify where your backups will be stored. Buckets can be configured in the `/dashboard/settings/destinations` route.
-- **Database Name**: Enter the name of the database you want to backup.
-- **Schedule Cron**: Define the schedule for your backups using cron syntax.
-- **Prefix**: Choose a prefix under which backups will be stored in your bucket.
-- **Enabled**: Toggle whether backups are active. The default setting is enabled.
+- **Destination**: Select the S3 destination for your backups. Configure destinations in **Settings → Destinations** at `/dashboard/settings/destinations`.
+- **Database**: Enter the name of the database you want to back up.
+- **Schedule**: Choose a predefined schedule or enter a custom cron expression.
+- **Prefix Destination**: Choose the path within the destination bucket.
+- **Custom File Name**: Optionally prepend a name to the generated timestamp, such as `my-backup-2026-08-03T20-58-22-123Z.sql.gz`. Only letters, numbers, dots, hyphens and underscores are allowed. Leave it empty to keep timestamp-only filenames.
+- **Keep the latest**: Optionally retain only the latest N backups. Leave it empty to keep all backups. Retention counts every backup in the same destination folder, regardless of its custom name.
+- **Enabled**: Enable or disable scheduled backups. Disabling the schedule still allows manual backups when the database is available.
 
 ### Testing Your Backup Configuration
 
 To ensure your backup settings are correctly configured:
 
-1. Click the `Test` button.
-2. This will initiate a test backup to the S3 bucket you selected.
-3. Check the bucket to see the result of the test backup.
+1. Save the backup configuration and select **Run Manual Backup** on its backup card.
+2. Check the deployment logs for a successful dump and upload.
+3. Check the selected S3 destination for the archive.
+4. Restore the archive into a separate test database and verify its contents.
 
-This feature provides peace of mind by verifying that your backup process is set up correctly before relying on it for operational backups.
+A successful upload confirms that the backup reached storage. A restore test confirms that the archive can recover the data you need.
+
+## Compose Database Backups
+
+Open the **Backups** tab of your Compose service and select **Create Backup**. The dialog groups the database source, connection settings, and storage schedule. The selected service must be running and must contain the database's dump utility.
+
+**Run Manual Backup** stays disabled while availability is being checked, when the selected container is stopped or unhealthy, or when the database connection fails. Hover over the disabled action to see the reason. Dokploy checks again every 15 seconds while the tab is open and immediately before starting a manual backup. The check uses the configured connection and existing database tools, without uploading an archive or running the custom command. An inactive backup schedule does not prevent a manual backup when the database is available.
+
+### Connection Overrides
+
+Choose PostgreSQL, MySQL, MariaDB, or MongoDB. Keep **Default script** to use Dokploy's built-in dump command, then open **Connection settings** to configure the connection as needed. This section starts collapsed in both create and edit dialogs, keeps its description visible, and preserves its values when closed:
+
+- **Host and port** are reached from inside the selected service container. For a PostgreSQL proxy listening on `6543`, enter its Compose service name as the host and `6543` as the port. A port published on the Docker host is not necessarily the port reachable inside the Compose network.
+- **Database User and Database Password** override authentication for that backup. Passwords are entered separately from dump arguments.
+- **Connection URI** is available for PostgreSQL and MongoDB. It takes precedence over the separate connection fields. PostgreSQL also takes the database name from the URI. MongoDB uses the Database field, so its value must agree with a database specified in the URI. URI query parameters can configure TLS or replica-set options.
+- **Authentication database** sets MongoDB's authentication source when no URI is used. Its default is `admin`.
+- **Additional dump arguments** is a separate expandable section below Connection settings when using **Default script**. It accepts supported options, one per line, such as `--exclude-table-data=events` for PostgreSQL. Values are passed literally. Connection flags, output paths and unsupported options are rejected. With **Custom script**, put supported dump options in the command editor instead.
+
+Existing backup configurations keep their original dump commands and authentication behavior until you configure an override or select a custom command. No migration of saved backup settings is required. Default MySQL and MariaDB backups retain local socket connections when no endpoint override is supplied; specifying a host or port selects TCP. The PostgreSQL default port is `5432`, MySQL and MariaDB use `3306`, and MongoDB uses `27017`.
+
+### Example: PostgreSQL Behind a Proxy
+
+Suppose your Compose stack has a PostgreSQL service named `postgres` and a proxy named `postgres-proxy` that accepts PostgreSQL connections on port `6543` inside the Compose network:
+
+1. Choose **PostgreSQL** as the **Database Type** and `postgres` as the **Service Name**. Dokploy runs `pg_dump` inside this service, so select a container that has the dump utility installed.
+2. Enter the target **Database** and keep **Default script**.
+3. Open **Connection settings**, set **Host** to `postgres-proxy`, and set **Port** to `6543`.
+4. Set **Database User** and **Database Password** to credentials accepted by the proxy for the target database. Leave **Connection URI** empty when using these separate fields.
+5. Select the S3 **Destination**, configure the schedule and storage settings, then create the backup.
+6. Run a manual backup and verify both the uploaded archive and a restore into a test database.
+
+The selected service must be able to reach the proxy. Use the proxy's internal listening port, which can differ from a port published on the Docker host. The proxy must support the session behavior required by `pg_dump`.
+
+### Custom Backup Commands
+
+Select **Custom script**, then **Use default as starting point** to customize a supported dump command. The editor accepts one validated command, not arbitrary shell code. Configure credentials using the connection fields.
+
+| Database | Example command | Output before gzip |
+| --- | --- | --- |
+| PostgreSQL | `pg_dump --no-acl --no-owner` | PostgreSQL custom archive |
+| MySQL | `mysqldump --single-transaction --quick` | SQL dump |
+| MariaDB | `mariadb-dump --single-transaction --quick` | SQL dump |
+| MongoDB | `mongodump --readPreference=secondaryPreferred` | MongoDB archive |
+
+The Restore Backup dialog does not expose the new connection overrides. For nondefault endpoints, restore with the database client using the matching connection settings.
+
+Shell operators, multiple commands, redirects, variables, arbitrary SQL, connection flags and file output options are rejected. Only supported dump options are accepted. Switching databases or backup methods preserves unsaved drafts while the dialog is open. Only the settings used by the selected database and method are validated and saved.
+
+Custom commands use the existing `docker exec` backup path inside the selected service. They do not start a helper container or another service. The service must contain the selected dump utility and the `timeout` utility. MySQL and MariaDB custom commands use TCP. PostgreSQL and MongoDB use the transport selected by their connection settings. Creating or editing custom commands requires the corresponding service backup permission and schedule create or update permission.
+
+### Required Database Test
+
+**Test and create** and **Test and update** run the command with the configured database connection before saving. This is a full dump test, so it can consume database resources. It must exit successfully and produce data within five minutes. Authentication errors, an unavailable service, missing tools, invalid commands, empty output, and timeouts prevent the save. A failed update preserves the previous configuration and schedule.
+
+The test discards its output and does not upload to S3. After saving, run a manual backup to verify the S3 destination, then test a restore of that archive. A successful database test does not validate S3 access or guarantee that future backups will succeed.
+
+### Storage and Scheduling
+
+Default and custom backups share the selected S3 destination, prefix, Custom File Name, schedule, retention and deployment logs. Custom File Name uses Dokploy's existing naming and validation rules: it is prepended to the generated timestamp. Leave it empty for timestamp-only filenames. Retention counts all matching backups in the same destination folder, regardless of their custom name. Dokploy manages compression and upload. Failed dump or upload operations are reported as failed deployments, and Dokploy attempts to remove partial uploads. Database passwords and connection URIs are redacted from backup errors; connection settings retain Dokploy's existing storage and access controls.
+
+Custom backup runs are limited to one hour. Backups that exceed this limit or the five-minute save test need a different backup strategy. Use a database account with the permissions required by the chosen dump tool, and verify backups through restoration before relying on them.
