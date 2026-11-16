@@ -25,17 +25,21 @@ Four graphs will be displayed for the use of memory, CPU, disk, and network. Not
 
 If you want to see any important logs from your application that is running, you can do so here and determine if your application is displaying any errors or not.
 
-## Files System
+## Patches
 
-Browse the file system of your application's running container directly from the dashboard. You can navigate directories, preview text files, download any file, and upload new files into the directory you currently have open.
+Apply file-level changes on top of your repository at build time without modifying the source repository. See [Patches](/docs/core/patches).
 
-Files outside persistent volumes are usually ephemeral and can disappear after a restart or a new deployment. Uploading requires the `Write` permission on the `Container Filesystem` resource for custom roles; owners and admins have it by default.
+## File Explorer
+
+To browse the file system of your application's running container, go to **Docker → Containers**, open the actions menu of the container and click `Browse Files`. You can navigate directories, preview and edit text files, download or delete files, and use `Upload File` to add new ones. Named volumes can be browsed the same way from **Docker → Volumes**.
+
+Files outside persistent volumes are usually ephemeral and can disappear after a restart or a new deployment. The file explorer requires access to the Docker section.
 
 ## Deployments
 
 You can view the last 10 deployments of your application. When you deploy your application in real time, a new deployment record will be created and it will gradually show you how your application is being built.
 
-We also offer a button to cancel deployments that are in queue. Note that those in progress cannot be canceled.
+We also offer a button to cancel deployments that are in queue, and a `Kill Build` button to stop a build that is already in progress.
 
 We provide a webhook so that you can trigger your own deployments by pushing to your GitHub, Gitea, GitLab, Bitbucket, DockerHub repository.
 
@@ -46,7 +50,7 @@ This is where you will assign your domain so that your application can be access
 There are two ways to assign a domain:
 
 1. Create a custom domain.
-2. Use a generated domain, we use traefik.me to generate free domains.
+2. Use a generated domain, we use sslip.io to generate free domains.
 
 ## Advanced Settings
 

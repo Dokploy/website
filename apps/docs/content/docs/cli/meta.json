@@ -6,8 +6,11 @@
 	"pages": [
 		"---Get Started---",
 		"index",
-		"comparisons",
+		"authentication",
 		"---Commands---",
-		"..."
+		"application",
+		"databases",
+		"project",
+		"environment"
 	]
 }
