@@ -10,18 +10,21 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
 	Activity,
+	BellRing,
 	CheckCircle2,
 	Clock,
 	Cloud,
 	Cpu,
 	Eye,
 	FileText,
+	FolderTree,
 	HardDrive,
 	Lock,
 	Network,
 	RotateCcw,
 	Server,
 	Settings2,
+	Share2,
 	Terminal,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -63,13 +66,31 @@ const coreFeatures = [
 		icon: Eye,
 		title: "Preview deployments",
 		description:
-			"Test application changes in isolated environments before they reach production. When configured, pull requests to your target branch trigger isolated preview builds automatically, so your team can validate functionality before merging.",
+			"Test application changes in isolated environments before they reach production. When configured, GitHub pull requests to your target branch trigger isolated preview builds automatically, so your team can validate functionality before merging.",
 	},
 	{
 		icon: Settings2,
 		title: "Environment variable management",
 		description:
 			"Manage shared and service-level environment variables across every application. Reduce configuration drift and keep sensitive data out of your codebase.",
+	},
+	{
+		icon: BellRing,
+		title: "Notifications where your team works",
+		description:
+			"Get notified about deployments, build errors, backups, and server thresholds through Slack, Discord, Telegram, Microsoft Teams, Mattermost, Lark, email (SMTP or Resend), Gotify, ntfy, Pushover, or a custom webhook.",
+	},
+	{
+		icon: FolderTree,
+		title: "Docker dashboard and file explorer",
+		description:
+			"Inspect containers, images, volumes, networks, events, and disk usage from one page, and browse or edit files inside containers and volumes without opening a shell.",
+	},
+	{
+		icon: Share2,
+		title: "Logs and metrics export",
+		description:
+			"Ship container logs and metrics to Loki, Datadog, Better Stack, Elasticsearch, Splunk, AWS CloudWatch, Prometheus, New Relic, or InfluxDB.",
 	},
 ];
 

@@ -18,21 +18,27 @@ import {
 	Download,
 	Eye,
 	FileCode,
+	FileDiff,
 	FolderInput,
 	FolderPlus,
 	GitBranch,
 	GitPullRequest,
+	Hammer,
 	HeartPulse,
 	History,
+	KeyRound,
 	Layers,
 	LayoutDashboard,
 	LayoutTemplate,
+	Network,
 	Rocket,
 	RotateCcw,
 	Server,
 	Settings2,
 	Shield,
 	SlidersHorizontal,
+	Sparkles,
+	Tag,
 	Users,
 	Webhook,
 	Workflow,
@@ -59,13 +65,31 @@ const professionalFeatures = [
 		icon: Layers,
 		title: "Deploy any app with any stack",
 		description:
-			"Dokploy supports single services, multi-service apps, and static sites. Deploy from Git, a container registry, or Docker Compose.",
+			"Dokploy supports single services, multi-service apps, and static sites. Deploy from Git, a container registry, Docker Compose, or a zip upload.",
 	},
 	{
 		icon: Wrench,
 		title: "Your build, your way",
 		description:
-			"Choose Nixpacks, Buildpacks, or a Dockerfile. Switch strategies per project without reworking your pipeline.",
+			"Choose Nixpacks, Railpack, Heroku or Paketo Buildpacks, a Dockerfile, or a static build. Switch strategies per application without reworking your pipeline.",
+	},
+	{
+		icon: Hammer,
+		title: "Dedicated build servers",
+		description:
+			"Run builds on a separate build server and push the image to your registry, so production servers keep their resources for running apps.",
+	},
+	{
+		icon: KeyRound,
+		title: "Secrets from your vault",
+		description:
+			"Reference secrets from HashiCorp Vault, Infisical, AWS Secrets Manager, AWS Parameter Store, Doppler, Azure Key Vault, Scaleway, or Phase. They are resolved at deploy time.",
+	},
+	{
+		icon: Network,
+		title: "Networks and DNS in one place",
+		description:
+			"Create and attach Docker networks per service, and manage DNS records for Cloudflare, Route 53, Porkbun, Infomaniak, and OVH from the dashboard.",
 	},
 ];
 
@@ -87,6 +111,24 @@ const automationFeatures = [
 		title: "Set up automated watch paths",
 		description:
 			"Monitor directories or files for changes and trigger actions when they're modified.",
+	},
+	{
+		icon: Tag,
+		title: "Deploy on push or on tag",
+		description:
+			"Choose whether a branch push or a new Git tag triggers the deployment, so releases ship only when you cut them.",
+	},
+	{
+		icon: FileDiff,
+		title: "Patch files at build time",
+		description:
+			"Apply file patches on top of the repository during the build, without forking or committing changes upstream.",
+	},
+	{
+		icon: Sparkles,
+		title: "Built-in AI assistant",
+		description:
+			"Describe what you need and generate a Docker Compose stack to deploy, or analyze build and runtime logs. Bring your own AI provider key.",
 	},
 ];
 
@@ -122,15 +164,15 @@ const platformFeatures = [
 	},
 	{
 		icon: FileCode,
-		title: "Configuration-first setup",
+		title: "Consistent configuration",
 		description:
-			"Use configuration files to maintain consistency in setup, configuration, and build across teams.",
+			"Share variables at the project and environment level, duplicate environments, and export a project to import it into another Dokploy instance.",
 	},
 	{
 		icon: RotateCcw,
 		title: "Rollback capabilities built in",
 		description:
-			"Rollback capabilities help teams recover quickly when new features impact production.",
+			"Enable rollbacks to keep previous release images in your registry, so teams recover quickly when new features impact production.",
 	},
 	{
 		icon: LayoutDashboard,
@@ -177,7 +219,7 @@ const deploymentSteps = [
 		icon: Settings2,
 		title: "Configure the build",
 		description:
-			"Pick Nixpacks, Buildpacks, or a Dockerfile, add your environment variables, and generate a domain with automatic HTTPS.",
+			"Pick Nixpacks, Railpack, Buildpacks, a Dockerfile, or a static build, add your environment variables, and generate a domain with automatic HTTPS.",
 	},
 	{
 		icon: Rocket,
@@ -216,13 +258,13 @@ const environmentFeatures = [
 		icon: HeartPulse,
 		title: "Zero-downtime releases",
 		description:
-			"Health checks confirm a new version is ready before traffic switches over, so users never see a broken deploy.",
+			"Configure health checks so a new version is confirmed ready before traffic switches over, and users never see a broken deploy.",
 	},
 	{
 		icon: History,
 		title: "Recover in seconds",
 		description:
-			"Keep previous releases on hand, with automated rollback options to recover when a code change misbehaves in production.",
+			"Turn on rollbacks to keep previous releases on hand and recover when a code change misbehaves in production.",
 	},
 ];
 
@@ -249,7 +291,7 @@ const aiDeploymentFeatures = [
 		icon: Shield,
 		title: "Built-in governance",
 		description:
-			"SSO, audit logs, IP allowlisting, and rollback in seconds. Speed from AI tools doesn't have to come at the cost of control.",
+			"SSO, audit logs, role-based access, and rollbacks. Speed from AI tools doesn't have to come at the cost of control.",
 	},
 ];
 
@@ -257,7 +299,7 @@ const faqs = [
 	{
 		question: "Can I deploy Docker Compose apps with Dokploy?",
 		answer:
-			"Yes. Dokploy supports deploying applications with Docker Compose, which is ideal when your implementation spans multiple services, data stores, and supporting tools. You can deploy a Compose stack as part of your deployment workflows, keep configuration in configuration files, and manage environments without increasing complexity as you scale.",
+			"Yes. Dokploy supports deploying applications with Docker Compose, which is ideal when your implementation spans multiple services, data stores, and supporting tools. You can deploy a Compose stack as part of your deployment workflows, keep configuration in your Compose file, and manage environments without increasing complexity as you scale.",
 	},
 	{
 		question: "Which Git providers can I deploy from?",
@@ -272,7 +314,7 @@ const faqs = [
 	{
 		question: "How do preview deployments work in Dokploy?",
 		answer:
-			"Preview deployments create environments for testing code changes before they reach production environments. When a pull request or branch updates, Dokploy can trigger automated deployments and deployment workflows so developers can validate functionality, reliability, and security in an isolated environment. This setup supports multiple environments, speeds up testing for new features, reduces the risk of deployment automation issues, and helps teams reduce errors before customers and users see changes in production.",
+			"Preview deployments create environments for testing code changes before they reach production environments. When a pull request is opened or updated on GitHub, Dokploy builds a preview deployment so developers can validate functionality, reliability, and security in an isolated environment. This setup supports multiple environments, speeds up testing for new features, reduces the risk of deployment automation issues, and helps teams reduce errors before customers and users see changes in production.",
 	},
 	{
 		question: "What is a deployment platform?",
