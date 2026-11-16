@@ -2,14 +2,19 @@
 import { cn } from "@/lib/utils";
 import {
 	IconActivity,
+	IconChartDots,
 	IconCloud,
 	IconDatabase,
 	IconEaseInOut,
+	IconGitPullRequest,
+	IconKey,
+	IconNetwork,
 	IconRocket,
 	IconTemplate,
 	IconTerminal,
 	IconTerminal2,
 	IconUsers,
+	IconWorld,
 } from "@tabler/icons-react";
 import { Layers, Lock, UnlockIcon } from "lucide-react";
 
@@ -18,7 +23,7 @@ export function FirstFeaturesSection() {
 		{
 			title: "Flexible Application Deployment",
 			description:
-				"Deploy any application using Nixpacks, Heroku Buildpacks, or your custom Dockerfile, tailored to your stack.",
+				"Deploy any application using Nixpacks, Railpack, Heroku or Paketo Buildpacks, static builds, or your custom Dockerfile.",
 			icon: <IconRocket />,
 		},
 		{
@@ -36,13 +41,13 @@ export function FirstFeaturesSection() {
 		{
 			title: "Advanced User Management",
 			description:
-				"Control user access with detailed roles and permissions, keeping your deployments secure and organized.",
+				"Control user access with built-in roles and per-member permissions, keeping your deployments secure and organized.",
 			icon: <IconUsers />,
 		},
 		{
 			title: "Database Management with Backups",
 			description:
-				"Manage and back up MySQL, PostgreSQL, MongoDB, MariaDB, Redis directly from Dokploy.",
+				"Deploy MySQL, PostgreSQL, MongoDB, MariaDB, Redis, and libSQL, with scheduled backups to S3-compatible storage.",
 			icon: <IconDatabase />,
 		},
 		{
@@ -55,7 +60,7 @@ export function FirstFeaturesSection() {
 			title: "Docker Swarm Clusters",
 			description:
 				"Scale your deployments seamlessly with built-in Docker Swarm support for robust, multi-node applications.",
-			icon: <IconUsers />,
+			icon: <IconNetwork />,
 		},
 		{
 			title: "Open Source Templates",
@@ -72,7 +77,7 @@ export function FirstFeaturesSection() {
 		{
 			title: "Real-time Monitoring & Alerts",
 			description:
-				"Monitor CPU, memory, and network usage in real-time across your deployments for full visibility.",
+				"Monitor CPU, memory, disk, and network usage in real-time, and get notified when CPU or memory cross your thresholds.",
 			icon: <IconActivity />,
 		},
 		{
@@ -86,6 +91,30 @@ export function FirstFeaturesSection() {
 			description:
 				"Built for developers seeking control and flexibility, with self-hosting and open-source deployment.",
 			icon: <IconEaseInOut />,
+		},
+		{
+			title: "Preview Deployments & Rollbacks",
+			description:
+				"Spin up a preview environment for every GitHub pull request and roll back to a previous release when you need to.",
+			icon: <IconGitPullRequest />,
+		},
+		{
+			title: "Secrets & Vault Providers",
+			description:
+				"Keep environment variables encrypted at rest and pull secrets from HashiCorp Vault, Infisical, AWS, Doppler, and more.",
+			icon: <IconKey />,
+		},
+		{
+			title: "Logs & Metrics Export",
+			description:
+				"Ship container logs and metrics to Datadog, Loki, Better Stack, Elasticsearch, and other observability platforms.",
+			icon: <IconChartDots />,
+		},
+		{
+			title: "Networks & DNS Management",
+			description:
+				"Create and attach Docker networks per service, and manage DNS records for Cloudflare, Route53, and other providers.",
+			icon: <IconWorld />,
 		},
 	];
 	return (
@@ -122,9 +151,8 @@ const Feature = ({
 		<div
 			className={cn(
 				"group/feature relative flex  flex-col border-neutral-800 py-10 lg:border-r",
-				(index === 0 || index === 4 || index === 8) &&
-					"dark:border-neutral-800 lg:border-l",
-				(index < 4 || index < 8) && "dark:border-neutral-800 lg:border-b",
+				index % 4 === 0 && "dark:border-neutral-800 lg:border-l",
+				index < 12 && "dark:border-neutral-800 lg:border-b",
 			)}
 		>
 			{index < 4 && (
