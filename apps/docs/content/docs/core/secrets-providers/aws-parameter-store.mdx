@@ -1,0 +1,59 @@
+---
+title: AWS Parameter Store
+description: "Use AWS Systems Manager Parameter Store parameters in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create IAM Credentials
+
+Create an IAM user (or use an existing one) with programmatic access and a least-privilege policy for the parameters Dokploy should reach:
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": ["ssm:GetParameters"],
+			"Resource": "arn:aws:ssm:*:*:parameter/production/my-app/*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": ["ssm:DescribeParameters"],
+			"Resource": "*"
+		}
+	]
+}
+```
+
+- `ssm:GetParameters` resolves references at deploy time.
+- `ssm:DescribeParameters` powers **Test Connection** and the autocomplete. Without it the connection test fails, but references you type by hand still resolve.
+- `SecureString` parameters encrypted with a customer-managed KMS key also need `kms:Decrypt` on that key.
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **AWS Parameter Store** and fill in:
+
+- **Name**: the identifier used in references, e.g. `aws-ssm`.
+- **Region**: the region your parameters live in, e.g. `us-east-1`.
+- **Access Key ID / Secret Access Key**: the IAM credentials.
+- **Endpoint** (optional): a custom endpoint for VPC endpoints or API-compatible emulators (e.g. LocalStack). Leave empty for regular AWS.
+- **Discovery path** (optional): limits parameter browsing and autocomplete to one hierarchy, e.g. `/production/my-app`. It must start with `/`.
+
+Use **Test Connection** to validate the credentials before saving, then assign the projects/environments where the provider may be used.
+
+<Callout type="warn">
+  The discovery path only narrows what the autocomplete lists. It is not a security boundary — the IAM policy decides which parameters the provider can read.
+</Callout>
+
+## Reference Format
+
+References use the full parameter **name**, including the leading slash:
+
+```bash
+DB_PASSWORD=${{vault.aws-ssm./production/my-app/db-password}}
+API_TOKEN=${{vault.aws-ssm./production/my-app/api-token}}
+```
+
+`SecureString` parameters are decrypted automatically. A parameter that does not exist fails the deployment with an explicit error instead of injecting an empty value.
