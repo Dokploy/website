@@ -1,0 +1,42 @@
+---
+title: Self-hosted Restrictions
+description: "Force every sign-in through SSO and require all services to run on remote servers."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+**Self-hosted Restrictions** are two instance-wide switches for teams that need tighter control over how people sign in and where workloads run.
+
+<Callout type="info">
+  Both switches require a valid [Enterprise license](/docs/core/enterprise/license-keys) and are only available on **self-hosted** instances. They are not available on Dokploy Cloud.
+</Callout>
+
+You find them in **Settings → SSO**, in the **Self-hosted Restrictions** card.
+
+## Enforce SSO
+
+When enabled, the email/password login form is hidden and users must sign in exclusively through SSO.
+
+The restriction is enforced on the server, not only in the UI. With Enforce SSO on, these sign-in methods are rejected:
+
+- Email and password sign-in and sign-up.
+- Social sign-in.
+- Passkey sign-in.
+
+<Callout type="warn">
+  Enable Enforce SSO only after you have registered an [SSO provider](/docs/core/enterprise/sso) and confirmed that you can sign in with it. Otherwise nobody, including the owner, can sign in from the login page.
+</Callout>
+
+## Remote Servers Only
+
+When enabled, all services — applications, databases and Docker Compose — must be deployed to a [remote server](/docs/core/remote-servers). Deploying directly to the machine that runs Dokploy is not allowed.
+
+Use it to keep the Dokploy host as a pure control plane: builds and workloads run on other machines, so a heavy build or a misbehaving container cannot take the panel down.
+
+Before enabling it, add at least one remote server. Creating a service without selecting a server fails while the option is on.
+
+## Related
+
+- [SSO](/docs/core/enterprise/sso)
+- [Account Security](/docs/core/account-security)
+- [Deployment options](/docs/core/deployment-options)
