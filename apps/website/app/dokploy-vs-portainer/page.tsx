@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Dokploy vs. Portainer Comparison | Dokploy",
+	title: "Dokploy vs. Portainer Comparison",
 	description:
 		"Comparing Dokploy vs. Portainer? See how these self-hosted or cloud container tools stack up on deployment, reverse proxy, multi-server support, and more.",
 };
@@ -67,7 +67,7 @@ const featureComparisonRows: FeatureRow[] = [
 		portainer: false,
 	},
 	{
-		feature: "Preview deployments (review apps)",
+		feature: "Preview deployments for GitHub pull requests",
 		dokploy: true,
 		portainer: false,
 	},
@@ -84,7 +84,7 @@ const featureComparisonRows: FeatureRow[] = [
 		section: "Networking & Domains",
 	},
 	{
-		feature: "Automatic SSL / encrypt cert via Let's Encrypt",
+		feature: "Automatic SSL certificates via Let's Encrypt",
 		dokploy: true,
 		portainer: false,
 	},
@@ -106,7 +106,11 @@ const featureComparisonRows: FeatureRow[] = [
 		section: "Configuration & Services",
 	},
 	{ feature: "Metrics enabled by default", dokploy: true, portainer: false },
-	{ feature: "Automated alerts from metrics", dokploy: true, portainer: false },
+	{
+		feature: "CPU and memory threshold alerts",
+		dokploy: true,
+		portainer: false,
+	},
 	{
 		feature: "Application and container log viewer",
 		dokploy: true,
@@ -128,11 +132,6 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "API and CLI access", dokploy: true, portainer: true },
 	{ feature: "AI-assisted deployments", dokploy: true, portainer: false },
 	{ feature: "Free community edition", dokploy: true, portainer: true },
-	{
-		feature: "Full-featured without a paid plan",
-		dokploy: true,
-		portainer: false,
-	},
 ];
 
 const whyChooseItems = [
@@ -150,7 +149,7 @@ const whyChooseItems = [
 		icon: Globe,
 		title: "Get built-in networking without extra tools",
 		description:
-			"Dokploy offers SSL, built-in reverse proxy, and managed domains and cert issuance encryption. It ships with Traefik integrated, so assigning a domain to a service and getting a valid HTTPS certificate is a few clicks in the UI. You can also manage Traefik config directly via the file editor if you need more control.",
+			"Dokploy offers a built-in reverse proxy, managed domains, and automatic SSL certificate issuance. It ships with Traefik integrated, so assigning a domain to a service and getting a valid HTTPS certificate is a few clicks in the UI. You can also manage Traefik config directly via the file editor if you need more control.",
 		image: {
 			src: "/images/dokploy-domains.webp",
 			alt: "Dokploy domains configuration with automatic HTTPS certificates",
@@ -160,7 +159,7 @@ const whyChooseItems = [
 		icon: Bell,
 		title: "Monitor, back up, and alert from one dashboard",
 		description:
-			"Dokploy has real-time CPU, memory, and disk metrics enabled by default, automated alerts, and scheduled S3-compatible database and volume backups built in. There's less to install, less to maintain, and less to go wrong. Troubleshooting is also simpler: logs, metrics, and alerts all live in the same UI.",
+			"Dokploy has real-time CPU, memory, and disk metrics, CPU and memory threshold alerts, and scheduled S3-compatible database and volume backups built in. There's less to install, less to maintain, and less to go wrong. Troubleshooting is also simpler: logs, metrics, and alerts all live in the same UI.",
 		image: {
 			src: "/images/dokploy-monitoring-dashboard.webp",
 			alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
@@ -170,7 +169,7 @@ const whyChooseItems = [
 		icon: Users,
 		title: "Switch to a more flexible workflow as your project grows",
 		description:
-			"Dokploy's open source version is genuinely full-featured for solo developers, startups, teams, and large enterprises alike. You can manage multi-server deployments, organize services into projects, control user permissions, and deploy across multiple environments—only upgrading as you grow. Whether you're a student running a side project or an agency managing client instances, the same tool scales with you.",
+			"Dokploy's core platform is free and open source, so solo developers, startups, and teams can deploy without a paid plan. You can manage multi-server deployments, organize services into projects, control user permissions, schedule jobs, roll back releases, and deploy across multiple environments. Enterprise features such as SSO, SCIM, audit logs, and custom roles are available under a license when you need them. Whether you're a student running a side project or an agency managing client instances, the same tool scales with you.",
 		image: {
 			src: "/images/dokploy-projects-dashboard.webp",
 			alt: "Dokploy projects dashboard with services grid and environment selector",
@@ -187,13 +186,13 @@ const integrationRows = [
 	{
 		category: "Build and deployment systems",
 		dokploy:
-			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+			"Docker, Docker Compose, Nixpacks, Railpack, Heroku Buildpacks, Paketo Buildpacks, Static",
 		portainer: "Docker, Docker Compose",
 	},
 	{
 		category: "Notifications and communication",
 		dokploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		portainer: "Slack, Microsoft Teams, Email (SMTP), Webhook",
 	},
 ];
@@ -380,11 +379,11 @@ export default function DokployVsPortainerPage() {
 							Deploy AI tools in a secure environment
 						</h2>
 						<p className="mt-6 text-lg text-muted-foreground">
-							Create sandboxes with Dokploy that combine multitenancy, SSO,
-							audit logs, and IP allowlisting in a single setup. Every
-							deployment is logged, access is tied to your identity provider,
-							workspaces are kept separate, and non-technical users can go from
-							code to a running app without an engineer involved.
+							Create sandboxes with Dokploy that combine multitenancy, SSO, and
+							audit logs in a single setup. Every deployment is logged, access
+							is tied to your identity provider, workspaces are kept separate,
+							and non-technical users can go from code to a running app without
+							an engineer involved.
 						</p>
 					</div>
 					<div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-border/50 shadow-2xl">

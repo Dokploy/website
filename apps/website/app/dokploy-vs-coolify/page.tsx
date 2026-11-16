@@ -19,7 +19,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Dokploy Vs. Coolify Comparison",
+	title: "Dokploy vs. Coolify Comparison",
 	description:
 		"Dokploy vs. Coolify at a glance: How to choose the right self-hosted open deployment option for your applications.",
 };
@@ -60,7 +60,7 @@ const featureComparisonRows = [
 		coolify: false,
 	},
 	{
-		feature: "Preview deployments (review apps)",
+		feature: "Preview deployments for GitHub pull requests",
 		dokploy: true,
 		coolify: true,
 	},
@@ -75,7 +75,7 @@ const featureComparisonRows = [
 		coolify: "limited",
 	},
 	{ feature: "Metrics enabled by default", dokploy: true, coolify: false },
-	{ feature: "Automated alerts from metrics", dokploy: true, coolify: false },
+	{ feature: "CPU and memory threshold alerts", dokploy: true, coolify: false },
 ];
 
 const whyChooseItems = [
@@ -95,19 +95,19 @@ const whyChooseItems = [
 		icon: Plug,
 		title: "Integrate with your favorite platforms",
 		description:
-			"Connect Dokploy to GitHub, GitLab, and Bitbucket. Dokploy supports Docker, Compose, Nixpacks, and Buildpacks, and even lets you add APIs and use CLI automation.",
+			"Connect Dokploy to GitHub, GitLab, Bitbucket, and Gitea. Dokploy supports Docker, Compose, Nixpacks, Railpack, and Heroku and Paketo Buildpacks, pulls secrets from providers like HashiCorp Vault, Infisical, and Doppler, and lets you automate everything through the API, CLI, and MCP server.",
 	},
 	{
 		icon: LayoutDashboard,
 		title: "Experience an intuitive, polished UX",
 		description:
-			"Enjoy a clean, consistent UI in the cloud, powered by Next.js and TypeScript. Dokploy is the modern deployment dashboard, optimized for productivity and clarity, with smooth navigation and predictable save behavior.",
+			"Enjoy a clean, consistent UI, powered by Next.js and TypeScript. Dokploy is the modern deployment dashboard, optimized for productivity and clarity, with smooth navigation and predictable save behavior.",
 	},
 	{
 		icon: Bell,
 		title: "Know what's happening before it's a problem",
 		description:
-			"Built-in metrics, automated alerting, and volume backups make Dokploy ideal for serious deployments. Monitor CPU, memory, and disk usage, automate notifications, and keep data safe with S3-compatible backups.",
+			"Built-in metrics, CPU and memory threshold alerts, and volume backups make Dokploy ideal for serious deployments. Monitor CPU, memory, and disk usage, export logs and metrics to tools like Loki and Datadog, roll back to a previous release, and keep data safe with S3-compatible backups.",
 	},
 	{
 		icon: Bot,
@@ -126,13 +126,13 @@ const integrationRows = [
 	{
 		category: "Build and deployment systems",
 		dokploy:
-			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+			"Docker, Docker Compose, Nixpacks, Railpack, Heroku Buildpacks, Paketo Buildpacks, Static",
 		coolify: "Docker, Docker Compose, Nixpacks",
 	},
 	{
 		category: "Notifications and communication",
 		dokploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		coolify: "Slack, Discord, Telegram, Email (SMTP), Pushover, Resend, Teams",
 	},
 ];

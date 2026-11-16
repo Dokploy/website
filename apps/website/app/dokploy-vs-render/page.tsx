@@ -18,7 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Dokploy Vs. Render: Self-Hosted Vs. Managed PaaS",
+	title: "Dokploy vs. Render: Self-Hosted vs. Managed PaaS",
 	description:
 		"Compare Dokploy vs. Render: infrastructure ownership, Docker Compose support, pricing, and deployment architecture—decide which fits your team.",
 };
@@ -41,7 +41,11 @@ const featureComparisonRows = [
 		dokploy: true,
 		render: true,
 	},
-	{ feature: "Nixpacks build support", dokploy: true, render: false },
+	{
+		feature: "Nixpacks and Railpack build support",
+		dokploy: true,
+		render: false,
+	},
 	{ feature: "Heroku Buildpacks support", dokploy: true, render: true },
 	{ feature: "Paketo Buildpacks support", dokploy: true, render: false },
 	{ feature: "Railpack build support", dokploy: true, render: false },
@@ -56,7 +60,11 @@ const featureComparisonRows = [
 		dokploy: true,
 		render: false,
 	},
-	{ feature: "Preview deployments", dokploy: true, render: true },
+	{
+		feature: "Preview deployments for pull requests",
+		dokploy: true,
+		render: true,
+	},
 	{ feature: "Multi-server deployment", dokploy: true, render: false },
 	{ feature: "Docker Swarm clustering", dokploy: true, render: false },
 	{ feature: "One-command installation", dokploy: true, render: false },
@@ -67,14 +75,14 @@ const featureComparisonRows = [
 		dokploy: true,
 		render: false,
 	},
-	{ feature: "Automated metric alerts", dokploy: true, render: false },
+	{ feature: "CPU and memory threshold alerts", dokploy: true, render: false },
 	{ feature: "Metrics enabled by default", dokploy: true, render: false },
 	{ feature: "AI-assisted deployments", dokploy: true, render: false },
 	{ feature: "MCP server support", dokploy: true, render: true },
 	{ feature: "API and CLI automation", dokploy: true, render: true },
-	{ feature: "Fine-grained RBAC", dokploy: true, render: false },
-	{ feature: "SSO / SAML", dokploy: true, render: true },
-	{ feature: "Audit logs", dokploy: true, render: true },
+	{ feature: "Fine-grained RBAC (Enterprise)", dokploy: true, render: false },
+	{ feature: "SSO / SAML (Enterprise)", dokploy: true, render: true },
+	{ feature: "Audit logs (Enterprise)", dokploy: true, render: true },
 	{
 		feature: "Predictable per-server platform pricing",
 		dokploy: true,
@@ -110,7 +118,7 @@ const whyChooseItems = [
 		icon: Gauge,
 		title: "Monitor and alert without extra tooling",
 		description:
-			"Get CPU, memory, and disk metrics out of the box, with automated alerts built in. Render has no native monitoring dashboard or automated alerting—you need a third-party solution.",
+			"Get CPU, memory, and disk metrics out of the box, with CPU and memory threshold alerts built in. Render has no native monitoring dashboard or automated alerting—you need a third-party solution.",
 	},
 	{
 		icon: Bot,
@@ -128,7 +136,8 @@ const pricingRows = [
 	},
 	{
 		label: "Entry price",
-		dokploy: "Free (open source, self-hosted)",
+		dokploy:
+			"$4.50/month per server (Hobby), with a 7-day free trial; self-hosting is free",
 		render: "$0/month workspace + compute per service",
 	},
 	{
@@ -167,13 +176,13 @@ const integrationRows = [
 	{
 		category: "Build and deployment systems",
 		dokploy:
-			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+			"Docker, Docker Compose, Nixpacks, Railpack, Heroku Buildpacks, Paketo Buildpacks, Static",
 		render: "Docker (Dockerfile + prebuilt images), Heroku Buildpacks",
 	},
 	{
 		category: "Notifications and communication",
 		dokploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		render: "Slack, Email, Webhook (Pro plan+)",
 	},
 ];
