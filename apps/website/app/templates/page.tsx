@@ -4,16 +4,16 @@ import { SearchAndFilter } from "../blog/components/SearchAndFilter";
 import { TemplateCard } from "./components/TemplateCard";
 
 export const metadata: Metadata = {
-	title: "Dokploy Templates: 500+ Open Source Apps",
+	title: "Dokploy Templates: 600+ Open Source Apps",
 	description:
-		"Browse 500+ open source Docker templates and one-click self-hosted apps to deploy with Dokploy – databases, CMS, analytics, AI tools and more.",
+		"Browse 600+ open source Docker templates and one-click self-hosted apps to deploy with Dokploy – databases, CMS, analytics, AI tools and more.",
 	alternates: {
 		canonical: "https://dokploy.com/templates",
 	},
 	openGraph: {
-		title: "Dokploy Templates: 500+ Open Source Apps",
+		title: "Dokploy Templates: 600+ Open Source Apps",
 		description:
-			"Browse 500+ open source Docker templates and one-click self-hosted apps to deploy with Dokploy – databases, CMS, analytics, AI tools and more.",
+			"Browse 600+ open source Docker templates and one-click self-hosted apps to deploy with Dokploy – databases, CMS, analytics, AI tools and more.",
 		type: "website",
 		url: "https://dokploy.com/templates",
 	},

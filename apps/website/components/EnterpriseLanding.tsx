@@ -29,9 +29,9 @@ import { Button } from "./ui/button";
 const features = [
 	{
 		icon: Lock,
-		title: "SSO / SAML",
+		title: "SSO (OIDC & SAML)",
 		description:
-			"Seamless authentication with enterprise identity providers for secure, centralized access control.",
+			"Centralized sign-in with your identity provider, plus forward auth to put SSO in front of the apps you deploy.",
 	},
 	{
 		icon: UserCog,
@@ -73,7 +73,7 @@ const features = [
 		icon: Paintbrush,
 		title: "White Labeling",
 		description:
-			"Present Dokploy as your own platform with custom branding, logo, and colors for your organization or clients.",
+			"Present self-hosted Dokploy as your own platform with a custom name, logos, favicon, and CSS for your organization or clients.",
 	},
 ];
 
@@ -184,7 +184,10 @@ export function EnterpriseLanding() {
 									Contact sales
 								</Button>
 								<Button variant="outline" className="rounded-full" asChild>
-									<Link href="https://docs.dokploy.com" target="_blank">
+									<Link
+										href="https://docs.dokploy.com/docs/core"
+										target="_blank"
+									>
 										View documentation
 									</Link>
 								</Button>
@@ -343,9 +346,7 @@ export function EnterpriseLanding() {
 							a governed, production-ready environment.
 						</p>
 						<Button className="mt-6 rounded-full" asChild>
-							<Link href="/features/application-deployment-platform">
-								Explore AI deployment
-							</Link>
+							<Link href="/deploy-ai">Explore AI deployment</Link>
 						</Button>
 					</div>
 				</Container>
