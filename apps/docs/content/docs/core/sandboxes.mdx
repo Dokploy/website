@@ -41,7 +41,7 @@ On Dokploy Cloud, and on instances with **Remote Servers Only** enabled, sandbox
 
 ## Templates
 
-Every template runs as a non-root user (`1000:1000`) with `/home/user` as working directory.
+Commands in every template run as a non-root user (`1000:1000`) with `/home/user` as working directory.
 
 | Template | Image |
 | -------- | ----- |
@@ -57,7 +57,7 @@ Every template runs as a non-root user (`1000:1000`) with `/home/user` as workin
 | `java` | `eclipse-temurin:21-jdk` |
 | `php` | `php:8.3-cli` |
 
-You can use any other image instead of a template. It must include `sh`, `sleep` and `date`, and it runs as the default user of the image.
+You can use any other image instead of a template. It must include `sh`, `sleep` and `date`. Commands run as the same non-root user (`1000:1000`), whatever the default user of the image is.
 
 ## Lifecycle
 
@@ -166,7 +166,7 @@ Each sandbox is created with a restrictive configuration:
 
 - All Linux capabilities dropped and `no-new-privileges` enabled
 - CPU, memory and process limits, with swap disabled
-- A non-root user when using a built-in template
+- Commands always run as a non-root user and cannot stop the processes that enforce the lifetime of the sandbox
 - A dedicated network: sandboxes cannot reach each other and are never attached to `dokploy-network` or to the network of any application
 - No network access at all in `Isolated` mode, which is the default
 - Environment variables encrypted at rest and never returned by the API
@@ -190,7 +190,7 @@ sudo systemctl reload docker
 3. Create the sandbox with **Runtime** set to `runsc`, or `"runtime": "runsc"` in the API.
 
 <Callout type="warn">
-With gVisor, `/tmp` lives in memory inside the sandbox. Files written to `/tmp` through `sandbox.writeFile` are not visible to your commands, and `sandbox.setTimeout` does not change the inactivity timeout of a running sandbox. Write files under the working directory and set the timeout when creating the sandbox.
+With gVisor, `/tmp` lives in memory inside the sandbox. Files written to `/tmp` through `sandbox.writeFile` are not visible to your commands, so write files under the working directory.
 </Callout>
 
 ## Permissions
