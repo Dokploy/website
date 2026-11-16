@@ -35,7 +35,7 @@ const pricingFaqs = [
 	{
 		question: "Can I switch between plans?",
 		answer:
-			"Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. When downgrading, the change takes effect at the start of your next billing cycle.",
+			"Yes, you can upgrade or downgrade your plan at any time. Plan changes take effect immediately, and the difference is prorated for the remainder of your billing cycle.",
 	},
 	{
 		question: "Is there a limit on the number of deployments?",
@@ -45,7 +45,7 @@ const pricingFaqs = [
 	{
 		question: "What's included in the Enterprise plan?",
 		answer:
-			"The Enterprise plan includes unlimited servers and organizations, fine-grained RBAC, SSO/SAML integration (Azure, OKTA, etc.), SCIM user provisioning, audit logs, MSA/SLA, white labeling, and priority support. It's available as both Cloud and Self-Hosted.",
+			"The Enterprise plan includes unlimited servers and organizations, fine-grained RBAC with custom roles, SSO via OIDC and SAML (Okta, Microsoft Entra ID, etc.), SCIM user provisioning, audit logs, forward auth for your deployed apps, MSA/SLA, and priority support. It's available as both Cloud and Self-Hosted. White labeling and SSO enforcement are available on Self-Hosted only.",
 	},
 	{
 		question: "Do you offer refunds?",
@@ -85,41 +85,40 @@ const hobbyFeatures = [
 	"Unlimited Deployments",
 	"Unlimited Databases",
 	"Unlimited Applications",
-	"Setup 1 Server",
+	"Pay per Server ($4.50/mo each)",
 	"1 Organization",
 	"1 User",
 	"2 Environments",
-	"1 Volume Backup per Application",
+	"1 Volume Backup per Service",
 	"1 Backup per Database",
-	"1 Scheduled Job per Application",
+	"1 Scheduled Job per Service or Server",
 	"Community Support (Discord)",
 ];
 
 const startupFeatures = [
 	"All the features of Hobby, plus…",
-	"Setup up to 3 Servers",
+	"3 Servers included ($4.50/mo per extra server)",
 	"3 Organizations",
 	"Unlimited Users",
 	"Unlimited Environments",
 	"Unlimited Volume Backups",
 	"Unlimited Database Backups",
 	"Unlimited Scheduled Jobs",
-	"Basic RBAC (Admin, Developer)",
-	"2FA",
+	"Built-in Roles (Owner, Admin, Member)",
 	"Email and Chat Support",
 ];
 
 const enterpriseFeatures = [
 	"All the features of Startup, plus…",
-	"Setup Unlimited Servers",
-	"Up to Unlimited Organizations",
-	"Fine-grained RBAC",
+	"Unlimited Servers",
+	"Unlimited Organizations",
+	"Fine-grained RBAC (Custom Roles)",
 	"Complete Hosting Flexibility",
-	"SSO / SAML (Azure, OKTA, etc)",
+	"SSO via OIDC / SAML (Okta, Entra ID, etc)",
 	"SCIM User Provisioning",
 	"Audit Logs",
 	"MSA/SLA",
-	"White Labeling",
+	"White Labeling (Self-Hosted)",
 	"Priority Support and Services",
 ];
 

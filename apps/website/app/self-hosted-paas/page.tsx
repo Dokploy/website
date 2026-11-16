@@ -82,7 +82,7 @@ const enterpriseFeatures = [
 		icon: KeyRound,
 		title: "SSO / SAML",
 		description:
-			"Integrate with enterprise identity providers like Okta and Azure AD for centralized, secure access control across your organization.",
+			"Integrate with enterprise identity providers like Okta and Microsoft Entra ID over OIDC or SAML, with SCIM provisioning, for centralized, secure access control across your organization.",
 	},
 	{
 		icon: ScrollText,
@@ -117,7 +117,7 @@ const setupSteps = [
 		icon: TerminalSquare,
 		title: "Run one install command",
 		description:
-			"Install Dokploy with a single command. Docker is the only prerequisite, the installer handles the rest in just a few commands.",
+			"Install Dokploy with a single command. The installer sets up Docker if it is missing and handles the rest.",
 	},
 	{
 		number: "03",
@@ -208,12 +208,14 @@ const faqs = [
 		question: "What's the difference between Dokploy Cloud and self-hosted?",
 		answer: (
 			<p>
-				Both versions are functionally identical. Every feature available in
-				self-hosted is also available in Cloud, and vice versa. The difference
-				is purely operational: with self-hosted, you manage the Dokploy instance
-				itself, including updates and uptime. With Cloud, Dokploy manages the
-				control plane for you. Your applications always run on your own servers
-				in both cases.
+				The deployment engine is the same in both, and your applications always
+				run on your own servers. With self-hosted, you manage the Dokploy
+				instance itself, including updates and uptime. With Cloud, Dokploy
+				manages the control plane for you, and every service is deployed to a
+				remote server you connect. A few features are self-hosted only: white
+				labeling, enforced SSO, the requests analytics view, and the settings
+				for the Dokploy server itself. Cloud plans also have their own limits on
+				users, organizations, and backups, listed on the pricing page.
 			</p>
 		),
 	},
@@ -433,9 +435,10 @@ export default function SelfHostedPaasPage() {
 							Should you choose Cloud or Self-Hosted?
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Both are great options. Every key feature available in Self-Hosted
-							is also available in Cloud, and vice versa. The choice comes down
-							to how much you want to manage yourself.
+							Both are great options. The core deployment features are the same
+							in both; a few instance-level features, such as white labeling and
+							enforced SSO, are self-hosted only. The choice comes down to how
+							much you want to manage yourself.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
@@ -491,9 +494,9 @@ export default function SelfHostedPaasPage() {
 							One product, two ways to run the control plane
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Dokploy&apos;s deployment engine is identical in both options. The
-							only difference is where the control plane—the UI, PostgreSQL
-							database, and Redis instance—runs.
+							Dokploy&apos;s deployment engine is the same in both options. The
+							main difference is where the control plane—the UI and its
+							PostgreSQL database—runs.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-2">

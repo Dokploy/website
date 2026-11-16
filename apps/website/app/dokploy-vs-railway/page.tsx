@@ -44,8 +44,8 @@ const featureComparisonRows: {
 	{ feature: "Native Docker Compose support", dokploy: true, railway: false },
 	{ feature: "Static site / build support", dokploy: true, railway: true },
 	{
-		feature: "Preview deployments",
-		dokploy: "PR-based",
+		feature: "Preview deployments for pull requests",
+		dokploy: "GitHub pull requests",
 		railway: "PR-based",
 	},
 	{ feature: "Scheduled jobs (cron)", dokploy: true, railway: true },
@@ -57,7 +57,7 @@ const featureComparisonRows: {
 	},
 	{
 		feature: "Managed databases",
-		dokploy: "Self-managed on your server",
+		dokploy: "One-click databases on your server with scheduled S3 backups",
 		railway: "Native backups, PITR & opt-in HA clustering",
 	},
 	{ feature: "MCP server for AI agents", dokploy: true, railway: true },
@@ -114,7 +114,7 @@ const whyChooseItems = [
 		icon: Gauge,
 		title: "See your metrics with zero setup",
 		description:
-			"Dokploy shows CPU, RAM, and disk metrics for every application by default, no extra tool required. Railway offers the same base metrics on all plans, but automated threshold alerts require upgrading to Pro.",
+			"Dokploy includes CPU, RAM, and disk metrics for your applications, no extra tool required. Railway offers the same base metrics on all plans, but automated threshold alerts require upgrading to Pro.",
 		image: "/images/dokploy-monitoring-dashboard.webp",
 		alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
 	},
@@ -125,7 +125,7 @@ const whenToUse = {
 		"You're running three or more always-on apps and want a flat server rate instead of metered billing.",
 		"You want full control over your servers, operating system, and region.",
 		"You need native Docker Compose support for multi-service apps.",
-		"You want the option to run Enterprise security features like SSO and audit logs on your own infrastructure someday.",
+		"You want the option to run Enterprise security features like SSO and audit logs on your own infrastructure.",
 		"Your costs shouldn't grow just because you add teammates.",
 	],
 	railway: [
@@ -140,7 +140,8 @@ const whenToUse = {
 const pricingRows = [
 	{
 		label: "Entry price",
-		dokploy: "Free (open source, self-hosted)",
+		dokploy:
+			"$4.50/month per server (Hobby), with a 7-day free trial; self-hosting is free",
 		railway: "$5/month (Hobby) + usage",
 	},
 	{
@@ -178,7 +179,8 @@ const integrationRows = [
 	},
 	{
 		category: "Notifications and communication",
-		dokploy: "Slack, Telegram, Discord, Lark, Email, Webhook, and more",
+		dokploy:
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		railway: "Primarily webhooks and email",
 	},
 ];
@@ -212,9 +214,8 @@ const migrationSteps: { title: string; description: ReactNode }[] = [
 		title: "Import your environment variables.",
 		description: (
 			<>
-				Paste them into Dokploy's Environment tab, or push the whole file at
-				once from the CLI:{" "}
-				<InlineCode>dokploy env push &lt;file&gt;</InlineCode>.
+				Paste the contents of your <InlineCode>.env</InlineCode> file into the
+				Environment tab of your application and save.
 			</>
 		),
 	},
@@ -222,8 +223,8 @@ const migrationSteps: { title: string; description: ReactNode }[] = [
 		title: "Provision your database and migrate the data.",
 		description: (
 			<>
-				Create a matching database in Dokploy—PostgreSQL, MySQL, MongoDB,
-				MariaDB, or Redis—then pull your connection string from Railway:{" "}
+				Create a matching database in Dokploy—PostgreSQL, MySQL, MariaDB,
+				MongoDB, Redis, or libSQL—then pull your connection string from Railway:{" "}
 				<InlineCode>
 					railway variables -s db --kv | grep DATABASE_PUBLIC_URL
 				</InlineCode>{" "}
@@ -239,7 +240,7 @@ const migrationSteps: { title: string; description: ReactNode }[] = [
 		description: (
 			<>
 				Trigger a deployment and check it on Dokploy's generated{" "}
-				<InlineCode>traefik.me</InlineCode> domain before touching DNS.
+				<InlineCode>sslip.io</InlineCode> domain before touching DNS.
 			</>
 		),
 	},
@@ -289,7 +290,7 @@ const faqs = [
 	{
 		question: "Does Dokploy support monorepos?",
 		answer:
-			"Yes, deploy it as a Docker Compose stack, where each service's build context can point to a different subdirectory of the same repository.",
+			"Yes. Create one application per package and set its build path to the right subdirectory, then use watch paths so each application only redeploys when its own files change. You can also deploy the whole repository as a Docker Compose stack, where each service's build context points to a different subdirectory.",
 	},
 ];
 

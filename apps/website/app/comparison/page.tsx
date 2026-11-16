@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Dokploy Vs. and PaaS Comparison Pages | Dokploy",
+	title: "Dokploy vs. Other PaaS: Comparison Pages",
 	description:
 		'How does Dokploy compare to other application deployment, database management, and PaaS solutions? Learn on our "Dokploy vs." alternative comparison pages.',
 };
@@ -69,7 +69,7 @@ const whyDokploy = [
 		icon: Activity,
 		title: "Monitor and back up by default",
 		description:
-			"Dokploy gives you real-time metrics, alerts, and scheduled S3-compatible backups in the same product from day one. That means less setup, fewer moving parts, and a much shorter path from learning that something's wrong to fixing the problem.",
+			"Dokploy gives you real-time metrics, CPU and memory threshold alerts, and scheduled S3-compatible backups in the same product. That means less setup, fewer moving parts, and a much shorter path from learning that something's wrong to fixing the problem.",
 	},
 	{
 		icon: Users,
