@@ -3,43 +3,62 @@ title: Databases
 description: A guide to using the Dokploy CLI to manage databases
 ---
 
-The Dokploy CLI can be used to create, deploy, and manage databases.
+Each database type has its own group: `postgres`, `mysql`, `mariadb`, `mongo` and `redis`.
 
 ## Requirements
 
-Is required to be already authenticated with the Dokploy CLI.
-
+You need to be [authenticated](/docs/cli/authentication) with the Dokploy CLI.
 
 ## Commands
 
-### MariaDB 
+All the database groups share the same actions. Replace `<group>` with the database type and `<id>` with the matching ID option (`--postgresId`, `--mysqlId`, `--mariadbId`, `--mongoId` or `--redisId`).
 
-1. `dokploy database mariadb create` - Create a new mariadb database.
-2. `dokploy database mariadb delete` - Delete an mariadb database.
-3. `dokploy database mariadb deploy` - Deploy a mariadb database.
-4. `dokploy database mariadb stop` - Stop a running mariadb database.
+| Command | Description |
+| --- | --- |
+| `dokploy <group> create` | Create a new database. |
+| `dokploy <group> one <id>` | Get the details of a database. |
+| `dokploy <group> search` | Search databases. |
+| `dokploy <group> deploy <id>` | Deploy a database. |
+| `dokploy <group> start <id>` | Start a database. |
+| `dokploy <group> stop <id>` | Stop a running database. |
+| `dokploy <group> rebuild <id>` | Rebuild a database. |
+| `dokploy <group> update <id>` | Update the settings of a database. |
+| `dokploy <group> save-environment <id> --env <value>` | Save the environment variables of a database. |
+| `dokploy <group> save-external-port <id> --externalPort <port>` | Set the external port of a database. |
+| `dokploy <group> move <id> --targetEnvironmentId <id>` | Move a database to another environment. |
+| `dokploy <group> remove <id>` | Delete a database. |
 
-### PostgreSQL
-1. `dokploy database postgresql create` - Create a new postgresql database.
-2. `dokploy database postgresql delete` - Delete an postgresql database.
-3. `dokploy database postgresql deploy` - Deploy a postgresql database.
-4. `dokploy database postgresql stop` - Stop a running postgresql database.
+## Creating a database
 
-### MySQL
-1. `dokploy database mysql create` - Create a new mysql database.
-2. `dokploy database mysql delete` - Delete an mysql database.
-3. `dokploy database mysql deploy` - Deploy a mysql database.
-4. `dokploy database mysql stop` - Stop a running mysql database.
+The required options depend on the database type:
 
-### MongoDB
-1. `dokploy database mongodb create` - Create a new mongodb database.
-2. `dokploy database mongodb delete` - Delete an mongodb database.
-3. `dokploy database mongodb deploy` - Deploy a mongodb database.
-4. `dokploy database mongodb stop` - Stop a running mongodb database.
+| Group | Required options |
+| --- | --- |
+| `postgres` | `--name`, `--databaseName`, `--databaseUser`, `--databasePassword`, `--environmentId` |
+| `mysql` | `--name`, `--databaseName`, `--databaseUser`, `--databasePassword`, `--environmentId` |
+| `mariadb` | `--name`, `--databaseName`, `--databaseUser`, `--databasePassword`, `--environmentId` |
+| `mongo` | `--name`, `--databaseUser`, `--databasePassword`, `--environmentId` |
+| `redis` | `--name`, `--databasePassword`, `--environmentId` |
 
-### Redis
-1. `dokploy database redis create` - Create a new redis database.
-2. `dokploy database redis delete` - Delete an redis database.
-3. `dokploy database redis deploy` - Deploy a redis database.
-4. `dokploy database redis stop` - Stop a running redis database.
+All of them also accept `--appName`, `--dockerImage`, `--description` and `--serverId`.
 
+## Examples
+
+```bash
+# Create a postgres database
+dokploy postgres create \
+  --name "my-db" \
+  --databaseName app \
+  --databaseUser app \
+  --databasePassword "a-strong-password" \
+  --environmentId env123
+
+# Deploy it
+dokploy postgres deploy --postgresId pg123
+
+# Stop a redis database
+dokploy redis stop --redisId redis123
+
+# Delete a mysql database
+dokploy mysql remove --mysqlId mysql123
+```
