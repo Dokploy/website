@@ -286,6 +286,10 @@ Configure persistent storage for your application to ensure data remains intact 
 
 File mounts are a Dokploy feature. When you create a file mount, Dokploy stores the file in a folder called `files` inside your project directory. This file is created once when you set up the file mount and persists across deployments.
 
+Your application can also write to a mounted file, for example to save its settings. When you open a file mount to edit it, Dokploy reads the current file from the server (over SSH for remote servers), so those changes show up in the editor. If the file is missing or can't be read, the editor shows the content stored in Dokploy instead.
+
+If the file changes on the server after you open the editor, saving is refused so your edit doesn't overwrite those changes. Reopen the editor to load the latest version, then make your edit again.
+
 <ImageZoom src="/assets/file-mount-configuration.webp" width={800} height={630} className="rounded-lg"/>
 
 <ImageZoom src="/assets/file-mount.webp" width={800} height={630} className="rounded-lg"/>

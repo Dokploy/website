@@ -42,6 +42,8 @@ To add a record, click **Add Record** and fill in:
 - **Proxied** (Cloudflare only): available on A, AAAA and CNAME records. Proxied records always use automatic TTL.
 - **TTL** (optional): leave empty for the provider's automatic/default TTL.
 
+**Add Record** never replaces a record with different content. If a record with the same type and name already exists but points somewhere else, the new one is added next to it, for example a second TXT record for a site verification next to your SPF record. (A name can only have one CNAME record, so the provider rejects a second one.) If a record with the same type, name and content already exists, it is updated instead of duplicated. To change the value of an existing record, edit that record.
+
 <Callout type="warn">
   Deleting a record from this screen removes it from the actual DNS provider, not just from Dokploy — the confirmation dialog calls this out explicitly.
 </Callout>

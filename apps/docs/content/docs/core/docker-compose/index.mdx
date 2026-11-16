@@ -163,6 +163,19 @@ volumes:
 
 </Callout>
 
+## Deleting a Compose Service
+
+You can delete a Compose service from its page, by right-clicking it on the project page and choosing **Delete**, or with **Bulk Actions** on the project page. Each of these dialogs has a checkbox to also delete the volumes of the service, unticked by default:
+
+- **Unticked**: the containers and networks are removed, and the Docker volumes are kept.
+- **Ticked**: Dokploy runs `docker compose down --volumes`, which also removes the volumes created by your compose file. Their data can't be recovered.
+
+The checkbox has no effect on services deployed as a Docker Stack, since `docker stack rm` keeps volumes.
+
+<Callout type="warn">
+  The service folder on the server is always deleted, including the `../files` folder. Data stored in bind mounts under `../files` is lost even when the volumes checkbox is unticked, so back it up first if you need it.
+</Callout>
+
 ## Keyboard Shortcuts
 
 To help speed up navigating there are some built in keyboard shortcuts for

@@ -46,13 +46,19 @@ docker service update --publish-add published=3000,target=3000,mode=host dokploy
 - **Additional Port Mappings**: publish extra ports through Traefik, beyond 80 and 443. Each mapping has a **Target Port** (inside the container), a **Published Port** (on the host) and a protocol (`tcp`, `udp` or `sctp`). Use it together with custom entry points, for example for TCP or UDP services.
 - **Check Version**: see below.
 
+Saving **Modify Environment** or **Additional Port Mappings**, and toggling the dashboard, recreate the Traefik container in the background. Dokploy starts the new container, checks that it stays up, and puts the previous one back if it doesn't. Your applications may be unreachable for a few seconds while this happens.
+
 ### Updating Traefik
 
 **Check Version** compares the running Traefik with the version recommended by your Dokploy release:
 
-- If it is **outdated**, you can update to the recommended version. Updating is optional and recreates the Traefik container, so your applications may be unreachable for a few seconds. Environment variables and port mappings are kept.
+- If it is **outdated**, you can update to the recommended version. Updating is optional and recreates the Traefik container, so your applications may be unreachable for a few seconds. Environment variables, port mappings, and the networks Traefik is connected to are kept. If the new container doesn't start, the previous one is put back.
 - If Traefik is **newer** than the recommended version, no update is needed.
 - If Traefik is not running or keeps restarting, the dialog says so — your applications are unreachable in that state. Use **View Logs** to find the error and **Reload** to start it.
+
+<Callout type="info">
+  Traefik is recreated from Dokploy's settings, not copied from the old container. Its configuration files and certificates live on the host, so they are kept. Changes made to the `dokploy-traefik` container outside Dokploy, such as extra volume mounts, labels, static IPs or ports bound to a specific host IP, are not carried over. This applies to updates and to the actions above that recreate the container.
+</Callout>
 
 ## Space
 
