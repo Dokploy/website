@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Dokploy vs. Dokku Comparison | Dokploy | Dokploy",
+	title: "Dokploy vs. Dokku Comparison",
 	description:
 		"Dokploy vs. Dokku: Compare self-hosted PaaS platforms. See how Dokploy's UI-first approach stacks up against Dokku's CLI-based workflow for deployments.",
 };
@@ -50,7 +50,11 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "Docker Compose support", dokploy: true, dokku: "limited" },
 	{ feature: "Deploy from custom Docker images", dokploy: true, dokku: true },
 	{ feature: "Nixpacks and Buildpack support", dokploy: true, dokku: true },
-	{ feature: "Preview deployments (review apps)", dokploy: true, dokku: false },
+	{
+		feature: "Preview deployments for GitHub pull requests",
+		dokploy: true,
+		dokku: false,
+	},
 	{ feature: "One-click app templates", dokploy: true, dokku: false },
 	// Networking & Domains
 	{
@@ -82,7 +86,7 @@ const featureComparisonRows: FeatureRow[] = [
 		section: "Monitoring & Alerts",
 	},
 	{ feature: "Metrics enabled by default", dokploy: true, dokku: false },
-	{ feature: "Automated alerts from metrics", dokploy: true, dokku: false },
+	{ feature: "CPU and memory threshold alerts", dokploy: true, dokku: false },
 	{ feature: "Application log viewer in UI", dokploy: true, dokku: false },
 	// Teams & Access
 	{
@@ -113,7 +117,7 @@ const whyChooseItems = [
 		icon: Bell,
 		title: "Get monitoring and backups out of the box",
 		description:
-			"Dokku has no built-in monitoring or backup system—you'd need to set up separate tools and cron jobs. Dokploy includes real-time CPU, memory, and disk metrics, automated alerts, and scheduled S3-compatible backups for both databases and Docker volumes from day one.",
+			"Dokku has no built-in monitoring or backup system—you'd need to set up separate tools and cron jobs. Dokploy includes real-time CPU, memory, and disk metrics, CPU and memory threshold alerts, and scheduled S3-compatible backups for both databases and Docker volumes.",
 		image: {
 			src: "/images/dokploy-monitoring-dashboard.webp",
 			alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
@@ -133,7 +137,7 @@ const whyChooseItems = [
 		icon: Globe,
 		title: "Manage everything in one place",
 		description:
-			"With Dokku, databases, SSL, and domains each require separate plugins and CLI commands. Dokploy integrates database management, domain configuration, SSL certificates, Docker Compose, and deployment pipelines into a single, cohesive interface—reducing context-switching and operational overhead.",
+			"With Dokku, databases, SSL, and domains each require separate plugins and CLI commands. Dokploy integrates database management, domain configuration, SSL certificates, Docker Compose, scheduled jobs, rollbacks, and deployment pipelines into a single, cohesive interface—reducing context-switching and operational overhead.",
 		image: {
 			src: "/images/dokploy-domains.webp",
 			alt: "Dokploy domains configuration with automatic HTTPS certificates",
@@ -160,13 +164,13 @@ const integrationRows = [
 	{
 		category: "Build and deployment systems",
 		dokploy:
-			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+			"Docker, Docker Compose, Nixpacks, Railpack, Heroku Buildpacks, Paketo Buildpacks, Static",
 		dokku: "Docker, Heroku Buildpacks (via plugins)",
 	},
 	{
 		category: "Notifications and communication",
 		dokploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		dokku: "None built-in",
 	},
 ];

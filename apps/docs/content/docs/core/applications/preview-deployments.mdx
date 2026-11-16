@@ -13,7 +13,7 @@ We recommend not using preview deployments for public repositories, since extern
 
 ## Configuration
 
-By default, Dokploy generates dynamic domains using traefik.me domains, which are free and require no additional configuration. The default port is 3000, but you can adjust this based on your application's requirements. You can also limit the number of  preview deployments per application (default is 3).
+By default, Dokploy generates dynamic domains using sslip.io domains, which are free and require no additional configuration. The default port is 3000, but you can adjust this based on your application's requirements. You can also limit the number of  preview deployments per application (default is 3).
 
 ### Custom Domains
 
@@ -26,7 +26,7 @@ If you prefer using a custom domain, you can configure it like this:
 Dokploy will generate domains following this pattern:
 
 ```
-preview-${appName}-${uniqueId}.traefik.me
+preview-${appName}-${uniqueId}.mydomain.com
 ```
 
 To make this work, you need to point your wildcard DNS record (*) to your server's IP address.

@@ -3,7 +3,7 @@ title: Introduction
 description: A guide to using the Dokploy command-line interface
 ---
 
-Dokploy CLI is a command-line tool for remotely managing your Dokploy server. It simplifies creating, deploying, and managing applications and databases.
+Dokploy CLI is a command-line tool for remotely managing your Dokploy server. Its commands are generated from the Dokploy OpenAPI specification, so most API endpoints are available from your terminal.
 
 ## Installation
 
@@ -11,13 +11,60 @@ Dokploy CLI is a command-line tool for remotely managing your Dokploy server. It
 npm install -g @dokploy/cli
 ```
 
+Node.js 18 or newer is required.
+
 ## Usage
 
-```bash
-dokploy COMMAND
-```
-To get help on a specific command:
+Every command follows the same shape: a **group** (the resource) and an **action**.
 
 ```bash
-dokploy COMMAND --help
+dokploy <group> <action> [options]
 ```
+
+Options are passed as `--name value` flags and match the fields of the corresponding API endpoint.
+
+```bash
+# List all projects
+dokploy project all
+
+# Get a specific project
+dokploy project one --projectId abc123
+
+# Create an application
+dokploy application create --name "my-app" --environmentId env123
+
+# Deploy an application
+dokploy application deploy --applicationId app123
+
+# Stop a database
+dokploy postgres stop --postgresId pg123
+```
+
+### JSON output
+
+Every command accepts a `--json` flag that prints the raw JSON response, which is useful for scripts:
+
+```bash
+dokploy project all --json
+```
+
+### Getting help
+
+```bash
+# List all groups
+dokploy --help
+
+# List the actions of a group
+dokploy application --help
+
+# See the options of a specific action
+dokploy application deploy --help
+```
+
+## Command groups
+
+These are the available groups. Run `dokploy <group> --help` to see the actions of each one.
+
+`admin`, `ai`, `application`, `backup`, `bitbucket`, `certificates`, `cluster`, `compose`, `deployment`, `destination`, `docker`, `domain`, `environment`, `git-provider`, `gitea`, `github`, `gitlab`, `license-key`, `mariadb`, `mongo`, `mounts`, `mysql`, `notification`, `organization`, `patch`, `port`, `postgres`, `preview-deployment`, `project`, `redirects`, `redis`, `registry`, `rollback`, `schedule`, `security`, `server`, `settings`, `ssh-key`, `sso`, `stripe`, `swarm`, `user`, `volume-backups`.
+
+The exact list depends on the version of the CLI you have installed, since commands are generated from the API specification available at release time.

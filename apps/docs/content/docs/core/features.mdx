@@ -21,8 +21,8 @@ Manage your applications through a range of features:
   2. Open a terminal directly in the application container.
 
 **Source and Build Configuration**:
-  1. Choose source providers (GitHub, Git, Docker).
-  2. Select build types (Docker, Nixpacks, Heroku Buildpacks, Paketo Buildpacks).
+  1. Choose source providers (GitHub, GitLab, Bitbucket, Gitea, Git, Docker, Drop).
+  2. Select build types (Dockerfile, Railpack, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Static).
 
 
 **Environment Management**:
@@ -36,7 +36,8 @@ Manage your applications through a range of features:
 
 **Deployments**:
   1. View and manage deployments, you can see the logs of the building application.
-  2. Cancel queued deployments in case you have a lot of deployments in the queue, the most common is when you push alot of times in your repository, you can cancel the incoming queues, not the deployments that are already running.
+  2. Cancel queued deployments in case you have a lot of deployments in the queue, the most common is when you push a lot of times in your repository.
+  3. Stop a build that is already running with the `Kill Build` button.
 
 **Domain Management**:
   1. Add, delete, and generate domains.
@@ -56,7 +57,7 @@ Enhance your Docker Compose experience with these advanced functionalities:
   2. Open a terminal with service selection capability.
 
 **Source Configuration**:
-  1. Choose source providers (GitHub, Git, Raw).
+  1. Choose source providers (GitHub, GitLab, Bitbucket, Gitea, Git, Raw).
 
 **Environment Management**:
   1. Add and manage environment variables.
@@ -69,7 +70,8 @@ Enhance your Docker Compose experience with these advanced functionalities:
 
 **Deployments**:
   1. View and manage deployments, you can see the logs of the building application.
-  2. Cancel queued deployments in case you have a lot of deployments in the queue, the most common is when you push alot of times in your repository, you can cancel the incoming queues, not the deployments that are already running.
+  2. Cancel queued deployments in case you have a lot of deployments in the queue, the most common is when you push a lot of times in your repository.
+  3. Stop a build that is already running with the `Kill Build` button.
 
 **Advanced Settings**:
   1. Custom command, by default we use an internal command to build the docker compose, however you can override it with your own command. Note that the custom command fully replaces the default one (the default command is shown in the UI as a reference, and the command always starts with `docker`).
@@ -81,7 +83,7 @@ Deploy and manage a variety of databases:
 
 
 **Supported Databases**:
-  1. MySQL, PostgreSQL, MongoDB, Redis, MariaDB.
+  1. MySQL, PostgreSQL, MongoDB, Redis, MariaDB, libSQL.
 
 **General Management**:
   1. Deploy, stop, and delete databases.
@@ -92,7 +94,7 @@ Deploy and manage a variety of databases:
   2. Monitor CPU, memory, disk, and network usage.
 
 **Backups and Logs**:
-  1. Configure manual and scheduled backups.
+  1. Configure manual and scheduled backups (available for every database except Redis).
   2. View real-time logs.
 
 **Advanced Configuration**:

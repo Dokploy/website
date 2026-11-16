@@ -6,8 +6,8 @@ import { useId } from "react";
 import NumberTicker from "./ui/number-ticker";
 
 const defaultStats = {
-	githubStars: 26000,
-	dockerDownloads: 6500000,
+	githubStars: 38000,
+	dockerDownloads: 16000000,
 	contributors: 200,
 	sponsors: 50,
 };

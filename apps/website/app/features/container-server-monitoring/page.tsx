@@ -11,6 +11,7 @@ import {
 	Network,
 	Server,
 	Settings,
+	Share2,
 	Shield,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -39,13 +40,13 @@ const monitoringFeatures = [
 		icon: HardDrive,
 		title: "Disk space monitoring",
 		description:
-			"Avoid failed writes and broken deployments by recognizing low disk space before your used storage space hits 100%.",
+			"Avoid failed writes and broken deployments by watching disk usage on the dashboard before your used storage space hits 100%.",
 	},
 	{
 		icon: Network,
 		title: "Network monitoring",
 		description:
-			"Detect bandwidth congestion or unexpected traffic spikes early to prevent slowdowns and outages before they impact your services.",
+			"See bandwidth congestion or unexpected traffic spikes on live charts so you can act before slowdowns impact your services.",
 	},
 ];
 
@@ -60,7 +61,7 @@ const alertFeatures = [
 		icon: LayoutDashboard,
 		title: "Notifications on your platforms",
 		description:
-			"Receive notifications on the communication platforms you use.",
+			"Receive alerts on Slack, Discord, Telegram, Microsoft Teams, Mattermost, Lark, email, Gotify, ntfy, Pushover, or a custom webhook.",
 	},
 	{
 		icon: Settings,
@@ -94,6 +95,18 @@ const configFeatures = [
 		description:
 			"Secure metrics access with an authentication token. Use the auto-generated metrics token or generate a new one.",
 	},
+	{
+		icon: Share2,
+		title: "Export logs and metrics",
+		description:
+			"Ship container logs and metrics to Loki, Datadog, Better Stack, Elasticsearch, Splunk, AWS CloudWatch, Prometheus, New Relic, or InfluxDB.",
+	},
+	{
+		icon: HardDrive,
+		title: "Docker disk usage and health",
+		description:
+			"See what images, containers, volumes, and build cache take up on each server, prune the build cache, and review Docker health diagnostics.",
+	},
 ];
 
 const relatedFeatures = [
@@ -115,7 +128,7 @@ const relatedFeatures = [
 		icon: Shield,
 		title: "RBAC",
 		description:
-			"Control who can access monitoring dashboards and alerts with fine-grained role-based access control.",
+			"Control who can access monitoring dashboards and alerts with role-based access control.",
 		href: "/features/role-based-access-control",
 	},
 ];
@@ -139,7 +152,7 @@ const faqs = [
 	{
 		question: "What is the best server monitoring software?",
 		answer:
-			"The best server monitoring software depends on what you need to monitor and whether you want open-source control or a managed SaaS. If you're using Dokploy, you get real-time server monitoring as part of your solution on all plans—with no additional setup required once your server is deployed.",
+			"The best server monitoring software depends on what you need to monitor and whether you want open-source control or a managed SaaS. If you're using Dokploy, you get real-time server monitoring as part of your solution on all plans. Self-hosted installs show metrics for the Dokploy server out of the box, and remote servers need a one-time monitoring setup.",
 	},
 ];
 
@@ -253,19 +266,19 @@ export default function ContainerServerMonitoringPage() {
 				<Container>
 					<div className="mx-auto max-w-2xl text-center">
 						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
-							Access server monitoring with no setup required
+							Set up server monitoring in a few clicks
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Use Dokploy&apos;s container monitoring dashboard as soon as
-							you&apos;ve completed the server deployment setup.
+							Use Dokploy&apos;s container monitoring dashboard once you&apos;ve
+							set up your server and enabled monitoring on it.
 						</p>
 					</div>
 					<div className="mx-auto mt-12 max-w-xl rounded-xl border border-border/50 bg-card p-8 text-center">
 						<p className="font-mono text-sm text-muted-foreground">
-							Remote servers → Select your server → Setup Server
+							Remote servers → Select your server → Setup Server → Monitoring
 						</p>
 						<p className="mt-4 text-sm text-muted-foreground">
-							If all your checkmarks are green, you&apos;re good to go!
+							Save the monitoring settings and metrics start flowing.
 						</p>
 					</div>
 				</Container>

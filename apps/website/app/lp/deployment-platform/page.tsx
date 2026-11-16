@@ -67,7 +67,7 @@ const professionalFeatures = [
 		icon: Hammer,
 		title: "Your build, your way",
 		description:
-			"Choose Nixpacks, Buildpacks, or a Dockerfile. Switch strategies per project without reworking your pipeline.",
+			"Choose Nixpacks, Railpack, Heroku or Paketo Buildpacks, a Dockerfile, or a static build. Switch strategies per application without reworking your pipeline.",
 	},
 	{
 		icon: GitBranch,
@@ -139,13 +139,13 @@ const automationFeatures = [
 		icon: Webhook,
 		title: "Use webhooks to auto-deploy",
 		description:
-			"Trigger deployments automatically by git push if you're a GitHub user.",
+			"Trigger deployments automatically on every git push from GitHub, GitLab, Bitbucket, or Gitea.",
 	},
 	{
 		icon: FlaskConical,
 		title: "Test changes before they go live",
 		description:
-			"Preview and test applications in isolated environments before production.",
+			"Preview and test GitHub pull requests in isolated environments before production.",
 	},
 	{
 		icon: Eye,
@@ -164,15 +164,15 @@ const platformFeatures = [
 	},
 	{
 		icon: FileCog,
-		title: "Configuration-first setup",
+		title: "Consistent configuration",
 		description:
-			"Use configuration files to maintain consistency in setup, configuration, and build across teams.",
+			"Share variables at the project and environment level, duplicate environments, and export a project to import it into another Dokploy instance.",
 	},
 	{
 		icon: History,
 		title: "Rollback capabilities built in",
 		description:
-			"Rollback capabilities help teams recover quickly when new features impact production.",
+			"Enable rollbacks to keep previous release images in your registry, so teams recover quickly when new features impact production.",
 	},
 	{
 		icon: LayoutDashboard,
@@ -184,7 +184,7 @@ const platformFeatures = [
 		icon: Layers,
 		title: "Simplify infrastructure management",
 		description:
-			"Utilize infrastructure as code across cloud providers and AWS services.",
+			"Manage your servers and cloud resources across cloud providers from one place.",
 	},
 	{
 		icon: Clock,
@@ -206,7 +206,7 @@ const faqs = [
 				</p>
 				<p className="mt-3">
 					You can deploy a Compose stack as part of your deployment workflows,
-					keep configuration in configuration files, and manage environments
+					keep configuration in your Compose file, and manage environments
 					without increasing complexity as you scale.
 				</p>
 			</>
@@ -256,10 +256,10 @@ const faqs = [
 			<>
 				<p>
 					Preview deployments create environments for testing code changes
-					before they reach production environments. When a pull request or
-					branch updates, Dokploy can trigger automated deployments and
-					deployment workflows so developers can validate functionality,
-					reliability, and security in an isolated environment.
+					before they reach production environments. When a pull request is
+					opened or updated on GitHub, Dokploy builds a preview deployment so
+					developers can validate functionality, reliability, and security in an
+					isolated environment.
 				</p>
 				<p className="mt-3">
 					This setup supports multiple environments, speeds up testing for new

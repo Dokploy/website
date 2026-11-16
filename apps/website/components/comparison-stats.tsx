@@ -6,8 +6,8 @@ import NumberTicker from "@/components/ui/number-ticker";
 import { useEffect, useState } from "react";
 
 const statsValues = {
-	githubStars: 26000,
-	dockerDownloads: 6500000,
+	githubStars: 38000,
+	dockerDownloads: 16000000,
 	contributors: 200,
 	sponsors: 50,
 };

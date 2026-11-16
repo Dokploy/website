@@ -67,6 +67,12 @@ const databaseSystems = [
 		description:
 			"An in-memory key-value store often used as a database, cache, and message broker\u2014fast by design and easy to integrate for high-performance operations.",
 	},
+	{
+		icon: Database,
+		title: "libSQL",
+		description:
+			"An open source fork of SQLite that runs as a server, with support for primary and replica nodes\u2014a lightweight option for edge and embedded-style workloads.",
+	},
 ];
 
 const protectionFeatures = [
@@ -74,7 +80,7 @@ const protectionFeatures = [
 		icon: Archive,
 		title: "Backups",
 		description:
-			"Schedule automated backups for any database and route them directly to an S3 bucket of your choice. Set a cron schedule, define a prefix, and test your configuration before relying on it so you know your stored data is secure before you ever need to recover it.",
+			"Schedule automated backups for PostgreSQL, MySQL, MariaDB, MongoDB, and libSQL\u2014including databases running inside a Docker Compose stack\u2014and route them directly to an S3-compatible bucket of your choice. Redis data is covered by volume backups. Set a cron schedule, define a prefix, choose how many backups to keep, and test your configuration before relying on it so you know your stored data is secure before you ever need to recover it.",
 	},
 	{
 		icon: FileText,
@@ -131,7 +137,7 @@ const advancedOptions = [
 		icon: AlertTriangle,
 		title: "Danger Zone",
 		description:
-			"When you need a clean slate, the Danger Zone lets you wipe all data, tables, and configuration in one controlled action.",
+			"When you need a clean slate, the Danger Zone lets you rebuild the database and wipe its data in one controlled action.",
 	},
 ];
 
@@ -170,7 +176,7 @@ const faqs = [
 	{
 		question: "What database systems does Dokploy support?",
 		answer:
-			"Dokploy supports five widely used database tools: PostgreSQL, MySQL, MariaDB, MongoDB, and Redis. That covers the most common SQL server databases and NoSQL use cases, from relational workloads that rely on structured query language to flexible document and key-value stores. All five\u2014both SQL databases and noSQL systems\u2014can be deployed, backed up, and monitored using the same tools and workflows inside Dokploy.",
+			"Dokploy supports six widely used database tools: PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL. That covers the most common SQL server databases and NoSQL use cases, from relational workloads that rely on structured query language to flexible document and key-value stores. All six\u2014both SQL databases and noSQL systems\u2014can be deployed and monitored using the same tools and workflows inside Dokploy. Scheduled database backups cover every engine except Redis, which you protect with volume backups.",
 	},
 ];
 
@@ -234,7 +240,7 @@ export default function DatabaseManagementToolPage() {
 							Deploy the database you already use
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Dokploy&apos;s database management tool supports five widely used
+							Dokploy&apos;s database management tool supports six widely used
 							database systems out of the box, so you&apos;re not locked into a
 							single technology. You pick what fits your stack and your data
 							management needs.
