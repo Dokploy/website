@@ -118,12 +118,12 @@ const data: IndustryPageData = {
 				title: "Review the running app",
 				description:
 					"Deploy changes to preview or staging so reviewers can test the service before production. Logs and deployment history help keep the release path visible.",
-				flow: "Open preview → Review logs → Approve release",
+				flow: "Open preview → Review logs → Merge the change",
 			},
 			{
 				title: "Deploy and operate",
 				description:
-					"Release the approved version, monitor health, and use rollback or backup options if the service needs to be restored. Keep operations close to the deployment record.",
+					"Deploy the reviewed version, monitor health, and use rollback or backup options if the service needs to be restored. Keep operations close to the deployment record.",
 				flow: "Deploy → Monitor → Restore if needed",
 			},
 		],
@@ -142,7 +142,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Pharma workflows",
@@ -160,7 +160,7 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",
@@ -189,7 +189,7 @@ const data: IndustryPageData = {
 			{
 				question: "Does Dokploy support databases for pharma apps?",
 				answer:
-					"Yes. Dokploy supports PostgreSQL, MySQL, MongoDB, Redis, and MariaDB, which can be used for internal tools, dashboards, and application services.",
+					"Yes. Dokploy supports PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL, which can be used for internal tools, dashboards, and application services.",
 			},
 			{
 				question: "Should pharmaceutical teams self-host Dokploy?",
