@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import {
 	AlertCircle,
 	Building2,
+	CalendarRange,
 	FileCheck,
+	FileDown,
 	KeyRound,
 	Paintbrush,
 	ScrollText,
@@ -37,13 +39,25 @@ const coreFeatures = [
 		icon: Search,
 		title: "Filter down to exactly what you need",
 		description:
-			"Search and filter audit logs by user, resource name, action type, or resource type so you can find the specific event you\u2019re looking for without scrolling through unrelated activity.",
+			"Search and filter audit logs by user, resource name, action type, resource type, or date range so you can find the specific event you\u2019re looking for without scrolling through unrelated activity.",
 	},
 	{
 		icon: FileCheck,
 		title: "Meet compliance requirements with confidence",
 		description:
 			"Audit logs give you documented evidence of access control and change management, making it straightforward to satisfy requirements for SOC 2, GDPR, and internal security policies.",
+	},
+	{
+		icon: FileDown,
+		title: "Export logs for auditors",
+		description:
+			"Export the filtered audit log as CSV or JSON to share with auditors or load into your own reporting and SIEM tools.",
+	},
+	{
+		icon: CalendarRange,
+		title: "Review a specific time window",
+		description:
+			"Narrow the log to a date range to reconstruct what happened during an incident or to cover an audit period.",
 	},
 ];
 
