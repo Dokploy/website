@@ -6,8 +6,10 @@ import {
 	KeyRound,
 	Paintbrush,
 	ScrollText,
+	Server,
 	Shield,
 	SlidersHorizontal,
+	UserCog,
 	UserPlus,
 	Users,
 } from "lucide-react";
@@ -44,6 +46,18 @@ const coreFeatures = [
 		title: "Scale access as your team grows",
 		description:
 			"As you add engineers, contractors, stakeholders, and third parties, RBAC makes it straightforward to onboard them with the right level of access from day one\u2014and to update or revoke permissions as roles change.",
+	},
+	{
+		icon: UserCog,
+		title: "Build custom roles on Enterprise",
+		description:
+			"Enterprise adds custom roles built from individual permissions on deployments, environment variables, domains, backups, schedules, servers, the server terminal, registries, certificates, notifications, audit logs, and more.",
+	},
+	{
+		icon: Server,
+		title: "Assign servers and Git providers per member",
+		description:
+			"On Enterprise, choose which servers and Git providers each member can use, so teams only deploy to the infrastructure and repositories meant for them.",
 	},
 ];
 

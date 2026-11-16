@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
 	KeyRound,
 	Link2,
+	Lock,
 	Paintbrush,
 	ScrollText,
 	Shield,
@@ -25,7 +26,7 @@ const coreFeatures = [
 		icon: Link2,
 		title: "Connect your existing identity provider",
 		description:
-			"Dokploy supports SSO via OpenID Connect (OIDC) and SAML, with native integrations for Okta, Azure AD (Microsoft Entra ID), Auth0, and Keycloak. If you use a different provider, you can configure it manually using standard OIDC or SAML endpoints.",
+			"Dokploy supports SSO via OpenID Connect (OIDC) and SAML, so it works with Okta, Microsoft Entra ID (Azure AD), Auth0, Keycloak, Zitadel, and any other compliant provider. You configure each one with standard OIDC or SAML 2.0 endpoints, and OIDC discovery fills them in from the issuer URL.",
 	},
 	{
 		icon: Users,
@@ -43,7 +44,19 @@ const coreFeatures = [
 		icon: UserMinus,
 		title: "Provision and deprovision automatically",
 		description:
-			"With SCIM provisioning, your identity provider creates, updates, and deactivates Dokploy accounts as your directory changes. When someone leaves, their access is revoked automatically\u2014no manual cleanup across multiple tools.",
+			"With SCIM 2.0 provisioning, your identity provider creates, updates, and deactivates Dokploy accounts as your directory changes. When someone leaves, their access is revoked automatically\u2014no manual cleanup across multiple tools.",
+	},
+	{
+		icon: Shield,
+		title: "Protect deployed apps with forward auth",
+		description:
+			"Put the applications you deploy behind your OIDC provider, so internal tools require a company login before anyone reaches them. Forward auth works with OIDC providers.",
+	},
+	{
+		icon: Lock,
+		title: "Enforce SSO for everyone",
+		description:
+			"On self-hosted instances, require every member to sign in through your identity provider and turn off email and password sign-in.",
 	},
 ];
 
