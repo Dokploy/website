@@ -178,7 +178,7 @@ install_dokploy() {
         -p 80:80/tcp \
         -p 443:443/tcp \
         -p 443:443/udp \
-        traefik:v3.7.16
+        traefik:v3.7.19
 
     docker network connect dokploy-network dokploy-traefik
 
@@ -194,7 +194,7 @@ install_dokploy() {
     #     --publish mode=host,published=443,target=443 \
     #     --publish mode=host,published=80,target=80 \
     #     --publish mode=host,published=443,target=443,protocol=udp \
-    #     traefik:v3.7.16
+    #     traefik:v3.7.19
 
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
@@ -339,7 +339,7 @@ docker run -d \
   -p 80:80/tcp \
   -p 443:443/tcp \
   -p 443:443/udp \
-  traefik:v3.7.16
+  traefik:v3.7.19
 
 docker network connect dokploy-network dokploy-traefik
 ```
@@ -431,7 +431,9 @@ Dokploy does not update the Traefik container automatically when you upgrade. Th
 - **Dokploy server**: go to **Web Server**, open the **Traefik** menu and click **Check Version**.
 - **Remote servers**: go to **Remote Servers**, click **Web Server Actions** on the server, open the **Traefik** menu and click **Check Version**.
 
-The dialog shows the running Traefik version and the version recommended by your Dokploy release. The recommended version is updated in new Dokploy releases. Updating is optional: when Traefik is older than the recommended version, you can click **Update**. Dokploy downloads the new image first, then recreates Traefik with the same environment variables and port mappings, and puts the previous container back if the new one fails to start. Your applications may be unreachable for a few seconds during the update.
+The dialog shows the running Traefik version and the version recommended by your Dokploy release. The recommended version is updated in new Dokploy releases. Updating is optional: when Traefik is older than the recommended version, you can click **Update**. Dokploy downloads the new image first, then recreates Traefik with the same environment variables, port mappings and networks, and puts the previous container back if the new one fails to start. Your applications may be unreachable for a few seconds during the update.
+
+`traefik.yml`, the dynamic configuration and `acme.json` are mounted from the host, so they are kept too. Changes made to the `dokploy-traefik` container outside Dokploy, such as extra volume mounts, labels, static IPs or ports bound to a specific host IP, are not carried over.
 
 <Callout type='info'>
   The update is only offered when Traefik is running the official image and is older than the recommended version. Start a stopped Traefik with **Reload** first. A custom Traefik image is never updated by Dokploy.
@@ -445,7 +447,7 @@ To update Traefik yourself, for example to a different version:
 2. Create a new container with the desired Traefik image version and the same configuration.
 3. Connect the new container to the Dokploy network.
 
-Example (replace `v3.7.16` with the version you want):
+Example (replace `v3.7.19` with the version you want):
 
 ```bash
 docker rm -f dokploy-traefik
@@ -459,7 +461,7 @@ docker run -d \
   -p 80:80/tcp \
   -p 443:443/tcp \
   -p 443:443/udp \
-  traefik:v3.7.16
+  traefik:v3.7.19
 
 docker network connect dokploy-network dokploy-traefik
 ```

@@ -1,0 +1,46 @@
+---
+title: Transfer a Service
+description: "Move an application, database or Docker Compose service to another server, together with its volumes and configuration."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+**Transfer to another server** moves a service from one server to another without recreating it by hand. It works for applications, Docker Compose services and every database type.
+
+The transfer copies the data directly between the two servers over SSH — no S3 bucket is involved.
+
+## What Is Transferred
+
+- Named **volumes**.
+- **Bind mount** host directories.
+- **File mounts**, recreated on the target server.
+- The service **configuration**: environment variables, domains, ports, resources and so on.
+- For applications, the **Traefik configuration**. For applications and Compose, the **deployment logs**.
+
+## Transferring a Service
+
+1. Open the service and click the **Transfer to another server** button in the service header.
+2. Select the **Target server**. Only servers you have access to are listed. On self-hosted instances the Dokploy server itself can also be the target.
+3. Optionally enable **Remove volumes from the source server after the transfer**.
+4. Confirm. A log drawer shows each step as it runs.
+
+Dokploy then stops the service on the source server, copies the volumes and bind mounts, switches the service to the target server and deploys it there.
+
+<Callout type="warn">
+  The service is stopped while its data is copied, so plan for downtime proportional to the size of the volumes.
+</Callout>
+
+## After the Transfer
+
+- **Update your DNS.** Point the service's domains to the new server. Certificates are issued again there.
+- **Check your networks.** [Networks](/docs/core/networks) that only exist on the source server are detached from the service.
+- **Clean up bind mounts.** Bind mount directories are copied but never deleted from the source server, even with the remove option enabled.
+
+## If Something Fails
+
+- If the copy fails, the service is switched back and started again on the source server. Data already copied to the target is left in place.
+- If the data was transferred but the deployment on the target fails, the service stays on the target server — fix the problem and click **Deploy** to retry.
+
+## Permissions
+
+Transferring requires permission to create services and deployments on the service, and access to the target server.

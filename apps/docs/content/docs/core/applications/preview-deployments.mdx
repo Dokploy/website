@@ -13,7 +13,7 @@ We recommend not using preview deployments for public repositories, since extern
 
 ## Configuration
 
-By default, Dokploy generates dynamic domains using traefik.me domains, which are free and require no additional configuration. The default port is 3000, but you can adjust this based on your application's requirements. You can also limit the number of  preview deployments per application (default is 3).
+By default, Dokploy generates dynamic domains using sslip.io domains, which are free and require no additional configuration. The default port is 3000, but you can adjust this based on your application's requirements. You can also limit the number of  preview deployments per application (default is 3).
 
 ### Custom Domains
 
@@ -26,7 +26,7 @@ If you prefer using a custom domain, you can configure it like this:
 Dokploy will generate domains following this pattern:
 
 ```
-preview-${appName}-${uniqueId}.traefik.me
+preview-${appName}-${uniqueId}.mydomain.com
 ```
 
 To make this work, you need to point your wildcard DNS record (*) to your server's IP address.
@@ -84,6 +84,35 @@ You can manually rebuild a preview deployment without downloading new code from 
 - Apply configuration changes that require a rebuild
 
 To rebuild a preview deployment, click the **Rebuild** button (hammer icon) next to the deployment and confirm the action. The rebuild will use the existing code and only re-run the build process.
+
+## SSO Protection
+
+<Callout type="info">
+  This is an **Enterprise** feature. It requires a valid enterprise license, an OIDC provider configured under [Settings → SSO](/docs/core/enterprise/sso), and the authentication proxy deployed on the server. See [Application Authentication](/docs/core/enterprise/sso/application-authentication) for setup instructions.
+</Callout>
+
+You can protect preview deployments behind your identity provider so that only authenticated users can access them. When enabled, every preview domain gets the same forward-auth middleware used by [Application Authentication](/docs/core/enterprise/sso/application-authentication).
+
+### Enabling SSO on Previews
+
+1. Go to **Application → Preview Deployments → Settings**.
+2. Toggle **Protect previews with SSO**.
+
+Existing previews are updated immediately. New previews inherit the setting when they are created.
+
+### Requirements
+
+- The authentication proxy must already be running on the server (see [Setting Up the Authentication Proxy](/docs/core/enterprise/sso/application-authentication#setting-up-the-authentication-proxy)).
+- The preview wildcard domain must be under the same base domain as the auth domain. For example, if your auth domain is `auth.acme.com`, the preview wildcard must be `*.acme.com` or a subdomain of `acme.com`.
+- If the auth domain uses HTTPS, the preview wildcard must also use HTTPS.
+
+### Disabling SSO on Previews
+
+Toggle the setting off. Disabling is always allowed, even if the authentication proxy has been removed. The forward-auth middleware is removed from every existing preview domain.
+
+<Callout type="info">
+  When a preview is deleted, its forward-auth middleware is also cleaned up automatically.
+</Callout>
 
 <Callout type="info">
   If you have security or redirects created in your application, it will inherit the same configuration for the preview deployment.

@@ -49,7 +49,7 @@ const industries = [
 		icon: Building2,
 		title: "Government",
 		description:
-			"Deploy citizen services, case management systems, and department tools in self-hosted, audit-ready environments your agency controls.",
+			"Deploy citizen services, case management systems, and department tools in self-hosted environments your agency controls, with Enterprise audit logs.",
 		href: "/industries/government",
 	},
 	{

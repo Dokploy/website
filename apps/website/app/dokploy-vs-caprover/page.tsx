@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Dokploy vs. CapRover Comparison | Dokploy",
+	title: "Dokploy vs. CapRover Comparison",
 	description:
 		"Dokploy vs. CapRover: Compare self-hosted PaaS platforms for app deployment, database management, monitoring, and team collaboration.",
 };
@@ -68,7 +68,7 @@ const featureComparisonRows: FeatureRow[] = [
 	},
 	{ feature: "Nixpacks and Buildpack support", dokploy: true, caprover: false },
 	{
-		feature: "Preview deployments (review apps)",
+		feature: "Preview deployments for GitHub pull requests",
 		dokploy: true,
 		caprover: false,
 	},
@@ -108,7 +108,11 @@ const featureComparisonRows: FeatureRow[] = [
 		section: "Monitoring & Alerts",
 	},
 	{ feature: "Metrics enabled by default", dokploy: true, caprover: false },
-	{ feature: "Automated alerts from metrics", dokploy: true, caprover: false },
+	{
+		feature: "CPU and memory threshold alerts",
+		dokploy: true,
+		caprover: false,
+	},
 	// Teams & Access
 	{
 		feature: "Teams and multi-user support",
@@ -131,7 +135,7 @@ const whyChooseItems = [
 		icon: Zap,
 		title: "Go beyond simple app hosting",
 		description:
-			"CapRover is great for getting a single app online fast, but Dokploy handles the full deployment lifecycle. From git-connected builds with Nixpacks and Buildpacks to Docker Compose orchestration, preview deployments, and multi-server scaling—Dokploy grows with your project instead of hitting a ceiling.",
+			"CapRover is great for getting a single app online fast, but Dokploy handles the full deployment lifecycle. From git-connected builds with Nixpacks, Railpack, and Buildpacks to Docker Compose orchestration, preview deployments, rollbacks, and multi-server scaling—Dokploy grows with your project instead of hitting a ceiling.",
 		image: {
 			src: "/images/dokploy-build-logs.webp",
 			alt: "Dokploy deployment panel showing build and deployment logs",
@@ -141,7 +145,7 @@ const whyChooseItems = [
 		icon: Bell,
 		title: "Monitor, alert, and back up without plugins",
 		description:
-			"CapRover doesn't include built-in monitoring or backup tools—you'd need to bolt on Prometheus, Grafana, or custom scripts. Dokploy ships with real-time CPU, memory, and disk metrics, automated alerting, and scheduled S3-compatible backups for databases and volumes, all in one dashboard.",
+			"CapRover doesn't include built-in monitoring or backup tools—you'd need to bolt on Prometheus, Grafana, or custom scripts. Dokploy ships with real-time CPU, memory, and disk metrics, CPU and memory threshold alerts, and scheduled S3-compatible backups for databases and volumes, all in one dashboard.",
 		image: {
 			src: "/images/dokploy-monitoring-dashboard.webp",
 			alt: "Dokploy monitoring dashboard showing CPU, memory and disk metrics",
@@ -178,13 +182,13 @@ const integrationRows = [
 	{
 		category: "Build and deployment systems",
 		dokploy:
-			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+			"Docker, Docker Compose, Nixpacks, Railpack, Heroku Buildpacks, Paketo Buildpacks, Static",
 		caprover: "Docker, Captain Definition file",
 	},
 	{
 		category: "Notifications and communication",
 		dokploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		caprover: "None built-in",
 	},
 ];

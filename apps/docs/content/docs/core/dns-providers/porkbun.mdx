@@ -1,0 +1,25 @@
+---
+title: Porkbun
+description: "Connect Porkbun to create and manage DNS records for your domains from Dokploy."
+---
+
+## Create API Keys
+
+1. Go to [porkbun.com/account/api](https://porkbun.com/account/api) and create an API key. Porkbun gives you two values: the **API Key** and the **Secret API Key**.
+2. In the Porkbun domain list, enable **API Access** for every domain Dokploy should manage. Domains without API access are rejected by Porkbun even with valid keys.
+
+## Configuration
+
+In **Settings → DNS Providers**, add a provider, choose **Porkbun** and fill in:
+
+- **Name**: the identifier for this provider, e.g. `porkbun-main`.
+- **API Key / Secret API Key**: the two values from the previous step.
+
+Use **Test Connection** to validate the credentials before saving.
+
+## Managing Records
+
+Click **View Domains** on the provider row to list the domains in your Porkbun account, then click a domain to view and manage its records. See [DNS Providers](/docs/core/dns-providers) for the full record form reference.
+
+- Porkbun defaults the **TTL** to `600` seconds when the field is left empty.
+- For **MX** and **SRV** records, write the priority first, followed by the rest of the value (for example `10 mail.example.com`). Dokploy sends the priority to Porkbun as a separate field.

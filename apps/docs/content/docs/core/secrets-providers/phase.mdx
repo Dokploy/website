@@ -1,0 +1,40 @@
+---
+title: Phase
+description: "Use Phase secrets in your Dokploy environment variables."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create a Service Account Token
+
+1. In the Phase Console, create a **Service Account** and give it access to the App and environment Dokploy should read.
+2. Generate a **REST API token** for that Service Account. Do not use the CLI/SDK token (the one starting with `pss_`).
+3. Copy the App's **App ID** from its settings.
+
+<Callout type="warn">
+  The Phase App must have **Server-side Encryption (SSE)** enabled. Without it the REST secrets API cannot return values, and **Test Connection** fails with a message asking you to enable it.
+</Callout>
+
+## Configuration
+
+In **Settings → Secrets → Add Provider**, choose **Phase** and fill in:
+
+- **Name**: the identifier used in references, e.g. `phase-prod`.
+- **Service Account REST API Token**: the token created above. Paste the token only, without the `ServiceAccount` prefix.
+- **App ID**: the UUID of the Phase App.
+- **Environment**: the environment name, e.g. `Production`.
+- **Secret Path**: the folder to read secrets from. Defaults to `/`.
+- **API URL**: defaults to `https://api.phase.dev`. For self-hosted Phase, use your instance's public API URL, which defaults to `${HTTP_PROTOCOL}${HOST}/service/public`.
+
+Use **Test Connection** to validate the credentials before saving, then assign the projects/environments where the provider may be used.
+
+## Reference Format
+
+A provider is scoped to one App, environment and path, so references only carry the secret **key**:
+
+```bash
+DATABASE_URL=${{vault.phase-prod.DATABASE_URL}}
+API_KEY=${{vault.phase-prod.API_KEY}}
+```
+
+To read secrets from another environment or path, create a second provider.

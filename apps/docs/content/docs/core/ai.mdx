@@ -29,6 +29,10 @@ Dokploy does not include its own AI model. You need to connect an external provi
 
 You can configure multiple providers and switch between them.
 
+<Callout type="info">
+After you save a provider, its API key is never shown again, not even to admins: the field displays `********`. Leave it untouched to keep the current key while you change other settings such as the model. Typing a new value replaces the key. If you change the **API URL**, enter the API key again: the model list can't be loaded with the stored key for a different URL.
+</Callout>
+
 ### Compatible providers
 
 Any provider that exposes an **OpenAI-compatible API** works with Dokploy. Some examples:
@@ -106,3 +110,11 @@ You can manage your AI providers from **Settings → AI**:
 - **Delete** providers you no longer need
 - **View available models** for each provider
 - **Enable/Disable** providers without deleting them
+
+## Permissions
+
+- **Owners and admins** can manage providers and use every AI feature.
+- **Members** can't use AI. The **AI Assistant** in the create service menu and the **AI** button in log viewers are hidden for them.
+- With an Enterprise license, a [custom role](/docs/core/enterprise/custom-roles#ai-settings) can grant the **AI Settings** permission granularly. **Read** is required to use AI features; **Create**, **Update** and **Delete** control who can manage provider configurations.
+
+To limit which AI endpoints can be used at all, see [Custom AI Providers](/docs/core/custom-ai-providers).

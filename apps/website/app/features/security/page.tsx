@@ -38,19 +38,31 @@ const ssoFeatures = [
 		icon: Plug,
 		title: "Connect the providers you use",
 		description:
-			"Pre-configured integrations with Okta, Microsoft Entra ID, Auth0, Keycloak, and Zitadel. Any other compatible provider can be configured.",
+			"Works with Okta, Microsoft Entra ID, Auth0, Keycloak, Zitadel, and any other OIDC or SAML 2.0 provider. For OIDC, enter the issuer URL and discovery fills in the endpoints.",
 	},
 	{
 		icon: UserMinus,
 		title: "Centralize user provisioning",
 		description:
-			"When you add or remove a user in your IdP, it's reflected in Dokploy. No parallel user management, no accounts lingering after someone leaves.",
+			"With SCIM 2.0 provisioning, when you add or remove a user in your IdP, it's reflected in Dokploy. No parallel user management, no accounts lingering after someone leaves.",
 	},
 	{
 		icon: ShieldCheck,
 		title: "Enforce your auth policies",
 		description:
 			"MFA requirements, session timeouts, and conditional access rules configured in your IdP apply to Dokploy automatically so your security posture stays consistent.",
+	},
+	{
+		icon: Shield,
+		title: "Put SSO in front of your apps",
+		description:
+			"Forward auth protects the applications you deploy behind your OIDC provider, so internal tools require a company login before anyone reaches them.",
+	},
+	{
+		icon: Lock,
+		title: "Enforce SSO sign-in",
+		description:
+			"On self-hosted instances, require every member to sign in through your identity provider instead of email and password.",
 	},
 ];
 
@@ -60,7 +72,7 @@ const rbacFeatures = [
 		plan: "All plans",
 		title: "Assign built-in roles",
 		description:
-			"Every paid plan includes built-in Owner, Admin, and Member roles, giving you immediate control over who can manage the platform and who simply uses it, with no configuration needed.",
+			"Built-in Owner, Admin, and Member roles ship with Dokploy, giving you immediate control over who can manage the platform and who simply uses it, with no configuration needed. On Dokploy Cloud, the Hobby plan is limited to a single user.",
 	},
 	{
 		icon: UserCog,
@@ -126,13 +138,14 @@ const auditLogItems = [
 	{
 		title: "Powerful filtering",
 		description:
-			"filter by user, action type, resource type, or resource name to zero in on exactly what you need",
+			"filter by user, action type, resource type, resource name, or date range, and export the results as CSV or JSON",
 	},
 ];
 
 const startupPlanFeatures = [
-	"Built-in roles, including Admin and Developer",
-	"Two-factor authentication (2FA)",
+	"Built-in Owner, Admin, and Member roles",
+	"Two-factor authentication (2FA) and passkeys",
+	"Session management",
 	"SSH key management",
 	"SSL/TLS certificate management",
 	"API key authentication",
@@ -142,9 +155,11 @@ const startupPlanFeatures = [
 ];
 
 const enterprisePlanFeatures = [
-	"SSO/SAML (Okta, Azure AD, Auth0, Keycloak, Zitadel, and more)",
+	"SSO via OIDC and SAML (Okta, Entra ID, Auth0, Keycloak, Zitadel, and more)",
+	"SCIM 2.0 user provisioning",
+	"Forward auth for deployed applications",
 	"Fine-grained RBAC with custom roles",
-	"Audit logs",
+	"Audit logs with CSV and JSON export",
 	"MSA/SLA",
 	"Complete hosting flexibility (on-prem or your own cloud)",
 	"Priority support",
@@ -153,15 +168,15 @@ const enterprisePlanFeatures = [
 const infrastructureFeatures = [
 	{
 		icon: Fingerprint,
-		title: "Enable two-factor authentication",
+		title: "Enable two-factor authentication and passkeys",
 		description:
-			"Startup plans and above include 2FA for all users: an extra layer of protection on top of passwords, without needing SSO.",
+			"Every plan includes 2FA and passkey sign-in for all users: an extra layer of protection on top of passwords, without needing SSO.",
 	},
 	{
 		icon: Lock,
 		title: "Automate SSL/TLS certificate management",
 		description:
-			"Dokploy handles certificate provisioning and renewal automatically via Traefik, so your services stay encrypted without manual intervention or renewal tracking.",
+			"Dokploy handles Let's Encrypt certificate provisioning and renewal automatically via Traefik, so your services stay encrypted without manual intervention. You can also upload your own certificates.",
 	},
 	{
 		icon: KeyRound,
@@ -174,6 +189,30 @@ const infrastructureFeatures = [
 		title: "Keep your data on your own infrastructure",
 		description:
 			"Self-hosted Dokploy means your deployments, credentials, and configurations stay on servers you control. No vendor accesses your environment.",
+	},
+	{
+		icon: ShieldCheck,
+		title: "Harden servers from the dashboard",
+		description:
+			"Configure Fail2ban and ban or unban IPs, review exposed ports and UFW status, manage SSH settings and authorized keys, and check pending updates on each remote server.",
+	},
+	{
+		icon: EyeOff,
+		title: "Encrypt environment variables at rest",
+		description:
+			"Environment variables are encrypted with AES-256-GCM before they are stored, so secrets are not readable in a database dump.",
+	},
+	{
+		icon: Plug,
+		title: "Pull secrets from your vault",
+		description:
+			"Reference secrets from HashiCorp Vault, Infisical, AWS Secrets Manager, AWS Parameter Store, Doppler, Azure Key Vault, Scaleway, or Phase instead of copying them into Dokploy.",
+	},
+	{
+		icon: Users,
+		title: "Review and revoke sessions",
+		description:
+			"Every user can list their active sessions and revoke any of them from the dashboard.",
 	},
 ];
 
@@ -205,12 +244,12 @@ const faqs = [
 	{
 		question: "What SSO providers does Dokploy support?",
 		answer:
-			"Dokploy supports any OIDC or SAML 2.0 provider. Pre-configured integrations are available for Okta, Azure AD (now Microsoft Entra ID), Auth0, Keycloak, and Zitadel. If your provider isn't listed, you can configure it manually using standard endpoints.",
+			"Dokploy supports any OIDC or SAML 2.0 provider, including Okta, Microsoft Entra ID (formerly Azure AD), Auth0, Keycloak, and Zitadel. You configure each provider with its standard endpoints, and OIDC discovery fills them in from the issuer URL when available.",
 	},
 	{
 		question: "Is RBAC available on every plan?",
 		answer:
-			"Basic role-based access control—Owner, Admin, and Member roles—is available from the Startup plan. There are Admin and Developer roles on the Startup plan. Custom roles with granular, resource-level permissions are an Enterprise feature.",
+			"Basic role-based access control—Owner, Admin, and Member roles—is included on every plan, although the Cloud Hobby plan is limited to a single user. Custom roles with granular, resource-level permissions are an Enterprise feature.",
 	},
 	{
 		question: "What does the audit log record?",
@@ -312,9 +351,9 @@ export default function SecurityPage() {
 							Control exactly what each user can access
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Role-based access control ships with every paid plan. Enterprise
-							extends it with fully custom roles built from individual
-							permissions across every resource type in the platform.
+							Built-in roles ship with every plan. Enterprise extends it with
+							fully custom roles built from individual permissions across every
+							resource type in the platform.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">

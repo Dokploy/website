@@ -1,0 +1,39 @@
+---
+title: Custom AI Providers
+description: "Restrict the AI providers your organization can use to a list you define, such as an internal LLM gateway."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+By default, anyone who can configure the [AI Assistant](/docs/core/ai) picks a provider from Dokploy's built-in list or types any API URL. **Custom AI Providers** let an organization replace that list with its own, so AI requests only go to endpoints you have approved — for example an internal LLM platform or a company-wide gateway.
+
+## Defining Providers
+
+1. Go to **Settings → AI**.
+2. Click **Custom Presets**.
+3. Add one entry per provider:
+   - **Name**: the label shown in the provider selector.
+   - **API URL**: the base URL of the provider's API, e.g. `https://llm.internal.company/v1`.
+4. Click **Save**.
+
+Only organization **owners and admins** can define custom providers.
+
+## What Changes
+
+As soon as at least one custom provider is defined:
+
+- The provider selector in the AI configuration form only offers your providers.
+- The **API URL** field is locked to the URL of the selected provider.
+- The restriction is enforced on the server: saving an AI configuration whose API URL is not in the list is rejected.
+
+Each AI configuration still has its own API key and model, so different teams can use the same approved endpoint with their own credentials.
+
+To go back to the built-in provider list, remove every custom provider and save.
+
+<Callout type="info">
+  Dokploy recognizes the well-known providers by their API URL. Any other URL is called through the OpenAI-compatible API, so an internal gateway needs to implement that API.
+</Callout>
+
+## Permissions
+
+Using and managing AI configurations is covered by the `ai` permission resource, which an Enterprise [custom role](/docs/core/enterprise/custom-roles) can grant granularly. Defining the custom provider list itself is reserved to owners and admins.

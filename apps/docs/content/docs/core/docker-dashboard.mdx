@@ -1,0 +1,83 @@
+---
+title: Docker Dashboard
+description: "Inspect and manage containers, Swarm, images, volumes, networks, events, disk usage and server health from the Docker section."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+The **Docker** section in the sidebar gives you a direct view of what is running on a server, including containers that were not created by Dokploy. Use it to inspect, debug and clean up.
+
+If you have remote servers, pick the server at the top of the page — every tab shows the data of the selected server.
+
+<Callout type="info">
+  The Docker section requires the `docker` permission. Owners and admins have it; for members it is enabled with the **Access to Docker** permission.
+</Callout>
+
+## Containers
+
+Lists every container on the server with its name, state, status, image and ports. The actions menu of a container has:
+
+- **Copy Container ID**
+- **View Logs**
+- **View Config**, **View Mounts** and **View Networks**: the inspect output of the container and what it is attached to.
+- **Terminal**: open a shell inside the container.
+- **Browse Files** and **Upload File**: see [File Explorer](#file-explorer).
+- **Remove Container**
+
+## Swarm
+
+Three sub-tabs for the Docker Swarm of the server:
+
+- **Overview**: the state of the Swarm and its nodes.
+- **Containers**: the containers running as Swarm services.
+- **Nodes**: the manager and worker nodes. See [Cluster](/docs/core/cluster) to add nodes.
+
+## Images
+
+Lists the images on the server with repository, ID, creation time and size. You can view an image's config (`docker image inspect`) or delete it. If an image is still in use, Dokploy asks before forcing the deletion.
+
+## Volumes
+
+Lists the Docker volumes with driver, scope, size and mountpoint. You can view a volume's config (`docker volume inspect`), browse its files or delete it.
+
+## Networks
+
+Create, import and delete Docker networks. See [Networks](/docs/core/networks).
+
+## Events
+
+Shows the events reported by the Docker daemon, equivalent to running `docker events`. Filter by type, action or name, and choose a time window from the last 5 minutes up to the last 24 hours.
+
+## Disk Usage
+
+Shows how much disk Docker uses for **Images**, **Containers**, **Volumes** and **Build Cache**, followed by the list of build cache entries kept by the Docker builder.
+
+**Prune build cache** removes every build cache entry that is not currently in use. This cannot be undone, and the next builds will be slower while the cache is rebuilt.
+
+For scheduled cleanups, see the **Daily Docker Cleanup** option in the server settings.
+
+## Health
+
+Runs a read-only diagnostic of the server and reports:
+
+- **inotify limits** and how many are in use.
+- **Disk** usage.
+- **Docker network pool**: IP usage per network. Docker's default address pool runs out at around 30 networks.
+- **Docker daemon errors** over a time window from the last hour to the last 7 days.
+
+The check runs automatically when you open the tab; click **Re-check** to refresh, or **Download report** to share the result. The Health tab is visible to users who also have access to servers.
+
+## File Explorer
+
+**Browse Files** opens a file explorer for a running container (from **Containers**) or a named volume (from **Volumes**). You can:
+
+- Navigate directories.
+- Preview and edit text files, then **Save**.
+- **Download** or delete files.
+- **Upload File** to add new ones to a container.
+
+Files larger than 512KB are shown as a truncated preview and cannot be edited in the browser, and binary files can only be downloaded.
+
+<Callout type="warn">
+  Files outside persistent volumes are ephemeral: they disappear when the container is recreated by a restart or a new deployment. To change files permanently, edit them in a volume, or use [Patches](/docs/core/patches) for files that come from your repository.
+</Callout>

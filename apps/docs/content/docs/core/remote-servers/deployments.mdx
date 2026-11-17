@@ -13,7 +13,7 @@ To get started with remote servers, you'll need to configure the initial setup f
 The server setup process prepares the necessary environment for securely and efficiently deploying applications.
 
 <Callout title="Important" type="info">
-  Root access to the server is required. We currently do not support non-root deployments.
+  You can connect as `root` or as a non-root user. Non-root users need passwordless `sudo` access, otherwise the setup script stops with an error. You can configure it with `echo '<user> ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/<user>`.
 </Callout>
 
 <Callout type="warning">
