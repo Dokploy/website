@@ -1,0 +1,44 @@
+---
+title: libSQL
+description: This guide covers how to connect to a libSQL database running in Dokploy.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+libSQL is reached over HTTP with basic authentication, using the **Database User** and **Database Password** of the service.
+
+## From Another Service in Dokploy
+
+Use the **Internal Connection URL** from the **General** tab. The host is the service's app name and the port is `8080`:
+
+```bash
+LIBSQL_URL=http://<app-name>:8080
+LIBSQL_USER=libsql
+LIBSQL_PASSWORD=<password>
+```
+
+## From Your Machine
+
+1. Go to your `libSQL` database.
+2. In **External Credentials**, enter the `External Port (Internet)`, make sure the port is not in use by another service, e.g. `8080`, and click `Save`.
+3. Dokploy displays the `External Connection URL`, e.g. `http://libsql:password@1.2.3.4:8080`.
+
+You can then check the connection with `curl`:
+
+```bash
+curl -u libsql:password http://1.2.3.4:8080/health
+```
+
+## Running a Query over HTTP
+
+libSQL exposes its HTTP API on the same port. This runs a statement through the pipeline endpoint:
+
+```bash
+curl -u libsql:password http://1.2.3.4:8080/v2/pipeline \
+  -H "Content-Type: application/json" \
+  -d '{"requests":[{"type":"execute","stmt":{"sql":"SELECT 1"}},{"type":"close"}]}'
+```
+
+<Callout type="info">
+  Dokploy configures the server with HTTP **basic** authentication. Client libraries that only accept an auth token send it as a bearer token, so configure them to send an `Authorization: Basic` header instead.
+</Callout>

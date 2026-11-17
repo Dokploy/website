@@ -1,0 +1,74 @@
+---
+title: TypeScript SDK
+description: "Call the Dokploy API from TypeScript with the official, fully typed SDK."
+---
+
+`@dokploy/sdk` is the official TypeScript SDK for the Dokploy API. It is generated from the OpenAPI specification, so every endpoint has a typed function with typed inputs and responses.
+
+The source lives in [Dokploy/sdk](https://github.com/Dokploy/sdk).
+
+## Installation
+
+```bash
+npm install @dokploy/sdk
+# or
+pnpm add @dokploy/sdk
+```
+
+## Authentication
+
+Create an API key in **Settings → Profile → API/CLI Keys**, then configure the client once with your instance URL and the key:
+
+```ts
+import { client } from "@dokploy/sdk";
+
+client.setConfig({
+	baseUrl: "https://your-dokploy-instance.com/api",
+	headers: {
+		"x-api-key": process.env.DOKPLOY_API_KEY,
+	},
+});
+```
+
+The base URL is your Dokploy URL followed by `/api`. For Dokploy Cloud that is `https://app.dokploy.com/api`.
+
+## Usage
+
+Each endpoint is exported as a function named after its API route: `project.create` becomes `projectCreate`, `application.one` becomes `applicationOne`, and so on. Functions return `{ data, error }`.
+
+### Create a project
+
+```ts
+import { projectCreate } from "@dokploy/sdk";
+
+const { data, error } = await projectCreate({
+	body: {
+		name: "my-project",
+		description: "My awesome project",
+	},
+});
+```
+
+### Read an application
+
+```ts
+import { applicationOne } from "@dokploy/sdk";
+
+const { data, error } = await applicationOne({
+	query: { applicationId: "app-id" },
+});
+
+console.log(data?.name);
+```
+
+Mutations take their input in `body`; queries take it in `query`.
+
+## Versioning
+
+The SDK is regenerated from the OpenAPI specification of each Dokploy release. Use an SDK version that matches your Dokploy version, so the functions line up with the endpoints your instance exposes.
+
+## Related
+
+- [API reference](/docs/api): every endpoint with its parameters.
+- [CLI](/docs/cli)
+- [MCP Server](/docs/core/mcp)

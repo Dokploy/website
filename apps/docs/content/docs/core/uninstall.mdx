@@ -3,16 +3,21 @@ title: Uninstall
 description: "Learn how to uninstall Dokploy on your server"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 Follow these steps to completely remove Dokploy and its components from your server.
+
+<Callout type="info">
+Redis is no longer part of self-hosted Dokploy since v0.29.9. If you installed an older version and never updated, also remove the leftover service and volume with `docker service remove dokploy-redis` and `docker volume remove -f dokploy-redis`.
+</Callout>
 
 <Steps>
 <Step>
 Remove the docker swarm services created by Dokploy:
 
    ```bash
-   docker service remove dokploy dokploy-traefik dokploy-postgres dokploy-redis
+   docker service remove dokploy dokploy-traefik dokploy-postgres
    docker container remove -f dokploy-traefik
    ```
  
@@ -23,7 +28,7 @@ Remove the docker swarm services created by Dokploy:
 Remove the docker volumes created by Dokploy:
 
    ```bash
-   docker volume remove -f dokploy dokploy-postgres dokploy-redis
+   docker volume remove -f dokploy dokploy-postgres
    ```
  
 </Step>

@@ -3,27 +3,59 @@ title: Authentication
 description: A guide to authenticating with the Dokploy CLI
 ---
 
-The Dokploy CLI uses a token-based authentication system. To authenticate, you'll need to create an access token and store it securely.
+The Dokploy CLI authenticates with an API key. You need the URL of your Dokploy server and an API key generated from the dashboard.
 
-## Creating an Access Token
+## Creating an API Key
 
-To create an access token, first you need to have permissions if you are admin you don't need permissions.
+To create an API key, first you need to have permissions, if you are admin you don't need permissions.
 
-By default, an access token never expires, but you can optionally set an expiration date when creating it — recommended if the token will be used by a script, CI job, or anything outside your own machine.
+By default, an API key never expires, but you can optionally set an expiration date when creating it — recommended if the key will be used by a script, CI job, or anything outside your own machine.
 
-You can go to `dashboard/settings/profile` and click on the `Generate` button.
+You can go to `dashboard/settings/profile` and click on the `Generate New Key` button in the **API/CLI Keys** section.
 
 <ImageZoom  src="/assets/cli/token.webp" width={800} height={630} alt='home og image' className="rounded-lg" />
 
+## Authenticating
 
-## Storing the Access Token
+There are three ways to provide the server URL and the API key.
 
-Dokploy when you create an access token automatically will generate a config.json with the access token and the server url.
+### Option 1: The `auth` command
 
+```bash
+dokploy auth -u https://panel.example.com -t YOUR_API_KEY
+```
 
+The command validates the credentials against your server and, if they are valid, saves the URL and the API key in a `config.json` file inside the CLI installation directory. You only need to run it once.
 
-## Commands
+| Option | Description |
+| --- | --- |
+| `-u, --url <url>` | URL of your Dokploy server |
+| `-t, --token <token>` | API key generated in your Dokploy dashboard |
 
-1. `dokploy auth -u <host> -t <token>` - Authenticate with the Dokploy CLI.
-2. `dokploy verify` - Verify if the access token is valid.
+### Option 2: Environment variables
 
+```bash
+export DOKPLOY_URL="https://panel.example.com"
+export DOKPLOY_API_KEY="YOUR_API_KEY"
+```
+
+When both variables are set, they take priority over the credentials saved by the `auth` command. This is the recommended option for CI jobs and scripts.
+
+### Option 3: A `.env` file
+
+Create a `.env` file in the directory where you run the CLI:
+
+```bash
+DOKPLOY_URL="https://panel.example.com"
+DOKPLOY_API_KEY="YOUR_API_KEY"
+```
+
+The CLI loads it automatically. Variables already defined in your shell take priority over the ones in the `.env` file.
+
+## Verifying the credentials
+
+Run any read command to confirm the CLI can reach your server, for example:
+
+```bash
+dokploy project all
+```

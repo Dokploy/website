@@ -3,16 +3,33 @@ title: Project
 description: A guide to using the Dokploy CLI to manage projects
 ---
 
-
-The Dokploy CLI can be used to create, deploy, and manage projects.
+The `project` group is used to create and manage projects.
 
 ## Requirements
 
-Is required to be already authenticated with the Dokploy CLI.
+You need to be [authenticated](/docs/cli/authentication) with the Dokploy CLI.
 
 ## Commands
 
-1. `dokploy project create` - Create a new project.
-2. `dokploy project info` - Get information about a project.
-3. `dokploy project list` - List all projects.
+| Command | Description |
+| --- | --- |
+| `dokploy project all` | List all projects. |
+| `dokploy project one --projectId <id>` | Get information about a project. |
+| `dokploy project search` | Search projects (for example with `--name` or `--q`). |
+| `dokploy project create --name <name>` | Create a new project. Accepts `--description` and `--env`. |
+| `dokploy project update --projectId <id>` | Update a project. |
+| `dokploy project duplicate --sourceEnvironmentId <id> --name <name>` | Duplicate an environment and its services into a new project, or into the same project with `--duplicateInSameProject`. |
+| `dokploy project remove --projectId <id>` | Delete a project. |
 
+## Examples
+
+```bash
+# List all projects
+dokploy project all
+
+# Create a project
+dokploy project create --name "my-project" --description "My first project"
+
+# Get a project as JSON
+dokploy project one --projectId abc123 --json
+```

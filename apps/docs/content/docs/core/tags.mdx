@@ -1,0 +1,31 @@
+---
+title: Tags
+description: "Organize projects with colored tags and filter the project list by them."
+---
+
+Tags are colored labels you attach to projects. They are useful once an organization has many projects — for example to mark the client a project belongs to, or to separate production from internal tooling.
+
+## Creating Tags
+
+Go to **Settings → Tags** and click **Create Tag**:
+
+- **Name**: up to 50 characters. Letters, numbers, spaces, dots, dashes and underscores are allowed. Names are unique within the organization.
+- **Color** (optional): the color of the tag badge.
+
+You can edit or delete a tag from the same page. Deleting a tag removes it from every project that used it.
+
+## Tagging Projects
+
+Open the create or edit dialog of a project and pick tags in the **Tags** selector. A project can have several tags, and you can create a new tag from the selector without leaving the dialog.
+
+## Filtering by Tag
+
+On the **Projects** page, use the tag filter next to the search box to show only the projects that have the selected tags.
+
+## Permissions
+
+Tags are covered by the `tag` permission resource:
+
+- **Owners and admins** can create, update and delete tags.
+- **Members** can see tags and filter by them.
+- With an enterprise license, [custom roles](/docs/core/enterprise/custom-roles) can grant `read`, `create`, `update` and `delete` separately.

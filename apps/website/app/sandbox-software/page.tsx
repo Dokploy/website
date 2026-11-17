@@ -92,7 +92,7 @@ const platformFeatures = [
 		icon: Rocket,
 		title: "Deploy any application in minutes",
 		description:
-			"Dokploy supports Docker, Docker Compose, and Nixpacks out of the box, so you can deploy applications built on virtually any stack. Getting a new app into a sandbox environment takes minutes, not days.",
+			"Dokploy supports Dockerfiles, Docker Compose, Nixpacks, Railpack, and Heroku and Paketo Buildpacks out of the box, so you can deploy applications built on virtually any stack. Getting a new app into a sandbox environment takes minutes, not days.",
 	},
 	{
 		icon: Layers,
@@ -104,13 +104,13 @@ const platformFeatures = [
 		icon: GitBranch,
 		title: "Integrate the tools your team is using",
 		description:
-			"Dokploy connects with GitHub, GitLab, and Bitbucket, so developers can trigger deployments directly from their existing workflows. Integrated CI/CD pipelines mean new features move from commit to sandbox seamlessly.",
+			"Dokploy connects with GitHub, GitLab, Bitbucket, Gitea, and any Git repository, so developers can trigger deployments directly from their existing workflows. Integrated CI/CD pipelines mean new features move from commit to sandbox seamlessly.",
 	},
 	{
 		icon: Activity,
 		title: "Monitor performance across every environment",
 		description:
-			"Built-in monitoring gives you visibility into resource usage, uptime, and application health across all your sandboxed apps. Identify issues early, before they reach your production environment.",
+			"Built-in monitoring gives you visibility into CPU, memory, disk, and network usage across all your sandboxed apps. Identify issues early, before they reach your production environment.",
 	},
 	{
 		icon: Workflow,

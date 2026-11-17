@@ -47,7 +47,7 @@ const data: IndustryPageData = {
 				icon: Layers,
 				title: "Support full-stack coursework",
 				description:
-					"Deploy frontends, APIs, background services, and databases from the same platform. Dokploy supports common databases, including PostgreSQL, MySQL, MongoDB, Redis, and MariaDB.",
+					"Deploy frontends, APIs, background services, and databases from the same platform. Dokploy supports common databases, including PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL.",
 			},
 			{
 				icon: Eye,
@@ -135,7 +135,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Git workflows",
@@ -152,7 +152,7 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",
@@ -176,7 +176,7 @@ const data: IndustryPageData = {
 			{
 				question: "Does Dokploy support common student project stacks?",
 				answer:
-					"Yes. Dokploy supports multiple deployment methods, including Git-based apps, Dockerfiles, and Docker Compose. It also supports common databases used in coursework, including PostgreSQL, MySQL, MongoDB, Redis, and MariaDB.",
+					"Yes. Dokploy supports multiple deployment methods, including Git-based apps, Dockerfiles, and Docker Compose. It also supports common databases used in coursework, including PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL.",
 			},
 			{
 				question:

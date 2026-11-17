@@ -1,0 +1,94 @@
+---
+title: Web Server Settings
+description: "Manage the Dokploy server itself: Traefik ports, environment and version, the panel port, updates, cleanups and log rotation."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+**Settings → Web Server** groups the settings of the machine Dokploy is installed on: the panel domain, the Traefik instance in front of your services, Docker cleanups and Dokploy updates.
+
+<Callout type="info">
+  This page only exists on self-hosted instances. On Dokploy Cloud the panel is managed for you, and the equivalent actions for your own machines live under **Settings → Remote Servers**.
+</Callout>
+
+The actions are grouped in three menus — **Server**, **Traefik** and **Space** — next to the update controls.
+
+## Server
+
+- **Reload**: restarts the Dokploy service.
+- **Terminal** and **View Logs**: a shell on the server and the logs of the Dokploy service.
+- **GPU Setup**: see [GPU Support](/docs/core/gpu-support).
+- **Update Server IP**: changes the IP Dokploy uses for the server, for example in generated domains.
+- **Enable / Disable Port 3000**: see [Panel Port](#panel-port).
+- **Clean all deployment queue**: see [Deployments Queue](/docs/core/deployments-queue).
+
+### Panel Port
+
+After installation the panel is reachable on port `3000`. Once the panel has its own domain, you can close that port so the panel is only served through Traefik over HTTPS.
+
+**Disable Port 3000** is only allowed when:
+
+- A domain is configured for the panel, and
+- You are accessing the panel through that domain.
+
+The Dokploy service restarts, which takes a few seconds. If you lose access, run this on the server to publish the port again:
+
+```bash
+docker service update --publish-add published=3000,target=3000,mode=host dokploy
+```
+
+## Traefik
+
+- **Reload**: restarts Traefik.
+- **View Logs**
+- **Modify Environment**: edit the environment variables of the Traefik container, for example to configure a DNS challenge for Let's Encrypt.
+- **Enable / Disable Dashboard**: publishes the Traefik dashboard on port `8080`. The port must be free.
+- **Additional Port Mappings**: publish extra ports through Traefik, beyond 80 and 443. Each mapping has a **Target Port** (inside the container), a **Published Port** (on the host) and a protocol (`tcp`, `udp` or `sctp`). Use it together with custom entry points, for example for TCP or UDP services.
+- **Check Version**: see below.
+
+Saving **Modify Environment** or **Additional Port Mappings**, and toggling the dashboard, recreate the Traefik container in the background. Dokploy starts the new container, checks that it stays up, and puts the previous one back if it doesn't. Your applications may be unreachable for a few seconds while this happens.
+
+### Updating Traefik
+
+**Check Version** compares the running Traefik with the version recommended by your Dokploy release:
+
+- If it is **outdated**, you can update to the recommended version. Updating is optional and recreates the Traefik container, so your applications may be unreachable for a few seconds. Environment variables, port mappings, and the networks Traefik is connected to are kept. If the new container doesn't start, the previous one is put back.
+- If Traefik is **newer** than the recommended version, no update is needed.
+- If Traefik is not running or keeps restarting, the dialog says so — your applications are unreachable in that state. Use **View Logs** to find the error and **Reload** to start it.
+
+<Callout type="info">
+  Traefik is recreated from Dokploy's settings, not copied from the old container. Its configuration files and certificates live on the host, so they are kept. Changes made to the `dokploy-traefik` container outside Dokploy, such as extra volume mounts, labels, static IPs or ports bound to a specific host IP, are not carried over. This applies to updates and to the actions above that recreate the container.
+</Callout>
+
+## Space
+
+Manual Docker cleanups for the Dokploy server:
+
+- **Clean unused images**
+- **Clean unused volumes**
+- **Clean stopped containers**
+- **Clean Patch Caches**
+- **Clean Docker Builder & System**
+- **Clean Monitoring**
+- **Clean all**
+
+<Callout type="warn">
+  Cleaning unused volumes deletes the data of any volume that is not attached to a container at that moment, including volumes of stopped services.
+</Callout>
+
+**Daily Docker Cleanup** runs a full cleanup every day: it prunes stopped containers, unused images, build cache and system resources. It can remove images built for Compose services that only run on demand, so leave it off if you rely on those.
+
+## Updates
+
+**Check for updates** looks for a new Dokploy release and lets you update from the panel. Review the release notes before updating.
+
+**Automatically check for new updates** makes the panel check on its own. The preference is stored in your browser, so it applies per browser rather than to the whole instance.
+
+## Request Logs Cleanup
+
+When request logging is active on the **Requests** page, Traefik writes an access log that grows over time. There you can set the **cron schedule** of the cleanup job. At the scheduled time, the job keeps only the last 1000 entries in the access log file and signals Traefik to reopen its log files. The default schedule is daily at midnight (`0 0 * * *`).
+
+## Related
+
+- [Backups](/docs/core/backups): back up and restore Dokploy itself.
+- [Concurrent Builds](/docs/core/concurrent-builds)

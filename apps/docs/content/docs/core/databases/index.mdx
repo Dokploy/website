@@ -14,6 +14,7 @@ Dokploy currently supports a range of popular database systems, ensuring compati
 - **MariaDB**: A fork of MySQL with additional features and improved performance.
 - **MongoDB**: A NoSQL database known for its high scalability and flexibility.
 - **Redis**: An in-memory key-value store often used as a database, cache, and message broker.
+- **libSQL**: An open-source fork of SQLite (sqld) that can be accessed over the network, with optional replica nodes.
 
 
 We offer multiple functionalities that you can use to manage your databases, such as:
@@ -34,18 +35,20 @@ Four graphs will be displayed for the use of memory, CPU, disk, and network. Not
 
 ## Backups
 
-We offer automated backups for your databases, ensuring that you can recover your data quickly and easily in case of any issues, you can setup a S3 Destinations in settings to store your backups.
+We offer automated backups for your databases, ensuring that you can recover your data quickly and easily in case of any issues, you can setup a S3 Destinations in settings to store your backups. See [Backups](/docs/core/databases/backups) for details.
+
+The Backups tab is available for Postgres, MySQL, MariaDB, MongoDB and libSQL. Redis does not have database backups.
 
 
 ## Logs
 
 If you want to see any important logs from your application that is running, you can do so here and determine if your application is displaying any errors or not.
 
-## Files System
+## File Explorer
 
-Browse the file system of your database's running container directly from the dashboard. You can navigate directories, preview text files, download any file, and upload new files into the directory you currently have open.
+To browse the file system of your database's running container, go to **Docker → Containers**, open the actions menu of the container and click `Browse Files`. You can navigate directories, preview and edit text files, download or delete files, and use `Upload File` to add new ones. Named volumes can be browsed the same way from **Docker → Volumes**.
 
-Files outside persistent volumes are usually ephemeral and can disappear after a restart or a new deployment. Uploading requires the `Write` permission on the `Container Filesystem` resource for custom roles; owners and admins have it by default.
+Files outside persistent volumes are usually ephemeral and can disappear after a restart or a new deployment. The file explorer requires access to the Docker section.
 
 ## Advanced
 

@@ -58,8 +58,17 @@ Once the authentication proxy is running on a server:
 The domain's Traefik configuration is updated immediately to require authentication. You can enable or disable protection independently for each domain, an application with multiple domains can have SSO enabled on some and not others.
 
 <Callout type="warn">
-  Application Authentication is currently only supported on **application domains**. Docker Compose service domains are not supported.
+  Application Authentication is supported on **application domains** and **preview deployment domains**. Docker Compose service domains are not supported.
 </Callout>
+
+## Protecting Preview Deployments
+
+You can also protect all preview deployment domains for an application. Instead of toggling each domain individually, enable it once in the preview settings:
+
+1. Go to **Application → Preview Deployments → Settings**.
+2. Toggle **Protect previews with SSO**.
+
+Every existing and future preview domain gets the forward-auth middleware. The preview wildcard domain must be under the same base domain as the auth domain. See [Preview Deployments — SSO Protection](/docs/core/applications/preview-deployments#sso-protection) for full details.
 
 ## Removing Protection
 

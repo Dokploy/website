@@ -1,0 +1,38 @@
+---
+title: Overview
+description: "See every service, backup, domain and deployment of your organization in one place."
+---
+
+The **Overview** page in the sidebar lists resources across all your projects, so you do not have to open each project to find something. It has four tabs.
+
+## Services
+
+Every application, Docker Compose service and database of the organization in a single list. Search by name and filter by:
+
+- **Project**
+- **Type**
+- **Status**
+- **Server** — including the Dokploy server on self-hosted instances
+
+Click a service to open it.
+
+## Backups
+
+The history of backup runs across all services — database backups and volume backups — with their date, service, destination, kind and status. Filter by **destination** or **service** to check, for example, that last night's backups to a given bucket all succeeded.
+
+This tab is visible to users who can read both backups and volume backups.
+
+## Domains
+
+Every domain configured on any service. Filter by **project**, by **status** (enabled or disabled), by **SSL** (HTTPS only or HTTP only) and by **port**. Useful to find which service owns a domain, or which domains still run without HTTPS.
+
+This tab requires permission to read domains.
+
+## Deployments
+
+All application and Compose deployments in one place, with two sub-tabs:
+
+- **Deployments**: the deployment history. Search by name, project, environment or server, and filter by status (**Running**, **Done**, **Error**, **Cancelled**) and type (**Application** or **Compose**).
+- **Queue**: the deployment jobs waiting or running. See [Deployments Queue](/docs/core/deployments-queue).
+
+This tab requires permission to read deployments.

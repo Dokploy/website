@@ -78,7 +78,6 @@ export function SecondaryFeaturesSections() {
 
 	const [isMounted, setIsMounted] = useState(false);
 
-	// Cambiar isMounted a true después del primer render
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
@@ -86,7 +85,7 @@ export function SecondaryFeaturesSections() {
 	return (
 		<section
 			id="features"
-			aria-label="Features for running your books"
+			aria-label="Dokploy features"
 			className="relative overflow-hidden bg-black pb-28 pt-20 sm:py-32"
 		>
 			<div className="relative mx-auto max-w-7xl max-lg:px-4">
