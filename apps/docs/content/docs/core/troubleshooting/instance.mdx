@@ -41,6 +41,29 @@ You should see all three of these containers running:
   **Note:** If you're running a version older than v0.29.9, you'll also see a `dokploy-redis` container. Redis is no longer used in self-hosted Dokploy since v0.29.9.
 </Callout>
 
+#### Traefik is not running after a reboot
+
+If `dokploy-traefik` is missing from `docker ps` after a server reboot, check its status:
+
+```bash
+docker ps -a --filter name=dokploy-traefik
+```
+
+If it shows `Exited (128)`, Docker tried to start Traefik before the Swarm network `dokploy-network` was ready, and it doesn't try again. The Docker log shows the error:
+
+```bash
+journalctl -u docker -b | grep "failed to start swarm container"
+# ... network dokploy-network not found
+```
+
+Recent Dokploy versions start Traefik automatically once Dokploy is up. On older versions, or on a remote server, start it yourself after the server has finished booting:
+
+```bash
+docker start dokploy-traefik
+```
+
+If the container no longer exists, recreate it as described in [Recreate Traefik Service](#recreate-traefik-service).
+
 If all three containers are running but you still can't access the interface, it's time to debug:
 
 ### Debugging Process
