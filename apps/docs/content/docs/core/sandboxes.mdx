@@ -131,6 +131,8 @@ curl -s "$DOKPLOY_URL/api/sandbox.listFiles?sandboxId=SANDBOX_ID&path=/home/user
 
 Paths must be absolute and parent directories are created automatically. For binary files send `"encoding": "base64"` in `writeFile` and `encoding=base64` in `readFile`.
 
+`writeFile` and `readFile` do not run as the sandbox user. They can reach any path in the container regardless of file permissions, and written files are owned by `1000:1000`.
+
 ### Manage Sandboxes
 
 | Endpoint | Method | Description |
@@ -173,6 +175,10 @@ Each sandbox is created with a restrictive configuration:
 
 <Callout type="warn">
 By default sandboxes use the standard Docker runtime (`runc`) and share the kernel of the server. If you run code from people you do not trust, use a runtime with stronger isolation such as gVisor, and prefer a server that does not host your applications.
+</Callout>
+
+<Callout type="warn">
+The non-root user restricts the code you run, not the caller of the API. `sandbox.writeFile` can replace any file in the container, including system binaries, and a custom image decides what the sandbox runs. Anyone with the **Create** permission therefore has full control over the contents of a sandbox and can keep it running past its timeout and maximum lifetime. Grant that permission only to people you trust with the server.
 </Callout>
 
 ### Using gVisor
