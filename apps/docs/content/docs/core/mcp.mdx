@@ -1,0 +1,102 @@
+---
+title: MCP Server
+description: "Connect AI assistants such as Claude, Cursor or VS Code to your Dokploy instance through the Model Context Protocol."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+The Dokploy MCP server exposes the Dokploy API as tools for the [Model Context Protocol](https://modelcontextprotocol.io). Once it is connected, an AI assistant can create projects, deploy applications, read logs, manage databases and domains, and so on, on your behalf.
+
+It is published as [`@dokploy/mcp`](https://www.npmjs.com/package/@dokploy/mcp) and works with both self-hosted Dokploy and Dokploy Cloud. The source lives in [Dokploy/mcp](https://github.com/Dokploy/mcp).
+
+## Requirements
+
+- Node.js 18 or newer (or Docker).
+- An MCP client: Cursor, VS Code, Claude Desktop, Claude Code, Windsurf, Zed or any other.
+- A Dokploy **API key**. Create one in **Settings → Profile → API/CLI Keys**.
+
+<Callout type="warn">
+  The MCP server acts with the permissions of the user who created the API key. An assistant connected with an owner's key can delete projects. Create the key from a user whose role matches what you want the assistant to be able to do.
+</Callout>
+
+## Configuration
+
+Most clients use the same JSON shape. Replace the URL and the key with your own:
+
+```json
+{
+	"mcpServers": {
+		"dokploy-mcp": {
+			"command": "npx",
+			"args": ["-y", "@dokploy/mcp"],
+			"env": {
+				"DOKPLOY_URL": "https://your-dokploy-server.com",
+				"DOKPLOY_API_KEY": "your-dokploy-api-key"
+			}
+		}
+	}
+}
+```
+
+Where the file lives depends on the client:
+
+| Client | Location |
+| --- | --- |
+| Cursor | `~/.cursor/mcp.json`, or `.cursor/mcp.json` in a project |
+| Claude Desktop | `claude_desktop_config.json` |
+| Windsurf | The Windsurf MCP config file |
+| VS Code | The MCP config file, using a top-level `servers` key and `"type": "stdio"` |
+| Zed | `settings.json`, under `context_servers` |
+
+For Claude Code, add it from the CLI:
+
+```bash
+claude mcp add dokploy-mcp -- npx -y @dokploy/mcp
+```
+
+and provide `DOKPLOY_URL` and `DOKPLOY_API_KEY` as environment variables.
+
+## Environment Variables
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `DOKPLOY_URL` | Yes | Your Dokploy server URL. |
+| `DOKPLOY_API_KEY` | Yes | Your Dokploy API key. |
+| `DOKPLOY_TOOL_PRESET` | No | Predefined toolset: `all` (default), `minimal`, `core`, `deploy`, `databases` or `git`. |
+| `DOKPLOY_ENABLED_TAGS` | No | Comma-separated list of API tags to load, e.g. `project,application,postgres`. Takes precedence over the preset. |
+| `DOKPLOY_DISABLED_TAGS` | No | Comma-separated list of tags to exclude. Applied last. |
+| `DOKPLOY_REDACT_ENV` | No | Redacts secret-bearing fields (environment variables, compose files, passwords, tokens, keys) from responses before they reach the model. Defaults to `true`. |
+| `DOKPLOY_CUSTOM_HEADERS` | No | JSON object of extra request headers, for instances behind Cloudflare Access or a similar proxy. |
+| `DOKPLOY_TIMEOUT` | No | Request timeout in milliseconds. Defaults to `30000`. |
+
+## Limiting the Tools
+
+By default the server exposes every Dokploy API endpoint as a tool — several hundred of them. Some clients and models become slower or less reliable with very large tool lists, so start with a preset and widen it when you need more:
+
+| Preset | Included tags |
+| --- | --- |
+| `minimal` | `project`, `application` |
+| `core` | `project`, `server`, `application` |
+| `deploy` | `project`, `environment`, `server`, `application`, `compose`, `domain`, `deployment` |
+| `databases` | `postgres`, `redis`, `mysql`, `mariadb`, `mongo`, `libsql` |
+| `git` | `github`, `gitlab`, `bitbucket`, `gitea`, `gitProvider`, `registry`, `sshKey` |
+
+Every tool carries annotations (`readOnlyHint`, `destructiveHint`, `idempotentHint`) so clients can ask for confirmation before destructive actions.
+
+## HTTP Mode
+
+The server uses stdio by default, which is what desktop clients expect. To run it as an HTTP service instead:
+
+```bash
+npx -y @dokploy/mcp --http
+# or
+MCP_TRANSPORT=http npx -y @dokploy/mcp
+```
+
+It then serves the Streamable HTTP transport on `/mcp` (and the legacy SSE transport on `/sse`), with a health check on `/health`.
+
+## Related
+
+- [API](/docs/api): the REST API the MCP server wraps.
+- [CLI](/docs/cli): manage Dokploy from your terminal.
+- [SDK](/docs/core/sdk): call the API from TypeScript.

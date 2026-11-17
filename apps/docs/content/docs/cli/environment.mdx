@@ -1,0 +1,39 @@
+---
+title: Environment
+description: A guide to using the Dokploy CLI to manage environments
+---
+
+The `environment` group is used to manage the environments of a project (for example production and staging). Applications and databases are created inside an environment, so you need an `environmentId` to create them.
+
+## Requirements
+
+You need to be [authenticated](/docs/cli/authentication) with the Dokploy CLI.
+
+## Commands
+
+| Command | Description |
+| --- | --- |
+| `dokploy environment by-project-id --projectId <id>` | List the environments of a project. |
+| `dokploy environment one --environmentId <id>` | Get the details of an environment. |
+| `dokploy environment search` | Search environments. |
+| `dokploy environment create --name <name> --projectId <id>` | Create a new environment in a project. |
+| `dokploy environment update --environmentId <id>` | Update an environment. Accepts `--name`, `--description` and `--env`. |
+| `dokploy environment duplicate --environmentId <id> --name <name>` | Duplicate an environment. |
+| `dokploy environment remove --environmentId <id>` | Delete an environment. |
+
+## Examples
+
+```bash
+# List the environments of a project
+dokploy environment by-project-id --projectId abc123
+
+# Create a staging environment
+dokploy environment create --name staging --projectId abc123
+
+# Set the shared variables of an environment
+dokploy environment update --environmentId env123 --env "$(cat .env)"
+```
+
+## Service environment variables
+
+To set the environment variables of a single service, use the `save-environment` command of its group, for example `dokploy application save-environment` or `dokploy postgres save-environment`. See [Application](/docs/cli/application#environment-variables).

@@ -22,6 +22,11 @@ const config = {
 	async redirects() {
 		return [
 			{
+				source: "/docs/cli/enviroment",
+				destination: "/docs/cli/environment",
+				permanent: true,
+			},
+			{
 				source: "/docs/templates",
 				destination: "https://dokploy.com/templates",
 				permanent: true,

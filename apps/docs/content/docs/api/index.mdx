@@ -15,7 +15,7 @@ In some cases, you may need to interact directly with the dokploy API. Here's ho
 
 1. By default, users do not have direct access to the API.
 2. Administrators can grant users access to:
-   - Generate access tokens
+   - Generate API keys
    - Access the Swagger UI
 3. If you need access, contact your administrator.
 
@@ -27,12 +27,12 @@ By default the OpenApi base url is `http://localhost:3000/api`, you need to repl
 
 ### Authentication
 
-The API uses JWT tokens for authentication. You can generate a token by going to the `/settings/profile` page and go to API/CLI Section and generate the token.
+The API uses API keys for authentication. You can generate one by going to the `/dashboard/settings/profile` page, in the **API/CLI Keys** section, and clicking `Generate New Key`. Send the key in the `x-api-key` header of every request.
 
 Let's take a example of authenticated request:
 ```bash
 curl -X 'GET' \
-  'https://dokploy.com/api/project.all' \
+  'https://your-domain.com/api/project.all' \
   -H 'accept: application/json' \
   -H 'x-api-key: YOUR-GENERATED-API-KEY'
 ```
@@ -44,56 +44,37 @@ then you will get the something like this:
     "projectId": "klZKsyw5g-QT_jrWJ5T-w",
     "name": "Random",
     "description": "",
-    "createdAt": "2024-06-19T15:05:58.785Z",
-    "adminId": "_WrKZbs7iJAA3p4N2Yfyu",
-    "applications": [],
-    "mariadb": [],
-    "mongo": [],
-    "mysql": [
+    "createdAt": "2026-06-19T15:05:58.785Z",
+    "organizationId": "_WrKZbs7iJAA3p4N2Yfyu",
+    "env": "",
+    "environments": [
       {
-        "mysqlId": "N3cudwO46TiDXzBm4SaQ1",
-        "name": "mysql",
-        "appName": "random-mysql-924715",
-        "description": "",
-        "databaseName": "mysql",
-        "databaseUser": "mysql",
-        "databasePassword": "h13BzO6y3KYSHaQg",
-        "databaseRootPassword": "mM1b7JeoPA7jArxj",
-        "dockerImage": "mysql:8",
-        "command": null,
-        "env": null,
-        "memoryReservation": null,
-        "memoryLimit": null,
-        "cpuReservation": null,
-        "cpuLimit": null,
-        "externalPort": null,
-        "applicationStatus": "done",
-        "createdAt": "2024-06-24T01:55:40.378Z",
-        "projectId": "klZKsyw5g-QT_jrWJ5T-w"
+        "environmentId": "Qd3xK0yTn5Jc8mVbR2LwA",
+        "name": "production",
+        "isDefault": true,
+        "applications": [],
+        "mariadb": [],
+        "mongo": [],
+        "mysql": [
+          {
+            "mysqlId": "N3cudwO46TiDXzBm4SaQ1",
+            "name": "mysql",
+            "applicationStatus": "done"
+          }
+        ],
+        "postgres": [],
+        "redis": [
+          {
+            "redisId": "TtFK5S4QFaIjaNGOb8Ku-",
+            "name": "redis",
+            "applicationStatus": "done"
+          }
+        ],
+        "libsql": [],
+        "compose": []
       }
     ],
-    "postgres": [],
-    "redis": [
-      {
-        "redisId": "TtFK5S4QFaIjaNGOb8Ku-",
-        "name": "redis",
-        "appName": "random-redis-7eec62",
-        "description": "",
-        "databasePassword": "Yvb8gqClfomjcue8",
-        "dockerImage": "redis:7",
-        "command": null,
-        "env": null,
-        "memoryReservation": null,
-        "memoryLimit": null,
-        "cpuReservation": null,
-        "cpuLimit": null,
-        "externalPort": 6379,
-        "createdAt": "2024-06-26T06:43:20.570Z",
-        "applicationStatus": "done",
-        "projectId": "klZKsyw5g-QT_jrWJ5T-w"
-      }
-    ],
-    "compose": []
-  },
+    "projectTags": []
+  }
 ]
 ```

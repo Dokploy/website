@@ -1,0 +1,59 @@
+---
+title: libSQL
+description: "Deploy a libSQL (sqld) database in Dokploy, with primary and replica nodes, namespaces and S3 backups."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+libSQL is an open-source fork of SQLite that runs as a server (`sqld`), so applications can reach it over HTTP instead of opening a local file. Dokploy deploys it as a database service next to Postgres, MySQL, MariaDB, MongoDB and Redis.
+
+## Creating a libSQL Database
+
+In a project environment, click **Create Service → Database** and select **libSQL**. Besides the usual name and description, the form has:
+
+| Field | Description |
+| --- | --- |
+| **Sqld Node** | `primary` (default) or `replica`. |
+| **Sqld Primary URL** | Only for replicas, and required there: the URL of the primary node to replicate from. |
+| **Enable Namespaces** | Starts `sqld` with `--enable-namespaces`, so one server can host several isolated databases. |
+| **Database User** | Defaults to `libsql`. |
+| **Database Password** | Used together with the user for HTTP basic authentication. |
+| **Docker Image** | Defaults to `ghcr.io/tursodatabase/libsql-server:v0.24.32`. |
+
+Dokploy creates a named volume `<app-name>-data` mounted at `/var/lib/sqld`, so the data survives redeploys.
+
+## Ports and Credentials
+
+The container listens on three ports:
+
+| Port | Purpose |
+| --- | --- |
+| `8080` | HTTP API — the port your applications connect to. |
+| `5001` | gRPC — used by replicas to replicate from a primary. |
+| `5000` | Admin API. |
+
+The **General** tab shows two blocks:
+
+- **Internal Credentials**: the user, password, node type, internal host and an **Internal Connection URL** (`http://<user>:<password>@<app-name>:8080`) for services on the same Docker network. Primary nodes also show an **Internal Replication Connection URL** on port `5001`.
+- **External Credentials**: set an **External Port (Internet)** to publish the HTTP API on the server. Once it is saved you can also publish the **External Admin Port** and, on primary nodes, the **External GRPC Port**.
+
+<Callout type="warn">
+  A replica cannot publish an external gRPC port — only primary nodes accept replication connections.
+</Callout>
+
+See [Connect to libSQL](/docs/core/databases/connection/libsql) for a client example.
+
+## Replicas
+
+To add a read replica:
+
+1. On the primary, copy the **Internal Replication Connection URL**. If the replica runs on another server, publish the **External GRPC Port** on the primary and use the external gRPC URL instead.
+2. Create a second libSQL service with **Sqld Node** set to `replica` and paste that URL in **Sqld Primary URL**.
+
+## Backups
+
+libSQL has the same **Backups** tab as the other SQL databases: scheduled backups to an [S3 Destination](/docs/core/actions), a retention count, manual runs and restore. See [Database Backups](/docs/core/databases/backups).
+
+## Other Tabs
+
+**Environment**, **Logs**, **Monitoring** and **Advanced** (custom command, resources, volumes, Swarm settings, networks) work the same as for every other database. See [Databases](/docs/core/databases).

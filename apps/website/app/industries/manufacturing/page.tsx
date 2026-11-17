@@ -115,8 +115,8 @@ const data: IndustryPageData = {
 			{
 				title: "Deploy safely",
 				description:
-					"Release the app to a controlled environment before production. Teams can review logs, variables, domains, and service settings before promotion.",
-				flow: "Deploy staging → Validate → Promote",
+					"Release the app to a controlled environment before production. Teams can review logs, variables, domains, and service settings before deploying to production.",
+				flow: "Deploy staging → Validate → Deploy production",
 			},
 			{
 				title: "Monitor and recover",
@@ -141,7 +141,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Industrial workflows",
@@ -159,7 +159,7 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",

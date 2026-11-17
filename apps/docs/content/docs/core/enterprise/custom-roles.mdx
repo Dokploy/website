@@ -53,7 +53,7 @@ Manage environment creation, viewing, and deletion.
 
 Access to Docker containers, images, and volumes management.
 
-- **Read** — View Docker containers, images, and volumes.
+- **Read** — View Docker containers, images, volumes, and Docker disk usage.
 
 ### SSH Keys
 
@@ -228,6 +228,8 @@ View server and service metrics (CPU, RAM, disk).
 
 - **Read** — View monitoring metrics.
 
+The host **Monitoring** page in the sidebar needs both **Monitoring → Read** and **Docker → Read**, because its data comes from Docker. A role with only Monitoring Read (such as the **Deployer** preset) still sees the Monitoring tab of each service, but not the host Monitoring page.
+
 ### Audit Logs
 
 View the audit log of actions performed in the organization.
@@ -251,6 +253,17 @@ Manage connections to DNS providers (Cloudflare, AWS Route53) used to automatica
 - **Create** — Add new DNS providers.
 - **Update** — Edit existing DNS provider configuration.
 - **Delete** — Remove DNS providers.
+
+### AI Settings
+
+Manage AI providers and models, and use AI features such as log analysis and the AI Assistant. See [AI Assistant](/docs/core/ai).
+
+- **Read** — View AI providers and use AI features (log analysis, AI Assistant).
+- **Create** — Add new AI provider configurations.
+- **Update** — Edit AI provider settings.
+- **Delete** — Remove AI provider configurations.
+
+Using AI features requires **Read**. Without it, the **AI Assistant** in the create service menu and the **AI** button in log viewers are hidden. Defining the organization's [Custom AI Providers](/docs/core/custom-ai-providers) stays limited to owners and admins.
 
 ## Creating a Custom Role
 

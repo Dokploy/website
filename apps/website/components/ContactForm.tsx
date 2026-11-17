@@ -261,9 +261,10 @@ export function ContactForm({
 								Self-Hosted Support
 							</h3>
 							<p className="mb-3 text-sm text-muted-foreground">
-								We currently don't provide direct support for self-hosted
-								deployments through this form. However, our community is here to
-								help!
+								We don't provide direct support for self-hosted deployments
+								through this form. Enterprise customers can use their dedicated
+								support channel, and our community is here to help everyone
+								else!
 							</p>
 							<div className="space-y-2 text-sm">
 								<p className="text-muted-foreground">

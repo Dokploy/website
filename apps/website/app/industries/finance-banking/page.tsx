@@ -109,12 +109,12 @@ const data: IndustryPageData = {
 				title: "Review before release",
 				description:
 					"Deploy changes into a preview or staging environment for product, security, and platform review. Stakeholders can test the running service before it reaches customers or staff.",
-				flow: "Open preview → Check logs → Approve release",
+				flow: "Open preview → Check logs → Merge the change",
 			},
 			{
 				title: "Deploy and monitor",
 				description:
-					"Promote the release, watch logs and metrics, and use rollback options if the service needs to be restored. The full deployment history stays tied to the service.",
+					"Deploy the reviewed change to production, watch logs and metrics, and use rollback options if the service needs to be restored. The full deployment history stays tied to the service.",
 				flow: "Deploy → Monitor → Roll back if needed",
 			},
 		],
@@ -133,7 +133,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Git workflows",
@@ -151,7 +151,7 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",

@@ -1,0 +1,77 @@
+---
+title: Networks
+description: "Create and manage Docker networks from Dokploy, and attach them to your services to control which services can reach each other."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+By default every service Dokploy deploys joins a shared overlay network called `dokploy-network`. That is what lets Traefik route traffic to your services, and it also means every service on a server can reach every other one by name.
+
+Network management lets you create your own Docker networks, attach them to specific services and, when you need isolation, detach a service from `dokploy-network`.
+
+## Managing Networks
+
+Go to **Docker → Networks**. If you have remote servers, use the server selector at the top of the page — networks belong to one server.
+
+The table lists the networks Dokploy knows about, with search and a driver filter. From here you can:
+
+- **Create** a network.
+- **View the config** of a network (the output of `docker network inspect`).
+- **Delete** a network.
+- **Verify** that every network in the list still exists in Docker.
+- **Sync** networks between Docker and Dokploy.
+
+Managing networks requires access to the **Docker** section.
+
+### Creating a Network
+
+| Field | Description |
+| --- | --- |
+| **Name** | The Docker network name. |
+| **Driver** | `bridge` for single-server containers, `overlay` for Swarm services. Applications and databases run as Swarm services, so use `overlay` for them. |
+| **MTU** (optional) | Maximum transmission unit. Leave empty to use Docker's default. |
+| **Internal** | Containers on this network cannot reach external networks. |
+| **Attachable** | Allows standalone containers to attach (overlay networks only). |
+| **Enable IPv4 / Enable IPv6** | Address families enabled on the network. |
+| **IPAM** | Optional IPAM driver and one or more subnet / IP range / gateway entries, e.g. `172.20.0.0/16`. |
+
+<Callout type="info">
+  Networks are immutable. To change one, delete it and create it again.
+</Callout>
+
+### Syncing with Docker
+
+Networks created outside Dokploy (with the Docker CLI, or by a Compose file) are not listed until you import them. Click **Sync** to:
+
+- **Import** networks that exist in Docker but not in Dokploy.
+- **Remove** records whose network no longer exists in Docker, or **recreate** the missing network from the stored settings.
+- **Update** a record from Docker when the two have drifted.
+
+## Attaching Networks to a Service
+
+Open a service and go to **Advanced → Networks**:
+
+1. Select one or more networks from the list.
+2. Save, then **redeploy** the service — network changes take effect on the next deploy.
+
+Services attached to the same network can reach each other by service name.
+
+For Docker Compose, the same card lets you attach networks **per service** of the compose file.
+
+### Detach from dokploy-network
+
+The **Detach from dokploy-network** switch removes the service from the shared network, so it is only reachable through the networks you attached.
+
+<Callout type="warn">
+  Traefik reaches your services through `dokploy-network`. Detaching a service that has domains breaks its routing and the domains stop working. Use this for internal services, such as a database that only one application should reach.
+</Callout>
+
+If a service is detached and has no other network attached, Dokploy keeps it on `dokploy-network` until you attach one, so it never becomes unreachable.
+
+## Example: Isolating a Database
+
+1. In **Docker → Networks**, create an `overlay` network called `backend`.
+2. On the database, go to **Advanced → Networks**, attach `backend` and enable **Detach from dokploy-network**. Redeploy.
+3. On the application that uses the database, attach `backend` and leave it on `dokploy-network` so its domain keeps working. Redeploy.
+
+The application reaches the database by its internal host name, and no other service on the server can.
