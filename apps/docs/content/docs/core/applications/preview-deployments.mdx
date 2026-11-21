@@ -46,6 +46,32 @@ For example:
 
 Note: Pull requests to branches other than your configured target branch will not trigger preview deployments.
 
+### Connecting Multiple Applications
+
+When several applications in the same environment build from the same repository (for example a frontend and an API in a monorepo), each pull request creates a preview deployment for every one of them. An application can reference the preview URL of another application in the same pull request with `${{<application>.DOKPLOY_DEPLOY_URL}}`:
+
+```bash
+# Frontend preview environment variables
+NEXT_PUBLIC_API_URL=https://${{api.DOKPLOY_DEPLOY_URL}}
+```
+
+```bash
+# API preview environment variables
+CORS_ALLOWED_ORIGINS=https://${{frontend.DOKPLOY_DEPLOY_URL}}
+```
+
+`<application>` is either the application's name or its app name (e.g. `api-zeeuhb`). If several applications in the environment share a name, use the app name.
+
+The reference resolves to the domain (without protocol) of the other application's preview deployment for the **same pull request** and the **same environment**, so a preview never points at another pull request or at production. It works in the preview environment variables, build arguments and build secrets.
+
+<Callout type="warn">
+  The referenced application must also have preview deployments enabled for the same target branch, and if you use filtering labels, the pull request must match its labels too. If no matching preview deployment exists, the build fails instead of falling back to another URL.
+</Callout>
+
+<Callout type="info">
+  Values used at build time (such as `NEXT_PUBLIC_*` variables) are baked into the build. Add the reference to the preview build arguments as well if your build reads it there.
+</Callout>
+
 ### Filtering labels
 
 If you only want pull requests with a specific label to create preview deployments, you can specify one or multiple in the preview settings.
