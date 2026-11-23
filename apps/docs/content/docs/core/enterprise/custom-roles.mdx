@@ -275,43 +275,28 @@ Using AI features requires **Read**. Without it, the **AI Assistant** in the cre
 
 ## Domain Restrictions
 
-You can limit which domains the members of a custom role can use. This is useful when you give a team its own subdomain space (for example `*.lab.example.com`) and don't want them publishing apps on any other host.
+You can limit which domains members of a custom role can use.
 
 1. Go to **Settings → Custom Roles** and create or edit a role.
-2. Expand **Domain restrictions**.
-3. In **Allowed domains**, add one wildcard per line, e.g. `*.lab.example.com`.
-4. Optionally turn on **Require HTTPS** so every domain these members create must have HTTPS enabled.
-5. Click **Save**.
+2. Expand **Domain restrictions** and add one wildcard per line, e.g. `*.lab.example.com`.
+3. Optionally enable **Require HTTPS**.
+4. Click **Save**.
 
-Leave **Allowed domains** empty for no restriction. Roles without patterns behave as before, and the built-in **Owner**, **Admin** and **Member** roles are never restricted.
+Leave it empty for no restriction. Built-in roles are never restricted.
 
-### How patterns match
+A pattern matches exactly one label: `*.lab.example.com` allows `app.lab.example.com`, but not `lab.example.com` or `a.b.lab.example.com`.
 
-Patterns must be wildcards in the form `*.<domain>` and match exactly **one** label in front of the suffix, the same way a TLS wildcard certificate does. With `*.lab.example.com`:
+Members of a restricted role:
 
-| Host | Allowed |
-| --- | --- |
-| `app.lab.example.com` | Yes |
-| `api.lab.example.com` | Yes |
-| `lab.example.com` | No (no label in front) |
-| `a.b.lab.example.com` | No (more than one label) |
-| `app.example.com` | No (different suffix) |
-
-### What restricted members can do
-
-For members of a role with allowed domains:
-
-- **Domains**: creating or updating a domain, or enabling a disabled one, fails with a `403` unless the host matches a pattern and, if required, uses HTTPS. Domain paths can't contain spaces, backticks or `$`.
-- **Domain form**: shows the allowed patterns under the host field, hides the sslip.io generator, and defaults new domains to HTTPS with Let's Encrypt when HTTPS is required.
-- **Preview deployments**: the preview wildcard must be **exactly** one of the allowed patterns (e.g. `*.lab.example.com`). The default sslip.io wildcard is not accepted, so set a custom wildcard before turning previews on.
-- **Traefik labels**: new or changed `traefik.*` swarm labels are rejected on applications and databases. Labels an admin already set can be kept or removed, but not changed.
-- **Templates, compose import, AI Assistant and onboarding**: generated domains outside the allowed patterns are skipped and the UI warns about it. When HTTPS is required, the domains that are created use Let's Encrypt.
-- **Project duplication**: domains outside the patterns are skipped, `traefik.*` labels are removed, and preview deployments that don't comply are disabled.
+- Can only create or update domains that match a pattern (and use HTTPS if required).
+- Can only use a preview wildcard equal to an allowed pattern. The default sslip.io wildcard is not allowed.
+- Can't add or change `traefik.*` swarm labels.
+- Get domains outside the patterns skipped when using templates, compose import, the AI Assistant or project duplication.
 
 <Callout type="warn">
-  - A role with allowed domains can't also have **Traefik Files → Write** or the **server terminal** permission, since both allow publishing any host without going through domain checks.
-  - Traefik labels written inside **Docker Compose files** are not validated.
-  - Existing domains outside the patterns keep working. The restriction applies when domains are created or changed.
+  - A restricted role can't have **Traefik Files → Write** or the server terminal permission.
+  - Traefik labels inside Docker Compose files are not validated.
+  - Existing domains outside the patterns keep working.
 </Callout>
 
 ## Assigning a Custom Role

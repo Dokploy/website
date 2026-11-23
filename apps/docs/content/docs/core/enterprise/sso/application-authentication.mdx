@@ -61,32 +61,26 @@ The domain's Traefik configuration is updated immediately to require authenticat
 
 ## Restricting Access by Email, Group or Domain
 
-SSO protection checks that visitors are signed in, but on its own it lets in anyone your identity provider accepts. Each application can set an allowlist so only specific users can reach it.
+You can limit which users can access an SSO-protected application.
 
-1. Go to your **Application → Domains** tab.
-2. Click the shield icon next to an SSO-protected domain.
-3. Under **Access restrictions**, fill in one or more lists (one entry per line):
-   - **Allowed emails**: exact email addresses, e.g. `jane@acme.com`.
-   - **Allowed groups**: group names from your identity provider, e.g. `engineering`.
-   - **Allowed email domains**: e.g. `acme.com`.
-4. Click **Save**.
+1. Go to **Application → Domains** and click the shield icon on an SSO-protected domain.
+2. Under **Access restrictions**, add entries (one per line) to any of:
+   - **Allowed emails**, e.g. `jane@acme.com`
+   - **Allowed groups**, e.g. `engineering`
+   - **Allowed email domains**, e.g. `acme.com`
+3. Click **Save**.
 
-The allowlist belongs to the application, not to a single domain: it applies to **every SSO-protected domain** of the application and to its **preview deployments**. Changes are applied to the Traefik configuration immediately.
+The restrictions apply to all SSO-protected domains of the application and to its preview deployments.
 
-How the lists are evaluated:
-
-- Leave all lists empty to allow any authenticated user (the default).
-- If more than one list is set, a user must match **all** of them. For example, setting both a group and an email domain only lets in users who are in that group **and** have an email in that domain.
-- Users who sign in but don't match get a **403 Forbidden** response.
+- Empty lists allow any authenticated user.
+- If more than one list is set, users must match all of them.
+- Users who don't match get a `403`.
 
 <Callout type="info">
-  - **Emails** must match exactly what your identity provider sends, and the match is case-sensitive. Only rely on emails if your identity provider verifies them, prefer groups when possible.
-  - **Groups** require your identity provider to send a `groups` claim. Add the `groups` scope to the SSO provider in [Settings → SSO](/docs/core/enterprise/sso) and make sure the provider includes groups in the token.
-  - **Email domains**: `acme.com` matches only that domain. Use `.acme.com` to also match its subdomains (e.g. `eu.acme.com`). A leading `@` is removed automatically.
-  - Entries can't contain commas.
+  - Emails are case-sensitive and must match what your identity provider sends.
+  - Groups require the `groups` scope on the SSO provider.
+  - `acme.com` matches only that domain. `.acme.com` also matches its subdomains.
 </Callout>
-
-To remove the restrictions, clear all the lists and click **Save**. Turning SSO off on a domain and on again keeps the allowlist, and so does redeploying the authentication proxy.
 
 ## Protecting Preview Deployments
 
@@ -95,7 +89,7 @@ You can also protect all preview deployment domains for an application. Instead 
 1. Go to **Application → Preview Deployments → Settings**.
 2. Toggle **Protect previews with SSO**.
 
-Every existing and future preview domain gets the forward-auth middleware, including the application's [access restrictions](#restricting-access-by-email-group-or-domain). The preview wildcard domain must be under the same base domain as the auth domain. See [Preview Deployments — SSO Protection](/docs/core/applications/preview-deployments#sso-protection) for full details.
+Every existing and future preview domain gets the forward-auth middleware, including the application's [access restrictions](#restricting-access-by-email-group-or-domain). The preview wildcard domain must be under the same base domain as the auth domain. See [Preview Deployments: SSO Protection](/docs/core/applications/preview-deployments#sso-protection) for full details.
 
 ## Removing Protection
 
