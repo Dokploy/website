@@ -11,13 +11,13 @@ Dokploy supports three roles for managing user access:
 
 ### Owner
 
-The **Owner** is the creator of the organization and has the highest level of access:
+The **Owner** is the creator of the organization, or the user it was transferred to, and has the highest level of access:
 
 - Full administrative privileges
 - Can perform all actions that admins can do
 - Can delete and edit the role of admins
-- **Intransferable**: The owner role cannot be transferred to another user
 - Only one owner exists per organization
+- When you host Dokploy yourself, the instance owner is the only user who can create organizations, and can [transfer ownership](/docs/core/ownership-transfer) of the instance and their organizations to another user
 
 ### Admin
 
@@ -27,6 +27,7 @@ The **Owner** is the creator of the organization and has the highest level of ac
 - Full access to all features and settings
 - **Limitations**: Cannot delete or edit the role of other admins
 - **Limitations**: Cannot delete or edit the role of the owner
+- **Limitations**: Cannot create organizations or transfer ownership when you host Dokploy yourself
 
 ### Members
 
