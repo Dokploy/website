@@ -39,7 +39,7 @@ This is deployed **per server**: one oauth2-proxy instance handles authenticatio
 
 1. Go to **Dashboard → Settings → SSO**.
 2. Under **Application Authentication**, find the server you want to protect applications on (this can be a remote server or, if self-hosted, the local Dokploy server).
-3. Set the **auth domain** (e.g. `auth.acme.com`) and choose your TLS/certificate settings (Let's Encrypt, custom resolver, or none).
+3. Set the **auth domain** (e.g. `auth.acme.com`) and choose your TLS/certificate settings (Let's Encrypt, **Custom Resolver**, or **None**).
 4. Click **Deploy** and select which OIDC provider to use for this server.
 5. Once deployed, Dokploy shows a **callback URL** — register it with your identity provider if it isn't already covered by your OIDC application configuration.
 
