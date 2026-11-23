@@ -25,6 +25,20 @@ We offer two SSH Keys Generation types:
     make sure to use the correct format for the key type you are using.
 </Callout>
 
+Once a key is created, only its **name** and **description** can be edited. To change the key itself, create a new SSH key.
+
+Only **owners** and **admins** can view or download the `Private Key` of an existing key. Other members see it empty.
+
+## Encryption at Rest
+
+Private keys are encrypted with AES-256-GCM before they are stored in the database, the same way as environment variables. They are decrypted only when Dokploy needs them (connecting to a server, cloning a repository, etc.).
+
+The encryption key comes from the `ENCRYPTION_KEY` environment variable if it is set, and from `BETTER_AUTH_SECRET` otherwise.
+
 <Callout type='warn'>
-    Once you create a SSH Key you will not be able to read the `Private Key` anymore.
+    Keep that secret stable and back it up. If it changes or is lost, for example when you restore the database on a new server without it, or roll back to a Dokploy version older than this feature, encrypted private keys can't be decrypted and stop working. Create the affected keys again in that case.
+</Callout>
+
+<Callout>
+    SSH keys created before this change are stored in plaintext and keep working as they are. They are not migrated automatically. To encrypt one, create it again.
 </Callout>
