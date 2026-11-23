@@ -24,9 +24,7 @@ Application Authentication is built on top of [oauth2-proxy](https://oauth2-prox
 
 This is deployed **per server**: one oauth2-proxy instance handles authentication for every protected application domain on that server. Individual applications "opt in" by enabling the toggle on their domain.
 
-<Callout type="warn">
-  Any user who can successfully authenticate against the configured identity provider is granted access. There is currently no allow-list by email, domain, or group — access control should be enforced on the identity provider side (e.g. restrict who can sign in to the OIDC application you registered).
-</Callout>
+By default, any user who can authenticate against the configured identity provider is granted access. To limit who can reach a specific application, set [access restrictions](#restricting-access-by-email-group-or-domain) on it.
 
 ## Prerequisites
 
@@ -61,6 +59,29 @@ The domain's Traefik configuration is updated immediately to require authenticat
   Application Authentication is supported on **application domains** and **preview deployment domains**. Docker Compose service domains are not supported.
 </Callout>
 
+## Restricting Access by Email, Group or Domain
+
+You can limit which users can access an SSO-protected application.
+
+1. Go to **Application → Domains** and click the shield icon on an SSO-protected domain.
+2. Under **Access restrictions**, add entries (one per line) to any of:
+   - **Allowed emails**, e.g. `jane@acme.com`
+   - **Allowed groups**, e.g. `engineering`
+   - **Allowed email domains**, e.g. `acme.com`
+3. Click **Save**.
+
+The restrictions apply to all SSO-protected domains of the application and to its preview deployments.
+
+- Empty lists allow any authenticated user.
+- If more than one list is set, users must match all of them.
+- Users who don't match get a `403`.
+
+<Callout type="info">
+  - Emails are case-sensitive and must match what your identity provider sends.
+  - Groups require the `groups` scope on the SSO provider.
+  - `acme.com` matches only that domain. `.acme.com` also matches its subdomains.
+</Callout>
+
 ## Protecting Preview Deployments
 
 You can also protect all preview deployment domains for an application. Instead of toggling each domain individually, enable it once in the preview settings:
@@ -68,7 +89,7 @@ You can also protect all preview deployment domains for an application. Instead 
 1. Go to **Application → Preview Deployments → Settings**.
 2. Toggle **Protect previews with SSO**.
 
-Every existing and future preview domain gets the forward-auth middleware. The preview wildcard domain must be under the same base domain as the auth domain. See [Preview Deployments — SSO Protection](/docs/core/applications/preview-deployments#sso-protection) for full details.
+Every existing and future preview domain gets the forward-auth middleware, including the application's [access restrictions](#restricting-access-by-email-group-or-domain). The preview wildcard domain must be under the same base domain as the auth domain. See [Preview Deployments: SSO Protection](/docs/core/applications/preview-deployments#sso-protection) for full details.
 
 ## Removing Protection
 

@@ -273,6 +273,32 @@ Using AI features requires **Read**. Without it, the **AI Assistant** in the cre
 4. Select the permissions you want to assign to this role.
 5. Click **Save**.
 
+## Domain Restrictions
+
+You can limit which domains members of a custom role can use.
+
+1. Go to **Settings → Custom Roles** and create or edit a role.
+2. Expand **Domain restrictions** and add one wildcard per line, e.g. `*.lab.example.com`.
+3. Optionally enable **Require HTTPS**.
+4. Click **Save**.
+
+Leave it empty for no restriction. Built-in roles are never restricted.
+
+A pattern matches exactly one label: `*.lab.example.com` allows `app.lab.example.com`, but not `lab.example.com` or `a.b.lab.example.com`.
+
+Members of a restricted role:
+
+- Can only create or update domains that match a pattern (and use HTTPS if required).
+- Can only use a preview wildcard equal to an allowed pattern. The default sslip.io wildcard is not allowed.
+- Can't add or change `traefik.*` swarm labels.
+- Get domains outside the patterns skipped when using templates, compose import, the AI Assistant or project duplication.
+
+<Callout type="warn">
+  - A restricted role can't have **Traefik Files → Write** or the server terminal permission.
+  - Traefik labels inside Docker Compose files are not validated.
+  - Existing domains outside the patterns keep working.
+</Callout>
+
 ## Assigning a Custom Role
 
 1. Go to **Settings → Users**.

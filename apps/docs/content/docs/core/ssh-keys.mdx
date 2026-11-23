@@ -25,6 +25,14 @@ We offer two SSH Keys Generation types:
     make sure to use the correct format for the key type you are using.
 </Callout>
 
+Once a key is created, only its name and description can be edited. Only owners and admins can view or download the private key.
+
+## Encryption at Rest
+
+Private keys are encrypted in the database using `ENCRYPTION_KEY`, or `BETTER_AUTH_SECRET` if it isn't set.
+
 <Callout type='warn'>
-    Once you create a SSH Key you will not be able to read the `Private Key` anymore.
+    If that secret changes or is lost (for example, restoring on a new server without it), encrypted keys stop working and must be created again.
 </Callout>
+
+Keys created before this change stay in plaintext and keep working. Create them again to encrypt them.
