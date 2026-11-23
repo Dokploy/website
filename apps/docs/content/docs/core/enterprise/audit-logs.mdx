@@ -46,11 +46,30 @@ You can filter audit log entries to quickly find what you're looking for:
 - **By name** — Search for actions on a specific resource name.
 - **By action** — Filter by action type (Created, Updated, Deleted, etc.).
 - **By resource** — Filter by resource type (application, Settings, Custom Role, etc.).
+- **By date range** — Pick a start and an end date. Entries from the whole end day are included.
+
+## Exporting
+
+Click **Export** next to **Columns** to download the audit log. The export includes every entry that matches the current filters, not only the page you're viewing; with no filters, all entries are exported. The menu shows how many entries will be exported before you pick a format:
+
+| Format | Contents |
+| --- | --- |
+| **CSV** | Comma-separated values, for Excel, Google Sheets, or Numbers. |
+| **TSV** | Tab-separated values. |
+| **JSON** | Full records, with each entry's metadata parsed into an object. |
+
+Each entry includes its ID, timestamp, user ID, email and role, action, resource type, resource ID and name, and metadata.
+
+An export contains up to the **newest 10,000 entries**. If more entries match, only the newest 10,000 are included and a warning tells you how many matched. Narrow the filters or the date range to export older entries.
+
+CSV and TSV files are UTF-8 with a byte order mark, so Excel shows non-ASCII characters correctly. User-entered values that start with `=`, `+`, `-` or `@` get a leading `'` so spreadsheet apps don't run them as formulas.
+
+Exporting requires the same **Audit Logs → Read** permission as viewing the log.
 
 ## Use Cases
 
 - **Security investigations** — Identify who made a specific change and when.
-- **Compliance** — Maintain evidence of access control and change management for SOC 2, GDPR, and internal policies.
+- **Compliance** — Maintain evidence of access control and change management for SOC 2, GDPR, and internal policies. [Export](#exporting) entries to keep them with your other records.
 - **Debugging** — Trace deployment failures or configuration issues back to the change that caused them.
 - **Team visibility** — Understand what actions team members are performing across the organization.
 

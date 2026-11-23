@@ -1,0 +1,48 @@
+---
+title: Sessions and Account
+description: "Review and revoke sessions, link Google or GitHub sign-in, and delete your account."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+This page covers the account controls that are not about credentials. For passwords, two-factor authentication and passkeys, see [Account Security](/docs/core/account-security).
+
+## Sessions
+
+**Settings → Sessions** lists sign-in sessions with their IP address, device, status (active or expired), start time and expiry.
+
+- **Every user** sees their own sessions.
+- **The organization owner** sees the sessions of every member of the organization.
+
+Click **Revoke Session** to force a logout. Use it when a device is lost, when someone leaves the team, or when you see a session you do not recognize — in that case also change your password.
+
+You can search by IP or device and filter by status.
+
+## Linked Accounts
+
+<Callout type="info">
+  Linked accounts are available on **Dokploy Cloud**, where Google and GitHub sign-in are offered.
+</Callout>
+
+In **Settings → Profile** you can link your **Google** or **GitHub** account to sign in with it instead of your password.
+
+You can unlink a provider as long as another sign-in method remains on the account, so you cannot lock yourself out.
+
+## Delete Your Account
+
+<Callout type="info">
+  Self-service account deletion is available on **Dokploy Cloud** for organization **owners**. On self-hosted instances, users are removed by an owner or admin from **Settings → Users**.
+</Callout>
+
+In **Settings → Profile**, the **Delete account** card permanently removes your account and all the data associated with it:
+
+- Active subscriptions are cancelled immediately. Invoices already issued are kept for accounting.
+- Every organization you own is deleted, including its projects, services, environments, domains and server connections.
+- In organizations you belong to but do not own, only your membership, API keys and the Git providers you connected are removed. Applications using those providers keep running but must be reconnected to redeploy.
+- Containers already running on your servers are not touched.
+
+To confirm, enter your password (if the account has one) and the confirmation code Dokploy emails you. The code is valid for 10 minutes.
+
+<Callout type="warn">
+  This action cannot be undone. Deleting the account does not stop the containers on your servers — remove those yourself if you no longer need them.
+</Callout>

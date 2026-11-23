@@ -5,6 +5,8 @@ import {
 	Activity,
 	Bot,
 	Boxes,
+	Cpu,
+	FileSearch,
 	FlaskConical,
 	KeyRound,
 	MousePointerClick,
@@ -45,6 +47,24 @@ const coreFeatures = [
 		description:
 			"Real-time monitoring, centralized logs, and instant rollback mean that when an AI-built app misbehaves, your team can see why and recover fast—before it touches anything else.",
 	},
+	{
+		icon: Sparkles,
+		title: "Generate a stack with the AI assistant",
+		description:
+			"Describe the service you need and Dokploy's built-in AI assistant suggests a Docker Compose stack with its configuration, ready to review and deploy.",
+	},
+	{
+		icon: FileSearch,
+		title: "Let AI read the logs for you",
+		description:
+			"When a build or a running app fails, AI log analysis summarizes what went wrong so non-experts can fix it without digging through raw output.",
+	},
+	{
+		icon: Cpu,
+		title: "Bring your own model",
+		description:
+			"Connect OpenAI, Azure OpenAI, Anthropic, Gemini, Mistral, Cohere, Perplexity, DeepInfra, OpenRouter, Ollama, or any OpenAI-compatible endpoint with your own key.",
+	},
 ];
 
 const guardrailFeatures = [
@@ -52,19 +72,19 @@ const guardrailFeatures = [
 		icon: Users,
 		title: "Separate every team's environment",
 		description:
-			"Dokploy's multitenancy keeps projects and data isolated at the team level. One team can't see, access, or interfere with another's applications, so AI experimentation stays contained without needing a separate instance per team.",
+			"Dokploy's multitenancy keeps projects and data isolated per organization. One organization can't see, access, or interfere with another's applications, so AI experimentation stays contained without needing a separate instance per team.",
 	},
 	{
 		icon: MousePointerClick,
 		title: "Let anyone deploy without the risk",
 		description:
-			"Non-technical users get a clean, simple interface for deploying and managing their apps. There's no CLI to learn and no config file to edit, just a straightforward path from code to running apps that doesn't require an engineer on standby.",
+			"Non-technical users get a clean, simple interface for deploying and managing their apps. There's no CLI to learn, just a straightforward path from code to running apps that doesn't require an engineer on standby.",
 	},
 	{
 		icon: Network,
 		title: "Lock down who can reach your environment",
 		description:
-			"Configure IP allowlisting to keep your internal deployment environment off the public internet. Wildcard subdomain support means every app gets its own clean internal URL, with access controlled at the network level.",
+			"Put internal apps behind your identity provider with forward auth, so only signed-in members of your organization can open them. Wildcard subdomain support means every app gets its own clean internal URL.",
 	},
 	{
 		icon: KeyRound,
@@ -280,19 +300,14 @@ export default function DeployAIPage() {
 							Get started with Openclaw in one click
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Openclaw is an open-source AI-powered coding assistant that you
-							can self-host on Dokploy with a single template deploy. It gives
-							your team a private, internal AI coding environment, and no data
-							leaves your infrastructure.
+							Openclaw is an open-source, self-hosted AI assistant that connects
+							to messaging channels such as WhatsApp. Deploy it on Dokploy with
+							a single template and it runs on your own infrastructure.
 						</p>
 						<div className="mt-10">
 							<Button variant="outline" className="rounded-full" asChild>
-								<Link
-									href="https://docs.dokploy.com/docs/templates/openclaw"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Read the Openclaw docs
+								<Link href="/templates/openclaw">
+									View the Openclaw template
 								</Link>
 							</Button>
 						</div>

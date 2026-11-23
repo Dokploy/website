@@ -1,0 +1,46 @@
+---
+title: Deployments Queue
+description: "Follow queued and running deployments, cancel pending ones and stop a build that is in progress."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Every deployment of an application or Docker Compose service goes through a queue. This page explains where to follow the queue and how to stop a deployment you no longer want.
+
+## Following Deployments
+
+Go to **Overview → Deployments**:
+
+- The **Deployments** sub-tab shows the deployment history of every application and Compose service, with search and filters by status and type.
+- The **Queue** sub-tab shows the jobs in the queue with their job ID, label, type, state, the time they were added, processed and finished, and the error if they failed. Each row links to its service.
+
+Each service also has its own **Deployments** tab with its last 10 deployments and their logs.
+
+How many builds run at the same time is controlled by [Concurrent Builds](/docs/core/concurrent-builds).
+
+## Stopping a Deployment
+
+The **Deployments** tab of an application or Compose service has three actions:
+
+| Action | What it does |
+| --- | --- |
+| **Kill Build** | Kills the build process that is currently running for this service. |
+| **Cancel Queues** | Cancels all the incoming (queued) deployments of this service. It does not stop a build that already started. |
+| **Clear deployments** | Deletes old deployment records and logs, keeping only the active deployment (the most recent successful one). |
+
+To stop a deployment that is already building, use **Kill Build**. To also discard the deployments waiting behind it, use **Cancel Queues** first.
+
+### Dokploy Cloud
+
+On Dokploy Cloud, a running deployment can additionally be cancelled:
+
+- From **Overview → Deployments → Queue**, with the cancel button on an active job.
+- From the service's **Deployments** tab: when the most recent deployment has been running for about 10 minutes, a **Build appears to be stuck** banner offers to cancel it.
+
+## Cleaning the Whole Queue
+
+On self-hosted instances, **Settings → Web Server → Server → Clean all deployment queue** removes every queued deployment of the instance. Use it when the queue is blocked and you want to start from a clean state.
+
+<Callout type="info">
+  On self-hosted instances the queue lives in the Dokploy process. Restarting Dokploy clears deployments that were still waiting in it.
+</Callout>

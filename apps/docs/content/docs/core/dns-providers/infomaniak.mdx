@@ -1,0 +1,28 @@
+---
+title: Infomaniak
+description: "Connect Infomaniak to create and manage DNS records for your domains from Dokploy."
+---
+
+## Create an API Token
+
+Create a token in the [Infomaniak Manager](https://manager.infomaniak.com) with these scopes:
+
+- `domain:read` — lists the domains in your account.
+- `dns:read` — reads the records of a zone.
+- `dns:write` — creates, updates and deletes records.
+
+## Configuration
+
+In **Settings → DNS Providers**, add a provider, choose **Infomaniak** and fill in:
+
+- **Name**: the identifier for this provider, e.g. `infomaniak-main`.
+- **API Token**: the token created above.
+
+Use **Test Connection** to validate the token before saving.
+
+## Managing Records
+
+Click **View Domains** on the provider row to list your domains, then click a domain to view and manage its records. See [DNS Providers](/docs/core/dns-providers) for the full record form reference.
+
+- Infomaniak requires a TTL on every record. Dokploy sends `300` seconds when the **TTL** field is left empty.
+- **TXT** values are stored quoted by Infomaniak. Dokploy adds and removes the quotes for you, so write the value without them.

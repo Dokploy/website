@@ -1,0 +1,80 @@
+---
+title: Security Management
+description: "Harden a remote server from Dokploy: Fail2ban, exposed ports, SSH settings, pending updates and login activity."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+The **Security** panel of a remote server lets you harden the server and review what is exposed and who is connecting to it, without opening a terminal. Changes are applied directly on the server over SSH.
+
+It complements the read-only [Security audit](/docs/core/remote-servers/security), which only reports recommendations.
+
+## Opening the Panel
+
+Go to **Settings → Remote Servers** and click the **Security** (shield) button on the server's row. The button is shown for servers that have an SSH key configured.
+
+Viewing the panel requires `read` access to servers; applying changes requires the `create` permission on servers. Owners and admins have both.
+
+The panel has five tabs.
+
+## Fail2ban
+
+Fail2ban bans IPs that repeatedly fail to authenticate over SSH.
+
+If Fail2ban is not installed, click **Install & enable**. Once installed, the tab shows whether it is active, an **Enabled** switch, and its configuration:
+
+| Setting | Description | Default |
+| --- | --- | --- |
+| **Max retries** | Failures before a ban. | `5` |
+| **Find time (minutes)** | Window in which failures are counted. | `10` |
+| **Ban duration** | **Temporary** (a duration in minutes) or **Permanent**. Permanent bans stay until you unban them. | 60 minutes |
+| **Whitelisted IPs** | One IP or CIDR range per line. These are never banned. | — |
+
+The IPs of the Dokploy panel are always whitelisted, so Dokploy cannot lock itself out of the server.
+
+Below the configuration, the tab lists the Fail2ban jails with their current and total counts, and the **banned IPs**. You can:
+
+- **Unban** an IP.
+- **Ban an IP permanently** by entering it manually. It is blocked on every port of the server until you unban it.
+
+<Callout type="info">
+  If Fail2ban was already installed on the server but not set up through this panel, the tab shows a **Not configured by Dokploy** badge.
+</Callout>
+
+## Exposed Ports
+
+Lists the ports listening on a public interface of the server, with the service, the process, the address they listen on and a risk level. Sensitive ports reachable from outside are flagged — for example database ports (PostgreSQL, MySQL, MongoDB, Redis) or an unencrypted Docker API.
+
+The tab also shows the status of the **UFW** firewall.
+
+<Callout type="warn">
+  Ports published by Docker bypass UFW rules: blocking them in UFW does not make them private. Stop publishing the port, or restrict access with a firewall at your cloud provider.
+</Callout>
+
+## SSH
+
+Shows the SSH daemon settings and the keys allowed to log in as the server's user.
+
+- **Password authentication**: allow logging in with a password instead of a key. Dokploy connects with an SSH key, so it is safe to disable if you also log in with a key.
+- **Root login**: **Key only**, **Allowed** or **Disabled**. If Dokploy connects as root, root login cannot be fully disabled.
+- **Max auth tries**: authentication attempts allowed per connection (1–10).
+
+When you apply the settings, the SSH daemon is reloaded and existing sessions stay open. Dokploy then reconnects to verify it still has access; if it cannot, the server restores the previous settings automatically within 60 seconds.
+
+The **authorized keys** table lists each key's type, fingerprint and comment. Removing a key means anyone using it can no longer log in as that user.
+
+## Updates
+
+Shows the operating system security patches available for the server and whether a reboot is required for installed updates to take effect.
+
+Update checks are supported on **Debian and Ubuntu** servers. The list is read from `apt`; if the package lists are stale, run `apt update` on the server to refresh them. Dokploy does not install updates for you.
+
+## Activity
+
+Shows who is connected and recent SSH login attempts:
+
+- **Active sessions**: user, terminal, origin and start time. You can **disconnect** a session, or **disconnect and ban** its IP.
+- **Recent logins**.
+- **Failed logins** by IP address, with search.
+
+Sessions that come from the Dokploy panel's IP are marked as such, since they are usually a teammate using the Dokploy terminal.

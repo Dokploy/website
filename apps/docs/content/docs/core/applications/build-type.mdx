@@ -7,7 +7,7 @@ description: "Learn about the different build types available in Dokploy, includ
 import { Callout } from 'fumadocs-ui/components/callout';
 
 
-Dokploy offers three distinct build types for deploying applications, each suited to different development needs and preferences.
+Dokploy offers six build types for deploying applications (Nixpacks, Railpack, Dockerfile, Heroku Buildpacks, Paketo Buildpacks and Static), each suited to different development needs and preferences.
 
 ### Nixpacks
 
@@ -42,9 +42,9 @@ Astro applications after you build it usually create a `dist` directory, so you 
 copy all the files in the `dist` directory to the root of your application, and will use a NGINX Optimized Dockerfile to run your application.
 
 
-### Railpack (NEW)
+### Railpack
 
-Railpack is a new build type optimized and is the successor of Nixpacks.
+Railpack is the successor of Nixpacks.
 
 Railpack exposes multiple Build Variables, you can define them in the `Environment Variables` tab.
 
@@ -68,12 +68,12 @@ Dokploy provides a **Railpack Version** field in the application settings where 
 
 1. Navigate to your application settings
 2. Find the **Railpack Version** field
-3. Enter the version you want to use (e.g., `0.15.1`)
+3. Enter the version you want to use (e.g., `0.15.4`)
 4. Dokploy will automatically download and use the specified version for your builds
 
 **Example:**
 
-To use Railpack version `0.15.1`, simply enter `0.15.1` in the Railpack Version field.
+To use Railpack version `0.15.4`, simply enter `0.15.4` in the Railpack Version field.
 
 <Callout type="warn">
   If you specify an invalid version, Dokploy will show an error. Make sure to use a valid version from the [Railpack releases page](https://github.com/railwayapp/railpack/releases).
@@ -127,7 +127,7 @@ Dokploy will copy everything from the `Root` directory and will mount it to the 
 Ensure to use the port `80` when creating a domain.
 </Callout>
 
-## Recomendations 
+## Recommendations 
 
 - For prototyping and development purposes, we recommend using the `Nixpacks` build type.
 - For production purposes, we recommend follow this [Production Guide](/docs/core/applications/going-production) to have a rock solid deployment.

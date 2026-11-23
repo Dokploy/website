@@ -3,7 +3,7 @@ title: Whitelabeling
 description: Rebrand Dokploy with your application name, logos, colors, and custom links
 ---
 
-Whitelabeling lets Enterprise users fully rebrand their Dokploy instance. You can customize the application name, logos, favicon, appearance, metadata, links, and error pages — all from **Settings → Whitelabel**.
+Whitelabeling lets Enterprise users fully rebrand their Dokploy instance. You can customize the application name, logos, favicon, link previews, appearance, links, error pages, and the password reset flow — all from **Settings → Whitelabel**.
 
 <ImageZoom src="/assets/images/ui/settings-whitelabeling.webp" alt="Whitelabeling settings" width={1600} height={775} className="rounded-lg"/>
 
@@ -13,11 +13,24 @@ Customize the application name, logos, and favicon to match your brand identity.
 
 | Field | Description |
 | --- | --- |
-| **Application Name** | Replaces "Dokploy" across the entire interface. |
-| **Application Description** | Tagline shown on the login/onboarding pages. Defaults to the standard Dokploy description if empty. |
+| **Application Name** | Replaces "Dokploy" across the entire interface. Also used as the browser tab title and as the title of link previews. Defaults to "Dokploy" if empty. |
+| **Application Description** | Tagline shown on the login/onboarding pages and in link previews. Defaults to the standard Dokploy description if empty. |
 | **Logo URL** | Main logo shown in the sidebar and header. Recommended size: 128×128px. |
 | **Login Page Logo URL** | Logo displayed on the login page. If empty, the main logo is used. |
 | **Favicon URL** | Browser tab icon. Supports `.ico`, `.png`, and `.svg` formats. |
+| **OG Image URL** | Open Graph image shown when a link to your instance is shared on social media or messaging platforms (Slack, Discord, X, etc.). Recommended size: 1200×630px. If empty, the default Dokploy preview image is used. |
+
+### Light Mode Logos
+
+A single logo can be hard to see on one of the two themes, for example a white logo on the light theme. Turn on **Light Mode Logos** to use separate logos for each theme. When it's on, the logos in **Branding** are used for the dark theme, and these ones for the light theme:
+
+| Field | Description |
+| --- | --- |
+| **Logo URL** | Main logo for the light theme. |
+| **Login Page Logo URL** | Login page logo for the light theme. If empty, the light **Logo URL** is used. |
+| **Favicon URL** | Favicon for light mode. It follows the browser or operating system theme, not the theme selected in Dokploy. |
+
+Any field left empty falls back to the matching logo from **Branding**. While the toggle is off, these fields are ignored.
 
 ## Appearance
 
@@ -39,13 +52,12 @@ Example — changing background and foreground colors:
 }
 ```
 
-## Metadata & Links
+## Links
 
-Customize the page title, footer text, and sidebar links.
+Customize the footer text and sidebar links.
 
 | Field | Description |
 | --- | --- |
-| **Page Title** | Browser tab title. Defaults to "Dokploy" if empty. |
 | **Footer Text** | Custom text displayed in the footer area. |
 | **Support URL** | Custom URL for the "Support" link in the sidebar. |
 | **Documentation URL** | Custom URL for the "Documentation" link in the sidebar. |
@@ -59,6 +71,17 @@ Customize the error page messages shown to users.
 | **Error Page Title** | Title shown on error pages. |
 | **Error Page Description** | Description text shown on error pages. Defaults to "We're sorry, but an unexpected error occurred. Please try again later." |
 
+## Forgot Password
+
+By default, the **Lost your password?** link on the login page opens the [Reset Password](/docs/core/reset-password) guide in the Dokploy documentation, which requires shell access to the server. Team members who can't run commands on the server need someone to contact instead. Set a support email to show your own instructions.
+
+| Field | Description |
+| --- | --- |
+| **Password Reset Guide** | Instructions shown when users click **Lost your password?** on the login page. If empty, a default message asks them to contact their administrator. |
+| **Support Email** | Email address for the **Get Support** button. Required to turn on the custom flow. |
+
+When **Support Email** is set, **Lost your password?** shows your guide and a **Get Support** button that opens an email to that address. Leave it empty to keep the default link. With a support email set, the link is hidden on the 2FA code step, since users there have already entered their password.
+
 ## Live Preview
 
 The whitelabel settings page includes a **Live Preview** section at the bottom. It shows a quick preview of how your branding changes will look — including the logo, application name, button styles, and footer text — before you save.
@@ -71,6 +94,7 @@ The whitelabel settings page includes a **Live Preview** section at the bottom. 
 ## Best practices
 
 - Use high-resolution logos (e.g. 2×) for sharp display on retina screens. SVG format is recommended for perfect scaling.
+- If your logo only works on a dark or a light background, use [Light Mode Logos](#light-mode-logos) and check the login, registration, invitation and password reset pages in both themes.
 - Keep your custom CSS colors accessible with sufficient contrast for text and buttons.
 - Test the login page, dashboard, and key workflows after applying changes to ensure nothing is broken or hard to read.
 - Always preview your changes using the Live Preview section before saving.

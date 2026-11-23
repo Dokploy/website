@@ -5,10 +5,12 @@ import {
 	KeyRound,
 	Link2,
 	MonitorCheck,
+	Moon,
 	Paintbrush,
 	Palette,
 	ScrollText,
 	Shield,
+	TriangleAlert,
 	Type,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -25,7 +27,7 @@ const coreFeatures = [
 		icon: Type,
 		title: "Customize your name and logo",
 		description:
-			"Replace Dokploy across the entire interface with your own application name. Upload your logo for the sidebar, header, and login page, and set a custom favicon so your branding carries through to the browser tab.",
+			"Replace Dokploy across the entire interface with your own application name. Point to your logo for the sidebar and the login page, and set a custom favicon so your branding carries through to the browser tab.",
 	},
 	{
 		icon: Palette,
@@ -37,13 +39,25 @@ const coreFeatures = [
 		icon: Link2,
 		title: "Control the metadata and support links",
 		description:
-			"Set your own page title, footer text, sidebar links, and more for documentation and support, so users are always directed to your resources, not Dokploy\u2019s.",
+			"Set your own app name and description, footer text, social preview image, and documentation and support links, so users are always directed to your resources, not Dokploy\u2019s.",
 	},
 	{
 		icon: MonitorCheck,
 		title: "Preview changes before you ship them",
 		description:
 			"The live preview panel shows how your branding will look across key parts of the interface before you save anything, reducing the risk of pushing changes that break your user experience.",
+	},
+	{
+		icon: Moon,
+		title: "Brand both light and dark mode",
+		description:
+			"Set separate logos and favicons for light and dark themes so your brand stays legible whichever mode your users choose.",
+	},
+	{
+		icon: TriangleAlert,
+		title: "Customize error and recovery pages",
+		description:
+			"Write your own error page title and description, and replace the password reset instructions with guidance and a support email that fit your organization.",
 	},
 ];
 
@@ -92,7 +106,8 @@ export default function WhiteLabelingPage() {
 						</h1>
 						<p className="mt-6 text-lg text-muted-foreground">
 							Replace every Dokploy mention with your own name, logo, branding,
-							and visual identity.
+							and visual identity. Available on self-hosted Enterprise
+							instances.
 						</p>
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>

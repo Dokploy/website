@@ -15,7 +15,7 @@ To use the remote servers feature, you need to have Dokploy UI installed either 
 
 If you plan to only deploy apps to remote servers and use Dokploy UI for managing deployments, Dokploy will use around 250 MB of RAM and minimal CPU, so a low-resource server should be sufficient.
 
-All the features we have documented previously are supported by Dokploy Remote Servers. The only feature not supported is remote server monitoring, due to performance reasons. However, all functionalities should work the same as when deploying on the same server where Dokploy UI is installed.
+All the features we have documented previously are supported by Dokploy Remote Servers, and all functionalities should work the same as when deploying on the same server where Dokploy UI is installed. Server-level [monitoring](/docs/core/monitoring) for remote servers is configured per server and is available on Dokploy Cloud.
 
 ## Server Types
 
@@ -57,8 +57,12 @@ You can configure an application to use a build server by selecting it in the ap
 2. **Setup Server**: Allows you to configure the remote server.
    - **SSH Keys**: Steps to add SSH keys to the remote server.
    - **Deployments**: Steps to configure the remote server for deploying applications.
-3. **Edit Server**: Allows you to modify the remote server's details, such as SSH key, name, description, IP, etc.
-4. **View Actions**: Lets you perform actions like managing the Traefik instance, storage, and activating Docker cleanup.
-5. **Show Traefik File System**: Displays the contents of the remote server's directory.
-6. **Show Docker Containers**: Shows the Docker containers running on the remote server.
-7. **Show Docker Swarm Overview**: Shows the Docker Swarm overview of the remote server.
+   - **Validate**: Checks that everything required is installed and configured. See [Validate](/docs/core/remote-servers/validate).
+   - **Monitoring**: Configures the metrics agent for the server (Dokploy Cloud).
+   - **GPU Setup**: Checks GPU support and configures the server so services can use its GPUs.
+3. **Security**: Review and manage the server's security: Fail2ban and banned IPs, exposed ports, SSH settings, pending updates and recent activity. See [Security](/docs/core/remote-servers/security).
+4. **Edit Server**: Allows you to modify the remote server's details, such as SSH key, name, description, IP, etc.
+5. **Web Server Actions**: Lets you perform actions like managing the Traefik instance (including checking and updating its version), storage, and activating Docker cleanup.
+6. **Show Traefik File System**: Displays the contents of the remote server's directory.
+7. **Show Docker Containers**: Shows the Docker containers running on the remote server.
+8. **Show Docker Swarm Overview**: Shows the Docker Swarm overview of the remote server.

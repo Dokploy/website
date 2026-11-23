@@ -101,7 +101,7 @@ export DOKPLOY_VERSION=latest && curl -sSL https://dokploy.com/install.sh | sh
 Every [Dokploy release](https://github.com/Dokploy/dokploy/releases) includes its own `install.sh` as a release asset, which installs exactly that version with the setup it expects. Replace the version tag in the URL with the one you want:
 
 ```bash
-curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.26.6/install.sh | sh
+curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.31.2/install.sh | sh
 ```
 
 <Callout type='info'>
@@ -158,7 +158,7 @@ curl -sSL https://dokploy.com/install.sh | sh -s update
 Use the `install.sh` from that version's [GitHub release](https://github.com/Dokploy/dokploy/releases):
 
 ```bash
-curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.26.6/install.sh | sh -s update
+curl -sL https://github.com/Dokploy/dokploy/releases/download/v0.31.2/install.sh | sh -s update
 ```
 
 ## Completing the Setup
@@ -200,7 +200,9 @@ To enhance security, it's advisable to restrict access to Dokploy via the server
     **Important:** Before disabling IP:port access, make sure you have configured a domain with HTTPS working properly. Otherwise, you will lose access to your Dokploy installation. See the [Domains](/docs/core/domains) section to set this up first.
 </Callout>
 
-Once you have verified that your domain is working correctly, you can disable IP:port access by running this command on the server:
+Once you have verified that your domain is working correctly, open **Web Server** in the settings, click the `Server` dropdown and select `Disable Port 3000`. You need to be accessing the panel through its domain to do this. Dokploy restarts and shows you a recovery command to re-enable the port in case you lose access.
+
+You can also do it manually by running this command on the server:
 
 ```bash
 docker service update --publish-rm "published=3000,target=3000,mode=host" dokploy

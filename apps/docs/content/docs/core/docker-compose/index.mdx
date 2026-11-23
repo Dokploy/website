@@ -53,17 +53,17 @@ Monitor each service individually within Dokploy. If your application consists o
 
 Access detailed logs for each service through the Dokploy log viewer, which can help in troubleshooting and ensuring the stability of your services.
 
-### Files System
+### File Explorer
 
-Browse the file system of any running container in your compose from the dashboard — pick the container from the dropdown, then navigate directories, preview text files, download any file, and upload new files into the directory you currently have open.
+To browse the file system of any running container in your compose, go to **Docker → Containers**, open the actions menu of the container and click `Browse Files`. You can navigate directories, preview and edit text files, download or delete files, and use `Upload File` to add new ones. Named volumes can be browsed the same way from **Docker → Volumes**.
 
-Files outside persistent volumes are usually ephemeral and can disappear after a restart or a new deployment. Uploading requires the `Write` permission on the `Container Filesystem` resource for custom roles; owners and admins have it by default.
+Files outside persistent volumes are usually ephemeral and can disappear after a restart or a new deployment. The file explorer requires access to the Docker section.
 
 ### Deployments
 
 You can view the last 10 deployments of your application. When you deploy your application in real time, a new deployment record will be created and it will gradually show you how your application is being built.
 
-We also offer a button to cancel deployments that are in queue. Note that those in progress cannot be canceled.
+We also offer a button to cancel deployments that are in queue, and a `Kill Build` button to stop a build that is already in progress.
 
 We provide a webhook so that you can trigger your own deployments by pushing to your GitHub, Gitea, GitLab, Bitbucket repository.
 
@@ -161,6 +161,19 @@ volumes:
 
 **Important:** If you need to use files from your repository (configuration files, scripts, etc.), you must move them to Dokploy's File Mounts (via Advanced → Mounts) instead of mounting them directly from the repository. When using AutoDeploy, Dokploy performs a `git clone` on each deployment, which clears the repository directory. Mounting files directly from your repository using relative paths (e.g., `./` or `./config/file.conf`) will cause them to be lost or empty in subsequent deployments. See the [Troubleshooting guide](/docs/core/troubleshooting/volumes-mounts#using-files-from-your-repository) for more details.
 
+</Callout>
+
+## Deleting a Compose Service
+
+You can delete a Compose service from its page, by right-clicking it on the project page and choosing **Delete**, or with **Bulk Actions** on the project page. Each of these dialogs has a checkbox to also delete the volumes of the service, unticked by default:
+
+- **Unticked**: the containers and networks are removed, and the Docker volumes are kept.
+- **Ticked**: Dokploy runs `docker compose down --volumes`, which also removes the volumes created by your compose file. Their data can't be recovered.
+
+The checkbox has no effect on services deployed as a Docker Stack, since `docker stack rm` keeps volumes.
+
+<Callout type="warn">
+  The service folder on the server is always deleted, including the `../files` folder. Data stored in bind mounts under `../files` is lost even when the volumes checkbox is unticked, so back it up first if you need it.
 </Callout>
 
 ## Keyboard Shortcuts

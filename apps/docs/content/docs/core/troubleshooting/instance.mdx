@@ -34,12 +34,35 @@ You should see all three of these containers running:
 ```bash
 2a5b955c32b6   dokploy/dokploy:latest      "docker-entrypoint.s…"   4 days ago     Up 4 days     0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                             dokploy.1.4bkuszk98muz372kw5mvwkw0h
 5a989bf52bc6   postgres:16                 "docker-entrypoint.s…"   4 days ago     Up 4 days     5432/tcp                                                                                                              dokploy-postgres.1.9hvjaxrmby7ex2denjtwo0csf
-05be01c5612f   traefik:v2.5                "/entrypoint.sh trae…"   4 days ago     Up 4 days     0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   dokploy-traefik.1.2oktabjmfu558x2d2dy6czt8m
+05be01c5612f   traefik:v3.7.19              "/entrypoint.sh trae…"   4 days ago     Up 4 days     0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   dokploy-traefik.1.2oktabjmfu558x2d2dy6czt8m
 ```
 
 <Callout type='info'>
   **Note:** If you're running a version older than v0.29.9, you'll also see a `dokploy-redis` container. Redis is no longer used in self-hosted Dokploy since v0.29.9.
 </Callout>
+
+#### Traefik is not running after a reboot
+
+If `dokploy-traefik` is missing from `docker ps` after a server reboot, check its status:
+
+```bash
+docker ps -a --filter name=dokploy-traefik
+```
+
+If it shows `Exited (128)`, Docker tried to start Traefik before the Swarm network `dokploy-network` was ready, and it doesn't try again. The Docker log shows the error:
+
+```bash
+journalctl -u docker -b | grep "failed to start swarm container"
+# ... network dokploy-network not found
+```
+
+Recent Dokploy versions start Traefik automatically once Dokploy is up. On older versions, or on a remote server, start it yourself after the server has finished booting:
+
+```bash
+docker start dokploy-traefik
+```
+
+If the container no longer exists, recreate it as described in [Recreate Traefik Service](#recreate-traefik-service).
 
 If all three containers are running but you still can't access the interface, it's time to debug:
 
@@ -219,7 +242,7 @@ docker run -d \
     -p 80:80/tcp \
     -p 443:443/tcp \
     -p 443:443/udp \
-    traefik:v3.6.25
+    traefik:v3.7.19
 
 docker network connect dokploy-network dokploy-traefik
 
@@ -237,7 +260,7 @@ docker service create \
   --publish mode=host,published=443,target=443 \
   --publish mode=host,published=80,target=80 \
   --publish mode=host,published=443,target=443,protocol=udp \
-  traefik:v3.6.25
+  traefik:v3.7.19
 ```
 
 ### Recreate Dokploy Service
