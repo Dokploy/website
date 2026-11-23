@@ -103,7 +103,10 @@ Associate custom domains with your application to make it accessible over the in
 - **Container Port**: The port on the container that the domain should route to.
 - **Custom Entrypoint**: Allows you to set manual entrypoint for Traefik configuration. Usage of Custom entrypoint is an advanced feature. For further details read "Understanding Custom Entrypoint"
 - **HTTPS**: Toggle this on to enable HTTPS for your domain, providing secure, encrypted connections.
-- **Certificate**: Select (letsencrypt), (custom) or (None)
+- **Certificate Provider**:
+  - **None**: uses a certificate you uploaded in [Certificates](/docs/core/certificates) whose name matches the host.
+  - **Let's Encrypt**: issues and renews a free certificate automatically.
+  - **Custom Resolver**: uses a cert resolver you added to Traefik's static configuration (`traefik.yml`), e.g. `myresolver`. Not for uploaded certificates.
 
 For how **Internal Path** and **Strip Path** work using Traefik middlewares, see the note below.
 
