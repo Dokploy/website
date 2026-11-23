@@ -94,7 +94,7 @@ export function IndustryPage({ data }: { data: IndustryPageData }) {
 							</Button>
 						</div>
 						<p className="mt-6 text-sm text-muted-foreground">
-							Deploy with one line of code
+							Deploy with one command
 						</p>
 					</div>
 				</Container>

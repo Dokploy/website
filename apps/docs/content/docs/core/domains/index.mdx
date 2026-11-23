@@ -8,15 +8,14 @@ import { Link } from 'next/link';
 
 Dokploy Provide 2 ways to add a domain to your service:
 
-1. **Free Domains** from Traefik.me
+1. **Free Domains** from sslip.io
 2. **Buy a domain** from one of the providers above
 
 <Callout type="warn">
-   `traefik.me` domains are free, but they are limited to HTTP only, if you want to configure HTTPS for free domains
-   you can [Create a certificate](/docs/core/certificates#traefikme-https-setup) and use it in the domain settings.
+   `sslip.io` domains are free, but they are limited to HTTP only. The HTTPS and certificate options have no effect on them.
 </Callout>
 
-If you don't have a domain, you can use our integrated free domains from Traefik.me in the Dokploy panel, without doing any configuration however is only for HTTP, if you want to have a HTTPS domain you need to buy a domain from one of the providers above.
+If you don't have a domain, you can use our integrated free domains from sslip.io in the Dokploy panel, without doing any configuration however is only for HTTP, if you want to have a HTTPS domain you need to buy a domain from one of the providers above.
 
 Domains are supported for:
 
@@ -104,7 +103,10 @@ Associate custom domains with your application to make it accessible over the in
 - **Container Port**: The port on the container that the domain should route to.
 - **Custom Entrypoint**: Allows you to set manual entrypoint for Traefik configuration. Usage of Custom entrypoint is an advanced feature. For further details read "Understanding Custom Entrypoint"
 - **HTTPS**: Toggle this on to enable HTTPS for your domain, providing secure, encrypted connections.
-- **Certificate**: Select (letsencrypt), (custom) or (None)
+- **Certificate Provider**:
+  - **None**: uses a certificate you uploaded in [Certificates](/docs/core/certificates) whose name matches the host.
+  - **Let's Encrypt**: issues and renews a free certificate automatically.
+  - **Custom Resolver**: uses a cert resolver you added to Traefik's static configuration (`traefik.yml`), e.g. `myresolver`. Not for uploaded certificates.
 
 For how **Internal Path** and **Strip Path** work using Traefik middlewares, see the note below.
 

@@ -66,6 +66,17 @@ The **Organization** is the top-level container in Dokploy. Everything — users
 - The user who installs Dokploy becomes the **Owner** of that organization.
 - All billing, SSO configuration, and global settings are scoped to the organization.
 
+### Creating and editing organizations
+
+Switch organizations from the organization selector at the top of the sidebar. Owners and admins can click **Add organization** there to create a new one (on Dokploy Cloud, every user can, up to the organization limit of their plan). Organizations you own have buttons to edit and delete them.
+
+An organization has:
+
+- **Name**: required.
+- **Logo URL or Upload**: paste an image URL, or drag and drop (or click to upload) a JPG, PNG, WebP, or SVG file of up to 2 MB. Uploaded JPG, PNG, and WebP images are resized to at most 256×256 pixels and stored as WebP; SVG files are sanitized. Without a logo, the Dokploy logo is shown.
+
+You can't delete the last organization you own.
+
 ### Key capabilities
 
 | Feature | Description |
@@ -157,7 +168,7 @@ Environment-level variables take precedence over project-level variables. Servic
 | Type | Description | Examples |
 |------|-------------|---------|
 | **Application** | Your custom app deployed from Git or Docker | Next.js app, Go API, Python worker |
-| **Database** | Managed database instances | PostgreSQL, MySQL, MongoDB, Redis, MariaDB |
+| **Database** | Managed database instances | PostgreSQL, MySQL, MongoDB, Redis, MariaDB, libSQL |
 | **Docker Compose** | Multi-container stacks defined via `docker-compose.yml` | WordPress + MySQL, ELK stack |
 
 Each service gets its own:

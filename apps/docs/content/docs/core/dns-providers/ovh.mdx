@@ -1,0 +1,44 @@
+---
+title: OVHcloud
+description: "Connect OVHcloud, Kimsufi or So you Start to create and manage DNS records for your domains from Dokploy."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Create API Credentials
+
+Create an application key, application secret and consumer key at once on the OVH token page ([api.ovh.com/createToken](https://api.ovh.com/createToken) for Europe), granting exactly these five rights:
+
+```
+GET /domain/zone
+GET /domain/zone/*
+POST /domain/zone/*
+PUT /domain/zone/*
+DELETE /domain/zone/*
+```
+
+<Callout type="warn">
+  OVH matches rights per exact path, so `/domain/zone/*` does not cover the bare `/domain/zone` listing. Grant `GET /domain/zone` on its own, otherwise Dokploy cannot list your zones.
+</Callout>
+
+## Configuration
+
+In **Settings → DNS Providers**, add a provider, choose **OVHcloud** and fill in:
+
+- **Name**: the identifier for this provider, e.g. `ovh-main`.
+- **API Endpoint**: the API region your account belongs to — OVHcloud Europe (default), OVHcloud Canada, OVHcloud US, Kimsufi Europe, Kimsufi Canada, So you Start Europe or So you Start Canada.
+- **Application Key / Application Secret / Consumer Key**: the three values from the previous step.
+- **Zone** (optional): restricts the provider to a single DNS zone, e.g. `example.com`. Dokploy then only lists and changes records in that zone, and the `GET /domain/zone` right is not needed.
+
+Use **Test Connection** to validate the credentials before saving.
+
+<Callout type="info">
+  The **Zone** restriction is enforced by Dokploy only. If you need a hard guarantee, also limit the OVH token itself to that zone.
+</Callout>
+
+## Managing Records
+
+Click **View Domains** on the provider row to list your zones, then click a zone to view and manage its records. See [DNS Providers](/docs/core/dns-providers) for the full record form reference.
+
+- Leaving the **TTL** empty lets OVH apply the zone's default TTL.
+- OVH only serves a change after the zone is refreshed. Dokploy refreshes the zone automatically after every create, update and delete. If the refresh fails, the error message says so: the change is saved, and the next successful change to the zone (or a manual refresh in the OVH manager) publishes it.

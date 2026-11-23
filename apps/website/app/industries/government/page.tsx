@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: "Software Deployment Tools for Government Industry",
 	description:
-		"Use software deployment tools for government teams to release citizen services and internal apps in self-hosted, audit-ready environments.",
+		"Use software deployment tools for government teams to release citizen services and internal apps in self-hosted environments with Enterprise audit logs.",
 	alternates: {
 		canonical: "https://dokploy.com/industries/government",
 	},
@@ -24,7 +24,7 @@ const data: IndustryPageData = {
 		heading:
 			"Ship public sector software without losing infrastructure control",
 		description:
-			"Government agencies need to ship software while keeping data and infrastructure under direct control. With Dokploy, teams release from Git and Docker, while IT manages access and audit trails.",
+			"Government agencies need to ship software while keeping data and infrastructure under direct control. With Dokploy, teams release from Git and Docker, while IT manages access and, on Enterprise, audit logs.",
 		items: [
 			{
 				icon: Server,
@@ -85,7 +85,7 @@ const data: IndustryPageData = {
 				"Admins manage projects, users, services, and servers centrally.",
 				"Enterprise options include SSO, custom roles, audit logs, and whitelabeling.",
 				"Non-technical staff can test AI-built tools inside a sandboxed environment.",
-				"IP allowlisting keeps internal systems off the public internet.",
+				"Enterprise forward auth puts SSO in front of internal applications.",
 			],
 		},
 	},
@@ -110,12 +110,12 @@ const data: IndustryPageData = {
 				title: "Review before release",
 				description:
 					"Deploy changes into a preview or staging environment for IT, security, and department review. Stakeholders can test the running service before it reaches citizens or staff.",
-				flow: "Open preview → Check logs → Approve release",
+				flow: "Open preview → Check logs → Merge the change",
 			},
 			{
 				title: "Deploy and monitor",
 				description:
-					"Promote the release, watch logs and metrics, and use rollback options if the service needs to be restored. The full deployment history stays tied to the service.",
+					"Deploy the reviewed change to production, watch logs and metrics, and use rollback options if the service needs to be restored. The full deployment history stays tied to the service.",
 				flow: "Deploy → Monitor → Roll back if needed",
 			},
 		],
@@ -124,7 +124,7 @@ const data: IndustryPageData = {
 		heading: "Built for government IT and departmental teams",
 		paragraphs: [
 			"Government IT teams often end up stitching together one-off servers, scripts, and vendor tools per department.",
-			"Dokploy replaces that patchwork with a single deployment layer, so oversight bodies get one consistent audit trail instead of piecing records together from a dozen systems, and smaller departments can ship without waiting on a custom platform build.",
+			"Dokploy replaces that patchwork with a single deployment layer, so, with Enterprise audit logs, oversight bodies get one consistent record instead of piecing records together from a dozen systems, and smaller departments can ship without waiting on a custom platform build.",
 		],
 		screenshotAlt:
 			"Dokploy dashboard for a government project with production and staging environments and running services",
@@ -133,7 +133,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Government workflows",
@@ -147,11 +147,11 @@ const data: IndustryPageData = {
 		{
 			area: "Governance options",
 			support:
-				"Enterprise SSO, audit logs, whitelabeling, IP allowlisting, and air-gapped self-hosted deployment",
+				"Enterprise SSO, SCIM, audit logs, whitelabeling, and air-gapped self-hosted deployment",
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",
@@ -176,7 +176,7 @@ const data: IndustryPageData = {
 				question:
 					"Does Dokploy support SSO and audit logs for government agencies?",
 				answer:
-					"Yes. Dokploy Enterprise includes SSO via SAML and OIDC, with native integrations for Okta, Azure AD, Auth0, and Keycloak, along with audit logs covering logins, deployments, and configuration changes, and custom RBAC roles.",
+					"Yes. Dokploy Enterprise includes SSO via SAML and OIDC, which works with identity providers such as Okta, Microsoft Entra ID, Auth0, and Keycloak, along with audit logs covering logins, deployments, and configuration changes, and custom RBAC roles.",
 			},
 			{
 				question:

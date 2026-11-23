@@ -66,7 +66,7 @@ const data: IndustryPageData = {
 				icon: Paintbrush,
 				title: "Whitelabel for a single brand experience",
 				description:
-					"Enterprise whitelabeling can help agencies present a branded deployment experience, while giving clients more security.",
+					"Enterprise whitelabeling can help agencies present a branded deployment experience on a self-hosted instance.",
 			},
 		],
 	},
@@ -116,7 +116,7 @@ const data: IndustryPageData = {
 				title: "Share a preview",
 				description:
 					"Deploy a preview environment so account teams and clients can review the live app before release. Keep feedback tied to the version under review.",
-				flow: "Open preview → Share URL → Collect signoff",
+				flow: "Open preview → Share URL → Gather feedback",
 			},
 			{
 				title: "Launch and support",
@@ -140,7 +140,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Client workflows",
@@ -158,7 +158,7 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",

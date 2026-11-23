@@ -2,6 +2,8 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	// satori loads its yoga/harfbuzz .wasm files from disk at runtime, so it must not be bundled
+	serverExternalPackages: ["satori"],
 	typescript: {
 		ignoreBuildErrors: true,
 	},

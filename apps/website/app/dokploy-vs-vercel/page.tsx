@@ -71,11 +71,27 @@ const featureComparisonRows = [
 		dokploy: true,
 		vercel: false,
 	},
-	{ feature: "Unlimited function duration", dokploy: true, vercel: false },
+	{
+		feature: "No platform-imposed execution timeouts",
+		dokploy: true,
+		vercel: false,
+	},
 	{ feature: "Custom build servers", dokploy: true, vercel: false },
-	{ feature: "Nixpacks build support", dokploy: true, vercel: false },
-	{ feature: "Heroku Buildpacks support", dokploy: true, vercel: false },
-	{ feature: "Preview deployments", dokploy: true, vercel: true },
+	{
+		feature: "Nixpacks and Railpack build support",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Heroku and Paketo Buildpacks support",
+		dokploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Preview deployments for pull requests",
+		dokploy: true,
+		vercel: true,
+	},
 	{ feature: "Multi-server deployment", dokploy: true, vercel: false },
 	{ feature: "Docker Swarm clustering", dokploy: true, vercel: false },
 	{ feature: "One-command installation", dokploy: true, vercel: false },
@@ -89,9 +105,9 @@ const featureComparisonRows = [
 	{ feature: "AI-assisted deployments", dokploy: true, vercel: true },
 	{ feature: "MCP server support", dokploy: true, vercel: true },
 	{ feature: "API and CLI automation", dokploy: true, vercel: true },
-	{ feature: "Fine-grained RBAC", dokploy: true, vercel: false },
-	{ feature: "SSO / SAML", dokploy: true, vercel: true },
-	{ feature: "Audit logs", dokploy: true, vercel: true },
+	{ feature: "Fine-grained RBAC (Enterprise)", dokploy: true, vercel: false },
+	{ feature: "SSO / SAML (Enterprise)", dokploy: true, vercel: true },
+	{ feature: "Audit logs (Enterprise)", dokploy: true, vercel: true },
 	{
 		feature: "Predictable per-server platform pricing",
 		dokploy: true,
@@ -123,7 +139,7 @@ const whyChooseItems = [
 		icon: Gauge,
 		title: "Monitor and alert without extra tooling",
 		description:
-			"Get CPU, memory, and disk metrics out of the box, with automated alerts built in. Vercel offers observability for function invocations and edge requests, but not server-level infrastructure metrics.",
+			"Get CPU, memory, and disk metrics out of the box, with CPU and memory threshold alerts built in. Vercel offers observability for function invocations and edge requests, but not server-level infrastructure metrics.",
 	},
 	{
 		icon: Bot,
@@ -141,7 +157,8 @@ const pricingRows = [
 	},
 	{
 		label: "Entry price",
-		dokploy: "Free (open source, self-hosted)",
+		dokploy:
+			"$4.50/month per server (Hobby), with a 7-day free trial; self-hosting is free",
 		vercel: "Free (Hobby, non-commercial only)",
 	},
 	{
@@ -176,13 +193,13 @@ const integrationRows = [
 	{
 		category: "Build and deployment systems",
 		dokploy:
-			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+			"Docker, Docker Compose, Nixpacks, Railpack, Heroku Buildpacks, Paketo Buildpacks, Static",
 		vercel: "Vercel framework detection (35+ frameworks), Vercel CLI",
 	},
 	{
 		category: "Notifications and communication",
 		dokploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Telegram, Discord, Microsoft Teams, Mattermost, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		vercel: "Slack, Email, Webhook",
 	},
 ];
@@ -215,10 +232,10 @@ export default function DokployVsVercelPage() {
 							<div className="rounded-xl border border-border/50 bg-card p-6 text-left">
 								<h3 className="text-xl font-semibold text-white">Dokploy</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
-									Dokploy is built for full-stack, Docker-native deployment on
-									infrastructure you own. Choose Vercel if your app is primarily
-									frontend or serverless and you want a managed platform
-									optimized for that model.
+									For full-stack, Docker-native deployment on infrastructure you
+									own—apps, databases, background workers, and Compose stacks on
+									any server, with predictable per-server pricing—choose
+									Dokploy.
 								</p>
 							</div>
 							<div className="rounded-xl border border-border/50 bg-card p-6 text-left">

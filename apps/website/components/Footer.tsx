@@ -116,6 +116,7 @@ const footerSections = [
 			{ href: "/contributors", label: "Contributors" },
 			{ href: "/terms-of-service", label: "Terms of Service" },
 			{ href: "/privacy", label: "Privacy Policy" },
+			{ href: "/security", label: "Security" },
 		],
 	},
 ] as const;

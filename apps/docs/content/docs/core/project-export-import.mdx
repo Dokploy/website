@@ -1,0 +1,58 @@
+---
+title: Export and Import Projects
+description: "Move a project between Dokploy instances with an encrypted export file."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+You can export the configuration of a project to an encrypted file and import it into another Dokploy instance — for example to move from a self-hosted instance to Dokploy Cloud, or to copy a setup to a new installation.
+
+<Callout type="info">
+  Only organization **owners and admins** can export and import projects.
+</Callout>
+
+## What the File Contains
+
+The export contains the **configuration** of the services you select: their settings, environment variables, credentials, domains, mounts and ports. Environment variables and credentials are included, encrypted with your passphrase.
+
+It does **not** contain:
+
+- Data stored in volumes and databases.
+- Backups and deployment history.
+- Resources shared across projects: servers, registries, Git providers and S3 destinations.
+
+To move the data itself, use [database backups](/docs/core/databases/backups) and [volume backups](/docs/core/volume-backups).
+
+## Exporting a Project
+
+1. On the **Projects** page, open the menu of the project and click **Export project**.
+2. Select the environments and services to include.
+3. Enter a **passphrase** of at least 12 characters and confirm it, or click **Generate**.
+4. Download the file. It is named after the project and the date, with the `.dokploy` extension.
+
+<Callout type="warn">
+  Keep the passphrase. The file is encrypted with it and cannot be imported without it.
+</Callout>
+
+## Importing a Project
+
+1. On the **Projects** page, click **Import project**.
+2. Select the `.dokploy` **Export file** and enter the **Passphrase**.
+3. Choose the **Server** the services will run on. On Dokploy Cloud a remote server is required.
+4. Review the preview and its warnings, then confirm.
+
+The import always creates a **new project**. Services are created but **not deployed**, so you can review them first.
+
+## After Importing
+
+The preview and the result list anything that needs attention. Typical items:
+
+- **Git providers, registries and SSH keys** are not part of the file. Reconnect or select them again on each service that used them.
+- Applications deployed from an **uploaded file** need the file uploaded again.
+- **Custom networks** are not recreated. Attach them again.
+- A **domain already used** on the target instance is imported disabled. A domain generated for the source server's IP needs to be generated again.
+- Domains that used **forward auth** are imported disabled until forward auth is set up on the new server.
+- **Preview deployments protected with SSO** are imported disabled until forward auth is set up on the new server.
+- A **published port** that is already taken on the target server is not added.
+- An **app name** that already exists is renamed, so its backups are stored under a new folder.
+- **Named volumes** keep their names. If a volume with the same name already exists on the target server, it is shared.

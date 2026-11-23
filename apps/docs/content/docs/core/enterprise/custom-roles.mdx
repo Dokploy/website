@@ -53,7 +53,7 @@ Manage environment creation, viewing, and deletion.
 
 Access to Docker containers, images, and volumes management.
 
-- **Read** — View Docker containers, images, and volumes.
+- **Read** — View Docker containers, images, volumes, and Docker disk usage.
 
 ### SSH Keys
 
@@ -174,6 +174,14 @@ Manage scheduled jobs (commands, deployments, scripts).
 - **Update** — Modify existing scheduled jobs.
 - **Delete** — Remove scheduled jobs.
 
+### Sandboxes
+
+Manage [sandboxes](/docs/core/sandboxes), the ephemeral containers used to run code through the API.
+
+- **Read** — View sandboxes, read and list their files.
+- **Create** — Create sandboxes, run commands, write files, change the timeout and kill them.
+- **Delete** — Remove sandbox records.
+
 ### Domains
 
 Manage custom domains assigned to services.
@@ -220,6 +228,8 @@ View server and service metrics (CPU, RAM, disk).
 
 - **Read** — View monitoring metrics.
 
+The host **Monitoring** page in the sidebar needs both **Monitoring → Read** and **Docker → Read**, because its data comes from Docker. A role with only Monitoring Read (such as the **Deployer** preset) still sees the Monitoring tab of each service, but not the host Monitoring page.
+
 ### Audit Logs
 
 View the audit log of actions performed in the organization.
@@ -244,6 +254,17 @@ Manage connections to DNS providers (Cloudflare, AWS Route53) used to automatica
 - **Update** — Edit existing DNS provider configuration.
 - **Delete** — Remove DNS providers.
 
+### AI Settings
+
+Manage AI providers and models, and use AI features such as log analysis and the AI Assistant. See [AI Assistant](/docs/core/ai).
+
+- **Read** — View AI providers and use AI features (log analysis, AI Assistant).
+- **Create** — Add new AI provider configurations.
+- **Update** — Edit AI provider settings.
+- **Delete** — Remove AI provider configurations.
+
+Using AI features requires **Read**. Without it, the **AI Assistant** in the create service menu and the **AI** button in log viewers are hidden. Defining the organization's [Custom AI Providers](/docs/core/custom-ai-providers) stays limited to owners and admins.
+
 ## Creating a Custom Role
 
 1. Go to **Settings → Custom Roles**.
@@ -251,6 +272,32 @@ Manage connections to DNS providers (Cloudflare, AWS Route53) used to automatica
 3. Enter a name for the role (e.g. `developer`, `viewer`, `deployer`).
 4. Select the permissions you want to assign to this role.
 5. Click **Save**.
+
+## Domain Restrictions
+
+You can limit which domains members of a custom role can use.
+
+1. Go to **Settings → Custom Roles** and create or edit a role.
+2. Expand **Domain restrictions** and add one wildcard per line, e.g. `*.lab.example.com`.
+3. Optionally enable **Require HTTPS**.
+4. Click **Save**.
+
+Leave it empty for no restriction. Built-in roles are never restricted.
+
+A pattern matches exactly one label: `*.lab.example.com` allows `app.lab.example.com`, but not `lab.example.com` or `a.b.lab.example.com`.
+
+Members of a restricted role:
+
+- Can only create or update domains that match a pattern (and use HTTPS if required).
+- Can only use a preview wildcard equal to an allowed pattern. The default sslip.io wildcard is not allowed.
+- Can't add or change `traefik.*` swarm labels.
+- Get domains outside the patterns skipped when using templates, compose import, the AI Assistant or project duplication.
+
+<Callout type="warn">
+  - A restricted role can't have **Traefik Files → Write** or the server terminal permission.
+  - Traefik labels inside Docker Compose files are not validated.
+  - Existing domains outside the patterns keep working.
+</Callout>
 
 ## Assigning a Custom Role
 

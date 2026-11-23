@@ -108,13 +108,13 @@ const data: IndustryPageData = {
 			{
 				title: "Test before release",
 				description:
-					"Deploy changes into a preview or staging environment. Product owners, IT, and clinical operations teams can review the running application before it is promoted.",
-				flow: "Open preview → Review service → Approve release",
+					"Deploy changes into a preview or staging environment. Product owners, IT, and clinical operations teams can review the running application before it goes to production.",
+				flow: "Open preview → Review service → Merge the change",
 			},
 			{
 				title: "Deploy with visibility",
 				description:
-					"Publish the approved version, then monitor logs, deployments, and server metrics. Rollback options help teams respond if a release needs to be restored.",
+					"Deploy the reviewed version, then monitor logs, deployments, and server metrics. Rollback options help teams respond if a release needs to be restored.",
 				flow: "Deploy → Watch logs → Roll back if needed",
 			},
 		],
@@ -133,7 +133,7 @@ const data: IndustryPageData = {
 		{
 			area: "Deployment methods",
 			support:
-				"Git, Docker, Docker Compose, Nixpacks, Heroku Buildpacks, and custom Dockerfiles",
+				"Git, Docker, Docker Compose, Nixpacks, Railpack, Heroku and Paketo Buildpacks, and custom Dockerfiles",
 		},
 		{
 			area: "Healthcare workflows",
@@ -151,7 +151,7 @@ const data: IndustryPageData = {
 		},
 		{
 			area: "Databases",
-			support: "PostgreSQL, MySQL, MongoDB, Redis, and MariaDB",
+			support: "PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL",
 		},
 		{
 			area: "Operations",
@@ -186,7 +186,7 @@ const data: IndustryPageData = {
 			{
 				question: "Does Dokploy support healthcare app databases?",
 				answer:
-					"Yes. Dokploy supports common databases, including PostgreSQL, MySQL, MongoDB, Redis, and MariaDB, along with backup options for supported services.",
+					"Yes. Dokploy supports common databases, including PostgreSQL, MySQL, MariaDB, MongoDB, Redis, and libSQL, along with backup options for supported services.",
 			},
 		],
 	},

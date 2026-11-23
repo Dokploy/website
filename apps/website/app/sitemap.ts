@@ -9,6 +9,7 @@ const corePages: { path: string; priority: number }[] = [
 	{ path: "/enterprise", priority: 0.9 },
 	{ path: "/deploy-ai", priority: 0.8 },
 	{ path: "/self-hosted-paas", priority: 0.8 },
+	{ path: "/sandbox-software", priority: 0.8 },
 	{ path: "/contact", priority: 0.7 },
 	{ path: "/partners", priority: 0.6 },
 	{ path: "/jobs", priority: 0.7 },
@@ -18,6 +19,7 @@ const featurePages = [
 	"/features/application-deployment-platform",
 	"/features/application-management-software",
 	"/features/database-management-tool",
+	"/features/container-server-monitoring",
 	"/features/security",
 	"/features/role-based-access-control",
 	"/features/single-sign-on",
@@ -47,7 +49,7 @@ const industryPages = [
 	"/industries/higher-education",
 ];
 
-const legalPages = ["/terms-of-service", "/terms", "/privacy"];
+const legalPages = ["/terms-of-service", "/terms", "/privacy", "/security"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const posts = await getPosts();

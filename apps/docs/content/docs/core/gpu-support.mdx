@@ -1,0 +1,62 @@
+---
+title: GPU Support
+description: "Enable NVIDIA GPU support for Docker Swarm on the Dokploy server or a remote server."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Dokploy can configure a server so that Docker Swarm services can use its NVIDIA GPUs. The setup checks the server, configures the NVIDIA runtime for Docker and labels the Swarm node.
+
+## Prerequisites
+
+Dokploy does not install drivers. Before enabling GPU support, the server needs:
+
+- NVIDIA GPU hardware physically installed.
+- NVIDIA drivers installed and running — check with `nvidia-smi`.
+- The NVIDIA Container Runtime (`nvidia-container-runtime`) installed.
+- A user with sudo/administrative privileges.
+- CUDA support for GPU acceleration.
+
+A remote server must also have completed **Setup Server**, since GPU support is configured on its Swarm node.
+
+## Where to Find It
+
+- **Dokploy server** (self-hosted): **Settings → Web Server**, open the **Server** actions menu and click **GPU Setup**.
+- **Remote server**: **Settings → Remote Servers**, open **Setup Server** for the server and go to the **GPU Setup** tab.
+
+## Checking the Status
+
+The panel reads the current state of the server:
+
+| Row | Meaning |
+| --- | --- |
+| **NVIDIA Driver** | Whether the driver is installed, and its version. |
+| **GPU Model / GPU Memory / Available GPUs** | What `nvidia-smi` detects. |
+| **CUDA Support** | Whether CUDA is available, and its version. |
+| **NVIDIA Container Runtime** | Whether `nvidia-container-runtime` is installed. |
+| **Runtime Configuration** | Whether `nvidia` is Docker's default runtime. |
+| **Swarm GPU Support** | Whether the node advertises GPUs to Swarm. |
+
+Use the refresh button to re-check after changing something on the server.
+
+## Enabling GPU Support
+
+Click the enable button and confirm. Dokploy then:
+
+1. Verifies the prerequisites and stops with a clear error if the driver or the container runtime is missing.
+2. Writes `/etc/docker/daemon.json` so that `nvidia` is the default runtime and the node advertises its GPUs as a generic resource (`GPU=<count>`).
+3. Sets `swarm-resource = "DOCKER_RESOURCE_GPU"` in `/etc/nvidia-container-runtime/config.toml`.
+4. Restarts Docker.
+5. Adds the label `gpu=true` to the Swarm node.
+
+<Callout type="warn">
+  Enabling GPU support replaces `/etc/docker/daemon.json` and restarts Docker, so running containers on that server are briefly interrupted. If you keep custom settings in `daemon.json`, back the file up first.
+</Callout>
+
+## Using the GPU in a Service
+
+Once the node is configured, the NVIDIA runtime is the default, so containers on that server can see the GPUs. In a cluster with several nodes, pin GPU workloads to the right node with a placement constraint in the service's **Advanced → Swarm Settings**:
+
+```
+node.labels.gpu==true
+```

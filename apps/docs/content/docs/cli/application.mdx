@@ -3,18 +3,52 @@ title: Application
 description: A guide to using the Dokploy CLI to manage applications
 ---
 
-
-The Dokploy CLI can be used to create, deploy, and manage applications.
+The `application` group is used to create, deploy, and manage applications.
 
 ## Requirements
 
-Is required to be already authenticated with the Dokploy CLI.
-
+You need to be [authenticated](/docs/cli/authentication) with the Dokploy CLI.
 
 ## Commands
 
-1. `dokploy app create` - Create a new application.
-2. `dokploy app delete` - Delete an application.
-3. `dokploy app deploy` - Deploy an application.
-4. `dokploy app stop` - Stop a running application.
+| Command | Description |
+| --- | --- |
+| `dokploy application create --name <name> --environmentId <id>` | Create a new application in an environment. |
+| `dokploy application one --applicationId <id>` | Get the details of an application. |
+| `dokploy application search` | Search applications (for example with `--name` or `--q`). |
+| `dokploy application deploy --applicationId <id>` | Deploy an application. |
+| `dokploy application redeploy --applicationId <id>` | Rebuild and deploy an application again. |
+| `dokploy application start --applicationId <id>` | Start an application. |
+| `dokploy application stop --applicationId <id>` | Stop a running application. |
+| `dokploy application kill-build --applicationId <id>` | Stop a build that is in progress. |
+| `dokploy application update --applicationId <id>` | Update the settings of an application. |
+| `dokploy application move --applicationId <id> --targetEnvironmentId <id>` | Move an application to another environment. |
+| `dokploy application delete --applicationId <id>` | Delete an application. |
 
+The group also includes commands to configure the source provider (`save-github-provider`, `save-gitlab-provider`, `save-bitbucket-provider`, `save-gitea-provider`, `save-git-provider`, `save-docker-provider`), the build type (`save-build-type`) and the environment variables (`save-environment`). Run `dokploy application --help` to see all of them.
+
+## Examples
+
+```bash
+# Create an application
+dokploy application create --name "my-app" --environmentId env123
+
+# Deploy it
+dokploy application deploy --applicationId app123
+
+# Get its details as JSON
+dokploy application one --applicationId app123 --json
+```
+
+### Environment variables
+
+Use `save-environment` to replace the environment variables, build arguments and build secrets of an application. All of them are required, pass an empty string for the ones you don't use:
+
+```bash
+dokploy application save-environment \
+  --applicationId app123 \
+  --env "$(cat .env)" \
+  --buildArgs "" \
+  --buildSecrets "" \
+  --createEnvFile
+```
