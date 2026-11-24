@@ -1,5 +1,6 @@
 import { CallToAction } from "@/components/CallToAction";
 import { Container } from "@/components/Container";
+import { CustomerLogos } from "@/components/CustomerLogos";
 import {
 	Accordion,
 	AccordionContent,
@@ -353,7 +354,7 @@ export default function ApplicationDeploymentPlatformPage() {
 	return (
 		<div className="min-h-screen bg-background">
 			{/* Hero Section */}
-			<section className="relative overflow-hidden border-b border-border/30 bg-black py-20 sm:py-32">
+			<section className="relative overflow-hidden bg-black py-20 sm:py-32">
 				<AnimatedGridPattern
 					numSquares={30}
 					maxOpacity={0.1}
@@ -399,6 +400,8 @@ export default function ApplicationDeploymentPlatformPage() {
 					</div>
 				</Container>
 			</section>
+
+			<CustomerLogos className="border-b border-border/30" />
 
 			{/* Professional features for every developer */}
 			<section className="border-b border-border/30 py-20 sm:py-32">

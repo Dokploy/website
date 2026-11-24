@@ -1,4 +1,5 @@
 import { CallToAction } from "@/components/CallToAction";
+import { CustomerLogos } from "@/components/CustomerLogos";
 import { Faqs } from "@/components/Faqs";
 import { Hero } from "@/components/Hero";
 import { Testimonials } from "@/components/Testimonials";
@@ -20,6 +21,7 @@ export default function Home() {
 		<div>
 			<main>
 				<Hero />
+				<CustomerLogos />
 				<FirstFeaturesSection />
 				<SecondaryFeaturesSections />
 				<StatsSection />
