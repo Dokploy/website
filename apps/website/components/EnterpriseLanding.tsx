@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ContactFormModal } from "./ContactFormModal";
 import { Container } from "./Container";
+import { CustomerLogos } from "./CustomerLogos";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Button } from "./ui/button";
@@ -196,6 +197,8 @@ export function EnterpriseLanding() {
 					</Container>
 				</div>
 			</div>
+
+			<CustomerLogos />
 
 			{/* Features Grid */}
 			<section className="py-20">

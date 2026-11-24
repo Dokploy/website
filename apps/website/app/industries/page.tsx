@@ -1,5 +1,6 @@
 import { CallToAction } from "@/components/CallToAction";
 import { Container } from "@/components/Container";
+import { CustomerLogos } from "@/components/CustomerLogos";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,7 +80,7 @@ export default function IndustriesPage() {
 	return (
 		<div className="min-h-screen bg-background">
 			{/* Hero Section */}
-			<section className="relative overflow-hidden border-b border-border/30 bg-black py-20 sm:py-32">
+			<section className="relative overflow-hidden bg-black py-20 sm:py-32">
 				<AnimatedGridPattern
 					numSquares={30}
 					maxOpacity={0.1}
@@ -116,6 +117,8 @@ export default function IndustriesPage() {
 					</div>
 				</Container>
 			</section>
+
+			<CustomerLogos className="border-b border-border/30" />
 
 			{/* Industries grid */}
 			<section className="border-b border-border/30 py-20 sm:py-32">
