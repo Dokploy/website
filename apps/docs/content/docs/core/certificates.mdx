@@ -15,9 +15,8 @@ We expose a UI to create and delete the certificates, we ask two fields:
 3. **Private Key**: Enter the private key.
 4. **(Optional) Server**: If you want to create a certificate for a server, you can select it here.
 
-<Callout type='warn'>
-    This action will create the files, but that doesn't mean it will work automatically. You need to adjust the Traefik configuration to use it, this configuration will make
-    to traefik can recognize the certificate.
+<Callout type='info'>
+    To use an uploaded certificate, set the domain's **Certificate Provider** to **None**. Traefik serves it for any domain whose name matches the certificate. Don't use **Custom Resolver** for uploaded certificates.
 </Callout>
 
 ## Free Generated Domains
