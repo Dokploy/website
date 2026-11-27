@@ -286,10 +286,10 @@ export function Header() {
 													href="/sandbox-software"
 													title="Sandbox Software"
 												>
-													Build and ship internal apps safely
+													Run AI code in isolated sandboxes
 												</ListItem>
 												<ListItem href="/deploy-ai" title="AI Deployment">
-													Empower your team to deploy AI tools
+													Empower your team to deploy AI-built apps
 												</ListItem>
 											</ul>
 										</NavigationMenuContent>

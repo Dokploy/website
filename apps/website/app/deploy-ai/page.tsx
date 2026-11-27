@@ -13,7 +13,9 @@ import {
 	Network,
 	Rocket,
 	ShieldCheck,
+	SlidersHorizontal,
 	Sparkles,
+	Terminal,
 	Users,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -22,48 +24,84 @@ import Link from "next/link";
 export const metadata: Metadata = {
 	title: "Deploy AI Apps Securely with Dokploy",
 	description:
-		"Empower your team to deploy AI-built apps in a secure, isolated sandbox, with SSO, multitenancy, audit logs, and one-click deploys.",
+		"Deploy AI-built apps with Dokploy. Connect AI agents via MCP, generate Compose stacks, analyze logs, and control access with Enterprise features.",
 	alternates: {
 		canonical: "https://dokploy.com/deploy-ai",
 	},
+	openGraph: {
+		title: "Deploy AI Apps Securely with Dokploy",
+		description:
+			"Deploy AI-built apps with Dokploy. Connect AI agents via MCP, generate Compose stacks, analyze logs, and control access with Enterprise features.",
+		images: "/og.png",
+		type: "website",
+	},
 };
+
+const inlineLinkClassName = "text-white hover:underline";
 
 const coreFeatures = [
 	{
 		icon: Bot,
 		title: "Connect AI agents directly to Dokploy",
+		href: "https://docs.dokploy.com/docs/core/mcp",
 		description:
-			"Dokploy's MCP server enables AI agents to interact with your deployment environment through the Model Context Protocol. An AI tool can trigger deployments, query application state, and manage services—without needing a custom integration.",
+			"AI agents can trigger deployments, check app status, and manage services through Dokploy's MCP server. They inherit the API key owner's permissions, so give each agent only the access it needs.",
 	},
 	{
 		icon: Boxes,
 		title: "Deploy any app, from any source",
+		href: "/features/application-deployment-platform",
 		description:
-			"Whether it's a Git repo, a Docker image, or a Docker Compose file, Dokploy handles it. Non-technical users can go from AI-generated code to a running application without a DevOps team in the loop.",
+			"Deploy apps built with generative AI from Git, a Docker image, or Docker Compose. Once engineers configure infrastructure and permissions, approved team members can manage deployments.",
 	},
 	{
 		icon: Activity,
 		title: "Catch issues before they become problems",
+		href: "/features/container-server-monitoring",
 		description:
-			"Real-time monitoring, centralized logs, and instant rollback mean that when an AI-built app misbehaves, your team can see why and recover fast—before it touches anything else.",
+			"Monitor AI-built apps and inspect deployment logs. Configure rollbacks for supported releases, or connect an AI provider to help analyze errors.",
 	},
 	{
 		icon: Sparkles,
 		title: "Generate a stack with the AI assistant",
+		href: "https://docs.dokploy.com/docs/core/ai",
 		description:
-			"Describe the service you need and Dokploy's built-in AI assistant suggests a Docker Compose stack with its configuration, ready to review and deploy.",
+			"Describe the service you need and Dokploy's AI assistant generates a Docker Compose configuration to review and edit before deployment. Connect your own AI model provider to start.",
 	},
 	{
 		icon: FileSearch,
 		title: "Let AI read the logs for you",
+		href: "https://docs.dokploy.com/docs/core/ai#analyzing-deployment-and-runtime-logs",
 		description:
-			"When a build or a running app fails, AI log analysis summarizes what went wrong so non-experts can fix it without digging through raw output.",
+			"Use AI-assisted log analysis to investigate deployment and runtime errors. Dokploy sends selected logs to your configured AI provider. Review what your services log before sharing it.",
 	},
 	{
 		icon: Cpu,
 		title: "Bring your own model",
+		href: "https://docs.dokploy.com/docs/core/ai#managing-providers",
 		description:
-			"Connect OpenAI, Azure OpenAI, Anthropic, Gemini, Mistral, Cohere, Perplexity, DeepInfra, OpenRouter, Ollama, or any OpenAI-compatible endpoint with your own key.",
+			"Connect OpenAI, Anthropic, Ollama, or another supported provider using your own key and model settings. Dokploy does not bundle an AI model or include API usage costs.",
+	},
+];
+
+const sandboxFeatures = [
+	{
+		icon: Terminal,
+		title: "Run code before deployment",
+		description:
+			"Execute AI-generated scripts, test dependencies, and inspect output in temporary Docker containers. Retrieve the files you need before the sandbox expires.",
+	},
+	{
+		icon: SlidersHorizontal,
+		title: "Control execution and access",
+		description:
+			"Set CPU and memory limits, inactivity timeouts, and network access. For stronger isolation when running untrusted code, configure gVisor on a separate execution server.",
+	},
+	{
+		icon: Bot,
+		title: "Connect agents with MCP",
+		description:
+			"AI agents can create sandboxes, execute commands, and manage files through MCP. When the application is ready for users, deploy it separately through Dokploy.",
 	},
 ];
 
@@ -72,46 +110,42 @@ const guardrailFeatures = [
 		icon: Users,
 		title: "Separate every team's environment",
 		description:
-			"Dokploy's multitenancy keeps projects and data isolated per organization. One organization can't see, access, or interfere with another's applications, so AI experimentation stays contained without needing a separate instance per team.",
+			"Use organizations, projects, and environments to organize AI-built apps. Assign roles and permissions so teams only access or deploy the resources they are authorized to manage, without running a separate Dokploy instance for every team.",
 	},
 	{
 		icon: MousePointerClick,
-		title: "Let anyone deploy without the risk",
+		title: "Let approved employees deploy apps",
 		description:
-			"Non-technical users get a clean, simple interface for deploying and managing their apps. There's no CLI to learn, just a straightforward path from code to running apps that doesn't require an engineer on standby.",
+			"Give approved team members a simple interface to manage applications once engineers have configured the servers, deployment settings, and permissions. Users can ship internal tools without needing a command line for every change.",
 	},
 	{
 		icon: Network,
-		title: "Lock down who can reach your environment",
+		title: "Control access to deployed apps",
 		description:
-			"Put internal apps behind your identity provider with forward auth, so only signed-in members of your organization can open them. Wildcard subdomain support means every app gets its own clean internal URL.",
+			"With Dokploy Enterprise, protect supported application domains with SSO and Traefik forward authentication. Use an OIDC identity provider to control who can sign in, and assign custom domains to deployed apps.",
 	},
 	{
 		icon: KeyRound,
-		title: "Sign in with the identity provider you already use",
+		title: "Sign in with your existing identity provider",
 		description:
-			"Dokploy supports SSO via Okta, Azure AD, Auth0, and more, with SCIM provisioning and deprovisioning. When someone joins a team, they get access. When they leave, it's revoked automatically—no manual cleanup, no lingering credentials.",
-		link: {
-			href: "/features/single-sign-on",
-			label: "Learn more about SSO",
-		},
+			"Dokploy Enterprise supports SSO through Okta, Microsoft Entra ID, and Auth0. Configure SCIM provisioning to sync access as users join or leave.",
 	},
 ];
 
 const testFreelyPoints = [
-	"Deploy AI-built apps without touching production infrastructure",
-	"Keep all environments fully isolated from live data and services",
-	"Audit logs record every action across your Dokploy environment",
-	"Roll back any deployment in seconds if something goes wrong",
-	"Run experiments that never reach customers until you're ready",
+	"Test AI-generated code in temporary sandboxes before deployment",
+	"Keep sandbox networks apart from application networks",
+	"Review deployment actions in Enterprise audit logs",
+	"Configure rollbacks for supported app releases",
+	"Test changes in previews before they go live",
 ];
 
 const empowerTeamPoints = [
-	"Sales, design, ops—anyone can deploy an app without IT involvement",
-	"No infrastructure knowledge required to get from code to URL",
-	"Subdomain support gives every app a clean, shareable internal link",
-	"Security and compliance requirements are handled at the platform level",
-	"Promising projects can graduate to production on your own timeline",
+	"Let approved teams deploy apps from AI-generated code",
+	"Have engineers configure infrastructure and permissions",
+	"Assign app domains and access controls",
+	"Use Enterprise SSO and roles to manage access",
+	"Promote internal demos to production when ready",
 ];
 
 export default function DeployAIPage() {
@@ -134,19 +168,14 @@ export default function DeployAIPage() {
 							Empower your employees to deploy AI
 						</h1>
 						<p className="mt-6 text-lg text-muted-foreground">
-							Your teams are building with AI. Talk to an expert to learn how
-							Dokploy will give them a safe, governed environment to ship those
-							tools without touching production infrastructure or involving an
-							engineer.
+							Your teams are building with AI. Dokploy gives approved employees
+							a simpler way to deploy AI-built apps on infrastructure your
+							engineers configure, with access controls and monitoring in place.
 						</p>
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>
-								<Link
-									href="https://app.dokploy.com/register"
-									aria-label="Get Started with Dokploy"
-									target="_blank"
-								>
-									Get Started
+								<Link href="/contact" aria-label="Contact Dokploy sales">
+									Contact sales
 								</Link>
 							</Button>
 							<Button
@@ -154,11 +183,11 @@ export default function DeployAIPage() {
 								asChild
 							>
 								<Link
-									href="/contact"
-									aria-label="Contact Us"
+									href="https://docs.dokploy.com/docs/core"
+									aria-label="View Dokploy documentation"
 									className="text-white"
 								>
-									Contact Us
+									View documentation
 								</Link>
 							</Button>
 						</div>
@@ -174,12 +203,50 @@ export default function DeployAIPage() {
 							Everything you need to start deploying AI today
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Dokploy is built to take an app from an AI coding tool to a live,
-							internal URL in minutes.
+							Take apps from AI coding tools to a live URL with Dokploy. Connect
+							AI agents, deploy from Git or containers, test in a sandbox, and
+							use an external AI model for Compose generation or log analysis.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
 						{coreFeatures.map((feature) => (
+							<div
+								key={feature.title}
+								className="rounded-xl border border-border/50 bg-card p-6"
+							>
+								<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
+									<feature.icon className="h-6 w-6" />
+								</div>
+								<h3 className="text-xl font-semibold">
+									<Link href={feature.href} className={inlineLinkClassName}>
+										{feature.title}
+									</Link>
+								</h3>
+								<p className="mt-3 text-sm text-muted-foreground">
+									{feature.description}
+								</p>
+							</div>
+						))}
+					</div>
+				</Container>
+			</section>
+
+			{/* Test AI-generated code in sandboxes */}
+			<section className="border-b border-border/30 py-20 sm:py-32">
+				<Container>
+					<div className="mx-auto max-w-2xl text-center">
+						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
+							Test AI-generated code in sandboxes
+						</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Run AI-generated code and test dependencies in temporary Docker
+							containers before you deploy an application. Use Dokploy Sandboxes
+							alongside your deployment workflows to test without putting your
+							main codebase at risk.
+						</p>
+					</div>
+					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+						{sandboxFeatures.map((feature) => (
 							<div
 								key={feature.title}
 								className="rounded-xl border border-border/50 bg-card p-6"
@@ -194,6 +261,11 @@ export default function DeployAIPage() {
 							</div>
 						))}
 					</div>
+					<div className="mt-12 flex justify-center">
+						<Button className="rounded-full" asChild>
+							<Link href="/sandbox-software">Explore Dokploy Sandboxes</Link>
+						</Button>
+					</div>
 				</Container>
 			</section>
 
@@ -205,9 +277,15 @@ export default function DeployAIPage() {
 							Built for teams that need guardrails, not gatekeepers
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							AI-generated code moves fast. Dokploy&apos;s enterprise features
-							make sure that speed doesn&apos;t come at the cost of security or
-							control.
+							AI-generated code moves fast. Dokploy Enterprise adds{" "}
+							<Link
+								href="https://docs.dokploy.com/docs/core/enterprise/custom-roles"
+								className={inlineLinkClassName}
+							>
+								custom roles
+							</Link>
+							, SSO, audit logs, and application authentication to help your
+							organization control deployment access and operations.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
@@ -225,14 +303,6 @@ export default function DeployAIPage() {
 								<p className="mt-3 text-sm text-muted-foreground">
 									{feature.description}
 								</p>
-								{feature.link ? (
-									<Link
-										href={feature.link.href}
-										className="mt-4 inline-block text-sm font-medium text-primary hover:underline"
-									>
-										{feature.link.label} &rarr;
-									</Link>
-								) : null}
 							</div>
 						))}
 					</div>
@@ -252,8 +322,9 @@ export default function DeployAIPage() {
 							Test freely. Ship confidently.
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							A dedicated internal sandbox means your teams can move fast
-							without creating risk for the rest of the business.
+							Test code, manage deployment workflows, and give approved
+							employees the tools to ship AI-built apps. Set permissions and
+							review changes before applications reach production.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
@@ -261,7 +332,7 @@ export default function DeployAIPage() {
 							<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
 								<FlaskConical className="h-6 w-6" />
 							</div>
-							<h3 className="text-xl font-semibold">Test without the risk</h3>
+							<h3 className="text-xl font-semibold">Test with safeguards</h3>
 							<ul className="mt-4 space-y-3 text-sm text-muted-foreground">
 								{testFreelyPoints.map((point) => (
 									<li key={point} className="flex gap-3">
@@ -289,7 +360,7 @@ export default function DeployAIPage() {
 				</Container>
 			</section>
 
-			{/* Openclaw */}
+			{/* OpenClaw */}
 			<section className="border-b border-border/30 bg-black py-20 sm:py-32">
 				<Container>
 					<div className="mx-auto max-w-3xl text-center">
@@ -297,17 +368,22 @@ export default function DeployAIPage() {
 							<Sparkles className="h-7 w-7" />
 						</div>
 						<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
-							Get started with Openclaw in one click
+							Get started with OpenClaw in one click
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Openclaw is an open-source, self-hosted AI assistant that connects
-							to messaging channels such as WhatsApp. Deploy it on Dokploy with
-							a single template and it runs on your own infrastructure.
+							OpenClaw is an open-source AI assistant for messaging and
+							automation that you can self-host using a{" "}
+							<Link href="/templates/openclaw" className={inlineLinkClassName}>
+								Dokploy template
+							</Link>
+							. Configure the AI providers, credentials, and access settings for
+							your use case. Requests to connected external AI models may leave
+							your infrastructure.
 						</p>
 						<div className="mt-10">
 							<Button variant="outline" className="rounded-full" asChild>
 								<Link href="/templates/openclaw">
-									View the Openclaw template
+									View the OpenClaw template
 								</Link>
 							</Button>
 						</div>
@@ -323,10 +399,10 @@ export default function DeployAIPage() {
 							Unlock Your Deployment Potential with Dokploy Cloud
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Say goodbye to infrastructure hassles, Dokploy Cloud handles it
-							all. Effortlessly deploy, manage Docker containers, and secure
-							your traffic with Traefik. Focus on building, we&apos;ll handle
-							the rest.
+							Dokploy Cloud manages the deployment control plane while your apps
+							run on connected servers. Deploy and manage Docker services
+							through the dashboard, with Traefik routing and managed updates
+							for the Dokploy instance.
 						</p>
 						<div className="mt-10">
 							<Button className="rounded-full" asChild>
