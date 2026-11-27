@@ -54,7 +54,8 @@ Key facts:
 - [Home](https://dokploy.com/): Product overview
 - [Application Deployment Platform](https://dokploy.com/features/application-deployment-platform): Deploy apps from any source
 - [Database Management](https://dokploy.com/features/database-management-tool): Manage and back up databases
-- [Deploy AI](https://dokploy.com/deploy-ai): Deploy AI-built apps in a governed sandbox with MCP, SSO, and multitenancy
+- [Deploy AI](https://dokploy.com/deploy-ai): Deploy AI-built apps with MCP, an AI assistant, sandboxes, and Enterprise access controls
+- [Sandbox Software](https://dokploy.com/sandbox-software): Run AI-generated code in isolated, temporary Docker sandboxes via the dashboard, API, or MCP
 - [Self-Hosted PaaS](https://dokploy.com/self-hosted-paas): Run Dokploy on your own infrastructure
 - [Enterprise](https://dokploy.com/enterprise): Enterprise-grade features and support
 - [RBAC](https://dokploy.com/features/role-based-access-control): Role-based access control

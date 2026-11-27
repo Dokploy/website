@@ -8,201 +8,209 @@ import {
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Activity,
 	Bot,
-	Boxes,
-	Building2,
+	Box,
 	Check,
+	Code,
+	Cpu,
+	FileCode,
 	FlaskConical,
-	GitBranch,
-	Headphones,
-	KeyRound,
 	Layers,
-	Lock,
-	Rocket,
+	Network,
 	Server,
 	ShieldCheck,
 	Sparkles,
-	TrendingUp,
-	Users,
+	Terminal,
+	Timer,
 	Workflow,
 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Fragment, type ReactNode } from "react";
+
+const SANDBOX_DOCS_URL = "https://docs.dokploy.com/docs/core/sandboxes";
 
 export const metadata: Metadata = {
-	title: "Sandbox Software for Safe Internal Deployments",
+	title: "Sandbox Software for AI Agents and Code Execution",
 	description:
-		"Deploy, test, and share apps internally with Dokploy's sandbox software. Give your team a safe, isolated environment to build without the risk.",
+		"Run AI-generated code and scripts in isolated Docker sandboxes. Control resources, network access, and execution through Dokploy's API and MCP server.",
 	alternates: {
 		canonical: "https://dokploy.com/sandbox-software",
 	},
+	openGraph: {
+		title: "Sandbox Software for AI Agents and Code Execution | Dokploy",
+		description:
+			"Run AI-generated code and scripts in isolated Docker sandboxes. Control resources, network access, and execution through Dokploy's API and MCP server.",
+		images: "/og.png",
+		type: "website",
+	},
 };
 
-const sandboxFeatures = [
+const useCases = [
 	{
-		icon: Boxes,
-		title: "Internal app deployment",
+		icon: Bot,
+		title: "AI agent code execution",
 		description:
-			"Ship tools and applications to your team without routing them through your main production environment. Deploy apps in their own contained environment, so users get access without risking other systems.",
+			"Let AI agents execute code they generate in temporary Docker containers, without accessing your application networks. Run scripts, inspect their output, and remove the sandbox when the task is complete.",
 	},
 	{
 		icon: FlaskConical,
-		title: "Prototyping and early-stage development",
+		title: "Test scripts and dependencies",
 		description:
-			"Run code in a development environment that's completely isolated from your live environment. Developers can make code changes, test new features, and identify bugs before anything reaches your users.",
+			"Try new packages, commands, and scripts without installing anything on your server. Test new code, identify bugs, and inspect results in a disposable sandbox environment.",
 	},
 	{
-		icon: Users,
-		title: "A sandbox anyone can use",
+		icon: FileCode,
+		title: "Run user-submitted code",
 		description:
-			"Give less technical colleagues a safe space to explore and interact with new software with no risk of breaking anything and no access to sensitive data. Anyone can try out new tools or test features without consequences.",
-	},
-	{
-		icon: Bot,
-		title: "Ship AI-coded apps with confidence",
-		description:
-			"Run vibe-coded apps built by your team, or AI tools like Cursor and Copilot, in an isolated virtual environment before integrating them into wider systems. Catch compatibility issues and review registry changes without exposing your host machine.",
-	},
-];
-
-const vibeCodedFeatures = [
-	{
-		icon: ShieldCheck,
-		title: "Keep every deployment secure",
-		description:
-			"Each app runs in its own isolated virtual environment. Multitenancy keeps every team's environment separate, so AI experimentation stays contained without needing a separate instance per team.",
-	},
-	{
-		icon: TrendingUp,
-		title: "Scale as your team grows",
-		description:
-			"Spin up multiple instances as your team expands. Dokploy's architecture supports the kind of scale that growing companies need, with resources that flex alongside your workload rather than holding you back.",
-	},
-	{
-		icon: KeyRound,
-		title: "Stay in control of who accesses what",
-		description:
-			"With granular access controls, you decide which users can deploy, view, or interact with each application. Role-based permissions and audit logs keep your sandbox organized, data protected, and actions traceable.",
-	},
-];
-
-const platformFeatures = [
-	{
-		icon: Rocket,
-		title: "Deploy any application in minutes",
-		description:
-			"Dokploy supports Dockerfiles, Docker Compose, Nixpacks, Railpack, and Heroku and Paketo Buildpacks out of the box, so you can deploy applications built on virtually any stack. Getting a new app into a sandbox environment takes minutes, not days.",
-	},
-	{
-		icon: Layers,
-		title: "Isolate every project from the start",
-		description:
-			"Projects run in their own environment by default. There's no risk of one app's processes, file system changes, or network activity bleeding into another, especially when you run untrusted applications or testing code in parallel.",
-	},
-	{
-		icon: GitBranch,
-		title: "Integrate the tools your team is using",
-		description:
-			"Dokploy connects with GitHub, GitLab, Bitbucket, Gitea, and any Git repository, so developers can trigger deployments directly from their existing workflows. Integrated CI/CD pipelines mean new features move from commit to sandbox seamlessly.",
-	},
-	{
-		icon: Activity,
-		title: "Monitor performance across every environment",
-		description:
-			"Built-in monitoring gives you visibility into CPU, memory, disk, and network usage across all your sandboxed apps. Identify issues early, before they reach your production environment.",
+			"Execute user-submitted scripts in resource-limited containers for code interpreters and software testing. Restrict network access, and use gVisor for stronger isolation when running untrusted code.",
 	},
 	{
 		icon: Workflow,
-		title: "Manage multiple environments with ease",
+		title: "Run one-off automations",
 		description:
-			"Create and manage different environments—development, staging, and beyond—from a single dashboard. Move applications through different stages of the development process in a structured, repeatable way.",
-	},
-	{
-		icon: Lock,
-		title: "Keep your data and deployments secure",
-		description:
-			"SSL certificates, SSH key management, and Traefik-powered reverse proxy come built in. Your sandbox environment is secure from the moment you deploy, with no additional configuration needed.",
+			"Execute automated scripts and background tasks in temporary environments with the dependencies they need. Set resource limits and control network access. Dokploy will clean up the container when it is no longer active.",
 	},
 ];
 
-const enterpriseFeatures = [
+const workflowSteps = [
 	{
-		icon: Building2,
-		title: "Centralize access across your entire organization",
+		icon: Box,
+		title: "Create your sandbox",
 		description:
-			"Get multi-user management and fine-grained custom roles on every environment on your platform. Define exactly who can deploy, view, and modify each application, with more granular control than standard RBAC allows.",
+			"Select a server, choose a built-in runtime or custom Docker image, and configure the hardware resources your code can use. Dokploy creates a separate container with your chosen settings.",
+	},
+	{
+		icon: Terminal,
+		title: "Run code and manage files",
+		description:
+			"Execute commands from the built-in console or through the API. Write files into the sandbox, read the output, and retrieve results without needing direct access to the host.",
+	},
+	{
+		icon: Timer,
+		title: "Clean up automatically",
+		description:
+			"Set an inactivity timeout to remove sandboxes that are no longer being used. Sandboxes default to a five-minute inactivity timeout and have a maximum lifetime of 24 hours. Files and processes are lost when the sandbox stops.",
+	},
+];
+
+const controlFeatures = [
+	{
+		icon: Layers,
+		title: "Choose your preferred runtime",
+		href: `${SANDBOX_DOCS_URL}#templates`,
+		description:
+			"Start with built-in templates for Python, Node.js, Go, Rust, Java, and other languages, or use your own Docker image. Each sandbox comes with a working directory and runs commands as a non-root user.",
+	},
+	{
+		icon: Cpu,
+		title: "Set CPU and memory limits",
+		href: "https://docs.dokploy.com/docs/core/monitoring",
+		description:
+			"Control how much CPU and memory each sandbox can use, with process limits and swap disabled. Set an inactivity timeout so temporary containers don't keep consuming resources when they're no longer needed.",
+	},
+	{
+		icon: Network,
+		title: "Control network access",
+		href: "https://docs.dokploy.com/docs/core/networks",
+		description:
+			"Run sandboxes with network access disabled by default, or enable internet access if your code needs it. Each sandbox gets a dedicated network and can't connect directly to other sandboxes or your application networks.",
+	},
+	{
+		icon: Code,
+		title: "Execute commands through the API",
+		href: "https://docs.dokploy.com/docs/api",
+		description:
+			"Create sandboxes, execute commands, and read or write files using the Dokploy API. Retrieve command output and exit codes programmatically, or stream output as commands run.",
 	},
 	{
 		icon: Server,
-		title: "Deploy on your own infrastructure",
+		title: "Run sandboxes on your infrastructure",
+		href: "https://docs.dokploy.com/docs/core/remote-servers",
 		description:
-			"Run Dokploy entirely on your own servers, in your own cloud environment, or on-premise. Your data never leaves your infrastructure, especially when you're deploying internal applications or processing sensitive files.",
+			"Run sandboxes on the Dokploy server or a connected remote server, depending on your setup. Dokploy Cloud requires a connected remote server for sandboxes. For untrusted code, use a server separate from your applications.",
 	},
 	{
-		icon: Headphones,
-		title: "Access dedicated support when you need it",
+		icon: ShieldCheck,
+		title: "Strengthen sandbox isolation",
+		href: `${SANDBOX_DOCS_URL}#using-gvisor`,
 		description:
-			"Enterprise customers get direct access to the Dokploy team for onboarding, troubleshooting, and ongoing support. If something needs fixing in your sandbox environment, you won't be waiting on a community forum.",
-	},
-	{
-		icon: KeyRound,
-		title: "Sign in securely with SSO",
-		description:
-			"Give your team one-click access through identity providers like Okta, Azure AD, and Auth0, with SCIM provisioning and deprovisioning built in. When someone joins a team, they get access. When they leave, it's revoked automatically.",
+			"Dokploy drops Linux capabilities, restricts privilege escalation, and runs commands as a non-root user. Standard Docker sandboxes share the host operating system kernel; install gVisor for stronger isolation of untrusted code.",
 	},
 ];
 
 const mcpPoints = [
-	"Trigger deployments directly from your AI coding tool",
-	"Query application state without leaving your development environment",
-	"Manage services and infrastructure through natural language",
-	"Connect any MCP-compatible agent, including Cursor, Copilot, and Claude",
+	"Create sandboxes with your preferred runtime and resource limits",
+	"Execute commands and retrieve their output",
+	"Read, write, and list files inside a sandbox",
+	"Manage timeouts and stop sandboxes when tasks are complete",
 ];
 
-const faqs = [
+const inlineLinkClassName = "text-white hover:underline";
+
+const faqs: { question: string; answer: ReactNode[] }[] = [
 	{
 		question: "What is sandbox software?",
 		answer: [
-			"Sandbox software lets you run applications, test code, and explore new software in an isolated virtual environment—one that is completely separate from your live production environment.",
-			"A sandbox is a contained environment, meaning that any changes made inside it, whether to the file system, registry, or network, can't affect your host machine or other systems. Sandboxes are widely used in software development, malware analysis, and security testing, as well as for reducing risk when deploying internal tools to users.",
+			"Sandbox software provides an isolated space to run programs and test code outside your application containers.",
+			"Dokploy's Sandboxes feature uses temporary Docker containers rather than full virtual machines. Run AI-generated code or automations with resource limits, network controls, and a defined lifetime.",
 		],
 	},
 	{
-		question: "Which sandbox software is best for startups?",
+		question: "How do I create a sandbox in Dokploy?",
 		answer: [
-			"For startups, the best sandbox software tends to be open-source or competitively priced, quick to set up, and flexible enough to support a fast-moving development process.",
-			"Dokploy is a strong option: it's self-hosted, supports Docker and Compose out of the box, and gives small teams a sandbox environment they can spin up in minutes. It also scales well as your team grows, so you won't need to switch platforms when you do.",
+			"Open Sandboxes in the Dokploy dashboard, select your server, and click Create Sandbox. Choose a runtime template or custom Docker image, configure the CPU, memory, network access, and timeout, then create the sandbox. You can also create sandboxes programmatically using the API or MCP server.",
 		],
 	},
 	{
-		question: "Which sandbox software is best for agencies?",
+		question: "Can AI agents run code in Dokploy Sandboxes?",
 		answer: [
-			"Agencies need sandbox software that handles multiple clients or projects in parallel, with clear separation between environments and straightforward access controls.",
-			"Dokploy's multi-environment management and role-based permissions make it a practical choice: you can maintain isolated development environments for each client, deploy new features for review, and keep everything organized from a single dashboard.",
+			"Yes. Dokploy's MCP server exposes sandbox operations to compatible AI agents, including creating containers, running commands, and managing files. Agents can execute generated code and inspect the results without connecting directly to your application networks.",
+		],
+	},
+	{
+		question: "How secure are Dokploy Sandboxes?",
+		answer: [
+			"Dokploy Sandboxes drop Linux capabilities, run commands as a non-root user, and enforce CPU, memory, and process limits. Network access is disabled by default.",
+			<Fragment key="security-runtime">
+				The default Docker runtime shares the host operating system kernel. For
+				stronger isolation when running untrusted or potentially malicious code,
+				configure gVisor. Grant sandbox{" "}
+				<Link
+					href={`${SANDBOX_DOCS_URL}#permissions`}
+					className={inlineLinkClassName}
+				>
+					Create permission
+				</Link>{" "}
+				only to trusted users, since they can control container files and extend
+				the sandbox&apos;s lifetime.
+			</Fragment>,
+		],
+	},
+	{
+		question: "How long does a sandbox last?",
+		answer: [
+			"Sandboxes have a configurable inactivity timeout, which defaults to five minutes. Activity such as executing commands or writing files resets the timeout. Sandboxes also have a default maximum lifetime of 24 hours. When a sandbox stops, its files and processes are lost.",
+		],
+	},
+	{
+		question: "Can I deploy applications inside a sandbox?",
+		answer: [
+			"Dokploy Sandboxes are designed for temporary code execution, not application hosting. They don't support public domains, exposed ports, or persistent volumes. To deploy an application that users can access, use Dokploy's normal application deployment features instead.",
 		],
 	},
 	{
 		question: "What are the benefits of using sandbox software?",
 		answer: [
-			"The main benefit is safety. A sandbox environment lets developers test code, run new software, and deploy internal applications without risking their production environment or other systems.",
-			"Beyond safety and security, sandboxes make it easier to identify bugs and compatibility issues early in the development process, give non-technical team members a safe space to interact with applications, enable more feature prototyping before launches, and create a more structured workflow—there's clear separation between development, staging, and live environments.",
+			"Sandbox software reduces the risk of testing scripts directly in development or production environments. Developers can experiment with new code and inspect its behavior in a separate container.",
+			"With Dokploy, test AI-generated code, debug errors, and run automated tasks in temporary Docker containers. Set CPU and memory limits, restrict network access, and remove inactive sandboxes automatically.",
 		],
 	},
 	{
 		question: "How do I use sandbox software?",
 		answer: [
-			"The process varies by platform, but with Dokploy, you start by setting up your self-hosted instance, which takes just a few minutes on any VPS.",
-			"From there, you connect your code repository, configure your deployment settings, and deploy your application into an isolated environment.",
-			"Team members can then access the app through a URL, without ever needing access to the underlying infrastructure. You can manage multiple instances, monitor performance, and move applications through different stages of testing from the same dashboard.",
-		],
-	},
-	{
-		question: "Which sandbox software is best for B2B companies?",
-		answer: [
-			"B2B companies typically need sandbox software that supports internal workflows, integrates with existing tools, and keeps sensitive data protected.",
-			"Dokploy Enterprise runs on your own infrastructure, connects with GitHub and GitLab, includes granular access controls, and supports the kind of scale that B2B teams need as they grow. You can also whitelabel the tool to create a seamless, branded experience for customers.",
-			"Dokploy is particularly useful for companies that want to deploy AI-assisted or internally developed applications to employees without routing them through a public-facing environment.",
+			"In Dokploy, open Sandboxes in the dashboard, select a server, and create a sandbox using a built-in runtime template or custom Docker image.",
+			"Configure its CPU, memory, network access, and inactivity timeout, then execute commands through the built-in console. You can also use Dokploy's API or MCP server to create sandboxes, execute code, and manage files programmatically.",
 		],
 	},
 ];
@@ -224,12 +232,13 @@ export default function SandboxSoftwarePage() {
 				<Container className="relative z-10">
 					<div className="mx-auto max-w-4xl text-center">
 						<h1 className="font-display text-4xl tracking-tight text-white sm:text-5xl lg:text-6xl">
-							Your team&apos;s sandbox. Your infrastructure. Your rules.
+							Run AI code in isolated sandboxes
 						</h1>
 						<p className="mt-6 text-lg text-muted-foreground">
-							Dokploy gives you a fully isolated environment to build, test, and
-							ship internal and AI-coded apps, without touching your production
-							environment or putting your systems at risk.
+							Give AI agents and team members a controlled sandbox environment
+							to execute code, run commands, and work with files. Dokploy
+							creates temporary Docker containers with CPU and memory limits and
+							configurable network access.
 						</p>
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>
@@ -242,28 +251,30 @@ export default function SandboxSoftwarePage() {
 								</Link>
 							</Button>
 							<Button variant="outline" className="rounded-full" asChild>
-								<Link href="/contact">Contact us</Link>
+								<Link href={SANDBOX_DOCS_URL}>Read the Docs</Link>
 							</Button>
 						</div>
 					</div>
 				</Container>
 			</section>
 
-			{/* Everything you need to build, test, and ship safely */}
+			{/* Run and test code in a sandbox */}
 			<section className="border-b border-border/30 py-20 sm:py-32">
 				<Container>
 					<div className="mx-auto max-w-2xl text-center">
 						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
-							Everything you need to build, test, and ship safely
+							Run and test code in a sandbox
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Whether your team is prototyping a new feature or rolling out an
-							AI-coded tool, your sandbox environment handles it—contained,
-							controlled, and completely separate from your live environment.
+							From AI-generated scripts to automated tasks, Dokploy&apos;s
+							sandbox software gives software developers an isolated environment
+							for testing and debugging code. Run new code without installing
+							dependencies on your server or connecting to your application
+							networks.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
-						{sandboxFeatures.map((feature) => (
+						{useCases.map((feature) => (
 							<div
 								key={feature.title}
 								className="rounded-xl border border-border/50 bg-card p-6"
@@ -281,61 +292,60 @@ export default function SandboxSoftwarePage() {
 				</Container>
 			</section>
 
-			{/* The smart way to release vibe-coded apps internally */}
+			{/* Create and manage sandboxes in minutes */}
 			<section className="border-b border-border/30 bg-black py-20 sm:py-32">
 				<Container>
 					<div className="mx-auto max-w-2xl text-center">
 						<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
-							The smart way to release vibe-coded apps internally
+							Create and manage sandboxes in minutes
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							AI-assisted development is moving fast. Dokploy gives your team
-							the infrastructure to deploy and share AI-generated applications
-							in a secure, controlled environment without slowing down the
-							development process.
+							Set up a temporary execution environment directly from the Dokploy
+							dashboard, or create and control sandboxes programmatically
+							through the API.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-3">
-						{vibeCodedFeatures.map((feature) => (
+						{workflowSteps.map((step) => (
 							<div
-								key={feature.title}
+								key={step.title}
 								className="rounded-xl border border-border/50 bg-card p-6"
 							>
 								<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
-									<feature.icon className="h-6 w-6" />
+									<step.icon className="h-6 w-6" />
 								</div>
 								<h3 className="text-lg font-semibold text-white">
-									{feature.title}
+									{step.title}
 								</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
-									{feature.description}
+									{step.description}
 								</p>
 							</div>
 						))}
 					</div>
 					<div className="mt-12 text-center">
 						<Button variant="outline" className="rounded-full" asChild>
-							<Link href="/deploy-ai">Deploy AI software with Dokploy</Link>
+							<Link href={SANDBOX_DOCS_URL}>Explore Dokploy Sandboxes</Link>
 						</Button>
 					</div>
 				</Container>
 			</section>
 
-			{/* The features that make Dokploy a powerful sandbox tool */}
+			{/* Control every sandbox environment */}
 			<section className="border-b border-border/30 py-20 sm:py-32">
 				<Container>
 					<div className="mx-auto max-w-2xl text-center">
 						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
-							The features that make Dokploy a powerful sandbox tool
+							Control every sandbox environment
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Dokploy is designed for teams that need flexibility, security, and
-							control—whether you&apos;re running a single internal app or
-							managing development environments across multiple projects.
+							Configure where your code runs, limit the hardware resources it
+							can use, and manage sandbox operations and network settings
+							through Dokploy&apos;s dashboard and API.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
-						{platformFeatures.map((feature) => (
+						{controlFeatures.map((feature) => (
 							<div
 								key={feature.title}
 								className="rounded-xl border border-border/50 bg-card p-6"
@@ -343,40 +353,10 @@ export default function SandboxSoftwarePage() {
 								<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
 									<feature.icon className="h-6 w-6" />
 								</div>
-								<h3 className="text-lg font-semibold">{feature.title}</h3>
-								<p className="mt-3 text-sm text-muted-foreground">
-									{feature.description}
-								</p>
-							</div>
-						))}
-					</div>
-				</Container>
-			</section>
-
-			{/* Dokploy Enterprise: sandbox software built for teams */}
-			<section className="border-b border-border/30 bg-black py-20 sm:py-32">
-				<Container>
-					<div className="mx-auto max-w-2xl text-center">
-						<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
-							Dokploy Enterprise: sandbox software built for teams
-						</h2>
-						<p className="mt-4 text-lg text-muted-foreground">
-							For organizations running sandbox environments at scale, Dokploy
-							Enterprise adds the infrastructure, support, and controls that
-							make internal deployments manageable—even for large teams.
-						</p>
-					</div>
-					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
-						{enterpriseFeatures.map((feature) => (
-							<div
-								key={feature.title}
-								className="rounded-xl border border-border/50 bg-card p-6"
-							>
-								<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
-									<feature.icon className="h-6 w-6" />
-								</div>
-								<h3 className="text-lg font-semibold text-white">
-									{feature.title}
+								<h3 className="text-lg font-semibold">
+									<Link href={feature.href} className={inlineLinkClassName}>
+										{feature.title}
+									</Link>
 								</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
 									{feature.description}
@@ -384,26 +364,58 @@ export default function SandboxSoftwarePage() {
 							</div>
 						))}
 					</div>
-					<div className="mt-12 text-center">
-						<Button variant="outline" className="rounded-full" asChild>
-							<Link href="/enterprise">Discover Dokploy Enterprise</Link>
-						</Button>
+				</Container>
+			</section>
+
+			{/* From sandbox to deployment */}
+			<section className="border-b border-border/30 bg-black py-20 sm:py-32">
+				<Container>
+					<div className="mx-auto max-w-2xl text-center">
+						<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
+							From sandbox to deployment
+						</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Sandboxes are designed for temporary code execution, not
+							application hosting. They don&apos;t expose public ports, support
+							domains, or retain files after they stop.
+						</p>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Once you&apos;ve tested your code, deploy your application
+							separately using Dokploy&apos;s{" "}
+							<Link
+								href="/features/application-deployment-platform"
+								className={inlineLinkClassName}
+							>
+								application deployment
+							</Link>{" "}
+							features, including Docker images, buildpacks, and Git-based
+							deployments.
+						</p>
+						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+							<Button className="rounded-full" asChild>
+								<Link href="/deploy-ai">
+									Deploy AI applications with Dokploy
+								</Link>
+							</Button>
+						</div>
 					</div>
 				</Container>
 			</section>
 
-			{/* Connect AI agents directly to your sandbox */}
+			{/* Connect AI agents to sandboxes with MCP */}
 			<section className="border-b border-border/30 py-20 sm:py-32">
 				<Container>
 					<div className="mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-2">
 						<div>
 							<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
-								Connect AI agents directly to your sandbox
+								Connect AI agents to sandboxes with MCP
 							</h2>
 							<p className="mt-4 text-lg text-muted-foreground">
-								Dokploy&apos;s MCP server enables AI agents to interact with
-								your deployment environment through the Model Context Protocol,
-								no custom integration required.
+								Dokploy&apos;s Model Context Protocol (MCP) server lets AI
+								coding agents create and manage sandboxes. Connect a supported
+								MCP client using a Dokploy API key. The agent inherits the key
+								owner&apos;s permissions, so restrict access to the operations
+								it needs.
 							</p>
 							<ul className="mt-8 space-y-4">
 								{mcpPoints.map((point) => (
@@ -417,6 +429,13 @@ export default function SandboxSoftwarePage() {
 									</li>
 								))}
 							</ul>
+							<div className="mt-8">
+								<Button variant="outline" className="rounded-full" asChild>
+									<Link href="https://docs.dokploy.com/docs/core/mcp">
+										Explore the Dokploy MCP server
+									</Link>
+								</Button>
+							</div>
 						</div>
 						<div className="flex aspect-square items-center justify-center rounded-2xl border border-border/50 bg-card sm:aspect-video lg:aspect-square">
 							<div className="flex flex-col items-center gap-4 text-center">
@@ -427,6 +446,37 @@ export default function SandboxSoftwarePage() {
 									Cursor, Copilot, Claude, and any MCP-compatible agent
 								</p>
 							</div>
+						</div>
+					</div>
+				</Container>
+			</section>
+
+			{/* CTA */}
+			<section className="border-b border-border/30 py-20 sm:py-32">
+				<Container>
+					<div className="mx-auto max-w-2xl text-center">
+						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
+							Start running code in sandboxes
+						</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Give AI agents and automation tools a temporary environment to
+							execute code, with configurable resource limits, network controls,
+							and API access.
+						</p>
+						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+							<Button className="rounded-full" asChild>
+								<Link href={SANDBOX_DOCS_URL} target="_blank">
+									Read the docs
+								</Link>
+							</Button>
+							<Button variant="outline" className="rounded-full" asChild>
+								<Link
+									href="https://app.dokploy.com/register"
+									aria-label="Get Started with Dokploy"
+								>
+									Get started
+								</Link>
+							</Button>
 						</div>
 					</div>
 				</Container>
@@ -443,52 +493,24 @@ export default function SandboxSoftwarePage() {
 					<Accordion
 						type="single"
 						collapsible
-						className="mx-auto mt-16 w-full max-w-3xl"
+						defaultValue={faqs[0].question}
+						className="mx-auto mt-16 w-full max-w-3xl [&_[role=region][data-state=closed]]:hidden"
 					>
 						{faqs.map((faq) => (
 							<AccordionItem value={faq.question} key={faq.question}>
 								<AccordionTrigger className="text-left text-white">
 									{faq.question}
 								</AccordionTrigger>
-								<AccordionContent>
+								<AccordionContent forceMount>
 									<div className="space-y-3">
-										{faq.answer.map((paragraph) => (
-											<p key={paragraph}>{paragraph}</p>
+										{faq.answer.map((paragraph, index) => (
+											<p key={`${faq.question}-${index}`}>{paragraph}</p>
 										))}
 									</div>
 								</AccordionContent>
 							</AccordionItem>
 						))}
 					</Accordion>
-				</Container>
-			</section>
-
-			{/* CTA */}
-			<section className="border-b border-border/30 py-20 sm:py-32">
-				<Container>
-					<div className="mx-auto max-w-2xl text-center">
-						<h2 className="font-display text-3xl tracking-tight sm:text-4xl">
-							Give your team a safe place to build
-						</h2>
-						<p className="mt-4 text-lg text-muted-foreground">
-							Start deploying internal and AI-coded apps in a sandbox that stays
-							fully separate from production, on infrastructure you control.
-						</p>
-						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-							<Button className="rounded-full" asChild>
-								<Link
-									href="https://app.dokploy.com/register"
-									aria-label="Get Started with Dokploy"
-									target="_blank"
-								>
-									Get Started
-								</Link>
-							</Button>
-							<Button variant="outline" className="rounded-full" asChild>
-								<Link href="/contact">Contact us</Link>
-							</Button>
-						</div>
-					</div>
 				</Container>
 			</section>
 		</div>
